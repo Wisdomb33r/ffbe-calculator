@@ -1,10 +1,31 @@
-<mat-card class="unit-details-mc">
-  <mat-card-title class="unit-details-mct">{{'unit.details.number' | translate}} {{unit.id}}</mat-card-title>
-  <mat-card-subtitle class="unit-details-mcst">{{unit.name}}</mat-card-subtitle>
+<mat-card class="unit-details-mc" *ngIf="detailedUnit">
+  <mat-card-title class="unit-details-mct">{{'unit.details.number' | translate}} {{detailedUnit.id}}</mat-card-title>
+  <mat-card-subtitle class="unit-details-mcst">{{detailedUnit.name}}</mat-card-subtitle>
   <mat-card-content class="unit-details-mcc">
     <div class="flexcontainer">
-      <img [src]="unit.icon">
-      <div>Detailed informations</div>
+      <img [src]="detailedUnit.icon">
+      <div>
+        <table class="unit-details-stats">
+          <tr>
+            <th>{{'unit.details.stats.hp' | translate}}</th>
+            <td>{{detailedUnit.hp}}</td>
+            <th>{{'unit.details.stats.mp' | translate}}</th>
+            <td>{{detailedUnit.mp}}</td>
+          </tr>
+          <tr>
+            <th>{{'unit.details.stats.atk' | translate}}</th>
+            <td>{{detailedUnit.atk}}</td>
+            <th>{{'unit.details.stats.mag' | translate}}</th>
+            <td>{{detailedUnit.mag}}</td>
+          </tr>
+          <tr>
+            <th>{{'unit.details.stats.def' | translate}}</th>
+            <td>{{detailedUnit.def}}</td>
+            <th>{{'unit.details.stats.spr' | translate}}</th>
+            <td>{{detailedUnit.spr}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </mat-card-content>
 </mat-card>

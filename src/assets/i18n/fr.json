@@ -7,7 +7,15 @@
       }
     },
     "details": {
-      "number": "No."
+      "number": "No.",
+      "stats": {
+        "hp": "PV",
+        "mp": "PM",
+        "atk": "ATT",
+        "mag": "MAGIE",
+        "def": "DÉF",
+        "spr": "PSY"
+      }
     }
   }
 }

@@ -29,3 +29,13 @@ div.flexcontainer {
   background: -webkit-linear-gradient(top, #27463b 0%, #0d140d 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #27463b 0%, #0d140d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
+
+.unit-details-stats {
+  color: white;
+}
+
+.unit-details-stats th {
+  text-align: left;
+  padding-right: 10px;
+  font-style: italic;
+}
