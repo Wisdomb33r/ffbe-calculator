@@ -1,0 +1,13 @@
+{
+  "unit": {
+    "selection": {
+      "title": "Choix de l'unité",
+      "error": {
+        "failedToLoadUnits": "Une erreur est survenue durant le chargement de la liste des unités"
+      }
+    },
+    "details": {
+      "number": "No."
+    }
+  }
+}

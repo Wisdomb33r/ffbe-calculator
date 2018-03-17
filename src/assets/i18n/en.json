@@ -1,0 +1,10 @@
+{
+  "unit": {
+    "selection": {
+      "title": "Unit selection",
+      "error": {
+        "failedToLoadUnits": "An error occured while retrieving unit list"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-title>{{'unit.selection.title' | translate}}</mat-card-title>
+
+  <ul class="error" *ngIf="errors.length > 0">
+    <li *ngFor="let error of errors">{{error | translate}}</li>
+  </ul>
+
+  <button mat-raised-button (click)="openUnitSelectionPane()">Choisir</button>
+</mat-card>
+
+<app-equipment-selection></app-equipment-selection>
+<app-unit-details [unit]="selectedUnit" *ngIf="selectedUnit"></app-unit-details>
+<app-damage-results></app-damage-results>
