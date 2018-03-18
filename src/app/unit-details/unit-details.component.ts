@@ -11,6 +11,7 @@ export class UnitDetailsComponent implements OnInit, OnChanges {
 
   @Input() unit: Unit;
   public detailedUnit: Unit;
+  public ranks = [];
 
   constructor(private databaseClient: DatabaseClientService) {
   }
@@ -18,8 +19,11 @@ export class UnitDetailsComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  ngOnChanges() {console.log('loading detailed char');
+  ngOnChanges() {
     this.databaseClient.getUnitById$(this.unit.id)
-      .subscribe((unit: Unit) => this.detailedUnit = unit);
+      .subscribe((unit: Unit) => {
+        this.detailedUnit = unit;
+        this.ranks = Array(unit.rank).fill(1); // filled with dummy 1 values
+      });
   }
 }

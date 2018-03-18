@@ -1,29 +1,47 @@
 <?php
 require_once "../../gestion/genscripts/object_brex_unit_comp.class.php";
 require_once "../../gestion/genscripts/object_brex_unit_carac.class.php";
+class UnitStats {
+  public $hp;
+  public $hp_passive;
+  public $mp;
+  public $mp_passive;
+  public $atk;
+  public $atk_passive;
+  public $mag;
+  public $mag_passive;
+  public $def;
+  public $def_passive;
+  public $spr;
+  public $spr_passive;
+  function __construct($brex_unit_stats) {
+    $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
+    $this->hp_passive = $brex_unit_stats->pv_passif;
+    $this->mp = $brex_unit_stats->pm + $brex_unit_stats->pm_pots;
+    $this->mp_passive = $brex_unit_stats->pm_passif;
+    $this->atk = $brex_unit_stats->att + $brex_unit_stats->att_pots;
+    $this->atk_passive = $brex_unit_stats->att_passif;
+    $this->mag = $brex_unit_stats->mag + $brex_unit_stats->mag_pots;
+    $this->mag_passive = $brex_unit_stats->mag_passif;
+    $this->def = $brex_unit_stats->def + $brex_unit_stats->def_pots;
+    $this->def_passive = $brex_unit_stats->def_passif;
+    $this->spr = $brex_unit_stats->psy + $brex_unit_stats->psy_pots;
+    $this->spr_passive = $brex_unit_stats->psy_passif;
+  }
+}
 class Unit {
   public $id;
   public $name;
   public $rank;
   public $icon;
-  public $hp;
-  public $mp;
-  public $atk;
-  public $mag;
-  public $def;
-  public $spr;
+  public $stats;
   function __construct($brex_unit, $brex_unit_stats, $language) {
     $this->id = $brex_unit->numero;
     $this->name = $language == 'fr' ? $brex_unit->perso->nom : $brex_unit->perso->nom_en;
     $this->rank = $brex_unit->stars;
     $this->icon = $brex_unit->getImageimgPath ();
     if ($brex_unit_stats) {
-      $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
-      $this->mp = $brex_unit_stats->pm + $brex_unit_stats->pm_pots;
-      $this->atk = $brex_unit_stats->att + $brex_unit_stats->att_pots;
-      $this->mag = $brex_unit_stats->mag + $brex_unit_stats->mag_pots;
-      $this->def = $brex_unit_stats->def + $brex_unit_stats->def_pots;
-      $this->spr = $brex_unit_stats->psy + $brex_unit_stats->psy_pots;
+      $this->stats = new UnitStats ( $brex_unit_stats );
     }
   }
 }
