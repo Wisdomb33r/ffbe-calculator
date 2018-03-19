@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {EquipmentSet} from '../../core/model/equipment-set.model';
 
 @Component({
   selector: 'app-equipment-selection',
@@ -6,6 +7,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./equipment-selection.component.css']
 })
 export class EquipmentSelectionComponent implements OnInit {
+
+  @Input() equipments: EquipmentSet;
 
   constructor() {
   }

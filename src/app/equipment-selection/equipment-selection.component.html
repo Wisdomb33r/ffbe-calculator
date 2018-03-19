@@ -1,3 +1,14 @@
-<p>
-  equipment-selection works!
-</p>
+<table>
+  <tr>
+    <td><img [src]="equipments.right_hand.icon"></td>
+    <td><img *ngIf="equipments.left_hand" [src]="equipments.left_hand.icon"></td>
+  </tr>
+  <tr>
+    <td><img [src]="equipments.head.icon"></td>
+    <td><img [src]="equipments.body.icon"></td>
+  </tr>
+  <tr>
+    <td><img [src]="equipments.accessory1.icon"></td>
+    <td><img [src]="equipments.accessory2.icon"></td>
+  </tr>
+</table>

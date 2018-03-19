@@ -8,6 +8,6 @@
   <button mat-raised-button (click)="openUnitSelectionPane()">Choisir</button>
 </mat-card>
 
-<app-equipment-selection></app-equipment-selection>
 <app-unit-details [unit]="selectedUnit" *ngIf="selectedUnit"></app-unit-details>
+<app-equipment-selection [equipments]="selectedUnit.builds[0].equipments" *ngIf="selectedUnit"></app-equipment-selection>
 <app-damage-results></app-damage-results>
