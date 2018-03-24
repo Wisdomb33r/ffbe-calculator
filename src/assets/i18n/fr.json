@@ -17,5 +17,10 @@
         "spr": "PSY"
       }
     }
+  },
+  "equipment": {
+    "selection": {
+      "title": "Équipement"
+    }
   }
 }

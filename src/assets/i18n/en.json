@@ -5,6 +5,22 @@
       "error": {
         "failedToLoadUnits": "An error occured while retrieving unit list"
       }
+    },
+    "details": {
+      "number": "Nb.",
+      "stats": {
+        "hp": "HP",
+        "mp": "MP",
+        "atk": "ATK",
+        "mag": "MAG",
+        "def": "DEF",
+        "spr": "SPR"
+      }
+    }
+  },
+  "equipment": {
+    "selection": {
+      "title": "Équipement"
     }
   }
 }

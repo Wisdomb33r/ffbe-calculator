@@ -1,1 +1,19 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+mat-card.mat-card {
+  margin-bottom: 5px;
+  background: #001f66; /* Old browsers */
+  background: -moz-linear-gradient(left, #000000 0%, #000b26 20%, #001f66 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #000000 0%, #000b26 20%, #001f66 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #000000 0%, #000b26 20%, #001f66 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+mat-card-title.mat-card-title {
+  border-top: 2px solid #aeaaac;
+  border-bottom: 2px solid #aeaaac;
+  color: #fefefe;
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 5px;
+  background: #08110e;
+}

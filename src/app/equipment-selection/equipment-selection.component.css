@@ -1,0 +1,9 @@
+div.flexcontainer {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: start;
+}
+
+img.item {
+  max-width: 58px;
+}

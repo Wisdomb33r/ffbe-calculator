@@ -4,6 +4,7 @@ import {Unit} from '../../core/model/unit.model';
 import {MatDialog} from '@angular/material';
 import {UnitSelectionComponent} from '../unit-selection/unit-selection.component';
 import {DatabaseClientService} from '../../core/services/database-client.service';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-damage-calculator',
@@ -30,10 +31,12 @@ export class DamageCalculatorComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: Unit) => {
-      this.databaseClient.getUnitById$(result.id)
-        .subscribe((unit: Unit) => {
-          this.selectedUnit = new Unit(unit);
-        });
+      if (!isNullOrUndefined(result)) {
+        this.databaseClient.getUnitById$(result.id)
+          .subscribe((unit: Unit) => {
+            this.selectedUnit = new Unit(unit);
+          });
+      }
     });
   }
 
