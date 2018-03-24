@@ -1,0 +1,8 @@
+.stat-details th {
+  text-align: left;
+  padding-right: 10px;
+}
+
+.stat-details td {
+  text-align: right;
+}

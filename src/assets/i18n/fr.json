@@ -14,7 +14,13 @@
         "atk": "ATT",
         "mag": "MAGIE",
         "def": "DÉF",
-        "spr": "PSY"
+        "spr": "PSY",
+        "popup": {
+          "title": "Détails du calcul",
+          "unitBase": "Unité",
+          "equipment": "Équipement",
+          "total": "Total"
+        }
       }
     }
   },

@@ -11,9 +11,26 @@ mat-card.mat-card {
 mat-card-title.mat-card-title {
   border-top: 2px solid #aeaaac;
   border-bottom: 2px solid #aeaaac;
-  color: #fefefe;
   font-weight: bold;
   font-size: 1em;
   margin-bottom: 5px;
   background: #08110e;
+  color: #fefefe;
+}
+
+mat-card-subtitle.mat-card-subtitle {
+  color: #fefefe;
+}
+
+mat-card-content.mat-card-content {
+  color: #fefefe;
+}
+
+mat-dialog-container.mat-dialog-container {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
+
+mat-dialog-container.mat-dialog-container h1 {
+  font-size: 16px;
 }

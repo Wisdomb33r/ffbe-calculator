@@ -35,6 +35,8 @@ export class DamageCalculatorComponent implements OnInit {
         this.databaseClient.getUnitById$(result.id)
           .subscribe((unit: Unit) => {
             this.selectedUnit = new Unit(unit);
+            this.selectedUnit.selectDefaultBuild();
+            this.selectedUnit.computeAll();
           });
       }
     });
