@@ -42,6 +42,7 @@ export class Unit {
     const equipment_def = this.selectedBuild.equipments.sumEquipmentStat('def');
     const equipment_spr = this.selectedBuild.equipments.sumEquipmentStat('spr');
     this.stats.defineEquipmentsStats(equipment_hp, equipment_mp, equipment_atk, equipment_mag, equipment_def, equipment_spr);
-    this.stats.computeTotals();
+    // TODO define the equipment passives / dh / tdh
+    this.stats.computeTotals(this.selectedBuild.equipments.getNumberOfWeapons(), this.selectedBuild.equipments.isOneHanded());
   }
 }

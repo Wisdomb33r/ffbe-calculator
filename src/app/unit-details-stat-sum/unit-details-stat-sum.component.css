@@ -1,3 +1,8 @@
+.stat-details {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
 .stat-details th {
   text-align: left;
   padding-right: 10px;
@@ -5,4 +10,13 @@
 
 .stat-details td {
   text-align: right;
+}
+
+.percent {
+  padding-left: 10px;
+  font-style: italic;
+}
+
+.total th, .total td {
+  border-top: 1px solid black;
 }

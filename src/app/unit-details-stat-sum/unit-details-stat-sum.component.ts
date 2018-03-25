@@ -24,8 +24,24 @@ export class UnitDetailsMagComponent implements OnInit {
     return this.unitStats[this.stat];
   }
 
+  public getPassiveValue() {
+    return Math.floor(this.unitStats[this.stat + '_from_passive']);
+  }
+
+  public getPassivePercent() {
+    return this.unitStats[this.stat + '_passive'];
+  }
+
   public getEquipmentValue() {
     return this.unitStats[this.stat + '_equipment'];
+  }
+
+  public getDhValue() {
+    return Math.floor(this.unitStats[this.stat + '_from_dh']);
+  }
+
+  public getDhPercent() {
+    return this.unitStats[this.stat + '_dh'];
   }
 
   public getTotalValue() {

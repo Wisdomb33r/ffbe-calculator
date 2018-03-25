@@ -44,4 +44,23 @@ export class EquipmentSet {
     result += this.materia4 ? this.materia4[statName] : 0;
     return result;
   }
+
+  public getNumberOfWeapons(): number {
+    let result = 0;
+    if (this.right_hand) {
+      result++;
+    }
+    if (this.left_hand) {
+      result++;
+    }
+    return result;
+  }
+
+  public isOneHanded(): boolean {
+    if (this.getNumberOfWeapons() === 1) {
+      // TODO add to the test if the weapon is single handed or not when backend is ready to deliver this information
+      return true;
+    }
+    return false;
+  }
 }
