@@ -1,5 +1,6 @@
 export class Equipment {
   public id: number;
+  public category: number;
   public name: string;
   public icon: string;
   public hp: number;
@@ -17,6 +18,7 @@ export class Equipment {
 
   constructor(equipment: Equipment) {
     this.id = equipment.id;
+    this.category = equipment.category;
     this.name = equipment.name;
     this.icon = equipment.icon;
     this.hp = equipment.hp;

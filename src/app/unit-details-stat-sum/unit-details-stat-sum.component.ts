@@ -29,7 +29,7 @@ export class UnitDetailsMagComponent implements OnInit {
   }
 
   public getPassivePercent() {
-    return this.unitStats[this.stat + '_passive'];
+    return this.unitStats[this.stat + '_passive'] + this.unitStats[this.stat + '_cond_passive'];
   }
 
   public getEquipmentValue() {

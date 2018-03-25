@@ -1,4 +1,6 @@
 import {Equipment} from './equipment.model';
+import {ConditionalPassive} from './conditional-passive.model';
+import {isNullOrUndefined} from 'util';
 
 export class EquipmentSet {
   // from backend
@@ -57,10 +59,21 @@ export class EquipmentSet {
   }
 
   public isOneHanded(): boolean {
-    if (this.getNumberOfWeapons() === 1) {
-      // TODO add to the test if the weapon is single handed or not when backend is ready to deliver this information
-      return true;
+    // TODO add to the test if the weapon is single handed or not when backend is ready to deliver this information
+    return this.getNumberOfWeapons() === 1;
+  }
+
+  public checkConditionalPassiveActive(condPassive: ConditionalPassive): boolean {
+    if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0) {
+      return this.right_hand.category === condPassive.category
+        || (this.left_hand && this.left_hand.category === condPassive.category)
+        || this.head.category === condPassive.category
+        || this.body.category === condPassive.category
+        ;
     }
-    return false;
+    if (!isNullOrUndefined(condPassive.element) && condPassive.element > 0) {
+      // TODO implement algorithm to determine if there is an equipped weapon of the right element
+      return false;
+    }
   }
 }

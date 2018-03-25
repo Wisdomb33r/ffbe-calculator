@@ -2,6 +2,7 @@
 require_once "../../gestion/genscripts/object_brex_unit_comp.class.php";
 require_once "../../gestion/genscripts/object_brex_unit_carac.class.php";
 require_once "../../gestion/genscripts/object_brex_stuff_comp.class.php";
+require_once "../../gestion/genscripts/object_brex_build_passif.class.php";
 class UnitStats {
   public $hp;
   public $hp_passive;
@@ -40,12 +41,13 @@ class UnitStats {
 }
 class Build {
   public $equipments;
-  function __construct($brex_build) {
-    $this->equipments = new EquipmentSet ( $brex_build );
+  function __construct($brex_build, $language) {
+    $this->equipments = new EquipmentSet ( $brex_build, $language );
   }
 }
 class Equipment {
   public $id;
+  public $category;
   public $name;
   public $icon;
   public $hp;
@@ -60,9 +62,10 @@ class Equipment {
   public $def_percent;
   public $spr;
   public $spr_percent;
-  function __construct($brex_equipement) {
+  function __construct($brex_equipement, $language) {
     $this->id = $brex_equipement->id;
-    $this->name = $brex_equipement->nom; // TODO : translation needed here
+    $this->category = $brex_equipement->categorie->id;
+    $this->name = $language == 'fr' ? $brex_equipement->nom : $brex_equipement->nom_en;
     $this->icon = $brex_equipement->getImageimgPath ();
     $this->hp = $brex_equipement->pv;
     $this->hp_percent = $brex_equipement->pvp;
@@ -89,19 +92,51 @@ class EquipmentSet {
   public $materia2;
   public $materia3;
   public $materia4;
-  function __construct($brex_build) {
-    $this->right_hand = new Equipment ( $brex_build->main1 );
+  function __construct($brex_build, $language) {
+    $this->right_hand = new Equipment ( $brex_build->main1, $language );
     if ($brex_build->main2) {
-      $this->left_hand = new Equipment ( $brex_build->main2 );
+      $this->left_hand = new Equipment ( $brex_build->main2, $language );
     }
-    $this->head = new Equipment ( $brex_build->tete );
-    $this->body = new Equipment ( $brex_build->torse );
-    $this->accessory1 = new Equipment ( $brex_build->accessoire1 );
-    $this->accessory2 = new Equipment ( $brex_build->accessoire2 );
-    $this->materia1 = new Equipment ( $brex_build->aptitude1 );
-    $this->materia2 = new Equipment ( $brex_build->aptitude2 );
-    $this->materia3 = new Equipment ( $brex_build->aptitude3 );
-    $this->materia4 = new Equipment ( $brex_build->aptitude4 );
+    $this->head = new Equipment ( $brex_build->tete, $language );
+    $this->body = new Equipment ( $brex_build->torse, $language );
+    $this->accessory1 = new Equipment ( $brex_build->accessoire1, $language );
+    $this->accessory2 = new Equipment ( $brex_build->accessoire2, $language );
+    $this->materia1 = new Equipment ( $brex_build->aptitude1, $language );
+    $this->materia2 = new Equipment ( $brex_build->aptitude2, $language );
+    $this->materia3 = new Equipment ( $brex_build->aptitude3, $language );
+    $this->materia4 = new Equipment ( $brex_build->aptitude4, $language );
+  }
+}
+class ConditionalPassive {
+  public $category;
+  public $element;
+  public $hp;
+  public $mp;
+  public $atk;
+  public $mag;
+  public $def;
+  public $spr;
+  public $hp_enhanced;
+  public $mp_enhanced;
+  public $atk_enhanced;
+  public $mag_enhanced;
+  public $def_enhanced;
+  public $spr_enhanced;
+  function __construct($brex_unit_passive) {
+    $this->category = $brex_unit_passive->categorie ? $brex_unit_passive->categorie->id : null;
+    $this->element = $brex_unit_passive->element ? $brex_unit_passive->element->id : null;
+    $this->hp = $brex_unit_passive->pv;
+    $this->mp = $brex_unit_passive->pm;
+    $this->atk = $brex_unit_passive->att;
+    $this->mag = $brex_unit_passive->mag;
+    $this->def = $brex_unit_passive->def;
+    $this->spr = $brex_unit_passive->psy;
+    $this->hp_enhanced = $brex_unit_passive->pv_amelio;
+    $this->mp_enhanced = $brex_unit_passive->pm_amelio;
+    $this->atk_enhanced = $brex_unit_passive->att_amelio;
+    $this->mag_enhanced = $brex_unit_passive->mag_amelio;
+    $this->def_enhanced = $brex_unit_passive->def_amelio;
+    $this->spr_enhanced = $brex_unit_passive->psy_amelio;
   }
 }
 class Unit {
@@ -111,7 +146,8 @@ class Unit {
   public $icon;
   public $stats;
   public $builds;
-  function __construct($brex_unit, $brex_unit_stats, $brex_builds, $language) {
+  public $conditional_passives;
+  function __construct($brex_unit, $brex_unit_stats, $brex_unit_passives, $brex_builds, $language) {
     $this->id = $brex_unit->numero;
     $this->name = $language == 'fr' ? $brex_unit->perso->nom : $brex_unit->perso->nom_en;
     $this->rank = $brex_unit->stars;
@@ -122,7 +158,13 @@ class Unit {
     if (is_array ( $brex_builds ) && count ( $brex_builds )) {
       $this->builds = array ();
       foreach ( $brex_builds as $brex_build ) {
-        $this->builds [] = new Build ( $brex_build );
+        $this->builds [] = new Build ( $brex_build, $language );
+      }
+    }
+    if (is_array ( $brex_unit_passives ) && count ( $brex_unit_passives )) {
+      $this->conditional_passives = array ();
+      foreach ( $brex_unit_passives as $brex_unit_passive ) {
+        $this->conditional_passives [] = new ConditionalPassive ( $brex_unit_passive );
       }
     }
   }
@@ -156,14 +198,16 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
       dieWithError ( 500, 'Unit checks failed, build not found' );
     }
     
-    $unit = new Unit ( $brex_unit, $brex_unit_stats [0], $brex_builds, $language );
+    $brex_unit_passives = brex_build_passif::findByRelation1N ( array ('unit' => $brex_unit->id) );
+    
+    $unit = new Unit ( $brex_unit, $brex_unit_stats [0], $brex_unit_passives, $brex_builds, $language );
     echo json_encode ( $unit, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK );
   } else {
     $brex_units = brex_unit::finderForCalculator ();
     $units = array ();
     if (count ( $brex_units ) > 0) {
       foreach ( $brex_units as $brex_unit ) {
-        $unit = new Unit ( $brex_unit, null, null, $language );
+        $unit = new Unit ( $brex_unit, null, null, null, $language );
         $units [] = $unit;
       }
     }

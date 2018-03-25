@@ -1,3 +1,5 @@
+import {ConditionalPassive} from './conditional-passive.model';
+
 export class UnitStats {
   // from backend
   public hp: number;
@@ -26,30 +28,37 @@ export class UnitStats {
   public spr_tdh: number;
 
   // transcient
-  public hp_equipment;
-  public mp_equipment;
-  public atk_equipment;
-  public mag_equipment;
-  public def_equipment;
-  public spr_equipment;
-  public hp_from_dh;
-  public mp_from_dh;
-  public atk_from_dh;
-  public mag_from_dh;
-  public def_from_dh;
-  public spr_from_dh;
-  public hp_from_passive;
-  public mp_from_passive;
-  public atk_from_passive;
-  public mag_from_passive;
-  public def_from_passive;
-  public spr_from_passive;
-  public hp_total;
-  public mp_total;
-  public atk_total;
-  public mag_total;
-  public def_total;
-  public spr_total;
+  public hp_equipment: number;
+  public mp_equipment: number;
+  public atk_equipment: number;
+  public mag_equipment: number;
+  public def_equipment: number;
+  public spr_equipment: number;
+  public hp_cond_passive: number;
+  public mp_cond_passive: number;
+  public atk_cond_passive: number;
+  public mag_cond_passive: number;
+  public def_cond_passive: number;
+  public spr_cond_passive: number;
+  public hp_from_dh: number;
+  public mp_from_dh: number;
+  public atk_from_dh: number;
+  public mag_from_dh: number;
+  public def_from_dh: number;
+  public spr_from_dh: number;
+  public hp_from_passive: number;
+  public mp_from_passive: number;
+  public atk_from_passive: number;
+  public mag_from_passive: number;
+  public def_from_passive: number;
+  public spr_from_passive: number;
+  public hp_total: number;
+  public mp_total: number;
+  public atk_total: number;
+  public mag_total: number;
+  public def_total: number;
+  public spr_total: number;
+  public activeConditionalPassives: Array<ConditionalPassive> = [];
 
   constructor(stats: UnitStats) {
     this.hp = stats.hp;
@@ -87,33 +96,42 @@ export class UnitStats {
     this.spr_equipment = spr;
   }
 
+  public defineConditionalPassives(passives: Array<ConditionalPassive>) {console.log('Active passives :');
+    this.hp_cond_passive = passives.map(passive => passive.hp).reduce((val1, val2) => val1 + val2, 0);
+    this.mp_cond_passive = passives.map(passive => passive.mp).reduce((val1, val2) => val1 + val2, 0);
+    this.atk_cond_passive = passives.map(passive => passive.atk).reduce((val1, val2) => val1 + val2, 0);
+    this.mag_cond_passive = passives.map(passive => passive.mag).reduce((val1, val2) => val1 + val2, 0);
+    this.def_cond_passive = passives.map(passive => passive.def).reduce((val1, val2) => val1 + val2, 0);
+    this.spr_cond_passive = passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
+  }
+
   public computeTotals(nbOfWeapons: number, oneHanded: boolean) {
-    this.hp_from_passive = this.hp * this.hp_passive / 100;
+    this.hp_from_passive = this.hp * (this.hp_passive + this.hp_cond_passive) / 100;
     this.hp_from_dh = this.hp_equipment *
       ((nbOfWeapons === 1 && oneHanded ? this.hp_dh / 100 : 0) + (nbOfWeapons === 1 ? this.hp_tdh / 100 : 0));
     this.hp_total = Math.floor(this.hp + this.hp_from_passive + this.hp_from_dh + this.hp_equipment);
 
-    this.mp_from_passive = this.mp * this.mp_passive / 100;
+    this.mp_from_passive = this.mp * (this.mp_passive + this.mp_cond_passive) / 100;
     this.mp_from_dh = this.mp_equipment *
       ((nbOfWeapons === 1 && oneHanded ? this.mp_dh / 100 : 0) + (nbOfWeapons === 1 ? this.mp_tdh / 100 : 0));
     this.mp_total = Math.floor(this.mp + this.mp_from_passive + this.mp_from_dh + this.mp_equipment);
 
-    this.atk_from_passive = this.atk * this.atk_passive / 100;
+    this.atk_from_passive = this.atk * (this.atk_passive + this.atk_cond_passive) / 100;
     this.atk_from_dh = this.atk_equipment *
       ((nbOfWeapons === 1 && oneHanded ? this.atk_dh / 100 : 0) + (nbOfWeapons === 1 ? this.atk_tdh / 100 : 0));
     this.atk_total = Math.floor(this.atk + this.atk_from_passive + this.atk_from_dh + this.atk_equipment);
 
-    this.mag_from_passive = this.mag * this.mag_passive / 100;
+    this.mag_from_passive = this.mag * (this.mag_passive + this.mag_cond_passive) / 100;
     this.mag_from_dh = this.mag_equipment *
       (nbOfWeapons === 1 && oneHanded ? this.mag_dh / 100 : 0) + (nbOfWeapons === 1 ? this.mag_tdh / 100 : 0);
     this.mag_total = Math.floor(this.mag + this.mag_from_passive + this.mag_from_dh + this.mag_equipment);
 
-    this.def_from_passive = this.def * this.def_passive / 100;
+    this.def_from_passive = this.def * (this.def_passive + this.def_cond_passive) / 100;
     this.def_from_dh = this.def_equipment *
       ((nbOfWeapons === 1 && oneHanded ? this.def_dh / 100 : 0) + (nbOfWeapons === 1 ? this.def_tdh / 100 : 0));
     this.def_total = Math.floor(this.def + this.def_from_passive + this.def_from_dh + this.def_equipment);
 
-    this.spr_from_passive = this.spr * this.spr_passive / 100;
+    this.spr_from_passive = this.spr * (this.spr_passive + this.spr_cond_passive) / 100;
     this.spr_from_dh = this.spr_equipment *
       ((nbOfWeapons === 1 && oneHanded ? this.spr_dh / 100 : 0) + (nbOfWeapons === 1 ? this.spr_tdh / 100 : 0));
     this.spr_total = Math.floor(this.spr + this.spr_from_passive + this.spr_from_dh + this.spr_equipment);
