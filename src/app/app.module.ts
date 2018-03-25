@@ -14,7 +14,7 @@ import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatabaseClientService} from '../core/services/database-client.service';
 import {UnitsService} from '../core/services/units.service';
-import {UnitDetailsMagComponent} from './unit-details-mag/unit-details-mag.component';
+import {UnitDetailsMagComponent} from './unit-details-stat-sum/unit-details-stat-sum.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Unit} from '../../core/model/unit.model';
 import {MatDialog} from '@angular/material';
-import {UnitDetailsMagComponent} from '../unit-details-mag/unit-details-mag.component';
+import {UnitDetailsMagComponent} from '../unit-details-stat-sum/unit-details-stat-sum.component';
 
 @Component({
   selector: 'app-unit-details',
@@ -23,10 +23,13 @@ export class UnitDetailsComponent implements OnInit, OnChanges {
     this.ranks = Array(this.unit.rank).fill(1); // filled with dummy 1 values
   }
 
-  displayMagDetails() {
+  displayStatDetails(stat: string) {
     const dialogRef = this.dialog.open(UnitDetailsMagComponent, {
       width: '300px',
-      data: {unitStats: this.unit.stats}
+      data: {
+        unitStats: this.unit.stats,
+        stat: stat
+      }
     });
   }
 }

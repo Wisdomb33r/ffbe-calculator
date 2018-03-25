@@ -4,18 +4,31 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-unit-details-mag',
-  templateUrl: './unit-details-mag.component.html',
-  styleUrls: ['./unit-details-mag.component.css']
+  templateUrl: './unit-details-stat-sum.component.html',
+  styleUrls: ['./unit-details-stat-sum.component.css']
 })
 export class UnitDetailsMagComponent implements OnInit {
 
   public unitStats: UnitStats;
+  public stat: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.unitStats = data.unitStats;
+    this.stat = data.stat;
   }
 
   ngOnInit() {
   }
 
+  public getBaseValue() {
+    return this.unitStats[this.stat];
+  }
+
+  public getEquipmentValue() {
+    return this.unitStats[this.stat + '_equipment'];
+  }
+
+  public getTotalValue() {
+    return this.unitStats[this.stat + '_total'];
+  }
 }

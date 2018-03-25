@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UnitDetailsMagComponent } from './unit-details-mag.component';
+import {UnitDetailsMagComponent} from './unit-details-stat-sum.component';
 
 describe('UnitDetailsMagComponent', () => {
   let component: UnitDetailsMagComponent;
@@ -8,9 +8,9 @@ describe('UnitDetailsMagComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UnitDetailsMagComponent ]
+      declarations: [UnitDetailsMagComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

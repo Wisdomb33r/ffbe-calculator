@@ -9,22 +9,27 @@
       <table class="unit-details-stats">
         <tr>
           <th>{{'unit.details.stats.hp' | translate}}</th>
-          <td>{{unit.stats.hp_total}}</td>
+          <td>{{unit.stats.hp_total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+                                           (click)="displayStatDetails('hp')"></td>
           <th>{{'unit.details.stats.mp' | translate}}</th>
-          <td>{{unit.stats.mp_total}}</td>
+          <td>{{unit.stats.mp_total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+                                           (click)="displayStatDetails('mp')"></td>
         </tr>
         <tr>
           <th>{{'unit.details.stats.atk' | translate}}</th>
-          <td>{{unit.stats.atk_total}}</td>
+          <td>{{unit.stats.atk_total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+                                            (click)="displayStatDetails('atk')"></td>
           <th>{{'unit.details.stats.mag' | translate}}</th>
           <td>{{unit.stats.mag_total}} <img class="inline-icon" src="assets/icons/grey/question.png"
-                                            (click)="displayMagDetails()"></td>
+                                            (click)="displayStatDetails('mag')"></td>
         </tr>
         <tr>
           <th>{{'unit.details.stats.def' | translate}}</th>
-          <td>{{unit.stats.def_total}}</td>
+          <td>{{unit.stats.def_total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+                                            (click)="displayStatDetails('def')"></td>
           <th>{{'unit.details.stats.spr' | translate}}</th>
-          <td>{{unit.stats.spr_total}}</td>
+          <td>{{unit.stats.spr_total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+                                            (click)="displayStatDetails('spr')"></td>
         </tr>
       </table>
     </div>

@@ -2,14 +2,14 @@
 <table class="stat-details">
   <tr>
     <th>{{'unit.details.stats.popup.unitBase' | translate}}</th>
-    <td>{{unitStats.mag}}</td>
+    <td>{{getBaseValue()}}</td>
   </tr>
   <tr>
     <th>{{'unit.details.stats.popup.equipment' | translate}}</th>
-    <td>{{unitStats.mag_equipment}}</td>
+    <td>{{getEquipmentValue()}}</td>
   </tr>
   <tr class="total">
     <th>{{'unit.details.stats.popup.total' | translate}}</th>
-    <td>{{unitStats.mag_total}}</td>
+    <td>{{getTotalValue()}}</td>
   </tr>
 </table>
