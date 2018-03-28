@@ -1,24 +1,44 @@
 <h1>{{'unit.details.stats.popup.title' | translate}}</h1>
 <table class="stat-details">
   <tr>
-    <th>{{'unit.details.stats.popup.base' | translate}}</th>
+    <th>{{'unit.details.stats.popup.unit' | translate}}</th>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>{{'unit.details.stats.popup.base' | translate}}</td>
     <td>{{getBaseValue()}}</td>
     <td></td>
   </tr>
   <tr>
-    <th>{{'unit.details.stats.popup.passive' | translate}}</th>
+    <td>{{'unit.details.stats.popup.passive' | translate}}</td>
     <td>{{getPassiveValue() | number}}</td>
     <td class="percent">({{getPassivePercent()}}%)</td>
   </tr>
   <tr>
+    <td>{{'unit.details.stats.popup.dh' | translate}}</td>
+    <td>{{getDhValue() | number}}</td>
+    <td class="percent">({{getDhPercent()}}%)</td>
+  </tr>
+  <tr>
     <th>{{'unit.details.stats.popup.equipment' | translate}}</th>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>{{'unit.details.stats.popup.passive' | translate}}</td>
+    <td>{{getEquipmentPassiveValue()}}</td>
+    <td class="percent">({{getEquipmentPassivePercent()}}%)</td>
+  </tr>
+  <tr>
+    <td>{{'unit.details.stats.popup.base' | translate}}</td>
     <td>{{getEquipmentValue()}}</td>
     <td></td>
   </tr>
   <tr>
-    <th>{{'unit.details.stats.popup.dh' | translate}}</th>
-    <td>{{getDhValue() | number}}</td>
-    <td class="percent">({{getDhPercent()}}%)</td>
+    <td>{{'unit.details.stats.popup.dh' | translate}}</td>
+    <td></td>
+    <td class="percent"></td>
   </tr>
   <tr class="total">
     <th>{{'unit.details.stats.popup.total' | translate}}</th>

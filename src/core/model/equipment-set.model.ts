@@ -47,6 +47,21 @@ export class EquipmentSet {
     return result;
   }
 
+  public sumEquipmentStatPercent(statName: string): number {
+    let result = 0;
+    result += this.right_hand ? this.right_hand[statName + '_percent'] : 0;
+    result += this.left_hand ? this.left_hand[statName + '_percent'] : 0;
+    result += this.head ? this.head[statName + '_percent'] : 0;
+    result += this.body ? this.body[statName + '_percent'] : 0;
+    result += this.accessory1 ? this.accessory1[statName + '_percent'] : 0;
+    result += this.accessory2 ? this.accessory2[statName + '_percent'] : 0;
+    result += this.materia1 ? this.materia1[statName + '_percent'] : 0;
+    result += this.materia2 ? this.materia2[statName + '_percent'] : 0;
+    result += this.materia3 ? this.materia3[statName + '_percent'] : 0;
+    result += this.materia4 ? this.materia4[statName + '_percent'] : 0;
+    return result;
+  }
+
   public getNumberOfWeapons(): number {
     let result = 0;
     if (this.right_hand) {
@@ -76,4 +91,23 @@ export class EquipmentSet {
       return false;
     }
   }
+
+  public getAllActiveConditionalPassives(): Array<ConditionalPassive> {
+    const condPassives: Array<ConditionalPassive> = [];
+    // TODO is there conditional passives on other equipments than materias ?
+    this.materia1.conditional_passives
+      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+      .forEach(condPassive => condPassives.push(condPassive));
+    this.materia2.conditional_passives
+      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+      .forEach(condPassive => condPassives.push(condPassive));
+    this.materia3.conditional_passives
+      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+      .forEach(condPassive => condPassives.push(condPassive));
+    this.materia4.conditional_passives
+      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+      .forEach(condPassive => condPassives.push(condPassive));
+    return condPassives;
+  }
+
 }

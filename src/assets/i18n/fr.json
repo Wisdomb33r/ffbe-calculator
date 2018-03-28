@@ -17,8 +17,9 @@
         "spr": "PSY",
         "popup": {
           "title": "Détails du calcul",
+          "unit": "Unité",
           "base": "Base",
-          "passive": "Passifs unité",
+          "passive": "Passifs",
           "equipment": "Équipement",
           "dh": "Deux mains",
           "total": "Total"

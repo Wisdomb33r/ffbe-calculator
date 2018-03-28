@@ -5,11 +5,16 @@
 
 .stat-details th {
   text-align: left;
-  padding-right: 10px;
+  padding-right: 15px;
 }
 
 .stat-details td {
   text-align: right;
+}
+
+.stat-details td:first-child {
+  text-align: left;
+  padding-right: 15px;
 }
 
 .percent {

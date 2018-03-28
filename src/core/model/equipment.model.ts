@@ -1,3 +1,5 @@
+import {ConditionalPassive} from './conditional-passive.model';
+
 export class Equipment {
   public id: number;
   public category: number;
@@ -15,6 +17,7 @@ export class Equipment {
   public def_percent: number;
   public spr: number;
   public spr_percent: number;
+  public conditional_passives: Array<ConditionalPassive> = [];
 
   constructor(equipment: Equipment) {
     this.id = equipment.id;
@@ -33,5 +36,9 @@ export class Equipment {
     this.def_percent = equipment.def_percent;
     this.spr = equipment.spr;
     this.spr_percent = equipment.spr_percent;
+    if (Array.isArray(equipment.conditional_passives)) {
+      equipment.conditional_passives
+        .forEach(conditional_passive => this.conditional_passives.push(new ConditionalPassive(conditional_passive)));
+    }
   }
 }

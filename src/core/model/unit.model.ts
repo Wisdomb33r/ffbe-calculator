@@ -40,20 +40,31 @@ export class Unit {
   }
 
   public computeRealStats() {
-    const equipment_hp = this.selectedBuild.equipments.sumEquipmentStat('hp');
-    const equipment_mp = this.selectedBuild.equipments.sumEquipmentStat('mp');
-    const equipment_atk = this.selectedBuild.equipments.sumEquipmentStat('atk');
-    const equipment_mag = this.selectedBuild.equipments.sumEquipmentStat('mag');
-    const equipment_def = this.selectedBuild.equipments.sumEquipmentStat('def');
-    const equipment_spr = this.selectedBuild.equipments.sumEquipmentStat('spr');
-    this.stats.defineEquipmentsStats(equipment_hp, equipment_mp, equipment_atk, equipment_mag, equipment_def, equipment_spr);
-    const activeCondPassives = this.filterActiveConditionalPassives();
+    this.stats.defineEquipmentsStats(
+      this.selectedBuild.equipments.sumEquipmentStat('hp'),
+      this.selectedBuild.equipments.sumEquipmentStat('mp'),
+      this.selectedBuild.equipments.sumEquipmentStat('atk'),
+      this.selectedBuild.equipments.sumEquipmentStat('mag'),
+      this.selectedBuild.equipments.sumEquipmentStat('def'),
+      this.selectedBuild.equipments.sumEquipmentStat('spr')
+    );
+    this.stats.defineEquipmentPassives(
+      this.selectedBuild.equipments.sumEquipmentStatPercent('hp'),
+      this.selectedBuild.equipments.sumEquipmentStatPercent('mp'),
+      this.selectedBuild.equipments.sumEquipmentStatPercent('atk'),
+      this.selectedBuild.equipments.sumEquipmentStatPercent('mag'),
+      this.selectedBuild.equipments.sumEquipmentStatPercent('def'),
+      this.selectedBuild.equipments.sumEquipmentStatPercent('spr'),
+      this.selectedBuild.equipments.getAllActiveConditionalPassives()
+    );
+    // TODO dh / tdh
+
+    const activeCondPassives = this.filterUnitActiveConditionalPassives();
     this.stats.defineConditionalPassives(activeCondPassives);
-    // TODO define the equipment passives / dh / tdh
     this.stats.computeTotals(this.selectedBuild.equipments.getNumberOfWeapons(), this.selectedBuild.equipments.isOneHanded());
   }
 
-  private filterActiveConditionalPassives(): Array<ConditionalPassive> {
+  private filterUnitActiveConditionalPassives(): Array<ConditionalPassive> {
     const activeConditionalPassives: Array<ConditionalPassive> = [];
     this.conditional_passives.forEach(condPassive => {
       if (this.selectedBuild.equipments.checkConditionalPassiveActive(condPassive)) {
