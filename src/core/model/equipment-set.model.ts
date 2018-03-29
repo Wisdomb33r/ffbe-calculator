@@ -64,18 +64,17 @@ export class EquipmentSet {
 
   public getNumberOfWeapons(): number {
     let result = 0;
-    if (this.right_hand) {
+    if (this.right_hand && this.right_hand.isWeapon()) {
       result++;
     }
-    if (this.left_hand) {
+    if (this.left_hand && this.left_hand.isWeapon()) {
       result++;
     }
     return result;
   }
 
   public isOneHanded(): boolean {
-    // TODO add to the test if the weapon is single handed or not when backend is ready to deliver this information
-    return this.getNumberOfWeapons() === 1;
+    return this.getNumberOfWeapons() === 1 && this.right_hand.isOneHanded();
   }
 
   public checkConditionalPassiveActive(condPassive: ConditionalPassive): boolean {

@@ -46,7 +46,11 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStat('atk'),
       this.selectedBuild.equipments.sumEquipmentStat('mag'),
       this.selectedBuild.equipments.sumEquipmentStat('def'),
-      this.selectedBuild.equipments.sumEquipmentStat('spr')
+      this.selectedBuild.equipments.sumEquipmentStat('spr'),
+      this.selectedBuild.equipments.sumEquipmentStat('atk_dh'),
+      this.selectedBuild.equipments.sumEquipmentStat('atk_tdh'),
+      this.selectedBuild.equipments.sumEquipmentStat('mag_dh'),
+      this.selectedBuild.equipments.sumEquipmentStat('mag_tdh')
     );
     this.stats.defineEquipmentPassives(
       this.selectedBuild.equipments.sumEquipmentStatPercent('hp'),
@@ -57,7 +61,6 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStatPercent('spr'),
       this.selectedBuild.equipments.getAllActiveConditionalPassives()
     );
-    // TODO dh / tdh
 
     const activeCondPassives = this.filterUnitActiveConditionalPassives();
     this.stats.defineConditionalPassives(activeCondPassives);

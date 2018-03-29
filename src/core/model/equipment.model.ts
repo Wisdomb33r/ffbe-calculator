@@ -1,4 +1,5 @@
 import {ConditionalPassive} from './conditional-passive.model';
+import {SHIELDS_CATEGORIES, WEAPONS_CATEGORIES} from '../calculator-constants';
 
 export class Equipment {
   public id: number;
@@ -17,6 +18,12 @@ export class Equipment {
   public def_percent: number;
   public spr: number;
   public spr_percent: number;
+  public atk_dh: number;
+  public atk_tdh: number;
+  public mag_dh: number;
+  public mag_tdh: number;
+  public variance_min: number;
+  public variance_max: number;
   public conditional_passives: Array<ConditionalPassive> = [];
 
   constructor(equipment: Equipment) {
@@ -36,9 +43,27 @@ export class Equipment {
     this.def_percent = equipment.def_percent;
     this.spr = equipment.spr;
     this.spr_percent = equipment.spr_percent;
+    this.atk_dh = equipment.atk_dh;
+    this.atk_tdh = equipment.atk_tdh;
+    this.mag_dh = equipment.mag_dh;
+    this.mag_tdh = equipment.mag_tdh;
+    this.variance_min = equipment.variance_min;
+    this.variance_max = equipment.variance_max;
     if (Array.isArray(equipment.conditional_passives)) {
       equipment.conditional_passives
         .forEach(conditional_passive => this.conditional_passives.push(new ConditionalPassive(conditional_passive)));
     }
+  }
+
+  public isWeapon(): boolean {
+    return WEAPONS_CATEGORIES.indexOf(this.category) > -1;
+  }
+
+  public isShield(): boolean {
+    return SHIELDS_CATEGORIES.indexOf(this.category) > -1;
+  }
+
+  public isOneHanded(): boolean {
+    return this.variance_min > 0 && this.variance_max > 0;
   }
 }

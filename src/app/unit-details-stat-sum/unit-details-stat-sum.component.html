@@ -37,8 +37,8 @@
   </tr>
   <tr>
     <td>{{'unit.details.stats.popup.dh' | translate}}</td>
-    <td></td>
-    <td class="percent"></td>
+    <td>{{getEquipmentDhValue() | number}}</td>
+    <td class="percent">{{getEquipmentDhPercent()}}%</td>
   </tr>
   <tr class="total">
     <th>{{'unit.details.stats.popup.total' | translate}}</th>
