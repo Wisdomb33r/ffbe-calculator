@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {UnitDetailsComponent} from './unit-details/unit-details.component';
-import {DamageCalculatorComponent} from './damage-calculator/damage-calculator.component';
+import {CalculatorComponent} from './calculator/calculator.component';
 import {EquipmentSelectionComponent} from './equipment-selection/equipment-selection.component';
 import {UnitSelectionComponent} from './unit-selection/unit-selection.component';
 import {DamageResultsComponent} from './damage-results/damage-results.component';
@@ -24,7 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     UnitDetailsComponent,
-    DamageCalculatorComponent,
+    CalculatorComponent,
     EquipmentSelectionComponent,
     DamageResultsComponent,
     UnitSelectionComponent,

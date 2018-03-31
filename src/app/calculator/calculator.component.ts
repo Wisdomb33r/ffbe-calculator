@@ -7,11 +7,11 @@ import {DatabaseClientService} from '../../core/services/database-client.service
 import {isNullOrUndefined} from 'util';
 
 @Component({
-  selector: 'app-damage-calculator',
-  templateUrl: './damage-calculator.component.html',
-  styleUrls: ['./damage-calculator.component.css']
+  selector: 'app-calculator',
+  templateUrl: './calculator.component.html',
+  styleUrls: ['./calculator.component.css']
 })
-export class DamageCalculatorComponent implements OnInit {
+export class CalculatorComponent implements OnInit {
 
   public selectedUnit: Unit = null;
   public errors: Array<string> = [];
@@ -27,7 +27,7 @@ export class DamageCalculatorComponent implements OnInit {
 
   public openUnitSelectionPane() {
     const dialogRef = this.dialog.open(UnitSelectionComponent, {
-      width: '450px'
+      width: '320px'
     });
 
     dialogRef.afterClosed().subscribe((result: Unit) => {

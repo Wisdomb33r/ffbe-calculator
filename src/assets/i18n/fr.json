@@ -4,6 +4,9 @@
       "title": "Choix de l'unité",
       "error": {
         "failedToLoadUnits": "Une erreur est survenue durant le chargement de la liste des unités"
+      },
+      "popup": {
+        "title": "Choix de l'unité"
       }
     },
     "details": {

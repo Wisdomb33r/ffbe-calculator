@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UnitDetailsMagComponent} from './unit-details-stat-sum.component';
 
-describe('UnitDetailsMagComponent', () => {
+xdescribe('UnitDetailsMagComponent', () => {
   let component: UnitDetailsMagComponent;
   let fixture: ComponentFixture<UnitDetailsMagComponent>;
 
