@@ -1,7 +1,16 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-mat-card.mat-card {
+body {
+  padding: 0;
+  margin: 0;
+}
+
+mat-toolbar.mat-toolbar {
   margin-bottom: 5px;
+}
+
+mat-card.mat-card {
+  margin: 0 5px 5px 5px;
   background: #001f66; /* Old browsers */
   background: -moz-linear-gradient(left, #000000 0%, #000b26 20%, #001f66 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(left, #000000 0%, #000b26 20%, #001f66 100%); /* Chrome10-25,Safari5.1-6 */

@@ -9,8 +9,7 @@ import {DamageResultsComponent} from './damage-results/damage-results.component'
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {MatButtonModule, MatCardModule, MatDialogModule, MatMenuModule, MatSelectModule} from '@angular/material';
-import {CommonModule} from '@angular/common';
+import {MatButtonModule, MatCardModule, MatDialogModule, MatMenuModule, MatSelectModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatabaseClientService} from '../core/services/database-client.service';
 import {UnitsService} from '../core/services/units.service';
@@ -31,7 +30,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     UnitDetailsMagComponent,
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -47,6 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatMenuModule,
     MatDialogModule,
     MatButtonModule,
+    MatToolbarModule,
   ],
   entryComponents: [
     UnitSelectionComponent,

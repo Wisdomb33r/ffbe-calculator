@@ -1,4 +1,7 @@
 {
+  "menu": {
+    "compute": "Calculer"
+  },
   "unit": {
     "selection": {
       "title": "Choix de l'unité",
