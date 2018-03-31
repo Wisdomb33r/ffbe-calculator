@@ -82,6 +82,12 @@ export class UnitStats {
   public mag_from_equipment_passive: number;
   public def_from_equipment_passive: number;
   public spr_from_equipment_passive: number;
+  public hp_from_esper: number;
+  public mp_from_esper: number;
+  public atk_from_esper: number;
+  public mag_from_esper: number;
+  public def_from_esper: number;
+  public spr_from_esper: number;
   public hp_total: number;
   public mp_total: number;
   public atk_total: number;
@@ -115,6 +121,8 @@ export class UnitStats {
     this.spr_passive = stats.spr_passive ? stats.spr_passive : 0;
     this.spr_dh = stats.spr_dh ? stats.spr_dh : 0;
     this.spr_tdh = stats.spr_tdh ? stats.spr_tdh : 0;
+    // TODO remove these hardcoded values when builder let esper choice
+    this.defineEsperStats(64, 63, 64, 64, 60, 60); // assuming bahamut
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number,
@@ -150,6 +158,15 @@ export class UnitStats {
     this.spr_equipment_passive = spr + passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
   }
 
+  public defineEsperStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number) {
+    this.hp_from_esper = hp;
+    this.mp_from_esper = mp;
+    this.atk_from_esper = atk;
+    this.mag_from_esper = mag;
+    this.def_from_esper = def;
+    this.spr_from_esper = spr;
+  }
+
   public computeTotals(nbOfWeapons: number, oneHanded: boolean) {
     this.computeTotalsForStat('hp', nbOfWeapons, oneHanded);
     this.computeTotalsForStat('mp', nbOfWeapons, oneHanded);
@@ -175,6 +192,7 @@ export class UnitStats {
       + this[statName + '_from_equipment_passive']
       + this[statName + '_from_dh']
       + this[statName + '_from_dh_equipment']
-      + this[statName + '_equipment']);
+      + this[statName + '_equipment'])
+      + this[statName + '_from_esper'];
   }
 }

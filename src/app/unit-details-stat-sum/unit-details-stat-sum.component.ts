@@ -60,6 +60,10 @@ export class UnitDetailsMagComponent implements OnInit {
     return this.unitStats[this.stat + '_dh_equipment'] + this.unitStats[this.stat + '_tdh_equipment'];
   }
 
+  public getEsperValue() {
+    return this.unitStats[this.stat + '_from_esper'];
+  }
+
   public getTotalValue() {
     return this.unitStats[this.stat + '_total'];
   }
