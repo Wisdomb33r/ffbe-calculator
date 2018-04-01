@@ -93,7 +93,26 @@ export class EquipmentSet {
 
   public getAllActiveConditionalPassives(): Array<ConditionalPassive> {
     const condPassives: Array<ConditionalPassive> = [];
-    // TODO is there conditional passives on other equipments than materias ?
+    this.right_hand.conditional_passives
+      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+      .forEach(condPassive => condPassives.push(condPassive));
+    if (this.left_hand) {
+      this.materia1.conditional_passives
+        .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+        .forEach(condPassive => condPassives.push(condPassive));
+    }
+    this.head.conditional_passives
+      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+      .forEach(condPassive => condPassives.push(condPassive));
+    this.body.conditional_passives
+      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+      .forEach(condPassive => condPassives.push(condPassive));
+    this.accessory1.conditional_passives
+      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+      .forEach(condPassive => condPassives.push(condPassive));
+    this.accessory2.conditional_passives
+      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
+      .forEach(condPassive => condPassives.push(condPassive));
     this.materia1.conditional_passives
       .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
       .forEach(condPassive => condPassives.push(condPassive));
