@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Unit} from '../../core/model/unit.model';
 import {MatDialog} from '@angular/material';
-import {UnitDetailsMagComponent} from '../unit-details-stat-sum/unit-details-stat-sum.component';
+import {UnitDetailsStatSumComponent} from '../unit-details-stat-sum/unit-details-stat-sum.component';
 
 @Component({
   selector: 'app-unit-details',
@@ -24,7 +24,7 @@ export class UnitDetailsComponent implements OnInit, OnChanges {
   }
 
   displayStatDetails(stat: string) {
-    const dialogRef = this.dialog.open(UnitDetailsMagComponent, {
+    const dialogRef = this.dialog.open(UnitDetailsStatSumComponent, {
       width: '300px',
       data: {
         unitStats: this.unit.stats,

@@ -38,14 +38,12 @@ mat-card-content.mat-card-content {
 mat-dialog-container.mat-dialog-container {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px;
+  padding: 10px;
+  max-height: 420px;
 }
 
 mat-dialog-container.mat-dialog-container h1 {
   font-size: 16px;
-}
-
-mat-dialog-container.mat-dialog-container {
-  padding: 10px;
 }
 
 mat-dialog-content.mat-dialog-content {

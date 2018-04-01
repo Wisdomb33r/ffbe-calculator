@@ -5,9 +5,10 @@ import {catchError} from 'rxjs/operators';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/observable/of';
 import {Unit} from '../model/unit.model';
+import {Equipment} from '../model/equipment.model';
 
 const BASE_URL = '/ffbe/calculator/';
-const ITEM_PATH = BASE_URL + 'items.php';
+const EQUIPMENT_PATH = BASE_URL + 'equipments.php';
 const UNIT_PATH = BASE_URL + 'units.php';
 
 @Injectable()
@@ -23,6 +24,11 @@ export class DatabaseClientService {
 
   public getUnits(): Observable<Array<Unit>> {
     return this.http.get<Array<Unit>>(UNIT_PATH)
+      .pipe(catchError(this.analyseError));
+  }
+
+  public getEquipmentsForUnitAndSlot(slot: string, unitId: number): Observable<Array<Equipment>> {
+    return this.http.get<Array<Equipment>>(EQUIPMENT_PATH + '?category=' + slot + '&unit=' + unitId)
       .pipe(catchError(this.analyseError));
   }
 

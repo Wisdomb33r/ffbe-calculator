@@ -4,7 +4,6 @@ import {Unit} from '../../core/model/unit.model';
 import {UnitsService} from '../../core/services/units.service';
 
 @Component({
-  selector: 'app-unit-selection-popup',
   templateUrl: './unit-selection.component.html',
   styleUrls: ['./unit-selection.component.css']
 })

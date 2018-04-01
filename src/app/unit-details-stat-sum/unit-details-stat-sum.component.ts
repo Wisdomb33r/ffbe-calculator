@@ -3,11 +3,10 @@ import {UnitStats} from '../../core/model/unit-stats.model';
 import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
-  selector: 'app-unit-details-mag',
   templateUrl: './unit-details-stat-sum.component.html',
   styleUrls: ['./unit-details-stat-sum.component.css']
 })
-export class UnitDetailsMagComponent implements OnInit {
+export class UnitDetailsStatSumComponent implements OnInit {
 
   public unitStats: UnitStats;
   public stat: string;

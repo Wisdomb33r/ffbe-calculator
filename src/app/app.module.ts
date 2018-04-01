@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {UnitDetailsComponent} from './unit-details/unit-details.component';
 import {CalculatorComponent} from './calculator/calculator.component';
-import {EquipmentSelectionComponent} from './equipment-selection/equipment-selection.component';
+import {EquipmentDetailsComponent} from './equipment-details/equipment-details.component';
 import {UnitSelectionComponent} from './unit-selection/unit-selection.component';
 import {DamageResultsComponent} from './damage-results/damage-results.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -13,7 +13,8 @@ import {MatButtonModule, MatCardModule, MatDialogModule, MatMenuModule, MatSelec
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatabaseClientService} from '../core/services/database-client.service';
 import {UnitsService} from '../core/services/units.service';
-import {UnitDetailsMagComponent} from './unit-details-stat-sum/unit-details-stat-sum.component';
+import {UnitDetailsStatSumComponent} from './unit-details-stat-sum/unit-details-stat-sum.component';
+import {EquipmentSelectionComponent} from './equipment-selection/equipment-selection.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -24,10 +25,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     UnitDetailsComponent,
     CalculatorComponent,
+    EquipmentDetailsComponent,
     EquipmentSelectionComponent,
     DamageResultsComponent,
     UnitSelectionComponent,
-    UnitDetailsMagComponent,
+    UnitDetailsStatSumComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   entryComponents: [
     UnitSelectionComponent,
-    UnitDetailsMagComponent,
+    UnitDetailsStatSumComponent,
+    EquipmentSelectionComponent,
   ],
   providers: [
     DatabaseClientService,

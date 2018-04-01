@@ -42,4 +42,7 @@ export class CalculatorComponent implements OnInit {
     });
   }
 
+  public computeAfterEquipmentChanged() {
+    this.selectedUnit.computeAll();
+  }
 }

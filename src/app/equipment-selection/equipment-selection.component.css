@@ -1,9 +1,20 @@
-div.flexcontainer {
+.equipment {
   display: flex;
   flex-flow: row wrap;
-  align-items: start;
+  margin-bottom: 10px;
 }
 
-img.item {
-  max-width: 58px;
+.equipment img {
+  width: 58px;
+  margin-right: 10px;
+}
+
+.equipment h2 {
+  margin: 0;
+  font-size: 12px;
+}
+
+.equipment p {
+  margin: 0;
+  font-size: 11px;
 }

@@ -1,19 +1,26 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {EquipmentSet} from '../../core/model/equipment-set.model';
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {UnitSelectionComponent} from '../unit-selection/unit-selection.component';
+import {Equipment} from '../../core/model/equipment.model';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
-  selector: 'app-equipment-selection',
   templateUrl: './equipment-selection.component.html',
   styleUrls: ['./equipment-selection.component.css']
 })
-export class EquipmentSelectionComponent implements OnInit {
+export class EquipmentSelectionComponent {
 
-  @Input() equipments: EquipmentSet;
+  private slot: string;
+  public equipments: Array<Equipment> = [];
 
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<UnitSelectionComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.slot = data.slot;
+    this.equipments = data.equipments;
   }
 
-  ngOnInit() {
+  public selectEquipment(equipment: Equipment) {
+    this.dialogRef.close(equipment);
   }
-
 }

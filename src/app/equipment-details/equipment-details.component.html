@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-title class="equipment-selection-mct">{{'equipment.selection.title' | translate}}</mat-card-title>
+  <div class="flexcontainer">
+    <table>
+      <tr>
+        <td><img class="item" [src]="equipments.right_hand.icon" (click)="openEquipmentSelectionPane('right_hand')"></td>
+        <td><img class="item" *ngIf="equipments.left_hand" [src]="equipments.left_hand.icon"></td>
+      </tr>
+      <tr>
+        <td><img class="item" [src]="equipments.head.icon"></td>
+        <td><img class="item" [src]="equipments.body.icon"></td>
+      </tr>
+      <tr>
+        <td><img class="item" [src]="equipments.accessory1.icon"></td>
+        <td><img class="item" [src]="equipments.accessory2.icon"></td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <td><img class="item" [src]="equipments.materia1.icon"></td>
+        <td><img class="item" [src]="equipments.materia2.icon"></td>
+      </tr>
+      <tr>
+        <td><img class="item" [src]="equipments.materia3.icon"></td>
+        <td><img class="item" [src]="equipments.materia4.icon"></td>
+      </tr>
+    </table>
+  </div>
+</mat-card>

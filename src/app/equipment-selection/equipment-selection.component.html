@@ -1,30 +1,14 @@
-<mat-card>
-  <mat-card-title class="equipment-selection-mct">{{'equipment.selection.title' | translate}}</mat-card-title>
-  <div class="flexcontainer">
-    <table>
-      <tr>
-        <td><img class="item" [src]="equipments.right_hand.icon"></td>
-        <td><img class="item" *ngIf="equipments.left_hand" [src]="equipments.left_hand.icon"></td>
-      </tr>
-      <tr>
-        <td><img class="item" [src]="equipments.head.icon"></td>
-        <td><img class="item" [src]="equipments.body.icon"></td>
-      </tr>
-      <tr>
-        <td><img class="item" [src]="equipments.accessory1.icon"></td>
-        <td><img class="item" [src]="equipments.accessory2.icon"></td>
-      </tr>
-    </table>
-
-    <table>
-      <tr>
-        <td><img class="item" [src]="equipments.materia1.icon"></td>
-        <td><img class="item" [src]="equipments.materia2.icon"></td>
-      </tr>
-      <tr>
-        <td><img class="item" [src]="equipments.materia3.icon"></td>
-        <td><img class="item" [src]="equipments.materia4.icon"></td>
-      </tr>
-    </table>
+<div class="equipment" *ngFor="let equipment of equipments">
+  <img [src]="equipment.icon" (click)="selectEquipment(equipment)">
+  <div>
+    <h2>{{equipment.name}}</h2>
+    <p *ngIf="equipment.atk">+{{equipment.atk}} {{'atk' | translate}}</p>
+    <p *ngIf="equipment.atk_percent">+{{equipment.atk_percent}}% {{'atk' | translate}}</p>
+    <p *ngIf="equipment.mag">+{{equipment.mag}} {{'mag' | translate}}</p>
+    <p *ngIf="equipment.mag_percent">+{{equipment.mag_percent}}% {{'mag' | translate}}</p>
+    <p *ngIf="equipment.def">+{{equipment.def}} {{'def' | translate}}</p>
+    <p *ngIf="equipment.def_percent">+{{equipment.def_percent}}% {{'def' | translate}}</p>
+    <p *ngIf="equipment.spr">+{{equipment.spr}} {{'spr' | translate}}</p>
+    <p *ngIf="equipment.spr_percent">+{{equipment.spr_percent}}% {{'spr' | translate}}</p>
   </div>
-</mat-card>
+</div>
