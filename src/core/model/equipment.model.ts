@@ -24,6 +24,7 @@ export class Equipment {
   public mag_tdh: number;
   public variance_min: number;
   public variance_max: number;
+  public unique: boolean;
   public conditional_passives: Array<ConditionalPassive> = [];
 
   constructor(equipment: Equipment) {
@@ -49,6 +50,7 @@ export class Equipment {
     this.mag_tdh = equipment.mag_tdh;
     this.variance_min = equipment.variance_min;
     this.variance_max = equipment.variance_max;
+    this.unique = equipment.unique;
     if (Array.isArray(equipment.conditional_passives)) {
       equipment.conditional_passives
         .forEach(conditional_passive => this.conditional_passives.push(new ConditionalPassive(conditional_passive)));

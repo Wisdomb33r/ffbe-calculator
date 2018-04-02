@@ -30,7 +30,9 @@ export class EquipmentsDisplayComponent implements OnInit {
     this.dbClient.getEquipmentsForUnitAndSlot(slot, this.unitId)
       .subscribe(items => {
           const equipments: Array<Equipment> = [];
-          items.forEach(item => equipments.push(new Equipment(item)));
+          items
+            .filter(item => this.isNotUniqueOrNotEquipped(item, slot))
+            .forEach(item => equipments.push(new Equipment(item)));
 
           const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
             width: '320px',
@@ -51,5 +53,26 @@ export class EquipmentsDisplayComponent implements OnInit {
           });
         }
       );
+  }
+
+  private isNotUniqueOrNotEquipped(item: Equipment, slot: string): boolean {
+    if (item.unique) {
+      if (slot.startsWith('materia') && (
+          item.id === this.equipments.materia1.id
+          || item.id === this.equipments.materia2.id
+          || item.id === this.equipments.materia3.id
+          || item.id === this.equipments.materia4.id)) {
+        return false;
+      }
+      if (slot.startsWith('accessory') && (item.id === this.equipments.accessory1.id || item.id === this.equipments.accessory2.id)) {
+        return false;
+      }
+      if (slot === 'right_hand' || slot === 'left_hand') {
+        if (item.id === this.equipments.right_hand.id || (this.equipments.left_hand && item.id === this.equipments.left_hand.id)) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

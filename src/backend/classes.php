@@ -21,6 +21,9 @@ class Equipment {
   public $atk_tdh;
   public $mag_dh;
   public $mag_tdh;
+  public $variance_min;
+  public $variance_max;
+  public $unique;
   public $conditional_passives;
   function __construct($brex_equipement, $language) {
     $this->id = $brex_equipement->id;
@@ -43,6 +46,9 @@ class Equipment {
     $this->atk_tdh = $brex_equipement->build_att_tdh;
     $this->mag_dh = $brex_equipement->build_mag_dh;
     $this->mag_tdh = $brex_equipement->build_mag_tdh;
+    $this->variance_min = $brex_equipement->variance_min;
+    $this->variance_max = $brex_equipement->variance_max;
+    $this->unique = $brex_equipement->uniq == 1 ? true : false;
     $brex_build_passives = brex_build_passif::findByRelation1N ( array ('objet' => $brex_equipement->id) );
     if (count ( $brex_build_passives )) {
       $this->conditional_passives = array ();
@@ -61,12 +67,6 @@ class ConditionalPassive {
   public $mag;
   public $def;
   public $spr;
-  public $hp_enhanced;
-  public $mp_enhanced;
-  public $atk_enhanced;
-  public $mag_enhanced;
-  public $def_enhanced;
-  public $spr_enhanced;
   function __construct($brex_unit_passive) {
     $this->category = $brex_unit_passive->categorie ? $brex_unit_passive->categorie->id : null;
     $this->element = $brex_unit_passive->element ? $brex_unit_passive->element->id : null;
@@ -76,12 +76,6 @@ class ConditionalPassive {
     $this->mag = $brex_unit_passive->mag;
     $this->def = $brex_unit_passive->def;
     $this->spr = $brex_unit_passive->psy;
-    $this->hp_enhanced = $brex_unit_passive->pv_amelio;
-    $this->mp_enhanced = $brex_unit_passive->pm_amelio;
-    $this->atk_enhanced = $brex_unit_passive->att_amelio;
-    $this->mag_enhanced = $brex_unit_passive->mag_amelio;
-    $this->def_enhanced = $brex_unit_passive->def_amelio;
-    $this->spr_enhanced = $brex_unit_passive->psy_amelio;
   }
 }
 class UnitStats {
