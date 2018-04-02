@@ -58,6 +58,18 @@ export class UnitStats {
   public mag_cond_passive: number;
   public def_cond_passive: number;
   public spr_cond_passive: number;
+  public effective_hp_dh: number;
+  public effective_mp_dh: number;
+  public effective_atk_dh: number;
+  public effective_mag_dh: number;
+  public effective_def_dh: number;
+  public effective_spr_dh: number;
+  public effective_hp_tdh: number;
+  public effective_mp_tdh: number;
+  public effective_atk_tdh: number;
+  public effective_mag_tdh: number;
+  public effective_def_tdh: number;
+  public effective_spr_tdh: number;
   public hp_from_dh: number;
   public mp_from_dh: number;
   public atk_from_dh: number;
@@ -167,30 +179,36 @@ export class UnitStats {
     this.spr_from_esper = spr;
   }
 
-  public computeTotals(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
-    this.computeTotalsForStat('hp', isDoubleHandActive, isTrueDoubleHandActive);
-    this.computeTotalsForStat('mp', isDoubleHandActive, isTrueDoubleHandActive);
-    this.computeTotalsForStat('atk', isDoubleHandActive, isTrueDoubleHandActive);
-    this.computeTotalsForStat('mag', isDoubleHandActive, isTrueDoubleHandActive);
-    this.computeTotalsForStat('def', isDoubleHandActive, isTrueDoubleHandActive);
-    this.computeTotalsForStat('spr', isDoubleHandActive, isTrueDoubleHandActive);
+  public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
+    this.defineDhActivationForStat('hp', isDoubleHandActive, isTrueDoubleHandActive);
+    this.defineDhActivationForStat('mp', isDoubleHandActive, isTrueDoubleHandActive);
+    this.defineDhActivationForStat('atk', isDoubleHandActive, isTrueDoubleHandActive);
+    this.defineDhActivationForStat('mag', isDoubleHandActive, isTrueDoubleHandActive);
+    this.defineDhActivationForStat('def', isDoubleHandActive, isTrueDoubleHandActive);
+    this.defineDhActivationForStat('spr', isDoubleHandActive, isTrueDoubleHandActive);
   }
 
-  private computeTotalsForStat(statName: string, isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
+  private defineDhActivationForStat(statName: string, isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
+    this['effective_' + statName + '_dh'] = isDoubleHandActive ? this[statName + '_dh'] : 0;
+    this['effective_' + statName + '_tdh'] = isTrueDoubleHandActive ? this[statName + '_tdh'] : 0;
+  }
+
+  public computeTotals() {
+    this.computeTotalsForStat('hp');
+    this.computeTotalsForStat('mp');
+    this.computeTotalsForStat('atk');
+    this.computeTotalsForStat('mag');
+    this.computeTotalsForStat('def');
+    this.computeTotalsForStat('spr');
+  }
+
+  private computeTotalsForStat(statName: string) {
     this[statName + '_from_passive'] = this[statName] * (this[statName + '_passive'] + this[statName + '_cond_passive']) / 100;
     this[statName + '_from_equipment_passive'] = this[statName] * this[statName + '_equipment_passive'] / 100;
     this[statName + '_from_dh'] = this[statName + '_equipment'] *
-      (
-        (isDoubleHandActive ? this[statName + '_dh'] / 100 : 0)
-        +
-        (isTrueDoubleHandActive ? this[statName + '_tdh'] / 100 : 0)
-      );
+      (this['effective_' + statName + '_dh'] / 100 + this['effective_' + statName + '_tdh'] / 100);
     this[statName + '_from_dh_equipment'] = this[statName + '_equipment'] *
-      (
-        (isDoubleHandActive ? this[statName + '_dh_equipment'] / 100 : 0)
-        +
-        (isTrueDoubleHandActive ? this[statName + '_tdh_equipment'] / 100 : 0)
-      );
+      (this[statName + '_dh_equipment'] / 100 + this[statName + '_tdh_equipment'] / 100);
     this[statName + '_total'] = Math.floor(this[statName]
       + this[statName + '_from_passive']
       + this[statName + '_from_equipment_passive']

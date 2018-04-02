@@ -48,7 +48,7 @@ export class UnitDetailsStatSumComponent implements OnInit {
   }
 
   public getDhPercent() {
-    return this.unitStats[this.stat + '_dh'] + this.unitStats[this.stat + '_tdh'];
+    return this.unitStats['effective_' + this.stat + '_dh'] + this.unitStats['effective_' + this.stat + '_tdh'];
   }
 
   public getEquipmentDhValue() {
