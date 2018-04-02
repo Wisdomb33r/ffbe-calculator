@@ -1,0 +1,27 @@
+div.flexcontainer {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: start;
+}
+
+.equipment-icon img {
+  max-width: 58px;
+}
+
+.equipment {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.equipment-icon {
+  border: 1px solid #505139;
+  border-right: 0;
+  background-color: #000c63;
+}
+
+.equipment-details {
+  vertical-align: top;
+  border: 1px solid #505139;
+  border-left: 0;
+  background-color: #000c63;
+}

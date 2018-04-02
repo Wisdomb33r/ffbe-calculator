@@ -1,20 +1,15 @@
 .equipment {
   display: flex;
   flex-flow: row wrap;
-  margin-bottom: 10px;
+  border: 1px solid #505139;
+  border-bottom: 0;
+  background-color: #000c63;
 }
 
 .equipment img {
   width: 58px;
-  margin-right: 10px;
 }
 
-.equipment h2 {
-  margin: 0;
-  font-size: 12px;
-}
-
-.equipment p {
-  margin: 0;
-  font-size: 11px;
+.equipment app-equipment-details {
+  flex-grow: 1;
 }

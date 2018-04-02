@@ -1,14 +1,6 @@
 <div class="equipment" *ngFor="let equipment of equipments">
-  <img [src]="equipment.icon" (click)="selectEquipment(equipment)">
   <div>
-    <h2>{{equipment.name}}</h2>
-    <p *ngIf="equipment.atk">+{{equipment.atk}} {{'atk' | translate}}</p>
-    <p *ngIf="equipment.atk_percent">+{{equipment.atk_percent}}% {{'atk' | translate}}</p>
-    <p *ngIf="equipment.mag">+{{equipment.mag}} {{'mag' | translate}}</p>
-    <p *ngIf="equipment.mag_percent">+{{equipment.mag_percent}}% {{'mag' | translate}}</p>
-    <p *ngIf="equipment.def">+{{equipment.def}} {{'def' | translate}}</p>
-    <p *ngIf="equipment.def_percent">+{{equipment.def_percent}}% {{'def' | translate}}</p>
-    <p *ngIf="equipment.spr">+{{equipment.spr}} {{'spr' | translate}}</p>
-    <p *ngIf="equipment.spr_percent">+{{equipment.spr_percent}}% {{'spr' | translate}}</p>
+    <img [src]="equipment.icon" (click)="selectEquipment(equipment)">
   </div>
+  <app-equipment-details [equipment]="equipment"></app-equipment-details>
 </div>

@@ -8,8 +8,8 @@
 </mat-toolbar>
 
 <app-unit-details [unit]="selectedUnit" *ngIf="selectedUnit"></app-unit-details>
-<app-equipment-details [equipments]="selectedUnit.selectedBuild.equipments"
-                       [unitId]="selectedUnit.id"
-                       *ngIf="selectedUnit"
-                       (equipmentChanged)="computeAfterEquipmentChanged()"></app-equipment-details>
+<app-equipments-display [equipments]="selectedUnit.selectedBuild.equipments"
+                        [unitId]="selectedUnit.id"
+                        *ngIf="selectedUnit"
+                        (equipmentChanged)="computeAfterEquipmentChanged()"></app-equipments-display>
 <app-damage-results *ngIf="selectedUnit"></app-damage-results>

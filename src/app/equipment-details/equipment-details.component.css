@@ -1,9 +1,15 @@
-div.flexcontainer {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: start;
+h2 {
+  margin: 0;
+  font-size: 11px;
+  background-color: #0e2d5f;
+  color: white;
+  padding: 2px;
+  border-top: 1px solid #6f96bd;
+  border-bottom: 1px solid #6f96bd;
 }
 
-img.item {
-  max-width: 58px;
+p {
+  margin: 0;
+  font-size: 10px;
+  color: white;
 }

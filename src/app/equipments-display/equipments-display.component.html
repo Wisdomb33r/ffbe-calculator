@@ -1,0 +1,78 @@
+<mat-card>
+  <mat-card-title class="equipment-selection-mct">{{'equipment.selection.title' | translate}}</mat-card-title>
+  <div class="flexcontainer">
+    <table class="equipment">
+      <tr>
+        <td class="equipment-icon">
+          <img [src]="equipments.right_hand.icon" (click)="openEquipmentSelectionPane('right_hand')">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.right_hand"></app-equipment-details>
+        </td>
+        <td class="equipment-icon" (click)="openEquipmentSelectionPane('left_hand')">
+          <img *ngIf="equipments.left_hand" [src]="equipments.left_hand.icon">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.left_hand" *ngIf="equipments.left_hand">
+          </app-equipment-details>
+        </td>
+      </tr>
+      <tr>
+        <td class="equipment-icon">
+          <img [src]="equipments.head.icon" (click)="openEquipmentSelectionPane('head')">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.head"></app-equipment-details>
+        </td>
+        <td class="equipment-icon">
+          <img [src]="equipments.body.icon" (click)="openEquipmentSelectionPane('body')">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.body"></app-equipment-details>
+        </td>
+      </tr>
+      <tr>
+        <td class="equipment-icon">
+          <img [src]="equipments.accessory1.icon" (click)="openEquipmentSelectionPane('accessory1')">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.accessory1"></app-equipment-details>
+        </td>
+        <td class="equipment-icon">
+          <img [src]="equipments.accessory2.icon" (click)="openEquipmentSelectionPane('accessory2')">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.accessory2"></app-equipment-details>
+        </td>
+      </tr>
+      <tr>
+        <td class="equipment-icon">
+          <img [src]="equipments.materia1.icon" (click)="openEquipmentSelectionPane('materia1')">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.materia1"></app-equipment-details>
+        </td>
+        <td class="equipment-icon">
+          <img [src]="equipments.materia2.icon" (click)="openEquipmentSelectionPane('materia2')">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.materia2"></app-equipment-details>
+        </td>
+      </tr>
+      <tr>
+        <td class="equipment-icon">
+          <img [src]="equipments.materia3.icon" (click)="openEquipmentSelectionPane('materia3')">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.materia3"></app-equipment-details>
+        </td>
+        <td class="equipment-icon">
+          <img [src]="equipments.materia4.icon" (click)="openEquipmentSelectionPane('materia4')">
+        </td>
+        <td class="equipment-details">
+          <app-equipment-details [equipment]="equipments.materia4"></app-equipment-details>
+        </td>
+      </tr>
+    </table>
+  </div>
+</mat-card>
