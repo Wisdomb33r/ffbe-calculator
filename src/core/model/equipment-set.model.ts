@@ -62,19 +62,12 @@ export class EquipmentSet {
     return result;
   }
 
-  public getNumberOfWeapons(): number {
-    let result = 0;
-    if (this.right_hand && this.right_hand.isWeapon()) {
-      result++;
-    }
-    if (this.left_hand && this.left_hand.isWeapon()) {
-      result++;
-    }
-    return result;
+  public isDoubleHandActive(): boolean {
+    return !this.left_hand && !this.right_hand.isTwoHanded();
   }
 
-  public isOneHanded(): boolean {
-    return this.getNumberOfWeapons() === 1 && this.right_hand.isOneHanded();
+  public isTrueDoubleHandActive(): boolean {
+    return !this.left_hand;
   }
 
   public checkConditionalPassiveActive(condPassive: ConditionalPassive): boolean {

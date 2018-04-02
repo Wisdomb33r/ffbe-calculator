@@ -167,25 +167,29 @@ export class UnitStats {
     this.spr_from_esper = spr;
   }
 
-  public computeTotals(nbOfWeapons: number, oneHanded: boolean) {
-    this.computeTotalsForStat('hp', nbOfWeapons, oneHanded);
-    this.computeTotalsForStat('mp', nbOfWeapons, oneHanded);
-    this.computeTotalsForStat('atk', nbOfWeapons, oneHanded);
-    this.computeTotalsForStat('mag', nbOfWeapons, oneHanded);
-    this.computeTotalsForStat('def', nbOfWeapons, oneHanded);
-    this.computeTotalsForStat('spr', nbOfWeapons, oneHanded);
+  public computeTotals(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
+    this.computeTotalsForStat('hp', isDoubleHandActive, isTrueDoubleHandActive);
+    this.computeTotalsForStat('mp', isDoubleHandActive, isTrueDoubleHandActive);
+    this.computeTotalsForStat('atk', isDoubleHandActive, isTrueDoubleHandActive);
+    this.computeTotalsForStat('mag', isDoubleHandActive, isTrueDoubleHandActive);
+    this.computeTotalsForStat('def', isDoubleHandActive, isTrueDoubleHandActive);
+    this.computeTotalsForStat('spr', isDoubleHandActive, isTrueDoubleHandActive);
   }
 
-  private computeTotalsForStat(statName: string, nbOfWeapons: number, oneHanded: boolean) {
+  private computeTotalsForStat(statName: string, isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
     this[statName + '_from_passive'] = this[statName] * (this[statName + '_passive'] + this[statName + '_cond_passive']) / 100;
     this[statName + '_from_equipment_passive'] = this[statName] * this[statName + '_equipment_passive'] / 100;
     this[statName + '_from_dh'] = this[statName + '_equipment'] *
-      ((nbOfWeapons === 1 && oneHanded ? this[statName + '_dh'] / 100 : 0) + (nbOfWeapons === 1 ? this[statName + '_tdh'] / 100 : 0));
+      (
+        (isDoubleHandActive ? this[statName + '_dh'] / 100 : 0)
+        +
+        (isTrueDoubleHandActive ? this[statName + '_tdh'] / 100 : 0)
+      );
     this[statName + '_from_dh_equipment'] = this[statName + '_equipment'] *
       (
-        (nbOfWeapons === 1 && oneHanded ? this[statName + '_dh_equipment'] / 100 : 0)
+        (isDoubleHandActive ? this[statName + '_dh_equipment'] / 100 : 0)
         +
-        (nbOfWeapons === 1 ? this[statName + '_tdh_equipment'] / 100 : 0)
+        (isTrueDoubleHandActive ? this[statName + '_tdh_equipment'] / 100 : 0)
       );
     this[statName + '_total'] = Math.floor(this[statName]
       + this[statName + '_from_passive']

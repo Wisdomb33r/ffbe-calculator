@@ -63,7 +63,7 @@ export class Equipment {
     return SHIELDS_CATEGORIES.indexOf(this.category) > -1;
   }
 
-  public isOneHanded(): boolean {
+  public isTwoHanded(): boolean {
     return this.variance_min > 0 && this.variance_max > 0;
   }
 }

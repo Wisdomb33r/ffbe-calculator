@@ -64,7 +64,7 @@ export class Unit {
 
     const activeCondPassives = this.filterUnitActiveConditionalPassives();
     this.stats.defineConditionalPassives(activeCondPassives);
-    this.stats.computeTotals(this.selectedBuild.equipments.getNumberOfWeapons(), this.selectedBuild.equipments.isOneHanded());
+    this.stats.computeTotals(this.selectedBuild.equipments.isDoubleHandActive(), this.selectedBuild.equipments.isTrueDoubleHandActive());
   }
 
   private filterUnitActiveConditionalPassives(): Array<ConditionalPassive> {
