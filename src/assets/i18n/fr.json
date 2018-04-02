@@ -37,7 +37,8 @@
   },
   "equipment": {
     "selection": {
-      "title": "Équipement"
+      "title": "Équipement",
+      "remove": "Retirer"
     }
   }
 }

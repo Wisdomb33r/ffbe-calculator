@@ -25,6 +25,8 @@ export class EquipmentsDisplayComponent implements OnInit {
 
   public openEquipmentSelectionPane(slot: string) {
 
+    const offhandPresent = this.equipments[slot] ? true : false;
+
     this.dbClient.getEquipmentsForUnitAndSlot(slot, this.unitId)
       .subscribe(items => {
           const equipments: Array<Equipment> = [];
@@ -34,11 +36,16 @@ export class EquipmentsDisplayComponent implements OnInit {
             width: '320px',
             data: {
               slot: slot,
-              equipments: equipments
+              equipments: equipments,
+              offhandPresent: offhandPresent,
             }
           }).afterClosed().subscribe((equipment: Equipment) => {
             if (equipment) {
-              this.equipments[slot] = equipment;
+              if (equipment.id === -1) {
+                this.equipments[slot] = null;
+              } else {
+                this.equipments[slot] = equipment;
+              }
               this.equipmentChanged.emit(equipment);
             }
           });

@@ -13,3 +13,13 @@
 .equipment app-equipment-details {
   flex-grow: 1;
 }
+
+.unequip {
+  padding-left: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.unequip span {
+  font-size: 18px;
+}

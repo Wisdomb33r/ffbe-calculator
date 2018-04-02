@@ -1,3 +1,6 @@
+<div class="equipment" (click)="removeEquipment()" *ngIf="isRemovable()">
+  <p class="unequip"><span>&#8617;</span> {{'equipment.selection.remove' | translate}}</p>
+</div>
 <div class="equipment" *ngFor="let equipment of equipments">
   <div>
     <img [src]="equipment.icon" (click)="selectEquipment(equipment)">
