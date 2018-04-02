@@ -1,8 +1,8 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {FfchClientService} from './database-client.service';
 import {HttpClient} from '@angular/common/http';
+import {DatabaseClientService} from './database-client.service';
 
 class HttpClientMock {
   public get(url: string): Observable<Object> {
@@ -10,13 +10,13 @@ class HttpClientMock {
   }
 }
 
-describe('FfchClientService', () => {
+describe('DatabaseClientService', () => {
   let httpClient: HttpClient = null;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        FfchClientService,
+        DatabaseClientService,
         {provide: HttpClient, useClass: HttpClientMock},
       ]
     });
@@ -27,15 +27,23 @@ describe('FfchClientService', () => {
     spyOn(httpClient, 'get').and.callThrough();
   }));
 
-  it('should be created', inject([FfchClientService], (service: FfchClientService) => {
+  it('should be created', inject([DatabaseClientService], (service: DatabaseClientService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('should delegate to HttpClient for accessing competences', inject([FfchClientService], (service: FfchClientService) => {
+  it('should delegate to HttpClient for accessing units by id', inject([DatabaseClientService], (service: DatabaseClientService) => {
     // WHEN
-    service.getCompetenceByGumiId$(1234);
+    service.getUnitById$(1234);
     // THEN
     expect(httpClient.get).toHaveBeenCalled();
-    expect(httpClient.get).toHaveBeenCalledWith('/admin/skills.php?id=' + 1234);
+    expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/units.php?id=' + 1234);
+  }));
+
+  it('should delegate to HttpClient for accessing units list', inject([DatabaseClientService], (service: DatabaseClientService) => {
+    // WHEN
+    service.getUnits();
+    // THEN
+    expect(httpClient.get).toHaveBeenCalled();
+    expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/units.php');
   }));
 });
