@@ -74,6 +74,16 @@ export class EquipmentSet {
     return !this.left_hand;
   }
 
+  public isDwEquipped(): boolean {
+    // TODO currently hard-coded, find a way to retrieve this value from database
+    return this.right_hand.id === 1199
+      || this.right_hand.id === 1352
+      || this.accessory1.id === 935 || this.accessory2.id === 935
+      || this.materia1.id === 791 || this.materia2.id === 791 || this.materia3.id === 791 || this.materia4.id === 791
+      || this.materia1.id === 1756 || this.materia2.id === 1756 || this.materia3.id === 1756 || this.materia4.id === 1756
+      ;
+  }
+
   public checkConditionalPassiveActive(condPassive: ConditionalPassive): boolean {
     if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0) {
       return this.right_hand.category === condPassive.category

@@ -31,31 +31,41 @@ export class EquipmentsDisplayComponent implements OnInit {
       .subscribe(items => {
           const equipments: Array<Equipment> = [];
           items
-            .filter(item => this.isNotUniqueOrNotEquipped(item, slot))
-            .forEach(item => equipments.push(new Equipment(item)));
+            .map(item => new Equipment(item))
+            .filter(item => this.isAllowed(item, slot))
+            .forEach(item => equipments.push(item));
 
-          const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
-            width: '320px',
-            data: {
-              slot: slot,
-              equipments: equipments,
-              offhandPresent: offhandPresent,
-            }
-          }).afterClosed().subscribe((equipment: Equipment) => {
-            if (equipment) {
-              if (equipment.id === -1) {
-                this.equipments[slot] = null;
-              } else {
-                this.equipments[slot] = equipment;
+          if (equipments.length > 0 || (slot === 'left_hand' && offhandPresent)) {
+            const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
+              width: '320px',
+              data: {
+                slot: slot,
+                equipments: equipments,
+                offhandPresent: offhandPresent,
               }
-              this.equipmentChanged.emit(equipment);
-            }
-          });
+            }).afterClosed().subscribe((equipment: Equipment) => {
+              if (equipment) {
+                if (equipment.id === -1) {
+                  this.equipments[slot] = null;
+                } else {
+                  this.equipments[slot] = equipment;
+                }
+                this.equipmentChanged.emit(equipment);
+              }
+            });
+          }
         }
       );
   }
 
-  private isNotUniqueOrNotEquipped(item: Equipment, slot: string): boolean {
+  private isAllowed(item: Equipment, slot: string): boolean {
+    let isAllowed = this.checkUniqueness(item, slot);
+    isAllowed = isAllowed && this.checkTwoHandedMainHandForOffhand(slot);
+    isAllowed = isAllowed && this.checkDwForSecondWeapon(item, slot);
+    return isAllowed;
+  }
+
+  private checkUniqueness(item: Equipment, slot: string): boolean {
     if (item.unique) {
       if (slot.startsWith('materia') && (
           item.id === this.equipments.materia1.id
@@ -74,5 +84,14 @@ export class EquipmentsDisplayComponent implements OnInit {
       }
     }
     return true;
+  }
+
+  private checkTwoHandedMainHandForOffhand(slot: string) {
+    return slot !== 'left_hand' || !this.equipments.right_hand.isTwoHanded();
+  }
+
+  private checkDwForSecondWeapon(item: Equipment, slot: string): boolean {
+    return slot !== 'left_hand' || item.isShield() || (this.equipments.isDwEquipped() && !item.isTwoHanded())
+      || item.id === 1199 || item.id === 1352 || this.unitId === 590 || this.unitId === 775 || this.unitId === 8063;
   }
 }
