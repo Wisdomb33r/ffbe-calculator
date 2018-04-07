@@ -203,12 +203,13 @@ export class UnitStats {
   }
 
   private computeTotalsForStat(statName: string) {
+    const effectiveEquipmentPassive = this.getEffectiveEquipmentPassive(statName);
+    const effectiveEquipmentDh = this.getEffectiveEquipmentDh(statName);
     this[statName + '_from_passive'] = this[statName] * (this[statName + '_passive'] + this[statName + '_cond_passive']) / 100;
-    this[statName + '_from_equipment_passive'] = this[statName] * this[statName + '_equipment_passive'] / 100;
+    this[statName + '_from_equipment_passive'] = this[statName] * effectiveEquipmentPassive / 100;
     this[statName + '_from_dh'] = this[statName + '_equipment'] *
       (this['effective_' + statName + '_dh'] / 100 + this['effective_' + statName + '_tdh'] / 100);
-    this[statName + '_from_dh_equipment'] = this[statName + '_equipment'] *
-      (this[statName + '_dh_equipment'] / 100 + this[statName + '_tdh_equipment'] / 100);
+    this[statName + '_from_dh_equipment'] = this[statName + '_equipment'] * effectiveEquipmentDh / 100;
     this[statName + '_total'] = Math.floor(this[statName]
       + this[statName + '_from_passive']
       + this[statName + '_from_equipment_passive']
@@ -216,5 +217,22 @@ export class UnitStats {
       + this[statName + '_from_dh_equipment']
       + this[statName + '_equipment'])
       + this[statName + '_from_esper'];
+  }
+
+  private getEffectiveEquipmentPassive(statName: string): number {
+    if ((this[statName + '_passive'] + this[statName + '_cond_passive'] + this[statName + '_equipment_passive']) > 300) {
+      return 300 - this[statName + '_passive'] - this[statName + '_cond_passive'];
+    } else {
+      return this[statName + '_equipment_passive'];
+    }
+  }
+
+  private getEffectiveEquipmentDh(statName: string): number {
+    if ((this['effective_' + statName + '_dh'] + this['effective_' + statName + '_tdh']
+        + this[statName + '_dh_equipment'] + this[statName + '_tdh_equipment']) > 300) {
+      return 300 - this['effective_' + statName + '_dh'] - this['effective_' + statName + '_tdh'];
+    } else {
+      return this[statName + '_dh_equipment'] + this[statName + '_tdh_equipment'];
+    }
   }
 }

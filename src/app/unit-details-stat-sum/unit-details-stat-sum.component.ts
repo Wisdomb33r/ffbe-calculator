@@ -66,4 +66,12 @@ export class UnitDetailsStatSumComponent implements OnInit {
   public getTotalValue() {
     return this.unitStats[this.stat + '_total'];
   }
+
+  public isEquipmentPassiveLimitExceeded(): boolean {
+    return this.getPassivePercent() + this.getEquipmentPassivePercent() > 300;
+  }
+
+  public isEquipmentDhLimitExceeded(): boolean {
+    return this.getDhPercent() + this.getEquipmentDhPercent() > 300;
+  }
 }

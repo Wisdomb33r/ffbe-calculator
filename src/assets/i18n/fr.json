@@ -1,4 +1,10 @@
 {
+  "atk": "ATT",
+  "mag": "MAG",
+  "def": "DÉF",
+  "spr": "PSY",
+  "dh": "DH",
+  "tdh": "TDH",
   "menu": {
     "compute": "Calculer"
   },
@@ -30,7 +36,8 @@
           "dh": "Deux mains",
           "esper": "Chimère",
           "bahamut": "Bahamut",
-          "total": "Total"
+          "total": "Total",
+          "limitWarn": "La caractéristique dépasse la limite de 300% autorisée par le jeu. Une partie du bonus est donc perdue."
         }
       }
     }

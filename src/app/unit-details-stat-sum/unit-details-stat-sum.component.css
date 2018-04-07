@@ -25,3 +25,17 @@
 .total th, .total td {
   border-top: 1px solid black;
 }
+
+.limit-warn {
+  background-image: url('/images/warn.png');
+  background-repeat: no-repeat;
+  padding-left: 20px;
+}
+
+td.limit-warn {
+  background-position: center left;
+}
+
+p.limit-warn {
+  background-position: top left;
+}

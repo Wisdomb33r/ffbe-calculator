@@ -28,7 +28,7 @@
   <tr>
     <td>{{'unit.details.stats.popup.passive' | translate}}</td>
     <td>{{getEquipmentPassiveValue()}}</td>
-    <td class="percent">({{getEquipmentPassivePercent()}}%)</td>
+    <td class="percent" [class.limit-warn]="isEquipmentPassiveLimitExceeded()">({{getEquipmentPassivePercent()}}%)</td>
   </tr>
   <tr>
     <td>{{'unit.details.stats.popup.base' | translate}}</td>
@@ -38,7 +38,7 @@
   <tr>
     <td>{{'unit.details.stats.popup.dh' | translate}}</td>
     <td>{{getEquipmentDhValue() | number}}</td>
-    <td class="percent">({{getEquipmentDhPercent()}}%)</td>
+    <td class="percent" [class.limit-warn]="isEquipmentDhLimitExceeded()">({{getEquipmentDhPercent()}}%)</td>
   </tr>
   <tr>
     <th>{{'unit.details.stats.popup.esper' | translate}}</th>
@@ -56,3 +56,5 @@
     <td></td>
   </tr>
 </table>
+<p *ngIf="isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded()" class="limit-warn">
+  {{'unit.details.stats.popup.limitWarn' | translate}}</p>
