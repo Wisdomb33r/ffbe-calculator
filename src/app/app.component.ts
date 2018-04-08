@@ -16,7 +16,4 @@ export class AppComponent {
     }
   }
 
-  public switchLanguage(lang: string) {
-    this.translate.use(lang);
-  }
 }

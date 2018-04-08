@@ -5,6 +5,12 @@
   </ul>
 
   <button mat-raised-button color="accent" (click)="openUnitSelectionPane()">{{'menu.compute' | translate}}</button>
+
+  <mat-menu #languageMenu="matMenu" yPosition="below" [overlapTrigger]="false">
+    <button mat-menu-item (click)="switchLanguage('en')">{{'menu.language.english' | translate}}</button>
+    <button mat-menu-item (click)="switchLanguage('fr')">{{'menu.language.french' | translate}}</button>
+  </mat-menu>
+  <button mat-raised-button color="accent" [matMenuTriggerFor]="languageMenu">{{'menu.languages' | translate}}</button>
 </mat-toolbar>
 
 <app-unit-details [unit]="selectedUnit" *ngIf="selectedUnit"></app-unit-details>

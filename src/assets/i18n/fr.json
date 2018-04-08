@@ -6,7 +6,12 @@
   "dh": "DH",
   "tdh": "TDH",
   "menu": {
-    "compute": "Calculer"
+    "compute": "Calculer",
+    "languages": "Langues",
+    "language": {
+      "english": "Anglais",
+      "french": "Français"
+    }
   },
   "unit": {
     "selection": {

@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material';
 import {UnitSelectionComponent} from '../unit-selection/unit-selection.component';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {isNullOrUndefined} from 'util';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-calculator',
@@ -18,7 +19,8 @@ export class CalculatorComponent implements OnInit {
 
   constructor(private unitsService: UnitsService,
               private dialog: MatDialog,
-              private databaseClient: DatabaseClientService) {
+              private databaseClient: DatabaseClientService,
+              private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -44,5 +46,9 @@ export class CalculatorComponent implements OnInit {
 
   public computeAfterEquipmentChanged() {
     this.selectedUnit.computeAll();
+  }
+
+  public switchLanguage(lang: string) {
+    this.translate.use(lang);
   }
 }
