@@ -3,11 +3,16 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {HttpClient} from '@angular/common/http';
 import {DatabaseClientService} from './database-client.service';
+import {TranslateService} from '@ngx-translate/core';
 
 class HttpClientMock {
   public get(url: string): Observable<Object> {
     return Observable.of(null);
   }
+}
+
+class TranslateServiceMock {
+  public currentLang = 'fr';
 }
 
 describe('DatabaseClientService', () => {
@@ -18,6 +23,7 @@ describe('DatabaseClientService', () => {
       providers: [
         DatabaseClientService,
         {provide: HttpClient, useClass: HttpClientMock},
+        {provide: TranslateService, useClass: TranslateServiceMock},
       ]
     });
   });
@@ -36,7 +42,7 @@ describe('DatabaseClientService', () => {
     service.getUnitById$(1234);
     // THEN
     expect(httpClient.get).toHaveBeenCalled();
-    expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/units.php?id=' + 1234);
+    expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/units.php?id=1234&language=fr');
   }));
 
   it('should delegate to HttpClient for accessing units list', inject([DatabaseClientService], (service: DatabaseClientService) => {
@@ -44,6 +50,15 @@ describe('DatabaseClientService', () => {
     service.getUnits();
     // THEN
     expect(httpClient.get).toHaveBeenCalled();
-    expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/units.php');
+    expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/units.php?language=fr');
   }));
+
+  it('should delegate to HttpClient for accessing equipments by unit id and slot',
+    inject([DatabaseClientService], (service: DatabaseClientService) => {
+      // WHEN
+      service.getEquipmentsForUnitAndSlot('head', 555);
+      // THEN
+      expect(httpClient.get).toHaveBeenCalled();
+      expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/equipments.php?category=head&unit=555&language=fr');
+    }));
 });

@@ -1,0 +1,7 @@
+mat-toolbar button {
+  margin-left: 10px;
+}
+
+mat-toolbar button:first-child {
+  margin-left: 0;
+}

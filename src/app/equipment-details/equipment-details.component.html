@@ -1,4 +1,8 @@
 <h2>{{equipment.name}}</h2>
+<p *ngIf="equipment.hp">+{{equipment.hp}} {{'hp' | translate}}</p>
+<p *ngIf="equipment.hp_percent">+{{equipment.hp_percent}}% {{'hp' | translate}}</p>
+<p *ngIf="equipment.mp">+{{equipment.mp}} {{'mp' | translate}}</p>
+<p *ngIf="equipment.mp_percent">+{{equipment.mp_percent}}% {{'mp' | translate}}</p>
 <p *ngIf="equipment.atk">+{{equipment.atk}} {{'atk' | translate}}</p>
 <p *ngIf="equipment.atk_percent">+{{equipment.atk_percent}}% {{'atk' | translate}}</p>
 <p *ngIf="equipment.mag">+{{equipment.mag}} {{'mag' | translate}}</p>
