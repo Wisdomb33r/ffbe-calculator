@@ -1,26 +1,51 @@
 {
+  "hp": "HP",
+  "mp": "MP",
+  "atk": "ATK",
+  "mag": "MAG",
+  "def": "DEF",
+  "spr": "SPR",
+  "dh": "DH",
+  "tdh": "TDH",
+  "menu": {
+    "compute": "Build",
+    "languages": "Languages",
+    "language": {
+      "english": "English",
+      "french": "French"
+    }
+  },
   "unit": {
     "selection": {
-      "title": "Unit selection",
       "error": {
         "failedToLoadUnits": "An error occured while retrieving unit list"
+      },
+      "popup": {
+        "title": "Unit selection"
       }
     },
     "details": {
       "number": "Nb.",
       "stats": {
-        "hp": "HP",
-        "mp": "MP",
-        "atk": "ATK",
-        "mag": "MAG",
-        "def": "DEF",
-        "spr": "SPR"
+        "popup": {
+          "title": "Calculation details",
+          "unit": "Unit",
+          "base": "Base",
+          "passive": "Traits",
+          "equipment": "Equipment",
+          "dh": "Doublehand",
+          "esper": "Esper",
+          "bahamut": "Bahamut",
+          "total": "Total",
+          "limitWarn": "The unit stat increase is over the 300% limit. The bonus is partially lost."
+        }
       }
     }
   },
   "equipment": {
     "selection": {
-      "title": "Equipment"
+      "title": "Equipment",
+      "remove": "Remove"
     }
   }
 }

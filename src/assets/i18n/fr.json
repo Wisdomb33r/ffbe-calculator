@@ -1,4 +1,6 @@
 {
+  "hp": "PV",
+  "mp": "PM",
   "atk": "ATT",
   "mag": "MAG",
   "def": "DÉF",
@@ -15,7 +17,6 @@
   },
   "unit": {
     "selection": {
-      "title": "Choix de l'unité",
       "error": {
         "failedToLoadUnits": "Une erreur est survenue durant le chargement de la liste des unités"
       },
@@ -26,12 +27,6 @@
     "details": {
       "number": "No.",
       "stats": {
-        "hp": "PV",
-        "mp": "PM",
-        "atk": "ATT",
-        "mag": "MAGIE",
-        "def": "DÉF",
-        "spr": "PSY",
         "popup": {
           "title": "Détails du calcul",
           "unit": "Unité",
