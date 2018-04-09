@@ -10,5 +10,4 @@ node_js:
 before_script:
   - npm -v
   - node -v
-  - npm start
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - npm run test-ci
