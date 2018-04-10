@@ -48,6 +48,9 @@ export class EquipmentsDisplayComponent implements OnInit {
                 if (equipment.id === -1) {
                   this.equipments[slot] = null;
                 } else {
+                  if (slot === 'right_hand' && equipment.isTwoHanded()) {
+                    this.equipments['left_hand'] = null;
+                  }
                   this.equipments[slot] = equipment;
                 }
                 this.equipmentChanged.emit(equipment);
