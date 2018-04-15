@@ -13,3 +13,13 @@ p {
   font-size: 10px;
   color: white;
 }
+
+.passive img {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.passive span {
+  display: block;
+}

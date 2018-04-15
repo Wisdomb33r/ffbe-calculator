@@ -1,0 +1,59 @@
+import {EquipmentSet} from './equipment-set.model';
+import {Equipment} from './equipment.model';
+
+const VALID_TWO_HANDED_EQUIPMENT_SET = '{"right_hand":{"id":1873,"category":27,"name":"Scie motorisée","icon":"/gestion/resources/brex_objet/img/000/001/native/873_c29f0a.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":130,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":100,"variance_max":160,"unique":false,"conditional_passives":null},"left_hand":null,"head":{"id":1640,"category":12,"name":"Épingle de Prishe","icon":"/gestion/resources/brex_objet/img/000/001/native/640_27b187.png","hp":null,"hp_percent":10,"mp":null,"mp_percent":10,"atk":45,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":false,"conditional_passives":null},"body":{"id":1717,"category":35,"name":"Vêtements d\'entraînement","icon":"/gestion/resources/brex_objet/img/000/001/native/717_81c9ff.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":20,"atk":20,"atk_percent":null,"mag":null,"mag_percent":null,"def":32,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":false,"conditional_passives":null},"accessory1":{"id":1871,"category":25,"name":"Gant de maréchal","icon":"/gestion/resources/brex_objet/img/000/001/native/871_636760.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":40,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":50,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":false,"conditional_passives":null},"accessory2":{"id":1871,"category":25,"name":"Gant de maréchal","icon":"/gestion/resources/brex_objet/img/000/001/native/871_636760.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":40,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":50,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":false,"conditional_passives":null},"materia1":{"id":1870,"category":57,"name":"Forme de casseur","icon":"/gestion/resources/brex_objet/img/000/001/native/870_77d1d7.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":null,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":100,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":true,"conditional_passives":null},"materia2":{"id":1205,"category":57,"name":"Maîtrise des épées longues","icon":"/gestion/resources/brex_objet/img/000/001/native/205_2bfefd.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":null,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":true,"conditional_passives":[{"category":27,"element":null,"hp":null,"mp":null,"atk":50,"mag":null,"def":null,"spr":null}]},"materia3":{"id":1641,"category":57,"name":"Escrimeur fier","icon":"/gestion/resources/brex_objet/img/000/001/native/641_6f3083.png","hp":null,"hp_percent":20,"mp":null,"mp_percent":null,"atk":null,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":true,"conditional_passives":[{"category":27,"element":null,"hp":null,"mp":null,"atk":40,"mag":null,"def":null,"spr":null}]},"materia4":{"id":1425,"category":57,"name":"Aventurier++++","icon":"/gestion/resources/brex_objet/img/000/001/native/425_5b2514.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":null,"atk_percent":40,"mag":null,"mag_percent":40,"def":null,"def_percent":40,"spr":null,"spr_percent":40,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":true,"conditional_passives":null}}';
+const VALID_EQUIPMENT = '{"id":1873,"category":27,"name":"Scie motorisée","icon":"/gestion/resources/brex_objet/img/000/001/native/873_c29f0a.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":130,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":100,"variance_max":160,"unique":false,"conditional_passives":null}';
+
+describe('EquipmentSet', () => {
+
+  it('should activate true double hand if left hand empty', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    // WHEN
+    const isTrueDoubleHandActive = equipments.isTrueDoubleHandActive();
+    // THEN
+    expect(isTrueDoubleHandActive).toBeTruthy();
+  });
+
+  it('should not activate true double hand if left hand not empty', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.left_hand = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    // WHEN
+    const isTrueDoubleHandActive = equipments.isTrueDoubleHandActive();
+    // THEN
+    expect(isTrueDoubleHandActive).toBeFalsy();
+  });
+
+  it('should activate double hand if left hand empty and weapon one handed', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.right_hand.variance_min = undefined;
+    equipments.right_hand.variance_max = undefined;
+    // WHEN
+    const isDoubleHandActive = equipments.isDoubleHandActive();
+    // THEN
+    expect(isDoubleHandActive).toBeTruthy();
+  });
+
+  it('should not activate double hand if left hand not empty', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.right_hand.variance_min = undefined;
+    equipments.right_hand.variance_max = undefined;
+    equipments.left_hand = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    // WHEN
+    const isDoubleHandActive = equipments.isDoubleHandActive();
+    // THEN
+    expect(isDoubleHandActive).toBeFalsy();
+  });
+
+  it('should not activate double hand if weapon two handed', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    // WHEN
+    const isDoubleHandActive = equipments.isDoubleHandActive();
+    // THEN
+    expect(isDoubleHandActive).toBeFalsy();
+  });
+});

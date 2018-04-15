@@ -15,4 +15,11 @@
 <p *ngIf="equipment.atk_tdh">+{{equipment.atk_tdh}}% {{'atk' | translate}} {{'tdh' | translate}}</p>
 <p *ngIf="equipment.mag_dh">+{{equipment.mag_dh}}% {{'mag' | translate}} {{'dh' | translate}}</p>
 <p *ngIf="equipment.mag_tdh">+{{equipment.mag_tdh}}% {{'mag' | translate}} {{'tdh' | translate}}</p>
-
+<p *ngFor="let passive of equipment.conditional_passives" class="passive">
+  <span *ngIf="passive.hp">+{{passive.hp}}% {{'hp' | translate}} <img src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.mp">+{{passive.mp}}% {{'mp' | translate}} <img src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.atk">+{{passive.atk}}% {{'atk' | translate}} <img src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.mag">+{{passive.mag}}% {{'mag' | translate}} <img src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.def">+{{passive.def}}% {{'def' | translate}} <img src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.spr">+{{passive.spr}}% {{'spr' | translate}} <img src="assets/equipments/{{passive.category}}.png"></span>
+</p>
