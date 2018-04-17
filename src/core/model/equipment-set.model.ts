@@ -99,40 +99,22 @@ export class EquipmentSet {
   }
 
   public getAllActiveConditionalPassives(): Array<ConditionalPassive> {
-    const condPassives: Array<ConditionalPassive> = [];
-    this.right_hand.conditional_passives
-      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-      .forEach(condPassive => condPassives.push(condPassive));
-    if (this.left_hand) {
-      this.materia1.conditional_passives
-        .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-        .forEach(condPassive => condPassives.push(condPassive));
-    }
-    this.head.conditional_passives
-      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-      .forEach(condPassive => condPassives.push(condPassive));
-    this.body.conditional_passives
-      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-      .forEach(condPassive => condPassives.push(condPassive));
-    this.accessory1.conditional_passives
-      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-      .forEach(condPassive => condPassives.push(condPassive));
-    this.accessory2.conditional_passives
-      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-      .forEach(condPassive => condPassives.push(condPassive));
-    this.materia1.conditional_passives
-      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-      .forEach(condPassive => condPassives.push(condPassive));
-    this.materia2.conditional_passives
-      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-      .forEach(condPassive => condPassives.push(condPassive));
-    this.materia3.conditional_passives
-      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-      .forEach(condPassive => condPassives.push(condPassive));
-    this.materia4.conditional_passives
-      .filter(condPassive => this.checkConditionalPassiveActive(condPassive))
-      .forEach(condPassive => condPassives.push(condPassive));
-    return condPassives;
+    const allPassives: Array<ConditionalPassive> = [
+      ...this.right_hand.conditional_passives,
+      ...this.left_hand ? this.left_hand.conditional_passives : [],
+      ...this.head.conditional_passives,
+      ...this.body.conditional_passives,
+      ...this.accessory1.conditional_passives,
+      ...this.accessory2.conditional_passives,
+      ...this.materia1.conditional_passives,
+      ...this.materia2.conditional_passives,
+      ...this.materia3.conditional_passives,
+      ...this.materia4.conditional_passives,
+    ];
+    allPassives.forEach((cp: ConditionalPassive) => cp.active = false);
+    const activePassives: Array<ConditionalPassive> = allPassives.filter(condPassive => this.checkConditionalPassiveActive(condPassive));
+    activePassives.forEach((cp: ConditionalPassive) => cp.active = true);
+    return activePassives;
   }
 
 }

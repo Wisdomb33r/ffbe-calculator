@@ -23,3 +23,7 @@ p {
 .passive span {
   display: block;
 }
+
+.inactive {
+  text-decoration: line-through;
+}

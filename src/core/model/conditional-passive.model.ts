@@ -1,4 +1,5 @@
 export class ConditionalPassive {
+  // from backend
   public category: number;
   public element: number;
   public hp: number;
@@ -7,6 +8,9 @@ export class ConditionalPassive {
   public mag: number;
   public def: number;
   public spr: number;
+
+  // transcient
+  public active = false;
 
   constructor(conditionalPassive: ConditionalPassive) {
     this.category = conditionalPassive.category;

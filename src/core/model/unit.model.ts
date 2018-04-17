@@ -72,7 +72,9 @@ export class Unit {
   private filterUnitActiveConditionalPassives(): Array<ConditionalPassive> {
     const activeConditionalPassives: Array<ConditionalPassive> = [];
     this.conditional_passives.forEach(condPassive => {
+      condPassive.active = false;
       if (this.selectedBuild.equipments.checkConditionalPassiveActive(condPassive)) {
+        condPassive.active = true;
         activeConditionalPassives.push(condPassive);
       }
     });
