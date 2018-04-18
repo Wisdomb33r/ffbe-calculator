@@ -22,44 +22,44 @@ export class UnitStats {
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number,
                                atk_dh, atk_tdh, mag_dh, mag_tdh) {
-    this.hp.stat_equipment = hp;
-    this.mp.stat_equipment = mp;
-    this.atk.stat_equipment = atk;
-    this.mag.stat_equipment = mag;
-    this.def.stat_equipment = def;
-    this.spr.stat_equipment = spr;
-    this.atk.stat_dh_equipment = atk_dh;
-    this.atk.stat_tdh_equipment = atk_tdh;
-    this.mag.stat_dh_equipment = mag_dh;
-    this.mag.stat_tdh_equipment = mag_tdh;
+    this.hp.base_equipment = hp;
+    this.mp.base_equipment = mp;
+    this.atk.base_equipment = atk;
+    this.mag.base_equipment = mag;
+    this.def.base_equipment = def;
+    this.spr.base_equipment = spr;
+    this.atk.dh_equipment = atk_dh;
+    this.atk.tdh_equipment = atk_tdh;
+    this.mag.dh_equipment = mag_dh;
+    this.mag.tdh_equipment = mag_tdh;
   }
 
   public defineConditionalPassives(passives: Array<ConditionalPassive>) {
-    this.hp.stat_cond_passive = passives.map(passive => passive.hp).reduce((val1, val2) => val1 + val2, 0);
-    this.mp.stat_cond_passive = passives.map(passive => passive.mp).reduce((val1, val2) => val1 + val2, 0);
-    this.atk.stat_cond_passive = passives.map(passive => passive.atk).reduce((val1, val2) => val1 + val2, 0);
-    this.mag.stat_cond_passive = passives.map(passive => passive.mag).reduce((val1, val2) => val1 + val2, 0);
-    this.def.stat_cond_passive = passives.map(passive => passive.def).reduce((val1, val2) => val1 + val2, 0);
-    this.spr.stat_cond_passive = passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
+    this.hp.conditional_passive = passives.map(passive => passive.hp).reduce((val1, val2) => val1 + val2, 0);
+    this.mp.conditional_passive = passives.map(passive => passive.mp).reduce((val1, val2) => val1 + val2, 0);
+    this.atk.conditional_passive = passives.map(passive => passive.atk).reduce((val1, val2) => val1 + val2, 0);
+    this.mag.conditional_passive = passives.map(passive => passive.mag).reduce((val1, val2) => val1 + val2, 0);
+    this.def.conditional_passive = passives.map(passive => passive.def).reduce((val1, val2) => val1 + val2, 0);
+    this.spr.conditional_passive = passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
   }
 
   public defineEquipmentPassives(hp: number, mp: number, atk: number, mag: number, def: number, spr: number,
                                  passives: Array<ConditionalPassive>) {
-    this.hp.stat_passive_equipment = hp + passives.map(passive => passive.hp).reduce((val1, val2) => val1 + val2, 0);
-    this.mp.stat_passive_equipment = mp + passives.map(passive => passive.mp).reduce((val1, val2) => val1 + val2, 0);
-    this.atk.stat_passive_equipment = atk + passives.map(passive => passive.atk).reduce((val1, val2) => val1 + val2, 0);
-    this.mag.stat_passive_equipment = mag + passives.map(passive => passive.mag).reduce((val1, val2) => val1 + val2, 0);
-    this.def.stat_passive_equipment = def + passives.map(passive => passive.def).reduce((val1, val2) => val1 + val2, 0);
-    this.spr.stat_passive_equipment = spr + passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
+    this.hp.passive_equipment = hp + passives.map(passive => passive.hp).reduce((val1, val2) => val1 + val2, 0);
+    this.mp.passive_equipment = mp + passives.map(passive => passive.mp).reduce((val1, val2) => val1 + val2, 0);
+    this.atk.passive_equipment = atk + passives.map(passive => passive.atk).reduce((val1, val2) => val1 + val2, 0);
+    this.mag.passive_equipment = mag + passives.map(passive => passive.mag).reduce((val1, val2) => val1 + val2, 0);
+    this.def.passive_equipment = def + passives.map(passive => passive.def).reduce((val1, val2) => val1 + val2, 0);
+    this.spr.passive_equipment = spr + passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
   }
 
   public defineEsperStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number) {
-    this.hp.stat_from_esper = hp;
-    this.mp.stat_from_esper = mp;
-    this.atk.stat_from_esper = atk;
-    this.mag.stat_from_esper = mag;
-    this.def.stat_from_esper = def;
-    this.spr.stat_from_esper = spr;
+    this.hp.value_from_esper = hp;
+    this.mp.value_from_esper = mp;
+    this.atk.value_from_esper = atk;
+    this.mag.value_from_esper = mag;
+    this.def.value_from_esper = def;
+    this.spr.value_from_esper = spr;
   }
 
   public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
