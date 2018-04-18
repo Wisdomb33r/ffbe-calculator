@@ -11,30 +11,30 @@ describe('UnitStats', () => {
     // WHEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_COMPLETE_TEST_DATA));
     // THEN
-    expect(unitStats.hp).toEqual(1);
-    expect(unitStats.mp).toEqual(2);
-    expect(unitStats.atk).toEqual(3);
-    expect(unitStats.mag).toEqual(4);
-    expect(unitStats.def).toEqual(5);
-    expect(unitStats.spr).toEqual(6);
-    expect(unitStats.hp_passive).toEqual(11);
-    expect(unitStats.mp_passive).toEqual(12);
-    expect(unitStats.atk_passive).toEqual(13);
-    expect(unitStats.mag_passive).toEqual(14);
-    expect(unitStats.def_passive).toEqual(15);
-    expect(unitStats.spr_passive).toEqual(16);
-    expect(unitStats.hp_dh).toEqual(21);
-    expect(unitStats.mp_dh).toEqual(22);
-    expect(unitStats.atk_dh).toEqual(23);
-    expect(unitStats.mag_dh).toEqual(24);
-    expect(unitStats.def_dh).toEqual(25);
-    expect(unitStats.spr_dh).toEqual(26);
-    expect(unitStats.hp_tdh).toEqual(31);
-    expect(unitStats.mp_tdh).toEqual(32);
-    expect(unitStats.atk_tdh).toEqual(33);
-    expect(unitStats.mag_tdh).toEqual(34);
-    expect(unitStats.def_tdh).toEqual(35);
-    expect(unitStats.spr_tdh).toEqual(36);
+    expect(unitStats.hp.stat).toEqual(1);
+    expect(unitStats.mp.stat).toEqual(2);
+    expect(unitStats.atk.stat).toEqual(3);
+    expect(unitStats.mag.stat).toEqual(4);
+    expect(unitStats.def.stat).toEqual(5);
+    expect(unitStats.spr.stat).toEqual(6);
+    expect(unitStats.hp.stat_passive).toEqual(11);
+    expect(unitStats.mp.stat_passive).toEqual(12);
+    expect(unitStats.atk.stat_passive).toEqual(13);
+    expect(unitStats.mag.stat_passive).toEqual(14);
+    expect(unitStats.def.stat_passive).toEqual(15);
+    expect(unitStats.spr.stat_passive).toEqual(16);
+    expect(unitStats.hp.stat_dh).toEqual(21);
+    expect(unitStats.mp.stat_dh).toEqual(22);
+    expect(unitStats.atk.stat_dh).toEqual(23);
+    expect(unitStats.mag.stat_dh).toEqual(24);
+    expect(unitStats.def.stat_dh).toEqual(25);
+    expect(unitStats.spr.stat_dh).toEqual(26);
+    expect(unitStats.hp.stat_tdh).toEqual(31);
+    expect(unitStats.mp.stat_tdh).toEqual(32);
+    expect(unitStats.atk.stat_tdh).toEqual(33);
+    expect(unitStats.mag.stat_tdh).toEqual(34);
+    expect(unitStats.def.stat_tdh).toEqual(35);
+    expect(unitStats.spr.stat_tdh).toEqual(36);
   });
 
   it('should define equipment stats', () => {
@@ -43,16 +43,16 @@ describe('UnitStats', () => {
     // WHEN
     unitStats.defineEquipmentsStats(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
     // THEN
-    expect(unitStats.hp_equipment).toEqual(10);
-    expect(unitStats.mp_equipment).toEqual(20);
-    expect(unitStats.atk_equipment).toEqual(30);
-    expect(unitStats.mag_equipment).toEqual(40);
-    expect(unitStats.def_equipment).toEqual(50);
-    expect(unitStats.spr_equipment).toEqual(60);
-    expect(unitStats.atk_dh_equipment).toEqual(70);
-    expect(unitStats.atk_tdh_equipment).toEqual(80);
-    expect(unitStats.mag_dh_equipment).toEqual(90);
-    expect(unitStats.mag_tdh_equipment).toEqual(100);
+    expect(unitStats.hp.stat_equipment).toEqual(10);
+    expect(unitStats.mp.stat_equipment).toEqual(20);
+    expect(unitStats.atk.stat_equipment).toEqual(30);
+    expect(unitStats.mag.stat_equipment).toEqual(40);
+    expect(unitStats.def.stat_equipment).toEqual(50);
+    expect(unitStats.spr.stat_equipment).toEqual(60);
+    expect(unitStats.atk.stat_dh_equipment).toEqual(70);
+    expect(unitStats.atk.stat_tdh_equipment).toEqual(80);
+    expect(unitStats.mag.stat_dh_equipment).toEqual(90);
+    expect(unitStats.mag.stat_tdh_equipment).toEqual(100);
   });
 
   it('should define unit conditional passives', () => {
@@ -61,12 +61,12 @@ describe('UnitStats', () => {
     // WHEN
     unitStats.defineConditionalPassives([JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA), JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA)]);
     // THEN
-    expect(unitStats.hp_cond_passive).toEqual(20);
-    expect(unitStats.mp_cond_passive).toEqual(40);
-    expect(unitStats.atk_cond_passive).toEqual(60);
-    expect(unitStats.mag_cond_passive).toEqual(80);
-    expect(unitStats.def_cond_passive).toEqual(100);
-    expect(unitStats.spr_cond_passive).toEqual(120);
+    expect(unitStats.hp.stat_cond_passive).toEqual(20);
+    expect(unitStats.mp.stat_cond_passive).toEqual(40);
+    expect(unitStats.atk.stat_cond_passive).toEqual(60);
+    expect(unitStats.mag.stat_cond_passive).toEqual(80);
+    expect(unitStats.def.stat_cond_passive).toEqual(100);
+    expect(unitStats.spr.stat_cond_passive).toEqual(120);
   });
 
   it('should define equipment passives', () => {
@@ -76,12 +76,12 @@ describe('UnitStats', () => {
     unitStats.defineEquipmentPassives(10, 20, 30, 40, 50, 60,
       [JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA), JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA)]);
     // THEN
-    expect(unitStats.hp_equipment_passive).toEqual(30);
-    expect(unitStats.mp_equipment_passive).toEqual(60);
-    expect(unitStats.atk_equipment_passive).toEqual(90);
-    expect(unitStats.mag_equipment_passive).toEqual(120);
-    expect(unitStats.def_equipment_passive).toEqual(150);
-    expect(unitStats.spr_equipment_passive).toEqual(180);
+    expect(unitStats.hp.stat_passive_equipment).toEqual(30);
+    expect(unitStats.mp.stat_passive_equipment).toEqual(60);
+    expect(unitStats.atk.stat_passive_equipment).toEqual(90);
+    expect(unitStats.mag.stat_passive_equipment).toEqual(120);
+    expect(unitStats.def.stat_passive_equipment).toEqual(150);
+    expect(unitStats.spr.stat_passive_equipment).toEqual(180);
   });
 
   it('should define esper stats', () => {
@@ -90,48 +90,48 @@ describe('UnitStats', () => {
     // WHEN
     unitStats.defineEsperStats(10, 20, 30, 40, 50, 60);
     // THEN
-    expect(unitStats.hp_from_esper).toEqual(10);
-    expect(unitStats.mp_from_esper).toEqual(20);
-    expect(unitStats.atk_from_esper).toEqual(30);
-    expect(unitStats.mag_from_esper).toEqual(40);
-    expect(unitStats.def_from_esper).toEqual(50);
-    expect(unitStats.spr_from_esper).toEqual(60);
+    expect(unitStats.hp.stat_from_esper).toEqual(10);
+    expect(unitStats.mp.stat_from_esper).toEqual(20);
+    expect(unitStats.atk.stat_from_esper).toEqual(30);
+    expect(unitStats.mag.stat_from_esper).toEqual(40);
+    expect(unitStats.def.stat_from_esper).toEqual(50);
+    expect(unitStats.spr.stat_from_esper).toEqual(60);
   });
 
   it('should set 0 dh value and non null tdh value if only true double hand is active', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
-    unitStats.atk_dh = 100;
-    unitStats.atk_tdh = 50;
+    unitStats.atk.stat_dh = 100;
+    unitStats.atk.stat_tdh = 50;
     // WHEN
     unitStats.defineDhActivation(false, true);
     // THEN
-    expect(unitStats.effective_atk_dh).toEqual(0);
-    expect(unitStats.effective_atk_tdh).toEqual(50);
+    expect(unitStats.atk.stat_dh_effective).toEqual(0);
+    expect(unitStats.atk.stat_tdh_effective).toEqual(50);
   });
 
   it('should set non null dh value and non null tdh value if both double hand are active', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
-    unitStats.atk_dh = 100;
-    unitStats.atk_tdh = 50;
+    unitStats.atk.stat_dh = 100;
+    unitStats.atk.stat_tdh = 50;
     // WHEN
     unitStats.defineDhActivation(true, true);
     // THEN
-    expect(unitStats.effective_atk_dh).toEqual(100);
-    expect(unitStats.effective_atk_tdh).toEqual(50);
+    expect(unitStats.atk.stat_dh_effective).toEqual(100);
+    expect(unitStats.atk.stat_tdh_effective).toEqual(50);
   });
 
   it('should set 0 dh and tdh value if no double hand is active', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
-    unitStats.atk_dh = 100;
-    unitStats.atk_tdh = 50;
+    unitStats.atk.stat_dh = 100;
+    unitStats.atk.stat_tdh = 50;
     // WHEN
     unitStats.defineDhActivation(false, false);
     // THEN
-    expect(unitStats.effective_atk_dh).toEqual(0);
-    expect(unitStats.effective_atk_tdh).toEqual(0);
+    expect(unitStats.atk.stat_dh_effective).toEqual(0);
+    expect(unitStats.atk.stat_tdh_effective).toEqual(0);
   });
 
   it('should compute totals as base stats if no bonus', () => {
@@ -145,12 +145,12 @@ describe('UnitStats', () => {
     // WHEN
     unitStats.computeTotals();
     // THEN
-    expect(unitStats.hp_total).toEqual(3000);
-    expect(unitStats.mp_total).toEqual(200);
-    expect(unitStats.atk_total).toEqual(300);
-    expect(unitStats.mag_total).toEqual(400);
-    expect(unitStats.def_total).toEqual(500);
-    expect(unitStats.spr_total).toEqual(500);
+    expect(unitStats.hp.stat_total).toEqual(3000);
+    expect(unitStats.mp.stat_total).toEqual(200);
+    expect(unitStats.atk.stat_total).toEqual(300);
+    expect(unitStats.mag.stat_total).toEqual(400);
+    expect(unitStats.def.stat_total).toEqual(500);
+    expect(unitStats.spr.stat_total).toEqual(500);
   });
 
   it('should compute atk totals with equipment bonuses and conditional passives', () => {
@@ -164,18 +164,18 @@ describe('UnitStats', () => {
     // WHEN
     unitStats.computeTotals();
     // THEN
-    expect(unitStats.hp_total).toEqual(3000);
-    expect(unitStats.mp_total).toEqual(200);
-    expect(unitStats.atk_total).toEqual(1400); // 300 base with +150% + 200 equipment with +150% DH + esper 150
-    expect(unitStats.mag_total).toEqual(400);
-    expect(unitStats.def_total).toEqual(500);
-    expect(unitStats.spr_total).toEqual(500);
+    expect(unitStats.hp.stat_total).toEqual(3000);
+    expect(unitStats.mp.stat_total).toEqual(200);
+    expect(unitStats.atk.stat_total).toEqual(1400); // 300 base with +150% + 200 equipment with +150% DH + esper 150
+    expect(unitStats.mag.stat_total).toEqual(400);
+    expect(unitStats.def.stat_total).toEqual(500);
+    expect(unitStats.spr.stat_total).toEqual(500);
   });
 
   it('should compute atk totals with passive increase limit exceeded', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
-    unitStats.atk_passive = 150;
+    unitStats.atk.stat_passive = 150;
     unitStats.defineEquipmentsStats(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     unitStats.defineEquipmentPassives(0, 0, 150, 0, 0, 0, []);
     unitStats.defineConditionalPassives([new ConditionalPassive(JSON.parse('{"category": 15,"atk": 150}'))]);
@@ -184,13 +184,13 @@ describe('UnitStats', () => {
     // WHEN
     unitStats.computeTotals();
     // THEN
-    expect(unitStats.atk_total).toEqual(1200); // 300 base with +300% (out of the 450%)
+    expect(unitStats.atk.stat_total).toEqual(1200); // 300 base with +300% (out of the 450%)
   });
 
   it('should compute atk totals with dh increase limit exceeded', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
-    unitStats.atk_dh = 150;
+    unitStats.atk.stat_dh = 150;
     unitStats.defineEquipmentsStats(0, 0, 200, 0, 0, 0, 150, 150, 0, 0);
     unitStats.defineEquipmentPassives(0, 0, 0, 0, 0, 0, []);
     unitStats.defineConditionalPassives([]);
@@ -199,7 +199,7 @@ describe('UnitStats', () => {
     // WHEN
     unitStats.computeTotals();
     // THEN
-    expect(unitStats.atk_total).toEqual(1100); // 300 base + 200 equipment + 300% (out of the 450% DH)
+    expect(unitStats.atk.stat_total).toEqual(1100); // 300 base + 200 equipment + 300% (out of the 450% DH)
   });
 
 });
