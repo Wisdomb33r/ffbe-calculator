@@ -1,7 +1,7 @@
 import {UnitStats} from './unit-stats.model';
 import {UnitStat} from './unit-stat.model';
 
-describe('UnitStats', () => {
+describe('UnitStat', () => {
 
   it('#defineDhActivation should set 0 dh effective value and non null effective tdh value if only true double hand is active', () => {
     // GIVEN
@@ -33,7 +33,7 @@ describe('UnitStats', () => {
     expect(unitStat.tdh_effective).toEqual(0);
   });
 
-  it('should compute total as base if no bonus', () => {
+  it('#computeTotal should compute total as base if no bonus', () => {
     // GIVEN
     const unitStat: UnitStat = new UnitStat(100, 0, 0, 0);
     // WHEN

@@ -54,7 +54,7 @@ describe('UnitStats', () => {
     expect(unitStats.mag.tdh_equipment).toEqual(100);
   });
 
-  it('should define unit conditional passives', () => {
+  it('#defineConditionalPassives should dispatch conditional passive to the different stats', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
     // WHEN
@@ -68,7 +68,7 @@ describe('UnitStats', () => {
     expect(unitStats.spr.conditional_passive).toEqual(120);
   });
 
-  it('should define equipment passives', () => {
+  it('#defineEquipmentPassives should set equipment passives', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
     // WHEN
@@ -83,7 +83,7 @@ describe('UnitStats', () => {
     expect(unitStats.spr.passive_equipment).toEqual(180);
   });
 
-  it('should define esper stats', () => {
+  it('#defineEsperStats should set esper stats', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
     // WHEN
@@ -95,6 +95,46 @@ describe('UnitStats', () => {
     expect(unitStats.mag.value_from_esper).toEqual(40);
     expect(unitStats.def.value_from_esper).toEqual(50);
     expect(unitStats.spr.value_from_esper).toEqual(60);
+  });
+
+  it('#defineDhActivation should delegate to stats objects', () => {
+    // GIVEN
+    const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
+    spyOn(unitStats.hp, 'defineDhActivation').and.callThrough();
+    spyOn(unitStats.mp, 'defineDhActivation').and.callThrough();
+    spyOn(unitStats.atk, 'defineDhActivation').and.callThrough();
+    spyOn(unitStats.mag, 'defineDhActivation').and.callThrough();
+    spyOn(unitStats.def, 'defineDhActivation').and.callThrough();
+    spyOn(unitStats.spr, 'defineDhActivation').and.callThrough();
+    // WHEN
+    unitStats.defineDhActivation(true, false);
+    // THEN
+    expect(unitStats.hp.defineDhActivation).toHaveBeenCalledWith(true, false);
+    expect(unitStats.mp.defineDhActivation).toHaveBeenCalledWith(true, false);
+    expect(unitStats.atk.defineDhActivation).toHaveBeenCalledWith(true, false);
+    expect(unitStats.mag.defineDhActivation).toHaveBeenCalledWith(true, false);
+    expect(unitStats.def.defineDhActivation).toHaveBeenCalledWith(true, false);
+    expect(unitStats.spr.defineDhActivation).toHaveBeenCalledWith(true, false);
+  });
+
+  it('#computeTotals should delegate to stats objects', () => {
+    // GIVEN
+    const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
+    spyOn(unitStats.hp, 'computeTotal').and.callThrough();
+    spyOn(unitStats.mp, 'computeTotal').and.callThrough();
+    spyOn(unitStats.atk, 'computeTotal').and.callThrough();
+    spyOn(unitStats.mag, 'computeTotal').and.callThrough();
+    spyOn(unitStats.def, 'computeTotal').and.callThrough();
+    spyOn(unitStats.spr, 'computeTotal').and.callThrough();
+    // WHEN
+    unitStats.computeTotals();
+    // THEN
+    expect(unitStats.hp.computeTotal).toHaveBeenCalled();
+    expect(unitStats.mp.computeTotal).toHaveBeenCalled();
+    expect(unitStats.atk.computeTotal).toHaveBeenCalled();
+    expect(unitStats.mag.computeTotal).toHaveBeenCalled();
+    expect(unitStats.def.computeTotal).toHaveBeenCalled();
+    expect(unitStats.spr.computeTotal).toHaveBeenCalled();
   });
 
 });
