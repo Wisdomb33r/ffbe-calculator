@@ -20,51 +20,51 @@ export class UnitDetailsStatSumComponent implements OnInit {
   }
 
   public getBaseValue() {
-    return this.unitStats[this.stat];
+    return this.unitStats[this.stat].base;
   }
 
   public getPassiveValue() {
-    return Math.floor(this.unitStats[this.stat + '_from_passive']);
+    return Math.floor(this.unitStats[this.stat].value_from_passive);
   }
 
   public getPassivePercent() {
-    return this.unitStats[this.stat + '_passive'] + this.unitStats[this.stat + '_cond_passive'];
+    return this.unitStats[this.stat].passive + this.unitStats[this.stat].conditional_passive;
   }
 
   public getEquipmentValue() {
-    return this.unitStats[this.stat + '_equipment'];
+    return this.unitStats[this.stat].base_equipment;
   }
 
   public getEquipmentPassiveValue() {
-    return Math.floor(this.unitStats[this.stat + '_from_equipment_passive']);
+    return Math.floor(this.unitStats[this.stat].value_from_passive_equipment);
   }
 
   public getEquipmentPassivePercent() {
-    return this.unitStats[this.stat + '_equipment_passive'];
+    return this.unitStats[this.stat].passive_equipment;
   }
 
   public getDhValue() {
-    return Math.floor(this.unitStats[this.stat + '_from_dh']);
+    return Math.floor(this.unitStats[this.stat].value_from_dh);
   }
 
   public getDhPercent() {
-    return this.unitStats['effective_' + this.stat + '_dh'] + this.unitStats['effective_' + this.stat + '_tdh'];
+    return this.unitStats[this.stat].dh_effective + this.unitStats[this.stat].tdh_effective;
   }
 
   public getEquipmentDhValue() {
-    return Math.floor(this.unitStats[this.stat + '_from_dh_equipment']);
+    return Math.floor(this.unitStats[this.stat].value_from_dh_equipment);
   }
 
   public getEquipmentDhPercent() {
-    return this.unitStats[this.stat + '_dh_equipment'] + this.unitStats[this.stat + '_tdh_equipment'];
+    return this.unitStats[this.stat].dh_equipment + this.unitStats[this.stat].tdh_equipment;
   }
 
   public getEsperValue() {
-    return this.unitStats[this.stat + '_from_esper'];
+    return this.unitStats[this.stat].value_from_esper;
   }
 
   public getTotalValue() {
-    return this.unitStats[this.stat + '_total'];
+    return this.unitStats[this.stat].total;
   }
 
   public isEquipmentPassiveLimitExceeded(): boolean {

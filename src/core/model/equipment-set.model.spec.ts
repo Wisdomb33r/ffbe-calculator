@@ -8,7 +8,7 @@ const CONDITIONAL_PASSIVE_TEST_DATA = '{"category":15,"element":null,"hp":10,"mp
 
 describe('EquipmentSet', () => {
 
-  it('should activate true double hand if left hand empty', () => {
+  it('#isTrueDoubleHandActive should be true if left hand empty', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     // WHEN
@@ -17,7 +17,7 @@ describe('EquipmentSet', () => {
     expect(isTrueDoubleHandActive).toBeTruthy();
   });
 
-  it('should not activate true double hand if left hand not empty', () => {
+  it('#isTrueDoubleHandActive should be false if left hand not empty', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     equipments.left_hand = new Equipment(JSON.parse(VALID_EQUIPMENT));
@@ -27,7 +27,7 @@ describe('EquipmentSet', () => {
     expect(isTrueDoubleHandActive).toBeFalsy();
   });
 
-  it('should activate double hand if left hand empty and weapon one handed', () => {
+  it('#isDoubleHandActive should be true if left hand empty and weapon one handed', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     equipments.right_hand.variance_min = undefined;
@@ -38,7 +38,7 @@ describe('EquipmentSet', () => {
     expect(isDoubleHandActive).toBeTruthy();
   });
 
-  it('should not activate double hand if left hand not empty', () => {
+  it('#isDoubleHandActive should be false if left hand not empty', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     equipments.right_hand.variance_min = undefined;
@@ -50,7 +50,7 @@ describe('EquipmentSet', () => {
     expect(isDoubleHandActive).toBeFalsy();
   });
 
-  it('should not activate double hand if weapon two handed', () => {
+  it('#isDoubleHandActive should be false if weapon two handed', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     // WHEN
@@ -59,7 +59,7 @@ describe('EquipmentSet', () => {
     expect(isDoubleHandActive).toBeFalsy();
   });
 
-  it('should sum all equipment stat', () => {
+  it('#sumEquipmentStat should sum all equipment stat', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     // WHEN
@@ -68,7 +68,7 @@ describe('EquipmentSet', () => {
     expect(sum).toEqual(275);
   });
 
-  it('should exclude dh bonuses of the sum if two weapons equipped', () => {
+  it('#sumEquipmentStat should exclude dh and tdh bonuses if two weapons equipped', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     equipments.head.atk_dh = 50;
@@ -84,7 +84,7 @@ describe('EquipmentSet', () => {
     expect(sumTdh).toEqual(0);
   });
 
-  it('should get all active conditional passives', () => {
+  it('#getAllActiveConditionalPassives should return conditional passives activated by equipments', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     equipments.head.conditional_passives = [JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA), JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA)];
@@ -102,5 +102,19 @@ describe('EquipmentSet', () => {
     expect(passives.length).toEqual(4);
     expect(passives.every(passive => passive.category === 15)).toBeTruthy();
     expect(passives.every(passive => passive.active)).toBeTruthy();
+  });
+
+  it('#activateEquipmentPassives should activate the conditional passives of an equipment which are valid according to equipments', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    const equipment: Equipment = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipment.conditional_passives = [JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA), JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA)];
+    equipment.conditional_passives[0].category = 10;
+    equipments.right_hand.category = 15;
+    // WHEN
+    const equipmentActivated = equipments.activateEquipmentPassives(equipment);
+    // THEN
+    expect(equipmentActivated.conditional_passives[0].active).toBeFalsy();
+    expect(equipmentActivated.conditional_passives[1].active).toBeTruthy();
   });
 });

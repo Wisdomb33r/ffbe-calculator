@@ -117,4 +117,8 @@ export class EquipmentSet {
     return activePassives;
   }
 
+  public activateEquipmentPassives(equipment: Equipment): Equipment {
+    equipment.conditional_passives.forEach(cp => this.checkConditionalPassiveActive(cp) ? cp.active = true : cp.active = false);
+    return equipment;
+  }
 }
