@@ -104,7 +104,7 @@ describe('EquipmentSet', () => {
     expect(passives.every(passive => passive.active)).toBeTruthy();
   });
 
-  it('#activateEquipmentPassives should activate the conditional passives of an equipment which are valid according to equipments', () => {
+  it('#activateEquipmentConditionalPassives should activate the conditional passives of an equipment which are valid according to equipments', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     const equipment: Equipment = new Equipment(JSON.parse(VALID_EQUIPMENT));
@@ -112,7 +112,7 @@ describe('EquipmentSet', () => {
     equipment.conditional_passives[0].category = 10;
     equipments.right_hand.category = 15;
     // WHEN
-    const equipmentActivated = equipments.activateEquipmentPassives(equipment);
+    const equipmentActivated = equipments.activateEquipmentConditionalPassives(equipment);
     // THEN
     expect(equipmentActivated.conditional_passives[0].active).toBeFalsy();
     expect(equipmentActivated.conditional_passives[1].active).toBeTruthy();
