@@ -33,6 +33,7 @@ export class EquipmentsDisplayComponent implements OnInit {
           items
             .map(item => new Equipment(item))
             .filter(item => this.isAllowed(item, slot))
+            .map(item => this.equipments.activateEquipmentConditionalPassives(item))
             .forEach(item => equipments.push(item));
 
           if (equipments.length > 0 || (slot === 'left_hand' && offhandPresent)) {
