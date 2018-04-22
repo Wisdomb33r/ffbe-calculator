@@ -14,7 +14,6 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class CalculatorComponent implements OnInit {
 
-  public selectedUnit: Unit = null;
   public errors: Array<string> = [];
 
   constructor(private unitsService: UnitsService,
@@ -36,16 +35,16 @@ export class CalculatorComponent implements OnInit {
       if (!isNullOrUndefined(result)) {
         this.databaseClient.getUnitById$(result.id)
           .subscribe((unit: Unit) => {
-            this.selectedUnit = new Unit(unit);
-            this.selectedUnit.selectDefaultBuild();
-            this.selectedUnit.computeAll();
+            this.unitsService.selectedUnit = new Unit(unit);
+            this.unitsService.selectedUnit.selectDefaultBuild();
+            this.unitsService.selectedUnit.computeAll();
           });
       }
     });
   }
 
   public computeAfterEquipmentChanged() {
-    this.selectedUnit.computeAll();
+    this.unitsService.selectedUnit.computeAll();
   }
 
   public switchLanguage(lang: string) {

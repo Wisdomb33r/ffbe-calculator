@@ -6,6 +6,7 @@ import {Unit} from '../model/unit.model';
 export class UnitsService {
 
   public units: Array<Unit>;
+  public selectedUnit: Unit;
 
   constructor(private databaseClient: DatabaseClientService) {
   }

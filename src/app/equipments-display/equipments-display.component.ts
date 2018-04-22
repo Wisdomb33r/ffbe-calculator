@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material';
 import {EquipmentSelectionComponent} from '../equipment-selection/equipment-selection.component';
 import {Equipment} from '../../core/model/equipment.model';
 import {DatabaseClientService} from '../../core/services/database-client.service';
+import {UnitsService} from '../../core/services/units.service';
 
 @Component({
   selector: 'app-equipments-display',
@@ -13,11 +14,11 @@ import {DatabaseClientService} from '../../core/services/database-client.service
 export class EquipmentsDisplayComponent implements OnInit {
 
   @Input() equipments: EquipmentSet;
-  @Input() unitId: number;
   @Output() equipmentChanged: EventEmitter<Equipment> = new EventEmitter<Equipment>();
 
   constructor(private dialog: MatDialog,
-              private dbClient: DatabaseClientService) {
+              private dbClient: DatabaseClientService,
+              private unitsService: UnitsService) {
   }
 
   ngOnInit() {
@@ -27,7 +28,7 @@ export class EquipmentsDisplayComponent implements OnInit {
 
     const offhandPresent = this.equipments[slot] ? true : false;
 
-    this.dbClient.getEquipmentsForUnitAndSlot(slot, this.unitId)
+    this.dbClient.getEquipmentsForUnitAndSlot(slot, this.unitsService.selectedUnit.id)
       .subscribe(items => {
           const equipments: Array<Equipment> = [];
           items
@@ -96,6 +97,7 @@ export class EquipmentsDisplayComponent implements OnInit {
 
   private checkDwForSecondWeapon(item: Equipment, slot: string): boolean {
     return slot !== 'left_hand' || item.isShield() || (this.equipments.isDwEquipped() && !item.isTwoHanded())
-      || item.id === 1199 || item.id === 1352 || this.unitId === 590 || this.unitId === 775 || this.unitId === 8063;
+      || item.id === 1199 || item.id === 1352 || this.unitsService.selectedUnit.id === 590
+      || this.unitsService.selectedUnit.id === 775 || this.unitsService.selectedUnit.id === 8063;
   }
 }

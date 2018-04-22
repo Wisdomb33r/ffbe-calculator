@@ -13,9 +13,8 @@
   <button mat-raised-button color="accent" [matMenuTriggerFor]="languageMenu">{{'menu.languages' | translate}}</button>
 </mat-toolbar>
 
-<app-unit-details [unit]="selectedUnit" *ngIf="selectedUnit"></app-unit-details>
-<app-equipments-display [equipments]="selectedUnit.selectedBuild.equipments"
-                        [unitId]="selectedUnit.id"
-                        *ngIf="selectedUnit"
+<app-unit-details [unit]="unitsService.selectedUnit" *ngIf="unitsService.selectedUnit"></app-unit-details>
+<app-equipments-display [equipments]="unitsService.selectedUnit.selectedBuild.equipments"
+                        *ngIf="unitsService.selectedUnit"
                         (equipmentChanged)="computeAfterEquipmentChanged()"></app-equipments-display>
-<app-damage-results *ngIf="selectedUnit"></app-damage-results>
+<app-damage-results *ngIf="unitsService.selectedUnit"></app-damage-results>
