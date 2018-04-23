@@ -33,6 +33,11 @@ export class Unit {
     }
   }
 
+  public isWithNativeDw() {
+    // TODO currently hardcoded, need to find a way to retrieve this from backend
+    return this.id === 590 || this.id === 775 || this.id === 8063;
+  }
+
   public computeAll() {
     if (this.selectedBuild) {
       this.computeRealStats();

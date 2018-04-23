@@ -68,4 +68,9 @@ export class Equipment {
   public isTwoHanded(): boolean {
     return this.variance_min > 0 && this.variance_max > 0;
   }
+
+  public isWeaponWithDw(): boolean {
+    // TODO currently hardcoded, need to find a way to retrieve this from backend
+    return this.id === 1199 || this.id === 1352;
+  }
 }

@@ -1,20 +1,22 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {EquipmentSet} from '../../core/model/equipment-set.model';
 import {MatDialog} from '@angular/material';
 import {EquipmentSelectionComponent} from '../equipment-selection/equipment-selection.component';
 import {Equipment} from '../../core/model/equipment.model';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {UnitsService} from '../../core/services/units.service';
+import {ISubscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-equipments-display',
   templateUrl: './equipments-display.component.html',
   styleUrls: ['./equipments-display.component.css']
 })
-export class EquipmentsDisplayComponent implements OnInit {
+export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
 
   @Input() equipments: EquipmentSet;
   @Output() equipmentChanged: EventEmitter<Equipment> = new EventEmitter<Equipment>();
+  private subscription: ISubscription;
 
   constructor(private dialog: MatDialog,
               private dbClient: DatabaseClientService,
@@ -24,19 +26,22 @@ export class EquipmentsDisplayComponent implements OnInit {
   ngOnInit() {
   }
 
-  public openEquipmentSelectionPane(slot: string) {
+  ngOnDestroy() {
+    this.unsubscribe();
+  }
 
+  private unsubscribe() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  public openEquipmentSelectionPane(slot: string) {
+    this.unsubscribe();
     const offhandPresent = this.equipments[slot] ? true : false;
 
-    this.dbClient.getEquipmentsForUnitAndSlot(slot, this.unitsService.selectedUnit.id)
-      .subscribe(items => {
-          const equipments: Array<Equipment> = [];
-          items
-            .map(item => new Equipment(item))
-            .filter(item => this.isAllowed(item, slot))
-            .map(item => this.equipments.activateEquipmentConditionalPassives(item))
-            .forEach(item => equipments.push(item));
-
+    this.subscription = this.unitsService.getAllowedEquipmentsForSlot$(slot)
+      .subscribe((equipments: Array<Equipment>) => {
           if (equipments.length > 0 || (slot === 'left_hand' && offhandPresent)) {
             const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
               width: '320px',
@@ -47,57 +52,12 @@ export class EquipmentsDisplayComponent implements OnInit {
               }
             }).afterClosed().subscribe((equipment: Equipment) => {
               if (equipment) {
-                if (equipment.id === -1) {
-                  this.equipments[slot] = null;
-                } else {
-                  if (slot === 'right_hand' && equipment.isTwoHanded()) {
-                    this.equipments['left_hand'] = null;
-                  }
-                  this.equipments[slot] = equipment;
-                }
+                this.unitsService.equipInSlot(slot, equipment);
                 this.equipmentChanged.emit(equipment);
               }
             });
           }
         }
       );
-  }
-
-  private isAllowed(item: Equipment, slot: string): boolean {
-    let isAllowed = this.checkUniqueness(item, slot);
-    isAllowed = isAllowed && this.checkTwoHandedMainHandForOffhand(slot);
-    isAllowed = isAllowed && this.checkDwForSecondWeapon(item, slot);
-    return isAllowed;
-  }
-
-  private checkUniqueness(item: Equipment, slot: string): boolean {
-    if (item.unique) {
-      if (slot.startsWith('materia') && (
-          item.id === this.equipments.materia1.id
-          || item.id === this.equipments.materia2.id
-          || item.id === this.equipments.materia3.id
-          || item.id === this.equipments.materia4.id)) {
-        return false;
-      }
-      if (slot.startsWith('accessory') && (item.id === this.equipments.accessory1.id || item.id === this.equipments.accessory2.id)) {
-        return false;
-      }
-      if (slot === 'right_hand' || slot === 'left_hand') {
-        if (item.id === this.equipments.right_hand.id || (this.equipments.left_hand && item.id === this.equipments.left_hand.id)) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  private checkTwoHandedMainHandForOffhand(slot: string) {
-    return slot !== 'left_hand' || !this.equipments.right_hand.isTwoHanded();
-  }
-
-  private checkDwForSecondWeapon(item: Equipment, slot: string): boolean {
-    return slot !== 'left_hand' || item.isShield() || (this.equipments.isDwEquipped() && !item.isTwoHanded())
-      || item.id === 1199 || item.id === 1352 || this.unitsService.selectedUnit.id === 590
-      || this.unitsService.selectedUnit.id === 775 || this.unitsService.selectedUnit.id === 8063;
   }
 }
