@@ -262,12 +262,12 @@ describe('UnitsService', () => {
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999);
       equipments.subscribe(result => {
         expect(result.length).toEqual(6);
-        expect(result[0].id).toEqual(12);
-        expect(result[1].id).toEqual(10);
-        expect(result[2].id).toEqual(15);
-        expect(result[3].id).toEqual(11);
-        expect(result[4].id).toEqual(13);
-        expect(result[5].id).toEqual(14);
+        expect(result[0].id).toEqual(14);
+        expect(result[1].id).toEqual(13);
+        expect(result[2].id).toEqual(11);
+        expect(result[3].id).toEqual(15);
+        expect(result[4].id).toEqual(10);
+        expect(result[5].id).toEqual(12);
       });
     }));
 
@@ -295,12 +295,12 @@ describe('UnitsService', () => {
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999);
       equipments.subscribe(result => {
         expect(result.length).toEqual(6);
-        expect(result[0].id).toEqual(12);
-        expect(result[1].id).toEqual(10);
-        expect(result[2].id).toEqual(15);
-        expect(result[3].id).toEqual(11);
-        expect(result[4].id).toEqual(13);
-        expect(result[5].id).toEqual(14);
+        expect(result[0].id).toEqual(14);
+        expect(result[1].id).toEqual(13);
+        expect(result[2].id).toEqual(11);
+        expect(result[3].id).toEqual(15);
+        expect(result[4].id).toEqual(10);
+        expect(result[5].id).toEqual(12);
       });
     }));
 
@@ -330,10 +330,10 @@ describe('UnitsService', () => {
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999);
       equipments.subscribe(result => {
         expect(result.length).toEqual(4);
-        expect(result[0].id).toEqual(13);
-        expect(result[1].id).toEqual(10);
-        expect(result[2].id).toEqual(12);
-        expect(result[3].id).toEqual(11);
+        expect(result[0].id).toEqual(11);
+        expect(result[1].id).toEqual(12);
+        expect(result[2].id).toEqual(10);
+        expect(result[3].id).toEqual(13);
       });
     }));
 });
