@@ -3,7 +3,6 @@ import {EquipmentSet} from '../../core/model/equipment-set.model';
 import {MatDialog} from '@angular/material';
 import {EquipmentSelectionComponent} from '../equipment-selection/equipment-selection.component';
 import {Equipment} from '../../core/model/equipment.model';
-import {DatabaseClientService} from '../../core/services/database-client.service';
 import {UnitsService} from '../../core/services/units.service';
 import {ISubscription} from 'rxjs/Subscription';
 
@@ -19,7 +18,6 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
 
   constructor(private dialog: MatDialog,
-              private dbClient: DatabaseClientService,
               private unitsService: UnitsService) {
   }
 
