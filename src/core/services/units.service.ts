@@ -4,6 +4,7 @@ import {Unit} from '../model/unit.model';
 import {Observable} from 'rxjs/Observable';
 import {Equipment} from '../model/equipment.model';
 import {map} from 'rxjs/operators';
+import {CalculatorUtils} from '../calculator-utils';
 
 @Injectable()
 export class UnitsService {
@@ -36,8 +37,62 @@ export class UnitsService {
         map((items: Array<Equipment>) => items
           .map((item: Equipment) => new Equipment(item))
           .filter((item: Equipment) => this.isAllowed(item, slot))
+          .sort((a: Equipment, b: Equipment) => this.compareEquipmentsForAlgorithm(a, b))
         )
       );
+  }
+
+  private compareEquipmentsForAlgorithm(a: Equipment, b: Equipment): number {
+    if (this.selectedUnit.selectedBuild.algorithmId === 1 || this.selectedUnit.selectedBuild.algorithmId === 4) {
+      return this.compareEquipmentsForAtk(a, b);
+    }
+    if (this.selectedUnit.selectedBuild.algorithmId === 2 || this.selectedUnit.selectedBuild.algorithmId === 5) {
+      return this.compareEquipmentsForMag(a, b);
+    }
+    if (this.selectedUnit.selectedBuild.algorithmId === 3 || this.selectedUnit.selectedBuild.algorithmId === 6) {
+      return this.compareEquipmentsForHybrid(a, b);
+    }
+    if (this.selectedUnit.selectedBuild.algorithmId === 8) {
+      return this.compareEquipmentsForDef(a, b);
+    }
+    return 0;
+  }
+
+  private compareEquipmentsForAtk(a: Equipment, b: Equipment): number {
+    const aAtk = this.estimateStat(a, 'atk');
+    const bAtk = this.estimateStat(b, 'atk');
+    return CalculatorUtils.compareNumbers(aAtk, bAtk);
+  }
+
+  private compareEquipmentsForMag(a: Equipment, b: Equipment): number {
+    const aMag = this.estimateStat(a, 'mag');
+    const bMag = this.estimateStat(b, 'mag');
+    return CalculatorUtils.compareNumbers(aMag, bMag);
+  }
+
+  private compareEquipmentsForHybrid(a: Equipment, b: Equipment): number {
+    const aAtk = this.estimateStat(a, 'atk');
+    const bAtk = this.estimateStat(b, 'atk');
+    const aMag = this.estimateStat(a, 'mag');
+    const bMag = this.estimateStat(b, 'mag');
+    return CalculatorUtils.compareNumbers(aAtk + aMag, bAtk + bMag);
+  }
+
+  private compareEquipmentsForDef(a: Equipment, b: Equipment): number {
+    const aHp = this.estimateStat(a, 'hp');
+    const aDef = this.estimateStat(a, 'def');
+    const aSpr = this.estimateStat(a, 'spr');
+    const bHp = this.estimateStat(b, 'hp');
+    const bDef = this.estimateStat(b, 'def');
+    const bSpr = this.estimateStat(b, 'spr');
+    return CalculatorUtils.compareNumbers((aHp / 10) + aDef + aSpr, (bHp / 10) + bDef + bSpr);
+  }
+
+  private estimateStat(equipment: Equipment, stat: string) {
+    const conditional_percent = equipment.conditional_passives.map(passive => passive[stat]).reduce((val1, val2) => val1 + val2, 0);
+    const from_passive = this.selectedUnit.stats[stat].base * (equipment[stat + '_percent'] + conditional_percent) / 100;
+    const from_dh = this.selectedUnit.stats[stat].base_equipment * (equipment[stat + '_dh'] + equipment[stat + '_tdh']) / 100;
+    return equipment[stat] + from_passive + from_dh;
   }
 
   private isAllowed(item: Equipment, slot: string): boolean {
