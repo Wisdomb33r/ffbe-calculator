@@ -47,7 +47,7 @@ describe('DatabaseClientService', () => {
 
   it('should delegate to HttpClient for accessing units list', inject([DatabaseClientService], (service: DatabaseClientService) => {
     // WHEN
-    service.getUnits();
+    service.getUnits$();
     // THEN
     expect(httpClient.get).toHaveBeenCalled();
     expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/units.php?language=fr');
@@ -56,7 +56,7 @@ describe('DatabaseClientService', () => {
   it('should delegate to HttpClient for accessing equipments by unit id and slot',
     inject([DatabaseClientService], (service: DatabaseClientService) => {
       // WHEN
-      service.getEquipmentsForUnitAndSlot('head', 555);
+      service.getEquipmentsForUnitAndSlot$('head', 555);
       // THEN
       expect(httpClient.get).toHaveBeenCalled();
       expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/equipments.php?category=head&unit=555&language=fr');

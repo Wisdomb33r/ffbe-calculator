@@ -24,12 +24,12 @@ export class DatabaseClientService {
       .pipe(catchError(this.analyseError));
   }
 
-  public getUnits(): Observable<Array<Unit>> {
+  public getUnits$(): Observable<Array<Unit>> {
     return this.http.get<Array<Unit>>(UNIT_PATH + '?language=' + this.translatorService.currentLang)
       .pipe(catchError(this.analyseError));
   }
 
-  public getEquipmentsForUnitAndSlot(slot: string, unitId: number): Observable<Array<Equipment>> {
+  public getEquipmentsForUnitAndSlot$(slot: string, unitId: number): Observable<Array<Equipment>> {
     return this.http.get<Array<Equipment>>(
       EQUIPMENT_PATH + '?category=' + slot + '&unit=' + unitId + '&language=' + this.translatorService.currentLang
     ).pipe(catchError(this.analyseError));
