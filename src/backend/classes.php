@@ -7,20 +7,28 @@ class Equipment {
   public $icon;
   public $hp;
   public $hp_percent;
+  public $hp_dh;
+  public $hp_tdh;
   public $mp;
   public $mp_percent;
+  public $mp_dh;
+  public $mp_tdh;
   public $atk;
   public $atk_percent;
-  public $mag;
-  public $mag_percent;
-  public $def;
-  public $def_percent;
-  public $spr;
-  public $spr_percent;
   public $atk_dh;
   public $atk_tdh;
+  public $mag;
+  public $mag_percent;
   public $mag_dh;
   public $mag_tdh;
+  public $def;
+  public $def_percent;
+  public $def_dh;
+  public $def_tdh;
+  public $spr;
+  public $spr_percent;
+  public $spr_dh;
+  public $spr_tdh;
   public $variance_min;
   public $variance_max;
   public $unique;
@@ -32,20 +40,28 @@ class Equipment {
     $this->icon = $brex_equipement->getImageimgPath ();
     $this->hp = $brex_equipement->pv;
     $this->hp_percent = $brex_equipement->pvp;
+    $this->hp_dh = 0;
+    $this->hp_tdh = 0;
     $this->mp = $brex_equipement->pm;
     $this->mp_percent = $brex_equipement->pmp;
+    $this->mp_dh = 0;
+    $this->mp_tdh = 0;
     $this->atk = $brex_equipement->att;
     $this->atk_percent = $brex_equipement->attp;
-    $this->mag = $brex_equipement->mag;
-    $this->mag_percent = $brex_equipement->magp;
-    $this->def = $brex_equipement->def;
-    $this->def_percent = $brex_equipement->defp;
-    $this->spr = $brex_equipement->psy;
-    $this->spr_percent = $brex_equipement->psyp;
     $this->atk_dh = $brex_equipement->build_att_dh;
     $this->atk_tdh = $brex_equipement->build_att_tdh;
+    $this->mag = $brex_equipement->mag;
+    $this->mag_percent = $brex_equipement->magp;
     $this->mag_dh = $brex_equipement->build_mag_dh;
     $this->mag_tdh = $brex_equipement->build_mag_tdh;
+    $this->def = $brex_equipement->def;
+    $this->def_percent = $brex_equipement->defp;
+    $this->def_dh = 0;
+    $this->def_tdh = 0;
+    $this->spr = $brex_equipement->psy;
+    $this->spr_percent = $brex_equipement->psyp;
+    $this->spr_dh = 0;
+    $this->spr_tdh = 0;
     $this->variance_min = $brex_equipement->variance_min;
     $this->variance_max = $brex_equipement->variance_max;
     $this->unique = $brex_equipement->uniq == 1 ? true : false;
@@ -115,8 +131,12 @@ class UnitStats {
   }
 }
 class Build {
+  public $algorithmId;
+  public $algorithmName;
   public $equipments;
   function __construct($brex_build, $language) {
+    $this->algorithmId = $brex_build->algorithm->id;
+    $this->algorithmName = $language == 'fr' ? $brex_build->algorithm->nom : $brex_build->algorithm->nom_en;
     $this->equipments = new EquipmentSet ( $brex_build, $language );
   }
 }

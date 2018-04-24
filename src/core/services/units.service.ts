@@ -37,7 +37,7 @@ export class UnitsService {
         map((items: Array<Equipment>) => items
           .map((item: Equipment) => new Equipment(item))
           .filter((item: Equipment) => this.isAllowed(item, slot))
-          .sort((a: Equipment, b: Equipment) => this.compareEquipmentsForAlgorithm(a, b))
+          .sort((a: Equipment, b: Equipment) => -this.compareEquipmentsForAlgorithm(a, b))
         )
       );
   }
