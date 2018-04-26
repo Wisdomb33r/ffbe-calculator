@@ -26,4 +26,23 @@ describe('AlgorithmPhysicalChaining', () => {
     expect(result['meanTurnPower']).toEqual(750);
     expect(result['preDefDamages']).toEqual(15000000);
   });
+
+  it('#calculate should set the mean per turn power considering number of hits and damages', () => {
+    // GIVEN
+    const algorithm = new AlgorithmPhysicalChaining();
+    const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
+    unit.selectDefaultBuild();
+    unit.stats.atk.total = 1000;
+    unit.selectedBuild.skills[0].hits = 10;
+    unit.selectedBuild.skills[0].damages = '5 5 5 5 5 5 5 5 30 30';
+    unit.selectedBuild.skills[0].frames = '10 20 30 40 50 60 70 80 90 100';
+    // WHEN
+    const result = algorithm.calculate(unit);
+    // THEN
+    expect(result).toBeTruthy();
+    expect(result instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
+    expect(result.result).toEqual(277.5);
+    expect(result['meanTurnPower']).toEqual(1387.5);
+    expect(result['preDefDamages']).toEqual(27750000);
+  });
 });

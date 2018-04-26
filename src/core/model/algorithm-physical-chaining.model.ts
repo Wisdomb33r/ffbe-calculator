@@ -44,7 +44,24 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
   }
 
   private calculatePerTurnPower(skills: Array<Skill>): Array<number> {
-    return skills.map((skill: Skill) => skill.power);
+    return skills.map((skill: Skill) => this.calculatePower(skill));
+  }
+
+  private calculatePower(skill: Skill, comboIncrement = 0.3): number {
+    if (isNullOrUndefined(skill.hits) || skill.hits <= 1) {
+      return skill.power ? skill.power : 0;
+    } else {
+      const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
+      const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
+      if (frames.length !== skill.hits || damages.length !== skill.hits) {
+        throw new Error('Cannot calculate physical chaining without proper frames and damages according to number of hits');
+      }
+      let power: number = 0;
+      for (let i = 0; i < skill.hits; i++) {
+        power = power + skill.power * damages[i] / 100 * Math.min(4, 1 + i * comboIncrement * 2);
+      }
+      return power;
+    }
   }
 
   private checkSkillsInput(skills: Array<Skill>) {
