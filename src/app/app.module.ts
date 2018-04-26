@@ -16,6 +16,7 @@ import {UnitsService} from '../core/services/units.service';
 import {UnitDetailsStatSumComponent} from './unit-details-stat-sum/unit-details-stat-sum.component';
 import {EquipmentSelectionComponent} from './equipment-selection/equipment-selection.component';
 import {EquipmentsDisplayComponent} from './equipments-display/equipments-display.component';
+import {SkillsDisplayComponent} from './skills-display/skills-display.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -32,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UnitSelectionComponent,
     UnitDetailsStatSumComponent,
     EquipmentsDisplayComponent,
+    SkillsDisplayComponent,
   ],
   imports: [
     BrowserModule,

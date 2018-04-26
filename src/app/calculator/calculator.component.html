@@ -17,4 +17,5 @@
 <app-equipments-display [equipments]="unitsService.selectedUnit.selectedBuild.equipments"
                         *ngIf="unitsService.selectedUnit"
                         (equipmentChanged)="computeAfterEquipmentChanged()"></app-equipments-display>
+<app-skills-display *ngIf="unitsService.selectedUnit.selectedBuild.skills"></app-skills-display>
 <app-damage-results *ngIf="unitsService.selectedUnit"></app-damage-results>

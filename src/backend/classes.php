@@ -134,10 +134,35 @@ class Build {
   public $algorithmId;
   public $algorithmName;
   public $equipments;
+  public $skills;
   function __construct($brex_build, $language) {
     $this->algorithmId = $brex_build->algorithm->id;
     $this->algorithmName = $language == 'fr' ? $brex_build->algorithm->nom : $brex_build->algorithm->nom_en;
     $this->equipments = new EquipmentSet ( $brex_build, $language );
+
+    $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
+    if(count($brex_build_skills)){
+      $this->skills = array();
+      foreach ( $brex_build_skills as $brex_skill ) {
+        $this->skills [] = new Skill ( $brex_skill, $language );
+      }
+    }
+  }
+}
+class Skill {
+  public $id;
+  public $name;
+  public $icon;
+  public $power;
+  public $isLimitBreak;
+  public $nb;
+  function __construct($brex_skill, $language){
+    $this->id = $brex_skill->competence->id;
+    $this->name = $language === 'fr' ? $brex_skill->competence->nom : $brex_skill->competence->nom_en;
+    $this->icon = $brex_skill->competence->icone->getImageimgPath();
+    $this->power = $brex_skill->puissance;
+    $this->isLimitBreak = $brex_skill->is_limite == 1 ? true : false;
+    $this->nb = $brex_skill->nb;
   }
 }
 class EquipmentSet {

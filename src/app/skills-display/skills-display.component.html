@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-title class="equipment-selection-mct">{{'skills.display.title' | translate}}</mat-card-title>
+  <div>
+    <ng-container *ngFor="let skill of unitsService.selectedUnit.selectedBuild.skills">
+      <img *ngIf="skill.icon" [src]="skill.icon">
+      <span *ngIf="!skill.isLimitBreak">LB</span>
+    </ng-container>
+  </div>
+</mat-card>
