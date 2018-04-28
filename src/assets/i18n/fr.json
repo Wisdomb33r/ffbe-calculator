@@ -47,5 +47,21 @@
       "title": "Équipement",
       "remove": "Retirer"
     }
+  },
+  "skills": {
+    "display": {
+      "title": "Cycle d'attaque"
+    }
+  },
+  "calculation": {
+    "display": {
+      "title": "Résultat des calculs",
+      "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
+    },
+    "defensive": {
+      "physicalEhp": "PV effectifs physiques",
+      "magicalEhp": "PV effectifs magiques",
+      "ehp": "PV effectifs"
+    }
   }
 }

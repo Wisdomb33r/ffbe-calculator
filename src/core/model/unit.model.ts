@@ -46,7 +46,7 @@ export class Unit {
   }
 
   public calculateResults() {
-    this.selectedBuild.algorithm.calculate(this);
+    this.selectedBuild.calculate(this);
   }
 
   public computeRealStats() {

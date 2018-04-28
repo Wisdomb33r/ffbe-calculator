@@ -47,5 +47,21 @@
       "title": "Equipment",
       "remove": "Remove"
     }
+  },
+  "skills": {
+    "display": {
+      "title": "Skill rotation"
+    }
+  },
+  "calculation": {
+    "display": {
+      "title": "Calculation results",
+      "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
+    },
+    "defensive": {
+      "physicalEhp": "Physical effective HP",
+      "magicalEhp": "Magical effective HP",
+      "ehp": "Effective HP"
+    }
   }
 }

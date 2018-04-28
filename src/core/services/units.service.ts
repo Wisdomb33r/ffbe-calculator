@@ -5,6 +5,8 @@ import {Observable} from 'rxjs/Observable';
 import {Equipment} from '../model/equipment.model';
 import {map} from 'rxjs/operators';
 import {CalculatorUtils} from '../calculator-utils';
+import {Algorithm} from '../model/algorithm.model';
+import {AlgorithmResult} from '../model/algorithm-result.model';
 
 @Injectable()
 export class UnitsService {
@@ -134,5 +136,14 @@ export class UnitsService {
       || (this.selectedUnit.selectedBuild.equipments.isDwEquipped() && !item.isTwoHanded())
       || (this.selectedUnit.isWithNativeDw() && !item.isTwoHanded())
       || item.isWeaponWithDw();
+  }
+
+  // SHORTCUT GETTERS
+  public getAlgorithm(): Algorithm {
+    return this.selectedUnit.selectedBuild.algorithm;
+  }
+
+  public getResult(): AlgorithmResult {
+    return this.selectedUnit.selectedBuild.result;
   }
 }
