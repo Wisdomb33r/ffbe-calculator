@@ -19,6 +19,7 @@ import {EquipmentsDisplayComponent} from './equipments-display/equipments-displa
 import {SkillsDisplayComponent} from './skills-display/skills-display.component';
 import {CalculationDefensiveComponent} from './calculation-defensive/calculation-defensive.component';
 import {CalculationPhysicalChainingComponent} from './calculation-physical-chaining/calculation-physical-chaining.component';
+import {ChainingSkillHitsDamagesComponent} from './chaining-skill-hits-damages/chaining-skill-hits-damages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SkillsDisplayComponent,
     CalculationDefensiveComponent,
     CalculationPhysicalChainingComponent,
+    ChainingSkillHitsDamagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UnitSelectionComponent,
     UnitDetailsStatSumComponent,
     EquipmentSelectionComponent,
+    ChainingSkillHitsDamagesComponent,
   ],
   providers: [
     DatabaseClientService,

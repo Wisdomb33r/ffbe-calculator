@@ -56,11 +56,12 @@
   "calculation": {
     "display": {
       "title": "Résultat des calculs",
+      "meanTurnPower": "Puissance moyenne",
+      "turn": "Tour",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
     },
     "physical": {
       "chaining": {
-        "meanTurnPower": "Puissance moyenne",
         "damagesBeforeDef": "Dégâts avant DÉF",
         "damages": "Dégâts"
       }

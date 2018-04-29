@@ -56,11 +56,12 @@
   "calculation": {
     "display": {
       "title": "Calculation results",
+      "meanTurnPower": "Mean power",
+      "turn": "Turn",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
     "physical": {
       "chaining": {
-        "meanTurnPower": "Mean power",
         "damagesBeforeDef": "Damages before DEF",
         "damages": "Damages"
       }

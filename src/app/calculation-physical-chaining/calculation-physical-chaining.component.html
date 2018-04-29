@@ -1,7 +1,8 @@
 <table>
   <tr>
-    <th>{{'calculation.physical.chaining.meanTurnPower' | translate}}</th>
-    <td>{{result.meanTurnPower | number:'1.0-0'}}</td>
+    <th>{{'calculation.display.meanTurnPower' | translate}}</th>
+    <td>{{result.meanTurnPower | number:'1.0-0'}}% <img class="inline-icon" src="assets/icons/grey/question.png"
+                                                        (click)="displayChainingSkillHitsDamages()"></td>
   </tr>
   <tr>
     <th>{{'calculation.physical.chaining.damagesBeforeDef' | translate}}</th>

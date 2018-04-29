@@ -1,0 +1,8 @@
+<div *ngFor="let damages of result.perTurnHitsPower; let i = index">
+  <h2>{{'calculation.display.turn' | translate}} {{i + 1}}</h2>
+  <p><span *ngFor="let damage of damages">{{damage | number:'1.0-0'}}% </span></p>
+</div>
+<div class="total">
+  <h2>{{'calculation.display.meanTurnPower' | translate}}</h2>
+  <p>{{result.meanTurnPower | number:'1.0-0'}}%</p>
+</div>
