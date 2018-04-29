@@ -84,6 +84,11 @@ export class EquipmentSet {
       ;
   }
 
+  public isDualWielding(): boolean {
+    return this.right_hand && this.right_hand.isWeapon() && !this.right_hand.isTwoHanded()
+      && this.left_hand && this.left_hand.isWeapon() && !this.left_hand.isTwoHanded();
+  }
+
   public checkConditionalPassiveActive(condPassive: ConditionalPassive): boolean {
     if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0) {
       return this.right_hand.category === condPassive.category

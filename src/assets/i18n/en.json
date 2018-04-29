@@ -58,6 +58,13 @@
       "title": "Calculation results",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
+    "physical": {
+      "chaining": {
+        "meanTurnPower": "Mean power",
+        "damagesBeforeDef": "Damages before DEF",
+        "damages": "Damages"
+      }
+    },
     "defensive": {
       "physicalEhp": "Physical effective HP",
       "magicalEhp": "Magical effective HP",

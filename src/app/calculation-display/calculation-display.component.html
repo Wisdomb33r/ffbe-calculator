@@ -4,6 +4,10 @@
     {{'calculation.display.missingAlgorithm' | translate}}
   </mat-card-content>
   <mat-card-content *ngIf="unitsService.getAlgorithm()">
+    <app-calculation-physical-chaining *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 1"
+                                       [algorithm]="unitsService.getAlgorithm()"
+                                       [result]="unitsService.getResult()">
+    </app-calculation-physical-chaining>
     <app-calculation-defensive *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 8"
                                [algorithm]="unitsService.getAlgorithm()"
                                [result]="unitsService.getResult()">
