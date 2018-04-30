@@ -2,6 +2,7 @@ import {Unit} from './unit.model';
 import {AlgorithmPhysicalChaining} from './algorithm-physical-chaining.model';
 import {AlgorithmResultPhysicalChaining} from './algorithm-result-physical-chaining.model';
 import {Equipment} from './equipment.model';
+import {CalculatorTestutils} from '../calculator-testutils.spec';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":200,"atk":300,"mag":400,"def":500,"spr":500}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100}';
@@ -23,12 +24,15 @@ describe('AlgorithmPhysicalChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
-    expect(result.result).toEqual(333);
-    expect(result['meanTurnPower']).toEqual(1665);
-    expect(result['preDefDamages']).toEqual(33300000);
+    expect(result.result).toEqual(21.1);
+    expect(result['combosIncrement']).toEqual(0.1);
+    expect(result['meanTurnPower']).toEqual(1055);
+    expect(result['preDefDamages']).toEqual(21100000);
     expect(result['perTurnHitsPower'][0].length).toEqual(5);
     expect(result['perTurnHitsPower'][1].length).toEqual(4);
-    expect(result['perTurnHitsPower']).toEqual([[50, 160, 330, 420, 170], [100, 320, 660, 1120]]);
+    CalculatorTestutils.expectArrayOfArrayOfNumberToBeCloseTo(result['perTurnHitsPower'], [
+      [50, 120, 210, 240, 90], [100, 240, 420, 640]
+    ]);
   });
 
   it('#calculate should set the result object values for a dual-wielded chain', () => {
@@ -38,17 +42,19 @@ describe('AlgorithmPhysicalChaining', () => {
     unit.selectDefaultBuild();
     unit.stats.atk.total = 1000;
     unit.selectedBuild.equipments.left_hand = new Equipment(JSON.parse(EQUIPMENT_TEST_DATA));
+    unit.selectedBuild.equipments.left_hand.elements = [1]; // fire element on left hand weapon for increment calculation
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
-    expect(result.result).toEqual(750.87);
-    expect(result['meanTurnPower']).toEqual(4635);
-    expect(result['preDefDamages']).toEqual(75087000);
+    expect(result.result).toEqual(75.087);
+    expect(result['combosIncrement']).toBeCloseTo(0.3);
+    expect(result['meanTurnPower']).toBeCloseTo(4635);
+    expect(result['preDefDamages']).toBeCloseTo(75087000);
     expect(result['perTurnHitsPower'][0].length).toEqual(10);
     expect(result['perTurnHitsPower'][1].length).toEqual(8);
-    expect(result['perTurnHitsPower']).toEqual([
+    CalculatorTestutils.expectArrayOfArrayOfNumberToBeCloseTo(result['perTurnHitsPower'], [
       [50, 160, 330, 420, 170, 200, 400, 600, 600, 200],
       [100, 320, 660, 1120, 340, 800, 1200, 1600]
     ]);

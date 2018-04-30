@@ -66,6 +66,17 @@ export class EquipmentSet {
     return result;
   }
 
+  public getWeaponsElements(): Array<number> {
+    const elements: Array<number> = [];
+    if (this.right_hand) {
+      elements.push(...this.right_hand.elements);
+    }
+    if (this.left_hand) {
+      elements.push(...this.left_hand.elements);
+    }
+    return elements;
+  }
+
   public isDoubleHandActive(): boolean {
     return !this.left_hand && !this.right_hand.isTwoHanded();
   }

@@ -33,6 +33,7 @@ class Equipment {
   public $variance_max;
   public $unique;
   public $conditional_passives;
+  public $elements = array();
   function __construct($brex_equipement, $language) {
     $this->id = $brex_equipement->id;
     $this->category = $brex_equipement->categorie->id;
@@ -71,6 +72,30 @@ class Equipment {
       foreach ( $brex_build_passives as $passive ) {
         $this->conditional_passives [] = new ConditionalPassive ( $passive );
       }
+    }
+    if($brex_equipement->res_feu >= 100){
+      $this->elements[] = 1;
+    }
+    if($brex_equipement->res_glace >= 100){
+      $this->elements[] = 2;
+    }
+    if($brex_equipement->res_foudre >= 100){
+      $this->elements[] = 3;
+    }
+    if($brex_equipement->res_eau >= 100){
+      $this->elements[] = 4;
+    }
+    if($brex_equipement->res_air >= 100){
+      $this->elements[] = 5;
+    }
+    if($brex_equipement->res_terre >= 100){
+      $this->elements[] = 6;
+    }
+    if($brex_equipement->res_lumiere >= 100){
+      $this->elements[] = 7;
+    }
+    if($brex_equipement->res_tenebres >= 100){
+      $this->elements[] = 8;
     }
   }
 }
@@ -139,7 +164,7 @@ class Build {
     $this->algorithmId = $brex_build->algorithm->id;
     $this->algorithmName = $language == 'fr' ? $brex_build->algorithm->nom : $brex_build->algorithm->nom_en;
     $this->equipments = new EquipmentSet ( $brex_build, $language );
-    
+
     $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
     if (count ( $brex_build_skills )) {
       $this->skills = array ();

@@ -7,17 +7,31 @@ import {Unit} from './unit.model';
 
 export class AlgorithmPhysicalChaining extends AlgorithmChaining {
 
-  public opponentDef = 100000;
+  public isSparkChain = false;
+  public opponentDef = 1000000;
   public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
 
   public calculate(unit: Unit): AlgorithmResult {
     this.checkSkillsInput(unit.selectedBuild.skills);
     const result: AlgorithmResultPhysicalChaining = new AlgorithmResultPhysicalChaining();
+    this.calculateCombosIncrement(unit, result);
     this.calculatePerTurnHitsPower(unit, result);
     this.calculateMeanTurnPower(result);
     this.calculateDamages(unit, result);
     result.result = result.preDefDamages / this.opponentDef;
     return result;
+  }
+
+  private calculateCombosIncrement(unit: Unit, result: AlgorithmResultPhysicalChaining) {
+    let increment = 0.1;
+    if (unit.selectedBuild.equipments.getWeaponsElements() && unit.selectedBuild.equipments.getWeaponsElements().length) {
+      increment = increment + (0.2 * unit.selectedBuild.equipments.getWeaponsElements().length);
+    }
+    if (this.isSparkChain) {
+      increment = increment + 0.2;
+    }
+    // TODO check skill elements when possible
+    result.combosIncrement = increment;
   }
 
   private calculateDamages(unit: Unit, result: AlgorithmResultPhysicalChaining) {
@@ -46,11 +60,10 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
   }
 
   private calculatePerTurnHitsPower(unit: Unit, result: AlgorithmResultPhysicalChaining) {
-    result.perTurnHitsPower = unit.selectedBuild.skills.map((skill: Skill) => this.calculateHitsPower(skill, unit));
+    result.perTurnHitsPower = unit.selectedBuild.skills.map((skill: Skill) => this.calculateHitsPower(skill, unit, result));
   }
 
-  private calculateHitsPower(skill: Skill, unit: Unit): Array<number> {
-    const comboIncrement = 0.3; // TODO determine combo increment for neutral, elemental and spark chains
+  private calculateHitsPower(skill: Skill, unit: Unit, result: AlgorithmResultPhysicalChaining): Array<number> {
     if (isNullOrUndefined(skill.hits) || skill.hits <= 1) {
       return [0];
     } else {
@@ -58,11 +71,11 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
       const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
       for (let i = 0; i < skill.hits; i++) {
-        hitsPower.push(skill.power * damages[i] / 100 * Math.min(4, 1 + i * comboIncrement * 2));
+        hitsPower.push(skill.power * damages[i] / 100 * Math.min(4, 1 + i * result.combosIncrement * 2));
       }
       if (skill.nb === 2 || unit.selectedBuild.equipments.isDualWielding()) {
         for (let j = 0; j < skill.hits; j++) {
-          hitsPower.push(skill.power * damages[j] / 100 * Math.min(4, 1 + (j + skill.hits) * comboIncrement * 2));
+          hitsPower.push(skill.power * damages[j] / 100 * Math.min(4, 1 + (j + skill.hits) * result.combosIncrement * 2));
         }
       }
       return hitsPower;
