@@ -1,8 +1,21 @@
+h1 {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
 h2 {
-  font-size: 18px;
+  font-size: 15px;
   margin: 5px 0;
 }
 
 p {
   margin: 5px 0;
+}
+
+td {
+  padding-right: 10px;
+}
+
+td:last-child {
+  padding-right: 0;
 }

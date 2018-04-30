@@ -16,7 +16,7 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     const result: AlgorithmResultPhysicalChaining = new AlgorithmResultPhysicalChaining();
     this.calculateCombosIncrement(unit, result);
     this.calculatePerTurnHitsPower(unit, result);
-    this.calculateMeanTurnPower(result);
+    this.calculateAverageTurnPower(result);
     this.calculateDamages(unit, result);
     result.result = result.preDefDamages / this.opponentDef;
     return result;
@@ -37,7 +37,7 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
   private calculateDamages(unit: Unit, result: AlgorithmResultPhysicalChaining) {
     const rawDamages = unit.selectedBuild.equipments.isDualWielding()
       ? this.calculateRawDwDamages(unit) : this.calculateRawDhDamages(unit);
-    result.preDefDamages = rawDamages * result.meanTurnPower / 100 * this.calculateLevelCorrection();
+    result.preDefDamages = rawDamages * result.averageTurnPower / 100 * this.calculateLevelCorrection();
   }
 
   private calculateRawDwDamages(unit: Unit): number {
@@ -53,8 +53,8 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     return 2;
   }
 
-  private calculateMeanTurnPower(result: AlgorithmResultPhysicalChaining) {
-    result.meanTurnPower = result.perTurnHitsPower
+  private calculateAverageTurnPower(result: AlgorithmResultPhysicalChaining) {
+    result.averageTurnPower = result.perTurnHitsPower
       .map((hitsPower: Array<number>) => hitsPower.reduce((val1, val2) => val1 + val2, 0))
       .reduce((val1, val2) => val1 + val2, 0) / result.perTurnHitsPower.length;
   }

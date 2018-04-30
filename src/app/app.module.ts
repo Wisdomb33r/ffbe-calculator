@@ -9,7 +9,15 @@ import {CalculationDisplayComponent} from './calculation-display/calculation-dis
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {MatButtonModule, MatCardModule, MatDialogModule, MatMenuModule, MatSelectModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatToolbarModule
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatabaseClientService} from '../core/services/database-client.service';
 import {UnitsService} from '../core/services/units.service';
@@ -20,6 +28,7 @@ import {SkillsDisplayComponent} from './skills-display/skills-display.component'
 import {CalculationDefensiveComponent} from './calculation-defensive/calculation-defensive.component';
 import {CalculationPhysicalChainingComponent} from './calculation-physical-chaining/calculation-physical-chaining.component';
 import {ChainingSkillHitsDamagesComponent} from './chaining-skill-hits-damages/chaining-skill-hits-damages.component';
+import {FormsModule} from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
@@ -58,6 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     MatButtonModule,
     MatToolbarModule,
+    MatCheckboxModule,
   ],
   entryComponents: [
     UnitSelectionComponent,

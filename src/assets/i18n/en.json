@@ -56,8 +56,12 @@
   "calculation": {
     "display": {
       "title": "Calculation results",
-      "meanTurnPower": "Mean power",
+      "averageTurnPower": "Average power",
       "turn": "Turn",
+      "hits": "hits",
+      "skillHitsPower": "Skill hits power",
+      "comboIncrement": "Combo increment",
+      "sparkChain": "Spark chain",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
     "physical": {

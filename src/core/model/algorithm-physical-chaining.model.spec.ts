@@ -26,7 +26,7 @@ describe('AlgorithmPhysicalChaining', () => {
     expect(result instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
     expect(result.result).toEqual(21.1);
     expect(result['combosIncrement']).toEqual(0.1);
-    expect(result['meanTurnPower']).toEqual(1055);
+    expect(result['averageTurnPower']).toEqual(1055);
     expect(result['preDefDamages']).toEqual(21100000);
     expect(result['perTurnHitsPower'][0].length).toEqual(5);
     expect(result['perTurnHitsPower'][1].length).toEqual(4);
@@ -50,7 +50,7 @@ describe('AlgorithmPhysicalChaining', () => {
     expect(result instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
     expect(result.result).toEqual(75.087);
     expect(result['combosIncrement']).toBeCloseTo(0.3);
-    expect(result['meanTurnPower']).toBeCloseTo(4635);
+    expect(result['averageTurnPower']).toBeCloseTo(4635);
     expect(result['preDefDamages']).toBeCloseTo(75087000);
     expect(result['perTurnHitsPower'][0].length).toEqual(10);
     expect(result['perTurnHitsPower'][1].length).toEqual(8);

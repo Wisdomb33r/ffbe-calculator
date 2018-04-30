@@ -24,7 +24,8 @@ export class CalculationPhysicalChainingComponent implements OnInit {
     const dialogRef = this.dialog.open(ChainingSkillHitsDamagesComponent, {
       width: '300px',
       data: {
-        result: this.result
+        result: this.result,
+        algorithm: this.algorithm,
       }
     });
   }

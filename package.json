@@ -7,8 +7,8 @@
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build --prod --base-href /ffbe/calculator/",
     "test": "ng test --browsers Chrome",
-    "test-ci": "ng test --single-run --browsers HeadlessChrome",
-    "test-cc": "ng test --single-run --browsers HeadlessChrome --cc",
+    "test-ci": "ng test --single-run --browsers ChromeHeadless",
+    "test-cc": "ng test --single-run --browsers ChromeHeadless --cc",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

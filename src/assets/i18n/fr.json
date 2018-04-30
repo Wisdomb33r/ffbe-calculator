@@ -56,8 +56,12 @@
   "calculation": {
     "display": {
       "title": "Résultat des calculs",
-      "meanTurnPower": "Puissance moyenne",
+      "averageTurnPower": "Puissance moyenne",
       "turn": "Tour",
+      "hits": "coups",
+      "skillHitsPower": "Puissance des coups",
+      "comboIncrement": "Bonus par combo",
+      "sparkChain": "Chaîne étincelle",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
     },
     "physical": {

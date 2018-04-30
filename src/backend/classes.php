@@ -33,7 +33,7 @@ class Equipment {
   public $variance_max;
   public $unique;
   public $conditional_passives;
-  public $elements = array();
+  public $elements = array ();
   function __construct($brex_equipement, $language) {
     $this->id = $brex_equipement->id;
     $this->category = $brex_equipement->categorie->id;
@@ -73,29 +73,29 @@ class Equipment {
         $this->conditional_passives [] = new ConditionalPassive ( $passive );
       }
     }
-    if($brex_equipement->res_feu >= 100){
-      $this->elements[] = 1;
+    if ($brex_equipement->res_feu >= 100) {
+      $this->elements [] = 1;
     }
-    if($brex_equipement->res_glace >= 100){
-      $this->elements[] = 2;
+    if ($brex_equipement->res_glace >= 100) {
+      $this->elements [] = 2;
     }
-    if($brex_equipement->res_foudre >= 100){
-      $this->elements[] = 3;
+    if ($brex_equipement->res_foudre >= 100) {
+      $this->elements [] = 3;
     }
-    if($brex_equipement->res_eau >= 100){
-      $this->elements[] = 4;
+    if ($brex_equipement->res_eau >= 100) {
+      $this->elements [] = 4;
     }
-    if($brex_equipement->res_air >= 100){
-      $this->elements[] = 5;
+    if ($brex_equipement->res_air >= 100) {
+      $this->elements [] = 5;
     }
-    if($brex_equipement->res_terre >= 100){
-      $this->elements[] = 6;
+    if ($brex_equipement->res_terre >= 100) {
+      $this->elements [] = 6;
     }
-    if($brex_equipement->res_lumiere >= 100){
-      $this->elements[] = 7;
+    if ($brex_equipement->res_lumiere >= 100) {
+      $this->elements [] = 7;
     }
-    if($brex_equipement->res_tenebres >= 100){
-      $this->elements[] = 8;
+    if ($brex_equipement->res_tenebres >= 100) {
+      $this->elements [] = 8;
     }
   }
 }
@@ -160,16 +160,16 @@ class Build {
   public $algorithmName;
   public $equipments;
   public $skills;
-  function __construct($brex_build, $language) {
+  function __construct($brex_build, $language, $brex_unit) {
     $this->algorithmId = $brex_build->algorithm->id;
     $this->algorithmName = $language == 'fr' ? $brex_build->algorithm->nom : $brex_build->algorithm->nom_en;
     $this->equipments = new EquipmentSet ( $brex_build, $language );
-
+    
     $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
     if (count ( $brex_build_skills )) {
       $this->skills = array ();
       foreach ( $brex_build_skills as $brex_skill ) {
-        $this->skills [] = new Skill ( $brex_skill, $language );
+        $this->skills [] = new Skill ( $brex_skill, $language, $brex_unit );
       }
     }
   }
@@ -181,13 +181,25 @@ class Skill {
   public $power;
   public $isLimitBreak;
   public $nb;
-  function __construct($brex_skill, $language) {
-    $this->id = $brex_skill->competence ? $brex_skill->competence->id : null;
-    $this->name = $language === 'fr' ? ($brex_skill->competence ? $brex_skill->competence->nom : 'Limite') : ($brex_skill->competence ? $brex_skill->competence->nom_en : 'LB');
-    $this->icon = $brex_skill->competence ? $brex_skill->competence->icone->getImageimgPath () : null;
-    $this->power = $brex_skill->puissance;
+  function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite == 1 ? true : false;
-    $this->nb = $brex_skill->nb;
+    $this->power = $brex_skill->puissance;
+    $this->nb = $brex_skill->nb ? $brex_skill->nb : 1;
+    if ($this->isLimitBreak) {
+      $this->id = null;
+      $this->name = $language === 'fr' ? $brex_unit->limite : $brex_unit->limite_en;
+      $this->icon = null;
+      $this->hits = $brex_unit->lim_hits;
+      $this->frames = $brex_unit->lim_frames;
+      $this->damages = $brex_unit->lim_damages;
+    } else {
+      $this->id = $brex_skill->competence->id;
+      $this->name = $language === 'fr' ? $brex_skill->competence->nom : $brex_skill->competence->nom_en;
+      $this->icon = $brex_skill->competence->icone->getImageimgPath ();
+      $this->hits = $brex_skill->competence->hits;
+      $this->frames = $brex_skill->competence->frames;
+      $this->damages = $brex_skill->competence->damages;
+    }
   }
 }
 class EquipmentSet {
@@ -235,7 +247,7 @@ class Unit {
     if (is_array ( $brex_builds ) && count ( $brex_builds )) {
       $this->builds = array ();
       foreach ( $brex_builds as $brex_build ) {
-        $this->builds [] = new Build ( $brex_build, $language );
+        $this->builds [] = new Build ( $brex_build, $language, $brex_unit );
       }
     }
     if (is_array ( $brex_unit_passives ) && count ( $brex_unit_passives )) {

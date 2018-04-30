@@ -1,14 +1,10 @@
 <table>
   <tr>
-    <th>{{'calculation.display.meanTurnPower' | translate}}</th>
-    <td>{{result.meanTurnPower | number:'1.0-0'}}% <img class="inline-icon" src="assets/icons/grey/question.png"
+    <th>{{'calculation.display.averageTurnPower' | translate}}</th>
+    <td>{{result.averageTurnPower | number:'1.0-0'}}% <img class="inline-icon" src="assets/icons/grey/question.png"
                                                         (click)="displayChainingSkillHitsDamages()"></td>
   </tr>
   <tr>
-    <th>{{'calculation.physical.chaining.damagesBeforeDef' | translate}}</th>
-    <td>{{result.preDefDamages | number:'1.0-0'}}</td>
-  </tr>
-  <tr class="total">
     <th>{{'calculation.physical.chaining.damages' | translate}}</th>
     <td>{{result.result | number:'1.0-0'}}</td>
   </tr>
