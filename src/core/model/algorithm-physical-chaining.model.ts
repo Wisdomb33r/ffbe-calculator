@@ -21,9 +21,9 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
   }
 
   private calculateDamages(unit: Unit, result: AlgorithmResultPhysicalChaining) {
-    const rawDamages = unit.selectedBuild.equipments.left_hand && unit.selectedBuild.equipments.left_hand.isWeapon()
+    const rawDamages = unit.selectedBuild.equipments.isDualWielding()
       ? this.calculateRawDwDamages(unit) : this.calculateRawDhDamages(unit);
-    result.preDefDamages = rawDamages * result.meanTurnPower / 2 / 100 * this.calculateLevelCorrection();
+    result.preDefDamages = rawDamages * result.meanTurnPower / 100 * this.calculateLevelCorrection();
   }
 
   private calculateRawDwDamages(unit: Unit): number {
@@ -56,9 +56,6 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     } else {
       const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
       const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
-      if (frames.length !== skill.hits || damages.length !== skill.hits) {
-        throw new Error('Cannot calculate physical chaining without proper frames and damages according to number of hits');
-      }
       const hitsPower: Array<number> = [];
       for (let i = 0; i < skill.hits; i++) {
         hitsPower.push(skill.power * damages[i] / 100 * Math.min(4, 1 + i * comboIncrement * 2));
@@ -75,6 +72,18 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
   private checkSkillsInput(skills: Array<Skill>) {
     if (isNullOrUndefined(skills) || !Array.isArray(skills) || skills.length === 0) {
       throw new Error('Cannot calculate physical chaining without a skill list');
+    } else {
+      skills.forEach((skill: Skill) => this.checkSkillInput(skill));
+    }
+  }
+
+  private checkSkillInput(skill: Skill) {
+    if (skill.hits && skill.hits > 0) {
+      const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
+      const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
+      if (frames.length !== skill.hits || damages.length !== skill.hits) {
+        throw new Error('Cannot calculate physical chaining without proper frames and damages according to number of hits');
+      }
     }
   }
 }
