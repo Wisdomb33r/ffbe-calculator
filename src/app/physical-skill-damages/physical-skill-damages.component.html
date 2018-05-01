@@ -20,6 +20,10 @@
     <td>{{'calculation.display.opponentDef' | translate}}</td>
     <td>{{algorithm.opponentDef}}</td>
   </tr>
+  <tr>
+    <td>{{'calculation.display.weaponVariance' | translate}}</td>
+    <td>{{result.averageWeaponVariance}}</td>
+  </tr>
 </table>
 <p *ngIf="algorithm.opponentDef === 1000000">{{'calculation.display.defaultDefExplanations' | translate}}</p>
 <h2>{{'calculation.display.damagesBeforeDef' | translate}}</h2>
@@ -31,7 +35,10 @@
 <p *ngIf="!result.isDualWielding">
   {{result.buffedAtk | number:'1.0-0'}}² * {{result.averageTurnPower | number:'1.0-0'}} * 2
 </p>
-<p>= {{result.preDefDamages}}</p>
+<p>= {{result.preDefDamages | number:'1.0-0'}}</p>
+<h2>{{'calculation.display.elementalDamages' | translate}}</h2>
+<p>{{result.preDefDamages | number:'1.0-0'}} * (1 - {{result.averageElementalResistance}} / 100)</p>
+<p>= {{result.elementalPreDefDamages}}</p>
 <h2>{{'calculation.display.damages' | translate}}</h2>
 <p>{{result.preDefDamages}}/{{algorithm.opponentDef}}</p>
 <p>= <strong>{{result.result}}</strong></p>

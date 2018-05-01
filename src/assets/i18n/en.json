@@ -64,10 +64,12 @@
       "sparkChain": "Spark chain",
       "damages": "Damages",
       "damagesBeforeDef": "Damages before DEF",
+      "elementalDamages": "Elemental modifier",
       "damageCalculation": "Damage calculation",
       "supportBuff": "Support buff",
       "buffedAtk": "ATK after buff",
       "opponentDef": "Enemy DEF",
+      "weaponVariance": "Weapon variance",
       "defaultDefExplanations": "The enemy default DEF is set to one million to ease characters comparison. This default value can be changed to get a forecast of a real situation.",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },

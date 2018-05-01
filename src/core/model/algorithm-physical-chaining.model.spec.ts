@@ -19,12 +19,14 @@ describe('AlgorithmPhysicalChaining', () => {
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
     unit.selectDefaultBuild();
     unit.stats.atk.total = 1000;
+    unit.selectedBuild.equipments.right_hand.variance_min = 100;
+    unit.selectedBuild.equipments.right_hand.variance_max = 160;
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
-    expect(result.result).toEqual(30.384);
+    expect(result.result).toBeCloseTo(36.53676);
     expect(result['atk']).toEqual(1000);
     expect(result['buffedAtk']).toEqual(1200);
     expect(result['isDualWielding']).toBeFalsy();
@@ -51,7 +53,7 @@ describe('AlgorithmPhysicalChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
-    expect(result.result).toEqual(112.167);
+    expect(result.result).toBeCloseTo(155.6317125);
     expect(result['atk']).toEqual(1000);
     expect(result['buffedAtk']).toEqual(1200);
     expect(result['isDualWielding']).toBeTruthy();

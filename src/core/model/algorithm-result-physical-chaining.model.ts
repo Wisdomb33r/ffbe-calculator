@@ -9,5 +9,9 @@ export class AlgorithmResultPhysicalChaining extends AlgorithmResult {
   public perTurnHitsPower: Array<Array<number>>;
   public averageTurnPower: number;
   public preDefDamages: number;
+  public averageElementalResistance: number;
+  public elementalPreDefDamages: number;
+  public averageWeaponVariance: number;
+  public finalVariance: number;
   public isDualWielding: boolean;
 }

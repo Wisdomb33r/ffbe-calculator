@@ -4,6 +4,7 @@ import {AlgorithmResult} from './algorithm-result.model';
 import {AlgorithmResultPhysicalChaining} from './algorithm-result-physical-chaining.model';
 import {isNullOrUndefined} from 'util';
 import {Unit} from './unit.model';
+import {Equipment} from './equipment.model';
 
 export class AlgorithmPhysicalChaining extends AlgorithmChaining {
 
@@ -21,15 +22,40 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     this.calculatePerTurnHitsPower(unit, result);
     this.calculateAverageTurnPower(result);
     this.calculateDamages(unit, result);
-    result.result = result.preDefDamages / this.opponentDef;
+    this.calculateElementalResistances(unit, result);
+    this.calculateDamageVariance(unit, result);
+    this.calculateFinalResult(unit, result);
     return result;
+  }
+
+  private calculateFinalResult(unit: Unit, result: AlgorithmResultPhysicalChaining) {
+    result.result = result.elementalPreDefDamages / this.opponentDef * result.averageWeaponVariance / 100 * result.finalVariance / 100;
+  }
+
+  private calculateDamageVariance(unit: Unit, result: AlgorithmResultPhysicalChaining) {
+    const right_hand: Equipment = unit.selectedBuild.equipments.right_hand;
+    result.averageWeaponVariance = right_hand.isTwoHanded() ? (right_hand.variance_min + right_hand.variance_max) / 2 : 100;
+    result.finalVariance = 92.5;
+  }
+
+  private calculateElementalResistances(unit: Unit, result: AlgorithmResultPhysicalChaining) {
+    const elements: Array<number> = unit.selectedBuild.equipments.getWeaponsElements();
+    // TODO check skill elements when possible
+    if (elements && elements.length) {
+      result.averageElementalResistance = elements
+        .map((element: number) => this.opponentResistances[element - 1])
+        .reduce((val1, val2) => val1 + val2, 0) / elements.length;
+      result.elementalPreDefDamages = result.preDefDamages * (1 - result.averageElementalResistance / 100);
+    } else {
+      result.elementalPreDefDamages = result.preDefDamages;
+    }
   }
 
   private calculateBuffs(unit: Unit, result: AlgorithmResultPhysicalChaining) {
     result.atk = unit.stats.atk.total;
     result.buffedAtk = result.atk;
     if (this.isSupportBuff) {
-      result.buffedAtk += unit.stats.atk.base;
+      result.buffedAtk += unit.stats.atk.base * this.supportBuffValue / 100;
     }
   }
 
