@@ -1,0 +1,37 @@
+<h1>{{'calculation.display.damageCalculation' | translate}}</h1>
+<table>
+  <tr>
+    <td>{{'atk' | translate}}</td>
+    <td>{{result.atk | number:'1.0-0'}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.supportBuff' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBuff" (change)="calculateBuild()">
+        {{algorithm.supportBuffValue}}%
+      </mat-checkbox>
+    </td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.buffedAtk' | translate}}</td>
+    <td>{{result.buffedAtk | number:'1.0-0'}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.opponentDef' | translate}}</td>
+    <td>{{algorithm.opponentDef}}</td>
+  </tr>
+</table>
+<p *ngIf="algorithm.opponentDef === 1000000">{{'calculation.display.defaultDefExplanations' | translate}}</p>
+<h2>{{'calculation.display.damagesBeforeDef' | translate}}</h2>
+<p *ngIf="result.isDualWielding">
+  ({{result.buffedAtk | number:'1.0-0'}}-{{result.leftHandAtk | number:'1.0-0'}})*({{result.buffedAtk |
+  number:'1.0-0'}}-{{result.rightHandAtk | number:'1.0-0'}})
+  * {{result.averageTurnPower | number:'1.0-0'}} * 2
+</p>
+<p *ngIf="!result.isDualWielding">
+  {{result.buffedAtk | number:'1.0-0'}}² * {{result.averageTurnPower | number:'1.0-0'}} * 2
+</p>
+<p>= {{result.preDefDamages}}</p>
+<h2>{{'calculation.display.damages' | translate}}</h2>
+<p>{{result.preDefDamages}}/{{algorithm.opponentDef}}</p>
+<p>= <strong>{{result.result}}</strong></p>

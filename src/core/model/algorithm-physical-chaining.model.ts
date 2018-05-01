@@ -8,18 +8,29 @@ import {Unit} from './unit.model';
 export class AlgorithmPhysicalChaining extends AlgorithmChaining {
 
   public isSparkChain = false;
+  public isSupportBuff = true;
+  public supportBuffValue = 100;
   public opponentDef = 1000000;
   public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
 
   public calculate(unit: Unit): AlgorithmResult {
     this.checkSkillsInput(unit.selectedBuild.skills);
     const result: AlgorithmResultPhysicalChaining = new AlgorithmResultPhysicalChaining();
+    this.calculateBuffs(unit, result);
     this.calculateCombosIncrement(unit, result);
     this.calculatePerTurnHitsPower(unit, result);
     this.calculateAverageTurnPower(result);
     this.calculateDamages(unit, result);
     result.result = result.preDefDamages / this.opponentDef;
     return result;
+  }
+
+  private calculateBuffs(unit: Unit, result: AlgorithmResultPhysicalChaining) {
+    result.atk = unit.stats.atk.total;
+    result.buffedAtk = result.atk;
+    if (this.isSupportBuff) {
+      result.buffedAtk += unit.stats.atk.base;
+    }
   }
 
   private calculateCombosIncrement(unit: Unit, result: AlgorithmResultPhysicalChaining) {
@@ -36,17 +47,20 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
 
   private calculateDamages(unit: Unit, result: AlgorithmResultPhysicalChaining) {
     const rawDamages = unit.selectedBuild.equipments.isDualWielding()
-      ? this.calculateRawDwDamages(unit) : this.calculateRawDhDamages(unit);
+      ? this.calculateRawDwDamages(unit, result) : this.calculateRawDhDamages(unit, result);
     result.preDefDamages = rawDamages * result.averageTurnPower / 100 * this.calculateLevelCorrection();
   }
 
-  private calculateRawDwDamages(unit: Unit): number {
-    return (unit.stats.atk.total - unit.selectedBuild.equipments.right_hand.atk)
-      * (unit.stats.atk.total - unit.selectedBuild.equipments.left_hand.atk);
+  private calculateRawDwDamages(unit: Unit, result: AlgorithmResultPhysicalChaining): number {
+    result.isDualWielding = true;
+    result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
+    result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
+    return (result.buffedAtk - result.leftHandAtk) * (result.buffedAtk - result.rightHandAtk);
   }
 
-  private calculateRawDhDamages(unit: Unit): number {
-    return unit.stats.atk.total * unit.stats.atk.total;
+  private calculateRawDhDamages(unit: Unit, result: AlgorithmResultPhysicalChaining): number {
+    result.isDualWielding = false;
+    return result.buffedAtk * result.buffedAtk;
   }
 
   private calculateLevelCorrection(): number {

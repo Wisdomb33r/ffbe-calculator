@@ -10,12 +10,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatMenuModule,
-  MatSelectModule,
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatMenuModule, MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -29,6 +24,7 @@ import {CalculationDefensiveComponent} from './calculation-defensive/calculation
 import {CalculationPhysicalChainingComponent} from './calculation-physical-chaining/calculation-physical-chaining.component';
 import {ChainingSkillHitsDamagesComponent} from './chaining-skill-hits-damages/chaining-skill-hits-damages.component';
 import {FormsModule} from '@angular/forms';
+import {PhysicalSkillDamagesComponent} from './physical-skill-damages/physical-skill-damages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -49,6 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalculationDefensiveComponent,
     CalculationPhysicalChainingComponent,
     ChainingSkillHitsDamagesComponent,
+    PhysicalSkillDamagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +72,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UnitDetailsStatSumComponent,
     EquipmentSelectionComponent,
     ChainingSkillHitsDamagesComponent,
+    PhysicalSkillDamagesComponent,
   ],
   providers: [
     DatabaseClientService,

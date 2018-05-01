@@ -62,13 +62,14 @@
       "skillHitsPower": "Skill hits power",
       "comboIncrement": "Combo increment",
       "sparkChain": "Spark chain",
+      "damages": "Damages",
+      "damagesBeforeDef": "Damages before DEF",
+      "damageCalculation": "Damage calculation",
+      "supportBuff": "Support buff",
+      "buffedAtk": "ATK after buff",
+      "opponentDef": "Enemy DEF",
+      "defaultDefExplanations": "The enemy default DEF is set to one million to ease characters comparison. This default value can be changed to get a forecast of a real situation.",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
-    },
-    "physical": {
-      "chaining": {
-        "damagesBeforeDef": "Damages before DEF",
-        "damages": "Damages"
-      }
     },
     "defensive": {
       "physicalEhp": "Physical effective HP",

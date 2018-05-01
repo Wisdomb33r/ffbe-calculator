@@ -62,13 +62,14 @@
       "skillHitsPower": "Puissance des coups",
       "comboIncrement": "Bonus par combo",
       "sparkChain": "Chaîne étincelle",
+      "damages": "Dégâts",
+      "damagesBeforeDef": "Dégâts avant DÉF",
+      "damageCalculation": "Calcul des dégâts",
+      "supportBuff": "Bonus du support",
+      "buffedAtk": "ATT après bonus",
+      "opponentDef": "DÉF adverse",
+      "defaultDefExplanations": "La DÉF adverse par défaut est fixée à un million pour faciliter la comparaison entre personnages. Cette valeur peut être modifiée pour prévoir les dégâts d'une situation réelle.",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
-    },
-    "physical": {
-      "chaining": {
-        "damagesBeforeDef": "Dégâts avant DÉF",
-        "damages": "Dégâts"
-      }
     },
     "defensive": {
       "physicalEhp": "PV effectifs physiques",
