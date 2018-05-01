@@ -76,7 +76,8 @@
     "defensive": {
       "physicalEhp": "PV effectifs physiques",
       "magicalEhp": "PV effectifs magiques",
-      "ehp": "PV effectifs"
+      "ehp": "PV effectifs",
+      "ehpResultExplanations": "Les valeurs présentées sont en millions de PV effectifs (MEHP)."
     }
   }
 }

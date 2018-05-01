@@ -76,7 +76,8 @@
     "defensive": {
       "physicalEhp": "Physical effective HP",
       "magicalEhp": "Magical effective HP",
-      "ehp": "Effective HP"
+      "ehp": "Effective HP",
+      "ehpResultExplanations": "Displayed values are in million of effective health points (MEHP)."
     }
   }
 }

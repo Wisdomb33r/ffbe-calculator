@@ -10,20 +10,21 @@ const UNIT_TEST_DATA = '{"id":9999,"stats":' + UNIT_STATS_TEST_DATA + ',"builds"
 
 describe('AlgorithmDefensive', () => {
 
-  it('#calculate should set the DEF, SPR and general effective HP amount', () => {
+  it('#calculate should set the result object values', () => {
     // GIVEN
     const algorithm = new AlgorithmDefensive();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
     unit.stats.hp.total = 10000;
     unit.stats.def.total = 500;
     unit.stats.spr.total = 300;
+    algorithm.isCovering = true;
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultDefensive).toBeTruthy();
-    expect(result.result).toEqual(4000000);
-    expect(result['physicalEffectiveHp']).toEqual(5000000);
-    expect(result['magicalEffectiveHp']).toEqual(3000000);
+    expect(result.result).toBeCloseTo(11428571.42857143);
+    expect(result['basePhysicalEffectiveHp']).toEqual(5000000);
+    expect(result['baseMagicalEffectiveHp']).toEqual(3000000);
   });
 });
