@@ -23,7 +23,7 @@ describe('AlgorithmDefensive', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultDefensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(11428571.42857143);
+    expect(result.result).toBeCloseTo(11.428571429);
     expect(result['basePhysicalEffectiveHp']).toEqual(5000000);
     expect(result['baseMagicalEffectiveHp']).toEqual(3000000);
   });

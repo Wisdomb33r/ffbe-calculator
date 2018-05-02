@@ -63,21 +63,22 @@
       "comboIncrement": "Bonus par combo",
       "sparkChain": "Chaîne étincelle",
       "damages": "Dégâts",
-      "damagesBeforeDef": "Dégâts avant DÉF",
-      "elementalDamages": "Éléments",
+      "unitDamages": "Dégâts de l'unité",
+      "elementalResistances": "Résistances élémentaires",
       "damageCalculation": "Calcul des dégâts",
       "supportBuff": "Bonus du support",
       "buffedAtk": "ATT après bonus",
       "opponentDef": "DÉF adverse",
       "weaponVariance": "Variance arme",
-      "defaultDefExplanations": "La DÉF adverse par défaut est fixée à un million pour faciliter la comparaison entre personnages. Cette valeur peut être modifiée pour prévoir les dégâts d'une situation réelle.",
+      "variances": "Variances",
+      "defaultDefExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF.",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
     },
     "defensive": {
       "physicalEhp": "PV effectifs physiques",
       "magicalEhp": "PV effectifs magiques",
       "ehp": "PV effectifs",
-      "ehpResultExplanations": "Les valeurs présentées sont en millions de PV effectifs (MEHP)."
+      "ehpResultExplanations": "Résultat exprimé en millions de PV effectifs (MEHP)."
     }
   }
 }

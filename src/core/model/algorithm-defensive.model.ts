@@ -17,14 +17,13 @@ export class AlgorithmDefensive implements Algorithm {
     this.calculateCover(unit, result);
     this.calculateResistances(unit, result);
     this.calculateFinalResult(unit, result);
-    result.result = (result.physicalEffectiveHp + result.magicalEffectiveHp) / 2;
     return result;
   }
 
   private calculateFinalResult(unit: Unit, result: AlgorithmResultDefensive) {
     result.physicalResult = result.physicalEffectiveHp / 1000000;
     result.magicalResult = result.magicalEffectiveHp / 1000000;
-    result.result = (result.physicalEffectiveHp + result.magicalEffectiveHp) / 200000;
+    result.result = (result.physicalEffectiveHp + result.magicalEffectiveHp) / 2000000;
   }
 
   private calculateMitigation(unit: Unit, result: AlgorithmResultDefensive) {

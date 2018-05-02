@@ -9,9 +9,14 @@ table {
 
 th {
   text-align: left;
-  padding-right: 1rem;
+  padding-right: 15px;
 }
 
 td {
   text-align: right;
+}
+
+p {
+  font-size: 12px;
+  margin-bottom: 0;
 }
