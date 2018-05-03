@@ -1,0 +1,15 @@
+<h1>{{'calculation.defensive.ehpCalculation' | translate}}</h1>
+<table>
+  <tr>
+    <td>{{'calculation.defensive.physicalEhp' | translate}}</td>
+    <td>{{result.physicalEffectiveHp | number:'1.0-0'}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.defensive.magicalEhp' | translate}}</td>
+    <td>{{result.magicalEffectiveHp | number:'1.0-0'}}</td>
+  </tr>
+</table>
+<h2>{{'calculation.defensive.ehp' | translate}}</h2>
+<p>({{result.physicalEffectiveHp | number:'1.0-0'}} + {{result.magicalEffectiveHp}}) / 2
+</p>
+<p>= <strong>{{result.result | number:'1.0-0'}}</strong></p>

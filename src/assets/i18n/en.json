@@ -75,8 +75,14 @@
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
     "defensive": {
+      "physicalEhpCalculation": "Physical EHP calculation",
+      "buffedDef": "DEF after buff",
+      "magicalEhpCalculation": "Magical EHP calculation",
+      "buffedSpr": "SPR after buff",
+      "supportMitigation": "Support mitigation",
       "physicalEhp": "Physical effective HP",
       "magicalEhp": "Magical effective HP",
+      "ehpCalculation": "Effective HP calculation",
       "ehp": "Effective HP",
       "ehpResultExplanations": "Result expressed in million of effective health points (MEHP)."
     }

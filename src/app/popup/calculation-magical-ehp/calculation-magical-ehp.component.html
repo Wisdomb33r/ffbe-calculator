@@ -1,0 +1,36 @@
+<h1>{{'calculation.defensive.magicalEhpCalculation' | translate}}</h1>
+<table>
+  <tr>
+    <td>{{'hp' | translate}}</td>
+    <td>{{result.hp | number:'1.0-0'}}</td>
+  </tr>
+  <tr>
+    <td>{{'spr' | translate}}</td>
+    <td>{{result.spr | number:'1.0-0'}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.supportBuff' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBuffing" (change)="calculateBuild()">
+        {{algorithm.supportBuff}}%
+      </mat-checkbox>
+    </td>
+  </tr>
+  <tr>
+    <td>{{'calculation.defensive.buffedSpr' | translate}}</td>
+    <td>{{result.buffedSpr | number:'1.0-0'}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.defensive.supportMitigation' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportMitigating" (change)="calculateBuild()">
+        {{algorithm.supportMitigation}}%
+      </mat-checkbox>
+    </td>
+  </tr>
+</table>
+<h2>{{'calculation.defensive.magicalEhp' | translate}}</h2>
+<p>{{result.hp | number:'1.0-0'}} * {{result.buffedSpr}}
+  <span *ngIf="algorithm.isSupportMitigating"> * (1 - {{algorithm.supportMitigation}}%)</span>
+</p>
+<p>= <strong>{{result.magicalEffectiveHp | number:'1.0-0'}}</strong></p>
