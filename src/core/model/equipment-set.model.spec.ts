@@ -117,4 +117,29 @@ describe('EquipmentSet', () => {
     expect(equipmentActivated.conditional_passives[0].active).toBeFalsy();
     expect(equipmentActivated.conditional_passives[1].active).toBeTruthy();
   });
+
+  it('#getWeaponsElements should return an empty array if no elemental weapon is equipped', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    // WHEN
+    const elements: Array<number> = equipments.getWeaponsElements();
+    // THEN
+    expect(elements.length).toEqual(0);
+  });
+
+  it('#getWeaponsElements should return an valid array if elemental weapons are equipped', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.left_hand = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipments.right_hand.elements = [1, 4];
+    equipments.left_hand.elements = [2, 6];
+    // WHEN
+    const elements: Array<number> = equipments.getWeaponsElements();
+    // THEN
+    expect(elements.length).toEqual(4);
+    expect(elements.find(x => x === 1)).toBeTruthy();
+    expect(elements.find(x => x === 2)).toBeTruthy();
+    expect(elements.find(x => x === 4)).toBeTruthy();
+    expect(elements.find(x => x === 6)).toBeTruthy();
+  });
 });

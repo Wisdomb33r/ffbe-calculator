@@ -5,17 +5,26 @@ import {UnitDetailsComponent} from './unit-details/unit-details.component';
 import {CalculatorComponent} from './calculator/calculator.component';
 import {EquipmentDetailsComponent} from './equipment-details/equipment-details.component';
 import {UnitSelectionComponent} from './unit-selection/unit-selection.component';
-import {DamageResultsComponent} from './damage-results/damage-results.component';
+import {CalculationDisplayComponent} from './calculation-display/calculation-display.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {MatButtonModule, MatCardModule, MatDialogModule, MatMenuModule, MatSelectModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatMenuModule, MatSelectModule,
+  MatToolbarModule
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatabaseClientService} from '../core/services/database-client.service';
 import {UnitsService} from '../core/services/units.service';
 import {UnitDetailsStatSumComponent} from './unit-details-stat-sum/unit-details-stat-sum.component';
 import {EquipmentSelectionComponent} from './equipment-selection/equipment-selection.component';
 import {EquipmentsDisplayComponent} from './equipments-display/equipments-display.component';
+import {SkillsDisplayComponent} from './skills-display/skills-display.component';
+import {CalculationDefensiveComponent} from './calculation-defensive/calculation-defensive.component';
+import {CalculationPhysicalChainingComponent} from './calculation-physical-chaining/calculation-physical-chaining.component';
+import {ChainingSkillHitsDamagesComponent} from './chaining-skill-hits-damages/chaining-skill-hits-damages.component';
+import {FormsModule} from '@angular/forms';
+import {PhysicalSkillDamagesComponent} from './physical-skill-damages/physical-skill-damages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -28,13 +37,19 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalculatorComponent,
     EquipmentDetailsComponent,
     EquipmentSelectionComponent,
-    DamageResultsComponent,
+    CalculationDisplayComponent,
     UnitSelectionComponent,
     UnitDetailsStatSumComponent,
     EquipmentsDisplayComponent,
+    SkillsDisplayComponent,
+    CalculationDefensiveComponent,
+    CalculationPhysicalChainingComponent,
+    ChainingSkillHitsDamagesComponent,
+    PhysicalSkillDamagesComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
@@ -50,11 +65,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     MatButtonModule,
     MatToolbarModule,
+    MatCheckboxModule,
   ],
   entryComponents: [
     UnitSelectionComponent,
     UnitDetailsStatSumComponent,
     EquipmentSelectionComponent,
+    ChainingSkillHitsDamagesComponent,
+    PhysicalSkillDamagesComponent,
   ],
   providers: [
     DatabaseClientService,

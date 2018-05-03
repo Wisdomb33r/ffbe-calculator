@@ -47,5 +47,38 @@
       "title": "Équipement",
       "remove": "Retirer"
     }
+  },
+  "skills": {
+    "display": {
+      "title": "Cycle d'attaque"
+    }
+  },
+  "calculation": {
+    "display": {
+      "title": "Résultat des calculs",
+      "averageTurnPower": "Puissance moyenne",
+      "turn": "Tour",
+      "hits": "coups",
+      "skillHitsPower": "Puissance des coups",
+      "comboIncrement": "Bonus par combo",
+      "sparkChain": "Chaîne étincelle",
+      "damages": "Dégâts",
+      "unitDamages": "Dégâts de l'unité",
+      "elementalResistances": "Résistances élémentaires",
+      "damageCalculation": "Calcul des dégâts",
+      "supportBuff": "Bonus du support",
+      "buffedAtk": "ATT après bonus",
+      "opponentDef": "DÉF adverse",
+      "weaponVariance": "Variance arme",
+      "variances": "Variances",
+      "defaultDefExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF.",
+      "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
+    },
+    "defensive": {
+      "physicalEhp": "PV effectifs physiques",
+      "magicalEhp": "PV effectifs magiques",
+      "ehp": "PV effectifs",
+      "ehpResultExplanations": "Résultat exprimé en millions de PV effectifs (MEHP)."
+    }
   }
 }

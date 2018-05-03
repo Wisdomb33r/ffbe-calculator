@@ -47,5 +47,38 @@
       "title": "Equipment",
       "remove": "Remove"
     }
+  },
+  "skills": {
+    "display": {
+      "title": "Skill rotation"
+    }
+  },
+  "calculation": {
+    "display": {
+      "title": "Calculation results",
+      "averageTurnPower": "Average power",
+      "turn": "Turn",
+      "hits": "hits",
+      "skillHitsPower": "Skill hits power",
+      "comboIncrement": "Combo increment",
+      "sparkChain": "Spark chain",
+      "damages": "Damages",
+      "unitDamages": "Unit damages",
+      "elementalResistances": "Elemental resists",
+      "damageCalculation": "Damage calculation",
+      "supportBuff": "Support buff",
+      "buffedAtk": "ATK after buff",
+      "opponentDef": "Enemy DEF",
+      "weaponVariance": "Weapon variance",
+      "variances": "Variances",
+      "defaultDefExplanations": "Result is by default expressed in million damages on a 1 DEF enemy. This is equivalent to damages on a 1 million DEF enemy.",
+      "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
+    },
+    "defensive": {
+      "physicalEhp": "Physical effective HP",
+      "magicalEhp": "Magical effective HP",
+      "ehp": "Effective HP",
+      "ehpResultExplanations": "Result expressed in million of effective health points (MEHP)."
+    }
   }
 }

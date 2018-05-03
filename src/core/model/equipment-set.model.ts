@@ -66,6 +66,17 @@ export class EquipmentSet {
     return result;
   }
 
+  public getWeaponsElements(): Array<number> {
+    const elements: Array<number> = [];
+    if (this.right_hand) {
+      elements.push(...this.right_hand.elements);
+    }
+    if (this.left_hand) {
+      elements.push(...this.left_hand.elements);
+    }
+    return elements;
+  }
+
   public isDoubleHandActive(): boolean {
     return !this.left_hand && !this.right_hand.isTwoHanded();
   }
@@ -82,6 +93,11 @@ export class EquipmentSet {
       || this.materia1.id === 791 || this.materia2.id === 791 || this.materia3.id === 791 || this.materia4.id === 791
       || this.materia1.id === 1756 || this.materia2.id === 1756 || this.materia3.id === 1756 || this.materia4.id === 1756
       ;
+  }
+
+  public isDualWielding(): boolean {
+    return this.right_hand && this.right_hand.isWeapon() && !this.right_hand.isTwoHanded()
+      && this.left_hand && this.left_hand.isWeapon() && !this.left_hand.isTwoHanded();
   }
 
   public checkConditionalPassiveActive(condPassive: ConditionalPassive): boolean {

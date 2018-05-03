@@ -1,0 +1,46 @@
+<h1>{{'calculation.display.damageCalculation' | translate}}</h1>
+<table>
+  <tr>
+    <td>{{'atk' | translate}}</td>
+    <td>{{result.atk | number:'1.0-0'}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.supportBuff' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBuff" (change)="calculateBuild()">
+        {{algorithm.supportBuffValue}}%
+      </mat-checkbox>
+    </td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.buffedAtk' | translate}}</td>
+    <td>{{result.buffedAtk | number:'1.0-0'}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.opponentDef' | translate}}</td>
+    <td>{{algorithm.opponentDef}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.weaponVariance' | translate}}</td>
+    <td>{{result.averageWeaponVariance}}%</td>
+  </tr>
+</table>
+<h2>{{'calculation.display.unitDamages' | translate}}</h2>
+<p *ngIf="result.isDualWielding">
+  ({{result.buffedAtk | number:'1.0-0'}}-{{result.leftHandAtk | number:'1.0-0'}})*({{result.buffedAtk |
+  number:'1.0-0'}}-{{result.rightHandAtk | number:'1.0-0'}})
+  * {{result.averageTurnPower | number:'1.0-0'}}% * 2
+</p>
+<p *ngIf="!result.isDualWielding">
+  {{result.buffedAtk | number:'1.0-0'}}² * {{result.averageTurnPower | number:'1.0-0'}}% * 2
+</p>
+<p>= {{result.preDefDamages | number:'1.0-0'}}</p>
+<h2 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h2>
+<p *ngIf="result.averageElementalResistance">
+  {{result.preDefDamages | number:'1.0-0'}} * (1 - ({{result.averageElementalResistance}}%))
+</p>
+<p *ngIf="result.averageElementalResistance">= {{result.elementalPreDefDamages | number:'1.0-0'}}</p>
+<h2>{{'calculation.display.variances' | translate}}</h2>
+<p>{{result.elementalPreDefDamages | number:'1.0-0'}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}% /
+  {{algorithm.opponentDef}}</p>
+<p>= <strong>{{result.result | number:'1.0-0'}}</strong></p>

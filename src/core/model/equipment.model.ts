@@ -34,6 +34,7 @@ export class Equipment {
   public variance_max: number;
   public unique: boolean;
   public conditional_passives: Array<ConditionalPassive> = [];
+  public elements: Array<number> = [];
 
   constructor(equipment: Equipment) {
     this.id = equipment.id;
@@ -70,6 +71,9 @@ export class Equipment {
     if (Array.isArray(equipment.conditional_passives)) {
       equipment.conditional_passives
         .forEach(conditional_passive => this.conditional_passives.push(new ConditionalPassive(conditional_passive)));
+    }
+    if (Array.isArray(equipment.elements)) {
+      this.elements = equipment.elements;
     }
   }
 

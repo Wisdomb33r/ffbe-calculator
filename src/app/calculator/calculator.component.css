@@ -5,3 +5,19 @@ mat-toolbar button {
 mat-toolbar button:first-child {
   margin-left: 0;
 }
+
+@media (min-width: 1000px) {
+  div.left {
+    float: left;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+  }
+
+  div.right {
+    float: right;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+  }
+}

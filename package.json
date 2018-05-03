@@ -1,7 +1,7 @@
 {
   "name": "ffbe-calculator",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "0.2.0",
+  "license": "GPL-3.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
