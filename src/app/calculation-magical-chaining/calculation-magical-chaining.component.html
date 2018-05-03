@@ -1,0 +1,13 @@
+<table>
+  <tr>
+    <th>{{'calculation.display.averageTurnPower' | translate}}</th>
+    <td>{{result.averageTurnPower | number:'1.0-0'}}% <img class="inline-icon" src="assets/icons/grey/question.png"
+                                                           (click)="displayChainingSkillHitsDamages()"></td>
+  </tr>
+  <tr>
+    <th>{{'calculation.display.damages' | translate}}</th>
+    <td>{{result.result | number:'1.0-0'}} <img class="inline-icon" src="assets/icons/grey/question.png"
+                                                (click)="displayMagicalSkillDamages()"></td>
+  </tr>
+</table>
+<p *ngIf="algorithm.opponentSpr === 1000000">{{'calculation.display.defaultSprExplanations' | translate}}</p>

@@ -25,6 +25,8 @@ import {CalculationPhysicalChainingComponent} from './calculation-physical-chain
 import {ChainingSkillHitsDamagesComponent} from './chaining-skill-hits-damages/chaining-skill-hits-damages.component';
 import {FormsModule} from '@angular/forms';
 import {PhysicalSkillDamagesComponent} from './physical-skill-damages/physical-skill-damages.component';
+import {CalculationMagicalChainingComponent} from './calculation-magical-chaining/calculation-magical-chaining.component';
+import {MagicalSkillDamagesComponent} from './popup/magical-skill-damages/magical-skill-damages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,6 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalculationPhysicalChainingComponent,
     ChainingSkillHitsDamagesComponent,
     PhysicalSkillDamagesComponent,
+    CalculationMagicalChainingComponent,
+    MagicalSkillDamagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +77,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EquipmentSelectionComponent,
     ChainingSkillHitsDamagesComponent,
     PhysicalSkillDamagesComponent,
+    MagicalSkillDamagesComponent,
   ],
   providers: [
     DatabaseClientService,

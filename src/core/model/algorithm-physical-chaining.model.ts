@@ -89,10 +89,6 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     return result.buffedAtk * result.buffedAtk;
   }
 
-  private calculateLevelCorrection(): number {
-    return 2;
-  }
-
   private calculateAverageTurnPower(result: AlgorithmResultPhysicalChaining) {
     result.averageTurnPower = result.perTurnHitsPower
       .map((hitsPower: Array<number>) => hitsPower.reduce((val1, val2) => val1 + val2, 0))
@@ -119,24 +115,6 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
         }
       }
       return hitsPower;
-    }
-  }
-
-  private checkSkillsInput(skills: Array<Skill>) {
-    if (isNullOrUndefined(skills) || !Array.isArray(skills) || skills.length === 0) {
-      throw new Error('Cannot calculate physical chaining without a skill list');
-    } else {
-      skills.forEach((skill: Skill) => this.checkSkillInput(skill));
-    }
-  }
-
-  private checkSkillInput(skill: Skill) {
-    if (skill.hits && skill.hits > 0) {
-      const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
-      const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
-      if (frames.length !== skill.hits || damages.length !== skill.hits) {
-        throw new Error('Cannot calculate physical chaining without proper frames and damages according to number of hits');
-      }
     }
   }
 }
