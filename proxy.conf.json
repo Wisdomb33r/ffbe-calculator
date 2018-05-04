@@ -10,9 +10,5 @@
   "/Ffexvius/": {
     "target": "http://final-fantasy.localhost:80",
     "secure": false
-  },
-  "/images/": {
-    "target": "http://final-fantasy.localhost:80",
-    "secure": false
   }
 }

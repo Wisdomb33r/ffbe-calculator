@@ -16,7 +16,7 @@ export class CalculatorComponent implements OnInit {
 
   public errors: Array<string> = [];
 
-  constructor(private unitsService: UnitsService,
+  constructor(public unitsService: UnitsService,
               private dialog: MatDialog,
               private databaseClient: DatabaseClientService,
               private translate: TranslateService) {
