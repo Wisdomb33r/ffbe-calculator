@@ -20,4 +20,8 @@ export class CalculationPhysicalEhpComponent {
     this.algorithm = data.algorithm;
   }
 
+  public calculateBuild() {
+    this.unitsService.selectedUnit.calculateResults();
+    this.result = this.unitsService.getResult() as AlgorithmResultDefensive;
+  }
 }

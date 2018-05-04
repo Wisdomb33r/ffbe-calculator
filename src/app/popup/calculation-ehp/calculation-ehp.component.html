@@ -2,14 +2,14 @@
 <table>
   <tr>
     <td>{{'calculation.defensive.physicalEhp' | translate}}</td>
-    <td>{{result.physicalEffectiveHp | number:'1.0-0'}}</td>
+    <td>{{result.physicalEffectiveHp | integer}}</td>
   </tr>
   <tr>
     <td>{{'calculation.defensive.magicalEhp' | translate}}</td>
-    <td>{{result.magicalEffectiveHp | number:'1.0-0'}}</td>
+    <td>{{result.magicalEffectiveHp | integer}}</td>
   </tr>
 </table>
 <h2>{{'calculation.defensive.ehp' | translate}}</h2>
-<p>({{result.physicalEffectiveHp | number:'1.0-0'}} + {{result.magicalEffectiveHp}}) / 2
+<p>({{result.physicalEffectiveHp | integer}} + {{result.magicalEffectiveHp | integer}}) / 2
 </p>
-<p>= <strong>{{result.result | number:'1.0-0'}}</strong></p>
+<p>= <strong>{{result.result | integer}}</strong></p>
