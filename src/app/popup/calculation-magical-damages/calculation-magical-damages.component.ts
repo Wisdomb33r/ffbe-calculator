@@ -6,10 +6,10 @@ import {AlgorithmMagicalChaining} from '../../../core/model/algorithm-magical-ch
 
 @Component({
   selector: 'app-magical-skill-damages',
-  templateUrl: './magical-skill-damages.component.html',
-  styleUrls: ['./magical-skill-damages.component.css']
+  templateUrl: './calculation-magical-damages.component.html',
+  styleUrls: ['./calculation-magical-damages.component.css']
 })
-export class MagicalSkillDamagesComponent {
+export class CalculationMagicalDamagesComponent {
 
   public result: AlgorithmResultMagicalChaining;
   public algorithm: AlgorithmMagicalChaining;

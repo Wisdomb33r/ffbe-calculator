@@ -27,11 +27,11 @@ import {EquipmentsDisplayComponent} from './equipments-display/equipments-displa
 import {SkillsDisplayComponent} from './skills-display/skills-display.component';
 import {CalculationDefensiveComponent} from './calculation-defensive/calculation-defensive.component';
 import {CalculationPhysicalChainingComponent} from './calculation-physical-chaining/calculation-physical-chaining.component';
-import {ChainingSkillHitsDamagesComponent} from './chaining-skill-hits-damages/chaining-skill-hits-damages.component';
+import {CalculationSkillChainingHitsDamagesComponent} from './popup/calculation-skill-chaining-hits-damages/calculation-skill-chaining-hits-damages.component';
 import {FormsModule} from '@angular/forms';
-import {PhysicalSkillDamagesComponent} from './physical-skill-damages/physical-skill-damages.component';
+import {CalculationPhysicalDamagesComponent} from './popup/calculation-physical-damages/calculation-physical-damages.component';
 import {CalculationMagicalChainingComponent} from './calculation-magical-chaining/calculation-magical-chaining.component';
-import {MagicalSkillDamagesComponent} from './popup/magical-skill-damages/magical-skill-damages.component';
+import {CalculationMagicalDamagesComponent} from './popup/calculation-magical-damages/calculation-magical-damages.component';
 import {CalculationPhysicalEhpComponent} from './popup/calculation-physical-ehp/calculation-physical-ehp.component';
 import {CalculationMagicalEhpComponent} from './popup/calculation-magical-ehp/calculation-magical-ehp.component';
 import {CalculationEhpComponent} from './popup/calculation-ehp/calculation-ehp.component';
@@ -56,10 +56,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     SkillsDisplayComponent,
     CalculationDefensiveComponent,
     CalculationPhysicalChainingComponent,
-    ChainingSkillHitsDamagesComponent,
-    PhysicalSkillDamagesComponent,
+    CalculationSkillChainingHitsDamagesComponent,
+    CalculationPhysicalDamagesComponent,
     CalculationMagicalChainingComponent,
-    MagicalSkillDamagesComponent,
+    CalculationMagicalDamagesComponent,
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,
@@ -88,9 +88,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     UnitSelectionComponent,
     UnitDetailsStatSumComponent,
     EquipmentSelectionComponent,
-    ChainingSkillHitsDamagesComponent,
-    PhysicalSkillDamagesComponent,
-    MagicalSkillDamagesComponent,
+    CalculationSkillChainingHitsDamagesComponent,
+    CalculationPhysicalDamagesComponent,
+    CalculationMagicalDamagesComponent,
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,

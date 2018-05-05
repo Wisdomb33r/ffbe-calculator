@@ -2,8 +2,8 @@ import {Component, Input} from '@angular/core';
 import {AlgorithmPhysicalChaining} from '../../core/model/algorithm-physical-chaining.model';
 import {AlgorithmResultPhysicalChaining} from '../../core/model/algorithm-result-physical-chaining.model';
 import {MatDialog} from '@angular/material';
-import {ChainingSkillHitsDamagesComponent} from '../chaining-skill-hits-damages/chaining-skill-hits-damages.component';
-import {PhysicalSkillDamagesComponent} from '../physical-skill-damages/physical-skill-damages.component';
+import {CalculationSkillChainingHitsDamagesComponent} from '../popup/calculation-skill-chaining-hits-damages/calculation-skill-chaining-hits-damages.component';
+import {CalculationPhysicalDamagesComponent} from '../popup/calculation-physical-damages/calculation-physical-damages.component';
 
 @Component({
   selector: 'app-calculation-physical-chaining',
@@ -19,7 +19,7 @@ export class CalculationPhysicalChainingComponent {
   }
 
   public displayChainingSkillHitsDamages() {
-    this.dialog.open(ChainingSkillHitsDamagesComponent, {
+    this.dialog.open(CalculationSkillChainingHitsDamagesComponent, {
       width: '300px',
       data: {
         result: this.result,
@@ -29,7 +29,7 @@ export class CalculationPhysicalChainingComponent {
   }
 
   public displayPhysicalSkillDamages() {
-    this.dialog.open(PhysicalSkillDamagesComponent, {
+    this.dialog.open(CalculationPhysicalDamagesComponent, {
       width: '300px',
       data: {
         result: this.result,

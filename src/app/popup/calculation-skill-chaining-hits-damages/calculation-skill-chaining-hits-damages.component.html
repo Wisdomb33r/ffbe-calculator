@@ -8,7 +8,7 @@
   </tr>
   <tr>
     <td>{{'calculation.display.comboIncrement' | translate}}</td>
-    <td>{{result.combosIncrement | integer}}</td>
+    <td>{{result.combosIncrement | number:'1.1-1'}}</td>
   </tr>
 </table>
 <div *ngFor="let damages of result.perTurnHitsPower; let i = index">

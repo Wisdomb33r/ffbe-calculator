@@ -1,15 +1,15 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {AlgorithmResultPhysicalChaining} from '../../core/model/algorithm-result-physical-chaining.model';
-import {AlgorithmPhysicalChaining} from '../../core/model/algorithm-physical-chaining.model';
-import {UnitsService} from '../../core/services/units.service';
+import {AlgorithmResultPhysicalChaining} from '../../../core/model/algorithm-result-physical-chaining.model';
+import {AlgorithmPhysicalChaining} from '../../../core/model/algorithm-physical-chaining.model';
+import {UnitsService} from '../../../core/services/units.service';
 
 @Component({
   selector: 'app-chaining-skill-hits-damages',
-  templateUrl: './chaining-skill-hits-damages.component.html',
-  styleUrls: ['./chaining-skill-hits-damages.component.css']
+  templateUrl: './calculation-skill-chaining-hits-damages.component.html',
+  styleUrls: ['./calculation-skill-chaining-hits-damages.component.css']
 })
-export class ChainingSkillHitsDamagesComponent implements OnInit {
+export class CalculationSkillChainingHitsDamagesComponent implements OnInit {
 
   public result: AlgorithmResultPhysicalChaining;
   public algorithm: AlgorithmPhysicalChaining;

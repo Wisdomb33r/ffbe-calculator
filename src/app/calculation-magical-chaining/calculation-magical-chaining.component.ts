@@ -2,8 +2,8 @@ import {Component, Input} from '@angular/core';
 import {AlgorithmMagicalChaining} from '../../core/model/algorithm-magical-chaining.model';
 import {AlgorithmResultMagicalChaining} from '../../core/model/algorithm-result-magical-chaining.model';
 import {MatDialog} from '@angular/material';
-import {ChainingSkillHitsDamagesComponent} from '../chaining-skill-hits-damages/chaining-skill-hits-damages.component';
-import {MagicalSkillDamagesComponent} from '../popup/magical-skill-damages/magical-skill-damages.component';
+import {CalculationSkillChainingHitsDamagesComponent} from '../popup/calculation-skill-chaining-hits-damages/calculation-skill-chaining-hits-damages.component';
+import {CalculationMagicalDamagesComponent} from '../popup/calculation-magical-damages/calculation-magical-damages.component';
 
 @Component({
   selector: 'app-calculation-magical-chaining',
@@ -19,7 +19,7 @@ export class CalculationMagicalChainingComponent {
   }
 
   public displayChainingSkillHitsDamages() {
-    this.dialog.open(ChainingSkillHitsDamagesComponent, {
+    this.dialog.open(CalculationSkillChainingHitsDamagesComponent, {
       width: '300px',
       data: {
         result: this.result,
@@ -29,7 +29,7 @@ export class CalculationMagicalChainingComponent {
   }
 
   public displayMagicalSkillDamages() {
-    this.dialog.open(MagicalSkillDamagesComponent, {
+    this.dialog.open(CalculationMagicalDamagesComponent, {
       width: '300px',
       data: {
         result: this.result,

@@ -2,33 +2,36 @@
 <table>
   <tr>
     <td>{{'atk' | translate}}</td>
+    <td></td>
     <td>{{result.atk | integer}}</td>
   </tr>
   <tr>
     <td>{{'calculation.display.supportBuff' | translate}}</td>
     <td>
-      <mat-checkbox [(ngModel)]="algorithm.isSupportBuff" (change)="calculateBuild()">
-        {{algorithm.supportBuffValue}}%
-      </mat-checkbox>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBuff" (change)="calculateBuild()"></mat-checkbox>
     </td>
+    <td>{{algorithm.supportBuffValue}}%</td>
   </tr>
   <tr>
     <td>{{'calculation.display.buffedAtk' | translate}}</td>
+    <td></td>
     <td>{{result.buffedAtk | integer}}</td>
   </tr>
   <tr>
     <td>{{'calculation.display.opponentDef' | translate}}</td>
+    <td></td>
     <td>{{algorithm.opponentDef | integer}}</td>
   </tr>
   <tr>
     <td>{{'calculation.display.weaponVariance' | translate}}</td>
+    <td></td>
     <td>{{result.averageWeaponVariance}}%</td>
   </tr>
 </table>
 <h2>{{'calculation.display.unitDamages' | translate}}</h2>
 <p *ngIf="result.isDualWielding">
   ({{result.buffedAtk | integer}}-{{result.leftHandAtk | integer}})*({{result.buffedAtk |
-  number:'1.0-0'}}-{{result.rightHandAtk | integer}})
+  integer}}-{{result.rightHandAtk | integer}})
   * {{result.averageTurnPower | integer}}% * 2
 </p>
 <p *ngIf="!result.isDualWielding">
