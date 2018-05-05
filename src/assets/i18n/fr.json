@@ -75,9 +75,9 @@
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
     },
     "defensive": {
-      "physicalEhpCalculation": "Calcul des EHP physiques",
+      "physicalEhpCalculation": "Calcul PV effectifs physiques",
       "buffedDef": "DÉF après bonus",
-      "magicalEhpCalculation": "Calcul des EHP magiques",
+      "magicalEhpCalculation": "Calcul PV effectifs magiques",
       "buffedSpr": "PSY après bonus",
       "supportMitigation": "Mitigation du support",
       "physicalEhp": "PV effectifs physiques",
