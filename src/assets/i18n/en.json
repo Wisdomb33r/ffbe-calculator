@@ -68,10 +68,13 @@
       "damageCalculation": "Damage calculation",
       "supportBuff": "Support buff",
       "buffedAtk": "ATK after buff",
+      "buffedMag": "MAG after buff",
       "opponentDef": "Enemy DEF",
+      "opponentSpr": "Enemy SPR",
       "weaponVariance": "Weapon variance",
       "variances": "Variances",
       "defaultDefExplanations": "Result is by default expressed in million damages on a 1 DEF enemy. This is equivalent to damages on a 1 million DEF enemy.",
+      "defaultSprExplanations": "Result is by default expressed in million damages on a 1 SPR enemy. This is equivalent to damages on a 1 million SPR enemy.",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
     "defensive": {

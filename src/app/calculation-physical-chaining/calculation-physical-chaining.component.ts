@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {AlgorithmPhysicalChaining} from '../../core/model/algorithm-physical-chaining.model';
 import {AlgorithmResultPhysicalChaining} from '../../core/model/algorithm-result-physical-chaining.model';
 import {MatDialog} from '@angular/material';
@@ -10,15 +10,12 @@ import {PhysicalSkillDamagesComponent} from '../physical-skill-damages/physical-
   templateUrl: './calculation-physical-chaining.component.html',
   styleUrls: ['./calculation-physical-chaining.component.css']
 })
-export class CalculationPhysicalChainingComponent implements OnInit {
+export class CalculationPhysicalChainingComponent {
 
   @Input() algorithm: AlgorithmPhysicalChaining;
   @Input() result: AlgorithmResultPhysicalChaining;
 
   constructor(private dialog: MatDialog) {
-  }
-
-  ngOnInit() {
   }
 
   public displayChainingSkillHitsDamages() {

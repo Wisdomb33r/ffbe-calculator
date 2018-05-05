@@ -7,7 +7,7 @@
   <tr>
     <th>{{'calculation.display.damages' | translate}}</th>
     <td>{{result.result | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
-                                                (click)="displayPhysicalSkillDamages()"></td>
+                                                (click)="displayMagicalSkillDamages()"></td>
   </tr>
 </table>
-<p *ngIf="algorithm.opponentDef === 1000000">{{'calculation.display.defaultDefExplanations' | translate}}</p>
+<p *ngIf="algorithm.opponentSpr === 1000000">{{'calculation.display.defaultSprExplanations' | translate}}</p>

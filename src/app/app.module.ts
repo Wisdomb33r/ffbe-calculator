@@ -30,6 +30,8 @@ import {CalculationPhysicalChainingComponent} from './calculation-physical-chain
 import {ChainingSkillHitsDamagesComponent} from './chaining-skill-hits-damages/chaining-skill-hits-damages.component';
 import {FormsModule} from '@angular/forms';
 import {PhysicalSkillDamagesComponent} from './physical-skill-damages/physical-skill-damages.component';
+import {CalculationMagicalChainingComponent} from './calculation-magical-chaining/calculation-magical-chaining.component';
+import {MagicalSkillDamagesComponent} from './popup/magical-skill-damages/magical-skill-damages.component';
 import {CalculationPhysicalEhpComponent} from './popup/calculation-physical-ehp/calculation-physical-ehp.component';
 import {CalculationMagicalEhpComponent} from './popup/calculation-magical-ehp/calculation-magical-ehp.component';
 import {CalculationEhpComponent} from './popup/calculation-ehp/calculation-ehp.component';
@@ -56,6 +58,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalculationPhysicalChainingComponent,
     ChainingSkillHitsDamagesComponent,
     PhysicalSkillDamagesComponent,
+    CalculationMagicalChainingComponent,
+    MagicalSkillDamagesComponent,
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,
@@ -86,6 +90,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EquipmentSelectionComponent,
     ChainingSkillHitsDamagesComponent,
     PhysicalSkillDamagesComponent,
+    MagicalSkillDamagesComponent,
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,

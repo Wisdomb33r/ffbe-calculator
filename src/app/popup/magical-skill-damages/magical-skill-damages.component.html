@@ -1,0 +1,41 @@
+<h1>{{'calculation.display.damageCalculation' | translate}}</h1>
+<table>
+  <tr>
+    <td>{{'mag' | translate}}</td>
+    <td></td>
+    <td>{{result.mag | integer}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.supportBuff' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBuffing" (change)="calculateBuild()"></mat-checkbox>
+    </td>
+    <td>{{algorithm.supportBuff | integer}}%</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.buffedMag' | translate}}</td>
+    <td></td>
+    <td>{{result.buffedMag | integer}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.opponentSpr' | translate}}</td>
+    <td></td>
+    <td>{{algorithm.opponentSpr | integer}}</td>
+  </tr>
+</table>
+
+<h2>{{'calculation.display.unitDamages' | translate}}</h2>
+<p>
+  {{result.buffedMag | integer}}² * {{result.averageTurnPower | integer}}% * 2
+</p>
+<p>= {{result.preSprDamages | integer}}</p>
+
+<h2 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h2>
+<p *ngIf="result.averageElementalResistance">
+  {{result.preSprDamages | integer}} * (1 - ({{result.averageElementalResistance}}%))
+</p>
+<p *ngIf="result.averageElementalResistance">= {{result.elementalPreSprDamages | integer}}</p>
+
+<h2>{{'calculation.display.variances' | translate}}</h2>
+<p>{{result.elementalPreSprDamages | integer}} * {{result.finalVariance}}% / {{algorithm.opponentSpr}}</p>
+<p>= <strong>{{result.result | integer}}</strong></p>
