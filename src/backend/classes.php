@@ -138,17 +138,17 @@ class UnitStats {
   public $mag_tdh;
   function __construct($brex_unit_stats) {
     $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
-    $this->hp_passive = $brex_unit_stats->pv_passif;
+    $this->hp_passive = $brex_unit_stats->pv_passif_amelio > 0 ? $brex_unit_stats->pv_passif_amelio : $brex_unit_stats->pv_passif;
     $this->mp = $brex_unit_stats->pm + $brex_unit_stats->pm_pots;
-    $this->mp_passive = $brex_unit_stats->pm_passif;
+    $this->mp_passive = $brex_unit_stats->pm_passif_amelio > 0 ? $brex_unit_stats->pm_passif_amelio : $brex_unit_stats->pm_passif;
     $this->atk = $brex_unit_stats->att + $brex_unit_stats->att_pots;
-    $this->atk_passive = $brex_unit_stats->att_passif;
+    $this->atk_passive = $brex_unit_stats->att_passif_amelio > 0 ? $brex_unit_stats->att_passif_amelio : $brex_unit_stats->att_passif;
     $this->mag = $brex_unit_stats->mag + $brex_unit_stats->mag_pots;
-    $this->mag_passive = $brex_unit_stats->mag_passif;
+    $this->mag_passive = $brex_unit_stats->mag_passif_amelio > 0 ? $brex_unit_stats->mag_passif_amelio : $brex_unit_stats->mag_passif;
     $this->def = $brex_unit_stats->def + $brex_unit_stats->def_pots;
-    $this->def_passive = $brex_unit_stats->def_passif;
+    $this->def_passive = $brex_unit_stats->def_passif_amelio > 0 ? $brex_unit_stats->def_passif_amelio : $brex_unit_stats->def_passif;
     $this->spr = $brex_unit_stats->psy + $brex_unit_stats->psy_pots;
-    $this->spr_passive = $brex_unit_stats->psy_passif;
+    $this->spr_passive = $brex_unit_stats->psy_passif_amelio > 0 ? $brex_unit_stats->psy_passif_amelio : $brex_unit_stats->psy_passif;
     $this->atk_dh = $brex_unit_stats->att_dh;
     $this->mag_dh = $brex_unit_stats->mag_dh;
     $this->atk_tdh = $brex_unit_stats->att_tdh;
@@ -185,6 +185,9 @@ class Skill {
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite == 1 ? true : false;
     $this->power = $brex_skill->puissance;
+    if ($brex_skill->nb == 2) {
+      $this->power = $brex_skill->puissance / 2;
+    }
     $this->nb = $brex_skill->nb ? $brex_skill->nb : 1;
     if ($this->isLimitBreak) {
       $this->id = null;
