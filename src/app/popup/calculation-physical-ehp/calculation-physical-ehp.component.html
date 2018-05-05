@@ -1,0 +1,37 @@
+<h1>{{'calculation.defensive.physicalEhpCalculation' | translate}}</h1>
+<table>
+  <tr>
+    <td>{{'hp' | translate}}</td>
+    <td></td>
+    <td>{{result.hp | integer}}</td>
+  </tr>
+  <tr>
+    <td>{{'def' | translate}}</td>
+    <td></td>
+    <td>{{result.def | integer}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.supportBuff' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBuffing" (change)="calculateBuild()"></mat-checkbox>
+    </td>
+    <td>{{algorithm.supportBuff}}%</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.defensive.buffedDef' | translate}}</td>
+    <td></td>
+    <td>{{result.buffedDef | integer}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.defensive.supportMitigation' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportMitigating" (change)="calculateBuild()"></mat-checkbox>
+    </td>
+    <td>{{algorithm.supportMitigation}}%</td>
+  </tr>
+</table>
+<h2>{{'calculation.defensive.physicalEhp' | translate}}</h2>
+<p>{{result.hp | integer}} * {{result.buffedDef}}
+  <span *ngIf="algorithm.isSupportMitigating"> / (1 - {{algorithm.supportMitigation}}%)</span>
+</p>
+<p>= <strong>{{result.physicalEffectiveHp | integer}}</strong></p>

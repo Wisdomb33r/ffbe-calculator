@@ -10,7 +10,12 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatMenuModule, MatSelectModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatMenuModule,
+  MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,6 +30,10 @@ import {CalculationPhysicalChainingComponent} from './calculation-physical-chain
 import {ChainingSkillHitsDamagesComponent} from './chaining-skill-hits-damages/chaining-skill-hits-damages.component';
 import {FormsModule} from '@angular/forms';
 import {PhysicalSkillDamagesComponent} from './physical-skill-damages/physical-skill-damages.component';
+import {CalculationPhysicalEhpComponent} from './popup/calculation-physical-ehp/calculation-physical-ehp.component';
+import {CalculationMagicalEhpComponent} from './popup/calculation-magical-ehp/calculation-magical-ehp.component';
+import {CalculationEhpComponent} from './popup/calculation-ehp/calculation-ehp.component';
+import {IntegerPipe} from '../core/pipes/integer.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    IntegerPipe,
     UnitDetailsComponent,
     CalculatorComponent,
     EquipmentDetailsComponent,
@@ -46,6 +56,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalculationPhysicalChainingComponent,
     ChainingSkillHitsDamagesComponent,
     PhysicalSkillDamagesComponent,
+    CalculationPhysicalEhpComponent,
+    CalculationMagicalEhpComponent,
+    CalculationEhpComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +86,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     EquipmentSelectionComponent,
     ChainingSkillHitsDamagesComponent,
     PhysicalSkillDamagesComponent,
+    CalculationPhysicalEhpComponent,
+    CalculationMagicalEhpComponent,
+    CalculationEhpComponent,
   ],
   providers: [
     DatabaseClientService,

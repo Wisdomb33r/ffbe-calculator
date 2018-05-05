@@ -50,3 +50,8 @@ mat-dialog-content.mat-dialog-content {
   padding: 10px;
   margin: -10px;
 }
+
+img.inline-icon {
+  vertical-align: middle;
+  margin-top: -2px;
+}
