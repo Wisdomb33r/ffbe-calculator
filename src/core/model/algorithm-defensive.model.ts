@@ -7,8 +7,8 @@ export class AlgorithmDefensive implements Algorithm {
 
   public isSupportMitigating = true;
   public supportMitigation = 30;
-  public isCovering = false;
-  public coverMitigation = 50;
+  public isPhysicalCovering = false;
+  public isMagicalCovering = false;
   public isSupportBuffing = true;
   public supportBuff = 100;
 
@@ -44,16 +44,20 @@ export class AlgorithmDefensive implements Algorithm {
   }
 
   private calculateMitigation(unit: Unit, result: AlgorithmResultDefensive) {
-    if (this.isSupportMitigating) {
-      result.physicalEffectiveHp = result.physicalEffectiveHp / (1 - this.supportMitigation / 100);
-      result.magicalEffectiveHp = result.magicalEffectiveHp / (1 - this.supportMitigation / 100);
+    result.mitigation = unit.selectedBuild.mitigation ? unit.selectedBuild.mitigation : 0;
+    result.effectiveMitigation = result.mitigation;
+    if (this.isSupportMitigating && this.supportMitigation > result.effectiveMitigation) {
+      result.effectiveMitigation = this.supportMitigation;
     }
+    result.physicalEffectiveHp = result.physicalEffectiveHp / (1 - result.effectiveMitigation / 100);
+    result.magicalEffectiveHp = result.magicalEffectiveHp / (1 - result.effectiveMitigation / 100);
   }
 
   private calculateCover(unit: Unit, result: AlgorithmResultDefensive) {
-    if (this.isCovering) {
-      result.physicalEffectiveHp = result.physicalEffectiveHp / (1 - this.coverMitigation / 100);
-      result.magicalEffectiveHp = result.magicalEffectiveHp / (1 - this.coverMitigation / 100);
+    if (this.isPhysicalCovering) {
+      result.physicalEffectiveHp = result.physicalEffectiveHp / (1 - result.physicalCover / 100);
+    } else if (this.isMagicalCovering) {
+      result.magicalEffectiveHp = result.magicalEffectiveHp / (1 - result.magicalCover / 100);
     }
   }
 
