@@ -24,4 +24,11 @@ export class CalculationPhysicalEhpComponent {
     this.unitsService.selectedUnit.calculateResults();
     this.result = this.unitsService.getResult() as AlgorithmResultDefensive;
   }
+
+  public switchCover() {
+    if (this.algorithm.isPhysicalCovering && this.algorithm.isMagicalCovering) {
+      this.algorithm.isMagicalCovering = false;
+    }
+    this.calculateBuild();
+  }
 }

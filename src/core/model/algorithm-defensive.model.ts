@@ -11,8 +11,21 @@ export class AlgorithmDefensive implements Algorithm {
   public isMagicalCovering = false;
   public isSupportBuffing = true;
   public supportBuff = 100;
+  private isInitialized = false;
+
+  public init(unit: Unit) {
+    if (unit.selectedBuild.physical_cover) {
+      this.isPhysicalCovering = true;
+    } else if (unit.selectedBuild.magical_cover) {
+      this.isMagicalCovering = true;
+    }
+    this.isInitialized = true;
+  }
 
   public calculate(unit: Unit): AlgorithmResult {
+    if (!this.isInitialized) {
+      this.init(unit);
+    }
     const result = new AlgorithmResultDefensive();
     this.calculateBuffs(unit, result);
     this.calculateBaseEffectiveHp(unit, result);
@@ -54,9 +67,15 @@ export class AlgorithmDefensive implements Algorithm {
   }
 
   private calculateCover(unit: Unit, result: AlgorithmResultDefensive) {
+    result.physicalCover = unit.selectedBuild.physical_cover ? unit.selectedBuild.physical_cover : 0;
+    result.magicalCover = unit.selectedBuild.magical_cover ? unit.selectedBuild.magical_cover : 0;
     if (this.isPhysicalCovering) {
+      result.effectivePhysicalCover = result.physicalCover;
+      result.effectiveMagicalCover = 0;
       result.physicalEffectiveHp = result.physicalEffectiveHp / (1 - result.physicalCover / 100);
     } else if (this.isMagicalCovering) {
+      result.effectiveMagicalCover = result.magicalCover;
+      result.effectivePhysicalCover = 0;
       result.magicalEffectiveHp = result.magicalEffectiveHp / (1 - result.magicalCover / 100);
     }
   }

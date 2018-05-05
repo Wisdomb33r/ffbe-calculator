@@ -11,7 +11,9 @@ export class AlgorithmResultDefensive extends AlgorithmResult {
   public physicalMitigation;
   public magicalMitigation;
   public physicalCover;
+  public effectivePhysicalCover;
   public magicalCover;
+  public effectiveMagicalCover;
   public physicalResistance;
   public magicalResistance;
   public basePhysicalEffectiveHp;

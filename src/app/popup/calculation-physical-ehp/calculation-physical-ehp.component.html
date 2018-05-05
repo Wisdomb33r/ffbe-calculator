@@ -32,11 +32,19 @@
   <tr *ngIf="result.mitigation">
     <td>{{'calculation.defensive.nativeMitigation' | translate}}</td>
     <td></td>
-    <td>{{result.mitigation}}</td>
+    <td>{{result.mitigation}}%</td>
+  </tr>
+  <tr *ngIf="result.physicalCover">
+    <td>{{'calculation.defensive.cover' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isPhysicalCovering" (change)="switchCover()"></mat-checkbox>
+    </td>
+    <td>{{result.physicalCover}}%</td>
   </tr>
 </table>
 <h2>{{'calculation.defensive.physicalEhp' | translate}}</h2>
 <p>{{result.hp | integer}} * {{result.buffedDef}}
-  <span *ngIf="result.effectiveMitigation"> / (1 - {{result.effectiveMitigation}}%)</span>
+  <span *ngIf="result.effectiveMitigation"> / (1-{{result.effectiveMitigation}}%)</span>
+  <span *ngIf="result.effectivePhysicalCover"> / (1-{{result.effectivePhysicalCover}}%)</span>
 </p>
 <p>= <strong>{{result.physicalEffectiveHp | integer}}</strong></p>

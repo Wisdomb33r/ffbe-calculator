@@ -84,6 +84,7 @@
       "buffedSpr": "SPR after buff",
       "supportMitigation": "Support mitigation",
       "nativeMitigation": "Native mitigation",
+      "cover": "Cover",
       "physicalEhp": "Physical effective HP",
       "magicalEhp": "Magical effective HP",
       "ehpCalculation": "Effective HP calculation",

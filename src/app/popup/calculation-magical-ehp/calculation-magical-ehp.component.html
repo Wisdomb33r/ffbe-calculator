@@ -29,9 +29,22 @@
     </td>
     <td>{{algorithm.supportMitigation}}%</td>
   </tr>
+  <tr *ngIf="result.mitigation">
+    <td>{{'calculation.defensive.nativeMitigation' | translate}}</td>
+    <td></td>
+    <td>{{result.mitigation}}%</td>
+  </tr>
+  <tr *ngIf="result.magicalCover">
+    <td>{{'calculation.defensive.cover' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isMagicalCovering" (change)="switchCover()"></mat-checkbox>
+    </td>
+    <td>{{result.magicalCover}}%</td>
+  </tr>
 </table>
 <h2>{{'calculation.defensive.magicalEhp' | translate}}</h2>
 <p>{{result.hp | integer}} * {{result.buffedSpr}}
-  <span *ngIf="algorithm.isSupportMitigating"> / (1 - {{algorithm.supportMitigation}}%)</span>
+  <span *ngIf="algorithm.isSupportMitigating"> / (1-{{algorithm.supportMitigation}}%)</span>
+  <span *ngIf="result.effectiveMagicalCover"> / (1-{{result.effectiveMagicalCover}}%)</span>
 </p>
 <p>= <strong>{{result.magicalEffectiveHp | integer}}</strong></p>
