@@ -1,7 +1,6 @@
 import {AlgorithmChaining} from './algorithm-chaining.model';
 import {Skill} from './skill.model';
 import {AlgorithmResult} from './algorithm-result.model';
-import {isNullOrUndefined} from 'util';
 import {Unit} from './unit.model';
 import {AlgorithmResultMagicalChaining} from './algorithm-result-magical-chaining.model';
 
@@ -59,7 +58,7 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
   private calculateCombosIncrement(unit: Unit, result: AlgorithmResultMagicalChaining) {
     let increment = 0.1;
     if (this.isSparkChain) {
-      increment = increment + 0.2;
+      increment = increment + 0.15;
     }
     // TODO check skill elements when possible
     result.combosIncrement = increment;
@@ -75,36 +74,7 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
       .reduce((val1, val2) => val1 + val2, 0) / result.perTurnHitsPower.length;
   }
 
-  private calculatePerTurnHitsPower(unit: Unit, result: AlgorithmResultMagicalChaining) {
-    result.perTurnHitsPower = unit.selectedBuild.skills.map((skill: Skill) => this.calculateHitsPower(skill, unit, result));
-  }
-
-  private calculateHitsPower(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining): Array<number> {
-    if (isNullOrUndefined(skill.hits) || skill.hits <= 1) {
-      return [0];
-    } else {
-      const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
-      const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
-      const hitsPower: Array<number> = [];
-      let chainCombos = 0;
-      for (let i = 0; i < skill.hits; i++) {
-        if (i > 0 && frames[i] - frames[i - 1] > 25) {
-          chainCombos = 0;
-        }
-        hitsPower.push(skill.power * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2));
-        chainCombos++;
-      }
-      // TODO chainCombos = 0 if the skill does not perfect chain (ie Beatrix)
-      if (skill.nb === 2) {
-        for (let j = 0; j < skill.hits; j++) {
-          if (j > 0 && frames[j] - frames[j - 1] > 25) {
-            chainCombos = 0;
-          }
-          hitsPower.push(skill.power * damages[j] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2));
-          chainCombos++;
-        }
-      }
-      return hitsPower;
-    }
+  protected isExecutingTwice(skill: Skill, unit: Unit) {
+    return skill.nb === 2;
   }
 }
