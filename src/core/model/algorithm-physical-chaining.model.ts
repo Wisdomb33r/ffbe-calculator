@@ -117,7 +117,11 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
       // TODO chainCombos = 0 if the skill does not perfect chain (ie Beatrix)
       if ((skill.nb === 2 || unit.selectedBuild.equipments.isDualWielding()) && !skill.isLimitBreak) {
         for (let j = 0; j < skill.hits; j++) {
-          hitsPower.push(skill.power * damages[j] / 100 * Math.min(4, 1 + (j + skill.hits) * result.combosIncrement * 2));
+          if (j > 0 && frames[j] - frames[j - 1] > 25) {
+            chainCombos = 0;
+          }
+          hitsPower.push(skill.power * damages[j] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2));
+          chainCombos++;
         }
       }
       return hitsPower;

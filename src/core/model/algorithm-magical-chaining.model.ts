@@ -86,8 +86,23 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
       const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
       const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
+      let chainCombos = 0;
       for (let i = 0; i < skill.hits; i++) {
-        hitsPower.push(skill.power * damages[i] / 100 * Math.min(4, 1 + i * result.combosIncrement * 2));
+        if (i > 0 && frames[i] - frames[i - 1] > 25) {
+          chainCombos = 0;
+        }
+        hitsPower.push(skill.power * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2));
+        chainCombos++;
+      }
+      // TODO chainCombos = 0 if the skill does not perfect chain (ie Beatrix)
+      if (skill.nb === 2) {
+        for (let j = 0; j < skill.hits; j++) {
+          if (j > 0 && frames[j] - frames[j - 1] > 25) {
+            chainCombos = 0;
+          }
+          hitsPower.push(skill.power * damages[j] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2));
+          chainCombos++;
+        }
       }
       return hitsPower;
     }
