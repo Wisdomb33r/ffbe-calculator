@@ -1,12 +1,12 @@
 <table>
   <tr>
     <th>{{'calculation.display.averageTurnPower' | translate}}</th>
-    <td>{{result.averageTurnPower | number:'1.0-0'}}% <img class="inline-icon" src="assets/icons/grey/question.png"
+    <td>{{result.averageTurnPower | integer}}% <img class="inline-icon" src="assets/icons/grey/question.png"
                                                            (click)="displayChainingSkillHitsDamages()"></td>
   </tr>
   <tr>
     <th>{{'calculation.display.damages' | translate}}</th>
-    <td>{{result.result | number:'1.0-0'}} <img class="inline-icon" src="assets/icons/grey/question.png"
+    <td>{{result.result | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
                                                 (click)="displayMagicalSkillDamages()"></td>
   </tr>
 </table>

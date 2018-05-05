@@ -8,16 +8,16 @@
   </tr>
   <tr>
     <td>{{'calculation.display.comboIncrement' | translate}}</td>
-    <td>{{result.combosIncrement | number:'1.1-1'}}</td>
+    <td>{{result.combosIncrement | integer}}</td>
   </tr>
 </table>
 <div *ngFor="let damages of result.perTurnHitsPower; let i = index">
   <h2>{{'calculation.display.turn' | translate}} {{i + 1}}
     <span *ngIf="damages.length > 1">({{damages.length}} {{'calculation.display.hits' | translate}})</span>
   </h2>
-  <p><span *ngFor="let damage of damages">{{damage | number:'1.0-0'}}% </span></p>
+  <p><span *ngFor="let damage of damages">{{damage | integer}}% </span></p>
 </div>
 <div class="total">
   <h2>{{'calculation.display.averageTurnPower' | translate}}</h2>
-  <p>{{result.averageTurnPower | number:'1.0-0'}}%</p>
+  <p>{{result.averageTurnPower | integer}}%</p>
 </div>
