@@ -10,6 +10,12 @@ export abstract class AlgorithmChaining implements Algorithm {
 
   protected abstract isExecutingTwice(skill: Skill, unit: Unit): boolean;
 
+  protected calculateAverageTurnPower(result: AlgorithmResultChaining) {
+    result.averageTurnPower = result.perTurnHitsPower
+      .map((hitsPower: Array<number>) => hitsPower.reduce((val1, val2) => val1 + val2, 0))
+      .reduce((val1, val2) => val1 + val2, 0) / result.perTurnHitsPower.length;
+  }
+
   protected calculatePerTurnHitsPower(unit: Unit, result: AlgorithmResultChaining) {
     result.perTurnHitsPower = unit.selectedBuild.skills.map((skill: Skill) => this.calculateHitsPower(skill, unit, result));
   }

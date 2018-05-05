@@ -88,12 +88,6 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     return result.buffedAtk * result.buffedAtk;
   }
 
-  private calculateAverageTurnPower(result: AlgorithmResultPhysicalChaining) {
-    result.averageTurnPower = result.perTurnHitsPower
-      .map((hitsPower: Array<number>) => hitsPower.reduce((val1, val2) => val1 + val2, 0))
-      .reduce((val1, val2) => val1 + val2, 0) / result.perTurnHitsPower.length;
-  }
-
   protected isExecutingTwice(skill: Skill, unit: Unit): boolean {
     return (skill.nb === 2 || unit.selectedBuild.equipments.isDualWielding()) && !skill.isLimitBreak;
   }

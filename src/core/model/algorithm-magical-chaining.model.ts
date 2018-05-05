@@ -68,12 +68,6 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     result.preSprDamages = result.buffedMag * result.buffedMag * result.averageTurnPower / 100 * this.calculateLevelCorrection();
   }
 
-  private calculateAverageTurnPower(result: AlgorithmResultMagicalChaining) {
-    result.averageTurnPower = result.perTurnHitsPower
-      .map((hitsPower: Array<number>) => hitsPower.reduce((val1, val2) => val1 + val2, 0))
-      .reduce((val1, val2) => val1 + val2, 0) / result.perTurnHitsPower.length;
-  }
-
   protected isExecutingTwice(skill: Skill, unit: Unit) {
     return skill.nb === 2;
   }
