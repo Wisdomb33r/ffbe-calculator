@@ -166,6 +166,7 @@ class Build {
     $this->equipments = new EquipmentSet ( $brex_build, $language );
     
     $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
+    $brex_build_skills = array_reverse ( $brex_build_skills );
     if (count ( $brex_build_skills )) {
       $this->skills = array ();
       foreach ( $brex_build_skills as $brex_skill ) {
@@ -247,7 +248,9 @@ class Unit {
     if (is_array ( $brex_builds ) && count ( $brex_builds )) {
       $this->builds = array ();
       foreach ( $brex_builds as $brex_build ) {
-        $this->builds [] = new Build ( $brex_build, $language, $brex_unit );
+        if ($brex_build->algorithm != null) {
+          $this->builds [] = new Build ( $brex_build, $language, $brex_unit );
+        }
       }
     }
     if (is_array ( $brex_unit_passives ) && count ( $brex_unit_passives )) {

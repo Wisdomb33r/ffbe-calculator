@@ -23,8 +23,13 @@ describe('AlgorithmDefensive', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultDefensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(11.428571429);
-    expect(result['basePhysicalEffectiveHp']).toEqual(5000000);
-    expect(result['baseMagicalEffectiveHp']).toEqual(3000000);
+    expect(result.result).toBeCloseTo(25.714);
+    expect(result['hp']).toBeCloseTo(10000);
+    expect(result['def']).toBeCloseTo(500);
+    expect(result['spr']).toBeCloseTo(300);
+    expect(result['buffedDef']).toBeCloseTo(1000);
+    expect(result['buffedSpr']).toBeCloseTo(800);
+    expect(result['basePhysicalEffectiveHp']).toEqual(10000000);
+    expect(result['baseMagicalEffectiveHp']).toEqual(8000000);
   });
 });

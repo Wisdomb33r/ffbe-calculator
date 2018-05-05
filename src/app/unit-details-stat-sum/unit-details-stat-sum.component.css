@@ -27,7 +27,7 @@
 }
 
 .limit-warn {
-  background-image: url('/images/warn.png');
+  background-image: url('https://www.final-fantasy.ch/images/warn.png');
   background-repeat: no-repeat;
   padding-left: 20px;
 }

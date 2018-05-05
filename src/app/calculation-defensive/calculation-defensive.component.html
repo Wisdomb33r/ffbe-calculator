@@ -1,15 +1,18 @@
 <table>
   <tr>
     <th>{{'calculation.defensive.physicalEhp' | translate}}</th>
-    <td>{{result.physicalResult | number:'1.0-0'}}</td>
+    <td>{{result.physicalResult | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
+                                                 (click)="displayPhysicalEhpCalculation()"></td>
   </tr>
   <tr>
     <th>{{'calculation.defensive.magicalEhp' | translate}}</th>
-    <td>{{result.magicalResult | number:'1.0-0'}}</td>
+    <td>{{result.magicalResult | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
+                                                (click)="displayMagicalEhpCalculation()"></td>
   </tr>
   <tr class="total">
     <th>{{'calculation.defensive.ehp' | translate}}</th>
-    <td>{{result.result | number:'1.0-0'}}</td>
+    <td>{{result.result | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
+                                         (click)="displayEhpCalculation()"></td>
   </tr>
 </table>
 <p>{{'calculation.defensive.ehpResultExplanations' | translate}}</p>
