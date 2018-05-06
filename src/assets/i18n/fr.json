@@ -8,12 +8,15 @@
   "dh": "DH",
   "tdh": "TDH",
   "menu": {
-    "compute": "Calculer",
+    "units": "Unités",
     "languages": "Langues",
     "language": {
       "english": "Anglais",
       "french": "Français"
-    }
+    },
+    "about": "À propos",
+    "calculator": "Calculateur",
+    "bugReport": "Signaler un bug"
   },
   "unit": {
     "selection": {

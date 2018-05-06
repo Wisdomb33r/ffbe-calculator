@@ -36,14 +36,26 @@ import {CalculationPhysicalEhpComponent} from './popup/calculation-physical-ehp/
 import {CalculationMagicalEhpComponent} from './popup/calculation-magical-ehp/calculation-magical-ehp.component';
 import {CalculationEhpComponent} from './popup/calculation-ehp/calculation-ehp.component';
 import {IntegerPipe} from '../core/pipes/integer.pipe';
+import {RouterModule, Routes} from '@angular/router';
+import {AboutReportComponent} from './about-report/about-report.component';
+import {AppMenusComponent} from './app-menus.component';
+import {AboutCalculatorComponent} from './about-calculator/about-calculator.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+const appRoutes: Routes = [
+  {path: 'about/report', component: AboutReportComponent},
+  {path: 'about/calculator', component: AboutCalculatorComponent},
+  {path: '', pathMatch: 'full', component: CalculatorComponent},
+  {path: '**', redirectTo: '/'}
+];
+
 @NgModule({
   declarations: [
     AppComponent,
+    AppMenusComponent,
     IntegerPipe,
     UnitDetailsComponent,
     CalculatorComponent,
@@ -63,12 +75,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,
+    AboutReportComponent,
+    AboutCalculatorComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(
+      appRoutes
+    ),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

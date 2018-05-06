@@ -8,12 +8,15 @@
   "dh": "DH",
   "tdh": "TDH",
   "menu": {
-    "compute": "Build",
+    "units": "Units",
     "languages": "Languages",
     "language": {
       "english": "English",
       "french": "French"
-    }
+    },
+    "about": "About",
+    "calculator": "Calculator",
+    "bugReport": "Report a bug"
   },
   "unit": {
     "selection": {

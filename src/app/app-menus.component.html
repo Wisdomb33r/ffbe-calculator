@@ -1,0 +1,15 @@
+<mat-toolbar>
+  <button mat-raised-button color="accent" (click)="openUnitSelectionPane()">{{'menu.units' | translate}}</button>
+
+  <mat-menu #languageMenu="matMenu" yPosition="below" [overlapTrigger]="false">
+    <button mat-menu-item (click)="switchLanguage('en')">{{'menu.language.english' | translate}}</button>
+    <button mat-menu-item (click)="switchLanguage('fr')">{{'menu.language.french' | translate}}</button>
+  </mat-menu>
+  <button mat-raised-button color="accent" [matMenuTriggerFor]="languageMenu">{{'menu.languages' | translate}}</button>
+
+  <mat-menu #aboutMenu="matMenu" yPosition="below" [overlapTrigger]="false">
+    <button mat-menu-item [routerLink]="['/about', 'calculator']">{{'menu.calculator' | translate}}</button>
+    <button mat-menu-item [routerLink]="['/about', 'report']">{{'menu.bugReport' | translate}}</button>
+  </mat-menu>
+  <button mat-raised-button color="accent" [matMenuTriggerFor]="aboutMenu">{{'menu.about' | translate}}</button>
+</mat-toolbar>
