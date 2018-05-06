@@ -81,7 +81,10 @@ export class AlgorithmDefensive implements Algorithm {
   }
 
   private calculateResistances(unit: Unit, result: AlgorithmResultDefensive) {
-    // TODO insert physical and magical resistance into the calculation when possible
+    result.physicalResistance = unit.selectedBuild.physical_resistance ? unit.selectedBuild.physical_resistance : 0;
+    result.magicalResistance = unit.selectedBuild.magical_resistance ? unit.selectedBuild.magical_resistance : 0;
+    result.physicalEffectiveHp = result.physicalEffectiveHp / (1 - result.physicalResistance / 100);
+    result.magicalEffectiveHp = result.magicalEffectiveHp / (1 - result.magicalResistance / 100);
   }
 
   private calculateBaseEffectiveHp(unit: Unit, result: AlgorithmResultDefensive) {

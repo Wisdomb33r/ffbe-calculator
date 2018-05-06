@@ -41,10 +41,16 @@
     </td>
     <td>{{result.magicalCover}}%</td>
   </tr>
+  <tr *ngIf="result.magicalResistance">
+    <td>{{'calculation.defensive.magicalResistance' | translate}}</td>
+    <td></td>
+    <td>{{result.magicalResistance}}%</td>
+  </tr>
 </table>
 <h2>{{'calculation.defensive.magicalEhp' | translate}}</h2>
 <p>{{result.hp | integer}} * {{result.buffedSpr}}
   <span *ngIf="algorithm.isSupportMitigating"> / (1-{{algorithm.supportMitigation}}%)</span>
   <span *ngIf="result.effectiveMagicalCover"> / (1-{{result.effectiveMagicalCover}}%)</span>
+  <span *ngIf="result.magicalResistance"> / (1-{{result.magicalResistance}}%)</span>
 </p>
 <p>= <strong>{{result.magicalEffectiveHp | integer}}</strong></p>

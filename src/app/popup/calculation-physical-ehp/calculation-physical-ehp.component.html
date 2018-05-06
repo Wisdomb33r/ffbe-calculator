@@ -41,10 +41,16 @@
     </td>
     <td>{{result.physicalCover}}%</td>
   </tr>
+  <tr *ngIf="result.physicalResistance">
+    <td>{{'calculation.defensive.physicalResistance' | translate}}</td>
+    <td></td>
+    <td>{{result.physicalResistance}}%</td>
+  </tr>
 </table>
 <h2>{{'calculation.defensive.physicalEhp' | translate}}</h2>
 <p>{{result.hp | integer}} * {{result.buffedDef}}
   <span *ngIf="result.effectiveMitigation"> / (1-{{result.effectiveMitigation}}%)</span>
   <span *ngIf="result.effectivePhysicalCover"> / (1-{{result.effectivePhysicalCover}}%)</span>
+  <span *ngIf="result.physicalResistance"> / (1-{{result.physicalResistance}}%)</span>
 </p>
 <p>= <strong>{{result.physicalEffectiveHp | integer}}</strong></p>

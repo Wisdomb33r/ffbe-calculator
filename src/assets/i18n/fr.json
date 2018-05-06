@@ -85,6 +85,8 @@
       "supportMitigation": "Mitigation du support",
       "nativeMitigation": "Mitigation native",
       "cover": "Couverture",
+      "physicalResistance": "Résistance physique",
+      "magicalResistance": "Résistance magique",
       "physicalEhp": "PV effectifs physiques",
       "magicalEhp": "PV effectifs magiques",
       "ehpCalculation": "Calcul des PV effectifs",

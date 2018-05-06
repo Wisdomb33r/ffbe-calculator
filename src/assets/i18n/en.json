@@ -85,6 +85,8 @@
       "supportMitigation": "Support mitigation",
       "nativeMitigation": "Native mitigation",
       "cover": "Cover",
+      "physicalResistance": "Physical resistance",
+      "magicalResistance": "Magical resistance",
       "physicalEhp": "Physical effective HP",
       "magicalEhp": "Magical effective HP",
       "ehpCalculation": "Effective HP calculation",

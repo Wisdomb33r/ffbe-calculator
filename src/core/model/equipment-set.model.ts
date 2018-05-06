@@ -18,18 +18,36 @@ export class EquipmentSet {
   // transcient
 
   constructor(equipments: EquipmentSet) {
-    this.right_hand = new Equipment(equipments.right_hand);
+    if (equipments.right_hand) {
+      this.right_hand = new Equipment(equipments.right_hand);
+    }
     if (equipments.left_hand) {
       this.left_hand = new Equipment(equipments.left_hand);
     }
-    this.head = new Equipment(equipments.head);
-    this.body = new Equipment(equipments.body);
-    this.accessory1 = new Equipment(equipments.accessory1);
-    this.accessory2 = new Equipment(equipments.accessory2);
-    this.materia1 = new Equipment(equipments.materia1);
-    this.materia2 = new Equipment(equipments.materia2);
-    this.materia3 = new Equipment(equipments.materia3);
-    this.materia4 = new Equipment(equipments.materia4);
+    if (equipments.head) {
+      this.head = new Equipment(equipments.head);
+    }
+    if (equipments.body) {
+      this.body = new Equipment(equipments.body);
+    }
+    if (equipments.accessory1) {
+      this.accessory1 = new Equipment(equipments.accessory1);
+    }
+    if (equipments.accessory2) {
+      this.accessory2 = new Equipment(equipments.accessory2);
+    }
+    if (equipments.materia1) {
+      this.materia1 = new Equipment(equipments.materia1);
+    }
+    if (equipments.materia2) {
+      this.materia2 = new Equipment(equipments.materia2);
+    }
+    if (equipments.materia3) {
+      this.materia3 = new Equipment(equipments.materia3);
+    }
+    if (equipments.materia4) {
+      this.materia4 = new Equipment(equipments.materia4);
+    }
   }
 
   public sumEquipmentStat(statName: string): number {
@@ -78,11 +96,11 @@ export class EquipmentSet {
   }
 
   public isDoubleHandActive(): boolean {
-    return !this.left_hand && !this.right_hand.isTwoHanded();
+    return !this.left_hand && this.right_hand && !this.right_hand.isTwoHanded();
   }
 
   public isTrueDoubleHandActive(): boolean {
-    return !this.left_hand;
+    return this.right_hand && !this.left_hand;
   }
 
   public isDwEquipped(): boolean {
@@ -102,10 +120,10 @@ export class EquipmentSet {
 
   public checkConditionalPassiveActive(condPassive: ConditionalPassive): boolean {
     if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0) {
-      return this.right_hand.category === condPassive.category
+      return (this.right_hand && this.right_hand.category === condPassive.category)
         || (this.left_hand && this.left_hand.category === condPassive.category)
-        || this.head.category === condPassive.category
-        || this.body.category === condPassive.category
+        || (this.head && this.head.category === condPassive.category)
+        || (this.body && this.body.category === condPassive.category)
         ;
     }
     if (!isNullOrUndefined(condPassive.element) && condPassive.element > 0) {
@@ -116,16 +134,16 @@ export class EquipmentSet {
 
   public getAllActiveConditionalPassives(): Array<ConditionalPassive> {
     const allPassives: Array<ConditionalPassive> = [
-      ...this.right_hand.conditional_passives,
+      ...this.right_hand ? this.right_hand.conditional_passives : [],
       ...this.left_hand ? this.left_hand.conditional_passives : [],
-      ...this.head.conditional_passives,
-      ...this.body.conditional_passives,
-      ...this.accessory1.conditional_passives,
-      ...this.accessory2.conditional_passives,
-      ...this.materia1.conditional_passives,
-      ...this.materia2.conditional_passives,
-      ...this.materia3.conditional_passives,
-      ...this.materia4.conditional_passives,
+      ...this.head ? this.head.conditional_passives : [],
+      ...this.body ? this.body.conditional_passives : [],
+      ...this.accessory1 ? this.accessory1.conditional_passives : [],
+      ...this.accessory2 ? this.accessory2.conditional_passives : [],
+      ...this.materia1 ? this.materia1.conditional_passives : [],
+      ...this.materia2 ? this.materia2.conditional_passives : [],
+      ...this.materia3 ? this.materia3.conditional_passives : [],
+      ...this.materia4 ? this.materia4.conditional_passives : [],
     ];
     allPassives.forEach((cp: ConditionalPassive) => cp.active = false);
     const activePassives: Array<ConditionalPassive> = allPassives.filter(condPassive => this.checkConditionalPassiveActive(condPassive));
