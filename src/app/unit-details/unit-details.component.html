@@ -9,26 +9,26 @@
       <table class="unit-details-stats">
         <tr>
           <th>{{'hp' | translate}}</th>
-          <td>{{unit.stats.hp.total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+          <td>{{unit.stats.hp.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
                                            (click)="displayStatDetails('hp')"></td>
           <th>{{'mp' | translate}}</th>
-          <td>{{unit.stats.mp.total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+          <td>{{unit.stats.mp.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
                                            (click)="displayStatDetails('mp')"></td>
         </tr>
         <tr>
           <th>{{'atk' | translate}}</th>
-          <td>{{unit.stats.atk.total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+          <td>{{unit.stats.atk.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
                                             (click)="displayStatDetails('atk')"></td>
           <th>{{'def' | translate}}</th>
-          <td>{{unit.stats.def.total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+          <td>{{unit.stats.def.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
                                             (click)="displayStatDetails('def')"></td>
         </tr>
         <tr>
           <th>{{'mag' | translate}}</th>
-          <td>{{unit.stats.mag.total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+          <td>{{unit.stats.mag.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
                                             (click)="displayStatDetails('mag')"></td>
           <th>{{'spr' | translate}}</th>
-          <td>{{unit.stats.spr.total}} <img class="inline-icon" src="assets/icons/grey/question.png"
+          <td>{{unit.stats.spr.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
                                             (click)="displayStatDetails('spr')"></td>
         </tr>
       </table>

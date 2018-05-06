@@ -7,17 +7,17 @@
   </tr>
   <tr>
     <td>{{'unit.details.stats.popup.base' | translate}}</td>
-    <td>{{getBaseValue()}}</td>
+    <td>{{getBaseValue() | integer}}</td>
     <td></td>
   </tr>
   <tr>
     <td>{{'unit.details.stats.popup.passive' | translate}}</td>
-    <td>{{getPassiveValue() | number}}</td>
+    <td>{{getPassiveValue() | integer}}</td>
     <td class="percent">({{getPassivePercent()}}%)</td>
   </tr>
   <tr>
     <td>{{'unit.details.stats.popup.dh' | translate}}</td>
-    <td>{{getDhValue() | number}}</td>
+    <td>{{getDhValue() | integer}}</td>
     <td class="percent">({{getDhPercent()}}%)</td>
   </tr>
   <tr>
@@ -27,17 +27,17 @@
   </tr>
   <tr>
     <td>{{'unit.details.stats.popup.passive' | translate}}</td>
-    <td>{{getEquipmentPassiveValue()}}</td>
+    <td>{{getEquipmentPassiveValue() | integer}}</td>
     <td class="percent" [class.limit-warn]="isEquipmentPassiveLimitExceeded()">({{getEquipmentPassivePercent()}}%)</td>
   </tr>
   <tr>
     <td>{{'unit.details.stats.popup.base' | translate}}</td>
-    <td>{{getEquipmentValue()}}</td>
+    <td>{{getEquipmentValue() | integer}}</td>
     <td></td>
   </tr>
   <tr>
     <td>{{'unit.details.stats.popup.dh' | translate}}</td>
-    <td>{{getEquipmentDhValue() | number}}</td>
+    <td>{{getEquipmentDhValue() | integer}}</td>
     <td class="percent" [class.limit-warn]="isEquipmentDhLimitExceeded()">({{getEquipmentDhPercent()}}%)</td>
   </tr>
   <tr>
@@ -47,12 +47,12 @@
   </tr>
   <tr>
     <td>{{'unit.details.stats.popup.bahamut' | translate}}</td>
-    <td>{{getEsperValue()}}</td>
+    <td>{{getEsperValue() | integer}}</td>
     <td></td>
   </tr>
   <tr class="total">
     <th>{{'unit.details.stats.popup.total' | translate}}</th>
-    <td>{{getTotalValue() | number}}</td>
+    <td>{{getTotalValue() | integer}}</td>
     <td></td>
   </tr>
 </table>
