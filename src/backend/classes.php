@@ -158,12 +158,29 @@ class UnitStats {
 class Build {
   public $algorithmId;
   public $algorithmName;
+  public $mitigation;
+  public $physical_mitigation;
+  public $magical_mitigation;
+  public $physical_cover;
+  public $magical_cover;
+  public $physical_resistance;
+  public $magical_resistance;
   public $equipments;
   public $skills;
   function __construct($brex_build, $language, $brex_unit) {
     $this->algorithmId = $brex_build->algorithm->id;
     $this->algorithmName = $language == 'fr' ? $brex_build->algorithm->nom : $brex_build->algorithm->nom_en;
     $this->equipments = new EquipmentSet ( $brex_build, $language );
+    
+    if ($brex_build->algorithm->id == 8) {
+      $this->mitigation = $brex_build->mitigation;
+      $this->physical_mitigation = $brex_build->physical_mitigation;
+      $this->magical_mitigation = $brex_build->magical_mitigation;
+      $this->physical_cover = $brex_build->physical_cover;
+      $this->magical_cover = $brex_build->magical_cover;
+      $this->physical_resistance = $brex_build->physical_resistance;
+      $this->magical_resistance = $brex_build->magical_resistance;
+    }
     
     $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
     $brex_build_skills = array_reverse ( $brex_build_skills );
@@ -218,18 +235,36 @@ class EquipmentSet {
   public $materia3;
   public $materia4;
   function __construct($brex_build, $language) {
-    $this->right_hand = new Equipment ( $brex_build->main1, $language );
+    if ($brex_build->main1) {
+      $this->right_hand = new Equipment ( $brex_build->main1, $language );
+    }
     if ($brex_build->main2) {
       $this->left_hand = new Equipment ( $brex_build->main2, $language );
     }
-    $this->head = new Equipment ( $brex_build->tete, $language );
-    $this->body = new Equipment ( $brex_build->torse, $language );
-    $this->accessory1 = new Equipment ( $brex_build->accessoire1, $language );
-    $this->accessory2 = new Equipment ( $brex_build->accessoire2, $language );
-    $this->materia1 = new Equipment ( $brex_build->aptitude1, $language );
-    $this->materia2 = new Equipment ( $brex_build->aptitude2, $language );
-    $this->materia3 = new Equipment ( $brex_build->aptitude3, $language );
-    $this->materia4 = new Equipment ( $brex_build->aptitude4, $language );
+    if ($brex_build->tete) {
+      $this->head = new Equipment ( $brex_build->tete, $language );
+    }
+    if ($brex_build->torse) {
+      $this->body = new Equipment ( $brex_build->torse, $language );
+    }
+    if ($brex_build->accessoire1) {
+      $this->accessory1 = new Equipment ( $brex_build->accessoire1, $language );
+    }
+    if ($brex_build->accessoire2) {
+      $this->accessory2 = new Equipment ( $brex_build->accessoire2, $language );
+    }
+    if ($brex_build->aptitude1) {
+      $this->materia1 = new Equipment ( $brex_build->aptitude1, $language );
+    }
+    if ($brex_build->aptitude2) {
+      $this->materia2 = new Equipment ( $brex_build->aptitude2, $language );
+    }
+    if ($brex_build->aptitude3) {
+      $this->materia3 = new Equipment ( $brex_build->aptitude3, $language );
+    }
+    if ($brex_build->aptitude4) {
+      $this->materia4 = new Equipment ( $brex_build->aptitude4, $language );
+    }
   }
 }
 class Unit {
