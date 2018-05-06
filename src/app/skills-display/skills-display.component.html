@@ -2,9 +2,10 @@
   <mat-card-title class="equipment-selection-mct">{{'skills.display.title' | translate}}</mat-card-title>
   <div>
     <ng-container *ngFor="let skill of unitsService.selectedUnit.selectedBuild.skills">
-      <img *ngIf="!skill.isLimitBreak" [src]="skill.icon">
+      <img *ngIf="!skill.isLimitBreak" [src]="skill.icon" (click)="displaySkill(skill)">
       <img *ngIf="skill.isLimitBreak"
-           [src]="translate.currentLang === 'fr' ? 'assets/icons/lb_fr.png' : 'assets/icons/lb_en.png'">
+           [src]="translate.currentLang === 'fr' ? 'assets/icons/lb_fr.png' : 'assets/icons/lb_en.png'"
+           (click)="displaySkill(skill)">
     </ng-container>
   </div>
 </mat-card>

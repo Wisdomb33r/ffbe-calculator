@@ -40,6 +40,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AboutReportComponent} from './about-report/about-report.component';
 import {AppMenusComponent} from './app-menus.component';
 import {AboutCalculatorComponent} from './about-calculator/about-calculator.component';
+import {SkillDisplayComponent} from './popup/skill-display/skill-display.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
     CalculationEhpComponent,
     AboutReportComponent,
     AboutCalculatorComponent,
+    SkillDisplayComponent,
   ],
   imports: [
     BrowserModule,
@@ -111,6 +113,7 @@ const appRoutes: Routes = [
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,
+    SkillDisplayComponent,
   ],
   providers: [
     DatabaseClientService,

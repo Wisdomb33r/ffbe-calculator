@@ -1,0 +1,23 @@
+<h1>{{skill.name}}</h1>
+<table>
+  <tr>
+    <td>{{'skills.display.power' | translate}}</td>
+    <td>{{skill.power | integer}}%</td>
+  </tr>
+  <tr *ngIf="skill.hits">
+    <td>{{'skills.display.hits' | translate}}</td>
+    <td>{{skill.hits}}</td>
+  </tr>
+  <tr *ngIf="skill.frames">
+    <td>{{'skills.display.frames' | translate}}</td>
+    <td>{{skill.frames}}</td>
+  </tr>
+  <tr *ngIf="skill.damages">
+    <td>{{'skills.display.damages' | translate}}</td>
+    <td>{{skill.damages}}</td>
+  </tr>
+  <tr *ngIf="skill.nb > 1">
+    <td>{{'skills.display.castNumber' | translate}}</td>
+    <td>{{skill.nb}}</td>
+  </tr>
+</table>

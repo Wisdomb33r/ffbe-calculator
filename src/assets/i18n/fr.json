@@ -53,7 +53,12 @@
   },
   "skills": {
     "display": {
-      "title": "Cycle d'attaque"
+      "title": "Cycle d'attaque",
+      "power": "Puissance",
+      "hits": "Nb de coups",
+      "frames": "Frames",
+      "damages": "Dégâts",
+      "castNumber": "Nb d'attaques"
     }
   },
   "calculation": {

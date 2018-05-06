@@ -53,7 +53,12 @@
   },
   "skills": {
     "display": {
-      "title": "Skill rotation"
+      "title": "Skill rotation",
+      "power": "Power",
+      "hits": "Hits number",
+      "frames": "Frames",
+      "damages": "Frames damages",
+      "castNumber": "Attacks number"
     }
   },
   "calculation": {
