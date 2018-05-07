@@ -6,9 +6,6 @@ import {AlgorithmResultMagicalChaining} from './algorithm-result-magical-chainin
 
 export class AlgorithmMagicalChaining extends AlgorithmChaining {
 
-  public isSparkChain = false;
-  public isSupportBuffing = true;
-  public supportBuff = 100;
   public opponentSpr = 1000000;
   public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
 

@@ -10,12 +10,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatMenuModule,
-  MatSelectModule,
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatMenuModule, MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -41,6 +36,10 @@ import {AboutReportComponent} from './about-report/about-report.component';
 import {AppMenusComponent} from './app-menus.component';
 import {AboutCalculatorComponent} from './about-calculator/about-calculator.component';
 import {SkillDisplayComponent} from './popup/skill-display/skill-display.component';
+import {CalculationHybridChainingComponent} from './calculation-hybrid-chaining/calculation-hybrid-chaining.component';
+import {CalculationHybridDamagesComponent} from './popup/calculation-hybrid-damages/calculation-hybrid-damages.component';
+import {CalculationHybridPhysicalDamagesComponent} from './popup/calculation-hybrid-physical-damages/calculation-hybrid-physical-damages.component';
+import {CalculationHybridMagicalDamagesComponent} from './popup/calculation-hybrid-magical-damages/calculation-hybrid-magical-damages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -79,6 +78,10 @@ const appRoutes: Routes = [
     AboutReportComponent,
     AboutCalculatorComponent,
     SkillDisplayComponent,
+    CalculationHybridChainingComponent,
+    CalculationHybridDamagesComponent,
+    CalculationHybridPhysicalDamagesComponent,
+    CalculationHybridMagicalDamagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,6 +117,9 @@ const appRoutes: Routes = [
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,
     SkillDisplayComponent,
+    CalculationHybridDamagesComponent,
+    CalculationHybridPhysicalDamagesComponent,
+    CalculationHybridMagicalDamagesComponent,
   ],
   providers: [
     DatabaseClientService,

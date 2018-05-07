@@ -7,9 +7,6 @@ import {Equipment} from './equipment.model';
 
 export class AlgorithmPhysicalChaining extends AlgorithmChaining {
 
-  public isSparkChain = false;
-  public isSupportBuff = true;
-  public supportBuffValue = 100;
   public opponentDef = 1000000;
   public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
 
@@ -58,8 +55,8 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
   private calculateBuffs(unit: Unit, result: AlgorithmResultPhysicalChaining) {
     result.atk = unit.stats.atk.total;
     result.buffedAtk = result.atk;
-    if (this.isSupportBuff) {
-      result.buffedAtk += unit.stats.atk.base * this.supportBuffValue / 100;
+    if (this.isSupportBuffing) {
+      result.buffedAtk += unit.stats.atk.base * this.supportBuff / 100;
     }
   }
 

@@ -8,6 +8,9 @@ import {AlgorithmResultChaining} from './algorithm-result-chaining.model';
 export abstract class AlgorithmChaining implements Algorithm {
 
   public isKillerActive = true;
+  public isSparkChain = false;
+  public isSupportBuffing = true;
+  public supportBuff = 100;
 
   public abstract calculate(unit: Unit): AlgorithmResult;
 

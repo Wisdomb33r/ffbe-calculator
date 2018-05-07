@@ -8,9 +8,9 @@
   <tr>
     <td>{{'calculation.display.supportBuff' | translate}}</td>
     <td>
-      <mat-checkbox [(ngModel)]="algorithm.isSupportBuff" (change)="calculateBuild()"></mat-checkbox>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBuffing" (change)="calculateBuild()"></mat-checkbox>
     </td>
-    <td>{{algorithm.supportBuffValue}}%</td>
+    <td>{{algorithm.supportBuff}}%</td>
   </tr>
   <tr>
     <td>{{'calculation.display.buffedAtk' | translate}}</td>

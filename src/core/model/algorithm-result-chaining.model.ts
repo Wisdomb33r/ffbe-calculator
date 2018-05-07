@@ -9,4 +9,5 @@ export class AlgorithmResultChaining extends AlgorithmResult {
   public killerDamages: number;
   public averageElementalResistance: number;
   public elementalDamages: number;
+  public finalVariance: number;
 }

@@ -6,6 +6,5 @@ export class AlgorithmResultPhysicalChaining extends AlgorithmResultChaining {
   public rightHandAtk: number;
   public buffedAtk: number;
   public averageWeaponVariance: number;
-  public finalVariance: number;
   public isDualWielding: boolean;
 }
