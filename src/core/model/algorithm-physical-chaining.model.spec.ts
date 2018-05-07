@@ -32,7 +32,7 @@ describe('AlgorithmPhysicalChaining', () => {
     expect(result['isDualWielding']).toBeFalsy();
     expect(result['combosIncrement']).toEqual(0.1);
     expect(result['averageTurnPower']).toEqual(1055);
-    expect(result['preDefDamages']).toEqual(30384000);
+    expect(result['rawDamages']).toEqual(30384000);
     expect(result['perTurnHitsPower'][0].length).toEqual(5);
     expect(result['perTurnHitsPower'][1].length).toEqual(4);
     CalculatorTestutils.expectArrayOfArrayOfNumberToBeCloseTo(result['perTurnHitsPower'], [
@@ -59,7 +59,7 @@ describe('AlgorithmPhysicalChaining', () => {
     expect(result['isDualWielding']).toBeTruthy();
     expect(result['combosIncrement']).toBeCloseTo(0.3);
     expect(result['averageTurnPower']).toBeCloseTo(4635);
-    expect(result['preDefDamages']).toBeCloseTo(112167000);
+    expect(result['rawDamages']).toBeCloseTo(112167000);
     expect(result['perTurnHitsPower'][0].length).toEqual(10);
     expect(result['perTurnHitsPower'][1].length).toEqual(8);
     CalculatorTestutils.expectArrayOfArrayOfNumberToBeCloseTo(result['perTurnHitsPower'], [

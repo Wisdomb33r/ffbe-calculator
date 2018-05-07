@@ -49,6 +49,14 @@ export class Unit {
     this.selectedBuild.calculate(this);
   }
 
+  public getPhysicalKillers(): number {
+    return this.selectedBuild.getPhysicalKillers();
+  }
+
+  public getMagicalKillers(): number {
+    return this.selectedBuild.getMagicalKillers();
+  }
+
   public computeRealStats() {
     this.stats.defineEquipmentsStats(
       this.selectedBuild.equipments.sumEquipmentStat('hp'),

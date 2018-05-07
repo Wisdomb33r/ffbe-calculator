@@ -21,14 +21,19 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     this.calculatePerTurnHitsPower(unit, result);
     this.calculateAverageTurnPower(result);
     this.calculateDamages(unit, result);
+    this.calculateKillers(unit, result);
     this.calculateElementalResistances(unit, result);
     this.calculateDamageVariance(unit, result);
     this.calculateFinalResult(unit, result);
     return result;
   }
 
+  protected getActiveKillers(unit: Unit) {
+    return unit.getPhysicalKillers();
+  }
+
   private calculateFinalResult(unit: Unit, result: AlgorithmResultPhysicalChaining) {
-    result.result = result.elementalPreDefDamages / this.opponentDef * result.averageWeaponVariance / 100 * result.finalVariance / 100;
+    result.result = result.elementalDamages / this.opponentDef * result.averageWeaponVariance / 100 * result.finalVariance / 100;
   }
 
   private calculateDamageVariance(unit: Unit, result: AlgorithmResultPhysicalChaining) {
@@ -44,9 +49,9 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
       result.averageElementalResistance = elements
         .map((element: number) => this.opponentResistances[element - 1])
         .reduce((val1, val2) => val1 + val2, 0) / elements.length;
-      result.elementalPreDefDamages = result.preDefDamages * (1 - result.averageElementalResistance / 100);
+      result.elementalDamages = result.killerDamages * (1 - result.averageElementalResistance / 100);
     } else {
-      result.elementalPreDefDamages = result.preDefDamages;
+      result.elementalDamages = result.killerDamages;
     }
   }
 
@@ -73,7 +78,7 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
   private calculateDamages(unit: Unit, result: AlgorithmResultPhysicalChaining) {
     const rawDamages = unit.selectedBuild.equipments.isDualWielding()
       ? this.calculateRawDwDamages(unit, result) : this.calculateRawDhDamages(unit, result);
-    result.preDefDamages = rawDamages * result.averageTurnPower / 100 * this.calculateLevelCorrection();
+    result.rawDamages = rawDamages * result.averageTurnPower / 100 * this.calculateLevelCorrection();
   }
 
   private calculateRawDwDamages(unit: Unit, result: AlgorithmResultPhysicalChaining): number {

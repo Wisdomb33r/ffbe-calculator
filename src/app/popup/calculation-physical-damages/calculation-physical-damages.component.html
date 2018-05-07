@@ -18,6 +18,13 @@
     <td>{{result.buffedAtk | integer}}</td>
   </tr>
   <tr>
+    <td>{{'calculation.display.killer' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>
+    </td>
+    <td>{{result.killerPassive | integer}}%</td>
+  </tr>
+  <tr>
     <td>{{'calculation.display.opponentDef' | translate}}</td>
     <td></td>
     <td>{{algorithm.opponentDef | integer}}</td>
@@ -37,13 +44,21 @@
 <p *ngIf="!result.isDualWielding">
   {{result.buffedAtk | integer}}² * {{result.averageTurnPower | integer}}% * 2
 </p>
-<p>= {{result.preDefDamages | integer}}</p>
+<p>= {{result.rawDamages | integer}}</p>
+
+<h2 *ngIf="result.killerPassive">{{'calculation.display.killerDamages' | translate}}</h2>
+<p *ngIf="result.killerPassive">
+  {{result.rawDamages | integer}} * (1+{{result.killerPassive}}%/10)
+</p>
+<p *ngIf="result.killerPassive">= {{result.killerDamages | integer}}</p>
+
 <h2 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h2>
 <p *ngIf="result.averageElementalResistance">
-  {{result.preDefDamages | integer}} * (1 - ({{result.averageElementalResistance}}%))
+  {{result.rawDamages | integer}} * (1-({{result.averageElementalResistance}}%))
 </p>
-<p *ngIf="result.averageElementalResistance">= {{result.elementalPreDefDamages | integer}}</p>
+<p *ngIf="result.averageElementalResistance">= {{result.elementalDamages | integer}}</p>
+
 <h2>{{'calculation.display.variances' | translate}}</h2>
-<p>{{result.elementalPreDefDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}% /
+<p>{{result.elementalDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}% /
   {{algorithm.opponentDef}}</p>
 <p>= <strong>{{result.result | integer}}</strong></p>
