@@ -45,8 +45,8 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
   private calculateFinalResult(unit: Unit, result: AlgorithmResultHybridChaining) {
     result.physicalResult = result.physicalElementalDamages / this.opponentDef
       * result.averageWeaponVariance / 100 * result.finalVariance / 100;
-    result.magicalResult = result.magicalElementalDamages / this.opponentSpr * result.finalVariance;
-    result = result.physicalResult + result.magicalResult / 2;
+    result.magicalResult = result.magicalElementalDamages / this.opponentSpr * result.finalVariance / 100;
+    result.result = result.physicalResult + result.magicalResult / 2;
   }
 
   private calculateDamageVariance(unit: Unit, result: AlgorithmResultHybridChaining) {

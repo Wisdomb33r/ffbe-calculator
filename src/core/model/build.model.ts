@@ -51,7 +51,7 @@ export class Build {
   }
 
   public getPhysicalKillers() {
-    return (this.physical_killer ? this.physical_cover : 0) + this.equipments.sumEquipmentStat('physical_killer');
+    return (this.physical_killer ? this.physical_killer : 0) + this.equipments.sumEquipmentStat('physical_killer');
   }
 
   public getMagicalKillers() {

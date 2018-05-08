@@ -1,3 +1,64 @@
-<p>
-  calculation-hybrid-physical-damages works!
+<h1>{{'calculation.display.damageCalculation' | translate}}</h1>
+<table>
+  <tr>
+    <td>{{'atk' | translate}}</td>
+    <td></td>
+    <td>{{result.atk | integer}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.supportBuff' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBuffing" (change)="calculateBuild()"></mat-checkbox>
+    </td>
+    <td>{{algorithm.supportBuff}}%</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.buffedAtk' | translate}}</td>
+    <td></td>
+    <td>{{result.buffedAtk | integer}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.killer' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>
+    </td>
+    <td>{{result.killerPassive | integer}}%</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.opponentDef' | translate}}</td>
+    <td></td>
+    <td>{{algorithm.opponentDef | integer}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.weaponVariance' | translate}}</td>
+    <td></td>
+    <td>{{result.averageWeaponVariance}}%</td>
+  </tr>
+</table>
+<h2>{{'calculation.display.unitDamages' | translate}}</h2>
+<p *ngIf="result.isDualWielding">
+  ({{result.buffedAtk | integer}}-{{result.leftHandAtk | integer}})*({{result.buffedAtk |
+  integer}}-{{result.rightHandAtk | integer}})
+  * {{result.averageTurnPower | integer}}% * 2
 </p>
+<p *ngIf="!result.isDualWielding">
+  {{result.buffedAtk | integer}}² * {{result.averageTurnPower | integer}}% * 2
+</p>
+<p>= {{result.physicalDamages | integer}}</p>
+
+<h2 *ngIf="result.killerPassive">{{'calculation.display.killerDamages' | translate}}</h2>
+<p *ngIf="result.killerPassive">
+  {{result.physicalDamages | integer}} * (1+{{result.killerPassive}}%/10)
+</p>
+<p *ngIf="result.killerPassive">= {{result.physicalKillerDamages | integer}}</p>
+
+<h2 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h2>
+<p *ngIf="result.averageElementalResistance">
+  {{result.physicalKillerDamages | integer}} * (1-({{result.averageElementalResistance}}%))
+</p>
+<p *ngIf="result.averageElementalResistance">= {{result.physicalElementalDamages | integer}}</p>
+
+<h2>{{'calculation.display.variances' | translate}}</h2>
+<p>{{result.physicalElementalDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}% /
+  {{algorithm.opponentDef}}</p>
+<p>= <strong>{{result.physicalResult | integer}}</strong></p>
