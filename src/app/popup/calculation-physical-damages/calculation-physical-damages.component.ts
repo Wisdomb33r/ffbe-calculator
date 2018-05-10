@@ -9,7 +9,7 @@ import {AlgorithmPhysicalChaining} from '../../../core/model/algorithm-physical-
   templateUrl: './calculation-physical-damages.component.html',
   styleUrls: ['./calculation-physical-damages.component.css']
 })
-export class CalculationPhysicalDamagesComponent implements OnInit {
+export class CalculationPhysicalDamagesComponent {
 
   public result: AlgorithmResultPhysicalChaining;
   public algorithm: AlgorithmPhysicalChaining;
@@ -18,9 +18,6 @@ export class CalculationPhysicalDamagesComponent implements OnInit {
               private unitsService: UnitsService) {
     this.result = data.result;
     this.algorithm = data.algorithm;
-  }
-
-  ngOnInit() {
   }
 
   public calculateBuild() {

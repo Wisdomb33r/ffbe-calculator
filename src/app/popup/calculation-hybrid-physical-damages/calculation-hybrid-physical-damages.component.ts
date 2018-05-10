@@ -19,4 +19,9 @@ export class CalculationHybridPhysicalDamagesComponent {
     this.result = data.result;
     this.algorithm = data.algorithm;
   }
+
+  public calculateBuild() {
+    this.unitsService.selectedUnit.calculateResults();
+    this.result = this.unitsService.getResult() as AlgorithmResultHybridChaining;
+  }
 }
