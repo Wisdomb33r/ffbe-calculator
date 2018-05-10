@@ -19,6 +19,7 @@ export abstract class AlgorithmChaining implements Algorithm {
   protected abstract getActiveKillers(unit: Unit): number;
 
   protected calculateKillers(unit: Unit, result: AlgorithmResultChaining) {
+    result.killerPassive = 0;
     if (this.isKillerActive) {
       result.killerPassive = this.getActiveKillers(unit);
       result.killerDamages = result.rawDamages * (1 + result.killerPassive / 1000);

@@ -23,7 +23,7 @@ describe('AlgorithmHybridChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultHybridChaining).toBeTruthy();
-    expect(result.result).toBeCloseTo(41.014);
+    expect(result.result).toBeCloseTo(60.315);
     expect(result['combosIncrement']).toEqual(0.1);
     expect(result['averageTurnPower']).toEqual(2760);
     expect(result['perTurnHitsPower'][0].length).toEqual(10);
@@ -63,7 +63,7 @@ describe('AlgorithmHybridChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultHybridChaining).toBeTruthy();
-    expect(result.result).toBeCloseTo(33.335);
+    expect(result.result).toBeCloseTo(47.956);
     expect(result['combosIncrement']).toBeCloseTo(0.45);
     expect(result['averageTurnPower']).toBeCloseTo(2107.5);
     expect(result['perTurnHitsPower'][0].length).toEqual(5);

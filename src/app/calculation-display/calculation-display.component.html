@@ -12,6 +12,10 @@
                                       [algorithm]="unitsService.getAlgorithm()"
                                       [result]="unitsService.getResult()">
     </app-calculation-magical-chaining>
+    <app-calculation-hybrid-chaining *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 3"
+                                     [algorithm]="unitsService.getAlgorithm()"
+                                     [result]="unitsService.getResult()">
+    </app-calculation-hybrid-chaining>
     <app-calculation-defensive *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 8"
                                [algorithm]="unitsService.getAlgorithm()"
                                [result]="unitsService.getResult()">

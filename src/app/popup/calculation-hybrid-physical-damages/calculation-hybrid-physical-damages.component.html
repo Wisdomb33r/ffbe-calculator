@@ -1,4 +1,4 @@
-<h1>{{'calculation.display.damageCalculation' | translate}}</h1>
+<h1>{{'calculation.display.physicalDamages' | translate}}</h1>
 <table>
   <tr>
     <td>{{'atk' | translate}}</td>
@@ -42,7 +42,7 @@
   * {{result.averageTurnPower | integer}}% * 2
 </p>
 <p *ngIf="!result.isDualWielding">
-  {{result.buffedAtk | integer}}² * {{result.averageTurnPower | integer}}% * 2
+  {{result.buffedAtk | integer}}² * {{result.averageTurnPower / 2 | integer}}% * 2
 </p>
 <p>= {{result.physicalDamages | integer}}</p>
 

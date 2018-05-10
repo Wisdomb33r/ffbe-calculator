@@ -71,6 +71,9 @@
       "comboIncrement": "Bonus par combo",
       "sparkChain": "Chaîne étincelle",
       "damages": "Dégâts",
+      "physicalDamages": "Dégâts physiques",
+      "magicalDamages": "Dégâts magiques",
+      "hybridDamages": "Dégâts hybrides",
       "unitDamages": "Dégâts de l'unité",
       "elementalResistances": "Résistances élémentaires",
       "damageCalculation": "Calcul des dégâts",
@@ -81,6 +84,8 @@
       "opponentSpr": "PSY adverse",
       "weaponVariance": "Variance arme",
       "variances": "Variances",
+      "killer": "Tueurs",
+      "killerDamages": "Dégâts après tueurs",
       "defaultDefExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF.",
       "defaultSprExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de PSY. Ce qui équivaut aux dégâts sur un ennemi à 1 million de PSY.",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."

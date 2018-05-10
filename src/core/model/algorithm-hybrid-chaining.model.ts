@@ -32,6 +32,7 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
   }
 
   protected calculateKillers(unit: Unit, result: AlgorithmResultHybridChaining) {
+    result.killerPassive = 0;
     if (this.isKillerActive) {
       result.killerPassive = this.getActiveKillers(unit);
       result.physicalKillerDamages = result.physicalDamages * (1 + result.killerPassive / 1000);
@@ -46,7 +47,7 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
     result.physicalResult = result.physicalElementalDamages / this.opponentDef
       * result.averageWeaponVariance / 100 * result.finalVariance / 100;
     result.magicalResult = result.magicalElementalDamages / this.opponentSpr * result.finalVariance / 100;
-    result.result = result.physicalResult + result.magicalResult / 2;
+    result.result = result.physicalResult + result.magicalResult;
   }
 
   private calculateDamageVariance(unit: Unit, result: AlgorithmResultHybridChaining) {

@@ -1,4 +1,4 @@
-<h1>{{'calculation.display.damageCalculation' | translate}}</h1>
+<h1>{{'calculation.display.magicalDamages' | translate}}</h1>
 <table>
   <tr>
     <td>{{'mag' | translate}}</td>
@@ -33,7 +33,7 @@
 
 <h2>{{'calculation.display.unitDamages' | translate}}</h2>
 <p>
-  {{result.buffedMag | integer}}² * {{result.averageTurnPower | integer}}% * 2
+  {{result.buffedMag | integer}}² * {{result.averageTurnPower / 2 | integer}}% * 2
 </p>
 <p>= {{result.magicalDamages | integer}}</p>
 
