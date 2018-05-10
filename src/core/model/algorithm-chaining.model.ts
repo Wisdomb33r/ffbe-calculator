@@ -6,9 +6,27 @@ import {Skill} from './skill.model';
 import {AlgorithmResultChaining} from './algorithm-result-chaining.model';
 
 export abstract class AlgorithmChaining implements Algorithm {
+
+  public isKillerActive = true;
+  public isSparkChain = false;
+  public isSupportBuffing = true;
+  public supportBuff = 100;
+
   public abstract calculate(unit: Unit): AlgorithmResult;
 
   protected abstract isExecutingTwice(skill: Skill, unit: Unit): boolean;
+
+  protected abstract getActiveKillers(unit: Unit): number;
+
+  protected calculateKillers(unit: Unit, result: AlgorithmResultChaining) {
+    result.killerPassive = 0;
+    if (this.isKillerActive) {
+      result.killerPassive = this.getActiveKillers(unit);
+      result.killerDamages = result.rawDamages * (1 + result.killerPassive / 1000);
+    } else {
+      result.killerDamages = result.rawDamages;
+    }
+  }
 
   protected calculateAverageTurnPower(result: AlgorithmResultChaining) {
     result.averageTurnPower = result.perTurnHitsPower

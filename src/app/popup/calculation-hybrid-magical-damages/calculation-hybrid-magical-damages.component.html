@@ -1,4 +1,4 @@
-<h1>{{'calculation.display.damageCalculation' | translate}}</h1>
+<h1>{{'calculation.display.magicalDamages' | translate}}</h1>
 <table>
   <tr>
     <td>{{'mag' | translate}}</td>
@@ -33,22 +33,22 @@
 
 <h2>{{'calculation.display.unitDamages' | translate}}</h2>
 <p>
-  {{result.buffedMag | integer}}² * {{result.averageTurnPower | integer}}% * 2
+  {{result.buffedMag | integer}}² * {{result.averageTurnPower / 2 | integer}}% * 2
 </p>
-<p>= {{result.rawDamages | integer}}</p>
+<p>= {{result.magicalDamages | integer}}</p>
 
 <h2 *ngIf="result.killerPassive">{{'calculation.display.killerDamages' | translate}}</h2>
 <p *ngIf="result.killerPassive">
-  {{result.rawDamages | integer}} * (1+{{result.killerPassive}}%/10)
+  {{result.magicalDamages | integer}} * (1+{{result.killerPassive}}%/10)
 </p>
-<p *ngIf="result.killerPassive">= {{result.killerDamages | integer}}</p>
+<p *ngIf="result.killerPassive">= {{result.magicalKillerDamages | integer}}</p>
 
 <h2 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h2>
 <p *ngIf="result.averageElementalResistance">
-  {{result.killerDamages | integer}} * (1-({{result.averageElementalResistance}}%))
+  {{result.magicalKillerDamages | integer}} * (1-({{result.averageElementalResistance}}%))
 </p>
-<p *ngIf="result.averageElementalResistance">= {{result.elementalDamages | integer}}</p>
+<p *ngIf="result.averageElementalResistance">= {{result.magicalElementalDamages | integer}}</p>
 
 <h2>{{'calculation.display.variances' | translate}}</h2>
-<p>{{result.elementalDamages | integer}} * {{result.finalVariance}}% / {{algorithm.opponentSpr}}</p>
-<p>= <strong>{{result.result | integer}}</strong></p>
+<p>{{result.magicalElementalDamages | integer}} * {{result.finalVariance}}% / {{algorithm.opponentSpr}}</p>
+<p>= <strong>{{result.magicalResult | integer}}</strong></p>

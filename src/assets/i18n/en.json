@@ -71,6 +71,9 @@
       "comboIncrement": "Combo increment",
       "sparkChain": "Spark chain",
       "damages": "Damages",
+      "physicalDamages": "Physical damages",
+      "magicalDamages": "Magical damages",
+      "hybridDamages": "Hybrid damages",
       "unitDamages": "Unit damages",
       "elementalResistances": "Elemental resists",
       "damageCalculation": "Damage calculation",
@@ -81,6 +84,8 @@
       "opponentSpr": "Enemy SPR",
       "weaponVariance": "Weapon variance",
       "variances": "Variances",
+      "killer": "Killers",
+      "killerDamages": "Damages after killers",
       "defaultDefExplanations": "Result is by default expressed in million damages on a 1 DEF enemy. This is equivalent to damages on a 1 million DEF enemy.",
       "defaultSprExplanations": "Result is by default expressed in million damages on a 1 SPR enemy. This is equivalent to damages on a 1 million SPR enemy.",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."

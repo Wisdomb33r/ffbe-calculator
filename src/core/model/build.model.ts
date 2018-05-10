@@ -16,6 +16,8 @@ export class Build {
   public magical_cover: number;
   public physical_resistance: number;
   public magical_resistance: number;
+  public physical_killer: number;
+  public magical_killer: number;
   public equipments: EquipmentSet;
   public skills: Array<Skill> = [];
 
@@ -33,6 +35,8 @@ export class Build {
     this.magical_cover = build.magical_cover;
     this.physical_resistance = build.physical_resistance;
     this.magical_resistance = build.magical_resistance;
+    this.physical_killer = build.physical_killer;
+    this.magical_killer = build.magical_killer;
     this.equipments = new EquipmentSet(build.equipments);
     if (Array.isArray(build.skills)) {
       build.skills.forEach((skill: Skill) => this.skills.push(new Skill(skill)));
@@ -44,5 +48,13 @@ export class Build {
     if (this.algorithm) {
       this.result = this.algorithm.calculate(unit);
     }
+  }
+
+  public getPhysicalKillers() {
+    return (this.physical_killer ? this.physical_killer : 0) + this.equipments.sumEquipmentStat('physical_killer');
+  }
+
+  public getMagicalKillers() {
+    return (this.magical_killer ? this.magical_killer : 0) + this.equipments.sumEquipmentStat('magical_killer');
   }
 }

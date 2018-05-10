@@ -1,4 +1,4 @@
-<h1>{{'calculation.display.damageCalculation' | translate}}</h1>
+<h1>{{'calculation.display.physicalDamages' | translate}}</h1>
 <table>
   <tr>
     <td>{{'atk' | translate}}</td>
@@ -42,23 +42,23 @@
   * {{result.averageTurnPower | integer}}% * 2
 </p>
 <p *ngIf="!result.isDualWielding">
-  {{result.buffedAtk | integer}}² * {{result.averageTurnPower | integer}}% * 2
+  {{result.buffedAtk | integer}}² * {{result.averageTurnPower / 2 | integer}}% * 2
 </p>
-<p>= {{result.rawDamages | integer}}</p>
+<p>= {{result.physicalDamages | integer}}</p>
 
 <h2 *ngIf="result.killerPassive">{{'calculation.display.killerDamages' | translate}}</h2>
 <p *ngIf="result.killerPassive">
-  {{result.rawDamages | integer}} * (1+{{result.killerPassive}}%/10)
+  {{result.physicalDamages | integer}} * (1+{{result.killerPassive}}%/10)
 </p>
-<p *ngIf="result.killerPassive">= {{result.killerDamages | integer}}</p>
+<p *ngIf="result.killerPassive">= {{result.physicalKillerDamages | integer}}</p>
 
 <h2 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h2>
 <p *ngIf="result.averageElementalResistance">
-  {{result.rawDamages | integer}} * (1-({{result.averageElementalResistance}}%))
+  {{result.physicalKillerDamages | integer}} * (1-({{result.averageElementalResistance}}%))
 </p>
-<p *ngIf="result.averageElementalResistance">= {{result.elementalDamages | integer}}</p>
+<p *ngIf="result.averageElementalResistance">= {{result.physicalElementalDamages | integer}}</p>
 
 <h2>{{'calculation.display.variances' | translate}}</h2>
-<p>{{result.elementalDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}% /
+<p>{{result.physicalElementalDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}% /
   {{algorithm.opponentDef}}</p>
-<p>= <strong>{{result.result | integer}}</strong></p>
+<p>= <strong>{{result.physicalResult | integer}}</strong></p>

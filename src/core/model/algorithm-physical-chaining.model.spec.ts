@@ -18,6 +18,9 @@ describe('AlgorithmPhysicalChaining', () => {
     const algorithm = new AlgorithmPhysicalChaining();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
     unit.selectDefaultBuild();
+    algorithm.isSupportBuffing = false;
+    algorithm.isSparkChain = true;
+    algorithm.isKillerActive = false;
     unit.stats.atk.total = 1000;
     unit.selectedBuild.equipments.right_hand.variance_min = 100;
     unit.selectedBuild.equipments.right_hand.variance_max = 160;
@@ -26,17 +29,17 @@ describe('AlgorithmPhysicalChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
-    expect(result.result).toBeCloseTo(36.53676);
+    expect(result.result).toBeCloseTo(36.376);
     expect(result['atk']).toEqual(1000);
-    expect(result['buffedAtk']).toEqual(1200);
+    expect(result['buffedAtk']).toEqual(1000);
     expect(result['isDualWielding']).toBeFalsy();
-    expect(result['combosIncrement']).toEqual(0.1);
-    expect(result['averageTurnPower']).toEqual(1055);
-    expect(result['preDefDamages']).toEqual(30384000);
+    expect(result['combosIncrement']).toBeCloseTo(0.25);
+    expect(result['averageTurnPower']).toBeCloseTo(1512.5);
+    expect(result['rawDamages']).toBeCloseTo(30250000);
     expect(result['perTurnHitsPower'][0].length).toEqual(5);
     expect(result['perTurnHitsPower'][1].length).toEqual(4);
     CalculatorTestutils.expectArrayOfArrayOfNumberToBeCloseTo(result['perTurnHitsPower'], [
-      [50, 120, 210, 240, 90], [100, 240, 420, 640]
+      [50, 150, 300, 375, 150], [100, 300, 600, 1000]
     ]);
   });
 
@@ -59,7 +62,7 @@ describe('AlgorithmPhysicalChaining', () => {
     expect(result['isDualWielding']).toBeTruthy();
     expect(result['combosIncrement']).toBeCloseTo(0.3);
     expect(result['averageTurnPower']).toBeCloseTo(4635);
-    expect(result['preDefDamages']).toBeCloseTo(112167000);
+    expect(result['rawDamages']).toBeCloseTo(112167000);
     expect(result['perTurnHitsPower'][0].length).toEqual(10);
     expect(result['perTurnHitsPower'][1].length).toEqual(8);
     CalculatorTestutils.expectArrayOfArrayOfNumberToBeCloseTo(result['perTurnHitsPower'], [

@@ -1,0 +1,15 @@
+<h1>{{'calculation.display.hybridDamages' | translate}}</h1>
+<table>
+  <tr>
+    <td>{{'calculation.display.physicalDamages' | translate}}</td>
+    <td>{{result.physicalResult | integer}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.magicalDamages' | translate}}</td>
+    <td>{{result.magicalResult | integer}}</td>
+  </tr>
+</table>
+<h2>{{'calculation.display.damages' | translate}}</h2>
+<p>({{result.physicalResult | integer}} + {{result.magicalResult | integer}})
+</p>
+<p>= <strong>{{result.result | integer}}</strong></p>

@@ -32,6 +32,8 @@ class Equipment {
   public $variance_min;
   public $variance_max;
   public $unique;
+  public $physical_killer;
+  public $magical_killer;
   public $conditional_passives;
   public $elements = array ();
   function __construct($brex_equipement, $language) {
@@ -66,6 +68,8 @@ class Equipment {
     $this->variance_min = $brex_equipement->variance_min;
     $this->variance_max = $brex_equipement->variance_max;
     $this->unique = $brex_equipement->uniq == 1 ? true : false;
+    $this->physical_killer = $brex_equipement->build_tue;
+    $this->magical_killer = $brex_equipement->build_tue_mag;
     $brex_build_passives = brex_build_passif::findByRelation1N ( array ('objet' => $brex_equipement->id) );
     if (count ( $brex_build_passives )) {
       $this->conditional_passives = array ();
@@ -165,11 +169,15 @@ class Build {
   public $magical_cover;
   public $physical_resistance;
   public $magical_resistance;
+  public $physical_killer;
+  public $magical_killer;
   public $equipments;
   public $skills;
   function __construct($brex_build, $language, $brex_unit) {
     $this->algorithmId = $brex_build->algorithm->id;
     $this->algorithmName = $language == 'fr' ? $brex_build->algorithm->nom : $brex_build->algorithm->nom_en;
+    $this->physical_killer = $brex_build->tue_amelio ? $brex_build->tue_amelio : $brex_build->tue;
+    // TODO magical killer when DB ready
     $this->equipments = new EquipmentSet ( $brex_build, $language );
     
     if ($brex_build->algorithm->id == 8) {

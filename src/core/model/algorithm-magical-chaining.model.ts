@@ -6,9 +6,6 @@ import {AlgorithmResultMagicalChaining} from './algorithm-result-magical-chainin
 
 export class AlgorithmMagicalChaining extends AlgorithmChaining {
 
-  public isSparkChain = false;
-  public isSupportBuffing = true;
-  public supportBuff = 100;
   public opponentSpr = 1000000;
   public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
 
@@ -20,14 +17,19 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     this.calculatePerTurnHitsPower(unit, result);
     this.calculateAverageTurnPower(result);
     this.calculateDamages(unit, result);
+    this.calculateKillers(unit, result);
     this.calculateElementalResistances(unit, result);
     this.calculateDamageVariance(unit, result);
     this.calculateFinalResult(unit, result);
     return result;
   }
 
+  protected getActiveKillers(unit: Unit) {
+    return unit.getMagicalKillers();
+  }
+
   private calculateFinalResult(unit: Unit, result: AlgorithmResultMagicalChaining) {
-    result.result = result.elementalPreSprDamages / this.opponentSpr * result.finalVariance / 100;
+    result.result = result.elementalDamages / this.opponentSpr * result.finalVariance / 100;
   }
 
   private calculateDamageVariance(unit: Unit, result: AlgorithmResultMagicalChaining) {
@@ -41,9 +43,9 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
       result.averageElementalResistance = elements
         .map((element: number) => this.opponentResistances[element - 1])
         .reduce((val1, val2) => val1 + val2, 0) / elements.length;
-      result.elementalPreSprDamages = result.preSprDamages * (1 - result.averageElementalResistance / 100);
+      result.elementalDamages = result.killerDamages * (1 - result.averageElementalResistance / 100);
     } else {
-      result.elementalPreSprDamages = result.preSprDamages;
+      result.elementalDamages = result.killerDamages;
     }
   }
 
@@ -65,7 +67,7 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
   }
 
   private calculateDamages(unit: Unit, result: AlgorithmResultMagicalChaining) {
-    result.preSprDamages = result.buffedMag * result.buffedMag * result.averageTurnPower / 100 * this.calculateLevelCorrection();
+    result.rawDamages = result.buffedMag * result.buffedMag * result.averageTurnPower / 100 * this.calculateLevelCorrection();
   }
 
   protected isExecutingTwice(skill: Skill, unit: Unit) {
