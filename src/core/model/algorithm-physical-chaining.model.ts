@@ -1,20 +1,20 @@
 import {AlgorithmChaining} from './algorithm-chaining.model';
 import {Skill} from './skill.model';
-import {AlgorithmResult} from './algorithm-result.model';
-import {AlgorithmResultPhysicalChaining} from './algorithm-result-physical-chaining.model';
+import {Result} from './result.model';
+import {ResultPhysicalChaining} from './result-physical-chaining.model';
 import {Unit} from './unit.model';
 import {Equipment} from './equipment.model';
-import {AlgorithmResultOffensive} from './algorithm-result-offensive.model';
-import {AlgorithmResultChaining} from './algorithm-result-chaining.model';
+import {ResultOffensive} from './result-offensive.model';
+import {ResultChaining} from './result-chaining.model';
 
 export class AlgorithmPhysicalChaining extends AlgorithmChaining {
 
   public opponentDef = 1000000;
   public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
 
-  public calculate(unit: Unit): AlgorithmResult {
+  public calculate(unit: Unit): Result {
     this.checkSkillsInput(unit.selectedBuild.skills);
-    const result: AlgorithmResultOffensive = new AlgorithmResultOffensive();
+    const result: ResultOffensive = new ResultOffensive();
     unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
     result.result = result.turnDamages
       .map(r => r.result)
@@ -22,8 +22,8 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     return result;
   }
 
-  private calculateTurn(skill: Skill, unit: Unit): AlgorithmResultChaining {
-    const result: AlgorithmResultPhysicalChaining = new AlgorithmResultPhysicalChaining();
+  private calculateTurn(skill: Skill, unit: Unit): ResultChaining {
+    const result: ResultPhysicalChaining = new ResultPhysicalChaining();
     this.calculateBuffs(skill, unit, result);
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
@@ -35,17 +35,17 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     return result;
   }
 
-  private calculateFinalResult(skill: Skill, unit: Unit, result: AlgorithmResultPhysicalChaining) {
+  private calculateFinalResult(skill: Skill, unit: Unit, result: ResultPhysicalChaining) {
     result.result = result.elementalDamages / this.opponentDef * result.averageWeaponVariance / 100 * result.finalVariance / 100;
   }
 
-  private calculateDamageVariance(skill: Skill, unit: Unit, result: AlgorithmResultPhysicalChaining) {
+  private calculateDamageVariance(skill: Skill, unit: Unit, result: ResultPhysicalChaining) {
     const right_hand: Equipment = unit.selectedBuild.equipments.right_hand;
     result.averageWeaponVariance = right_hand.isTwoHanded() ? (right_hand.variance_min + right_hand.variance_max) / 2 : 100;
     result.finalVariance = 92.5;
   }
 
-  private calculateElementalResistances(skill: Skill, unit: Unit, result: AlgorithmResultPhysicalChaining) {
+  private calculateElementalResistances(skill: Skill, unit: Unit, result: ResultPhysicalChaining) {
     const elements: Array<number> = unit.selectedBuild.equipments.getWeaponsElements();
     // TODO check skill elements when possible
     if (elements && elements.length) {
@@ -58,7 +58,7 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     }
   }
 
-  private calculateBuffs(skill: Skill, unit: Unit, result: AlgorithmResultPhysicalChaining) {
+  private calculateBuffs(skill: Skill, unit: Unit, result: ResultPhysicalChaining) {
     result.atk = unit.stats.atk.total;
     result.buffedAtk = result.atk;
     if (this.isSupportBuffing) {
@@ -66,20 +66,20 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     }
   }
 
-  private calculateDamages(skill: Skill, unit: Unit, result: AlgorithmResultPhysicalChaining) {
+  private calculateDamages(skill: Skill, unit: Unit, result: ResultPhysicalChaining) {
     const rawDamages = unit.selectedBuild.equipments.isDualWielding()
       ? this.calculateRawDwDamages(unit, result) : this.calculateRawDhDamages(unit, result);
     result.rawDamages = rawDamages * result.power / 100 * this.calculateLevelCorrection();
   }
 
-  private calculateRawDwDamages(unit: Unit, result: AlgorithmResultPhysicalChaining): number {
+  private calculateRawDwDamages(unit: Unit, result: ResultPhysicalChaining): number {
     result.isDualWielding = true;
     result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
     result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
     return (result.buffedAtk - result.leftHandAtk) * (result.buffedAtk - result.rightHandAtk);
   }
 
-  private calculateRawDhDamages(unit: Unit, result: AlgorithmResultPhysicalChaining): number {
+  private calculateRawDhDamages(unit: Unit, result: ResultPhysicalChaining): number {
     result.isDualWielding = false;
     return result.buffedAtk * result.buffedAtk;
   }

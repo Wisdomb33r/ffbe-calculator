@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AlgorithmDefensive} from '../../core/model/algorithm-defensive.model';
-import {AlgorithmResultDefensive} from '../../core/model/algorithm-result-defensive.model';
+import {ResultDefensive} from '../../core/model/result-defensive.model';
 import {CalculationPhysicalEhpComponent} from '../popup/calculation-physical-ehp/calculation-physical-ehp.component';
 import {CalculationMagicalEhpComponent} from '../popup/calculation-magical-ehp/calculation-magical-ehp.component';
 import {CalculationEhpComponent} from '../popup/calculation-ehp/calculation-ehp.component';
@@ -14,7 +14,7 @@ import {MatDialog} from '@angular/material';
 export class CalculationDefensiveComponent implements OnInit {
 
   @Input() algorithm: AlgorithmDefensive;
-  @Input() result: AlgorithmResultDefensive;
+  @Input() result: ResultDefensive;
 
   constructor(private dialog: MatDialog) {
   }

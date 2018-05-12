@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {AlgorithmResultPhysicalChaining} from '../../../core/model/algorithm-result-physical-chaining.model';
+import {ResultPhysicalChaining} from '../../../core/model/result-physical-chaining.model';
 import {UnitsService} from '../../../core/services/units.service';
 import {AlgorithmPhysicalChaining} from '../../../core/model/algorithm-physical-chaining.model';
 
@@ -11,7 +11,7 @@ import {AlgorithmPhysicalChaining} from '../../../core/model/algorithm-physical-
 })
 export class CalculationPhysicalDamagesComponent {
 
-  public result: AlgorithmResultPhysicalChaining;
+  public result: ResultPhysicalChaining;
   public algorithm: AlgorithmPhysicalChaining;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,6 +22,6 @@ export class CalculationPhysicalDamagesComponent {
 
   public calculateBuild() {
     this.unitsService.selectedUnit.calculateResults();
-    this.result = this.unitsService.getResult() as AlgorithmResultPhysicalChaining;
+    this.result = this.unitsService.getResult() as ResultPhysicalChaining;
   }
 }

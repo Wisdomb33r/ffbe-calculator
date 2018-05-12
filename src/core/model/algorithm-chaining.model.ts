@@ -1,9 +1,9 @@
 import {Algorithm} from './algorithm.model';
-import {AlgorithmResult} from './algorithm-result.model';
+import {Result} from './result.model';
 import {Unit} from './unit.model';
 import {isNullOrUndefined} from 'util';
 import {Skill} from './skill.model';
-import {AlgorithmResultChaining} from './algorithm-result-chaining.model';
+import {ResultChaining} from './result-chaining.model';
 
 export abstract class AlgorithmChaining implements Algorithm {
 
@@ -12,11 +12,11 @@ export abstract class AlgorithmChaining implements Algorithm {
   public isSupportBuffing = true;
   public supportBuff = 100;
 
-  public abstract calculate(unit: Unit): AlgorithmResult;
+  public abstract calculate(unit: Unit): Result;
 
   protected abstract isExecutingTwice(skill: Skill, unit: Unit): boolean;
 
-  protected calculateCombosIncrement(skill: Skill, unit: Unit, result: AlgorithmResultChaining) {
+  protected calculateCombosIncrement(skill: Skill, unit: Unit, result: ResultChaining) {
     let increment = 0.1;
     increment += skill.skillType.getCombosIncrementFromWeapons(unit);
     if (this.isSparkChain) {
@@ -26,7 +26,7 @@ export abstract class AlgorithmChaining implements Algorithm {
     result.combosIncrement = increment;
   }
 
-  protected calculateKillers(skill: Skill, unit: Unit, result: AlgorithmResultChaining) {
+  protected calculateKillers(skill: Skill, unit: Unit, result: ResultChaining) {
     result.killerPassive = 0;
     if (this.isKillerActive) {
       result.killerPassive = skill.skillType.getActiveKillers(unit);
@@ -36,7 +36,7 @@ export abstract class AlgorithmChaining implements Algorithm {
     }
   }
 
-  protected calculateHitsPower(skill: Skill, unit: Unit, result: AlgorithmResultChaining) {
+  protected calculateHitsPower(skill: Skill, unit: Unit, result: ResultChaining) {
     if (isNullOrUndefined(skill.hits) || skill.hits <= 1) {
       result.hitsPower = [0];
       result.power = 0;

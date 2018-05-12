@@ -1,8 +1,8 @@
 import {Unit} from './unit.model';
 import {CalculatorTestutils} from '../calculator-testutils.spec';
 import {AlgorithmHybridChaining} from './algorithm-hybrid-chaining.model';
-import {AlgorithmResultHybridChaining} from './algorithm-result-hybrid-chaining.model';
-import {AlgorithmResultOffensive} from './algorithm-result-offensive.model';
+import {ResultHybridChaining} from './result-hybrid-chaining.model';
+import {ResultOffensive} from './result-offensive.model';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100,"mag":100}';
@@ -24,11 +24,11 @@ describe('AlgorithmHybridChaining', () => {
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
-    expect(result instanceof AlgorithmResultOffensive).toBeTruthy();
+    expect(result instanceof ResultOffensive).toBeTruthy();
     expect(result.result).toBeCloseTo(60.315);
     expect(result['turnDamages'].length).toEqual(2);
-    result['turnDamages'].forEach((turn: AlgorithmResultHybridChaining) => {
-      expect(turn instanceof AlgorithmResultHybridChaining).toBeTruthy();
+    result['turnDamages'].forEach((turn: ResultHybridChaining) => {
+      expect(turn instanceof ResultHybridChaining).toBeTruthy();
       expect(turn['atk']).toEqual(800);
       expect(turn['buffedAtk']).toEqual(1000);
       expect(turn['mag']).toEqual(1000);
@@ -81,11 +81,11 @@ describe('AlgorithmHybridChaining', () => {
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
-    expect(result instanceof AlgorithmResultOffensive).toBeTruthy();
+    expect(result instanceof ResultOffensive).toBeTruthy();
     expect(result.result).toBeCloseTo(47.956);
     expect(result['turnDamages'].length).toEqual(2);
-    result['turnDamages'].forEach((turn: AlgorithmResultHybridChaining) => {
-      expect(turn instanceof AlgorithmResultHybridChaining).toBeTruthy();
+    result['turnDamages'].forEach((turn: ResultHybridChaining) => {
+      expect(turn instanceof ResultHybridChaining).toBeTruthy();
       expect(turn['atk']).toEqual(800);
       expect(turn['buffedAtk']).toEqual(800);
       expect(turn['mag']).toEqual(1000);

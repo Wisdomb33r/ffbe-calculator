@@ -1,6 +1,6 @@
-import {AlgorithmResultChaining} from './algorithm-result-chaining.model';
+import {ResultChaining} from './result-chaining.model';
 
-export class AlgorithmResultHybridChaining extends AlgorithmResultChaining {
+export class ResultHybridChaining extends ResultChaining {
   public mag: number;
   public buffedMag: number;
   public atk: number;

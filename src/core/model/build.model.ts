@@ -2,7 +2,7 @@ import {EquipmentSet} from './equipment-set.model';
 import {Skill} from './skill.model';
 import {Algorithm} from './algorithm.model';
 import {AlgorithmFactory} from './algorithm-factory.model';
-import {AlgorithmResult} from './algorithm-result.model';
+import {Result} from './result.model';
 import {Unit} from './unit.model';
 
 export class Build {
@@ -23,7 +23,7 @@ export class Build {
 
   // transcient
   public algorithm: Algorithm;
-  public result: AlgorithmResult;
+  public result: Result;
 
   constructor(build: Build) {
     this.algorithmId = build.algorithmId;

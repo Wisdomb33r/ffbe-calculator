@@ -6,7 +6,7 @@ import {Equipment} from '../model/equipment.model';
 import {map} from 'rxjs/operators';
 import {CalculatorUtils} from '../calculator-utils';
 import {Algorithm} from '../model/algorithm.model';
-import {AlgorithmResult} from '../model/algorithm-result.model';
+import {Result} from '../model/result.model';
 
 @Injectable()
 export class UnitsService {
@@ -144,7 +144,7 @@ export class UnitsService {
     return this.selectedUnit.selectedBuild.algorithm;
   }
 
-  public getResult(): AlgorithmResult {
+  public getResult(): Result {
     return this.selectedUnit.selectedBuild.result;
   }
 }

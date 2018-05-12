@@ -1,6 +1,6 @@
-import {AlgorithmResult} from './algorithm-result.model';
+import {Result} from './result.model';
 import {Unit} from './unit.model';
 
 export interface Algorithm {
-  calculate(unit: Unit): AlgorithmResult;
+  calculate(unit: Unit): Result;
 }

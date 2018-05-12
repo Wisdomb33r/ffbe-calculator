@@ -1,6 +1,6 @@
-import {AlgorithmResult} from './algorithm-result.model';
+import {Result} from './result.model';
 
-export class AlgorithmResultChaining extends AlgorithmResult {
+export class ResultChaining extends Result {
   public combosIncrement: number;
   public hitsPower: Array<number>;
   public power: number;

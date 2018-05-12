@@ -1,6 +1,6 @@
 import {Algorithm} from './algorithm.model';
-import {AlgorithmResult} from './algorithm-result.model';
-import {AlgorithmResultDefensive} from './algorithm-result-defensive.model';
+import {Result} from './result.model';
+import {ResultDefensive} from './result-defensive.model';
 import {Unit} from './unit.model';
 
 export class AlgorithmDefensive implements Algorithm {
@@ -22,11 +22,11 @@ export class AlgorithmDefensive implements Algorithm {
     this.isInitialized = true;
   }
 
-  public calculate(unit: Unit): AlgorithmResult {
+  public calculate(unit: Unit): Result {
     if (!this.isInitialized) {
       this.init(unit);
     }
-    const result = new AlgorithmResultDefensive();
+    const result = new ResultDefensive();
     this.calculateBuffs(unit, result);
     this.calculateBaseEffectiveHp(unit, result);
     this.calculateMitigation(unit, result);
@@ -36,7 +36,7 @@ export class AlgorithmDefensive implements Algorithm {
     return result;
   }
 
-  private calculateBuffs(unit: Unit, result: AlgorithmResultDefensive) {
+  private calculateBuffs(unit: Unit, result: ResultDefensive) {
     result.hp = unit.stats.hp.total;
     result.def = unit.stats.def.total;
     result.buffedDef = result.def;
@@ -50,13 +50,13 @@ export class AlgorithmDefensive implements Algorithm {
     }
   }
 
-  private calculateFinalResult(unit: Unit, result: AlgorithmResultDefensive) {
+  private calculateFinalResult(unit: Unit, result: ResultDefensive) {
     result.physicalResult = result.physicalEffectiveHp / 1000000;
     result.magicalResult = result.magicalEffectiveHp / 1000000;
     result.result = (result.physicalEffectiveHp + result.magicalEffectiveHp) / 2000000;
   }
 
-  private calculateMitigation(unit: Unit, result: AlgorithmResultDefensive) {
+  private calculateMitigation(unit: Unit, result: ResultDefensive) {
     result.mitigation = unit.selectedBuild.mitigation ? unit.selectedBuild.mitigation : 0;
     result.effectiveMitigation = result.mitigation;
     if (this.isSupportMitigating && this.supportMitigation > result.effectiveMitigation) {
@@ -66,7 +66,7 @@ export class AlgorithmDefensive implements Algorithm {
     result.magicalEffectiveHp = result.magicalEffectiveHp / (1 - result.effectiveMitigation / 100);
   }
 
-  private calculateCover(unit: Unit, result: AlgorithmResultDefensive) {
+  private calculateCover(unit: Unit, result: ResultDefensive) {
     result.physicalCover = unit.selectedBuild.physical_cover ? unit.selectedBuild.physical_cover : 0;
     result.magicalCover = unit.selectedBuild.magical_cover ? unit.selectedBuild.magical_cover : 0;
     if (this.isPhysicalCovering) {
@@ -80,14 +80,14 @@ export class AlgorithmDefensive implements Algorithm {
     }
   }
 
-  private calculateResistances(unit: Unit, result: AlgorithmResultDefensive) {
+  private calculateResistances(unit: Unit, result: ResultDefensive) {
     result.physicalResistance = unit.selectedBuild.physical_resistance ? unit.selectedBuild.physical_resistance : 0;
     result.magicalResistance = unit.selectedBuild.magical_resistance ? unit.selectedBuild.magical_resistance : 0;
     result.physicalEffectiveHp = result.physicalEffectiveHp / (1 - result.physicalResistance / 100);
     result.magicalEffectiveHp = result.magicalEffectiveHp / (1 - result.magicalResistance / 100);
   }
 
-  private calculateBaseEffectiveHp(unit: Unit, result: AlgorithmResultDefensive) {
+  private calculateBaseEffectiveHp(unit: Unit, result: ResultDefensive) {
     result.basePhysicalEffectiveHp = result.hp * result.buffedDef;
     result.baseMagicalEffectiveHp = result.hp * result.buffedSpr;
     result.physicalEffectiveHp = result.basePhysicalEffectiveHp;

@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {UnitsService} from '../../../core/services/units.service';
-import {AlgorithmResultDefensive} from '../../../core/model/algorithm-result-defensive.model';
+import {ResultDefensive} from '../../../core/model/result-defensive.model';
 import {AlgorithmDefensive} from '../../../core/model/algorithm-defensive.model';
 
 @Component({
@@ -11,7 +11,7 @@ import {AlgorithmDefensive} from '../../../core/model/algorithm-defensive.model'
 })
 export class CalculationMagicalEhpComponent {
 
-  public result: AlgorithmResultDefensive;
+  public result: ResultDefensive;
   public algorithm: AlgorithmDefensive;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,7 +22,7 @@ export class CalculationMagicalEhpComponent {
 
   public calculateBuild() {
     this.unitsService.selectedUnit.calculateResults();
-    this.result = this.unitsService.getResult() as AlgorithmResultDefensive;
+    this.result = this.unitsService.getResult() as ResultDefensive;
   }
 
   public switchCover() {

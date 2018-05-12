@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {AlgorithmPhysicalChaining} from '../../core/model/algorithm-physical-chaining.model';
-import {AlgorithmResultPhysicalChaining} from '../../core/model/algorithm-result-physical-chaining.model';
+import {ResultPhysicalChaining} from '../../core/model/result-physical-chaining.model';
 import {MatDialog} from '@angular/material';
 import {CalculationSkillChainingHitsDamagesComponent} from '../popup/calculation-skill-chaining-hits-damages/calculation-skill-chaining-hits-damages.component';
 import {CalculationPhysicalDamagesComponent} from '../popup/calculation-physical-damages/calculation-physical-damages.component';
@@ -13,7 +13,7 @@ import {CalculationPhysicalDamagesComponent} from '../popup/calculation-physical
 export class CalculationPhysicalChainingComponent {
 
   @Input() algorithm: AlgorithmPhysicalChaining;
-  @Input() result: AlgorithmResultPhysicalChaining;
+  @Input() result: ResultPhysicalChaining;
 
   constructor(private dialog: MatDialog) {
   }

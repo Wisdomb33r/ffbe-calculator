@@ -1,6 +1,6 @@
-import {AlgorithmResult} from './algorithm-result.model';
+import {Result} from './result.model';
 
-export class AlgorithmResultDefensive extends AlgorithmResult {
+export class ResultDefensive extends Result {
   public hp;
   public def;
   public spr;

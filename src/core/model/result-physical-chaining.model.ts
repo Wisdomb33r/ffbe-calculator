@@ -1,6 +1,6 @@
-import {AlgorithmResultChaining} from './algorithm-result-chaining.model';
+import {ResultChaining} from './result-chaining.model';
 
-export class AlgorithmResultPhysicalChaining extends AlgorithmResultChaining {
+export class ResultPhysicalChaining extends ResultChaining {
   public atk: number;
   public leftHandAtk: number;
   public rightHandAtk: number;

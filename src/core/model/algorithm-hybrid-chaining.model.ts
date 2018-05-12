@@ -1,10 +1,10 @@
 import {AlgorithmChaining} from './algorithm-chaining.model';
-import {AlgorithmResult} from './algorithm-result.model';
+import {Result} from './result.model';
 import {Unit} from './unit.model';
 import {Skill} from './skill.model';
-import {AlgorithmResultHybridChaining} from './algorithm-result-hybrid-chaining.model';
+import {ResultHybridChaining} from './result-hybrid-chaining.model';
 import {Equipment} from './equipment.model';
-import {AlgorithmResultOffensive} from './algorithm-result-offensive.model';
+import {ResultOffensive} from './result-offensive.model';
 
 export class AlgorithmHybridChaining extends AlgorithmChaining {
 
@@ -12,18 +12,18 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
   public opponentSpr = 1000000;
   public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
 
-  public calculate(unit: Unit): AlgorithmResult {
+  public calculate(unit: Unit): Result {
     this.checkSkillsInput(unit.selectedBuild.skills);
-    const result: AlgorithmResultOffensive = new AlgorithmResultOffensive();
+    const result: ResultOffensive = new ResultOffensive();
     unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
     result.result = result.turnDamages
-      .map((r: AlgorithmResultHybridChaining) => r.result)
+      .map((r: ResultHybridChaining) => r.result)
       .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.length;
     return result;
   }
 
-  public calculateTurn(skill: Skill, unit: Unit): AlgorithmResultHybridChaining {
-    const result: AlgorithmResultHybridChaining = new AlgorithmResultHybridChaining();
+  public calculateTurn(skill: Skill, unit: Unit): ResultHybridChaining {
+    const result: ResultHybridChaining = new ResultHybridChaining();
     this.calculateBuffs(skill, unit, result);
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
@@ -40,7 +40,7 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
     return unit.getPhysicalKillers();
   }
 
-  protected calculateKillers(skill: Skill, unit: Unit, result: AlgorithmResultHybridChaining) {
+  protected calculateKillers(skill: Skill, unit: Unit, result: ResultHybridChaining) {
     result.killerPassive = 0;
     if (this.isKillerActive) {
       result.killerPassive = this.getActiveKillers(unit);
@@ -52,20 +52,20 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
     }
   }
 
-  private calculateFinalResult(skill: Skill, unit: Unit, result: AlgorithmResultHybridChaining) {
+  private calculateFinalResult(skill: Skill, unit: Unit, result: ResultHybridChaining) {
     result.physicalResult = result.physicalElementalDamages / this.opponentDef
       * result.averageWeaponVariance / 100 * result.finalVariance / 100;
     result.magicalResult = result.magicalElementalDamages / this.opponentSpr * result.finalVariance / 100;
     result.result = result.physicalResult + result.magicalResult;
   }
 
-  private calculateDamageVariance(skill: Skill, unit: Unit, result: AlgorithmResultHybridChaining) {
+  private calculateDamageVariance(skill: Skill, unit: Unit, result: ResultHybridChaining) {
     const right_hand: Equipment = unit.selectedBuild.equipments.right_hand;
     result.averageWeaponVariance = right_hand.isTwoHanded() ? (right_hand.variance_min + right_hand.variance_max) / 2 : 100;
     result.finalVariance = 92.5;
   }
 
-  private calculateElementalResistances(skill: Skill, unit: Unit, result: AlgorithmResultHybridChaining) {
+  private calculateElementalResistances(skill: Skill, unit: Unit, result: ResultHybridChaining) {
     const elements: Array<number> = unit.selectedBuild.equipments.getWeaponsElements();
     // TODO check skill elements when possible
     if (elements && elements.length) {
@@ -80,7 +80,7 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
     }
   }
 
-  private calculateBuffs(skill: Skill, unit: Unit, result: AlgorithmResultHybridChaining) {
+  private calculateBuffs(skill: Skill, unit: Unit, result: ResultHybridChaining) {
     result.atk = unit.stats.atk.total;
     result.buffedAtk = result.atk;
     if (this.isSupportBuffing) {
@@ -93,24 +93,24 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
     }
   }
 
-  private calculateMagicalDamages(skill: Skill, unit: Unit, result: AlgorithmResultHybridChaining) {
+  private calculateMagicalDamages(skill: Skill, unit: Unit, result: ResultHybridChaining) {
     result.magicalDamages = result.buffedMag * result.buffedMag * result.power / 200 * this.calculateLevelCorrection();
   }
 
-  private calculatePhysicalDamages(skill: Skill, unit: Unit, result: AlgorithmResultHybridChaining) {
+  private calculatePhysicalDamages(skill: Skill, unit: Unit, result: ResultHybridChaining) {
     const physicalDamages = unit.selectedBuild.equipments.isDualWielding()
       ? this.calculateRawDwDamages(unit, result) : this.calculateRawDhDamages(unit, result);
     result.physicalDamages = physicalDamages * result.power / 200 * this.calculateLevelCorrection();
   }
 
-  private calculateRawDwDamages(unit: Unit, result: AlgorithmResultHybridChaining): number {
+  private calculateRawDwDamages(unit: Unit, result: ResultHybridChaining): number {
     result.isDualWielding = true;
     result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
     result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
     return (result.buffedAtk - result.leftHandAtk) * (result.buffedAtk - result.rightHandAtk);
   }
 
-  private calculateRawDhDamages(unit: Unit, result: AlgorithmResultHybridChaining): number {
+  private calculateRawDhDamages(unit: Unit, result: ResultHybridChaining): number {
     result.isDualWielding = false;
     return result.buffedAtk * result.buffedAtk;
   }

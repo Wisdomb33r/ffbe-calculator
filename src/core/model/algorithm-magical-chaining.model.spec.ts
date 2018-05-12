@@ -1,8 +1,8 @@
 import {Unit} from './unit.model';
 import {CalculatorTestutils} from '../calculator-testutils.spec';
 import {AlgorithmMagicalChaining} from './algorithm-magical-chaining.model';
-import {AlgorithmResultOffensive} from './algorithm-result-offensive.model';
-import {AlgorithmResultMagicalChaining} from './algorithm-result-magical-chaining.model';
+import {ResultOffensive} from './result-offensive.model';
+import {ResultMagicalChaining} from './result-magical-chaining.model';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"mag":100}';
@@ -23,11 +23,11 @@ describe('AlgorithmMagicalChaining', () => {
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
-    expect(result instanceof AlgorithmResultOffensive).toBeTruthy();
+    expect(result instanceof ResultOffensive).toBeTruthy();
     expect(result.result).toBeCloseTo(30.916);
     expect(result['turnDamages'].length).toEqual(2);
-    result['turnDamages'].forEach((turn: AlgorithmResultMagicalChaining) => {
-      expect(turn instanceof AlgorithmResultMagicalChaining).toBeTruthy();
+    result['turnDamages'].forEach((turn: ResultMagicalChaining) => {
+      expect(turn instanceof ResultMagicalChaining).toBeTruthy();
       expect(turn['mag']).toEqual(1000);
       expect(turn['buffedMag']).toEqual(1200);
       expect(turn['combosIncrement']).toEqual(0.1);

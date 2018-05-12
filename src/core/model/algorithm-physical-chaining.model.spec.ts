@@ -1,9 +1,9 @@
 import {Unit} from './unit.model';
 import {AlgorithmPhysicalChaining} from './algorithm-physical-chaining.model';
-import {AlgorithmResultPhysicalChaining} from './algorithm-result-physical-chaining.model';
+import {ResultPhysicalChaining} from './result-physical-chaining.model';
 import {Equipment} from './equipment.model';
 import {CalculatorTestutils} from '../calculator-testutils.spec';
-import {AlgorithmResultOffensive} from './algorithm-result-offensive.model';
+import {ResultOffensive} from './result-offensive.model';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100}';
@@ -29,11 +29,11 @@ describe('AlgorithmPhysicalChaining', () => {
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
-    expect(result instanceof AlgorithmResultOffensive).toBeTruthy();
+    expect(result instanceof ResultOffensive).toBeTruthy();
     expect(result.result).toBeCloseTo(36.376);
     expect(result['turnDamages'].length).toEqual(2);
-    result['turnDamages'].forEach((turn: AlgorithmResultPhysicalChaining) => {
-      expect(turn instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
+    result['turnDamages'].forEach((turn: ResultPhysicalChaining) => {
+      expect(turn instanceof ResultPhysicalChaining).toBeTruthy();
       expect(turn['atk']).toEqual(1000);
       expect(turn['buffedAtk']).toEqual(1000);
       expect(turn['isDualWielding']).toBeFalsy();
@@ -70,11 +70,11 @@ describe('AlgorithmPhysicalChaining', () => {
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
-    expect(result instanceof AlgorithmResultOffensive).toBeTruthy();
+    expect(result instanceof ResultOffensive).toBeTruthy();
     expect(result.result).toBeCloseTo(155.6317125);
     expect(result['turnDamages'].length).toEqual(2);
-    result['turnDamages'].forEach((turn: AlgorithmResultPhysicalChaining) => {
-      expect(turn instanceof AlgorithmResultPhysicalChaining).toBeTruthy();
+    result['turnDamages'].forEach((turn: ResultPhysicalChaining) => {
+      expect(turn instanceof ResultPhysicalChaining).toBeTruthy();
       expect(turn['atk']).toEqual(1000);
       expect(turn['buffedAtk']).toEqual(1200);
       expect(turn['isDualWielding']).toBeTruthy();

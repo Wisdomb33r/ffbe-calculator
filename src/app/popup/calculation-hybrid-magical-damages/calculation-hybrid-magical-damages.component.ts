@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {AlgorithmResultHybridChaining} from '../../../core/model/algorithm-result-hybrid-chaining.model';
+import {ResultHybridChaining} from '../../../core/model/result-hybrid-chaining.model';
 import {UnitsService} from '../../../core/services/units.service';
 import {AlgorithmHybridChaining} from '../../../core/model/algorithm-hybrid-chaining.model';
 import {MAT_DIALOG_DATA} from '@angular/material';
@@ -11,7 +11,7 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 })
 export class CalculationHybridMagicalDamagesComponent {
 
-  public result: AlgorithmResultHybridChaining;
+  public result: ResultHybridChaining;
   public algorithm: AlgorithmHybridChaining;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,6 +22,6 @@ export class CalculationHybridMagicalDamagesComponent {
 
   public calculateBuild() {
     this.unitsService.selectedUnit.calculateResults();
-    this.result = this.unitsService.getResult() as AlgorithmResultHybridChaining;
+    this.result = this.unitsService.getResult() as ResultHybridChaining;
   }
 }
