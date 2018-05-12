@@ -18,7 +18,7 @@ export abstract class AlgorithmChaining implements Algorithm {
 
   protected abstract getActiveKillers(unit: Unit): number;
 
-  protected calculateKillers(unit: Unit, result: AlgorithmResultChaining) {
+  protected calculateKillers(skill: Skill, unit: Unit, result: AlgorithmResultChaining) {
     result.killerPassive = 0;
     if (this.isKillerActive) {
       result.killerPassive = this.getActiveKillers(unit);
@@ -28,19 +28,10 @@ export abstract class AlgorithmChaining implements Algorithm {
     }
   }
 
-  protected calculateAverageTurnPower(result: AlgorithmResultChaining) {
-    result.averageTurnPower = result.perTurnHitsPower
-      .map((hitsPower: Array<number>) => hitsPower.reduce((val1, val2) => val1 + val2, 0))
-      .reduce((val1, val2) => val1 + val2, 0) / result.perTurnHitsPower.length;
-  }
-
-  protected calculatePerTurnHitsPower(unit: Unit, result: AlgorithmResultChaining) {
-    result.perTurnHitsPower = unit.selectedBuild.skills.map((skill: Skill) => this.calculateHitsPower(skill, unit, result));
-  }
-
-  protected calculateHitsPower(skill: Skill, unit: Unit, result: AlgorithmResultChaining): Array<number> {
+  protected calculateHitsPower(skill: Skill, unit: Unit, result: AlgorithmResultChaining) {
     if (isNullOrUndefined(skill.hits) || skill.hits <= 1) {
-      return [0];
+      result.hitsPower = [0];
+      result.power = 0;
     } else {
       const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
       const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
@@ -63,7 +54,8 @@ export abstract class AlgorithmChaining implements Algorithm {
           chainCombos++;
         }
       }
-      return hitsPower;
+      result.hitsPower = hitsPower;
+      result.power = hitsPower.reduce((val1, val2) => val1 + val2, 0);
     }
   }
 

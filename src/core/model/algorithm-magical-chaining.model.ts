@@ -3,6 +3,7 @@ import {Skill} from './skill.model';
 import {AlgorithmResult} from './algorithm-result.model';
 import {Unit} from './unit.model';
 import {AlgorithmResultMagicalChaining} from './algorithm-result-magical-chaining.model';
+import {AlgorithmResultOffensive} from './algorithm-result-offensive.model';
 
 export class AlgorithmMagicalChaining extends AlgorithmChaining {
 
@@ -11,16 +12,24 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
 
   public calculate(unit: Unit): AlgorithmResult {
     this.checkSkillsInput(unit.selectedBuild.skills);
+    const result: AlgorithmResultOffensive = new AlgorithmResultOffensive();
+    unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
+    result.result = result.turnDamages
+      .map(r => r.result)
+      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.length;
+    return result;
+  }
+
+  public calculateTurn(skill: Skill, unit: Unit): AlgorithmResultMagicalChaining {
     const result: AlgorithmResultMagicalChaining = new AlgorithmResultMagicalChaining();
-    this.calculateBuffs(unit, result);
-    this.calculateCombosIncrement(unit, result);
-    this.calculatePerTurnHitsPower(unit, result);
-    this.calculateAverageTurnPower(result);
-    this.calculateDamages(unit, result);
-    this.calculateKillers(unit, result);
-    this.calculateElementalResistances(unit, result);
-    this.calculateDamageVariance(unit, result);
-    this.calculateFinalResult(unit, result);
+    this.calculateBuffs(skill, unit, result);
+    this.calculateCombosIncrement(skill, unit, result);
+    this.calculateHitsPower(skill, unit, result);
+    this.calculateDamages(skill, unit, result);
+    this.calculateKillers(skill, unit, result);
+    this.calculateElementalResistances(skill, unit, result);
+    this.calculateDamageVariance(skill, unit, result);
+    this.calculateFinalResult(skill, unit, result);
     return result;
   }
 
@@ -28,15 +37,15 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     return unit.getMagicalKillers();
   }
 
-  private calculateFinalResult(unit: Unit, result: AlgorithmResultMagicalChaining) {
+  private calculateFinalResult(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining) {
     result.result = result.elementalDamages / this.opponentSpr * result.finalVariance / 100;
   }
 
-  private calculateDamageVariance(unit: Unit, result: AlgorithmResultMagicalChaining) {
+  private calculateDamageVariance(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining) {
     result.finalVariance = 92.5;
   }
 
-  private calculateElementalResistances(unit: Unit, result: AlgorithmResultMagicalChaining) {
+  private calculateElementalResistances(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining) {
     const elements: Array<number> = [];
     // TODO check skill elements when possible
     if (elements && elements.length) {
@@ -49,7 +58,7 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     }
   }
 
-  private calculateBuffs(unit: Unit, result: AlgorithmResultMagicalChaining) {
+  private calculateBuffs(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining) {
     result.mag = unit.stats.mag.total;
     result.buffedMag = result.mag;
     if (this.isSupportBuffing) {
@@ -57,7 +66,7 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     }
   }
 
-  private calculateCombosIncrement(unit: Unit, result: AlgorithmResultMagicalChaining) {
+  private calculateCombosIncrement(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining) {
     let increment = 0.1;
     if (this.isSparkChain) {
       increment = increment + 0.15;
@@ -66,8 +75,8 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     result.combosIncrement = increment;
   }
 
-  private calculateDamages(unit: Unit, result: AlgorithmResultMagicalChaining) {
-    result.rawDamages = result.buffedMag * result.buffedMag * result.averageTurnPower / 100 * this.calculateLevelCorrection();
+  private calculateDamages(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining) {
+    result.rawDamages = result.buffedMag * result.buffedMag * result.power / 100 * this.calculateLevelCorrection();
   }
 
   protected isExecutingTwice(skill: Skill, unit: Unit) {
