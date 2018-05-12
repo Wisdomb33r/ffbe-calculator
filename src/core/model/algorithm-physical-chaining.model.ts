@@ -35,10 +35,6 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     return result;
   }
 
-  protected getActiveKillers(unit: Unit) {
-    return unit.getPhysicalKillers();
-  }
-
   private calculateFinalResult(skill: Skill, unit: Unit, result: AlgorithmResultPhysicalChaining) {
     result.result = result.elementalDamages / this.opponentDef * result.averageWeaponVariance / 100 * result.finalVariance / 100;
   }
@@ -68,18 +64,6 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     if (this.isSupportBuffing) {
       result.buffedAtk += unit.stats.atk.base * this.supportBuff / 100;
     }
-  }
-
-  private calculateCombosIncrement(skill: Skill, unit: Unit, result: AlgorithmResultPhysicalChaining) {
-    let increment = 0.1;
-    if (unit.selectedBuild.equipments.getWeaponsElements() && unit.selectedBuild.equipments.getWeaponsElements().length) {
-      increment = increment + (0.2 * unit.selectedBuild.equipments.getWeaponsElements().length);
-    }
-    if (this.isSparkChain) {
-      increment = increment + 0.15;
-    }
-    // TODO check skill elements when possible
-    result.combosIncrement = increment;
   }
 
   private calculateDamages(skill: Skill, unit: Unit, result: AlgorithmResultPhysicalChaining) {

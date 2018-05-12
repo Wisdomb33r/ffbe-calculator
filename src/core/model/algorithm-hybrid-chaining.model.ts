@@ -93,18 +93,6 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
     }
   }
 
-  private calculateCombosIncrement(skill: Skill, unit: Unit, result: AlgorithmResultHybridChaining) {
-    let increment = 0.1;
-    if (unit.selectedBuild.equipments.getWeaponsElements() && unit.selectedBuild.equipments.getWeaponsElements().length) {
-      increment = increment + (0.2 * unit.selectedBuild.equipments.getWeaponsElements().length);
-    }
-    if (this.isSparkChain) {
-      increment = increment + 0.15;
-    }
-    // TODO check skill elements when possible
-    result.combosIncrement = increment;
-  }
-
   private calculateMagicalDamages(skill: Skill, unit: Unit, result: AlgorithmResultHybridChaining) {
     result.magicalDamages = result.buffedMag * result.buffedMag * result.power / 200 * this.calculateLevelCorrection();
   }

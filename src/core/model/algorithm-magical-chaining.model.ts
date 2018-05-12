@@ -33,10 +33,6 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     return result;
   }
 
-  protected getActiveKillers(unit: Unit) {
-    return unit.getMagicalKillers();
-  }
-
   private calculateFinalResult(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining) {
     result.result = result.elementalDamages / this.opponentSpr * result.finalVariance / 100;
   }
@@ -64,15 +60,6 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     if (this.isSupportBuffing) {
       result.buffedMag += unit.stats.mag.base * this.supportBuff / 100;
     }
-  }
-
-  private calculateCombosIncrement(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining) {
-    let increment = 0.1;
-    if (this.isSparkChain) {
-      increment = increment + 0.15;
-    }
-    // TODO check skill elements when possible
-    result.combosIncrement = increment;
   }
 
   private calculateDamages(skill: Skill, unit: Unit, result: AlgorithmResultMagicalChaining) {

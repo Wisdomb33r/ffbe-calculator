@@ -90,7 +90,7 @@ export class EquipmentSet {
       elements.push(...this.right_hand.elements);
     }
     if (this.left_hand) {
-      elements.push(...this.left_hand.elements);
+      elements.push(...this.left_hand.elements.filter(element => elements.indexOf(element) === -1));
     }
     return elements;
   }

@@ -16,12 +16,20 @@ export abstract class AlgorithmChaining implements Algorithm {
 
   protected abstract isExecutingTwice(skill: Skill, unit: Unit): boolean;
 
-  protected abstract getActiveKillers(unit: Unit): number;
+  protected calculateCombosIncrement(skill: Skill, unit: Unit, result: AlgorithmResultChaining) {
+    let increment = 0.1;
+    increment += skill.skillType.getCombosIncrementFromWeapons(unit);
+    if (this.isSparkChain) {
+      increment = increment + 0.15;
+    }
+    // TODO check skill elements when possible
+    result.combosIncrement = increment;
+  }
 
   protected calculateKillers(skill: Skill, unit: Unit, result: AlgorithmResultChaining) {
     result.killerPassive = 0;
     if (this.isKillerActive) {
-      result.killerPassive = this.getActiveKillers(unit);
+      result.killerPassive = skill.skillType.getActiveKillers(unit);
       result.killerDamages = result.rawDamages * (1 + result.killerPassive / 1000);
     } else {
       result.killerDamages = result.rawDamages;
