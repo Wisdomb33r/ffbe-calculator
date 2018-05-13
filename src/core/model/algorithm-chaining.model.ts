@@ -4,6 +4,7 @@ import {Unit} from './unit.model';
 import {isNullOrUndefined} from 'util';
 import {Skill} from './skill.model';
 import {ResultChaining} from './result-chaining.model';
+import {ResultOffensive} from './result-offensive.model';
 
 export abstract class AlgorithmChaining implements Algorithm {
 
@@ -15,21 +16,40 @@ export abstract class AlgorithmChaining implements Algorithm {
   public opponentSpr = 1000000;
   public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
 
-  public abstract calculate(unit: Unit): Result;
+  public calculate(unit: Unit): Result {
+    const result: ResultOffensive = new ResultOffensive();
+    unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
+    result.result = result.turnDamages
+      .map(r => r.result)
+      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.length;
+    return result;
+  }
 
-  protected abstract isExecutingTwice(skill: Skill, unit: Unit): boolean;
+  private calculateTurn(skill: Skill, unit: Unit): ResultChaining {
+    const result: ResultChaining = new ResultChaining();
+    skill.damageType.calculateBuffs(unit, this.isSupportBuffing, this.supportBuff, result);
+    this.calculateCombosIncrement(skill, unit, result);
+    this.calculateHitsPower(skill, unit, result);
+    skill.damageType.calculateDamages(unit, result);
+    skill.damageType.calculateKillerDamages(unit, skill.skillType.getActiveKillers(unit), result);
+    skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), this.opponentResistances, result);
+    skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);
+    return result;
+  }
 
-  protected calculateCombosIncrement(skill: Skill, unit: Unit, result: ResultChaining) {
+  private calculateCombosIncrement(skill: Skill, unit: Unit, result: ResultChaining) {
     let increment = 0.1;
-    increment += skill.skillType.getCombosIncrementFromWeapons(unit);
+    const elements = skill.skillType.getElements(skill, unit);
+    if (Array.isArray(elements) && elements.length > 0) {
+      increment += 0.2 * elements.length;
+    }
     if (this.isSparkChain) {
       increment += 0.15;
     }
-    // TODO check skill elements when possible
     result.combosIncrement = increment;
   }
 
-  protected calculateHitsPower(skill: Skill, unit: Unit, result: ResultChaining) {
+  private calculateHitsPower(skill: Skill, unit: Unit, result: ResultChaining) {
     if (isNullOrUndefined(skill.hits) || skill.hits <= 1) {
       result.hitsPower = [0];
       result.power = 0;
@@ -46,7 +66,7 @@ export abstract class AlgorithmChaining implements Algorithm {
         chainCombos++;
       }
       // TODO chainCombos = 0 if the skill does not perfect chain (ie Beatrix)
-      if (this.isExecutingTwice(skill, unit)) {
+      if (skill.skillType.isExecutingTwice(skill, unit)) {
         for (let j = 0; j < skill.hits; j++) {
           if (j > 0 && frames[j] - frames[j - 1] > 25) {
             chainCombos = 0;

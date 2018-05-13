@@ -17,6 +17,9 @@ export class Skill {
   public damages: string;
   public damages_type: string;
   public calculation_stat: string;
+  public isBreakingChain: boolean;
+  public resists_break: Array<number>;
+  public elements: Array<number>;
 
   // transcient
   public skillType: SkillType;
@@ -35,6 +38,9 @@ export class Skill {
     this.damages = skill.damages;
     this.damages_type = skill.damages_type;
     this.calculation_stat = skill.calculation_stat;
+    this.isBreakingChain = skill.isBreakingChain;
+    this.resists_break = skill.resists_break;
+    this.elements = skill.elements;
     this.skillType = SkillTypeFactory.getInstance(this.category);
     this.damageType = DamageTypeFactory.getInstance(this.damages_type, this.calculation_stat);
   }

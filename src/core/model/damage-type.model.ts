@@ -8,6 +8,10 @@ export abstract class DamageType {
 
   abstract calculateKillerDamages(unit: Unit, killer: number, result: ResultChaining);
 
+  abstract calculateElementalDamages(unit: Unit, elements: Array<number>, resistances: Array<number>, result: ResultChaining);
+
+  abstract calculateFinalResult(unit: Unit, def: number, spr: number, result: ResultChaining);
+
   protected calculateLevelCorrection(unit: Unit) {
     return 2;
   }
