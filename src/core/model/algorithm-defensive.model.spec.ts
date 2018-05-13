@@ -1,5 +1,5 @@
 import {AlgorithmDefensive} from './algorithm-defensive.model';
-import {AlgorithmResultDefensive} from './algorithm-result-defensive.model';
+import {ResultDefensive} from './result-defensive.model';
 import {Unit} from './unit.model';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":200,"atk":300,"mag":400,"def":500,"spr":500}';
@@ -23,7 +23,7 @@ describe('AlgorithmDefensive', () => {
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
-    expect(result instanceof AlgorithmResultDefensive).toBeTruthy();
+    expect(result instanceof ResultDefensive).toBeTruthy();
     expect(result.result).toBeCloseTo(20);
     expect(result['hp']).toBeCloseTo(10000);
     expect(result['def']).toBeCloseTo(500);

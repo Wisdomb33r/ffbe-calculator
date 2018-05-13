@@ -2,7 +2,7 @@ import {EquipmentSet} from './equipment-set.model';
 import {Skill} from './skill.model';
 import {Algorithm} from './algorithm.model';
 import {AlgorithmFactory} from './algorithm-factory.model';
-import {AlgorithmResult} from './algorithm-result.model';
+import {Result} from './result.model';
 import {Unit} from './unit.model';
 
 export class Build {
@@ -23,7 +23,7 @@ export class Build {
 
   // transcient
   public algorithm: Algorithm;
-  public result: AlgorithmResult;
+  public result: Result;
 
   constructor(build: Build) {
     this.algorithmId = build.algorithmId;
@@ -39,7 +39,30 @@ export class Build {
     this.magical_killer = build.magical_killer;
     this.equipments = new EquipmentSet(build.equipments);
     if (Array.isArray(build.skills)) {
-      build.skills.forEach((skill: Skill) => this.skills.push(new Skill(skill)));
+      build.skills.forEach((skill: Skill) => {
+        // TODO find a better way to handle the skill and damage type of limit breaks
+        if (!skill.category && skill.isLimitBreak) {
+          switch (build.algorithmId) {
+            case 1:
+            case 4:
+              skill.category = 6;
+              skill.damages_type = 'physical';
+              break;
+            case 2:
+            case 5:
+              skill.category = 7;
+              skill.damages_type = 'magical';
+              break;
+            case 3:
+            case 6:
+              skill.category = 8;
+              skill.damages_type = 'hybrid';
+              break;
+          }
+        }
+
+        this.skills.push(new Skill(skill));
+      });
     }
     this.algorithm = AlgorithmFactory.getInstance(this.algorithmId);
   }

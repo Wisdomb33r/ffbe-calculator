@@ -1,46 +1,58 @@
 import {Algorithm} from './algorithm.model';
-import {AlgorithmResult} from './algorithm-result.model';
+import {Result} from './result.model';
 import {Unit} from './unit.model';
 import {isNullOrUndefined} from 'util';
 import {Skill} from './skill.model';
-import {AlgorithmResultChaining} from './algorithm-result-chaining.model';
+import {ResultChaining} from './result-chaining.model';
+import {ResultOffensive} from './result-offensive.model';
 
-export abstract class AlgorithmChaining implements Algorithm {
+export class AlgorithmChaining implements Algorithm {
 
   public isKillerActive = true;
   public isSparkChain = false;
   public isSupportBuffing = true;
   public supportBuff = 100;
+  public opponentDef = 1000000;
+  public opponentSpr = 1000000;
+  public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
 
-  public abstract calculate(unit: Unit): AlgorithmResult;
+  public calculate(unit: Unit): Result {
+    const result: ResultOffensive = new ResultOffensive();
+    unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
+    result.result = result.turnDamages
+      .map(r => r.result)
+      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.length;
+    return result;
+  }
 
-  protected abstract isExecutingTwice(skill: Skill, unit: Unit): boolean;
+  private calculateTurn(skill: Skill, unit: Unit): ResultChaining {
+    const result: ResultChaining = new ResultChaining();
+    skill.damageType.calculateBuffs(unit, this.isSupportBuffing, this.supportBuff, result);
+    this.calculateCombosIncrement(skill, unit, result);
+    this.calculateHitsPower(skill, unit, result);
+    skill.damageType.calculateDamages(unit, result);
+    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, skill.skillType.getActiveKillers(unit), result);
+    skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), this.opponentResistances, result);
+    skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);
+    return result;
+  }
 
-  protected abstract getActiveKillers(unit: Unit): number;
-
-  protected calculateKillers(unit: Unit, result: AlgorithmResultChaining) {
-    result.killerPassive = 0;
-    if (this.isKillerActive) {
-      result.killerPassive = this.getActiveKillers(unit);
-      result.killerDamages = result.rawDamages * (1 + result.killerPassive / 1000);
-    } else {
-      result.killerDamages = result.rawDamages;
+  private calculateCombosIncrement(skill: Skill, unit: Unit, result: ResultChaining) {
+    let increment = 0.1;
+    const elements = skill.skillType.getElements(skill, unit);
+    if (Array.isArray(elements) && elements.length > 0) {
+      increment += 0.2 * elements.length;
     }
+    if (this.isSparkChain) {
+      increment += 0.15;
+    }
+    result.combosIncrement = increment;
   }
 
-  protected calculateAverageTurnPower(result: AlgorithmResultChaining) {
-    result.averageTurnPower = result.perTurnHitsPower
-      .map((hitsPower: Array<number>) => hitsPower.reduce((val1, val2) => val1 + val2, 0))
-      .reduce((val1, val2) => val1 + val2, 0) / result.perTurnHitsPower.length;
-  }
-
-  protected calculatePerTurnHitsPower(unit: Unit, result: AlgorithmResultChaining) {
-    result.perTurnHitsPower = unit.selectedBuild.skills.map((skill: Skill) => this.calculateHitsPower(skill, unit, result));
-  }
-
-  protected calculateHitsPower(skill: Skill, unit: Unit, result: AlgorithmResultChaining): Array<number> {
+  private calculateHitsPower(skill: Skill, unit: Unit, result: ResultChaining) {
     if (isNullOrUndefined(skill.hits) || skill.hits <= 1) {
-      return [0];
+      result.hitsPower = [0];
+      result.power = 0;
     } else {
       const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
       const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
@@ -54,7 +66,7 @@ export abstract class AlgorithmChaining implements Algorithm {
         chainCombos++;
       }
       // TODO chainCombos = 0 if the skill does not perfect chain (ie Beatrix)
-      if (this.isExecutingTwice(skill, unit)) {
+      if (skill.skillType.isExecutingTwice(skill, unit)) {
         for (let j = 0; j < skill.hits; j++) {
           if (j > 0 && frames[j] - frames[j - 1] > 25) {
             chainCombos = 0;
@@ -63,29 +75,8 @@ export abstract class AlgorithmChaining implements Algorithm {
           chainCombos++;
         }
       }
-      return hitsPower;
-    }
-  }
-
-  protected calculateLevelCorrection(): number {
-    return 2;
-  }
-
-  protected checkSkillsInput(skills: Array<Skill>) {
-    if (isNullOrUndefined(skills) || !Array.isArray(skills) || skills.length === 0) {
-      throw new Error('Cannot calculate chaining without a skill list');
-    } else {
-      skills.forEach((skill: Skill) => this.checkSkillInput(skill));
-    }
-  }
-
-  protected checkSkillInput(skill: Skill) {
-    if (skill.hits && skill.hits > 0) {
-      const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
-      const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
-      if (frames.length !== skill.hits || damages.length !== skill.hits) {
-        throw new Error('Cannot calculate chaining without proper frames and damages according to number of hits');
-      }
+      result.hitsPower = hitsPower;
+      result.power = hitsPower.reduce((val1, val2) => val1 + val2, 0);
     }
   }
 }

@@ -1,22 +1,16 @@
 import {Algorithm} from './algorithm.model';
-import {AlgorithmPhysicalChaining} from './algorithm-physical-chaining.model';
 import {AlgorithmDefensive} from './algorithm-defensive.model';
-import {AlgorithmMagicalChaining} from './algorithm-magical-chaining.model';
-import {AlgorithmHybridChaining} from './algorithm-hybrid-chaining.model';
+import {AlgorithmChaining} from './algorithm-chaining.model';
 
 export class AlgorithmFactory {
   public static getInstance(algorithmId: number): Algorithm {
     switch (algorithmId) {
       case 1:
-        return new AlgorithmPhysicalChaining();
       case 2:
-        return new AlgorithmMagicalChaining();
       case 3:
-        return new AlgorithmHybridChaining();
+        return new AlgorithmChaining();
       /*case 4:
-        return new AlgorithmPhysicalFinisher();
       case 5:
-        return new AlgorithmMagicalFinisher();
       case 6:
         return new AlgorithmHybridFinisher();
       case 7:

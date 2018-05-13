@@ -127,12 +127,12 @@ describe('EquipmentSet', () => {
     expect(elements.length).toEqual(0);
   });
 
-  it('#getWeaponsElements should return an valid array if elemental weapons are equipped', () => {
+  it('#getWeaponsElements should return an valid array without duplicates if elemental weapons are equipped', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     equipments.left_hand = new Equipment(JSON.parse(VALID_EQUIPMENT));
     equipments.right_hand.elements = [1, 4];
-    equipments.left_hand.elements = [2, 6];
+    equipments.left_hand.elements = [2, 6, 4];
     // WHEN
     const elements: Array<number> = equipments.getWeaponsElements();
     // THEN

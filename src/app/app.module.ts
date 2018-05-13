@@ -1,19 +1,26 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {FormsModule} from '@angular/forms';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatToolbarModule
+} from '@angular/material';
 import {AppComponent} from './app.component';
 import {UnitDetailsComponent} from './unit-details/unit-details.component';
 import {CalculatorComponent} from './calculator/calculator.component';
 import {EquipmentDetailsComponent} from './equipment-details/equipment-details.component';
 import {UnitSelectionComponent} from './unit-selection/unit-selection.component';
 import {CalculationDisplayComponent} from './calculation-display/calculation-display.component';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatMenuModule, MatSelectModule,
-  MatToolbarModule
-} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DatabaseClientService} from '../core/services/database-client.service';
 import {UnitsService} from '../core/services/units.service';
 import {UnitDetailsStatSumComponent} from './unit-details-stat-sum/unit-details-stat-sum.component';
@@ -21,25 +28,17 @@ import {EquipmentSelectionComponent} from './equipment-selection/equipment-selec
 import {EquipmentsDisplayComponent} from './equipments-display/equipments-display.component';
 import {SkillsDisplayComponent} from './skills-display/skills-display.component';
 import {CalculationDefensiveComponent} from './calculation-defensive/calculation-defensive.component';
-import {CalculationPhysicalChainingComponent} from './calculation-physical-chaining/calculation-physical-chaining.component';
-import {CalculationSkillChainingHitsDamagesComponent} from './popup/calculation-skill-chaining-hits-damages/calculation-skill-chaining-hits-damages.component';
-import {FormsModule} from '@angular/forms';
+import {CalculationChainingComponent} from './calculation-chaining/calculation-chaining.component';
 import {CalculationPhysicalDamagesComponent} from './popup/calculation-physical-damages/calculation-physical-damages.component';
-import {CalculationMagicalChainingComponent} from './calculation-magical-chaining/calculation-magical-chaining.component';
 import {CalculationMagicalDamagesComponent} from './popup/calculation-magical-damages/calculation-magical-damages.component';
 import {CalculationPhysicalEhpComponent} from './popup/calculation-physical-ehp/calculation-physical-ehp.component';
 import {CalculationMagicalEhpComponent} from './popup/calculation-magical-ehp/calculation-magical-ehp.component';
 import {CalculationEhpComponent} from './popup/calculation-ehp/calculation-ehp.component';
 import {IntegerPipe} from '../core/pipes/integer.pipe';
-import {RouterModule, Routes} from '@angular/router';
 import {AboutReportComponent} from './about-report/about-report.component';
 import {AppMenusComponent} from './app-menus.component';
 import {AboutCalculatorComponent} from './about-calculator/about-calculator.component';
 import {SkillDisplayComponent} from './popup/skill-display/skill-display.component';
-import {CalculationHybridChainingComponent} from './calculation-hybrid-chaining/calculation-hybrid-chaining.component';
-import {CalculationHybridDamagesComponent} from './popup/calculation-hybrid-damages/calculation-hybrid-damages.component';
-import {CalculationHybridPhysicalDamagesComponent} from './popup/calculation-hybrid-physical-damages/calculation-hybrid-physical-damages.component';
-import {CalculationHybridMagicalDamagesComponent} from './popup/calculation-hybrid-magical-damages/calculation-hybrid-magical-damages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -67,10 +66,8 @@ const appRoutes: Routes = [
     EquipmentsDisplayComponent,
     SkillsDisplayComponent,
     CalculationDefensiveComponent,
-    CalculationPhysicalChainingComponent,
-    CalculationSkillChainingHitsDamagesComponent,
+    CalculationChainingComponent,
     CalculationPhysicalDamagesComponent,
-    CalculationMagicalChainingComponent,
     CalculationMagicalDamagesComponent,
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
@@ -78,10 +75,6 @@ const appRoutes: Routes = [
     AboutReportComponent,
     AboutCalculatorComponent,
     SkillDisplayComponent,
-    CalculationHybridChainingComponent,
-    CalculationHybridDamagesComponent,
-    CalculationHybridPhysicalDamagesComponent,
-    CalculationHybridMagicalDamagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,16 +103,12 @@ const appRoutes: Routes = [
     UnitSelectionComponent,
     UnitDetailsStatSumComponent,
     EquipmentSelectionComponent,
-    CalculationSkillChainingHitsDamagesComponent,
     CalculationPhysicalDamagesComponent,
     CalculationMagicalDamagesComponent,
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,
     SkillDisplayComponent,
-    CalculationHybridDamagesComponent,
-    CalculationHybridPhysicalDamagesComponent,
-    CalculationHybridMagicalDamagesComponent,
   ],
   providers: [
     DatabaseClientService,

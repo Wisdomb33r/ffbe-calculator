@@ -4,18 +4,10 @@
     {{'calculation.display.missingAlgorithm' | translate}}
   </mat-card-content>
   <mat-card-content *ngIf="unitsService.getAlgorithm()">
-    <app-calculation-physical-chaining *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 1"
-                                       [algorithm]="unitsService.getAlgorithm()"
-                                       [result]="unitsService.getResult()">
-    </app-calculation-physical-chaining>
-    <app-calculation-magical-chaining *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 2"
-                                      [algorithm]="unitsService.getAlgorithm()"
-                                      [result]="unitsService.getResult()">
-    </app-calculation-magical-chaining>
-    <app-calculation-hybrid-chaining *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 3"
-                                     [algorithm]="unitsService.getAlgorithm()"
-                                     [result]="unitsService.getResult()">
-    </app-calculation-hybrid-chaining>
+    <app-calculation-chaining *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId < 3"
+                              [algorithm]="unitsService.getAlgorithm()"
+                              [result]="unitsService.getResult()">
+    </app-calculation-chaining>
     <app-calculation-defensive *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 8"
                                [algorithm]="unitsService.getAlgorithm()"
                                [result]="unitsService.getResult()">
