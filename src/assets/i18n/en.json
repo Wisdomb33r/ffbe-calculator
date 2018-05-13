@@ -99,8 +99,7 @@
       "variances": "Variances",
       "killer": "Killers",
       "killerDamages": "Damages after killers",
-      "defaultDefExplanations": "Result is by default expressed in million damages on a 1 DEF enemy. This is equivalent to damages on a 1 million DEF enemy.",
-      "defaultSprExplanations": "Result is by default expressed in million damages on a 1 SPR enemy. This is equivalent to damages on a 1 million SPR enemy.",
+      "defaultDefSprExplanations": "Result is by default expressed in million damages on a 1 DEF/PSY enemy. This is equivalent to damages on a 1 million DEF/PSY enemy.",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
     "defensive": {

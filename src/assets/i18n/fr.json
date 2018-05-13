@@ -99,8 +99,7 @@
       "variances": "Variances",
       "killer": "Tueurs",
       "killerDamages": "Dégâts après tueurs",
-      "defaultDefExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF.",
-      "defaultSprExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de PSY. Ce qui équivaut aux dégâts sur un ennemi à 1 million de PSY.",
+      "defaultDefSprExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF/PSY. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF/PSY.",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
     },
     "defensive": {
