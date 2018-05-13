@@ -202,11 +202,20 @@ class Build {
 }
 class Skill {
   public $id;
+  public $category;
   public $name;
   public $icon;
   public $power;
   public $isLimitBreak;
   public $nb;
+  public $hits;
+  public $frames;
+  public $damages;
+  public $damages_type;
+  public $calculation_stat;
+  public $isBreakingChain;
+  public $resists_break;
+  public $elements;
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite == 1 ? true : false;
     $this->power = $brex_skill->puissance;
@@ -215,7 +224,6 @@ class Skill {
     }
     $this->nb = $brex_skill->nb ? $brex_skill->nb : 1;
     if ($this->isLimitBreak) {
-      $this->id = null;
       $this->name = $language === 'fr' ? $brex_unit->limite : $brex_unit->limite_en;
       $this->icon = null;
       $this->hits = $brex_unit->lim_hits;
@@ -223,11 +231,21 @@ class Skill {
       $this->damages = $brex_unit->lim_damages;
     } else {
       $this->id = $brex_skill->competence->id;
+      $this->category = $brex_skill->competence->categorie->id;
       $this->name = $language === 'fr' ? $brex_skill->competence->nom : $brex_skill->competence->nom_en;
       $this->icon = $brex_skill->competence->icone->getImageimgPath ();
       $this->hits = $brex_skill->competence->hits;
       $this->frames = $brex_skill->competence->frames;
       $this->damages = $brex_skill->competence->damages;
+      if ($brex_skill->competence->physique) {
+        $this->damages_type = 'physical';
+      }
+      if ($brex_skill->competence->magique) {
+        $this->damages_type = 'magical';
+      }
+      if ($brex_skill->competence->hybride) {
+        $this->damages_type = 'hybrid';
+      }
     }
   }
 }
