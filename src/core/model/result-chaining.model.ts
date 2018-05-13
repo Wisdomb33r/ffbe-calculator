@@ -9,13 +9,25 @@ export class ResultChaining extends Result {
   public mag: number;
   public buffedMag: number;
 
+  // skill power
   public combosIncrement: number;
   public hitsPower: Array<number>;
   public power: number;
-  public rawDamages: number;
-  public killerPassive: number;
-  public killerDamages: number;
-  public averageElementalResistance: number;
-  public elementalDamages: number;
+
+  // skill behavior
+  public isDualWielding: boolean;
+  public averageWeaponVariance: number;
   public finalVariance: number;
+  public killerPassive: number;
+  public averageElementalResistance: number;
+
+  // damages
+  public physicalDamages;
+  public magicalDamages;
+  public physicalKillerDamages;
+  public magicalKillerDamages;
+  public physicalElementalDamages;
+  public magicalElementalDamages;
+  public physicalResult;
+  public magicalResult;
 }

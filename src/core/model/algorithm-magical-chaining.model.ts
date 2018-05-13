@@ -2,8 +2,8 @@ import {AlgorithmChaining} from './algorithm-chaining.model';
 import {Skill} from './skill.model';
 import {Result} from './result.model';
 import {Unit} from './unit.model';
-import {ResultMagicalChaining} from './result-magical-chaining.model';
 import {ResultOffensive} from './result-offensive.model';
+import {ResultChaining} from './result-chaining.model';
 
 export class AlgorithmMagicalChaining extends AlgorithmChaining {
 
@@ -20,37 +20,37 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     return result;
   }
 
-  public calculateTurn(skill: Skill, unit: Unit): ResultMagicalChaining {
-    const result: ResultMagicalChaining = new ResultMagicalChaining();
+  public calculateTurn(skill: Skill, unit: Unit): ResultChaining {
+    const result: ResultChaining = new ResultChaining();
     skill.damageType.calculateBuffs(unit, this.isSupportBuffing, this.supportBuff, result);
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
-    this.calculateKillers(skill, unit, result);
+    skill.damageType.calculateKillerDamages(unit, skill.skillType.getActiveKillers(unit), result);
     this.calculateElementalResistances(skill, unit, result);
     this.calculateDamageVariance(skill, unit, result);
     this.calculateFinalResult(skill, unit, result);
     return result;
   }
 
-  private calculateFinalResult(skill: Skill, unit: Unit, result: ResultMagicalChaining) {
-    result.result = result.elementalDamages / this.opponentSpr * result.finalVariance / 100;
+  private calculateFinalResult(skill: Skill, unit: Unit, result: ResultChaining) {
+    result.result = result.magicalElementalDamages / this.opponentSpr * result.finalVariance / 100;
   }
 
-  private calculateDamageVariance(skill: Skill, unit: Unit, result: ResultMagicalChaining) {
+  private calculateDamageVariance(skill: Skill, unit: Unit, result: ResultChaining) {
     result.finalVariance = 92.5;
   }
 
-  private calculateElementalResistances(skill: Skill, unit: Unit, result: ResultMagicalChaining) {
+  private calculateElementalResistances(skill: Skill, unit: Unit, result: ResultChaining) {
     const elements: Array<number> = [];
     // TODO check skill elements when possible
     if (elements && elements.length) {
       result.averageElementalResistance = elements
         .map((element: number) => this.opponentResistances[element - 1])
         .reduce((val1, val2) => val1 + val2, 0) / elements.length;
-      result.elementalDamages = result.killerDamages * (1 - result.averageElementalResistance / 100);
+      result.magicalElementalDamages = result.magicalKillerDamages * (1 - result.averageElementalResistance / 100);
     } else {
-      result.elementalDamages = result.killerDamages;
+      result.magicalElementalDamages = result.magicalKillerDamages;
     }
   }
 

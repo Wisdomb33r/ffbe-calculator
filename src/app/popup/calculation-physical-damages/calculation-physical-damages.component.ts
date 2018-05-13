@@ -1,8 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {ResultPhysicalChaining} from '../../../core/model/result-physical-chaining.model';
 import {UnitsService} from '../../../core/services/units.service';
 import {AlgorithmPhysicalChaining} from '../../../core/model/algorithm-physical-chaining.model';
+import {ResultChaining} from '../../../core/model/result-chaining.model';
 
 @Component({
   selector: 'app-physical-skill-damages',
@@ -11,7 +11,7 @@ import {AlgorithmPhysicalChaining} from '../../../core/model/algorithm-physical-
 })
 export class CalculationPhysicalDamagesComponent {
 
-  public result: ResultPhysicalChaining;
+  public result: ResultChaining;
   public algorithm: AlgorithmPhysicalChaining;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,6 +22,6 @@ export class CalculationPhysicalDamagesComponent {
 
   public calculateBuild() {
     this.unitsService.selectedUnit.calculateResults();
-    this.result = this.unitsService.getResult() as ResultPhysicalChaining;
+    this.result = this.unitsService.getResult() as ResultChaining;
   }
 }

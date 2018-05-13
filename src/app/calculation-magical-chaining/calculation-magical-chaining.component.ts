@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {AlgorithmMagicalChaining} from '../../core/model/algorithm-magical-chaining.model';
-import {ResultMagicalChaining} from '../../core/model/result-magical-chaining.model';
 import {MatDialog} from '@angular/material';
 import {CalculationSkillChainingHitsDamagesComponent} from '../popup/calculation-skill-chaining-hits-damages/calculation-skill-chaining-hits-damages.component';
 import {CalculationMagicalDamagesComponent} from '../popup/calculation-magical-damages/calculation-magical-damages.component';
+import {ResultChaining} from '../../core/model/result-chaining.model';
 
 @Component({
   selector: 'app-calculation-magical-chaining',
@@ -13,7 +13,7 @@ import {CalculationMagicalDamagesComponent} from '../popup/calculation-magical-d
 export class CalculationMagicalChainingComponent {
 
   @Input() algorithm: AlgorithmMagicalChaining;
-  @Input() result: ResultMagicalChaining;
+  @Input() result: ResultChaining;
 
   constructor(private dialog: MatDialog) {
   }

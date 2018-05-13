@@ -26,16 +26,6 @@ export abstract class AlgorithmChaining implements Algorithm {
     result.combosIncrement = increment;
   }
 
-  protected calculateKillers(skill: Skill, unit: Unit, result: ResultChaining) {
-    result.killerPassive = 0;
-    if (this.isKillerActive) {
-      result.killerPassive = skill.skillType.getActiveKillers(unit);
-      result.killerDamages = result.rawDamages * (1 + result.killerPassive / 1000);
-    } else {
-      result.killerDamages = result.rawDamages;
-    }
-  }
-
   protected calculateHitsPower(skill: Skill, unit: Unit, result: ResultChaining) {
     if (isNullOrUndefined(skill.hits) || skill.hits <= 1) {
       result.hitsPower = [0];

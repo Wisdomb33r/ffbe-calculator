@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {UnitsService} from '../../../core/services/units.service';
-import {ResultMagicalChaining} from '../../../core/model/result-magical-chaining.model';
 import {AlgorithmMagicalChaining} from '../../../core/model/algorithm-magical-chaining.model';
+import {ResultChaining} from '../../../core/model/result-chaining.model';
 
 @Component({
   selector: 'app-magical-skill-damages',
@@ -11,7 +11,7 @@ import {AlgorithmMagicalChaining} from '../../../core/model/algorithm-magical-ch
 })
 export class CalculationMagicalDamagesComponent {
 
-  public result: ResultMagicalChaining;
+  public result: ResultChaining;
   public algorithm: AlgorithmMagicalChaining;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,6 +22,6 @@ export class CalculationMagicalDamagesComponent {
 
   public calculateBuild() {
     this.unitsService.selectedUnit.calculateResults();
-    this.result = this.unitsService.getResult() as ResultMagicalChaining;
+    this.result = this.unitsService.getResult() as ResultChaining;
   }
 }

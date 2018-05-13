@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {AlgorithmHybridChaining} from '../../core/model/algorithm-hybrid-chaining.model';
-import {ResultHybridChaining} from '../../core/model/result-hybrid-chaining.model';
 import {MatDialog} from '@angular/material';
 import {CalculationSkillChainingHitsDamagesComponent} from '../popup/calculation-skill-chaining-hits-damages/calculation-skill-chaining-hits-damages.component';
 import {CalculationHybridDamagesComponent} from '../popup/calculation-hybrid-damages/calculation-hybrid-damages.component';
 import {CalculationHybridPhysicalDamagesComponent} from '../popup/calculation-hybrid-physical-damages/calculation-hybrid-physical-damages.component';
 import {CalculationHybridMagicalDamagesComponent} from '../popup/calculation-hybrid-magical-damages/calculation-hybrid-magical-damages.component';
+import {ResultChaining} from '../../core/model/result-chaining.model';
 
 @Component({
   selector: 'app-calculation-hybrid-chaining',
@@ -15,7 +15,7 @@ import {CalculationHybridMagicalDamagesComponent} from '../popup/calculation-hyb
 export class CalculationHybridChainingComponent {
 
   @Input() algorithm: AlgorithmHybridChaining;
-  @Input() result: ResultHybridChaining;
+  @Input() result: ResultChaining;
 
   constructor(private dialog: MatDialog) {
   }
