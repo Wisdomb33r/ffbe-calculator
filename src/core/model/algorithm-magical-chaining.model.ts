@@ -7,11 +7,7 @@ import {ResultChaining} from './result-chaining.model';
 
 export class AlgorithmMagicalChaining extends AlgorithmChaining {
 
-  public opponentSpr = 1000000;
-  public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
-
   public calculate(unit: Unit): Result {
-    this.checkSkillsInput(unit.selectedBuild.skills);
     const result: ResultOffensive = new ResultOffensive();
     unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
     result.result = result.turnDamages
