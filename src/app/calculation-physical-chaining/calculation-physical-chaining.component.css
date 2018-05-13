@@ -1,3 +1,12 @@
+.total th, .total td {
+  border-top: 1px solid white;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
 th {
   text-align: left;
   padding-right: 15px;
@@ -5,6 +14,11 @@ th {
 
 td {
   text-align: right;
+  padding-right: 5px;
+}
+
+td:last-child {
+  padding-right: 0;
 }
 
 p {

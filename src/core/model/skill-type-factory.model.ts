@@ -1,6 +1,7 @@
 import {SkillTypePhysical} from './skill-type-physical.model';
 import {SkillTypeMagical} from './skill-type-magical.model';
 import {SkillType} from './skill-type.model';
+import {SkillTypeNone} from './skill-type-none.model';
 
 export class SkillTypeFactory {
   public static getInstance(category: number): SkillType {
@@ -17,7 +18,7 @@ export class SkillTypeFactory {
       case 9:
         return new SillTypeFixed();*/
       default:
-        return null;
+        return new SkillTypeNone();
     }
   }
 }

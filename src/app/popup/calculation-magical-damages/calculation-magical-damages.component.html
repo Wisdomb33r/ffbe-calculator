@@ -1,3 +1,26 @@
+<h1>{{'calculation.display.skillHitsPower' | translate}}</h1>
+<table>
+  <tr>
+    <td>{{'calculation.display.sparkChain' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSparkChain" (change)="calculateBuild()"></mat-checkbox>
+    </td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.comboIncrement' | translate}}</td>
+    <td>{{result.combosIncrement | number:'1.1-1'}}</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.hits' | translate}}</td>
+    <td>{{result.hitsPower.length}}</td>
+  </tr>
+</table>
+<p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
+<div class="total">
+  <h2>{{'calculation.display.averageTurnPower' | translate}}</h2>
+  <p>{{result.power | integer}}%</p>
+</div>
+
 <h1>{{'calculation.display.damageCalculation' | translate}}</h1>
 <table>
   <tr>
@@ -33,22 +56,22 @@
 
 <h2>{{'calculation.display.unitDamages' | translate}}</h2>
 <p>
-  {{result.buffedMag | integer}}² * {{result.averageTurnPower | integer}}% * 2
+  {{result.buffedMag | integer}}² * {{result.power | integer}}% * 2
 </p>
-<p>= {{result.rawDamages | integer}}</p>
+<p>= {{result.magicalDamages | integer}}</p>
 
 <h2 *ngIf="result.killerPassive">{{'calculation.display.killerDamages' | translate}}</h2>
 <p *ngIf="result.killerPassive">
-  {{result.rawDamages | integer}} * (1+{{result.killerPassive}}%/10)
+  {{result.magicalDamages | integer}} * (1+{{result.killerPassive}}%/10)
 </p>
-<p *ngIf="result.killerPassive">= {{result.killerDamages | integer}}</p>
+<p *ngIf="result.killerPassive">= {{result.magicalKillerDamages | integer}}</p>
 
 <h2 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h2>
 <p *ngIf="result.averageElementalResistance">
-  {{result.killerDamages | integer}} * (1-({{result.averageElementalResistance}}%))
+  {{result.magicalKillerDamages | integer}} * (1-({{result.averageElementalResistance}}%))
 </p>
-<p *ngIf="result.averageElementalResistance">= {{result.elementalDamages | integer}}</p>
+<p *ngIf="result.averageElementalResistance">= {{result.magicalElementalDamages | integer}}</p>
 
 <h2>{{'calculation.display.variances' | translate}}</h2>
-<p>{{result.elementalDamages | integer}} * {{result.finalVariance}}% / {{algorithm.opponentSpr}}</p>
+<p>{{result.magicalElementalDamages | integer}} * {{result.finalVariance}}% / {{algorithm.opponentSpr}}</p>
 <p>= <strong>{{result.result | integer}}</strong></p>

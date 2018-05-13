@@ -10,9 +10,7 @@ export class AlgorithmFactory {
       case 3:
         return new AlgorithmChaining();
       /*case 4:
-        return new AlgorithmPhysicalFinisher();
       case 5:
-        return new AlgorithmMagicalFinisher();
       case 6:
         return new AlgorithmHybridFinisher();
       case 7:

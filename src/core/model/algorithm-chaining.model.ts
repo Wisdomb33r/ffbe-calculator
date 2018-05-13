@@ -31,7 +31,7 @@ export class AlgorithmChaining implements Algorithm {
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
-    skill.damageType.calculateKillerDamages(unit, skill.skillType.getActiveKillers(unit), result);
+    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, skill.skillType.getActiveKillers(unit), result);
     skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), this.opponentResistances, result);
     skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);
     return result;

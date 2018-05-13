@@ -1,13 +1,21 @@
 <table>
-  <tr>
-    <th>{{'calculation.display.averageTurnPower' | translate}}</th>
-    <td>{{result.averageTurnPower | integer}}% <img class="inline-icon" src="assets/icons/grey/question.png"
-                                                           (click)="displayChainingSkillHitsDamages()"></td>
+  <tr *ngFor="let turn of result.turnDamages; let i = index">
+    <th>{{'calculation.display.turn' | translate}} n+{{i+1}}</th>
+    <td *ngIf="turn.physicalResult">{{turn.physicalResult | integer}}</td>
+    <td *ngIf="turn.physicalResult">
+      <img class="inline-icon" src="assets/icons/grey/question.png" (click)="displayPhysicalDamages(i)">
+    </td>
+    <td *ngIf="turn.magicalResult">{{turn.magicalResult | integer}}</td>
+    <td *ngIf="turn.magicalResult">
+      <img class="inline-icon" src="assets/icons/grey/question.png" (click)="displayMagicalDamages(i)">
+    </td>
   </tr>
-  <tr>
-    <th>{{'calculation.display.damages' | translate}}</th>
-    <td>{{result.result | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
-                                                (click)="displayPhysicalSkillDamages()"></td>
+  <tr class="total">
+    <th>{{'calculation.display.averageDamages' | translate}}</th>
+    <td>{{result.result | integer}}</td>
+    <td></td>
+    <td *ngIf="isWithBothPhysicalAndMagicalDamages()"></td>
+    <td *ngIf="isWithBothPhysicalAndMagicalDamages()"></td>
   </tr>
 </table>
 <p *ngIf="algorithm.opponentDef === 1000000">{{'calculation.display.defaultDefExplanations' | translate}}</p>

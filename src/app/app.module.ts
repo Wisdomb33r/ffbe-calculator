@@ -10,7 +10,12 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatMenuModule, MatSelectModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatMenuModule,
+  MatSelectModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,7 +30,6 @@ import {CalculationPhysicalChainingComponent} from './calculation-physical-chain
 import {CalculationSkillChainingHitsDamagesComponent} from './popup/calculation-skill-chaining-hits-damages/calculation-skill-chaining-hits-damages.component';
 import {FormsModule} from '@angular/forms';
 import {CalculationPhysicalDamagesComponent} from './popup/calculation-physical-damages/calculation-physical-damages.component';
-import {CalculationMagicalChainingComponent} from './calculation-magical-chaining/calculation-magical-chaining.component';
 import {CalculationMagicalDamagesComponent} from './popup/calculation-magical-damages/calculation-magical-damages.component';
 import {CalculationPhysicalEhpComponent} from './popup/calculation-physical-ehp/calculation-physical-ehp.component';
 import {CalculationMagicalEhpComponent} from './popup/calculation-magical-ehp/calculation-magical-ehp.component';
@@ -36,7 +40,6 @@ import {AboutReportComponent} from './about-report/about-report.component';
 import {AppMenusComponent} from './app-menus.component';
 import {AboutCalculatorComponent} from './about-calculator/about-calculator.component';
 import {SkillDisplayComponent} from './popup/skill-display/skill-display.component';
-import {CalculationHybridChainingComponent} from './calculation-hybrid-chaining/calculation-hybrid-chaining.component';
 import {CalculationHybridDamagesComponent} from './popup/calculation-hybrid-damages/calculation-hybrid-damages.component';
 import {CalculationHybridPhysicalDamagesComponent} from './popup/calculation-hybrid-physical-damages/calculation-hybrid-physical-damages.component';
 import {CalculationHybridMagicalDamagesComponent} from './popup/calculation-hybrid-magical-damages/calculation-hybrid-magical-damages.component';
@@ -70,7 +73,6 @@ const appRoutes: Routes = [
     CalculationPhysicalChainingComponent,
     CalculationSkillChainingHitsDamagesComponent,
     CalculationPhysicalDamagesComponent,
-    CalculationMagicalChainingComponent,
     CalculationMagicalDamagesComponent,
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
@@ -78,7 +80,6 @@ const appRoutes: Routes = [
     AboutReportComponent,
     AboutCalculatorComponent,
     SkillDisplayComponent,
-    CalculationHybridChainingComponent,
     CalculationHybridDamagesComponent,
     CalculationHybridPhysicalDamagesComponent,
     CalculationHybridMagicalDamagesComponent,

@@ -28,10 +28,10 @@ export class DamageTypeMagical extends DamageType {
     result.magicalDamages = result.buffedMag * result.buffedMag * result.power / 100 * this.calculateLevelCorrection(unit);
   }
 
-  public calculateKillerDamages(unit: Unit, killer: number, result: ResultChaining) {
+  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultChaining) {
     result.killerPassive = 0;
     result.magicalKillerDamages = result.magicalDamages;
-    if (killer) {
+    if (killer && isKillerActive) {
       result.killerPassive = killer;
       result.magicalKillerDamages *= (1 + result.killerPassive / 1000);
     }

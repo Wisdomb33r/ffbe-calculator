@@ -27,14 +27,14 @@ export class DamageTypePhysical extends DamageType {
 
   public calculateDamages(unit: Unit, result: ResultChaining) {
     const rawDamages = unit.selectedBuild.equipments.isDualWielding()
-      ? this.calculateRawDwDamages(unit, result) : this.calculateRawDhDamages(unit, result);
+      ? this.calculateDwDamages(unit, result) : this.calculateDhDamages(unit, result);
     result.physicalDamages = rawDamages * result.power / 100 * this.calculateLevelCorrection(unit);
   }
 
-  public calculateKillerDamages(unit: Unit, killer: number, result: ResultChaining) {
+  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultChaining) {
     result.killerPassive = 0;
     result.physicalKillerDamages = result.physicalDamages;
-    if (killer) {
+    if (killer && isKillerActive) {
       result.killerPassive = killer;
       result.physicalKillerDamages *= (1 + result.killerPassive / 1000);
     }
@@ -62,14 +62,14 @@ export class DamageTypePhysical extends DamageType {
     result.finalVariance = 92.5;
   }
 
-  private calculateRawDwDamages(unit: Unit, result: ResultChaining): number {
+  private calculateDwDamages(unit: Unit, result: ResultChaining): number {
     result.isDualWielding = true;
     result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
     result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
     return (result.buffedAtk - result.leftHandAtk) * (result.buffedAtk - result.rightHandAtk);
   }
 
-  private calculateRawDhDamages(unit: Unit, result: ResultChaining): number {
+  private calculateDhDamages(unit: Unit, result: ResultChaining): number {
     result.isDualWielding = false;
     return result.buffedAtk * result.buffedAtk;
   }

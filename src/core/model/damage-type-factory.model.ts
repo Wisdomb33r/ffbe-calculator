@@ -2,6 +2,7 @@ import {DamageTypePhysical} from './damage-type-physical.model';
 import {DamageTypeMagical} from './damage-type-magical.model';
 import {DamageType} from './damage-type.model';
 import {DamageTypeHybrid} from './damage-type-hybrid.model';
+import {DamageTypeNone} from './damage-type-none.model';
 
 export class DamageTypeFactory {
   public static getInstance(damages_type: string, calculation_stat: string): DamageType {
@@ -15,7 +16,7 @@ export class DamageTypeFactory {
       /*case 'fixed':
         return new DamageTypeFixed();*/
       default:
-        return null;
+        return new DamageTypeNone();
     }
   }
 }

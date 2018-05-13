@@ -6,7 +6,7 @@ export abstract class DamageType {
 
   abstract calculateDamages(unit: Unit, result: ResultChaining);
 
-  abstract calculateKillerDamages(unit: Unit, killer: number, result: ResultChaining);
+  abstract calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultChaining);
 
   abstract calculateElementalDamages(unit: Unit, elements: Array<number>, resistances: Array<number>, result: ResultChaining);
 
