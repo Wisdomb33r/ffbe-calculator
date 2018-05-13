@@ -4,7 +4,7 @@
     {{'calculation.display.missingAlgorithm' | translate}}
   </mat-card-content>
   <mat-card-content *ngIf="unitsService.getAlgorithm()">
-    <app-calculation-chaining *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId < 3"
+    <app-calculation-chaining *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId < 4"
                               [algorithm]="unitsService.getAlgorithm()"
                               [result]="unitsService.getResult()">
     </app-calculation-chaining>
