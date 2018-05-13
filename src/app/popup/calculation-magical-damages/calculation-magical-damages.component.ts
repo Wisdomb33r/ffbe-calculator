@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {UnitsService} from '../../../core/services/units.service';
-import {AlgorithmMagicalChaining} from '../../../core/model/algorithm-magical-chaining.model';
 import {ResultChaining} from '../../../core/model/result-chaining.model';
+import {AlgorithmChaining} from '../../../core/model/algorithm-chaining.model';
 
 @Component({
   selector: 'app-magical-skill-damages',
@@ -12,7 +12,7 @@ import {ResultChaining} from '../../../core/model/result-chaining.model';
 export class CalculationMagicalDamagesComponent {
 
   public result: ResultChaining;
-  public algorithm: AlgorithmMagicalChaining;
+  public algorithm: AlgorithmChaining;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private unitsService: UnitsService) {

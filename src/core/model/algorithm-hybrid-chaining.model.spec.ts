@@ -1,8 +1,8 @@
 import {Unit} from './unit.model';
 import {CalculatorTestutils} from '../calculator-testutils.spec';
-import {AlgorithmHybridChaining} from './algorithm-hybrid-chaining.model';
 import {ResultOffensive} from './result-offensive.model';
 import {ResultChaining} from './result-chaining.model';
+import {AlgorithmChaining} from './algorithm-chaining.model';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100,"mag":100}';
@@ -15,7 +15,7 @@ describe('AlgorithmHybridChaining', () => {
 
   it('#calculate should set the result object values for a dual-wielded chain', () => {
     // GIVEN
-    const algorithm = new AlgorithmHybridChaining();
+    const algorithm = new AlgorithmChaining();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
     unit.selectDefaultBuild();
     unit.stats.atk.total = 800;
@@ -67,7 +67,7 @@ describe('AlgorithmHybridChaining', () => {
 
   it('#calculate should set the result object values for a single-wielded chain', () => {
     // GIVEN
-    const algorithm = new AlgorithmHybridChaining();
+    const algorithm = new AlgorithmChaining();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
     unit.selectDefaultBuild();
     unit.stats.atk.total = 800;

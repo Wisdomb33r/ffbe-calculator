@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {UnitsService} from '../../../core/services/units.service';
-import {AlgorithmHybridChaining} from '../../../core/model/algorithm-hybrid-chaining.model';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {ResultChaining} from '../../../core/model/result-chaining.model';
+import {AlgorithmChaining} from '../../../core/model/algorithm-chaining.model';
 
 @Component({
   selector: 'app-calculation-hybrid-magical-damages',
@@ -12,7 +12,7 @@ import {ResultChaining} from '../../../core/model/result-chaining.model';
 export class CalculationHybridMagicalDamagesComponent {
 
   public result: ResultChaining;
-  public algorithm: AlgorithmHybridChaining;
+  public algorithm: AlgorithmChaining;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private unitsService: UnitsService) {

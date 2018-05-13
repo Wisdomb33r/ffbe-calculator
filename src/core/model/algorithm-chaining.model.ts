@@ -6,7 +6,7 @@ import {Skill} from './skill.model';
 import {ResultChaining} from './result-chaining.model';
 import {ResultOffensive} from './result-offensive.model';
 
-export abstract class AlgorithmChaining implements Algorithm {
+export class AlgorithmChaining implements Algorithm {
 
   public isKillerActive = true;
   public isSparkChain = false;

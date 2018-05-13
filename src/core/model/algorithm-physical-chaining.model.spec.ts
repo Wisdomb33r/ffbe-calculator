@@ -1,9 +1,9 @@
 import {Unit} from './unit.model';
-import {AlgorithmPhysicalChaining} from './algorithm-physical-chaining.model';
 import {Equipment} from './equipment.model';
 import {CalculatorTestutils} from '../calculator-testutils.spec';
 import {ResultOffensive} from './result-offensive.model';
 import {ResultChaining} from './result-chaining.model';
+import {AlgorithmChaining} from './algorithm-chaining.model';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100}';
@@ -16,7 +16,7 @@ describe('AlgorithmPhysicalChaining', () => {
 
   it('#calculate should set the result object values for a single-handed chain', () => {
     // GIVEN
-    const algorithm = new AlgorithmPhysicalChaining();
+    const algorithm = new AlgorithmChaining();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
     unit.selectDefaultBuild();
     algorithm.isSupportBuffing = false;
@@ -60,7 +60,7 @@ describe('AlgorithmPhysicalChaining', () => {
 
   it('#calculate should set the result object values for a dual-wielded chain', () => {
     // GIVEN
-    const algorithm = new AlgorithmPhysicalChaining();
+    const algorithm = new AlgorithmChaining();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
     unit.selectDefaultBuild();
     unit.stats.atk.total = 1000;

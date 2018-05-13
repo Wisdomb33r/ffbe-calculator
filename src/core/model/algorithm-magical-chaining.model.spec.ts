@@ -1,8 +1,8 @@
 import {Unit} from './unit.model';
 import {CalculatorTestutils} from '../calculator-testutils.spec';
-import {AlgorithmMagicalChaining} from './algorithm-magical-chaining.model';
 import {ResultOffensive} from './result-offensive.model';
 import {ResultChaining} from './result-chaining.model';
+import {AlgorithmChaining} from './algorithm-chaining.model';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"mag":100}';
@@ -15,7 +15,7 @@ describe('AlgorithmMagicalChaining', () => {
 
   it('#calculate should set the result object values', () => {
     // GIVEN
-    const algorithm = new AlgorithmMagicalChaining();
+    const algorithm = new AlgorithmChaining();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
     unit.selectDefaultBuild();
     unit.stats.mag.total = 1000;
