@@ -7,11 +7,11 @@ import {CalculationMagicalDamagesComponent} from '../popup/calculation-magical-d
 import {ResultChaining} from '../../core/model/result-chaining.model';
 
 @Component({
-  selector: 'app-calculation-physical-chaining',
-  templateUrl: './calculation-physical-chaining.component.html',
-  styleUrls: ['./calculation-physical-chaining.component.css']
+  selector: 'app-calculation-chaining',
+  templateUrl: './calculation-chaining.component.html',
+  styleUrls: ['./calculation-chaining.component.css']
 })
-export class CalculationPhysicalChainingComponent {
+export class CalculationChainingComponent {
 
   @Input() algorithm: AlgorithmChaining;
   @Input() result: ResultOffensive;
