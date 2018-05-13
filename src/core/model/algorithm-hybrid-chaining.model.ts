@@ -24,11 +24,10 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
 
   public calculateTurn(skill: Skill, unit: Unit): ResultHybridChaining {
     const result: ResultHybridChaining = new ResultHybridChaining();
-    this.calculateBuffs(skill, unit, result);
+    skill.damageType.calculateBuffs(unit, this.isSupportBuffing, this.supportBuff, result);
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
-    this.calculatePhysicalDamages(skill, unit, result);
-    this.calculateMagicalDamages(skill, unit, result);
+    skill.damageType.calculateDamages(unit, result);
     this.calculateKillers(skill, unit, result);
     this.calculateElementalResistances(skill, unit, result);
     this.calculateDamageVariance(skill, unit, result);
@@ -78,41 +77,6 @@ export class AlgorithmHybridChaining extends AlgorithmChaining {
       result.physicalElementalDamages = result.physicalKillerDamages;
       result.magicalElementalDamages = result.magicalKillerDamages;
     }
-  }
-
-  private calculateBuffs(skill: Skill, unit: Unit, result: ResultHybridChaining) {
-    result.atk = unit.stats.atk.total;
-    result.buffedAtk = result.atk;
-    if (this.isSupportBuffing) {
-      result.buffedAtk += unit.stats.atk.base * this.supportBuff / 100;
-    }
-    result.mag = unit.stats.mag.total;
-    result.buffedMag = result.mag;
-    if (this.isSupportBuffing) {
-      result.buffedMag += unit.stats.mag.base * this.supportBuff / 100;
-    }
-  }
-
-  private calculateMagicalDamages(skill: Skill, unit: Unit, result: ResultHybridChaining) {
-    result.magicalDamages = result.buffedMag * result.buffedMag * result.power / 200 * this.calculateLevelCorrection();
-  }
-
-  private calculatePhysicalDamages(skill: Skill, unit: Unit, result: ResultHybridChaining) {
-    const physicalDamages = unit.selectedBuild.equipments.isDualWielding()
-      ? this.calculateRawDwDamages(unit, result) : this.calculateRawDhDamages(unit, result);
-    result.physicalDamages = physicalDamages * result.power / 200 * this.calculateLevelCorrection();
-  }
-
-  private calculateRawDwDamages(unit: Unit, result: ResultHybridChaining): number {
-    result.isDualWielding = true;
-    result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
-    result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
-    return (result.buffedAtk - result.leftHandAtk) * (result.buffedAtk - result.rightHandAtk);
-  }
-
-  private calculateRawDhDamages(unit: Unit, result: ResultHybridChaining): number {
-    result.isDualWielding = false;
-    return result.buffedAtk * result.buffedAtk;
   }
 
   protected isExecutingTwice(skill: Skill, unit: Unit): boolean {

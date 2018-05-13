@@ -20,7 +20,7 @@ export abstract class AlgorithmChaining implements Algorithm {
     let increment = 0.1;
     increment += skill.skillType.getCombosIncrementFromWeapons(unit);
     if (this.isSparkChain) {
-      increment = increment + 0.15;
+      increment += 0.15;
     }
     // TODO check skill elements when possible
     result.combosIncrement = increment;

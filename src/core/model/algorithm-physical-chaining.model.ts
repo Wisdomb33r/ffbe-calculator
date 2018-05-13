@@ -24,10 +24,10 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
 
   private calculateTurn(skill: Skill, unit: Unit): ResultChaining {
     const result: ResultPhysicalChaining = new ResultPhysicalChaining();
-    this.calculateBuffs(skill, unit, result);
+    skill.damageType.calculateBuffs(unit, this.isSupportBuffing, this.supportBuff, result);
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
-    this.calculateDamages(skill, unit, result);
+    skill.damageType.calculateDamages(unit, result);
     this.calculateKillers(skill, unit, result);
     this.calculateElementalResistances(skill, unit, result);
     this.calculateDamageVariance(skill, unit, result);
@@ -56,32 +56,6 @@ export class AlgorithmPhysicalChaining extends AlgorithmChaining {
     } else {
       result.elementalDamages = result.killerDamages;
     }
-  }
-
-  private calculateBuffs(skill: Skill, unit: Unit, result: ResultPhysicalChaining) {
-    result.atk = unit.stats.atk.total;
-    result.buffedAtk = result.atk;
-    if (this.isSupportBuffing) {
-      result.buffedAtk += unit.stats.atk.base * this.supportBuff / 100;
-    }
-  }
-
-  private calculateDamages(skill: Skill, unit: Unit, result: ResultPhysicalChaining) {
-    const rawDamages = unit.selectedBuild.equipments.isDualWielding()
-      ? this.calculateRawDwDamages(unit, result) : this.calculateRawDhDamages(unit, result);
-    result.rawDamages = rawDamages * result.power / 100 * this.calculateLevelCorrection();
-  }
-
-  private calculateRawDwDamages(unit: Unit, result: ResultPhysicalChaining): number {
-    result.isDualWielding = true;
-    result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
-    result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
-    return (result.buffedAtk - result.leftHandAtk) * (result.buffedAtk - result.rightHandAtk);
-  }
-
-  private calculateRawDhDamages(unit: Unit, result: ResultPhysicalChaining): number {
-    result.isDualWielding = false;
-    return result.buffedAtk * result.buffedAtk;
   }
 
   protected isExecutingTwice(skill: Skill, unit: Unit): boolean {

@@ -22,10 +22,10 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
 
   public calculateTurn(skill: Skill, unit: Unit): ResultMagicalChaining {
     const result: ResultMagicalChaining = new ResultMagicalChaining();
-    this.calculateBuffs(skill, unit, result);
+    skill.damageType.calculateBuffs(unit, this.isSupportBuffing, this.supportBuff, result);
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
-    this.calculateDamages(skill, unit, result);
+    skill.damageType.calculateDamages(unit, result);
     this.calculateKillers(skill, unit, result);
     this.calculateElementalResistances(skill, unit, result);
     this.calculateDamageVariance(skill, unit, result);
@@ -52,18 +52,6 @@ export class AlgorithmMagicalChaining extends AlgorithmChaining {
     } else {
       result.elementalDamages = result.killerDamages;
     }
-  }
-
-  private calculateBuffs(skill: Skill, unit: Unit, result: ResultMagicalChaining) {
-    result.mag = unit.stats.mag.total;
-    result.buffedMag = result.mag;
-    if (this.isSupportBuffing) {
-      result.buffedMag += unit.stats.mag.base * this.supportBuff / 100;
-    }
-  }
-
-  private calculateDamages(skill: Skill, unit: Unit, result: ResultMagicalChaining) {
-    result.rawDamages = result.buffedMag * result.buffedMag * result.power / 100 * this.calculateLevelCorrection();
   }
 
   protected isExecutingTwice(skill: Skill, unit: Unit) {
