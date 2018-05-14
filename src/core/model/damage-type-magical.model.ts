@@ -37,11 +37,11 @@ export class DamageTypeMagical extends DamageType {
     }
   }
 
-  public calculateElementalDamages(unit: Unit, elements: Array<number>, resistances: Array<number>, result: ResultChaining) {
+  public calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultChaining) {
     result.magicalElementalDamages = result.magicalKillerDamages;
     if (elements && elements.length) {
       result.averageElementalResistance = elements
-        .map((element: number) => resistances[element - 1])
+        .map((element: number) => result.resistances[element - 1])
         .reduce((val1, val2) => val1 + val2, 0) / elements.length;
       result.magicalElementalDamages = result.magicalKillerDamages * (1 - result.averageElementalResistance / 100);
     }

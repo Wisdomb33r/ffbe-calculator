@@ -11,10 +11,12 @@ export class AlgorithmChaining implements Algorithm {
   public isKillerActive = true;
   public isSparkChain = false;
   public isSupportBuffing = true;
+  public isSupportBreakingResistances = true;
   public supportBuff = 100;
   public opponentDef = 1000000;
   public opponentSpr = 1000000;
-  public opponentResistances: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
+  public supportResistsBreak: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
+  public opponentResistances: Array<number> = [0, 0, 0, 0, 0, 0, 0, 0];
 
   public calculate(unit: Unit): Result {
     const result: ResultOffensive = new ResultOffensive();
@@ -32,7 +34,8 @@ export class AlgorithmChaining implements Algorithm {
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
     skill.damageType.calculateKillerDamages(unit, this.isKillerActive, skill.skillType.getActiveKillers(unit), result);
-    skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), this.opponentResistances, result);
+    this.calculateEffectiveResistances(skill, result);
+    skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
     skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);
     return result;
   }
@@ -77,6 +80,16 @@ export class AlgorithmChaining implements Algorithm {
       }
       result.hitsPower = hitsPower;
       result.power = hitsPower.reduce((val1, val2) => val1 + val2, 0);
+    }
+  }
+
+  private calculateEffectiveResistances(skill: Skill, result: ResultChaining) {
+    result.resistances = this.isSupportBreakingResistances ?
+      this.opponentResistances.map((resist, index) => resist + this.supportResistsBreak[index])
+      : this.opponentResistances;
+    if (Array.isArray(skill.resists_break) && skill.resists_break.length === 8) {
+      result.resistances = result.resistances.map((resist, index) =>
+        Math.min(resist, this.opponentResistances[index] + skill.resists_break[index]));
     }
   }
 }

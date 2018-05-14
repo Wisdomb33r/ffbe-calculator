@@ -12,7 +12,7 @@ export class DamageTypeNone extends DamageType {
   calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultChaining) {
   }
 
-  calculateElementalDamages(unit: Unit, elements: Array<number>, resistances: Array<number>, result: ResultChaining) {
+  calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultChaining) {
   }
 
   calculateFinalResult(unit: Unit, def: number, spr: number, result: ResultChaining) {
