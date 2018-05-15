@@ -38,6 +38,7 @@ export class DamageTypeMagical extends DamageType {
   }
 
   public calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultChaining) {
+    result.elements = elements;
     result.magicalElementalDamages = result.magicalKillerDamages;
     if (elements && elements.length) {
       result.averageElementalResistance = elements

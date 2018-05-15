@@ -88,6 +88,7 @@
       "magicalDamages": "Magical damages",
       "hybridDamages": "Hybrid damages",
       "unitDamages": "Unit damages",
+      "resistances": "Resists",
       "elementalResistances": "Elemental resists",
       "damageCalculation": "Damage calculation",
       "supportBuff": "Support buff",

@@ -88,6 +88,7 @@
       "magicalDamages": "Dégâts magiques",
       "hybridDamages": "Dégâts hybrides",
       "unitDamages": "Dégâts de l'unité",
+      "resistances": "Résistances",
       "elementalResistances": "Résistances élémentaires",
       "damageCalculation": "Calcul des dégâts",
       "supportBuff": "Bonus du support",

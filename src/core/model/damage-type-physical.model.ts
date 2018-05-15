@@ -41,6 +41,7 @@ export class DamageTypePhysical extends DamageType {
   }
 
   public calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultChaining) {
+    result.elements = elements;
     result.physicalElementalDamages = result.physicalKillerDamages;
     if (elements && elements.length) {
       result.averageElementalResistance = elements

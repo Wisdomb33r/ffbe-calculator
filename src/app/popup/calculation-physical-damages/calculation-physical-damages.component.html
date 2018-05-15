@@ -48,6 +48,19 @@
     <td>{{result.killerPassive | integer}}%</td>
   </tr>
   <tr>
+    <td>{{'calculation.display.resistances' | translate}}</td>
+    <td>
+      <div *ngFor="let element of result.elements" class="resist-icon">
+        <img src="/assets/resists/resist_{{element}}.png">
+      </div>
+    </td>
+    <td>
+      <div *ngFor="let element of result.elements" class="resist-label">
+        {{result.resistances[element-1]}}%
+      </div>
+    </td>
+  </tr>
+  <tr>
     <td>{{'calculation.display.opponentDef' | translate}}</td>
     <td></td>
     <td>{{algorithm.opponentDef | integer}}</td>
