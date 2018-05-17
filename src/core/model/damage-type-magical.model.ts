@@ -9,7 +9,7 @@ export class DamageTypeMagical extends DamageType {
 
   constructor(calculation_stat?: string) {
     super();
-    if (!isNullOrUndefined(calculation_stat) && calculation_stat.length > 0) {
+    if (!isNullOrUndefined(calculation_stat) && ['atk', 'mag', 'def', 'spr'].indexOf(this.calculationStat) > -1) {
       this.calculationStat = calculation_stat;
     } else {
       this.calculationStat = 'mag';
@@ -17,15 +17,16 @@ export class DamageTypeMagical extends DamageType {
   }
 
   public calculateBuffs(unit: Unit, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
-    result.mag = unit.stats.mag.total;
-    result.buffedMag = result.mag;
+    result[this.calculationStat] = unit.stats[this.calculationStat].total;
+    result['buffed_' + this.calculationStat] = unit.stats[this.calculationStat].total;
     if (isSupportBuffing) {
-      result.buffedMag += unit.stats.mag.base * supportBuff / 100;
+      result['buffed_' + this.calculationStat] += unit.stats[this.calculationStat] * supportBuff / 100;
     }
   }
 
   public calculateDamages(unit: Unit, result: ResultChaining) {
-    result.magicalDamages = result.buffedMag * result.buffedMag * result.power / 100 * this.calculateLevelCorrection(unit);
+    result.magicalDamages = result['buffed_' + this.calculationStat] * result['buffed_' + this.calculationStat]
+      * result.power / 100 * this.calculateLevelCorrection(unit);
   }
 
   public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultChaining) {

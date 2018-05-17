@@ -35,7 +35,7 @@ describe('AlgorithmPhysicalChaining', () => {
     result['turnDamages'].forEach((turn: ResultChaining) => {
       expect(turn instanceof ResultChaining).toBeTruthy();
       expect(turn['atk']).toEqual(1000);
-      expect(turn['buffedAtk']).toEqual(1000);
+      expect(turn['buffed_atk']).toEqual(1000);
       expect(turn['isDualWielding']).toBeFalsy();
       expect(turn['combosIncrement']).toBeCloseTo(0.25);
       expect(turn['killerPassive']).toBeCloseTo(0);
@@ -76,7 +76,7 @@ describe('AlgorithmPhysicalChaining', () => {
     result['turnDamages'].forEach((turn: ResultChaining) => {
       expect(turn instanceof ResultChaining).toBeTruthy();
       expect(turn['atk']).toEqual(1000);
-      expect(turn['buffedAtk']).toEqual(1200);
+      expect(turn['buffed_atk']).toEqual(1200);
       expect(turn['isDualWielding']).toBeTruthy();
       expect(turn['combosIncrement']).toBeCloseTo(0.3);
       expect(turn['killerPassive']).toBeCloseTo(0);
