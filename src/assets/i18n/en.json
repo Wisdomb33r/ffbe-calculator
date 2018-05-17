@@ -76,18 +76,8 @@
   "calculation": {
     "display": {
       "title": "Calculation results",
-      "averageTurnPower": "Average power",
       "turn": "Turn",
       "hits": "Hits",
-      "skillHitsPower": "Skill hits power",
-      "comboIncrement": "Combo increment",
-      "sparkChain": "Spark chain",
-      "damages": "Damages",
-      "averageDamages": "Average damages",
-      "physicalDamages": "Physical damages",
-      "magicalDamages": "Magical damages",
-      "hybridDamages": "Hybrid damages",
-      "unitDamages": "Unit damages",
       "resistances": "Resists",
       "elementalResistances": "Elemental resists",
       "damageCalculation": "Damage calculation",
@@ -100,8 +90,16 @@
       "variances": "Variances",
       "killer": "Killers",
       "killerDamages": "Damages after killers",
-      "defaultDefSprExplanations": "Result is by default expressed in million damages on a 1 DEF/PSY enemy. This is equivalent to damages on a 1 million DEF/PSY enemy.",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
+    },
+    "offensive": {
+      "turnPower": "Turn power",
+      "skillHitsPower": "Skill hits power",
+      "comboIncrement": "Combo increment",
+      "sparkChain": "Spark chain",
+      "baseDamages": "Base damages",
+      "averageDamages": "Average damages",
+      "defaultDefSprExplanations": "Result is by default expressed in million damages on a 1 DEF/PSY enemy. This is equivalent to damages on a 1 million DEF/PSY enemy."
     },
     "defensive": {
       "physicalEhpCalculation": "Physical EHP calculation",

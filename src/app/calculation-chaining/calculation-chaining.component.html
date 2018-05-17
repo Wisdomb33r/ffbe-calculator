@@ -11,11 +11,11 @@
     </td>
   </tr>
   <tr class="total">
-    <th>{{'calculation.display.averageDamages' | translate}}</th>
+    <th>{{'calculation.offensive.averageDamages' | translate}}</th>
     <td>{{result.result | integer}}</td>
     <td></td>
     <td *ngIf="isWithBothPhysicalAndMagicalDamages()"></td>
     <td *ngIf="isWithBothPhysicalAndMagicalDamages()"></td>
   </tr>
 </table>
-<p *ngIf="algorithm.opponentDef === 1000000">{{'calculation.display.defaultDefSprExplanations' | translate}}</p>
+<p *ngIf="algorithm.opponentDef === 1000000">{{'calculation.offensive.defaultDefSprExplanations' | translate}}</p>
