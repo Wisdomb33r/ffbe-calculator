@@ -225,6 +225,7 @@ class Skill {
     $this->resists_break = $brex_skill->resists_break ? explode ( ',', $brex_skill->resists_break ) : null;
     $this->nb = $brex_skill->nb ? $brex_skill->nb : 1;
     $this->elements = $brex_skill->elements ? explode ( ',', $brex_skill->elements ) : null;
+    $this->isBreakingChain = $brex_skill->breaking_chain ? true : false;
     if ($this->isLimitBreak) {
       $this->name = $language === 'fr' ? $brex_unit->limite : $brex_unit->limite_en;
       $this->icon = null;

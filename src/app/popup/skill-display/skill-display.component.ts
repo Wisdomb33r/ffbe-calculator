@@ -3,7 +3,6 @@ import {Skill} from '../../../core/model/skill.model';
 import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
-  selector: 'app-skill-display',
   templateUrl: './skill-display.component.html',
   styleUrls: ['./skill-display.component.css']
 })
