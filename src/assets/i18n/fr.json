@@ -76,21 +76,13 @@
   "calculation": {
     "display": {
       "title": "Résultat des calculs",
-      "averageTurnPower": "Puissance moyenne",
       "turn": "Tour",
       "hits": "Coups",
-      "skillHitsPower": "Puissance des coups",
-      "comboIncrement": "Bonus par combo",
-      "sparkChain": "Chaîne étincelle",
-      "damages": "Dégâts",
-      "averageDamages": "Dégâts moyens",
-      "physicalDamages": "Dégâts physiques",
-      "magicalDamages": "Dégâts magiques",
-      "hybridDamages": "Dégâts hybrides",
-      "unitDamages": "Dégâts de l'unité",
+      "resistances": "Résistances",
       "elementalResistances": "Résistances élémentaires",
       "damageCalculation": "Calcul des dégâts",
       "supportBuff": "Bonus du support",
+      "supportBreak": "Baisse rés. du support",
       "buffedAtk": "ATT après bonus",
       "buffedMag": "MAGIE après bonus",
       "opponentDef": "DÉF adverse",
@@ -99,8 +91,16 @@
       "variances": "Variances",
       "killer": "Tueurs",
       "killerDamages": "Dégâts après tueurs",
-      "defaultDefSprExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF/PSY. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF/PSY.",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
+    },
+    "offensive": {
+      "turnPower": "Puissance du tour",
+      "skillHitsPower": "Puissance des coups",
+      "comboIncrement": "Bonus par combo",
+      "sparkChain": "Chaîne étincelle",
+      "baseDamages": "Dégâts de base",
+      "averageDamages": "Dégâts moyens",
+      "defaultDefSprExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF/PSY. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF/PSY."
     },
     "defensive": {
       "physicalEhpCalculation": "Calcul PV effectifs physiques",

@@ -1,13 +1,13 @@
-<h1>{{'calculation.display.skillHitsPower' | translate}}</h1>
+<h1>{{'calculation.offensive.skillHitsPower' | translate}}</h1>
 <table>
   <tr>
-    <td>{{'calculation.display.sparkChain' | translate}}</td>
+    <td>{{'calculation.offensive.sparkChain' | translate}}</td>
     <td>
       <mat-checkbox [(ngModel)]="algorithm.isSparkChain" (change)="calculateBuild()"></mat-checkbox>
     </td>
   </tr>
   <tr>
-    <td>{{'calculation.display.comboIncrement' | translate}}</td>
+    <td>{{'calculation.offensive.comboIncrement' | translate}}</td>
     <td>{{result.combosIncrement | number:'1.1-1'}}</td>
   </tr>
   <tr>
@@ -17,7 +17,7 @@
 </table>
 <p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
 <div class="total">
-  <h2>{{'calculation.display.averageTurnPower' | translate}}</h2>
+  <h2>{{'calculation.offensive.turnPower' | translate}}</h2>
   <p>{{result.power | integer}}%</p>
 </div>
 
@@ -48,13 +48,33 @@
     <td>{{result.killerPassive | integer}}%</td>
   </tr>
   <tr>
+    <td>{{'calculation.display.supportBreak' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBreakingResistances" (change)="calculateBuild()"></mat-checkbox>
+    </td>
+    <td>{{algorithm.supportResistsBreak[0] | integer}}%</td>
+  </tr>
+  <tr>
+    <td>{{'calculation.display.resistances' | translate}}</td>
+    <td>
+      <div *ngFor="let element of result.elements" class="resist-icon">
+        <img src="/assets/resists/resist_{{element}}.png">
+      </div>
+    </td>
+    <td>
+      <div *ngFor="let element of result.elements" class="resist-label">
+        {{result.resistances[element-1] | integer}}%
+      </div>
+    </td>
+  </tr>
+  <tr>
     <td>{{'calculation.display.opponentSpr' | translate}}</td>
     <td></td>
     <td>{{algorithm.opponentSpr | integer}}</td>
   </tr>
 </table>
 
-<h2>{{'calculation.display.unitDamages' | translate}}</h2>
+<h2>{{'calculation.offensive.baseDamages' | translate}}</h2>
 <p>
   {{result.buffedMag | integer}}² * {{result.power | integer}}% * 2
 </p>
