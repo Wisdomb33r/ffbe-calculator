@@ -1,22 +1,12 @@
-import {Algorithm} from './algorithm.model';
 import {Unit} from './unit.model';
 import {ResultOffensive} from './result-offensive.model';
 import {Skill} from './skill.model';
 import {Result} from './result.model';
 import {ResultChaining} from './result-chaining.model';
 import {isNullOrUndefined} from 'util';
+import {AlgorithmOffensive} from './algorithm-offensive.model';
 
-export class AlgorithmFinish implements Algorithm {
-
-  public isKillerActive = true;
-  public isSparkChain = false;
-  public isSupportBuffing = true;
-  public isSupportBreakingResistances = true;
-  public supportBuff = 100;
-  public opponentDef = 1000000;
-  public opponentSpr = 1000000;
-  public supportResistsBreak: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
-  public opponentResistances: Array<number> = [0, 0, 0, 0, 0, 0, 0, 0];
+export class AlgorithmFinish extends AlgorithmOffensive {
 
   public calculate(unit: Unit): Result {
     const result: ResultOffensive = new ResultOffensive();
@@ -33,8 +23,8 @@ export class AlgorithmFinish implements Algorithm {
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
     skill.damageType.calculateKillerDamages(unit, this.isKillerActive, skill.skillType.getActiveKillers(unit), result);
-    // this.calculateEffectiveResistances(skill, result);
-    skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), this.opponentResistances, result);
+    this.calculateEffectiveResistances(skill, result);
+    skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
     skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);
     return result;
   }
@@ -45,13 +35,18 @@ export class AlgorithmFinish implements Algorithm {
       result.power = 0;
     } else {
       result.combosIncrement = 4;
-      const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
+      const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
       if (skill.isBreakingChain) {
         result.combosIncrement = 2.5;
       }
       for (let i = 0; i < skill.hits; i++) {
         hitsPower.push(skill.power * damages[i] / 100 * result.combosIncrement);
+      }
+      if (skill.skillType.isExecutingTwice(skill, unit)) {
+        for (let j = 0; j < skill.hits; j++) {
+          hitsPower.push(skill.power * damages[j] / 100 * result.combosIncrement);
+        }
       }
       result.hitsPower = hitsPower;
       result.power = hitsPower.reduce((val1, val2) => val1 + val2, 0);

@@ -28,7 +28,7 @@ import {EquipmentSelectionComponent} from './equipment-selection/equipment-selec
 import {EquipmentsDisplayComponent} from './equipments-display/equipments-display.component';
 import {SkillsDisplayComponent} from './skills-display/skills-display.component';
 import {CalculationDefensiveComponent} from './calculation-defensive/calculation-defensive.component';
-import {CalculationChainingComponent} from './calculation-chaining/calculation-chaining.component';
+import {CalculationOffensiveComponent} from './calculation-offensive/calculation-offensive.component';
 import {CalculationPhysicalDamagesComponent} from './popup/calculation-physical-damages/calculation-physical-damages.component';
 import {CalculationMagicalDamagesComponent} from './popup/calculation-magical-damages/calculation-magical-damages.component';
 import {CalculationPhysicalEhpComponent} from './popup/calculation-physical-ehp/calculation-physical-ehp.component';
@@ -66,7 +66,7 @@ const appRoutes: Routes = [
     EquipmentsDisplayComponent,
     SkillsDisplayComponent,
     CalculationDefensiveComponent,
-    CalculationChainingComponent,
+    CalculationOffensiveComponent,
     CalculationPhysicalDamagesComponent,
     CalculationMagicalDamagesComponent,
     CalculationPhysicalEhpComponent,

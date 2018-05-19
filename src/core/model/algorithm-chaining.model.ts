@@ -1,22 +1,12 @@
-import {Algorithm} from './algorithm.model';
 import {Result} from './result.model';
 import {Unit} from './unit.model';
 import {isNullOrUndefined} from 'util';
 import {Skill} from './skill.model';
 import {ResultChaining} from './result-chaining.model';
 import {ResultOffensive} from './result-offensive.model';
+import {AlgorithmOffensive} from './algorithm-offensive.model';
 
-export class AlgorithmChaining implements Algorithm {
-
-  public isKillerActive = true;
-  public isSparkChain = false;
-  public isSupportBuffing = true;
-  public isSupportBreakingResistances = true;
-  public supportBuff = 100;
-  public opponentDef = 1000000;
-  public opponentSpr = 1000000;
-  public supportResistsBreak: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
-  public opponentResistances: Array<number> = [0, 0, 0, 0, 0, 0, 0, 0];
+export class AlgorithmChaining extends AlgorithmOffensive {
 
   public calculate(unit: Unit): Result {
     const result: ResultOffensive = new ResultOffensive();
@@ -57,8 +47,8 @@ export class AlgorithmChaining implements Algorithm {
       result.hitsPower = [0];
       result.power = 0;
     } else {
-      const frames: Array<number> = skill.frames.split(' ').map((s: string) => +s);
-      const damages: Array<number> = skill.damages.split(' ').map((s: string) => +s);
+      const frames: Array<number> = ('' + skill.frames).split(' ').map((s: string) => +s);
+      const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
       let chainCombos = 0;
       for (let i = 0; i < skill.hits; i++) {
@@ -82,16 +72,6 @@ export class AlgorithmChaining implements Algorithm {
       }
       result.hitsPower = hitsPower;
       result.power = hitsPower.reduce((val1, val2) => val1 + val2, 0);
-    }
-  }
-
-  private calculateEffectiveResistances(skill: Skill, result: ResultChaining) {
-    result.resistances = this.isSupportBreakingResistances ?
-      this.opponentResistances.map((resist, index) => resist + this.supportResistsBreak[index])
-      : this.opponentResistances;
-    if (Array.isArray(skill.resists_break) && skill.resists_break.length === 8) {
-      result.resistances = result.resistances.map((resist, index) =>
-        Math.min(resist, this.opponentResistances[index] + skill.resists_break[index]));
     }
   }
 }

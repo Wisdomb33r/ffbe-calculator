@@ -1,13 +1,14 @@
 <h1>{{'calculation.offensive.skillHitsPower' | translate}}</h1>
 <table>
-  <tr>
+  <tr *ngIf="isChaining()">
     <td>{{'calculation.offensive.sparkChain' | translate}}</td>
     <td>
       <mat-checkbox [(ngModel)]="algorithm.isSparkChain" (change)="calculateBuild()"></mat-checkbox>
     </td>
   </tr>
   <tr>
-    <td>{{'calculation.offensive.comboIncrement' | translate}}</td>
+    <td *ngIf="isChaining()">{{'calculation.offensive.comboIncrement' | translate}}</td>
+    <td *ngIf="!isChaining()">{{'calculation.offensive.comboMultiplier' | translate}}</td>
     <td>{{result.combosIncrement | number:'1.1-1'}}</td>
   </tr>
   <tr>
@@ -40,21 +41,21 @@
     <td></td>
     <td>{{result.buffedAtk | integer}}</td>
   </tr>
-  <tr>
+  <tr *ngIf="result.killerPassive">
     <td>{{'calculation.display.killer' | translate}}</td>
     <td>
       <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>
     </td>
     <td>{{result.killerPassive | integer}}%</td>
   </tr>
-  <tr>
+  <tr *ngIf="result.elements && result.elements.length > 0">
     <td>{{'calculation.display.supportBreak' | translate}}</td>
     <td>
       <mat-checkbox [(ngModel)]="algorithm.isSupportBreakingResistances" (change)="calculateBuild()"></mat-checkbox>
     </td>
     <td>{{algorithm.supportResistsBreak[0] | integer}}%</td>
   </tr>
-  <tr>
+  <tr *ngIf="result.elements && result.elements.length > 0">
     <td>{{'calculation.display.resistances' | translate}}</td>
     <td>
       <div *ngFor="let element of result.elements" class="resist-icon">

@@ -97,6 +97,7 @@
       "turnPower": "Puissance du tour",
       "skillHitsPower": "Puissance des coups",
       "comboIncrement": "Bonus par combo",
+      "comboMultiplier": "Multiplicateur combos",
       "sparkChain": "Chaîne étincelle",
       "baseDamages": "Dégâts de base",
       "averageDamages": "Dégâts moyens",

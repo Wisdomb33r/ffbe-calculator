@@ -5,7 +5,6 @@ import {ResultDefensive} from '../../../core/model/result-defensive.model';
 import {AlgorithmDefensive} from '../../../core/model/algorithm-defensive.model';
 
 @Component({
-  selector: 'app-calculation-physical-ehp',
   templateUrl: './calculation-physical-ehp.component.html',
   styleUrls: ['./calculation-physical-ehp.component.css']
 })
