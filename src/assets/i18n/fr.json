@@ -82,6 +82,7 @@
       "elementalResistances": "Résistances élémentaires",
       "damageCalculation": "Calcul des dégâts",
       "supportBuff": "Bonus du support",
+      "supportBreak": "Baisse rés. du support",
       "buffedAtk": "ATT après bonus",
       "buffedMag": "MAGIE après bonus",
       "opponentDef": "DÉF adverse",

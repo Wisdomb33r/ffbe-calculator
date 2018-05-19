@@ -16,6 +16,10 @@ p {
 td {
   padding-right: 10px;
   font-size: 12px;
+  vertical-align: middle;
+}
+
+td:first-child {
   vertical-align: top;
 }
 

@@ -82,6 +82,7 @@
       "elementalResistances": "Elemental resists",
       "damageCalculation": "Damage calculation",
       "supportBuff": "Support buff",
+      "supportBreak": "Support resists break",
       "buffedAtk": "ATK after buff",
       "buffedMag": "MAG after buff",
       "opponentDef": "Enemy DEF",

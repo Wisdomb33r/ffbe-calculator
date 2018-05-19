@@ -48,6 +48,13 @@
     <td>{{result.killerPassive | integer}}%</td>
   </tr>
   <tr>
+    <td>{{'calculation.display.supportBreak' | translate}}</td>
+    <td>
+      <mat-checkbox [(ngModel)]="algorithm.isSupportBreakingResistances" (change)="calculateBuild()"></mat-checkbox>
+    </td>
+    <td>{{algorithm.supportResistsBreak[0] | integer}}%</td>
+  </tr>
+  <tr>
     <td>{{'calculation.display.resistances' | translate}}</td>
     <td>
       <div *ngFor="let element of result.elements" class="resist-icon">
@@ -56,7 +63,7 @@
     </td>
     <td>
       <div *ngFor="let element of result.elements" class="resist-label">
-        {{result.resistances[element-1]}}%
+        {{result.resistances[element-1] | integer}}%
       </div>
     </td>
   </tr>
