@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import {CalculatorUtils} from '../calculator-utils';
 import {Algorithm} from '../model/algorithm.model';
 import {Result} from '../model/result.model';
+import {EquipmentSet} from '../model/equipment-set.model';
 
 @Injectable()
 export class UnitsService {
@@ -146,5 +147,9 @@ export class UnitsService {
 
   public getResult(): Result {
     return this.selectedUnit.selectedBuild.result;
+  }
+
+  public getEquipments(): EquipmentSet {
+    return this.selectedUnit.selectedBuild.equipments;
   }
 }

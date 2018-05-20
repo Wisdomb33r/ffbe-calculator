@@ -8,4 +8,12 @@
   <app-skills-display *ngIf="unitsService.selectedUnit && unitsService.selectedUnit.selectedBuild.skills.length > 0">
   </app-skills-display>
   <app-calculation-display *ngIf="unitsService.selectedUnit"></app-calculation-display>
+  <app-permanent-url *ngIf="unitsService.selectedUnit" [unit]="unitsService.selectedUnit"
+                     [right_hand]="unitsService.getEquipments().right_hand"
+                     [left_hand]="unitsService.getEquipments().left_hand"
+                     [head]="unitsService.getEquipments().head"
+                     [body]="unitsService.getEquipments().body"
+                     [accessory1]="unitsService.getEquipments().accessory1"
+                     [accessory2]="unitsService.getEquipments().accessory2">
+  </app-permanent-url>
 </div>

@@ -119,5 +119,11 @@
       "ehp": "PV effectifs",
       "ehpResultExplanations": "Résultat exprimé en millions de PV effectifs (MEHP)."
     }
+  },
+  "permanent": {
+    "url": {
+      "title": "URL permanente",
+      "copy": "Copier"
+    }
   }
 }

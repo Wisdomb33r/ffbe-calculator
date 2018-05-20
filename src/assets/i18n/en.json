@@ -119,5 +119,11 @@
       "ehp": "Effective HP",
       "ehpResultExplanations": "Result expressed in million of effective health points (MEHP)."
     }
+  },
+  "permanent": {
+    "url": {
+      "title": "Permanent URL",
+      "copy": "Copy"
+    }
   }
 }

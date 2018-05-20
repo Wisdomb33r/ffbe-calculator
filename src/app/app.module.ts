@@ -11,6 +11,7 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
+  MatInputModule,
   MatMenuModule,
   MatSelectModule,
   MatToolbarModule
@@ -39,6 +40,9 @@ import {AboutReportComponent} from './about-report/about-report.component';
 import {AppMenusComponent} from './app-menus.component';
 import {AboutCalculatorComponent} from './about-calculator/about-calculator.component';
 import {SkillDisplayComponent} from './popup/skill-display/skill-display.component';
+import {ExternalLinkComponent} from './external-link/external-link.component';
+import {PermanentUrlComponent} from './permanent-url/permanent-url.component';
+import {ClipboardModule} from 'ngx-clipboard';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,6 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 const appRoutes: Routes = [
   {path: 'about/report', component: AboutReportComponent},
   {path: 'about/calculator', component: AboutCalculatorComponent},
+  {path: 'link/unit/:id', component: ExternalLinkComponent},
   {path: '', pathMatch: 'full', component: CalculatorComponent},
   {path: '**', redirectTo: '/'}
 ];
@@ -75,6 +80,8 @@ const appRoutes: Routes = [
     AboutReportComponent,
     AboutCalculatorComponent,
     SkillDisplayComponent,
+    ExternalLinkComponent,
+    PermanentUrlComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +105,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatToolbarModule,
     MatCheckboxModule,
+    MatInputModule,
+    ClipboardModule,
   ],
   entryComponents: [
     UnitSelectionComponent,
