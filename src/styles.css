@@ -7,6 +7,15 @@ body {
 
 mat-toolbar.mat-toolbar {
   margin-bottom: 5px;
+  background-color: #EEEEEE;
+}
+
+mat-toolbar.mat-toolbar button {
+  margin-left: 10px;
+}
+
+mat-toolbar.mat-toolbar button:first-child {
+  margin-left: 0;
 }
 
 mat-card.mat-card {

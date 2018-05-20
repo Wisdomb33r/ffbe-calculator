@@ -43,6 +43,7 @@ import {SkillDisplayComponent} from './popup/skill-display/skill-display.compone
 import {ExternalLinkComponent} from './external-link/external-link.component';
 import {PermanentUrlComponent} from './permanent-url/permanent-url.component';
 import {ClipboardModule} from 'ngx-clipboard';
+import {AppFooterComponent} from './app-footer.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     AppMenusComponent,
+    AppFooterComponent,
     IntegerPipe,
     UnitDetailsComponent,
     CalculatorComponent,
