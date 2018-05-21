@@ -3,6 +3,19 @@
   <app-equipments-display [equipments]="unitsService.selectedUnit.selectedBuild.equipments"
                           *ngIf="unitsService.selectedUnit"
                           (equipmentChanged)="computeAfterEquipmentChanged()"></app-equipments-display>
+  <mat-card *ngIf="!unitsService.selectedUnit">
+    <mat-card-title>{{'calculator.home.title' | translate}}</mat-card-title>
+    <mat-card-content>
+      <p>{{'calculator.home.howToStart' | translate}}</p>
+      <ol>
+        <li>{{'calculator.home.hitUnitButton' | translate}}</li>
+        <li>{{'calculator.home.selectUnit' | translate}}</li>
+        <li>{{'calculator.home.adaptEquipments' | translate}}</li>
+        <li>{{'calculator.home.getCharacterCalculation' | translate}}</li>
+      </ol>
+      <p>{{'calculator.home.thereIsMore' | translate}}</p>
+    </mat-card-content>
+  </mat-card>
 </div>
 <div class="right">
   <app-skills-display *ngIf="unitsService.selectedUnit && unitsService.selectedUnit.selectedBuild.skills.length > 0">

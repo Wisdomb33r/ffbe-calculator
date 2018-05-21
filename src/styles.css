@@ -5,6 +5,16 @@ body {
   margin: 0;
 }
 
+a, a:visited {
+  color: lightskyblue;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 mat-toolbar.mat-toolbar {
   margin-bottom: 5px;
   background-color: #EEEEEE;
@@ -63,4 +73,20 @@ mat-dialog-content.mat-dialog-content {
 img.inline-icon {
   vertical-align: middle;
   margin-top: -2px;
+}
+
+@media (min-width: 1000px) {
+  div.left {
+    float: left;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+  }
+
+  div.right {
+    float: right;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+  }
 }

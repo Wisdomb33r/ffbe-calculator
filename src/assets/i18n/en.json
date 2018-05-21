@@ -16,7 +16,45 @@
     },
     "about": "About",
     "calculator": "Calculator",
-    "bugReport": "Report a bug"
+    "bugReport": "Contact us"
+  },
+  "calculator": {
+    "home": {
+      "title": "FF Brave Exvius unit calculator",
+      "howToStart": "Using the unit calculator is just as simple as :",
+      "hitUnitButton": "Hit the Units button",
+      "selectUnit": "Select your unit",
+      "adaptEquipments": "Choose your equipments",
+      "getCharacterCalculation": "Get a calculation result",
+      "thereIsMore": "But wait, there is more ! The default configuration can be adapted to many situations ! Just try it !"
+    },
+    "about": {
+      "title": "Calculation types",
+      "summary": "Many character types are already present in the calculator :",
+      "chainers": "Chainers",
+      "finishers": "Finishers",
+      "tanks": "Tanks",
+      "todo": "Others are yet to be implemented :",
+      "espers": "Esper damages",
+      "healers": "Healers",
+      "supports": "Supports"
+    },
+    "rules": {
+      "title": "Calculation rules",
+      "summary": "Mathematical formulae are the ones used by the game. A few hypotheses and simplifications are however needed to evaluate a character out of his group :",
+      "chainersWithDuplicate": "Chainers are considered with a duplicate (same unit, same equipments for elemental weapons).",
+      "finishersWithChainers": "Finishers are considered with a couple of chainers in the group to start a combo.",
+      "chainCalculationSimplified": "The combo calculation for a chainer and its duplicate is slightly simplified. Namely, it does not consider multiple skills hits overlap.",
+      "chainImpossibleCases": "The calculator does not avoid some cases that are not possible in game (for instance Victoria cannot spark chain and Tidus cannot chain without spark nor combo break).",
+      "supportPresence": "By default, the calculator assumes there are supports in the group to buff (+100%, i.e. Ramza) and debuff (-50% to resists, for example Seven, 9S or Kryla).",
+      "killersCalculation": "By default, the killer traits are considered on average. For a +50% damages on a specific type of monster, the calculation adds a net 5% increase."
+    },
+    "report": {
+      "title": "Contact us",
+      "summary": "You wish for a new functionality ? You want to report a bug ? The calculator does not work for you ? Here are a few way to give us feedback :",
+      "github": "Directly on our Github project (preferred channel) ",
+      "mail": "With e-mail at "
+    }
   },
   "unit": {
     "selection": {
