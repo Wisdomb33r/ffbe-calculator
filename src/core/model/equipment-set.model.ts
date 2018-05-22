@@ -118,7 +118,10 @@ export class EquipmentSet {
       && this.left_hand && this.left_hand.isWeapon() && !this.left_hand.isTwoHanded();
   }
 
-  public checkConditionalPassiveActive(condPassive: ConditionalPassive): boolean {
+  public checkConditionalPassiveActive(condPassive: ConditionalPassive, unitId: number): boolean {
+    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0) {
+      return unitId === condPassive.unit;
+    }
     if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0) {
       return (this.right_hand && this.right_hand.category === condPassive.category)
         || (this.left_hand && this.left_hand.category === condPassive.category)
@@ -132,7 +135,7 @@ export class EquipmentSet {
     }
   }
 
-  public getAllActiveConditionalPassives(): Array<ConditionalPassive> {
+  public getAllActiveConditionalPassives(unitId: number): Array<ConditionalPassive> {
     const allPassives: Array<ConditionalPassive> = [
       ...this.right_hand ? this.right_hand.conditional_passives : [],
       ...this.left_hand ? this.left_hand.conditional_passives : [],
@@ -146,13 +149,14 @@ export class EquipmentSet {
       ...this.materia4 ? this.materia4.conditional_passives : [],
     ];
     allPassives.forEach((cp: ConditionalPassive) => cp.active = false);
-    const activePassives: Array<ConditionalPassive> = allPassives.filter(condPassive => this.checkConditionalPassiveActive(condPassive));
+    const activePassives: Array<ConditionalPassive> =
+      allPassives.filter(condPassive => this.checkConditionalPassiveActive(condPassive, unitId));
     activePassives.forEach((cp: ConditionalPassive) => cp.active = true);
     return activePassives;
   }
 
-  public activateEquipmentConditionalPassives(equipment: Equipment): Equipment {
-    equipment.conditional_passives.forEach(cp => this.checkConditionalPassiveActive(cp) ? cp.active = true : cp.active = false);
+  public activateEquipmentConditionalPassives(equipment: Equipment, unitId: number): Equipment {
+    equipment.conditional_passives.forEach(cp => this.checkConditionalPassiveActive(cp, unitId) ? cp.active = true : cp.active = false);
     return equipment;
   }
 }

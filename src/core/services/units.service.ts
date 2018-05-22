@@ -40,7 +40,7 @@ export class UnitsService {
         map((items: Array<Equipment>) => items
           .map((item: Equipment) => new Equipment(item))
           .filter((item: Equipment) => this.isAllowed(item, slot))
-          .map((item: Equipment) => this.selectedUnit.selectedBuild.equipments.activateEquipmentConditionalPassives(item))
+          .map((item: Equipment) => this.getEquipments().activateEquipmentConditionalPassives(item, this.selectedUnit.id))
           .sort((a: Equipment, b: Equipment) => -this.compareEquipmentsForAlgorithm(a, b))
         )
       );
