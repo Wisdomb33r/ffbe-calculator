@@ -219,10 +219,13 @@ class Skill {
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite == 1 ? true : false;
     $this->power = $brex_skill->puissance;
-    if ($brex_skill->nb == 2) {
-      $this->power = $brex_skill->puissance / 2;
+    if ($brex_skill->nb > 1) {
+      $this->power = $brex_skill->puissance / $brex_skill->nb;
     }
+    $this->resists_break = $brex_skill->resists_break ? explode ( ',', $brex_skill->resists_break ) : null;
     $this->nb = $brex_skill->nb ? $brex_skill->nb : 1;
+    $this->elements = $brex_skill->elements ? explode ( ',', $brex_skill->elements ) : null;
+    $this->isBreakingChain = $brex_skill->breaking_chain ? true : false;
     if ($this->isLimitBreak) {
       $this->name = $language === 'fr' ? $brex_unit->limite : $brex_unit->limite_en;
       $this->icon = null;
@@ -245,6 +248,18 @@ class Skill {
       }
       if ($brex_skill->competence->hybride) {
         $this->damages_type = 'hybrid';
+      }
+      if ($brex_skill->competence->elements) {
+        $elements = explode ( ',', $brex_skill->competence->elements );
+        if (! is_array ( $this->elements )) {
+          $this->elements = $elements;
+        } else {
+          foreach ( $elements as $element ) {
+            if (! in_array ( $element, $this->elements )) {
+              $this->elements [] = $element;
+            }
+          }
+        }
       }
     }
   }

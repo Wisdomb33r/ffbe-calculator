@@ -2,13 +2,11 @@ import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-about-report',
-  templateUrl: './about-report.component.html',
-  styleUrls: ['./about-report.component.css']
+  selector: 'app-footer',
+  templateUrl: './app-footer.component.html',
+  styleUrls: ['./app-footer.component.css']
 })
-export class AboutReportComponent {
-
+export class AppFooterComponent {
   constructor(public translateService: TranslateService) {
   }
-
 }

@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-title>{{'permanent.url.title' | translate}}</mat-card-title>
+  <div class="copy-button">
+    <button mat-raised-button ngxClipboard [cbContent]="url" color="accent">{{'permanent.url.copy' | translate}}
+    </button>
+  </div>
+  <mat-form-field>
+    <input matInput type="text" [(ngModel)]="url">
+  </mat-form-field>
+</mat-card>

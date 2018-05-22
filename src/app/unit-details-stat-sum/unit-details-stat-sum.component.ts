@@ -6,7 +6,7 @@ import {MAT_DIALOG_DATA} from '@angular/material';
   templateUrl: './unit-details-stat-sum.component.html',
   styleUrls: ['./unit-details-stat-sum.component.css']
 })
-export class UnitDetailsStatSumComponent implements OnInit {
+export class UnitDetailsStatSumComponent {
 
   public unitStats: UnitStats;
   public stat: string;
@@ -14,9 +14,6 @@ export class UnitDetailsStatSumComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.unitStats = data.unitStats;
     this.stat = data.stat;
-  }
-
-  ngOnInit() {
   }
 
   public getBaseValue() {

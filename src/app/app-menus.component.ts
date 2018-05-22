@@ -6,7 +6,7 @@ import {UnitSelectionComponent} from './unit-selection/unit-selection.component'
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog} from '@angular/material';
 import {isNullOrUndefined} from 'util';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-menus',
@@ -18,7 +18,8 @@ export class AppMenusComponent implements OnInit {
               private dialog: MatDialog,
               private databaseClient: DatabaseClientService,
               private translate: TranslateService,
-              private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -26,21 +27,25 @@ export class AppMenusComponent implements OnInit {
   }
 
   public openUnitSelectionPane() {
-    const dialogRef = this.dialog.open(UnitSelectionComponent, {
-      width: '320px'
-    });
+    if (this.router.url === '/' || !this.unitsService.selectedUnit) {
+      const dialogRef = this.dialog.open(UnitSelectionComponent, {
+        width: '320px'
+      });
 
-    dialogRef.afterClosed().subscribe((result: Unit) => {
-      if (!isNullOrUndefined(result)) {
-        this.databaseClient.getUnitById$(result.id)
-          .subscribe((unit: Unit) => {
-            this.unitsService.selectedUnit = new Unit(unit);
-            this.unitsService.selectedUnit.selectDefaultBuild();
-            this.unitsService.selectedUnit.computeAll();
-            this.router.navigate(['/']);
-          });
-      }
-    });
+      dialogRef.afterClosed().subscribe((result: Unit) => {
+        if (!isNullOrUndefined(result)) {
+          this.databaseClient.getUnitById$(result.id)
+            .subscribe((unit: Unit) => {
+              this.unitsService.selectedUnit = new Unit(unit);
+              this.unitsService.selectedUnit.selectDefaultBuild();
+              this.unitsService.selectedUnit.computeAll();
+              this.router.navigate(['/']);
+            });
+        }
+      });
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   public switchLanguage(lang: string) {

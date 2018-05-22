@@ -11,6 +11,7 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
+  MatInputModule,
   MatMenuModule,
   MatSelectModule,
   MatToolbarModule
@@ -28,7 +29,7 @@ import {EquipmentSelectionComponent} from './equipment-selection/equipment-selec
 import {EquipmentsDisplayComponent} from './equipments-display/equipments-display.component';
 import {SkillsDisplayComponent} from './skills-display/skills-display.component';
 import {CalculationDefensiveComponent} from './calculation-defensive/calculation-defensive.component';
-import {CalculationChainingComponent} from './calculation-chaining/calculation-chaining.component';
+import {CalculationOffensiveComponent} from './calculation-offensive/calculation-offensive.component';
 import {CalculationPhysicalDamagesComponent} from './popup/calculation-physical-damages/calculation-physical-damages.component';
 import {CalculationMagicalDamagesComponent} from './popup/calculation-magical-damages/calculation-magical-damages.component';
 import {CalculationPhysicalEhpComponent} from './popup/calculation-physical-ehp/calculation-physical-ehp.component';
@@ -39,6 +40,10 @@ import {AboutReportComponent} from './about-report/about-report.component';
 import {AppMenusComponent} from './app-menus.component';
 import {AboutCalculatorComponent} from './about-calculator/about-calculator.component';
 import {SkillDisplayComponent} from './popup/skill-display/skill-display.component';
+import {ExternalLinkComponent} from './external-link/external-link.component';
+import {PermanentUrlComponent} from './permanent-url/permanent-url.component';
+import {ClipboardModule} from 'ngx-clipboard';
+import {AppFooterComponent} from './app-footer.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 const appRoutes: Routes = [
   {path: 'about/report', component: AboutReportComponent},
   {path: 'about/calculator', component: AboutCalculatorComponent},
+  {path: 'link/unit/:id', component: ExternalLinkComponent},
   {path: '', pathMatch: 'full', component: CalculatorComponent},
   {path: '**', redirectTo: '/'}
 ];
@@ -55,6 +61,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     AppMenusComponent,
+    AppFooterComponent,
     IntegerPipe,
     UnitDetailsComponent,
     CalculatorComponent,
@@ -66,7 +73,7 @@ const appRoutes: Routes = [
     EquipmentsDisplayComponent,
     SkillsDisplayComponent,
     CalculationDefensiveComponent,
-    CalculationChainingComponent,
+    CalculationOffensiveComponent,
     CalculationPhysicalDamagesComponent,
     CalculationMagicalDamagesComponent,
     CalculationPhysicalEhpComponent,
@@ -75,6 +82,8 @@ const appRoutes: Routes = [
     AboutReportComponent,
     AboutCalculatorComponent,
     SkillDisplayComponent,
+    ExternalLinkComponent,
+    PermanentUrlComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +107,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatToolbarModule,
     MatCheckboxModule,
+    MatInputModule,
+    ClipboardModule,
   ],
   entryComponents: [
     UnitSelectionComponent,

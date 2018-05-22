@@ -23,6 +23,8 @@ export class ResultChaining extends Result {
   public averageWeaponVariance: number;
   public finalVariance: number;
   public killerPassive: number;
+  public elements: Array<number>;
+  public resistances: Array<number>;
   public averageElementalResistance: number;
 
   // damages

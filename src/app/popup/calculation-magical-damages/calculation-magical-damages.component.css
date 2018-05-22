@@ -16,9 +16,19 @@ p {
 td {
   padding-right: 10px;
   font-size: 12px;
+  vertical-align: center;
+}
+
+td:first-child {
+  vertical-align: top;
 }
 
 td:last-child {
   padding-right: 0;
   text-align: right;
+}
+
+.resist-label, .resist-icon {
+  height: 24px;
+  line-height: 24px;
 }

@@ -16,7 +16,45 @@
     },
     "about": "À propos",
     "calculator": "Calculateur",
-    "bugReport": "Signaler un bug"
+    "bugReport": "Nous contacter"
+  },
+  "calculator": {
+    "home": {
+      "title": "Calculateur d'unités FF Brave Exvius",
+      "howToStart": "Utiliser le calculateur d'unité est aussi simple que ça :",
+      "hitUnitButton": "Cliquez le bouton Unités",
+      "selectUnit": "Sélectionnez votre unité",
+      "adaptEquipments": "Adaptez les pièces d'équipement",
+      "getCharacterCalculation": "Obtenez immédiatement un résultat",
+      "thereIsMore": "Mais ce n'est pas tout, la configuration par défaut du calcul peut être adaptée à beaucoup de situations. Lancez-vous ! Tout simplement !"
+    },
+    "about": {
+      "title": "Types de calculs",
+      "summary": "Certains types de personnages sont déjà présents dans le calculateur :",
+      "chainers": "Chaîneurs",
+      "finishers": "Finishers",
+      "tanks": "Tanks",
+      "todo": "Certains types ne le sont pas encore :",
+      "espers": "Dégâts des chimères",
+      "healers": "Soigneurs",
+      "supports": "Supports"
+    },
+    "rules": {
+      "title": "Règles des calculs",
+      "summary": "Les formules mathématiques utilisées sont celles utilisées par le jeu. Quelques hypothèses et simplifications sont toutefois réalisées pour évaluer un personnage hors de son groupe :",
+      "chainersWithDuplicate": "Un chaîneur est considéré comme étant accompagné d'un seul clone (même unité, même matériel pour les éléments des armes).",
+      "finishersWithChainers": "Un finisher est considéré comme étant accompagné d'un duo de chaîneurs pour former le combo.",
+      "chainCalculationSimplified": "Le calcul du combo d'un chaîneur et de son clone utilise un algorithme simplifié. Il est notamment réalisé sans considérer la superposition des coups des multiples exécutions d'une compétence.",
+      "chainImpossibleCases": "Le calculateur ne bloque également pas certains cas qu'il est impossible de réaliser en jeu (par exemple que Victoria ne peut pas faire de chaînes étincelles, ou que Tidus ne peut pas faire de chaîne parfaite sans étincelles).",
+      "supportPresence": "Par défaut, tout calcul considère la présence d'un support pour buff (+100%, par exemple Ramza) et pour debuff (-50% aux résistances, par exemple Seven, 9S ou Kryla).",
+      "killersCalculation": "Par défaut, les passifs de tueur sont considérés en moyenne. Pour un bonus +50% dégâts sur un type de monstre, le calcul ajoute 5% aux dégâts."
+    },
+    "report": {
+      "title": "Nous contacter",
+      "summary": "Vous souhaitez une nouvelle fonctionnalité ? Vous avez découvert un bug ? Le calculateur ne fonctionne pas ou mal ? Voici quelques moyens pour nous contacter :",
+      "github": "Directement sur notre projet Github ",
+      "mail": "Par e-mail à "
+    }
   },
   "unit": {
     "selection": {
@@ -76,21 +114,13 @@
   "calculation": {
     "display": {
       "title": "Résultat des calculs",
-      "averageTurnPower": "Puissance moyenne",
       "turn": "Tour",
       "hits": "Coups",
-      "skillHitsPower": "Puissance des coups",
-      "comboIncrement": "Bonus par combo",
-      "sparkChain": "Chaîne étincelle",
-      "damages": "Dégâts",
-      "averageDamages": "Dégâts moyens",
-      "physicalDamages": "Dégâts physiques",
-      "magicalDamages": "Dégâts magiques",
-      "hybridDamages": "Dégâts hybrides",
-      "unitDamages": "Dégâts de l'unité",
+      "resistances": "Résistances",
       "elementalResistances": "Résistances élémentaires",
       "damageCalculation": "Calcul des dégâts",
       "supportBuff": "Bonus du support",
+      "supportBreak": "Baisse rés. du support",
       "buffedAtk": "ATT après bonus",
       "buffedMag": "MAGIE après bonus",
       "opponentDef": "DÉF adverse",
@@ -99,8 +129,17 @@
       "variances": "Variances",
       "killer": "Tueurs",
       "killerDamages": "Dégâts après tueurs",
-      "defaultDefSprExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF/PSY. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF/PSY.",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
+    },
+    "offensive": {
+      "turnPower": "Puissance du tour",
+      "skillHitsPower": "Puissance des coups",
+      "comboIncrement": "Bonus par combo",
+      "comboMultiplier": "Multiplicateur combos",
+      "sparkChain": "Chaîne étincelle",
+      "baseDamages": "Dégâts de base",
+      "averageDamages": "Dégâts moyens",
+      "defaultDefSprExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF/PSY. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF/PSY."
     },
     "defensive": {
       "physicalEhpCalculation": "Calcul PV effectifs physiques",
@@ -117,6 +156,12 @@
       "ehpCalculation": "Calcul des PV effectifs",
       "ehp": "PV effectifs",
       "ehpResultExplanations": "Résultat exprimé en millions de PV effectifs (MEHP)."
+    }
+  },
+  "permanent": {
+    "url": {
+      "title": "URL permanente",
+      "copy": "Copier"
     }
   }
 }

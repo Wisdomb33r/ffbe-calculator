@@ -1,6 +1,6 @@
 {
   "name": "ffbe-calculator",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "license": "GPL-3.0",
   "scripts": {
     "ng": "ng",
@@ -28,6 +28,7 @@
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "core-js": "^2.4.1",
+    "ngx-clipboard": "^10.0.0",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

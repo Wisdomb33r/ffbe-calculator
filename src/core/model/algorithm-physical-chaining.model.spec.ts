@@ -66,12 +66,13 @@ describe('AlgorithmPhysicalChaining', () => {
     unit.stats.atk.total = 1000;
     unit.selectedBuild.equipments.left_hand = new Equipment(JSON.parse(EQUIPMENT_TEST_DATA));
     unit.selectedBuild.equipments.left_hand.elements = [1]; // fire element on left hand weapon for increment calculation
+    unit.selectedBuild.skills[0].resists_break = [-100, 0, 0, 0, 0, 0, 0, 0]; // skill under 100% fire break
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(155.6317125);
+    expect(result.result).toBeCloseTo(173.148);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultChaining) => {
       expect(turn instanceof ResultChaining).toBeTruthy();
@@ -86,7 +87,7 @@ describe('AlgorithmPhysicalChaining', () => {
     expect(turn1['power']).toBeCloseTo(3130);
     expect(turn1['physicalDamages']).toEqual(75746000);
     expect(turn1['physicalKillerDamages']).toBeCloseTo(75746000);
-    expect(turn1['physicalElementalDamages']).toBeCloseTo(113619000);
+    expect(turn1['physicalElementalDamages']).toBeCloseTo(151492000);
     expect(turn1['hitsPower'].length).toEqual(10);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [50, 160, 330, 420, 170, 200, 400, 600, 600, 200]);
 

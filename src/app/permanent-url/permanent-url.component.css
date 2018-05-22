@@ -1,0 +1,22 @@
+div.copy-button {
+  display: inline-block;
+  width: 70px;
+}
+
+button.mat-raised-button {
+  padding: 0 8px;
+  min-width: auto;
+}
+
+/deep/ .mat-input-underline {
+  background-color: white;
+}
+
+mat-form-field.mat-form-field {
+  width: calc(100% - 80px);
+}
+
+input.mat-input-element {
+  font-size: 12px;
+  color: white;
+}

@@ -1,19 +1,19 @@
 import {Component, Input} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {CalculationPhysicalDamagesComponent} from '../popup/calculation-physical-damages/calculation-physical-damages.component';
-import {AlgorithmChaining} from '../../core/model/algorithm-chaining.model';
 import {ResultOffensive} from '../../core/model/result-offensive.model';
 import {CalculationMagicalDamagesComponent} from '../popup/calculation-magical-damages/calculation-magical-damages.component';
 import {ResultChaining} from '../../core/model/result-chaining.model';
+import {AlgorithmOffensive} from '../../core/model/algorithm-offensive.model';
 
 @Component({
-  selector: 'app-calculation-chaining',
-  templateUrl: './calculation-chaining.component.html',
-  styleUrls: ['./calculation-chaining.component.css']
+  selector: 'app-calculation-offensive',
+  templateUrl: './calculation-offensive.component.html',
+  styleUrls: ['./calculation-offensive.component.css']
 })
-export class CalculationChainingComponent {
+export class CalculationOffensiveComponent {
 
-  @Input() algorithm: AlgorithmChaining;
+  @Input() algorithm: AlgorithmOffensive;
   @Input() result: ResultOffensive;
 
   constructor(private dialog: MatDialog) {
