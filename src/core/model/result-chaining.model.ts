@@ -12,6 +12,7 @@ export class ResultChaining extends Result {
   public buffed_def: number;
   public spr: number;
   public buffed_spr: number;
+  public calculationStat: string;
 
   // skill power
   public combosIncrement: number;

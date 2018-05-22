@@ -5,22 +5,12 @@ import {ResultChaining} from './result-chaining.model';
 
 export class DamageTypeMagical extends DamageType {
 
-  public calculationStat: string;
-
   constructor(calculation_stat?: string) {
     super();
     if (!isNullOrUndefined(calculation_stat) && ['atk', 'mag', 'def', 'spr'].indexOf(this.calculationStat) > -1) {
       this.calculationStat = calculation_stat;
     } else {
       this.calculationStat = 'mag';
-    }
-  }
-
-  public calculateBuffs(unit: Unit, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
-    result[this.calculationStat] = unit.stats[this.calculationStat].total;
-    result['buffed_' + this.calculationStat] = unit.stats[this.calculationStat].total;
-    if (isSupportBuffing) {
-      result['buffed_' + this.calculationStat] += unit.stats[this.calculationStat] * supportBuff / 100;
     }
   }
 

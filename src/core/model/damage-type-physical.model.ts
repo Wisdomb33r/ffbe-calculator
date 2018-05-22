@@ -6,22 +6,12 @@ import {Equipment} from './equipment.model';
 
 export class DamageTypePhysical extends DamageType {
 
-  public calculationStat: string;
-
   constructor(calculation_stat?: string) {
     super();
     if (!isNullOrUndefined(calculation_stat) && calculation_stat.length > 0) {
       this.calculationStat = calculation_stat;
     } else {
       this.calculationStat = 'atk';
-    }
-  }
-
-  public calculateBuffs(unit: Unit, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
-    result.atk = unit.stats.atk.total;
-    result.buffed_atk = result.atk;
-    if (isSupportBuffing) {
-      result.buffed_atk += unit.stats.atk.base * supportBuff / 100;
     }
   }
 
