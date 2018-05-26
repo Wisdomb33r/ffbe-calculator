@@ -9,12 +9,12 @@ h2.mat-dialog-title {
 }
 
 .unit {
-  width: 100px;
+  width: 90px;
 }
 
 .unit-icon {
   display: block;
   margin: auto;
-  max-width: 100px;
+  max-width: 90px;
   cursor: pointer;
 }
