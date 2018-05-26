@@ -1,5 +1,6 @@
 export class ConditionalPassive {
   // from backend
+  public unit: number;
   public category: number;
   public element: number;
   public hp: number;
@@ -13,6 +14,7 @@ export class ConditionalPassive {
   public active = false;
 
   constructor(conditionalPassive: ConditionalPassive) {
+    this.unit = conditionalPassive.unit;
     this.category = conditionalPassive.category;
     this.element = conditionalPassive.element;
     this.hp = conditionalPassive.hp ? conditionalPassive.hp : 0;
