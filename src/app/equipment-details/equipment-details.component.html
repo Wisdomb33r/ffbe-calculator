@@ -11,10 +11,18 @@
 <p *ngIf="equipment.def_percent">+{{equipment.def_percent}}% {{'def' | translate}}</p>
 <p *ngIf="equipment.spr">+{{equipment.spr}} {{'spr' | translate}}</p>
 <p *ngIf="equipment.spr_percent">+{{equipment.spr_percent}}% {{'spr' | translate}}</p>
-<p *ngIf="equipment.atk_dh">+{{equipment.atk_dh}}% {{'atk' | translate}} {{'dh' | translate}}</p>
-<p *ngIf="equipment.atk_tdh">+{{equipment.atk_tdh}}% {{'atk' | translate}} {{'tdh' | translate}}</p>
-<p *ngIf="equipment.mag_dh">+{{equipment.mag_dh}}% {{'mag' | translate}} {{'dh' | translate}}</p>
-<p *ngIf="equipment.mag_tdh">+{{equipment.mag_tdh}}% {{'mag' | translate}} {{'tdh' | translate}}</p>
+<p *ngIf="equipment.atk_dh" [class.inactive]="!isDhActive()">
+  +{{equipment.atk_dh}}% {{'atk' | translate}} {{'dh' | translate}}
+</p>
+<p *ngIf="equipment.atk_tdh" [class.inactive]="!isTdhActive()">
+  +{{equipment.atk_tdh}}% {{'atk' | translate}} {{'tdh' | translate}}
+</p>
+<p *ngIf="equipment.mag_dh" [class.inactive]="!isDhActive()">
+  +{{equipment.mag_dh}}% {{'mag' | translate}} {{'dh' | translate}}
+</p>
+<p *ngIf="equipment.mag_tdh" [class.inactive]="!isTdhActive()">
+  +{{equipment.mag_tdh}}% {{'mag' | translate}} {{'tdh' | translate}}
+</p>
 <p *ngFor="let passive of getConditionalPassivesToDisplay()" class="passive" [class.inactive]="!passive.active">
   <span *ngIf="passive.hp">+{{passive.hp}}% {{'hp' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
