@@ -49,7 +49,7 @@
 </table>
 <h2>{{'calculation.defensive.magicalEhp' | translate}}</h2>
 <p>{{result.hp | integer}} * {{result.buffedSpr}}
-  <span *ngIf="algorithm.isSupportMitigating"> / (1-{{algorithm.supportMitigation}}%)</span>
+  <span *ngIf="result.effectiveMitigation"> / (1-{{result.effectiveMitigation}}%)</span>
   <span *ngIf="result.effectiveMagicalCover"> / (1-{{result.effectiveMagicalCover}}%)</span>
   <span *ngIf="result.magicalResistance"> / (1-{{result.magicalResistance}}%)</span>
 </p>
