@@ -157,8 +157,8 @@ class UnitStats {
     $this->spr_passive = $brex_unit_stats->psy_passif_amelio > 0 ? $brex_unit_stats->psy_passif_amelio : $brex_unit_stats->psy_passif;
     $this->atk_dh = $brex_unit_stats->att_dh_amelio > 0 ? $brex_unit_stats->att_dh_amelio : $brex_unit_stats->att_dh;
     $this->mag_dh = $brex_unit_stats->mag_dh_amelio > 0 ? $brex_unit_stats->mag_dh_amelio : $brex_unit_stats->mag_dh;
-    $this->atk_tdh = $brex_unit_stats->att_tdh > 0 ? $brex_unit_stats->att_tdh_amelio : $brex_unit_stats->att_tdh;
-    $this->mag_tdh = $brex_unit_stats->mag_tdh > 0 ? $brex_unit_stats->mag_tdh_amelio : $brex_unit_stats->mag_tdh;
+    $this->atk_tdh = $brex_unit_stats->att_tdh_amelio > 0 ? $brex_unit_stats->att_tdh_amelio : $brex_unit_stats->att_tdh;
+    $this->mag_tdh = $brex_unit_stats->mag_tdh_amelio > 0 ? $brex_unit_stats->mag_tdh_amelio : $brex_unit_stats->mag_tdh;
   }
 }
 class Build {

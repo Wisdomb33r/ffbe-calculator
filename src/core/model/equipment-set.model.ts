@@ -119,7 +119,7 @@ export class EquipmentSet {
   }
 
   public checkConditionalPassiveActive(condPassive: ConditionalPassive, unitId: number): boolean {
-    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0) {
+    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0 && isNullOrUndefined(condPassive.category)) {
       return unitId === condPassive.unit;
     }
     if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0) {
