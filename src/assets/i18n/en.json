@@ -141,7 +141,7 @@
       "sparkChain": "Spark chain",
       "baseDamages": "Base damages",
       "averageDamages": "Average damages",
-      "defaultDefSprExplanations": "Result is by default expressed in million damages on a 1 DEF/PSY enemy. This is equivalent to damages on a 1 million DEF/PSY enemy."
+      "defaultDefSprExplanations": "Results are expressed in millions damages on a 1 DEF/PSY enemy. This is equivalent to damages on a 1 million DEF/PSY enemy."
     },
     "defensive": {
       "physicalEhpCalculation": "Physical EHP calculation",
