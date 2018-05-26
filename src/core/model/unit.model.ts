@@ -77,7 +77,7 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStatPercent('mag'),
       this.selectedBuild.equipments.sumEquipmentStatPercent('def'),
       this.selectedBuild.equipments.sumEquipmentStatPercent('spr'),
-      this.selectedBuild.equipments.getAllActiveConditionalPassives()
+      this.selectedBuild.equipments.getAllActiveConditionalPassives(this.id)
     );
 
     const activeCondPassives = this.filterUnitActiveConditionalPassives();
@@ -91,7 +91,7 @@ export class Unit {
     const activeConditionalPassives: Array<ConditionalPassive> = [];
     this.conditional_passives.forEach(condPassive => {
       condPassive.active = false;
-      if (this.selectedBuild.equipments.checkConditionalPassiveActive(condPassive)) {
+      if (this.selectedBuild.equipments.checkConditionalPassiveActive(condPassive, this.id)) {
         condPassive.active = true;
         activeConditionalPassives.push(condPassive);
       }

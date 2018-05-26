@@ -104,6 +104,7 @@ class Equipment {
   }
 }
 class ConditionalPassive {
+  public $unit;
   public $category;
   public $element;
   public $hp;
@@ -113,6 +114,7 @@ class ConditionalPassive {
   public $def;
   public $spr;
   function __construct($brex_unit_passive) {
+    $this->unit = $brex_unit_passive->unit ? $brex_unit_passive->unit->numero : null;
     $this->category = $brex_unit_passive->categorie ? $brex_unit_passive->categorie->id : null;
     $this->element = $brex_unit_passive->element ? $brex_unit_passive->element->id : null;
     $this->hp = $brex_unit_passive->pv;
@@ -153,10 +155,10 @@ class UnitStats {
     $this->def_passive = $brex_unit_stats->def_passif_amelio > 0 ? $brex_unit_stats->def_passif_amelio : $brex_unit_stats->def_passif;
     $this->spr = $brex_unit_stats->psy + $brex_unit_stats->psy_pots;
     $this->spr_passive = $brex_unit_stats->psy_passif_amelio > 0 ? $brex_unit_stats->psy_passif_amelio : $brex_unit_stats->psy_passif;
-    $this->atk_dh = $brex_unit_stats->att_dh;
-    $this->mag_dh = $brex_unit_stats->mag_dh;
-    $this->atk_tdh = $brex_unit_stats->att_tdh;
-    $this->mag_tdh = $brex_unit_stats->mag_tdh;
+    $this->atk_dh = $brex_unit_stats->att_dh_amelio > 0 ? $brex_unit_stats->att_dh_amelio : $brex_unit_stats->att_dh;
+    $this->mag_dh = $brex_unit_stats->mag_dh_amelio > 0 ? $brex_unit_stats->mag_dh_amelio : $brex_unit_stats->mag_dh;
+    $this->atk_tdh = $brex_unit_stats->att_tdh > 0 ? $brex_unit_stats->att_tdh_amelio : $brex_unit_stats->att_tdh;
+    $this->mag_tdh = $brex_unit_stats->mag_tdh > 0 ? $brex_unit_stats->mag_tdh_amelio : $brex_unit_stats->mag_tdh;
   }
 }
 class Build {
@@ -179,7 +181,7 @@ class Build {
     $this->physical_killer = $brex_build->tue_amelio ? $brex_build->tue_amelio : $brex_build->tue;
     // TODO magical killer when DB ready
     $this->equipments = new EquipmentSet ( $brex_build, $language );
-    
+
     if ($brex_build->algorithm->id == 8) {
       $this->mitigation = $brex_build->mitigation;
       $this->physical_mitigation = $brex_build->physical_mitigation;
@@ -189,7 +191,7 @@ class Build {
       $this->physical_resistance = $brex_build->physical_resistance;
       $this->magical_resistance = $brex_build->magical_resistance;
     }
-    
+
     $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
     $brex_build_skills = array_reverse ( $brex_build_skills );
     if (count ( $brex_build_skills )) {
@@ -335,7 +337,9 @@ class Unit {
     if (is_array ( $brex_unit_passives ) && count ( $brex_unit_passives )) {
       $this->conditional_passives = array ();
       foreach ( $brex_unit_passives as $brex_unit_passive ) {
-        $this->conditional_passives [] = new ConditionalPassive ( $brex_unit_passive );
+        if(!$brex_unit_passive->objet){
+          $this->conditional_passives [] = new ConditionalPassive ( $brex_unit_passive );
+        }
       }
     }
   }
