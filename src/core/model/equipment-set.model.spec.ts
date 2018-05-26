@@ -122,6 +122,7 @@ describe('EquipmentSet', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     const conditionalPassive = new ConditionalPassive(JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA));
+    conditionalPassive.category = undefined;
     conditionalPassive.unit = 777;
     // WHEN
     const isActive = equipments.checkConditionalPassiveActive(conditionalPassive, 777);
