@@ -51,6 +51,67 @@ describe('UnitsService', () => {
     expect(service).toBeTruthy();
   }));
 
+  it('#equipInSlot should remove equipment from slot',
+    inject([UnitsService], (service: UnitsService) => {
+      // GIVEN
+      service.selectedUnit = createMinimalUnit();
+      service.selectedUnit.selectDefaultBuild();
+      // WHEN
+      service.equipInSlot('body', new Equipment(JSON.parse('{"id":-1}')));
+      // THEN
+      expect(service.getEquipments().body).toBeNull();
+    }));
+
+  it('#equipInSlot should remove left hand if two-handed right hand is equipped',
+    inject([UnitsService], (service: UnitsService) => {
+      // GIVEN
+      service.selectedUnit = createMinimalUnit();
+      service.selectedUnit.selectDefaultBuild();
+      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id": 1199}'));
+      // WHEN
+      service.equipInSlot('right_hand', new Equipment(JSON.parse('{"id":66,"variance_min":100,"variance_max":150}')));
+      // THEN
+      expect(service.getEquipments().left_hand).toBeNull();
+    }));
+
+  it('#equipInSlot should remove left hand weapon if no DW item left',
+    inject([UnitsService], (service: UnitsService) => {
+      // GIVEN
+      service.selectedUnit = createMinimalUnit();
+      service.selectedUnit.selectDefaultBuild();
+      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id":10,"category":1}'));
+      // WHEN
+      service.equipInSlot('body', new Equipment(JSON.parse('{"id":999}')));
+      // THEN
+      expect(service.getEquipments().left_hand).toBeNull();
+    }));
+
+  it('#equipInSlot should not remove left hand shield if no DW item left',
+    inject([UnitsService], (service: UnitsService) => {
+      // GIVEN
+      service.selectedUnit = createMinimalUnit();
+      service.selectedUnit.selectDefaultBuild();
+      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id":10,"category":9}')); // shield
+      // WHEN
+      service.equipInSlot('body', new Equipment(JSON.parse('{"id":999}')));
+      // THEN
+      expect(service.getEquipments().left_hand).toBeTruthy();
+      expect(service.getEquipments().left_hand.id).toEqual(10);
+    }));
+
+  it('#equipInSlot should not remove left hand weapon if DW item left',
+    inject([UnitsService], (service: UnitsService) => {
+      // GIVEN
+      service.selectedUnit = createMinimalUnit();
+      service.selectedUnit.selectDefaultBuild();
+      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id":10,"category":1}'));
+      // WHEN
+      service.equipInSlot('accessory1', new Equipment(JSON.parse('{"id":935}'))); // item with DW
+      // THEN
+      expect(service.getEquipments().left_hand).toBeTruthy();
+      expect(service.getEquipments().left_hand.id).toEqual(10);
+    }));
+
   it('#getAllowedEquipmentsForSlot$ should not filter equipments and return an observable',
     inject([UnitsService], (service: UnitsService) => {
       // GIVEN

@@ -31,6 +31,10 @@ export class UnitsService {
         this.selectedUnit.selectedBuild.equipments['left_hand'] = null;
       }
       this.selectedUnit.selectedBuild.equipments[slot] = equipment;
+      if (!this.selectedUnit.isWithNativeDw() && !this.getEquipments().isDwEquipped()
+        && this.getEquipments().left_hand && this.getEquipments().left_hand.isWeapon()) {
+        this.getEquipments().left_hand = null;
+      }
     }
   }
 
