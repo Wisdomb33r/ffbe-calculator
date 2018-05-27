@@ -244,6 +244,7 @@ class Skill {
       $this->hits = $brex_skill->competence->hits;
       $this->frames = $brex_skill->competence->frames;
       $this->damages = $brex_skill->competence->damages;
+      $this->calculation_stat = $brex_skill->competence->calculation_stat;
       if ($brex_skill->competence->physique) {
         $this->damages_type = 'physical';
       }
