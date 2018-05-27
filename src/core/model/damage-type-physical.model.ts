@@ -6,22 +6,12 @@ import {Equipment} from './equipment.model';
 
 export class DamageTypePhysical extends DamageType {
 
-  public calculationStat: string;
-
   constructor(calculation_stat?: string) {
     super();
-    if (!isNullOrUndefined(calculation_stat) && calculation_stat.length > 0) {
+    if (!isNullOrUndefined(calculation_stat) && ['atk', 'mag', 'def', 'spr'].indexOf(calculation_stat) > -1) {
       this.calculationStat = calculation_stat;
     } else {
       this.calculationStat = 'atk';
-    }
-  }
-
-  public calculateBuffs(unit: Unit, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
-    result.atk = unit.stats.atk.total;
-    result.buffedAtk = result.atk;
-    if (isSupportBuffing) {
-      result.buffedAtk += unit.stats.atk.base * supportBuff / 100;
     }
   }
 
@@ -67,11 +57,11 @@ export class DamageTypePhysical extends DamageType {
     result.isDualWielding = true;
     result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
     result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
-    return (result.buffedAtk - result.leftHandAtk) * (result.buffedAtk - result.rightHandAtk);
+    return (result.buffed_atk - result.leftHandAtk) * (result.buffed_atk - result.rightHandAtk);
   }
 
   private calculateDhDamages(unit: Unit, result: ResultChaining): number {
     result.isDualWielding = false;
-    return result.buffedAtk * result.buffedAtk;
+    return result.buffed_atk * result.buffed_atk;
   }
 }

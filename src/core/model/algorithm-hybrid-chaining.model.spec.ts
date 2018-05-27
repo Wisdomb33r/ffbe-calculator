@@ -30,9 +30,9 @@ describe('AlgorithmHybridChaining', () => {
     result['turnDamages'].forEach((turn: ResultChaining) => {
       expect(turn instanceof ResultChaining).toBeTruthy();
       expect(turn['atk']).toEqual(800);
-      expect(turn['buffedAtk']).toEqual(1000);
+      expect(turn['buffed_atk']).toEqual(1000);
       expect(turn['mag']).toEqual(1000);
-      expect(turn['buffedMag']).toEqual(1200);
+      expect(turn['buffed_mag']).toEqual(1200);
       expect(turn['isDualWielding']).toBeTruthy();
       expect(turn['combosIncrement']).toBeCloseTo(0.1);
       expect(turn['killerPassive']).toBeCloseTo(50);
@@ -87,9 +87,9 @@ describe('AlgorithmHybridChaining', () => {
     result['turnDamages'].forEach((turn: ResultChaining) => {
       expect(turn instanceof ResultChaining).toBeTruthy();
       expect(turn['atk']).toEqual(800);
-      expect(turn['buffedAtk']).toEqual(800);
+      expect(turn['buffed_atk']).toEqual(800);
       expect(turn['mag']).toEqual(1000);
-      expect(turn['buffedMag']).toEqual(1000);
+      expect(turn['buffed_mag']).toEqual(1000);
       expect(turn['isDualWielding']).toBeFalsy();
       expect(turn['combosIncrement']).toBeCloseTo(0.45);
       expect(turn['killerPassive']).toBeCloseTo(0);

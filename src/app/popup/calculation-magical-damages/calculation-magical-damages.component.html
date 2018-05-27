@@ -25,9 +25,9 @@
 <h1>{{'calculation.display.damageCalculation' | translate}}</h1>
 <table>
   <tr>
-    <td>{{'mag' | translate}}</td>
+    <td>{{result.calculationStat | translate}}</td>
     <td></td>
-    <td>{{result.mag | integer}}</td>
+    <td>{{result[result.calculationStat] | integer}}</td>
   </tr>
   <tr>
     <td>{{'calculation.display.supportBuff' | translate}}</td>
@@ -37,9 +37,9 @@
     <td>{{algorithm.supportBuff | integer}}%</td>
   </tr>
   <tr>
-    <td>{{'calculation.display.buffedMag' | translate}}</td>
+    <td>{{'calculation.display.buffed_' + result.calculationStat | translate}}</td>
     <td></td>
-    <td>{{result.buffedMag | integer}}</td>
+    <td>{{result['buffed_' + result.calculationStat] | integer}}</td>
   </tr>
   <tr>
     <td>{{'calculation.display.killer' | translate}}</td>
@@ -77,7 +77,7 @@
 
 <h2>{{'calculation.offensive.baseDamages' | translate}}</h2>
 <p>
-  {{result.buffedMag | integer}}² * {{result.power | integer}}% * 2
+  {{result['buffed_' + result.calculationStat] | integer}}² * {{result.power | integer}}% * 2
 </p>
 <p>= {{result.magicalDamages | integer}}</p>
 

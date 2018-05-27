@@ -29,7 +29,7 @@ describe('AlgorithmMagicalChaining', () => {
     result['turnDamages'].forEach((turn: ResultChaining) => {
       expect(turn instanceof ResultChaining).toBeTruthy();
       expect(turn['mag']).toEqual(1000);
-      expect(turn['buffedMag']).toEqual(1200);
+      expect(turn['buffed_mag']).toEqual(1200);
       expect(turn['combosIncrement']).toEqual(0.1);
       expect(turn['killerPassive']).toBeCloseTo(100);
     });

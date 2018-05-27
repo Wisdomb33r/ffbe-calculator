@@ -5,9 +5,14 @@ export class ResultChaining extends Result {
   public atk: number;
   public leftHandAtk: number;
   public rightHandAtk: number;
-  public buffedAtk: number;
+  public buffed_atk: number;
   public mag: number;
-  public buffedMag: number;
+  public buffed_mag: number;
+  public def: number;
+  public buffed_def: number;
+  public spr: number;
+  public buffed_spr: number;
+  public calculationStat: string;
 
   // skill power
   public combosIncrement: number;

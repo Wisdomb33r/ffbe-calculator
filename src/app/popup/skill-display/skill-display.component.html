@@ -8,6 +8,10 @@
     <td>{{'skills.display.damageType' | translate}}</td>
     <td>{{'skills.display.damageType_' + skill.damages_type | translate}}</td>
   </tr>
+  <tr *ngIf="skill.calculation_stat">
+    <td>{{'skills.display.calculationStat' | translate}}</td>
+    <td>{{skill.calculation_stat | translate}}</td>
+  </tr>
   <tr>
     <td>{{'skills.display.power' | translate}}</td>
     <td>{{skill.power | integer}}%</td>

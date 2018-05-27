@@ -37,7 +37,7 @@ describe('AlgorithmPhysicalFinish', () => {
     result['turnDamages'].forEach((turn: ResultChaining) => {
       expect(turn instanceof ResultChaining).toBeTruthy();
       expect(turn['atk']).toEqual(1000);
-      expect(turn['buffedAtk']).toEqual(1000);
+      expect(turn['buffed_atk']).toEqual(1000);
       expect(turn['isDualWielding']).toBeFalsy();
       expect(turn['killerPassive']).toBeCloseTo(0);
     });

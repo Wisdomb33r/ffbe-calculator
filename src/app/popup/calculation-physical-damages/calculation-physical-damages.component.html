@@ -37,9 +37,9 @@
     <td>{{algorithm.supportBuff}}%</td>
   </tr>
   <tr>
-    <td>{{'calculation.display.buffedAtk' | translate}}</td>
+    <td>{{'calculation.display.buffed_atk' | translate}}</td>
     <td></td>
-    <td>{{result.buffedAtk | integer}}</td>
+    <td>{{result.buffed_atk | integer}}</td>
   </tr>
   <tr>
     <td>{{'calculation.display.killer' | translate}}</td>
@@ -81,12 +81,12 @@
 </table>
 <h2>{{'calculation.offensive.baseDamages' | translate}}</h2>
 <p *ngIf="result.isDualWielding">
-  ({{result.buffedAtk | integer}}-{{result.leftHandAtk | integer}})*({{result.buffedAtk |
+  ({{result.buffed_atk | integer}}-{{result.leftHandAtk | integer}})*({{result.buffed_atk |
   integer}}-{{result.rightHandAtk | integer}})
   * {{result.power | integer}}% * 2
 </p>
 <p *ngIf="!result.isDualWielding">
-  {{result.buffedAtk | integer}}² * {{result.power | integer}}% * 2
+  {{result.buffed_atk | integer}}² * {{result.power | integer}}% * 2
 </p>
 <p>= {{result.physicalDamages | integer}}</p>
 
