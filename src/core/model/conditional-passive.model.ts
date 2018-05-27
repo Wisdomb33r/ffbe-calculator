@@ -9,6 +9,7 @@ export class ConditionalPassive {
   public mag: number;
   public def: number;
   public spr: number;
+  public partial_dw: boolean;
 
   // transcient
   public active = false;
@@ -23,5 +24,6 @@ export class ConditionalPassive {
     this.mag = conditionalPassive.mag ? conditionalPassive.mag : 0;
     this.def = conditionalPassive.def ? conditionalPassive.def : 0;
     this.spr = conditionalPassive.spr ? conditionalPassive.spr : 0;
+    this.partial_dw = conditionalPassive.partial_dw ? true : false;
   }
 }

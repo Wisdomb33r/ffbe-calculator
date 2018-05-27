@@ -1,6 +1,7 @@
 import {UnitStats} from './unit-stats.model';
 import {Build} from './build.model';
 import {ConditionalPassive} from './conditional-passive.model';
+import {isNullOrUndefined} from 'util';
 
 export class Unit {
   // from backend
@@ -36,6 +37,16 @@ export class Unit {
   public isWithNativeDw() {
     // TODO currently hardcoded, need to find a way to retrieve this from backend
     return this.id === 590 || this.id === 775 || this.id === 8063;
+  }
+
+  public isWithPartialDwForCategory(category: number): boolean {
+    return this.isPartialDwNativeForCategory(category) || this.selectedBuild.equipments.isPartialDwEquippedForCategory(category);
+  }
+
+  private isPartialDwNativeForCategory(category: number): boolean {
+    return !isNullOrUndefined(
+      this.conditional_passives.find(condPassive => condPassive.category === category && condPassive.partial_dw)
+    );
   }
 
   public computeAll() {
