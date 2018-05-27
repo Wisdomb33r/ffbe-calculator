@@ -97,7 +97,7 @@ describe('EquipmentSet', () => {
     equipments.materia3.conditional_passives[0].category = 10;
     equipments.right_hand.category = 15; // to activate half the the defined conditional passives
     // WHEN
-    const passives: Array<ConditionalPassive> = equipments.getAllActiveConditionalPassives();
+    const passives: Array<ConditionalPassive> = equipments.getAllActiveConditionalPassives(999);
     // THEN
     expect(passives.length).toEqual(4);
     expect(passives.every(passive => passive.category === 15)).toBeTruthy();
@@ -112,10 +112,33 @@ describe('EquipmentSet', () => {
     equipment.conditional_passives[0].category = 10;
     equipments.right_hand.category = 15;
     // WHEN
-    const equipmentActivated = equipments.activateEquipmentConditionalPassives(equipment);
+    const equipmentActivated = equipments.activateEquipmentConditionalPassives(equipment, 999);
     // THEN
     expect(equipmentActivated.conditional_passives[0].active).toBeFalsy();
     expect(equipmentActivated.conditional_passives[1].active).toBeTruthy();
+  });
+
+  it('#checkConditionalPassiveActive should return true for unit specific passive if the unit is the right one', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    const conditionalPassive = new ConditionalPassive(JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA));
+    conditionalPassive.category = undefined;
+    conditionalPassive.unit = 777;
+    // WHEN
+    const isActive = equipments.checkConditionalPassiveActive(conditionalPassive, 777);
+    // THEN
+    expect(isActive).toBeTruthy();
+  });
+
+  it('#checkConditionalPassiveActive should return false for unit specific passive if the unit is not the right one', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    const conditionalPassive = new ConditionalPassive(JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA));
+    conditionalPassive.unit = 888;
+    // WHEN
+    const isActive = equipments.checkConditionalPassiveActive(conditionalPassive, 777);
+    // THEN
+    expect(isActive).toBeFalsy();
   });
 
   it('#getWeaponsElements should return an empty array if no elemental weapon is equipped', () => {

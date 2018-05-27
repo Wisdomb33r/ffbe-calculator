@@ -118,22 +118,49 @@ export class EquipmentSet {
       && this.left_hand && this.left_hand.isWeapon() && !this.left_hand.isTwoHanded();
   }
 
-  public checkConditionalPassiveActive(condPassive: ConditionalPassive): boolean {
-    if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0) {
+  public isPartialDwEquippedForCategory(category: number): boolean {
+    return !isNullOrUndefined(
+      this.getAllConditionalPassives()
+        .find(condPassive => condPassive.category === category && condPassive.partial_dw)
+    );
+  }
+
+  public checkConditionalPassiveActive(condPassive: ConditionalPassive, unitId: number): boolean {
+    // unit-specific bonus of an item
+    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0 && isNullOrUndefined(condPassive.category)) {
+      return unitId === condPassive.unit;
+    }
+    // unit or item bonus if a category of equipment is present
+    if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0 && !condPassive.partial_dw) {
       return (this.right_hand && this.right_hand.category === condPassive.category)
         || (this.left_hand && this.left_hand.category === condPassive.category)
         || (this.head && this.head.category === condPassive.category)
         || (this.body && this.body.category === condPassive.category)
         ;
     }
+    // unit or item bonus if a weapon of the right element is present
     if (!isNullOrUndefined(condPassive.element) && condPassive.element > 0) {
       // TODO implement algorithm to determine if there is an equipped weapon of the right element
       return false;
     }
   }
 
-  public getAllActiveConditionalPassives(): Array<ConditionalPassive> {
-    const allPassives: Array<ConditionalPassive> = [
+  public getAllActiveConditionalPassives(unitId: number): Array<ConditionalPassive> {
+    const allPassives: Array<ConditionalPassive> = this.getAllConditionalPassives();
+    allPassives.forEach((cp: ConditionalPassive) => cp.active = false);
+    const activePassives: Array<ConditionalPassive> =
+      allPassives.filter(condPassive => this.checkConditionalPassiveActive(condPassive, unitId));
+    activePassives.forEach((cp: ConditionalPassive) => cp.active = true);
+    return activePassives;
+  }
+
+  public activateEquipmentConditionalPassives(equipment: Equipment, unitId: number): Equipment {
+    equipment.conditional_passives.forEach(cp => this.checkConditionalPassiveActive(cp, unitId) ? cp.active = true : cp.active = false);
+    return equipment;
+  }
+
+  private getAllConditionalPassives(): Array<ConditionalPassive> {
+    return [
       ...this.right_hand ? this.right_hand.conditional_passives : [],
       ...this.left_hand ? this.left_hand.conditional_passives : [],
       ...this.head ? this.head.conditional_passives : [],
@@ -145,14 +172,5 @@ export class EquipmentSet {
       ...this.materia3 ? this.materia3.conditional_passives : [],
       ...this.materia4 ? this.materia4.conditional_passives : [],
     ];
-    allPassives.forEach((cp: ConditionalPassive) => cp.active = false);
-    const activePassives: Array<ConditionalPassive> = allPassives.filter(condPassive => this.checkConditionalPassiveActive(condPassive));
-    activePassives.forEach((cp: ConditionalPassive) => cp.active = true);
-    return activePassives;
-  }
-
-  public activateEquipmentConditionalPassives(equipment: Equipment): Equipment {
-    equipment.conditional_passives.forEach(cp => this.checkConditionalPassiveActive(cp) ? cp.active = true : cp.active = false);
-    return equipment;
   }
 }

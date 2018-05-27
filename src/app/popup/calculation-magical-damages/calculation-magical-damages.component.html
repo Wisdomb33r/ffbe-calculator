@@ -41,7 +41,7 @@
     <td></td>
     <td>{{result['buffed_' + result.calculationStat] | integer}}</td>
   </tr>
-  <tr *ngIf="result.killerPassive">
+  <tr>
     <td>{{'calculation.display.killer' | translate}}</td>
     <td>
       <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>

@@ -31,6 +31,9 @@ export class UnitsService {
         this.selectedUnit.selectedBuild.equipments['left_hand'] = null;
       }
       this.selectedUnit.selectedBuild.equipments[slot] = equipment;
+      if (this.getEquipments().left_hand && !this.checkDwForSecondWeapon(this.getEquipments().left_hand, 'left_hand')) {
+        this.getEquipments().left_hand = null;
+      }
     }
   }
 
@@ -40,7 +43,7 @@ export class UnitsService {
         map((items: Array<Equipment>) => items
           .map((item: Equipment) => new Equipment(item))
           .filter((item: Equipment) => this.isAllowed(item, slot))
-          .map((item: Equipment) => this.selectedUnit.selectedBuild.equipments.activateEquipmentConditionalPassives(item))
+          .map((item: Equipment) => this.getEquipments().activateEquipmentConditionalPassives(item, this.selectedUnit.id))
           .sort((a: Equipment, b: Equipment) => -this.compareEquipmentsForAlgorithm(a, b))
         )
       );
@@ -130,14 +133,17 @@ export class UnitsService {
   }
 
   private checkTwoHandedMainHandForOffhand(slot: string) {
-    return slot !== 'left_hand' || !this.selectedUnit.selectedBuild.equipments.right_hand.isTwoHanded();
+    return slot !== 'left_hand' || !this.getEquipments().right_hand.isTwoHanded();
   }
 
   private checkDwForSecondWeapon(item: Equipment, slot: string): boolean {
     return slot !== 'left_hand' || item.isShield()
-      || (this.selectedUnit.selectedBuild.equipments.isDwEquipped() && !item.isTwoHanded())
+      || (this.getEquipments().isDwEquipped() && !item.isTwoHanded())
       || (this.selectedUnit.isWithNativeDw() && !item.isTwoHanded())
-      || item.isWeaponWithDw();
+      || item.isWeaponWithDw()
+      || (this.selectedUnit.isWithPartialDwForCategory(item.category)
+        && this.selectedUnit.isWithPartialDwForCategory(this.getEquipments().right_hand.category))
+      ;
   }
 
   // SHORTCUT GETTERS
