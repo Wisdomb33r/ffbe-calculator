@@ -113,6 +113,7 @@ class ConditionalPassive {
   public $mag;
   public $def;
   public $spr;
+  public $partial_dw;
   function __construct($brex_unit_passive) {
     $this->unit = $brex_unit_passive->unit ? $brex_unit_passive->unit->numero : null;
     $this->category = $brex_unit_passive->categorie ? $brex_unit_passive->categorie->id : null;
@@ -123,6 +124,7 @@ class ConditionalPassive {
     $this->mag = $brex_unit_passive->mag;
     $this->def = $brex_unit_passive->def;
     $this->spr = $brex_unit_passive->psy;
+    $this->partial_dw = $brex_unit_passive->partial_dw ? true : false;
   }
 }
 class UnitStats {
