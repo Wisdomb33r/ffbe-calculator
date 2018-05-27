@@ -8,7 +8,7 @@ export class DamageTypePhysical extends DamageType {
 
   constructor(calculation_stat?: string) {
     super();
-    if (!isNullOrUndefined(calculation_stat) && calculation_stat.length > 0) {
+    if (!isNullOrUndefined(calculation_stat) && ['atk', 'mag', 'def', 'spr'].indexOf(calculation_stat) > -1) {
       this.calculationStat = calculation_stat;
     } else {
       this.calculationStat = 'atk';
