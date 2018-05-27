@@ -7,7 +7,7 @@ export class DamageTypeMagical extends DamageType {
 
   constructor(calculation_stat?: string) {
     super();
-    if (!isNullOrUndefined(calculation_stat) && ['atk', 'mag', 'def', 'spr'].indexOf(this.calculationStat) > -1) {
+    if (!isNullOrUndefined(calculation_stat) && ['atk', 'mag', 'def', 'spr'].indexOf(calculation_stat) > -1) {
       this.calculationStat = calculation_stat;
     } else {
       this.calculationStat = 'mag';
