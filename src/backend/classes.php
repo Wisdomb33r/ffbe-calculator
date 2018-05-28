@@ -34,6 +34,7 @@ class Equipment {
   public $unique;
   public $physical_killer;
   public $magical_killer;
+  public $sex_restriction;
   public $conditional_passives;
   public $elements = array ();
   function __construct($brex_equipement, $language) {
@@ -70,6 +71,7 @@ class Equipment {
     $this->unique = $brex_equipement->uniq == 1 ? true : false;
     $this->physical_killer = $brex_equipement->build_tue;
     $this->magical_killer = $brex_equipement->build_tue_mag;
+    $this->sex_restriction = $brex_equipement->sex_restrict;
     $brex_build_passives = brex_build_passif::findByRelation1N ( array ('objet' => $brex_equipement->id) );
     if (count ( $brex_build_passives )) {
       $this->conditional_passives = array ();
@@ -318,6 +320,7 @@ class Unit {
   public $name;
   public $rank;
   public $icon;
+  public $sex;
   public $stats;
   public $builds;
   public $conditional_passives;
@@ -326,6 +329,7 @@ class Unit {
     $this->name = $language == 'fr' ? $brex_unit->perso->nom : $brex_unit->perso->nom_en;
     $this->rank = $brex_unit->stars;
     $this->icon = $brex_unit->getImageimgPath ();
+    $this->sex = $brex_unit->perso->sex;
     if ($brex_unit_stats) {
       $this->stats = new UnitStats ( $brex_unit_stats );
     }

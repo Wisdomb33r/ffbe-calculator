@@ -9,6 +9,7 @@ export class Unit {
   public name: string;
   public rank: number;
   public icon: string;
+  public sex: number;
   public stats: UnitStats;
   public conditional_passives: Array<ConditionalPassive> = [];
   public builds: Array<Build> = [];
@@ -21,6 +22,7 @@ export class Unit {
     this.name = unit.name;
     this.rank = unit.rank;
     this.icon = unit.icon;
+    this.sex = unit.sex;
     this.stats = new UnitStats(unit.stats);
     unit.builds.forEach(build => this.builds.push(new Build(build)));
     if (Array.isArray(unit.conditional_passives)) {
