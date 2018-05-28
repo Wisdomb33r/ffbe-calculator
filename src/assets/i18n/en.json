@@ -123,6 +123,7 @@
       "elementalResistances": "Elemental resists",
       "damageCalculation": "Damage calculation",
       "supportBuff": "Support buff",
+      "selfBuff": "Self buff",
       "supportBreak": "Support resists break",
       "buffed_atk": "ATK after buff",
       "buffed_mag": "MAG after buff",

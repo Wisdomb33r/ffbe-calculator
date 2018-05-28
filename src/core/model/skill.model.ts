@@ -18,6 +18,10 @@ export class Skill {
   public damages_type: string;
   public calculation_stat: string;
   public isBreakingChain: boolean;
+  public att_buff: number;
+  public mag_buff: number;
+  public def_buff: number;
+  public spr_buff: number;
   public resists_break: Array<number>;
   public elements: Array<number>;
 
@@ -39,6 +43,10 @@ export class Skill {
     this.damages_type = skill.damages_type;
     this.calculation_stat = skill.calculation_stat;
     this.isBreakingChain = skill.isBreakingChain;
+    this.att_buff = skill.att_buff;
+    this.mag_buff = skill.mag_buff;
+    this.def_buff = skill.def_buff;
+    this.spr_buff = skill.spr_buff;
     this.resists_break = skill.resists_break;
     this.elements = skill.elements;
     this.skillType = SkillTypeFactory.getInstance(this.category);

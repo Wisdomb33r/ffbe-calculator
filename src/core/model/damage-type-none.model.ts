@@ -1,9 +1,10 @@
 import {DamageType} from './damage-type.model';
 import {Unit} from './unit.model';
 import {ResultChaining} from './result-chaining.model';
+import {Skill} from './skill.model';
 
 export class DamageTypeNone extends DamageType {
-  calculateBuffs(unit: Unit, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
+  calculateBuffs(unit: Unit, skill: Skill, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
   }
 
   calculateDamages(unit: Unit, result: ResultChaining) {

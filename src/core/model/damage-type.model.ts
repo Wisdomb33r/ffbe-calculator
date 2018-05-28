@@ -1,15 +1,18 @@
 import {Unit} from './unit.model';
 import {ResultChaining} from './result-chaining.model';
+import {Skill} from './skill.model';
 
 export abstract class DamageType {
 
   public calculationStat: string;
 
-  public calculateBuffs(unit: Unit, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
+  public calculateBuffs(unit: Unit, skill: Skill, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
     result[this.calculationStat] = unit.stats[this.calculationStat].total;
     result['buffed_' + this.calculationStat] = unit.stats[this.calculationStat].total;
-    if (isSupportBuffing) {
-      result['buffed_' + this.calculationStat] += unit.stats[this.calculationStat].base * supportBuff / 100;
+    result.self_buff = skill[this.calculationStat + '_buff'] ? skill[this.calculationStat + '_buff'] : 0;
+    const buff = Math.max(result.self_buff, isSupportBuffing && supportBuff ? supportBuff : 0);
+    if (buff) {
+      result['buffed_' + this.calculationStat] += unit.stats[this.calculationStat].base * buff / 100;
     }
     result.calculationStat = this.calculationStat;
   }

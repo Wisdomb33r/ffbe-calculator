@@ -123,6 +123,7 @@
       "elementalResistances": "Résistances élémentaires",
       "damageCalculation": "Calcul des dégâts",
       "supportBuff": "Bonus du support",
+      "selfBuff": "Bonus personnel",
       "supportBreak": "Baisse rés. du support",
       "buffed_atk": "ATT après bonus",
       "buffed_mag": "MAG après bonus",
