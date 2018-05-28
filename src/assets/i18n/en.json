@@ -19,6 +19,11 @@
     "bugReport": "Contact us"
   },
   "calculator": {
+    "app": {
+      "title": "Brave Exvius builder and calculator",
+      "description": "Unit builder and calculator tool for Final Fantasy Brave Exvius",
+      "keywords": "final, fantasy, brave, exvius, unit, character, builder, calculator, damages, magical, physical, hybrid, compute, computation, result, effective, HP, tanking, tanks, mages, tool"
+    },
     "home": {
       "title": "FF Brave Exvius unit calculator",
       "howToStart": "Using the unit calculator is just as simple as :",
