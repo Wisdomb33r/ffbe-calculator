@@ -6,7 +6,8 @@ import {UnitSelectionComponent} from './unit-selection/unit-selection.component'
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog} from '@angular/material';
 import {isNullOrUndefined} from 'util';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
+import {Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-menus',
@@ -19,7 +20,8 @@ export class AppMenusComponent implements OnInit {
               private databaseClient: DatabaseClientService,
               private translate: TranslateService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private meta: Meta,
+              private title: Title) {
   }
 
   ngOnInit() {
@@ -50,5 +52,11 @@ export class AppMenusComponent implements OnInit {
 
   public switchLanguage(lang: string) {
     this.translate.use(lang);
+
+    this.meta.removeTag('name="description"');
+    this.meta.removeTag('name="keywords"');
+    this.translate.get('calculator.app.title').subscribe(translated => this.title.setTitle(translated));
+    this.translate.get('calculator.app.description').subscribe(translated => this.meta.addTag({name: 'description', content: translated}));
+    this.translate.get('calculator.app.keywords').subscribe(translated => this.meta.addTag({name: 'keywords', content: translated}));
   }
 }
