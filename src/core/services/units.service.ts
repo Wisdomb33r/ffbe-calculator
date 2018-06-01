@@ -8,6 +8,7 @@ import {CalculatorUtils} from '../calculator-utils';
 import {Algorithm} from '../model/algorithm.model';
 import {Result} from '../model/result.model';
 import {EquipmentSet} from '../model/equipment-set.model';
+import {isNullOrUndefined} from 'util';
 
 @Injectable()
 export class UnitsService {
@@ -106,7 +107,12 @@ export class UnitsService {
     let isAllowed = this.checkUniqueness(item, slot);
     isAllowed = isAllowed && this.checkTwoHandedMainHandForOffhand(slot);
     isAllowed = isAllowed && this.checkDwForSecondWeapon(item, slot);
+    isAllowed = isAllowed && this.checkSexRestrictions(item);
     return isAllowed;
+  }
+
+  private checkSexRestrictions(item: Equipment) {
+    return isNullOrUndefined(item.sex_restriction) || item.sex_restriction === this.selectedUnit.sex;
   }
 
   private checkUniqueness(item: Equipment, slot: string): boolean {

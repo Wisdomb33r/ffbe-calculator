@@ -299,6 +299,30 @@ describe('UnitsService', () => {
       });
     }));
 
+  it('#getAllowedEquipmentsForSlot$ should filter items having sex restrictions',
+    inject([UnitsService], (service: UnitsService) => {
+      // GIVEN
+      service.selectedUnit = createMinimalUnit();
+      service.selectedUnit.sex = 2;
+      service.selectedUnit.selectDefaultBuild();
+      spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
+        .and.returnValue(Observable.of([
+        new Equipment(JSON.parse('{"id":1,"sex_restriction":1}')), // male
+        new Equipment(JSON.parse('{"id":2,"sex_restriction":2}')), // female
+        new Equipment(JSON.parse('{"id":3}')), // no restriction
+      ]));
+      // WHEN
+      const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
+      // THEN
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999);
+      equipments.subscribe(result => {
+        expect(result.length).toEqual(2);
+        expect(result[0].id).toEqual(2);
+        expect(result[1].id).toEqual(3);
+      });
+    }));
+
   it('#getAllowedEquipmentsForSlot$ should sort all equipments based on ATK stat for physical damage algorithms',
     inject([UnitsService], (service: UnitsService) => {
       // GIVEN
