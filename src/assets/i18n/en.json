@@ -159,6 +159,8 @@
       "magicalEhpCalculation": "Magical EHP calculation",
       "supportMitigation": "Support mitigation",
       "nativeMitigation": "Native mitigation",
+      "nativePhysicalMitigation": "Native physical mitigation",
+      "nativeMagicalMitigation": "Native magical mitigation",
       "cover": "Cover",
       "physicalResistance": "Physical resistance",
       "magicalResistance": "Magical resistance",

@@ -48,6 +48,18 @@ export class AlgorithmDefensive implements Algorithm {
     if (this.isSupportBuffing) {
       result.buffedSpr += unit.stats.spr.base * this.supportBuff / 100;
     }
+
+    // TODO currently hardcoded for WKN because self-buffs are in skills and defensive characters not configured with a skill rotation
+    if (unit.id === 8016) {
+      result.selfDefBuff = 150;
+      if (result.selfDefBuff > this.supportBuff) {
+        result.buffedDef = result.def + unit.stats.def.base * result.selfDefBuff / 100;
+      }
+      result.selfSprBuff = 150;
+      if (result.selfSprBuff > this.supportBuff) {
+        result.buffedSpr = result.spr + unit.stats.spr.base * result.selfSprBuff / 100;
+      }
+    }
   }
 
   private calculateFinalResult(unit: Unit, result: ResultDefensive) {
@@ -62,8 +74,12 @@ export class AlgorithmDefensive implements Algorithm {
     if (this.isSupportMitigating && this.supportMitigation > result.effectiveMitigation) {
       result.effectiveMitigation = this.supportMitigation;
     }
-    result.physicalEffectiveHp = result.physicalEffectiveHp / (1 - result.effectiveMitigation / 100);
-    result.magicalEffectiveHp = result.magicalEffectiveHp / (1 - result.effectiveMitigation / 100);
+    result.physicalMitigation = unit.selectedBuild.physical_mitigation ? unit.selectedBuild.physical_mitigation : 0;
+    result.magicalMitigation = unit.selectedBuild.magical_mitigation ? unit.selectedBuild.magical_mitigation : 0;
+    result.physicalEffectiveHp =
+      result.physicalEffectiveHp / (1 - result.effectiveMitigation / 100) / (1 - result.physicalMitigation / 100);
+    result.magicalEffectiveHp =
+      result.magicalEffectiveHp / (1 - result.effectiveMitigation / 100) / (1 - result.magicalMitigation / 100);
   }
 
   private calculateCover(unit: Unit, result: ResultDefensive) {

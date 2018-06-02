@@ -18,6 +18,11 @@
       </td>
       <td>{{algorithm.supportBuff}}%</td>
     </tr>
+    <tr *ngIf="result.selfDefBuff">
+      <td>{{'calculation.display.selfBuff' | translate}}</td>
+      <td></td>
+      <td>{{result.selfDefBuff | integer}}%</td>
+    </tr>
     <tr>
       <td>{{'calculation.display.buffed_def' | translate}}</td>
       <td></td>
@@ -35,6 +40,11 @@
       <td></td>
       <td>{{result.mitigation}}%</td>
     </tr>
+    <tr *ngIf="result.physicalMitigation">
+      <td>{{'calculation.defensive.nativePhysicalMitigation' | translate}}</td>
+      <td></td>
+      <td>{{result.physicalMitigation}}%</td>
+    </tr>
     <tr *ngIf="result.physicalCover">
       <td>{{'calculation.defensive.cover' | translate}}</td>
       <td>
@@ -51,6 +61,7 @@
   <h3>{{'calculation.defensive.physicalEhp' | translate}}</h3>
   <p>{{result.hp | integer}} * {{result.buffedDef}}
     <span *ngIf="result.effectiveMitigation"> / (1-{{result.effectiveMitigation}}%)</span>
+    <span *ngIf="result.physicalMitigation"> / (1-{{result.physicalMitigation}}%)</span>
     <span *ngIf="result.effectivePhysicalCover"> / (1-{{result.effectivePhysicalCover}}%)</span>
     <span *ngIf="result.physicalResistance"> / (1-{{result.physicalResistance}}%)</span>
   </p>
