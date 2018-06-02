@@ -1,4 +1,7 @@
-<h2>{{equipment.name}}</h2>
+<h2><img src="assets/equipments/{{equipment.category}}.png" *ngIf="isItemCategoryDisplayed()">{{equipment.name}}</h2>
+<p *ngIf="equipment.elements && equipment.elements.length > 0" class="element">
+  <span *ngFor="let element of equipment.elements"><img src="assets/resists/resist_{{element}}.png"></span>
+</p>
 <p *ngIf="equipment.hp">+{{equipment.hp}} {{'hp' | translate}}</p>
 <p *ngIf="equipment.hp_percent">+{{equipment.hp_percent}}% {{'hp' | translate}}</p>
 <p *ngIf="equipment.mp">+{{equipment.mp}} {{'mp' | translate}}</p>
@@ -36,4 +39,7 @@
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
   <span *ngIf="passive.spr">+{{passive.spr}}% {{'spr' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
+</p>
+<p *ngIf="equipment.variance_min > 0 && equipment.variance_max > 0">
+  {{equipment.variance_min}}% - {{equipment.variance_max}}%
 </p>

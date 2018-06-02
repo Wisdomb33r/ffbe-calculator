@@ -27,4 +27,8 @@ export class EquipmentDetailsComponent {
   public isTdhActive(): boolean {
     return this.unitsService.getEquipments().isTrueDoubleHandActive();
   }
+
+  public isItemCategoryDisplayed(): boolean {
+    return this.equipment.isWeapon() || this.equipment.isShield() || this.equipment.isHead() || this.equipment.isBody();
+  }
 }

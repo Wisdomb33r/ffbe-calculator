@@ -14,7 +14,16 @@ p {
   color: white;
 }
 
-.passive img {
+p.element {
+  height: 16px;
+}
+
+p.element span, p.element img {
+  width: 16px;
+  height: 16px;
+}
+
+.passive img, h2 img {
   width: 16px;
   height: 16px;
   vertical-align: middle;
