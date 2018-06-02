@@ -21,7 +21,6 @@ export class CalculationOffensiveComponent {
 
   public displayPhysicalDamages(index: number) {
     this.dialog.open(CalculationPhysicalDamagesComponent, {
-      width: '300px',
       data: {
         result: this.result.turnDamages[index],
         algorithm: this.algorithm,
@@ -32,7 +31,6 @@ export class CalculationOffensiveComponent {
 
   public displayMagicalDamages(index: number) {
     this.dialog.open(CalculationMagicalDamagesComponent, {
-      width: '300px',
       data: {
         result: this.result.turnDamages[index],
         algorithm: this.algorithm,

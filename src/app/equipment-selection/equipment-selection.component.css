@@ -1,6 +1,6 @@
 .equipment {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   border: 1px solid #505139;
   border-bottom: 0;
   background-color: #000c63;

@@ -25,7 +25,6 @@ export class UnitDetailsComponent implements OnInit, OnChanges {
 
   displayStatDetails(stat: string) {
     const dialogRef = this.dialog.open(UnitDetailsStatSumComponent, {
-      width: '300px',
       data: {
         unitStats: this.unit.stats,
         stat: stat

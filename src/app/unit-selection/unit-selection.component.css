@@ -4,17 +4,23 @@ div.flexcontainer {
   align-items: center;
 }
 
-h2.mat-dialog-title {
-  margin-bottom: 0;
-}
-
 .unit {
-  width: 90px;
+  width: 75px;
 }
 
 .unit-icon {
   display: block;
   margin: auto;
-  max-width: 90px;
+  max-width: 75px;
   cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .unit {
+    width: 120px;
+  }
+
+  .unit-icon {
+    max-width: 120px;
+  }
 }

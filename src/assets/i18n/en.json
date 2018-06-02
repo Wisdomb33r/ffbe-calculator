@@ -126,8 +126,9 @@
       "hits": "Hits",
       "resistances": "Resists",
       "elementalResistances": "Elemental resists",
-      "damageCalculation": "Damage calculation",
+      "calculationParameters": "Calculation parameters",
       "supportBuff": "Support buff",
+      "selfBuff": "Self buff",
       "supportBreak": "Support resists break",
       "buffed_atk": "ATK after buff",
       "buffed_mag": "MAG after buff",
@@ -149,6 +150,8 @@
       "sparkChain": "Spark chain",
       "baseDamages": "Base damages",
       "averageDamages": "Average damages",
+      "physicalDamagesCalculation": "Physical damages calculation",
+      "magicalDamagesCalculation": "Magical damages calculation",
       "defaultDefSprExplanations": "Results are expressed in millions damages on a 1 DEF/PSY enemy. This is equivalent to damages on a 1 million DEF/PSY enemy."
     },
     "defensive": {

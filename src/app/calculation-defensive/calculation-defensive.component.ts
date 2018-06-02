@@ -24,7 +24,6 @@ export class CalculationDefensiveComponent implements OnInit {
 
   public displayPhysicalEhpCalculation() {
     this.dialog.open(CalculationPhysicalEhpComponent, {
-      width: '300px',
       data: {
         result: this.result,
         algorithm: this.algorithm,
@@ -34,7 +33,6 @@ export class CalculationDefensiveComponent implements OnInit {
 
   public displayMagicalEhpCalculation() {
     this.dialog.open(CalculationMagicalEhpComponent, {
-      width: '300px',
       data: {
         result: this.result,
         algorithm: this.algorithm,
@@ -44,7 +42,6 @@ export class CalculationDefensiveComponent implements OnInit {
 
   public displayEhpCalculation() {
     this.dialog.open(CalculationEhpComponent, {
-      width: '300px',
       data: {
         result: this.result,
         algorithm: this.algorithm,

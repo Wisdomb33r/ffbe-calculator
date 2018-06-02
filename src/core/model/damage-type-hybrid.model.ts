@@ -3,6 +3,7 @@ import {Unit} from './unit.model';
 import {DamageType} from './damage-type.model';
 import {DamageTypePhysical} from './damage-type-physical.model';
 import {DamageTypeMagical} from './damage-type-magical.model';
+import {Skill} from './skill.model';
 
 export class DamageTypeHybrid extends DamageType {
 
@@ -15,9 +16,9 @@ export class DamageTypeHybrid extends DamageType {
     this.magical = new DamageTypeMagical();
   }
 
-  public calculateBuffs(unit: Unit, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
-    this.physical.calculateBuffs(unit, isSupportBuffing, supportBuff, result);
-    this.magical.calculateBuffs(unit, isSupportBuffing, supportBuff, result);
+  public calculateBuffs(unit: Unit, skill: Skill, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
+    this.physical.calculateBuffs(unit, skill, isSupportBuffing, supportBuff, result);
+    this.magical.calculateBuffs(unit, skill, isSupportBuffing, supportBuff, result);
   }
 
   public calculateDamages(unit: Unit, result: ResultChaining) {
