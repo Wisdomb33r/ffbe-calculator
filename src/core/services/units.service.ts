@@ -148,7 +148,8 @@ export class UnitsService {
       || (this.selectedUnit.isWithNativeDw() && !item.isTwoHanded())
       || item.isWeaponWithDw()
       || (this.selectedUnit.isWithPartialDwForCategory(item.category)
-        && this.selectedUnit.isWithPartialDwForCategory(this.getEquipments().right_hand.category))
+        && this.selectedUnit.isWithPartialDwForCategory(this.getEquipments().right_hand.category)
+        && !item.isTwoHanded())
       ;
   }
 
