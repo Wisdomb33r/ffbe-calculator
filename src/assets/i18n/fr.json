@@ -159,6 +159,8 @@
       "magicalEhpCalculation": "Calcul PV effectifs magiques",
       "supportMitigation": "Mitigation du support",
       "nativeMitigation": "Mitigation native",
+      "nativePhysicalMitigation": "Mitigation physique native",
+      "nativeMagicalMitigation": "Mitigation magique native",
       "cover": "Couverture",
       "physicalResistance": "Résistance physique",
       "magicalResistance": "Résistance magique",

@@ -18,6 +18,11 @@
       </td>
       <td>{{algorithm.supportBuff}}%</td>
     </tr>
+    <tr *ngIf="result.selfSprBuff">
+      <td>{{'calculation.display.selfBuff' | translate}}</td>
+      <td></td>
+      <td>{{result.selfSprBuff | integer}}%</td>
+    </tr>
     <tr>
       <td>{{'calculation.display.buffed_spr' | translate}}</td>
       <td></td>
@@ -35,6 +40,11 @@
       <td></td>
       <td>{{result.mitigation}}%</td>
     </tr>
+    <tr *ngIf="result.magicalMitigation">
+      <td>{{'calculation.defensive.nativeMagicalMitigation' | translate}}</td>
+      <td></td>
+      <td>{{result.magicalMitigation}}%</td>
+    </tr>
     <tr *ngIf="result.magicalCover">
       <td>{{'calculation.defensive.cover' | translate}}</td>
       <td>
@@ -51,6 +61,7 @@
   <h3>{{'calculation.defensive.magicalEhp' | translate}}</h3>
   <p>{{result.hp | integer}} * {{result.buffedSpr}}
     <span *ngIf="result.effectiveMitigation"> / (1-{{result.effectiveMitigation}}%)</span>
+    <span *ngIf="result.magicalMitigation"> / (1-{{result.magicalMitigation}}%)</span>
     <span *ngIf="result.effectiveMagicalCover"> / (1-{{result.effectiveMagicalCover}}%)</span>
     <span *ngIf="result.magicalResistance"> / (1-{{result.magicalResistance}}%)</span>
   </p>
