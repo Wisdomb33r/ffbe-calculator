@@ -20,3 +20,13 @@ export const SHIELDS_CATEGORIES: Array<number> = [
   9,
   10,
 ];
+export const HEAD_CATEGORIES: Array<number> = [
+  11,
+  12,
+];
+export const BODY_CATEGORIES: Array<number> = [
+  7,
+  8,
+  14,
+  35,
+];

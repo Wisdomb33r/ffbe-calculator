@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Unit} from '../core/model/unit.model';
 import {UnitsService} from '../core/services/units.service';
 import {DatabaseClientService} from '../core/services/database-client.service';
-import {UnitSelectionComponent} from './unit-selection/unit-selection.component';
+import {UnitSelectionComponent} from './popup/unit-selection/unit-selection.component';
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog} from '@angular/material';
 import {isNullOrUndefined} from 'util';

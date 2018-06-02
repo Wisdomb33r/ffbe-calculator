@@ -1,7 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {UnitSelectionComponent} from '../unit-selection/unit-selection.component';
-import {Equipment} from '../../core/model/equipment.model';
+import {Equipment} from '../../../core/model/equipment.model';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/mergeMap';
 
@@ -15,7 +14,7 @@ export class EquipmentSelectionComponent {
   public equipments: Array<Equipment> = [];
   public offhandPresent: boolean;
 
-  constructor(public dialogRef: MatDialogRef<UnitSelectionComponent>,
+  constructor(public dialogRef: MatDialogRef<EquipmentSelectionComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.slot = data.slot;
     this.equipments = data.equipments;

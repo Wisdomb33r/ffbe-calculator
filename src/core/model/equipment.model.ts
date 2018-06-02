@@ -1,5 +1,5 @@
 import {ConditionalPassive} from './conditional-passive.model';
-import {SHIELDS_CATEGORIES, WEAPONS_CATEGORIES} from '../calculator-constants';
+import {BODY_CATEGORIES, HEAD_CATEGORIES, SHIELDS_CATEGORIES, WEAPONS_CATEGORIES} from '../calculator-constants';
 
 export class Equipment {
   public id: number;
@@ -89,6 +89,14 @@ export class Equipment {
 
   public isShield(): boolean {
     return SHIELDS_CATEGORIES.indexOf(this.category) > -1;
+  }
+
+  public isHead(): boolean {
+    return HEAD_CATEGORIES.indexOf(this.category) > -1;
+  }
+
+  public isBody(): boolean {
+    return BODY_CATEGORIES.indexOf(this.category) > -1;
   }
 
   public isTwoHanded(): boolean {
