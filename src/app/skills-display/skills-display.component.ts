@@ -19,7 +19,6 @@ export class SkillsDisplayComponent {
 
   public displaySkill(skill: Skill) {
     this.dialog.open(SkillDisplayComponent, {
-      width: '300px',
       data: {
         skill: skill
       }

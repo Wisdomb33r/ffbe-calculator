@@ -42,7 +42,6 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
       .subscribe((equipments: Array<Equipment>) => {
           if (equipments.length > 0 || (slot === 'left_hand' && offhandPresent)) {
             const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
-              width: '320px',
               data: {
                 slot: slot,
                 equipments: equipments,

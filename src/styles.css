@@ -58,6 +58,7 @@ mat-dialog-container.mat-dialog-container {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px;
   padding: 10px;
+  min-width: 250px;
 }
 
 h2.mat-dialog-title {
