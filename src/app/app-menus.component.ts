@@ -30,9 +30,7 @@ export class AppMenusComponent implements OnInit {
 
   public openUnitSelectionPane() {
     if (this.router.url === '/' || !this.unitsService.selectedUnit) {
-      const dialogRef = this.dialog.open(UnitSelectionComponent, {
-        width: '320px'
-      });
+      const dialogRef = this.dialog.open(UnitSelectionComponent);
 
       dialogRef.afterClosed().subscribe((result: Unit) => {
         if (!isNullOrUndefined(result)) {

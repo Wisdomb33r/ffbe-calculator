@@ -126,7 +126,7 @@
       "hits": "Coups",
       "resistances": "Résistances",
       "elementalResistances": "Résistances élémentaires",
-      "damageCalculation": "Calcul des dégâts",
+      "calculationParameters": "Paramètres du calcul",
       "supportBuff": "Bonus du support",
       "selfBuff": "Bonus personnel",
       "supportBreak": "Baisse rés. du support",
@@ -150,6 +150,8 @@
       "sparkChain": "Chaîne étincelle",
       "baseDamages": "Dégâts de base",
       "averageDamages": "Dégâts moyens",
+      "physicalDamagesCalculation": "Calcul dégâts physiques",
+      "magicalDamagesCalculation": "Calcul dégâts magiques",
       "defaultDefSprExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF/PSY. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF/PSY."
     },
     "defensive": {

@@ -1,113 +1,114 @@
-<h1>{{'calculation.offensive.skillHitsPower' | translate}}</h1>
-<table>
-  <tr *ngIf="isChaining()">
-    <td>{{'calculation.offensive.sparkChain' | translate}}</td>
-    <td>
-      <mat-checkbox [(ngModel)]="algorithm.isSparkChain" (change)="calculateBuild()"></mat-checkbox>
-    </td>
-  </tr>
-  <tr>
-    <td *ngIf="isChaining()">{{'calculation.offensive.comboIncrement' | translate}}</td>
-    <td *ngIf="!isChaining()">{{'calculation.offensive.comboMultiplier' | translate}}</td>
-    <td>{{result.combosIncrement | number:'1.1-1'}}</td>
-  </tr>
-  <tr>
-    <td>{{'calculation.display.hits' | translate}}</td>
-    <td>{{result.hitsPower.length}}</td>
-  </tr>
-</table>
-<p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
-<div class="total">
-  <h2>{{'calculation.offensive.turnPower' | translate}}</h2>
+<h2 mat-dialog-title>{{'calculation.offensive.physicalDamagesCalculation' | translate}}</h2>
+<mat-dialog-content>
+  <h3>{{'calculation.offensive.skillHitsPower' | translate}}</h3>
+  <table>
+    <tr *ngIf="isChaining()">
+      <td>{{'calculation.offensive.sparkChain' | translate}}</td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.isSparkChain" (change)="calculateBuild()"></mat-checkbox>
+      </td>
+    </tr>
+    <tr>
+      <td *ngIf="isChaining()">{{'calculation.offensive.comboIncrement' | translate}}</td>
+      <td *ngIf="!isChaining()">{{'calculation.offensive.comboMultiplier' | translate}}</td>
+      <td>{{result.combosIncrement | number:'1.1-1'}}</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.display.hits' | translate}}</td>
+      <td>{{result.hitsPower.length}}</td>
+    </tr>
+  </table>
+  <p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
+  <h3>{{'calculation.offensive.turnPower' | translate}}</h3>
   <p>{{result.power | integer}}%</p>
-</div>
 
-<h1>{{'calculation.display.damageCalculation' | translate}}</h1>
-<table>
-  <tr>
-    <td>{{'atk' | translate}}</td>
-    <td></td>
-    <td>{{result.atk | integer}}</td>
-  </tr>
-  <tr>
-    <td>{{'calculation.display.supportBuff' | translate}}</td>
-    <td>
-      <mat-checkbox [(ngModel)]="algorithm.isSupportBuffing" (change)="calculateBuild()"></mat-checkbox>
-    </td>
-    <td>{{algorithm.supportBuff}}%</td>
-  </tr>
-  <tr>
-    <td>{{'calculation.display.selfBuff' | translate}}</td>
-    <td></td>
-    <td>{{result.self_buff | integer}}%</td>
-  </tr>
-  <tr>
-    <td>{{'calculation.display.buffed_atk' | translate}}</td>
-    <td></td>
-    <td>{{result.buffed_atk | integer}}</td>
-  </tr>
-  <tr>
-    <td>{{'calculation.display.killer' | translate}}</td>
-    <td>
-      <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>
-    </td>
-    <td>{{result.killerPassive | integer}}%</td>
-  </tr>
-  <tr *ngIf="result.elements && result.elements.length > 0">
-    <td>{{'calculation.display.supportBreak' | translate}}</td>
-    <td>
-      <mat-checkbox [(ngModel)]="algorithm.isSupportBreakingResistances" (change)="calculateBuild()"></mat-checkbox>
-    </td>
-    <td>{{algorithm.supportResistsBreak[0] | integer}}%</td>
-  </tr>
-  <tr *ngIf="result.elements && result.elements.length > 0">
-    <td>{{'calculation.display.resistances' | translate}}</td>
-    <td>
-      <div *ngFor="let element of result.elements" class="resist-icon">
-        <img src="assets/resists/resist_{{element}}.png">
-      </div>
-    </td>
-    <td>
-      <div *ngFor="let element of result.elements" class="resist-label">
-        {{result.resistances[element-1] | integer}}%
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>{{'calculation.display.opponentDef' | translate}}</td>
-    <td></td>
-    <td>{{algorithm.opponentDef | integer}}</td>
-  </tr>
-  <tr>
-    <td>{{'calculation.display.weaponVariance' | translate}}</td>
-    <td></td>
-    <td>{{result.averageWeaponVariance}}%</td>
-  </tr>
-</table>
-<h2>{{'calculation.offensive.baseDamages' | translate}}</h2>
-<p *ngIf="result.isDualWielding">
-  ({{result.buffed_atk | integer}}-{{result.leftHandAtk | integer}})*({{result.buffed_atk |
-  integer}}-{{result.rightHandAtk | integer}})
-  * {{result.power | integer}}% * 2
-</p>
-<p *ngIf="!result.isDualWielding">
-  {{result.buffed_atk | integer}}² * {{result.power | integer}}% * 2
-</p>
-<p>= {{result.physicalDamages | integer}}</p>
+  <h3>{{'calculation.display.calculationParameters' | translate}}</h3>
+  <table>
+    <tr>
+      <td>{{'atk' | translate}}</td>
+      <td></td>
+      <td>{{result.atk | integer}}</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.display.supportBuff' | translate}}</td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.isSupportBuffing" (change)="calculateBuild()"></mat-checkbox>
+      </td>
+      <td>{{algorithm.supportBuff}}%</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.display.selfBuff' | translate}}</td>
+      <td></td>
+      <td>{{result.self_buff | integer}}%</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.display.buffed_atk' | translate}}</td>
+      <td></td>
+      <td>{{result.buffed_atk | integer}}</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.display.killer' | translate}}</td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>
+      </td>
+      <td>{{result.killerPassive | integer}}%</td>
+    </tr>
+    <tr *ngIf="result.elements && result.elements.length > 0">
+      <td>{{'calculation.display.supportBreak' | translate}}</td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.isSupportBreakingResistances" (change)="calculateBuild()"></mat-checkbox>
+      </td>
+      <td>{{algorithm.supportResistsBreak[0] | integer}}%</td>
+    </tr>
+    <tr *ngIf="result.elements && result.elements.length > 0">
+      <td>{{'calculation.display.resistances' | translate}}</td>
+      <td>
+        <div *ngFor="let element of result.elements" class="resist-icon">
+          <img src="assets/resists/resist_{{element}}.png">
+        </div>
+      </td>
+      <td>
+        <div *ngFor="let element of result.elements" class="resist-label">
+          {{result.resistances[element-1] | integer}}%
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>{{'calculation.display.opponentDef' | translate}}</td>
+      <td></td>
+      <td>{{algorithm.opponentDef | integer}}</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.display.weaponVariance' | translate}}</td>
+      <td></td>
+      <td>{{result.averageWeaponVariance}}%</td>
+    </tr>
+  </table>
+  <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
+  <p *ngIf="result.isDualWielding">
+    ({{result.buffed_atk | integer}}-{{result.leftHandAtk | integer}})*({{result.buffed_atk |
+    integer}}-{{result.rightHandAtk | integer}})
+    * {{result.power | integer}}% * 2
+  </p>
+  <p *ngIf="!result.isDualWielding">
+    {{result.buffed_atk | integer}}² * {{result.power | integer}}% * 2
+  </p>
+  <p>= {{result.physicalDamages | integer}}</p>
 
-<h2 *ngIf="result.killerPassive">{{'calculation.display.killerDamages' | translate}}</h2>
-<p *ngIf="result.killerPassive">
-  {{result.physicalDamages | integer}} * (1+{{result.killerPassive}}%/10)
-</p>
-<p *ngIf="result.killerPassive">= {{result.physicalKillerDamages | integer}}</p>
+  <h3 *ngIf="result.killerPassive">{{'calculation.display.killerDamages' | translate}}</h3>
+  <p *ngIf="result.killerPassive">
+    {{result.physicalDamages | integer}} * (1+{{result.killerPassive}}%/10)
+  </p>
+  <p *ngIf="result.killerPassive">= {{result.physicalKillerDamages | integer}}</p>
 
-<h2 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h2>
-<p *ngIf="result.averageElementalResistance">
-  {{result.physicalKillerDamages | integer}} * (1-({{result.averageElementalResistance}}%))
-</p>
-<p *ngIf="result.averageElementalResistance">= {{result.physicalElementalDamages | integer}}</p>
+  <h3 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h3>
+  <p *ngIf="result.averageElementalResistance">
+    {{result.physicalKillerDamages | integer}} * (1-({{result.averageElementalResistance}}%))
+  </p>
+  <p *ngIf="result.averageElementalResistance">= {{result.physicalElementalDamages | integer}}</p>
 
-<h2>{{'calculation.display.variances' | translate}}</h2>
-<p>{{result.physicalElementalDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}% /
-  {{algorithm.opponentDef}}</p>
-<p>= <strong>{{result.physicalResult | integer}}</strong></p>
+  <h3>{{'calculation.display.variances' | translate}}</h3>
+  <p>{{result.physicalElementalDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}% /
+    {{algorithm.opponentDef}}</p>
+  <p>= <strong>{{result.physicalResult | integer}}</strong></p>
+</mat-dialog-content>

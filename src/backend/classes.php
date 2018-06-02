@@ -222,6 +222,10 @@ class Skill {
   public $isBreakingChain;
   public $resists_break;
   public $elements;
+  public $att_buff;
+  public $mag_buff;
+  public $def_buff;
+  public $spr_buff;
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite == 1 ? true : false;
     $this->power = $brex_skill->puissance;
@@ -232,6 +236,10 @@ class Skill {
     $this->nb = $brex_skill->nb ? $brex_skill->nb : 1;
     $this->elements = $brex_skill->elements ? explode ( ',', $brex_skill->elements ) : null;
     $this->isBreakingChain = $brex_skill->breaking_chain ? true : false;
+    $this->att_buff = $brex_skill->att_buff;
+    $this->mag_buff = $brex_skill->mag_buff;
+    $this->def_buff = $brex_skill->def_buff;
+    $this->spr_buff = $brex_skill->psy_buff;
     if ($this->isLimitBreak) {
       $this->name = $language === 'fr' ? $brex_unit->limite : $brex_unit->limite_en;
       $this->icon = null;
