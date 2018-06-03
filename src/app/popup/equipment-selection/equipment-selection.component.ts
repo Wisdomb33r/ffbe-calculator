@@ -1,4 +1,14 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, NgZone, OnDestroy, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  NgZone,
+  OnDestroy,
+  ViewChild
+} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Equipment} from '../../../core/model/equipment.model';
 import 'rxjs/add/observable/of';
@@ -10,6 +20,7 @@ import {Observable} from 'rxjs/Observable';
 
 @Component({
   templateUrl: './equipment-selection.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./equipment-selection.component.css']
 })
 export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
