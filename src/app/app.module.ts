@@ -11,10 +11,11 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
+  MatFormFieldModule,
   MatInputModule,
   MatMenuModule,
   MatSelectModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
 import {AppComponent} from './app.component';
 import {UnitDetailsComponent} from './unit-details/unit-details.component';
@@ -108,6 +109,7 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatCheckboxModule,
     MatInputModule,
+    MatFormFieldModule,
     ClipboardModule,
   ],
   entryComponents: [
