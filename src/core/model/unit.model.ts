@@ -38,7 +38,13 @@ export class Unit {
 
   public isWithNativeDw() {
     // TODO currently hardcoded, need to find a way to retrieve this from backend
-    return this.id === 590 || this.id === 775 || this.id === 8063;
+    return this.id === 258 // lightning
+      || this.id === 319 // luneth
+      || this.id === 590 // onion knight
+      || this.id === 639 // nyx
+      || this.id === 775 // 2B
+      || this.id === 844 // CG Jake
+      || this.id === 8063; // A2
   }
 
   public isWithPartialDwForCategory(category: number): boolean {

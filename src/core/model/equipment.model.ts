@@ -2,6 +2,7 @@ import {ConditionalPassive} from './conditional-passive.model';
 import {BODY_CATEGORIES, HEAD_CATEGORIES, SHIELDS_CATEGORIES, WEAPONS_CATEGORIES} from '../calculator-constants';
 
 export class Equipment {
+  // from backend
   public id: number;
   public category: number;
   public name: string;
@@ -38,6 +39,9 @@ export class Equipment {
   public sex_restriction: number;
   public conditional_passives: Array<ConditionalPassive> = [];
   public elements: Array<number> = [];
+
+  // transcient
+  public filtered = false;
 
   constructor(equipment: Equipment) {
     this.id = equipment.id;

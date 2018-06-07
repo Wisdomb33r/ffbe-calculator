@@ -17,9 +17,11 @@ export class AppComponent {
       translate.use('fr');
     }
 
-    translate.get('calculator.app.title').subscribe(translated => this.title.setTitle(translated));
-    translate.get('calculator.app.description').subscribe(translated => this.meta.addTag({name: 'description', content: translated}));
-    translate.get('calculator.app.keywords').subscribe(translated => this.meta.addTag({name: 'keywords', content: translated}));
+    this.meta.removeTag('name="description"');
+    this.meta.removeTag('name="keywords"');
+    this.translate.get('calculator.app.title').subscribe(translated => this.title.setTitle(translated));
+    this.translate.get('calculator.app.description').subscribe(translated => this.meta.addTag({name: 'description', content: translated}));
+    this.translate.get('calculator.app.keywords').subscribe(translated => this.meta.addTag({name: 'keywords', content: translated}));
   }
 
 }

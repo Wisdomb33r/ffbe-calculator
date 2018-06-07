@@ -93,7 +93,8 @@
   "equipment": {
     "selection": {
       "title": "Equipment",
-      "remove": "Remove"
+      "remove": "Remove",
+      "filter": "Filter items"
     }
   },
   "skills": {
