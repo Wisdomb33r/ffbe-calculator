@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Inject,
-  NgZone,
-  OnDestroy,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, NgZone, OnDestroy, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Equipment} from '../../../core/model/equipment.model';
 import 'rxjs/add/observable/of';
@@ -20,14 +10,12 @@ import {Observable} from 'rxjs/Observable';
 
 @Component({
   templateUrl: './equipment-selection.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./equipment-selection.component.css']
 })
 export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
 
   private slot: string;
   public equipments: Array<Equipment> = [];
-  public unfilteredEquipments: Array<Equipment> = [];
   public offhandPresent: boolean;
   @ViewChild('itemfilter') itemfilter: ElementRef;
   private filterChangedSubscription: ISubscription;
@@ -38,7 +26,6 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
               private cdref: ChangeDetectorRef) {
     this.slot = data.slot;
     this.equipments = data.equipments;
-    this.unfilteredEquipments = data.equipments;
     this.offhandPresent = data.offhandPresent;
   }
 
@@ -47,8 +34,8 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
       this.filterChangedSubscription = Observable.fromEvent(this.itemfilter.nativeElement, 'keyup')
         .debounceTime(600)
         .subscribe((keyboardEvent: any) => {
-          this.equipments = this.unfilteredEquipments.filter(
-            (item: Equipment) => item.name.toLowerCase().indexOf(keyboardEvent.target.value.toLowerCase()) > -1
+          this.equipments.forEach((item: Equipment) =>
+            item.filtered = item.name.toLowerCase().indexOf(keyboardEvent.target.value.toLowerCase()) === -1
           );
           this.cdref.detectChanges();
         });
