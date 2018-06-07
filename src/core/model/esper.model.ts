@@ -7,6 +7,7 @@ export class Esper {
   public build_fr: string;
   public build_en: string;
   public rank: number;
+  public level: number;
   public icon: string;
   public hp: number;
   public mp: number;
