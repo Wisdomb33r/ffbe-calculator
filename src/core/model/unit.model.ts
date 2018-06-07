@@ -92,6 +92,14 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStatPercent('spr'),
       this.selectedBuild.equipments.getAllActiveConditionalPassives(this.id)
     );
+    this.stats.defineEsperStats(
+      this.selectedBuild.esper.calculateStatIncrease('hp'),
+      this.selectedBuild.esper.calculateStatIncrease('mp'),
+      this.selectedBuild.esper.calculateStatIncrease('atk'),
+      this.selectedBuild.esper.calculateStatIncrease('mag'),
+      this.selectedBuild.esper.calculateStatIncrease('def'),
+      this.selectedBuild.esper.calculateStatIncrease('spr')
+    );
 
     const activeCondPassives = this.filterUnitActiveConditionalPassives();
     this.stats.defineConditionalPassives(activeCondPassives);
