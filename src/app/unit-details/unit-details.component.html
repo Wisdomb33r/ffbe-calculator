@@ -9,29 +9,37 @@
       <table class="unit-details-stats">
         <tr>
           <th>{{'hp' | translate}}</th>
-          <td>{{unit.stats.hp.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
-                                           (click)="displayStatDetails('hp')"></td>
+          <td>{{unit.stats.hp.total | integer}}
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+                 (click)="displayStatDetails('hp')"></td>
           <th>{{'mp' | translate}}</th>
-          <td>{{unit.stats.mp.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
-                                           (click)="displayStatDetails('mp')"></td>
+          <td>{{unit.stats.mp.total | integer}}
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+                 (click)="displayStatDetails('mp')"></td>
         </tr>
         <tr>
           <th>{{'atk' | translate}}</th>
-          <td>{{unit.stats.atk.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
-                                            (click)="displayStatDetails('atk')"></td>
+          <td>{{unit.stats.atk.total | integer}}
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+                 (click)="displayStatDetails('atk')"></td>
           <th>{{'def' | translate}}</th>
-          <td>{{unit.stats.def.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
-                                            (click)="displayStatDetails('def')"></td>
+          <td>{{unit.stats.def.total | integer}}
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+                 (click)="displayStatDetails('def')"></td>
         </tr>
         <tr>
           <th>{{'mag' | translate}}</th>
-          <td>{{unit.stats.mag.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
-                                            (click)="displayStatDetails('mag')"></td>
+          <td>{{unit.stats.mag.total | integer}}
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+                 (click)="displayStatDetails('mag')"></td>
           <th>{{'spr' | translate}}</th>
-          <td>{{unit.stats.spr.total | integer}} <img class="inline-icon" src="assets/icons/grey/question.png"
-                                            (click)="displayStatDetails('spr')"></td>
+          <td>{{unit.stats.spr.total | integer}}
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+                 (click)="displayStatDetails('spr')"></td>
         </tr>
       </table>
+      <img [src]="unit.selectedBuild.esper.icon" [alt]="getEsperName()" class="esper"
+           (click)="openEsperSelectionPane()">
     </div>
   </mat-card-content>
 </mat-card>

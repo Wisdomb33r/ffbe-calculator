@@ -1,5 +1,6 @@
 <div class="left">
-  <app-unit-details [unit]="unitsService.selectedUnit" *ngIf="unitsService.selectedUnit"></app-unit-details>
+  <app-unit-details [unit]="unitsService.selectedUnit" *ngIf="unitsService.selectedUnit"
+                    (esperChanged)="computeAfterEquipmentChanged()"></app-unit-details>
   <app-equipments-display [equipments]="unitsService.selectedUnit.selectedBuild.equipments"
                           *ngIf="unitsService.selectedUnit"
                           (equipmentChanged)="computeAfterEquipmentChanged()"></app-equipments-display>

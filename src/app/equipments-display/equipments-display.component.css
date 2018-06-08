@@ -6,6 +6,7 @@ div.flexcontainer {
 
 .equipment-icon img {
   max-width: 58px;
+  cursor: pointer;
 }
 
 .equipment {

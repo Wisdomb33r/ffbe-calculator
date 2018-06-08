@@ -1,6 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {UnitStats} from '../../core/model/unit-stats.model';
 import {MAT_DIALOG_DATA} from '@angular/material';
+import {Esper} from '../../core/model/esper.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   templateUrl: './unit-details-stat-sum.component.html',
@@ -10,10 +12,13 @@ export class UnitDetailsStatSumComponent {
 
   public unitStats: UnitStats;
   public stat: string;
+  public esper: Esper;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private translateService: TranslateService,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     this.unitStats = data.unitStats;
     this.stat = data.stat;
+    this.esper = data.esper;
   }
 
   public getBaseValue() {
@@ -70,5 +75,9 @@ export class UnitDetailsStatSumComponent {
 
   public isEquipmentDhLimitExceeded(): boolean {
     return this.getDhPercent() + this.getEquipmentDhPercent() > 300;
+  }
+
+  public getEsperName() {
+    return this.esper['name_' + this.translateService.currentLang];
   }
 }

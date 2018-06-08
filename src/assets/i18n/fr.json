@@ -83,11 +83,15 @@
           "equipment": "Équipement",
           "dh": "Deux mains",
           "esper": "Chimère",
-          "bahamut": "Bahamut",
           "total": "Total",
           "limitWarn": "La caractéristique dépasse la limite de 300% autorisée par le jeu. Une partie du bonus est donc perdue."
         }
       }
+    }
+  },
+  "esper": {
+    "selection": {
+      "title": "Choix de la chimère"
     }
   },
   "equipment": {

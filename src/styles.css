@@ -78,6 +78,10 @@ img.inline-icon {
   margin-top: -2px;
 }
 
+img.details-opener {
+  cursor: pointer;
+}
+
 @media (min-width: 1000px) {
   div.left {
     float: left;

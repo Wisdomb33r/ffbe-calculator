@@ -8,6 +8,7 @@
 
 .equipment img {
   width: 58px;
+  cursor: pointer;
 }
 
 .equipment app-equipment-details {

@@ -37,14 +37,16 @@ export const IFRIT_KILLERS: Esper = getIfritWithKillers();
 export const IFRIT_STATS_BOOST: Esper = getIfritWithStatsBoost();
 export const SHIVA_STATS_BOOST: Esper = getShivaWithStatsBoost();
 export const GOLEM_KILLERS: Esper = getGolemWithKillers();
-export const RAMUH_STATS_BOOST: Esper = getRamuhWithStatsBoost();
+export const RAMUH_DEMON_KILLER: Esper = getRamuhWithStatsBoostAndDemonKiller();
+export const RAMUH_STONE_KILLER: Esper = getRamuhWithStatsBoostAndStoneKiller();
 export const BAHAMUT: Esper = getBahamut();
 export const ESPER_BUILDS: Array<Esper> = [
   IFRIT_KILLERS,
   IFRIT_STATS_BOOST,
   SHIVA_STATS_BOOST,
   GOLEM_KILLERS,
-  RAMUH_STATS_BOOST,
+  RAMUH_DEMON_KILLER,
+  RAMUH_STONE_KILLER,
   BAHAMUT,
 ];
 
@@ -140,12 +142,12 @@ function getGolemWithKillers(): Esper {
   return esper;
 }
 
-function getRamuhWithStatsBoost(): Esper {
+function getRamuhWithStatsBoostAndDemonKiller(): Esper {
   const esper = new Esper();
   esper.id = 5;
   esper.name_fr = 'Ramuh';
   esper.name_en = 'Ramuh';
-  esper.build_fr = 'Stats boost + tue-démon magique';
+  esper.build_fr = 'Stats boost + Tue-démon M.';
   esper.build_en = 'Stats boost + M Demon Killer';
   esper.rank = 3;
   esper.level = 60;
@@ -163,13 +165,36 @@ function getRamuhWithStatsBoost(): Esper {
   return esper;
 }
 
+function getRamuhWithStatsBoostAndStoneKiller(): Esper {
+  const esper = new Esper();
+  esper.id = 5;
+  esper.name_fr = 'Ramuh';
+  esper.name_en = 'Ramuh';
+  esper.build_fr = 'Stats boost + Tue-pierre M.';
+  esper.build_en = 'Stats boost + M Stone Killer';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/005_c96c38.png';
+  esper.hp = 5200;
+  esper.mp = 8000;
+  esper.atk = 3600;
+  esper.mag = 7640 + 310;
+  esper.def = 2920 + 270;
+  esper.spr = 6440;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0);
+  esper.call_boost = 0;
+  esper.stats_percent = 20;
+  return esper;
+}
+
 function getBahamut(): Esper {
   const esper = new Esper();
   esper.id = 12;
   esper.name_fr = 'Bahamut';
   esper.name_en = 'Bahamut';
-  esper.build_fr = 'Orienté ATT/MAG';
-  esper.build_en = 'ATT/MAG oriented';
+  esper.build_fr = 'Max ATT / MAG';
+  esper.build_en = 'MAX ATT / MAG';
   esper.rank = 1;
   esper.level = 30;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/012_0da633.png';
