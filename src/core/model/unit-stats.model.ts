@@ -16,8 +16,6 @@ export class UnitStats {
     this.mag = new UnitStat(stats.mag, stats.mag_passive, stats.mag_dh, stats.mag_tdh);
     this.def = new UnitStat(stats.def, stats.def_passive, stats.def_dh, stats.def_tdh);
     this.spr = new UnitStat(stats.spr, stats.spr_passive, stats.spr_dh, stats.spr_tdh);
-    // TODO remove these hardcoded values when builder let esper choice
-    this.defineEsperStats(64, 63, 64, 64, 60, 60); // assuming bahamut
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number,

@@ -4,6 +4,8 @@ import {Algorithm} from './algorithm.model';
 import {AlgorithmFactory} from './algorithm-factory.model';
 import {Result} from './result.model';
 import {Unit} from './unit.model';
+import {EsperFactory} from './esper-factory.model';
+import {Esper} from './esper.model';
 
 export class Build {
   // from backend
@@ -24,6 +26,7 @@ export class Build {
   // transcient
   public algorithm: Algorithm;
   public result: Result;
+  public esper: Esper;
 
   constructor(build: Build) {
     this.algorithmId = build.algorithmId;
@@ -65,6 +68,7 @@ export class Build {
       });
     }
     this.algorithm = AlgorithmFactory.getInstance(this.algorithmId);
+    this.esper = EsperFactory.getInstance(this.algorithmId);
   }
 
   public calculate(unit: Unit) {

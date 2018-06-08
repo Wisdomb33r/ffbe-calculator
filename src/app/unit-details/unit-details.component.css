@@ -28,3 +28,8 @@ mat-card-title.unit-details-mct {
   text-align: right;
   padding-right: 10px;
 }
+
+img.esper {
+  width: 67px;
+  cursor: pointer;
+}

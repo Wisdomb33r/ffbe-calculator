@@ -45,6 +45,7 @@ import {ExternalLinkComponent} from './external-link/external-link.component';
 import {PermanentUrlComponent} from './permanent-url/permanent-url.component';
 import {ClipboardModule} from 'ngx-clipboard';
 import {AppFooterComponent} from './app-footer.component';
+import {EsperSelectionComponent} from './popup/esper-selection/esper-selection.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -85,6 +86,7 @@ const appRoutes: Routes = [
     SkillDisplayComponent,
     ExternalLinkComponent,
     PermanentUrlComponent,
+    EsperSelectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -122,6 +124,7 @@ const appRoutes: Routes = [
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,
     SkillDisplayComponent,
+    EsperSelectionComponent,
   ],
   providers: [
     DatabaseClientService,

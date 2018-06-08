@@ -3,11 +3,11 @@
     <th>{{'calculation.display.turn' | translate}} n+{{i+1}}</th>
     <td *ngIf="turn.physicalResult">{{turn.physicalResult | integer}}</td>
     <td *ngIf="turn.physicalResult">
-      <img class="inline-icon" src="assets/icons/grey/question.png" (click)="displayPhysicalDamages(i)">
+      <img class="inline-icon details-opener" src="assets/icons/grey/question.png" (click)="displayPhysicalDamages(i)">
     </td>
     <td *ngIf="turn.magicalResult">{{turn.magicalResult | integer}}</td>
     <td *ngIf="turn.magicalResult">
-      <img class="inline-icon" src="assets/icons/grey/question.png" (click)="displayMagicalDamages(i)">
+      <img class="inline-icon details-opener" src="assets/icons/grey/question.png" (click)="displayMagicalDamages(i)">
     </td>
   </tr>
   <tr class="total">

@@ -83,11 +83,15 @@
           "equipment": "Equipment",
           "dh": "Doublehand",
           "esper": "Esper",
-          "bahamut": "Bahamut",
           "total": "Total",
           "limitWarn": "The unit stat increase is over the 300% limit. The bonus is partially lost."
         }
       }
+    }
+  },
+  "esper": {
+    "selection": {
+      "title": "Esper choice"
     }
   },
   "equipment": {
