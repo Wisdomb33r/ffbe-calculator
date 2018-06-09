@@ -44,7 +44,15 @@
       <td>
         <mat-checkbox [(ngModel)]="algorithm.isSupportMitigating" (change)="calculateBuild()"></mat-checkbox>
       </td>
-      <td>{{algorithm.supportMitigation}}%</td>
+      <td>
+        <select [(ngModel)]="algorithm.supportMitigation" (change)="calculateBuild()">
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20">20%</option>
+          <option value="25">25%</option>
+          <option value="30">30%</option>
+        </select>
+      </td>
     </tr>
     <tr *ngIf="result.mitigation">
       <td>{{'calculation.defensive.nativeMitigation' | translate}}</td>
