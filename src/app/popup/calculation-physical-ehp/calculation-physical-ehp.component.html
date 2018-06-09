@@ -51,6 +51,7 @@
           <option value="20">20%</option>
           <option value="25">25%</option>
           <option value="30">30%</option>
+          <option value="40">40%</option>
         </select>
       </td>
     </tr>
@@ -58,6 +59,22 @@
       <td>{{'calculation.defensive.nativeMitigation' | translate}}</td>
       <td></td>
       <td>{{result.mitigation}}%</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.defensive.supportPhysicalMitigation' | translate}}</td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.isSupportPhysicalMitigating" (change)="calculateBuild()"></mat-checkbox>
+      </td>
+      <td>
+        <select [(ngModel)]="algorithm.supportPhysicalMitigation" (change)="calculateBuild()">
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20">20%</option>
+          <option value="25">25%</option>
+          <option value="30">30%</option>
+          <option value="40">40%</option>
+        </select>
+      </td>
     </tr>
     <tr *ngIf="result.physicalMitigation">
       <td>{{'calculation.defensive.nativePhysicalMitigation' | translate}}</td>
@@ -78,9 +95,9 @@
     </tr>
   </table>
   <h3>{{'calculation.defensive.physicalEhp' | translate}}</h3>
-  <p>{{result.hp | integer}} * {{result.buffedDef}}
+  <p>{{result.hp | integer}} * {{result.buffedDef | integer}}
     <span *ngIf="result.effectiveMitigation"> / (1-{{result.effectiveMitigation}}%)</span>
-    <span *ngIf="result.physicalMitigation"> / (1-{{result.physicalMitigation}}%)</span>
+    <span *ngIf="result.effectivePhysicalMitigation"> / (1-{{result.effectivePhysicalMitigation}}%)</span>
     <span *ngIf="result.effectivePhysicalCover"> / (1-{{result.effectivePhysicalCover}}%)</span>
     <span *ngIf="result.physicalResistance"> / (1-{{result.physicalResistance}}%)</span>
   </p>

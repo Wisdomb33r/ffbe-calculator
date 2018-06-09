@@ -11,7 +11,9 @@ export class ResultDefensive extends Result {
   public mitigation: number;
   public effectiveMitigation: number;
   public physicalMitigation: number;
+  public effectivePhysicalMitigation: number;
   public magicalMitigation: number;
+  public effectiveMagicalMitigation: number;
   public physicalCover: number;
   public effectivePhysicalCover: number;
   public magicalCover: number;

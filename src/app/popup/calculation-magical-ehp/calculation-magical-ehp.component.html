@@ -51,6 +51,7 @@
           <option value="20">20%</option>
           <option value="25">25%</option>
           <option value="30">30%</option>
+          <option value="40">40%</option>
         </select>
       </td>
     </tr>
@@ -58,6 +59,22 @@
       <td>{{'calculation.defensive.nativeMitigation' | translate}}</td>
       <td></td>
       <td>{{result.mitigation}}%</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.defensive.supportMagicalMitigation' | translate}}</td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.isSupportMagicalMitigating" (change)="calculateBuild()"></mat-checkbox>
+      </td>
+      <td>
+        <select [(ngModel)]="algorithm.supportMagicalMitigation" (change)="calculateBuild()">
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20">20%</option>
+          <option value="25">25%</option>
+          <option value="30">30%</option>
+          <option value="40">40%</option>
+        </select>
+      </td>
     </tr>
     <tr *ngIf="result.magicalMitigation">
       <td>{{'calculation.defensive.nativeMagicalMitigation' | translate}}</td>
@@ -78,9 +95,9 @@
     </tr>
   </table>
   <h3>{{'calculation.defensive.magicalEhp' | translate}}</h3>
-  <p>{{result.hp | integer}} * {{result.buffedSpr}}
+  <p>{{result.hp | integer}} * {{result.buffedSpr | integer}}
     <span *ngIf="result.effectiveMitigation"> / (1-{{result.effectiveMitigation}}%)</span>
-    <span *ngIf="result.magicalMitigation"> / (1-{{result.magicalMitigation}}%)</span>
+    <span *ngIf="result.effectiveMagicalMitigation"> / (1-{{result.effectiveMagicalMitigation}}%)</span>
     <span *ngIf="result.effectiveMagicalCover"> / (1-{{result.effectiveMagicalCover}}%)</span>
     <span *ngIf="result.magicalResistance"> / (1-{{result.magicalResistance}}%)</span>
   </p>
