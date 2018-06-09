@@ -15,6 +15,7 @@ export class CalculationPhysicalDamagesComponent {
   public result: ResultChaining;
   public algorithm: AlgorithmOffensive;
   private index: number;
+  public opponentDefValueError = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private unitsService: UnitsService) {
@@ -31,5 +32,15 @@ export class CalculationPhysicalDamagesComponent {
 
   public isChaining() {
     return this.algorithm instanceof AlgorithmChaining;
+  }
+
+  public opponentDefChanged() {
+    if (this.algorithm.opponentDef < 1 || this.algorithm.opponentDef > 1000000) {
+      this.opponentDefValueError = true;
+      this.algorithm.opponentDef = 1000000;
+    } else {
+      this.opponentDefValueError = false;
+    }
+    this.calculateBuild();
   }
 }

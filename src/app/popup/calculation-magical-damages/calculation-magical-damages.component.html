@@ -86,9 +86,10 @@
     <tr>
       <td>{{'calculation.display.opponentSpr' | translate}}</td>
       <td></td>
-      <td>{{algorithm.opponentSpr | integer}}</td>
+      <td><input [(ngModel)]="algorithm.opponentSpr" (blur)="opponentSprChanged()"></td>
     </tr>
   </table>
+  <mat-error *ngIf="opponentSprValueError">{{'calculation.offensive.opponentSprValueError' | translate}}</mat-error>
 
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p>

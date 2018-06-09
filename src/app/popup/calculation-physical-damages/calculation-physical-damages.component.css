@@ -27,3 +27,8 @@ td:last-child {
   height: 24px;
   line-height: 24px;
 }
+
+select,
+input {
+  width: 60px;
+}
