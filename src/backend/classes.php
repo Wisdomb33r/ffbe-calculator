@@ -166,6 +166,8 @@ class UnitStats {
   }
 }
 class Build {
+  public $id;
+  public $name;
   public $algorithmId;
   public $algorithmName;
   public $mitigation;
@@ -180,12 +182,14 @@ class Build {
   public $equipments;
   public $skills;
   function __construct($brex_build, $language, $brex_unit) {
+    $this->id = $brex_build->id;
+    $this->name = $language == 'fr' ? $brex_build->name_fr : $brex_build->name_en;
     $this->algorithmId = $brex_build->algorithm->id;
     $this->algorithmName = $language == 'fr' ? $brex_build->algorithm->nom : $brex_build->algorithm->nom_en;
     $this->physical_killer = $brex_build->tue_amelio ? $brex_build->tue_amelio : $brex_build->tue;
     // TODO magical killer when DB ready
     $this->equipments = new EquipmentSet ( $brex_build, $language );
-
+    
     if ($brex_build->algorithm->id == 8) {
       $this->mitigation = $brex_build->mitigation;
       $this->physical_mitigation = $brex_build->physical_mitigation;
@@ -195,7 +199,7 @@ class Build {
       $this->physical_resistance = $brex_build->physical_resistance;
       $this->magical_resistance = $brex_build->magical_resistance;
     }
-
+    
     $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
     $brex_build_skills = array_reverse ( $brex_build_skills );
     if (count ( $brex_build_skills )) {
@@ -352,7 +356,7 @@ class Unit {
     if (is_array ( $brex_unit_passives ) && count ( $brex_unit_passives )) {
       $this->conditional_passives = array ();
       foreach ( $brex_unit_passives as $brex_unit_passive ) {
-        if(!$brex_unit_passive->objet){
+        if (! $brex_unit_passive->objet) {
           $this->conditional_passives [] = new ConditionalPassive ( $brex_unit_passive );
         }
       }

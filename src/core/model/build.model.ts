@@ -9,6 +9,8 @@ import {Esper} from './esper.model';
 
 export class Build {
   // from backend
+  public id: number;
+  public name: string;
   public algorithmId: number;
   public algorithmName: string;
   public mitigation: number;
@@ -29,6 +31,8 @@ export class Build {
   public esper: Esper;
 
   constructor(build: Build) {
+    this.id = build.id;
+    this.name = build.name;
     this.algorithmId = build.algorithmId;
     this.algorithmName = build.algorithmName;
     this.mitigation = build.mitigation;

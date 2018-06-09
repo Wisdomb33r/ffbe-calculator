@@ -16,6 +16,7 @@ export class UnitDetailsComponent implements OnChanges {
   @Input() unit: Unit;
   @Output() esperChanged: EventEmitter<Esper> = new EventEmitter<Esper>();
   public ranks = [];
+  public selectedBuildId;
 
   constructor(private dialog: MatDialog,
               private translateService: TranslateService) {
@@ -23,6 +24,7 @@ export class UnitDetailsComponent implements OnChanges {
 
   ngOnChanges() {
     this.ranks = Array(this.unit.rank).fill(1); // filled with dummy 1 values
+    this.selectedBuildId = this.unit.selectedBuild.id;
   }
 
   displayStatDetails(stat: string) {
@@ -47,5 +49,12 @@ export class UnitDetailsComponent implements OnChanges {
         this.esperChanged.emit(esper);
       }
     });
+  }
+
+  public changeBuild(build) {
+    if (build.id !== this.unit.selectedBuild.id) {
+      this.unit.selectedBuild = build;
+      this.unit.computeAll();
+    }
   }
 }

@@ -4,6 +4,15 @@
   </mat-card-title>
   <mat-card-subtitle class="unit-details-mcst">{{unit.name}}</mat-card-subtitle>
   <mat-card-content class="unit-details-mcc">
+    <div *ngIf="unit.builds.length > 1">
+      <mat-form-field>
+        <mat-select [(ngModel)]="selectedBuildId" placeholder="{{'unit.details.multipleBuildsToSelect' | translate}}">
+          <mat-option *ngFor="let build of unit.builds" [value]="build.id" (click)="changeBuild(build)">
+            {{build.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div class="flexcontainer">
       <img [src]="unit.icon">
       <table class="unit-details-stats">

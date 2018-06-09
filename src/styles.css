@@ -82,6 +82,13 @@ img.details-opener {
   cursor: pointer;
 }
 
+mat-select .mat-select-value,
+.mat-select-placeholder,
+label.mat-input-placeholder,
+.mat-select-arrow {
+  color: white;
+}
+
 @media (min-width: 1000px) {
   div.left {
     float: left;
