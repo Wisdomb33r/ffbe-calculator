@@ -4,7 +4,7 @@ import {Skill} from './skill.model';
 
 export class SkillTypePhysical implements SkillType {
   public getActiveKillers(unit: Unit): number {
-    return unit.getPhysicalKillers();
+    return unit.getPhysicalKillers() + unit.selectedBuild.esper.physical_killers.getKillerSum();
   }
 
   public getElements(skill: Skill, unit: Unit): Array<number> {

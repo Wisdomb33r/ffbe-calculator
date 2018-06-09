@@ -4,7 +4,7 @@ import {Skill} from './skill.model';
 
 export class SkillTypeMagical implements SkillType {
   public getActiveKillers(unit: Unit): number {
-    return unit.getMagicalKillers();
+    return unit.getMagicalKillers() + unit.selectedBuild.esper.magical_killers.getKillerSum();
   }
 
   public getElements(skill: Skill, unit: Unit): Array<number> {
