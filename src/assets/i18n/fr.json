@@ -74,6 +74,7 @@
     },
     "details": {
       "number": "No.",
+      "multipleBuildsToSelect": "Sélection du build de l'unité",
       "stats": {
         "popup": {
           "title": "Détails du calcul",

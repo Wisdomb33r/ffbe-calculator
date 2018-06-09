@@ -33,3 +33,8 @@ img.esper {
   width: 67px;
   cursor: pointer;
 }
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: -15px;
+}
