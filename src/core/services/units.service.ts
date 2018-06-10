@@ -9,11 +9,19 @@ import {Algorithm} from '../model/algorithm.model';
 import {Result} from '../model/result.model';
 import {EquipmentSet} from '../model/equipment-set.model';
 import {isNullOrUndefined} from 'util';
+import {Build} from '../model/build.model';
 
 @Injectable()
 export class UnitsService {
 
   public units: Array<Unit>;
+  public physicalChainers: Array<Unit>;
+  public magicalChainers: Array<Unit>;
+  public hybridChainers: Array<Unit>;
+  public physicalFinishers: Array<Unit>;
+  public magicalFinishers: Array<Unit>;
+  public hybridFinishers: Array<Unit>;
+  public defenders: Array<Unit>;
   public selectedUnit: Unit;
 
   constructor(private databaseClient: DatabaseClientService) {
@@ -21,7 +29,16 @@ export class UnitsService {
 
   public loadUnits() {
     this.databaseClient.getUnits$()
-      .subscribe(units => this.units = units);
+      .subscribe(units => {
+        this.units = units;
+        this.physicalChainers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 1).length > 0);
+        this.magicalChainers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 2).length > 0);
+        this.hybridChainers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 3).length > 0);
+        this.physicalFinishers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 4).length > 0);
+        this.magicalFinishers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 5).length > 0);
+        this.hybridFinishers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 6).length > 0);
+        this.defenders = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 8).length > 0);
+      });
   }
 
   public equipInSlot(slot: string, equipment: Equipment) {

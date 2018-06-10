@@ -69,7 +69,14 @@
         "failedToLoadUnits": "Une erreur est survenue durant le chargement de la liste des unités"
       },
       "popup": {
-        "title": "Choix de l'unité"
+        "title": "Choix de l'unité",
+        "physicalChainers": "Combos physiques",
+        "magicalChainers": "Combos magiques",
+        "hybridChainers": "Combos hybrides",
+        "physicalFinishers": "Finishers physiques",
+        "magicalFinishers": "Finishers magiques",
+        "hybridFinishers": "Finishers hybrides",
+        "tanks": "Tanks"
       }
     },
     "details": {

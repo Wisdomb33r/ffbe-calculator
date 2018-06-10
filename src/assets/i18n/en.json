@@ -69,7 +69,14 @@
         "failedToLoadUnits": "An error occured while retrieving unit list"
       },
       "popup": {
-        "title": "Unit selection"
+        "title": "Unit selection",
+        "physicalChainers": "Physical chaining",
+        "magicalChainers": "Magical chaining",
+        "hybridChainers": "Hybrid chaining",
+        "physicalFinishers": "Physical finishers",
+        "magicalFinishers": "Magical finishers",
+        "hybridFinishers": "Hybrid finishers",
+        "tanks": "Tanks"
       }
     },
     "details": {
