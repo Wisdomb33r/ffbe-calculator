@@ -43,4 +43,9 @@ export class CalculationMagicalDamagesComponent {
     }
     this.calculateBuild();
   }
+
+  public convertSupportBreakAndCalculate() {
+    this.algorithm.supportResistsBreak = this.algorithm.supportResistsBreak.map(res => +res);
+    this.calculateBuild();
+  }
 }

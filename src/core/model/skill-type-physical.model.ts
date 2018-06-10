@@ -16,7 +16,7 @@ export class SkillTypePhysical implements SkillType {
         }
       });
     }
-    return elements;
+    return elements ? elements.sort() : elements;
   }
 
   public isExecutingTwice(skill: Skill, unit: Unit): boolean {
