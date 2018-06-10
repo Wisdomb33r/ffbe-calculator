@@ -8,7 +8,7 @@ export class SkillTypeMagical implements SkillType {
   }
 
   public getElements(skill: Skill, unit: Unit): Array<number> {
-    return skill.elements;
+    return skill.elements ? skill.elements.sort() : skill.elements;
   }
 
   public isExecutingTwice(skill: Skill, unit: Unit): boolean {

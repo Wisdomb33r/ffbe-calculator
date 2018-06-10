@@ -9,13 +9,10 @@ p {
 }
 
 td {
-  padding-right: 10px;
+  padding-right: 5px;
   font-size: 12px;
-  vertical-align: center;
-}
-
-td:first-child {
   vertical-align: top;
+  line-height: 23px;
 }
 
 td:last-child {
@@ -26,4 +23,10 @@ td:last-child {
 .resist-label, .resist-icon {
   height: 24px;
   line-height: 24px;
+}
+
+select,
+input {
+  width: 60px;
+  text-align: right;
 }

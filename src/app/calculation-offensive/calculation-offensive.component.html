@@ -18,4 +18,6 @@
     <td *ngIf="isWithBothPhysicalAndMagicalDamages()"></td>
   </tr>
 </table>
-<p *ngIf="algorithm.opponentDef === 1000000">{{'calculation.offensive.defaultDefSprExplanations' | translate}}</p>
+<p *ngIf="algorithm.opponentDef === 1000000 && algorithm.opponentSpr === 1000000">
+  {{'calculation.offensive.defaultDefSprExplanations' | translate}}
+</p>

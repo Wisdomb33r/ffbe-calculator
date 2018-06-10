@@ -15,6 +15,7 @@ export class CalculationMagicalDamagesComponent {
   public result: ResultChaining;
   public algorithm: AlgorithmOffensive;
   private index: number;
+  public opponentSprValueError = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private unitsService: UnitsService) {
@@ -31,5 +32,20 @@ export class CalculationMagicalDamagesComponent {
 
   public isChaining() {
     return this.algorithm instanceof AlgorithmChaining;
+  }
+
+  public opponentSprChanged() {
+    if (this.algorithm.opponentSpr < 1 || this.algorithm.opponentSpr > 1000000) {
+      this.opponentSprValueError = true;
+      this.algorithm.opponentSpr = 1000000;
+    } else {
+      this.opponentSprValueError = false;
+    }
+    this.calculateBuild();
+  }
+
+  public convertSupportBreakAndCalculate() {
+    this.algorithm.supportResistsBreak = this.algorithm.supportResistsBreak.map(res => +res);
+    this.calculateBuild();
   }
 }

@@ -158,6 +158,8 @@
       "averageDamages": "Average damages",
       "physicalDamagesCalculation": "Physical damages calculation",
       "magicalDamagesCalculation": "Magical damages calculation",
+      "opponentDefValueError": "Enemy DEF value must be between 1 and 1 million",
+      "opponentSprValueError": "Enemy SPR value must be between 1 and 1 million",
       "defaultDefSprExplanations": "Results are expressed in millions damages on a 1 DEF/PSY enemy. This is equivalent to damages on a 1 million DEF/PSY enemy."
     },
     "defensive": {
@@ -165,7 +167,9 @@
       "magicalEhpCalculation": "Magical EHP calculation",
       "supportMitigation": "Support mitigation",
       "nativeMitigation": "Native mitigation",
+      "supportPhysicalMitigation": "Support physical mitigation",
       "nativePhysicalMitigation": "Native physical mitigation",
+      "supportMagicalMitigation": "Support magical mitigation",
       "nativeMagicalMitigation": "Native magical mitigation",
       "cover": "Cover",
       "physicalResistance": "Physical resistance",

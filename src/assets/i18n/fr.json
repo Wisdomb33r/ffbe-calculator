@@ -158,6 +158,8 @@
       "averageDamages": "Dégâts moyens",
       "physicalDamagesCalculation": "Calcul dégâts physiques",
       "magicalDamagesCalculation": "Calcul dégâts magiques",
+      "opponentDefValueError": "La DÉF adverse doit être entre 1 et un million",
+      "opponentSprValueError": "La PSY adverse doit être entre 1 et un million",
       "defaultDefSprExplanations": "Résultat exprimé en millions de dégâts sur un ennemi à 1 de DÉF/PSY. Ce qui équivaut aux dégâts sur un ennemi à 1 million de DÉF/PSY."
     },
     "defensive": {
@@ -165,7 +167,9 @@
       "magicalEhpCalculation": "Calcul PV effectifs magiques",
       "supportMitigation": "Mitigation du support",
       "nativeMitigation": "Mitigation native",
+      "supportPhysicalMitigation": "Mitigation physique du support",
       "nativePhysicalMitigation": "Mitigation physique native",
+      "supportMagicalMitigation": "Mitigation magique du support",
       "nativeMagicalMitigation": "Mitigation magique native",
       "cover": "Couverture",
       "physicalResistance": "Résistance physique",
