@@ -1,8 +1,45 @@
 <h2 mat-dialog-title>{{'unit.selection.popup.title' | translate}}</h2>
 <mat-dialog-content>
+  <h3>{{'unit.selection.popup.physicalChainers' | translate}}</h3>
   <div class="flexcontainer">
-    <div class="unit" *ngFor="let unit of units">
-      <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)">
+    <div class="unit" *ngFor="let unit of unitsService.physicalChainers">
+      <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
+    </div>
+  </div>
+  <h3>{{'unit.selection.popup.magicalChainers' | translate}}</h3>
+  <div class="flexcontainer">
+    <div class="unit" *ngFor="let unit of unitsService.magicalChainers">
+      <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
+    </div>
+  </div>
+  <h3>{{'unit.selection.popup.hybridChainers' | translate}}</h3>
+  <div class="flexcontainer">
+    <div class="unit" *ngFor="let unit of unitsService.hybridChainers">
+      <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
+    </div>
+  </div>
+  <h3>{{'unit.selection.popup.physicalFinishers' | translate}}</h3>
+  <div class="flexcontainer">
+    <div class="unit" *ngFor="let unit of unitsService.physicalFinishers">
+      <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
+    </div>
+  </div>
+  <h3>{{'unit.selection.popup.magicalFinishers' | translate}}</h3>
+  <div class="flexcontainer">
+    <div class="unit" *ngFor="let unit of unitsService.magicalFinishers">
+      <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
+    </div>
+  </div>
+  <h3>{{'unit.selection.popup.hybridFinishers' | translate}}</h3>
+  <div class="flexcontainer">
+    <div class="unit" *ngFor="let unit of unitsService.hybridFinishers">
+      <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
+    </div>
+  </div>
+  <h3>{{'unit.selection.popup.tanks' | translate}}</h3>
+  <div class="flexcontainer">
+    <div class="unit" *ngFor="let unit of unitsService.defenders">
+      <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
     </div>
   </div>
 </mat-dialog-content>

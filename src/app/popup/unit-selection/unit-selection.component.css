@@ -15,6 +15,11 @@ div.flexcontainer {
   cursor: pointer;
 }
 
+h3 {
+  font-size: 14px;
+  margin: 0;
+}
+
 @media (min-width: 600px) {
   .unit {
     width: 120px;

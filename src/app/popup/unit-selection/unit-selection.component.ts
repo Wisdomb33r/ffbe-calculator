@@ -9,11 +9,8 @@ import {UnitsService} from '../../../core/services/units.service';
 })
 export class UnitSelectionComponent {
 
-  public units: Array<Unit> = [];
-
   constructor(public dialogRef: MatDialogRef<UnitSelectionComponent>,
               public unitsService: UnitsService) {
-    this.units = unitsService.units;
   }
 
   public selectUnit(unit: Unit) {
