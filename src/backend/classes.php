@@ -181,31 +181,33 @@ class Build {
   public $magical_killer;
   public $equipments;
   public $skills;
-  function __construct($brex_build, $language, $brex_unit) {
+  function __construct($brex_build, $language, $brex_unit, $minimal = false) {
     $this->id = $brex_build->id;
     $this->name = $language == 'fr' ? $brex_build->name_fr : $brex_build->name_en;
     $this->algorithmId = $brex_build->algorithm->id;
     $this->algorithmName = $language == 'fr' ? $brex_build->algorithm->nom : $brex_build->algorithm->nom_en;
-    $this->physical_killer = $brex_build->tue_amelio ? $brex_build->tue_amelio : $brex_build->tue;
-    // TODO magical killer when DB ready
-    $this->equipments = new EquipmentSet ( $brex_build, $language );
-    
-    if ($brex_build->algorithm->id == 8) {
-      $this->mitigation = $brex_build->mitigation;
-      $this->physical_mitigation = $brex_build->physical_mitigation;
-      $this->magical_mitigation = $brex_build->magical_mitigation;
-      $this->physical_cover = $brex_build->physical_cover;
-      $this->magical_cover = $brex_build->magical_cover;
-      $this->physical_resistance = $brex_build->physical_resistance;
-      $this->magical_resistance = $brex_build->magical_resistance;
-    }
-    
-    $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
-    $brex_build_skills = array_reverse ( $brex_build_skills );
-    if (count ( $brex_build_skills )) {
-      $this->skills = array ();
-      foreach ( $brex_build_skills as $brex_skill ) {
-        $this->skills [] = new Skill ( $brex_skill, $language, $brex_unit );
+    if (! $minimal) {
+      $this->physical_killer = $brex_build->tue_amelio ? $brex_build->tue_amelio : $brex_build->tue;
+      // TODO magical killer when DB ready
+      $this->equipments = new EquipmentSet ( $brex_build, $language );
+      
+      if ($brex_build->algorithm->id == 8) {
+        $this->mitigation = $brex_build->mitigation;
+        $this->physical_mitigation = $brex_build->physical_mitigation;
+        $this->magical_mitigation = $brex_build->magical_mitigation;
+        $this->physical_cover = $brex_build->physical_cover;
+        $this->magical_cover = $brex_build->magical_cover;
+        $this->physical_resistance = $brex_build->physical_resistance;
+        $this->magical_resistance = $brex_build->magical_resistance;
+      }
+      
+      $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
+      $brex_build_skills = array_reverse ( $brex_build_skills );
+      if (count ( $brex_build_skills )) {
+        $this->skills = array ();
+        foreach ( $brex_build_skills as $brex_skill ) {
+          $this->skills [] = new Skill ( $brex_skill, $language, $brex_unit );
+        }
       }
     }
   }
@@ -336,7 +338,7 @@ class Unit {
   public $stats;
   public $builds;
   public $conditional_passives;
-  function __construct($brex_unit, $brex_unit_stats, $brex_unit_passives, $brex_builds, $language) {
+  function __construct($brex_unit, $brex_unit_stats, $brex_unit_passives, $brex_builds, $language, $minimal = false) {
     $this->id = $brex_unit->numero;
     $this->name = $language == 'fr' ? $brex_unit->perso->nom : $brex_unit->perso->nom_en;
     $this->rank = $brex_unit->stars;
@@ -349,7 +351,7 @@ class Unit {
       $this->builds = array ();
       foreach ( $brex_builds as $brex_build ) {
         if ($brex_build->algorithm != null) {
-          $this->builds [] = new Build ( $brex_build, $language, $brex_unit );
+          $this->builds [] = new Build ( $brex_build, $language, $brex_unit, $minimal );
         }
       }
     }
