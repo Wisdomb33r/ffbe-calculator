@@ -43,7 +43,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
   }
 
   private calculateHitsPower(skill: Skill, unit: Unit, result: ResultChaining) {
-    if (isNullOrUndefined(skill.hits) || skill.hits <= 1) {
+    if (isNullOrUndefined(skill.hits) || skill.hits < 1) {
       result.hitsPower = [0];
       result.power = 0;
     } else {

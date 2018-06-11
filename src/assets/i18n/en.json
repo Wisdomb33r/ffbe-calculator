@@ -128,7 +128,7 @@
       "power": "Power",
       "hits": "Hits number",
       "frames": "Frames",
-      "damages": "Frames damages",
+      "damages": "Hits damages",
       "castNumber": "Attacks number"
     }
   },

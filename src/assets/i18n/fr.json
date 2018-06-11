@@ -128,7 +128,7 @@
       "power": "Puissance",
       "hits": "Nb de coups",
       "frames": "Frames",
-      "damages": "Dégâts",
+      "damages": "Dégâts des coups",
       "castNumber": "Nb d'attaques"
     }
   },
