@@ -87,7 +87,8 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStat('atk_dh'),
       this.selectedBuild.equipments.sumEquipmentStat('atk_tdh'),
       this.selectedBuild.equipments.sumEquipmentStat('mag_dh'),
-      this.selectedBuild.equipments.sumEquipmentStat('mag_tdh')
+      this.selectedBuild.equipments.sumEquipmentStat('mag_tdh'),
+      this.selectedBuild.equipments.sumEquipmentStat('evo')
     );
     this.stats.defineEquipmentPassives(
       this.selectedBuild.equipments.sumEquipmentStatPercent('hp'),

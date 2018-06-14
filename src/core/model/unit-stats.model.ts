@@ -8,6 +8,7 @@ export class UnitStats {
   public mag: UnitStat;
   public def: UnitStat;
   public spr: UnitStat;
+  public evo: UnitStat;
 
   constructor(stats: any) {
     this.hp = new UnitStat(stats.hp, stats.hp_passive, stats.hp_dh, stats.hp_tdh);
@@ -16,10 +17,11 @@ export class UnitStats {
     this.mag = new UnitStat(stats.mag, stats.mag_passive, stats.mag_dh, stats.mag_tdh);
     this.def = new UnitStat(stats.def, stats.def_passive, stats.def_dh, stats.def_tdh);
     this.spr = new UnitStat(stats.spr, stats.spr_passive, stats.spr_dh, stats.spr_tdh);
+    this.evo = new UnitStat(stats.evo, undefined, undefined, undefined);
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number,
-                               atk_dh, atk_tdh, mag_dh, mag_tdh) {
+                               atk_dh, atk_tdh, mag_dh, mag_tdh, evo) {
     this.hp.base_equipment = hp;
     this.mp.base_equipment = mp;
     this.atk.base_equipment = atk;
@@ -30,6 +32,7 @@ export class UnitStats {
     this.atk.tdh_equipment = atk_tdh;
     this.mag.dh_equipment = mag_dh;
     this.mag.tdh_equipment = mag_tdh;
+    this.evo.base_equipment = evo;
   }
 
   public defineConditionalPassives(passives: Array<ConditionalPassive>) {

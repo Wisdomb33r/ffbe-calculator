@@ -40,7 +40,7 @@ describe('UnitStats', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
     // WHEN
-    unitStats.defineEquipmentsStats(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
+    unitStats.defineEquipmentsStats(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10);
     // THEN
     expect(unitStats.hp.base_equipment).toEqual(10);
     expect(unitStats.mp.base_equipment).toEqual(20);

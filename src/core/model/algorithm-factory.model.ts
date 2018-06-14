@@ -13,6 +13,7 @@ export class AlgorithmFactory {
       case 4:
       case 5:
       case 6:
+      case 7:
         return new AlgorithmFinish();
       case 8:
         return new AlgorithmDefensive();

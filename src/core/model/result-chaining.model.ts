@@ -11,6 +11,7 @@ export class ResultChaining extends Result {
   public def: number;
   public buffed_def: number;
   public spr: number;
+  public evo: number;
   public buffed_spr: number;
   public calculationStat: string;
   public self_buff: number;

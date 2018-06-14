@@ -47,20 +47,20 @@ export class DamageTypePhysical extends DamageType {
     result.result = result.physicalResult;
   }
 
-  private calculateDamageVariance(unit: Unit, result: ResultChaining) {
+  protected calculateDamageVariance(unit: Unit, result: ResultChaining) {
     const right_hand: Equipment = unit.selectedBuild.equipments.right_hand;
     result.averageWeaponVariance = right_hand.isTwoHanded() ? (right_hand.variance_min + right_hand.variance_max) / 2 : 100;
     result.finalVariance = 92.5;
   }
 
-  private calculateDwDamages(unit: Unit, result: ResultChaining): number {
+  protected calculateDwDamages(unit: Unit, result: ResultChaining): number {
     result.isDualWielding = true;
     result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
     result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
     return (result.buffed_atk - result.leftHandAtk) * (result.buffed_atk - result.rightHandAtk);
   }
 
-  private calculateDhDamages(unit: Unit, result: ResultChaining): number {
+  protected calculateDhDamages(unit: Unit, result: ResultChaining): number {
     result.isDualWielding = false;
     return result.buffed_atk * result.buffed_atk;
   }
