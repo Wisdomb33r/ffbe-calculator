@@ -35,6 +35,7 @@ export const BODY_CATEGORIES: Array<number> = [
 ];
 export const IFRIT_KILLERS: Esper = getIfritWithKillers();
 export const IFRIT_STATS_BOOST: Esper = getIfritWithStatsBoost();
+export const IFRIT_EVOKE_BOOST: Esper = getIfritWithDamageModifier();
 export const SHIVA_STATS_BOOST: Esper = getShivaWithStatsBoost();
 export const GOLEM_KILLERS: Esper = getGolemWithKillers();
 export const RAMUH_DEMON_KILLER: Esper = getRamuhWithStatsBoostAndDemonKiller();
@@ -43,6 +44,7 @@ export const BAHAMUT: Esper = getBahamut();
 export const ESPER_BUILDS: Array<Esper> = [
   IFRIT_KILLERS,
   IFRIT_STATS_BOOST,
+  IFRIT_EVOKE_BOOST,
   SHIVA_STATS_BOOST,
   GOLEM_KILLERS,
   RAMUH_DEMON_KILLER,
