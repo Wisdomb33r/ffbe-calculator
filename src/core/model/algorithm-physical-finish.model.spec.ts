@@ -63,7 +63,7 @@ describe('AlgorithmPhysicalFinish', () => {
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [4000]);
   });
 
-  fit('#calculate should set the result object values for a physical esper calculation', () => {
+  it('#calculate should set the result object values for a physical esper calculation', () => {
     // GIVEN
     const algorithm = new AlgorithmFinish();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
