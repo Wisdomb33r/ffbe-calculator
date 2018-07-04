@@ -106,18 +106,24 @@
 
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p *ngIf="isPhysical()">
-    {{result.atk | integer}}+{{result.def | integer}}+{{result.mag / 2 | integer}}+{{result.spr / 2 | integer}}
+    FLOOR({{result.atk | integer}}+{{result.def | integer}}+{{result.mag / 2 | integer}}+{{result.spr / 2 | integer}}
+    / 100 * (1+{{result.evo | integer}}/100)) * {{result.power}} * {{result.esperDamageModifier}}
     * {{result.levelCorrection | integer}}
   </p>
-  <p *ngIf="isPhysical()">= {{result.physicalDamages | integer}}</p>
+  <p *ngIf="!isPhysical()">
+    FLOOR({{result.mag | integer}}+{{result.spr | integer}}+{{result.atk / 2 | integer}}+{{result.def / 2 | integer}}
+    / 100 * (1+{{result.evo | integer}}/100)) * {{result.power}} * {{result.esperDamageModifier}}
+    * {{result.levelCorrection | integer}}
+  </p>
+  <p>= {{getBaseDamages() | integer}}</p>
 
   <h3 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h3>
   <p *ngIf="result.averageElementalResistance">
-    {{result.magicalKillerDamages | integer}} * (1-({{result.averageElementalResistance | integer}}%))
+    {{getKillerDamages() | integer}} * (1-({{result.averageElementalResistance | integer}}%))
   </p>
-  <p *ngIf="result.averageElementalResistance">= {{result.magicalElementalDamages | integer}}</p>
+  <p *ngIf="result.averageElementalResistance">= {{getElementalDamages() | integer}}</p>
 
   <h3>{{'calculation.display.variances' | translate}}</h3>
-  <p>{{result.magicalElementalDamages | integer}} * {{result.finalVariance}}% / {{algorithm.opponentSpr}}</p>
-  <p>= <strong>{{result.magicalResult | integer}}</strong></p>
+  <p>{{result.magicalElementalDamages | integer}} * {{result.finalVariance}}% / {{getOpponentStat() | integer}}</p>
+  <p>= <strong>{{getResult() | integer}}</strong></p>
 </mat-dialog-content>

@@ -20,9 +20,11 @@ export class DamageTypeEsper extends DamageType {
     result.def = unit.selectedBuild.esper.def;
     result.spr = unit.selectedBuild.esper.spr;
     result.evo = unit.stats.evo.total;
+    result.esperDamageModifier = unit.selectedBuild.esper.damage_modifier;
   }
 
   public calculateDamages(unit: Unit, result: ResultChaining) {
+    result.levelCorrection = 1 + unit.selectedBuild.esper.level / 100; // TODO move this in calculateLevelCorrection
     switch (unit.selectedBuild.esper.damageType) {
       case 'physical':
         this.calculatePhysicalDamages(unit, result);

@@ -30,12 +30,32 @@ export class CalculationEsperDamagesComponent {
     this.result = result.turnDamages[this.index];
   }
 
-  public isChaining() {
+  public isChaining(): boolean {
     return this.algorithm instanceof AlgorithmChaining;
   }
 
-  public isPhysical() {
+  public isPhysical(): boolean {
     return this.unitsService.selectedUnit.selectedBuild.esper.damageType === 'physical';
+  }
+
+  public getResult(): number {
+    return this.isPhysical() ? this.result.physicalResult : this.result.magicalResult;
+  }
+
+  public getElementalDamages(): number {
+    return this.isPhysical() ? this.result.physicalElementalDamages : this.result.magicalElementalDamages;
+  }
+
+  public getKillerDamages(): number {
+    return this.isPhysical() ? this.result.physicalKillerDamages : this.result.magicalKillerDamages;
+  }
+
+  public getBaseDamages(): number {
+    return this.isPhysical() ? this.result.physicalDamages : this.result.magicalDamages;
+  }
+
+  public getOpponentStat(): number {
+    return this.isPhysical() ? this.algorithm.opponentDef : this.algorithm.opponentSpr;
   }
 
   public opponentSprChanged() {

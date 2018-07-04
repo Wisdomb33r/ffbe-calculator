@@ -20,6 +20,8 @@ export class ResultChaining extends Result {
   public combosIncrement: number;
   public hitsPower: Array<number>;
   public power: number;
+  public esperDamageModifier: number;
+  public levelCorrection: number;
 
   // skill behavior
   public isDualWielding: boolean;
