@@ -37,7 +37,9 @@ export const IFRIT_KILLERS: Esper = getIfritWithKillers();
 export const IFRIT_STATS_BOOST: Esper = getIfritWithStatsBoost();
 export const IFRIT_EVOKE_BOOST: Esper = getIfritWithDamageModifier();
 export const SHIVA_STATS_BOOST: Esper = getShivaWithStatsBoost();
-export const GOLEM_KILLERS: Esper = getGolemWithKillers();
+export const GOLEM_BUG_KILLERS: Esper = getGolemWithBugKillers();
+export const GOLEM_STONE_KILLERS: Esper = getGolemWithStoneKillers();
+export const GOLEM_TANKING: Esper = getGolemWithDefensivesTraits();
 export const RAMUH_DEMON_KILLER: Esper = getRamuhWithStatsBoostAndDemonKiller();
 export const RAMUH_STONE_KILLER: Esper = getRamuhWithStatsBoostAndStoneKiller();
 export const RAMUH_EVOKE_BOOST: Esper = getRamuhWithStatsBoostAndDamageModifier();
@@ -47,7 +49,9 @@ export const ESPER_BUILDS: Array<Esper> = [
   IFRIT_STATS_BOOST,
   IFRIT_EVOKE_BOOST,
   SHIVA_STATS_BOOST,
-  GOLEM_KILLERS,
+  GOLEM_BUG_KILLERS,
+  GOLEM_STONE_KILLERS,
+  GOLEM_TANKING,
   RAMUH_DEMON_KILLER,
   RAMUH_STONE_KILLER,
   RAMUH_EVOKE_BOOST,
@@ -158,27 +162,76 @@ function getShivaWithStatsBoost(): Esper {
   return esper;
 }
 
-function getGolemWithKillers(): Esper {
+function getGolemWithBugKillers(): Esper {
   const esper = new Esper();
   esper.id = 4;
   esper.name_fr = 'Golem';
   esper.name_en = 'Golem';
-  esper.build_fr = 'Tueurs';
-  esper.build_en = 'Killers';
-  esper.rank = 2;
-  esper.level = 40;
+  esper.build_fr = 'Tue-insectes';
+  esper.build_en = 'Bug Killers';
+  esper.rank = 3;
+  esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
-  esper.hp = 5500 + 900;
-  esper.mp = 4300;
-  esper.atk = 3200 + 100;
-  esper.mag = 1600 + 15;
-  esper.def = 4500 + 360;
-  esper.spr = 1600 + 30;
-  esper.physical_killers = new KillerPassives(0, 50, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0);
+  esper.hp = 9000;
+  esper.mp = 7000;
+  esper.atk = 6200 + 400;
+  esper.mag = 3900;
+  esper.def = 8800 + 360;
+  esper.spr = 3900 + 100;
+  esper.physical_killers = new KillerPassives(0, 125, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 0;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 10;
+  return esper;
+}
+
+function getGolemWithStoneKillers(): Esper {
+  const esper = new Esper();
+  esper.id = 4;
+  esper.name_fr = 'Golem';
+  esper.name_en = 'Golem';
+  esper.build_fr = 'Tue-pierres';
+  esper.build_en = 'Stone Killers';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
+  esper.hp = 9000;
+  esper.mp = 7000;
+  esper.atk = 6200 + 220;
+  esper.mag = 3900;
+  esper.def = 8800 + 800;
+  esper.spr = 3900 + 100;
+  esper.physical_killers = new KillerPassives(0, 50, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 75, 0, 0, 0);
+  esper.power = 0;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 10;
+  return esper;
+}
+
+function getGolemWithDefensivesTraits(): Esper {
+  const esper = new Esper();
+  esper.id = 4;
+  esper.name_fr = 'Golem';
+  esper.name_en = 'Golem';
+  esper.build_fr = 'Tanking';
+  esper.build_en = 'Tanking';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
+  esper.hp = 9000 + 1500;
+  // TODO esper.hp_percent = 10;
+  esper.mp = 7000 + 100;
+  esper.atk = 6200;
+  esper.mag = 3900 + 15;
+  esper.def = 8800 + 360;
+  esper.spr = 3900 + 100;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 0;
   esper.damage_modifier = 1;
-  esper.stats_percent = 0;
+  esper.stats_percent = 20;
   return esper;
 }
 

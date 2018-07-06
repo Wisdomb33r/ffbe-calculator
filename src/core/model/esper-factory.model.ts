@@ -1,4 +1,4 @@
-import {BAHAMUT, GOLEM_KILLERS, IFRIT_STATS_BOOST, RAMUH_DEMON_KILLER, RAMUH_EVOKE_BOOST} from '../calculator-constants';
+import {BAHAMUT, GOLEM_TANKING, IFRIT_STATS_BOOST, RAMUH_DEMON_KILLER, RAMUH_EVOKE_BOOST} from '../calculator-constants';
 import {Esper} from './esper.model';
 
 export class EsperFactory {
@@ -16,7 +16,7 @@ export class EsperFactory {
       case 7:
         return RAMUH_EVOKE_BOOST;
       case 8:
-        return GOLEM_KILLERS;
+        return GOLEM_TANKING;
       default:
         return IFRIT_STATS_BOOST;
     }
