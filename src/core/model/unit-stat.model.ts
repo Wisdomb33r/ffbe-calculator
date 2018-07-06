@@ -23,7 +23,7 @@ export class UnitStat {
   public total = 0;
 
   constructor(stat: number, stat_passive: number, stat_dh: number, stat_tdh: number) {
-    this.base = stat;
+    this.base = stat ? stat : 0;
     this.passive = stat_passive ? stat_passive : 0;
     this.dh = stat_dh ? stat_dh : 0;
     this.tdh = stat_tdh ? stat_tdh : 0;

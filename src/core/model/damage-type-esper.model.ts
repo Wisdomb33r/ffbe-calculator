@@ -1,7 +1,6 @@
 import {DamageType} from './damage-type.model';
 import {Unit} from './unit.model';
 import {ResultChaining} from './result-chaining.model';
-import {Esper} from './esper.model';
 import {DamageTypeEsperPhysical} from './damage-type-esper-physical.model';
 import {DamageTypeEsperMagical} from './damage-type-esper-magical.model';
 import {Skill} from './skill.model';
@@ -10,8 +9,8 @@ export class DamageTypeEsper extends DamageType {
 
   private damageType: DamageType;
 
-  public calculateLevelCorrection(unit: Unit) {
-    return 1 + unit.selectedBuild.esper.level / 100;
+  public calculateLevelCorrection(unit: Unit, result: ResultChaining) {
+    result.levelCorrection = 1 + unit.selectedBuild.esper.level / 100;
   }
 
   public calculateBuffs(unit: Unit, skill: Skill, isSupportBuffing: boolean, supportBuff: number, result: ResultChaining) {
@@ -24,7 +23,6 @@ export class DamageTypeEsper extends DamageType {
   }
 
   public calculateDamages(unit: Unit, result: ResultChaining) {
-    result.levelCorrection = 1 + unit.selectedBuild.esper.level / 100; // TODO move this in calculateLevelCorrection
     switch (unit.selectedBuild.esper.damageType) {
       case 'physical':
         this.calculatePhysicalDamages(unit, result);
@@ -33,6 +31,11 @@ export class DamageTypeEsper extends DamageType {
       case 'magical':
         this.calculateMagicalDamages(unit, result);
         this.damageType = new DamageTypeEsperMagical();
+        break;
+      default:
+        result.magicalDamages = 0;
+        result.magicalKillerDamages = 0;
+        result.magicalResult = 0;
         break;
     }
   }
@@ -50,14 +53,12 @@ export class DamageTypeEsper extends DamageType {
   }
 
   private calculatePhysicalDamages(unit: Unit, result: ResultChaining) {
-    const esper: Esper = unit.selectedBuild.esper;
-    const base = Math.floor((esper.atk + esper.def + esper.mag / 2 + esper.spr / 2) / 100 * (1 + unit.stats.evo.total / 100));
-    result.physicalDamages = Math.pow(base, 2) * result.power * esper.damage_modifier;
+    const base = Math.floor((result.atk + result.def + result.mag / 2 + result.spr / 2) / 100 * (1 + unit.stats.evo.total / 100));
+    result.physicalDamages = Math.pow(base, 2) * result.power * result.esperDamageModifier;
   }
 
   private calculateMagicalDamages(unit: Unit, result: ResultChaining) {
-    const esper: Esper = unit.selectedBuild.esper;
-    const base = Math.floor((esper.mag + esper.spr + esper.atk / 2 + esper.def / 2) / 100 * (1 + unit.stats.evo.total / 10));
-    result.magicalDamages = Math.pow(base, 2) * result.power * esper.damage_modifier;
+    const base = Math.floor((result.mag + result.spr + result.atk / 2 + result.def / 2) / 100 * (1 + unit.stats.evo.total / 100));
+    result.magicalDamages = Math.pow(base, 2) * result.power * result.esperDamageModifier * result.levelCorrection;
   }
 }

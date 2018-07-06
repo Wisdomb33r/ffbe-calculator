@@ -40,6 +40,7 @@ export const SHIVA_STATS_BOOST: Esper = getShivaWithStatsBoost();
 export const GOLEM_KILLERS: Esper = getGolemWithKillers();
 export const RAMUH_DEMON_KILLER: Esper = getRamuhWithStatsBoostAndDemonKiller();
 export const RAMUH_STONE_KILLER: Esper = getRamuhWithStatsBoostAndStoneKiller();
+export const RAMUH_EVOKE_BOOST: Esper = getRamuhWithStatsBoostAndDamageModifier();
 export const BAHAMUT: Esper = getBahamut();
 export const ESPER_BUILDS: Array<Esper> = [
   IFRIT_KILLERS,
@@ -49,6 +50,7 @@ export const ESPER_BUILDS: Array<Esper> = [
   GOLEM_KILLERS,
   RAMUH_DEMON_KILLER,
   RAMUH_STONE_KILLER,
+  RAMUH_EVOKE_BOOST,
   BAHAMUT,
 ];
 
@@ -70,9 +72,11 @@ function getIfritWithKillers(): Esper {
   esper.spr = 3880;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 125, 125, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 75, 75, 0, 0, 0, 0, 0, 0);
+  esper.power = 235;
   esper.damage_modifier = 1;
   esper.stats_percent = 0;
   esper.damageType = 'physical';
+  esper.elements = [1];
   return esper;
 }
 
@@ -94,9 +98,11 @@ function getIfritWithStatsBoost(): Esper {
   esper.spr = 3880 + 100;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 50, 50, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 235;
   esper.damage_modifier = 1;
   esper.stats_percent = 20;
   esper.damageType = 'physical';
+  esper.elements = [1];
   return esper;
 }
 
@@ -118,9 +124,11 @@ function getIfritWithDamageModifier(): Esper {
   esper.spr = 3880;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 75, 0, 0, 0, 0, 0, 0);
+  esper.power = 235;
   esper.damage_modifier = 2;
   esper.stats_percent = 0;
   esper.damageType = 'physical';
+  esper.elements = [1];
   return esper;
 }
 
@@ -142,9 +150,11 @@ function getShivaWithStatsBoost(): Esper {
   esper.spr = 7020;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 190;
   esper.damage_modifier = 1;
   esper.stats_percent = 20;
   esper.damageType = 'magical';
+  esper.elements = [2];
   return esper;
 }
 
@@ -166,6 +176,7 @@ function getGolemWithKillers(): Esper {
   esper.spr = 1600 + 30;
   esper.physical_killers = new KillerPassives(0, 50, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 0;
   esper.damage_modifier = 1;
   esper.stats_percent = 0;
   return esper;
@@ -189,9 +200,11 @@ function getRamuhWithStatsBoostAndDemonKiller(): Esper {
   esper.spr = 6440 + 110;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0);
+  esper.power = 210;
   esper.damage_modifier = 1;
   esper.stats_percent = 20;
   esper.damageType = 'magical';
+  esper.elements = [3];
   return esper;
 }
 
@@ -213,9 +226,37 @@ function getRamuhWithStatsBoostAndStoneKiller(): Esper {
   esper.spr = 6440;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0);
+  esper.power = 210;
   esper.damage_modifier = 1;
   esper.stats_percent = 20;
   esper.damageType = 'magical';
+  esper.elements = [3];
+  return esper;
+}
+
+function getRamuhWithStatsBoostAndDamageModifier(): Esper {
+  const esper = new Esper();
+  esper.id = 5;
+  esper.name_fr = 'Ramuh';
+  esper.name_en = 'Ramuh';
+  esper.build_fr = 'Appel de sagesse';
+  esper.build_en = 'Wise Evocation';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/005_c96c38.png';
+  esper.hp = 5200 + 410;
+  esper.mp = 8000;
+  esper.atk = 3600 + 195;
+  esper.mag = 7640 + 310;
+  esper.def = 2920 + 85;
+  esper.spr = 6440;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 210;
+  esper.damage_modifier = 2;
+  esper.stats_percent = 10;
+  esper.damageType = 'magical';
+  esper.elements = [3];
   return esper;
 }
 
@@ -237,6 +278,7 @@ function getBahamut(): Esper {
   esper.spr = 6000;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 300;
   esper.damage_modifier = 1;
   esper.stats_percent = 0;
   esper.damageType = 'magical';

@@ -35,7 +35,9 @@ export class UnitsService {
         this.magicalChainers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 2).length > 0);
         this.hybridChainers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 3).length > 0);
         this.physicalFinishers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 4).length > 0);
-        this.magicalFinishers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 5).length > 0);
+        this.magicalFinishers = units.filter(
+          (u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 5 || b.algorithmId === 7).length > 0
+        );
         this.hybridFinishers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 6).length > 0);
         this.defenders = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 8).length > 0);
       });

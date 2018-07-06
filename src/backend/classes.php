@@ -67,6 +67,7 @@ class Equipment {
     $this->spr_percent = $brex_equipement->psyp;
     $this->spr_dh = 0;
     $this->spr_tdh = 0;
+    $this->evo = $brex_equipement->evop;
     $this->variance_min = $brex_equipement->variance_min;
     $this->variance_max = $brex_equipement->variance_max;
     $this->unique = $brex_equipement->uniq == 1 ? true : false;
@@ -143,6 +144,7 @@ class UnitStats {
   public $def_passive;
   public $spr;
   public $spr_passive;
+  public $evo;
   public $atk_dh;
   public $mag_dh;
   public $atk_tdh;
@@ -160,6 +162,7 @@ class UnitStats {
     $this->def_passive = $brex_unit_stats->def_passif_amelio > 0 ? $brex_unit_stats->def_passif_amelio : $brex_unit_stats->def_passif;
     $this->spr = $brex_unit_stats->psy + $brex_unit_stats->psy_pots;
     $this->spr_passive = $brex_unit_stats->psy_passif_amelio > 0 ? $brex_unit_stats->psy_passif_amelio : $brex_unit_stats->psy_passif;
+    $this->evo = $brex_unit_stats->evop_amelio > 0 ? $brex_unit_stats->evop_amelio : $brex_unit_stats->evop;
     $this->atk_dh = $brex_unit_stats->att_dh_amelio > 0 ? $brex_unit_stats->att_dh_amelio : $brex_unit_stats->att_dh;
     $this->mag_dh = $brex_unit_stats->mag_dh_amelio > 0 ? $brex_unit_stats->mag_dh_amelio : $brex_unit_stats->mag_dh;
     $this->atk_tdh = $brex_unit_stats->att_tdh_amelio > 0 ? $brex_unit_stats->att_tdh_amelio : $brex_unit_stats->att_tdh;
@@ -220,6 +223,7 @@ class Skill {
   public $icon;
   public $power;
   public $isLimitBreak;
+  public $isEsper;
   public $nb;
   public $hits;
   public $frames;
@@ -235,6 +239,7 @@ class Skill {
   public $spr_buff;
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite == 1 ? true : false;
+    $this->isEsper = $brex_skill->is_esper == 1 ? true : false;
     $this->power = $brex_skill->puissance;
     if ($brex_skill->nb > 1) {
       $this->power = $brex_skill->puissance / $brex_skill->nb;
@@ -253,6 +258,14 @@ class Skill {
       $this->hits = $brex_unit->lim_hits;
       $this->frames = $brex_unit->lim_frames;
       $this->damages = $brex_unit->lim_damages;
+    } else if ($this->isEsper) {
+      $this->name = $language === 'fr' ? 'Chimère' : 'Esper';
+      $this->icon = null;
+      $this->category = 9;
+      $this->damages_type = 'esper';
+      $this->hits = 1;
+      $this->frames = 100;
+      $this->damages = 100;
     } else {
       $this->id = $brex_skill->competence->id;
       $this->category = $brex_skill->competence->categorie->id;

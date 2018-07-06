@@ -48,6 +48,18 @@
       <td *ngIf="result.elements && result.elements.length > 0"></td>
       <td>{{result.spr | integer}}</td>
     </tr>
+    <tr>
+      <td>{{'evo' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.evo | integer}}</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.offensive.esperDamageMultiplier' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.esperDamageModifier | integer}}</td>
+    </tr>
     <tr *ngIf="result.elements && result.elements.length > 0">
       <td>{{'calculation.display.supportBreak' | translate}}</td>
       <td>
@@ -106,14 +118,18 @@
 
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p *ngIf="isPhysical()">
-    FLOOR({{result.atk | integer}}+{{result.def | integer}}+{{result.mag / 2 | integer}}+{{result.spr / 2 | integer}}
-    / 100 * (1+{{result.evo | integer}}/100)) * {{result.power}} * {{result.esperDamageModifier}}
-    * {{result.levelCorrection | integer}}
+    FLOOR( ({{result.atk | integer}} + {{result.def | integer}} + {{result.mag / 2 | integer}}
+    + {{result.spr / 2 | integer}})/100 * (1 + {{result.evo | integer}}/100) )²
+    * {{result.power | integer}}
+    * {{result.esperDamageModifier | integer}}
+    * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p *ngIf="!isPhysical()">
-    FLOOR({{result.mag | integer}}+{{result.spr | integer}}+{{result.atk / 2 | integer}}+{{result.def / 2 | integer}}
-    / 100 * (1+{{result.evo | integer}}/100)) * {{result.power}} * {{result.esperDamageModifier}}
-    * {{result.levelCorrection | integer}}
+    FLOOR( ({{result.mag | integer}} + {{result.spr | integer}} + {{result.atk / 2 | integer}}
+    + {{result.def / 2 | integer}})/100 * (1 + {{result.evo | integer}}/100) )²
+    * {{result.power | integer}}
+    * {{result.esperDamageModifier | integer}}
+    * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p>= {{getBaseDamages() | integer}}</p>
 

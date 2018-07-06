@@ -2,12 +2,15 @@
   <tr *ngFor="let turn of result.turnDamages; let i = index">
     <th>{{'calculation.display.turn' | translate}} n+{{i+1}}</th>
     <td *ngIf="turn.physicalResult">{{turn.physicalResult | integer}}</td>
-    <td *ngIf="turn.physicalResult">
+    <td *ngIf="turn.physicalResult && !turn.esperDamageModifier">
       <img class="inline-icon details-opener" src="assets/icons/grey/question.png" (click)="displayPhysicalDamages(i)">
     </td>
     <td *ngIf="turn.magicalResult">{{turn.magicalResult | integer}}</td>
-    <td *ngIf="turn.magicalResult">
+    <td *ngIf="turn.magicalResult && !turn.esperDamageModifier">
       <img class="inline-icon details-opener" src="assets/icons/grey/question.png" (click)="displayMagicalDamages(i)">
+    </td>
+    <td *ngIf="(turn.physicalResult || turn.magicalResult) && turn.esperDamageModifier">
+      <img class="inline-icon details-opener" src="assets/icons/grey/question.png" (click)="displayEsperDamages(i)">
     </td>
   </tr>
   <tr class="total">

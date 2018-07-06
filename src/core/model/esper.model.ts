@@ -17,9 +17,11 @@ export class Esper {
   public spr: number;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
+  public power: number;
   public damage_modifier: number;
   public stats_percent: number;
   public damageType: string;
+  public elements: Array<number>;
 
   public calculateStatIncrease(statName: string): number {
     return (this.stats_percent > 0 ? 1 + this.stats_percent / 100 : 1) * this[statName] / 100;

@@ -17,7 +17,7 @@ export class UnitStats {
     this.mag = new UnitStat(stats.mag, stats.mag_passive, stats.mag_dh, stats.mag_tdh);
     this.def = new UnitStat(stats.def, stats.def_passive, stats.def_dh, stats.def_tdh);
     this.spr = new UnitStat(stats.spr, stats.spr_passive, stats.spr_dh, stats.spr_tdh);
-    this.evo = new UnitStat(stats.evo, undefined, undefined, undefined);
+    this.evo = new UnitStat(stats.evo, 0, 0, 0);
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number,
@@ -79,5 +79,6 @@ export class UnitStats {
     this.mag.computeTotal();
     this.def.computeTotal();
     this.spr.computeTotal();
+    this.evo.computeTotal();
   }
 }

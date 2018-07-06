@@ -16,6 +16,7 @@ export class CalculationEsperDamagesComponent {
   public algorithm: AlgorithmOffensive;
   private index: number;
   public opponentSprValueError = false;
+  public opponentDefValueError = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private unitsService: UnitsService) {
@@ -64,6 +65,16 @@ export class CalculationEsperDamagesComponent {
       this.algorithm.opponentSpr = 1000000;
     } else {
       this.opponentSprValueError = false;
+    }
+    this.calculateBuild();
+  }
+
+  public opponentDefChanged() {
+    if (this.algorithm.opponentDef < 1 || this.algorithm.opponentDef > 1000000) {
+      this.opponentDefValueError = true;
+      this.algorithm.opponentDef = 1000000;
+    } else {
+      this.opponentDefValueError = false;
     }
     this.calculateBuild();
   }

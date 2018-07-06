@@ -8,7 +8,7 @@ export class SkillTypeFixed implements SkillType {
   }
 
   getElements(skill: Skill, unit: Unit): Array<number> {
-    return skill.elements;
+    return skill.isEsper ? unit.selectedBuild.esper.elements : skill.elements;
   }
 
   isExecutingTwice(skill: Skill, unit: Unit): boolean {
