@@ -167,7 +167,7 @@ function getGolemWithKillers(): Esper {
   esper.build_en = 'Killers';
   esper.rank = 2;
   esper.level = 40;
-  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_905c88.png';
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
   esper.hp = 5500 + 900;
   esper.mp = 4300;
   esper.atk = 3200 + 100;

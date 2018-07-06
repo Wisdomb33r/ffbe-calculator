@@ -19,6 +19,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
 
   private calculateTurn(skill: Skill, unit: Unit): ResultChaining {
     const result: ResultChaining = new ResultChaining();
+    skill.damageType.calculateLevelCorrection(unit, result);
     skill.damageType.calculateBuffs(unit, skill, this.isSupportBuffing, this.supportBuff, result);
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
