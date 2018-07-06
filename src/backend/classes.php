@@ -228,7 +228,7 @@ class Skill {
   public $isBreakingChain;
   public $resists_break;
   public $elements;
-  public $att_buff;
+  public $atk_buff;
   public $mag_buff;
   public $def_buff;
   public $spr_buff;
@@ -242,7 +242,7 @@ class Skill {
     $this->nb = $brex_skill->nb ? $brex_skill->nb : 1;
     $this->elements = $brex_skill->elements ? explode ( ',', $brex_skill->elements ) : null;
     $this->isBreakingChain = $brex_skill->breaking_chain ? true : false;
-    $this->att_buff = $brex_skill->att_buff;
+    $this->atk_buff = $brex_skill->att_buff;
     $this->mag_buff = $brex_skill->mag_buff;
     $this->def_buff = $brex_skill->def_buff;
     $this->spr_buff = $brex_skill->psy_buff;
