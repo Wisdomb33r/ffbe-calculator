@@ -1,5 +1,6 @@
 <?php
 require_once "../../gestion/genscripts/object_brex_build_passif.class.php";
+require_once "../../gestion/genscripts/object_brex_comp_eveil.class.php";
 class Equipment {
   public $id;
   public $category;
@@ -260,6 +261,24 @@ class Skill {
       $this->hits = $brex_skill->competence->hits;
       $this->frames = $brex_skill->competence->frames;
       $this->damages = $brex_skill->competence->damages;
+      if ($brex_skill->is_enhanced == 1) {
+        $values = array ();
+        $values ['perso'] = $brex_unit->perso->id;
+        $values ['competence'] = $brex_skill->competence->id;
+        $enhancements = brex_comp_eveil::findByRelation1N ( $values );
+        if (count ( $enhancements )) {
+          foreach ( $enhancements as $e ) {
+            if ($e->niveau == 2) {
+              if ($e->hits)
+                $this->hits = $e->hits;
+              if ($e->frames)
+                $this->frames = $e->frames;
+              if ($e->damages)
+                $this->damages = $e->damages;
+            }
+          }
+        }
+      }
       $this->calculation_stat = $brex_skill->competence->calculation_stat;
       if ($brex_skill->competence->physique) {
         $this->damages_type = 'physical';
