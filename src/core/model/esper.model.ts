@@ -10,11 +10,17 @@ export class Esper {
   public level: number;
   public icon: string;
   public hp: number;
+  public hp_percent: number;
   public mp: number;
+  public mp_percent: number;
   public atk: number;
+  public atk_percent: number;
   public mag: number;
+  public mag_percent: number;
   public def: number;
+  public def_percent: number;
   public spr: number;
+  public spr_percent: number;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
   public power: number;

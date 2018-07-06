@@ -1,5 +1,6 @@
 import {ConditionalPassive} from './conditional-passive.model';
 import {UnitStat} from './unit-stat.model';
+import {Esper} from './esper.model';
 
 export class UnitStats {
   public hp: UnitStat;
@@ -54,13 +55,19 @@ export class UnitStats {
     this.spr.passive_equipment = spr + passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
   }
 
-  public defineEsperStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number) {
-    this.hp.value_from_esper = hp;
-    this.mp.value_from_esper = mp;
-    this.atk.value_from_esper = atk;
-    this.mag.value_from_esper = mag;
-    this.def.value_from_esper = def;
-    this.spr.value_from_esper = spr;
+  public defineEsperStats(esper: Esper) {
+    this.hp.value_from_esper = esper.calculateStatIncrease('hp');
+    this.hp.passive_esper = esper.hp_percent ? esper.hp_percent : 0;
+    this.mp.value_from_esper = esper.calculateStatIncrease('mp');
+    this.mp.passive_esper = esper.mp_percent ? esper.mp_percent : 0;
+    this.atk.value_from_esper = esper.calculateStatIncrease('atk');
+    this.atk.passive_esper = esper.atk_percent ? esper.atk_percent : 0;
+    this.mag.value_from_esper = esper.calculateStatIncrease('mag');
+    this.mag.passive_esper = esper.mag_percent ? esper.mag_percent : 0;
+    this.def.value_from_esper = esper.calculateStatIncrease('def');
+    this.def.passive_esper = esper.def_percent ? esper.def_percent : 0;
+    this.spr.value_from_esper = esper.calculateStatIncrease('spr');
+    this.spr.passive_esper = esper.spr_percent ? esper.spr_percent : 0;
   }
 
   public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {

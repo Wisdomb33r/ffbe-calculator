@@ -221,7 +221,7 @@ function getGolemWithDefensivesTraits(): Esper {
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
   esper.hp = 9000 + 1500;
-  // TODO esper.hp_percent = 10;
+  esper.hp_percent = 10;
   esper.mp = 7000 + 100;
   esper.atk = 6200;
   esper.mag = 3900 + 15;

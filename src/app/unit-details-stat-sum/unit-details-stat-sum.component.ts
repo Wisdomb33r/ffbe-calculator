@@ -65,6 +65,14 @@ export class UnitDetailsStatSumComponent {
     return this.unitStats[this.stat].value_from_esper;
   }
 
+  public getEsperPassiveValue() {
+    return Math.floor(this.unitStats[this.stat].value_from_passive_esper);
+  }
+
+  public getEsperPassivePercent() {
+    return this.unitStats[this.stat].passive_esper;
+  }
+
   public getTotalValue() {
     return this.unitStats[this.stat].total;
   }
