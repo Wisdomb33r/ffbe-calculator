@@ -19,6 +19,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
 
   private calculateTurn(skill: Skill, unit: Unit): ResultChaining {
     const result: ResultChaining = new ResultChaining();
+    skill.damageType.calculateLevelCorrection(unit, result);
     skill.damageType.calculateBuffs(unit, skill, this.isSupportBuffing, this.supportBuff, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
@@ -30,6 +31,9 @@ export class AlgorithmFinish extends AlgorithmOffensive {
   }
 
   private calculateHitsPower(skill: Skill, unit: Unit, result: ResultChaining) {
+    if (skill.isEsper) {
+      skill.power = unit.selectedBuild.esper.power;
+    }
     if (isNullOrUndefined(skill.hits) || skill.hits < 1) {
       result.hitsPower = [0];
       result.power = 0;

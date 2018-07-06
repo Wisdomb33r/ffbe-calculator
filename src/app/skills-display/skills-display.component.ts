@@ -20,8 +20,13 @@ export class SkillsDisplayComponent {
   public displaySkill(skill: Skill) {
     this.dialog.open(SkillDisplayComponent, {
       data: {
-        skill: skill
+        skill: skill,
+        esper: this.unitsService.selectedUnit.selectedBuild.esper,
       }
     });
+  }
+
+  public getEsperImage(): string {
+    return this.unitsService.selectedUnit.selectedBuild.esper.icon;
   }
 }

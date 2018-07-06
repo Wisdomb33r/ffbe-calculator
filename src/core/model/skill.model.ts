@@ -11,6 +11,7 @@ export class Skill {
   public icon: string;
   public power: number;
   public isLimitBreak: boolean;
+  public isEsper: boolean;
   public nb: number;
   public hits: number;
   public frames: string;
@@ -36,6 +37,7 @@ export class Skill {
     this.icon = skill.icon;
     this.power = skill.power;
     this.isLimitBreak = skill.isLimitBreak;
+    this.isEsper = skill.isEsper;
     this.nb = skill.nb;
     this.hits = skill.hits;
     this.frames = skill.frames;

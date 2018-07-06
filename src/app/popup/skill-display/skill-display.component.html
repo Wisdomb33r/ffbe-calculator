@@ -1,5 +1,5 @@
-<h2 mat-dialog-title>{{skill.name}}</h2>
-<mat-dialog-content>
+<h2 mat-dialog-title *ngIf="!skill.isEsper">{{skill.name}}</h2>
+<mat-dialog-content *ngIf="!skill.isEsper">
   <table>
     <tr>
       <td>{{'skills.display.attackType' | translate}}</td>
@@ -32,6 +32,24 @@
     <tr *ngIf="skill.nb > 1">
       <td>{{'skills.display.castNumber' | translate}}</td>
       <td>{{skill.nb}}</td>
+    </tr>
+  </table>
+</mat-dialog-content>
+
+<h2 mat-dialog-title *ngIf="skill.isEsper">{{getEsperName()}}</h2>
+<mat-dialog-content *ngIf="skill.isEsper">
+  <table>
+    <tr>
+      <td>{{'skills.display.attackType' | translate}}</td>
+      <td>{{'skills.display.attackType_esper' | translate}}</td>
+    </tr>
+    <tr>
+      <td>{{'skills.display.damageType' | translate}}</td>
+      <td>{{'skills.display.damageType_' + esper.damageType | translate}}</td>
+    </tr>
+    <tr>
+      <td>{{'skills.display.power' | translate}}</td>
+      <td>{{esper.power | integer}}</td>
     </tr>
   </table>
 </mat-dialog-content>

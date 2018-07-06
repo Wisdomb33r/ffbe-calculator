@@ -52,6 +52,12 @@
       <td>{{getEsperValue() | integer}}</td>
       <td></td>
     </tr>
+    <tr>
+      <td>{{'unit.details.stats.popup.passive' | translate}}</td>
+      <td>{{getEsperPassiveValue() | integer}}</td>
+      <td class="percent" [class.limit-warn]="isEquipmentPassiveLimitExceeded()">({{getEsperPassivePercent()}}%)
+      </td>
+    </tr>
     <tr class="total">
       <th>{{'unit.details.stats.popup.total' | translate}}</th>
       <td>{{getTotalValue() | integer}}</td>

@@ -1,5 +1,6 @@
 import 'rxjs/add/observable/of';
 import {UnitStats} from './unit-stats.model';
+import {GOLEM_TANKING} from '../calculator-constants';
 
 describe('UnitStats', () => {
   const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":200,"atk":300,"mag":400,"def":500,"spr":500}';
@@ -40,7 +41,7 @@ describe('UnitStats', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
     // WHEN
-    unitStats.defineEquipmentsStats(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
+    unitStats.defineEquipmentsStats(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10);
     // THEN
     expect(unitStats.hp.base_equipment).toEqual(10);
     expect(unitStats.mp.base_equipment).toEqual(20);
@@ -87,14 +88,15 @@ describe('UnitStats', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
     // WHEN
-    unitStats.defineEsperStats(10, 20, 30, 40, 50, 60);
+    unitStats.defineEsperStats(GOLEM_TANKING);
     // THEN
-    expect(unitStats.hp.value_from_esper).toEqual(10);
-    expect(unitStats.mp.value_from_esper).toEqual(20);
-    expect(unitStats.atk.value_from_esper).toEqual(30);
-    expect(unitStats.mag.value_from_esper).toEqual(40);
-    expect(unitStats.def.value_from_esper).toEqual(50);
-    expect(unitStats.spr.value_from_esper).toEqual(60);
+    expect(unitStats.hp.value_from_esper).toBeCloseTo(126);
+    expect(unitStats.mp.value_from_esper).toBeCloseTo(85.2);
+    expect(unitStats.atk.value_from_esper).toBeCloseTo(74.4);
+    expect(unitStats.mag.value_from_esper).toBeCloseTo(46.98);
+    expect(unitStats.def.value_from_esper).toBeCloseTo(109.92);
+    expect(unitStats.spr.value_from_esper).toBeCloseTo(48);
+    expect(unitStats.hp.passive_esper).toEqual(10);
   });
 
   it('#defineDhActivation should delegate to stats objects', () => {

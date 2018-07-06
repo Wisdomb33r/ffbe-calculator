@@ -25,7 +25,7 @@ export abstract class DamageType {
 
   abstract calculateFinalResult(unit: Unit, def: number, spr: number, result: ResultChaining);
 
-  protected calculateLevelCorrection(unit: Unit) {
-    return 2;
+  public calculateLevelCorrection(unit: Unit, result: ResultChaining) {
+    result.levelCorrection = 2;
   }
 }

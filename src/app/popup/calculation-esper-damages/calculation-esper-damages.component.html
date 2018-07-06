@@ -1,0 +1,145 @@
+<h2 mat-dialog-title>{{'calculation.offensive.esperDamagesCalculation' | translate}}</h2>
+<mat-dialog-content>
+  <h3>{{'calculation.offensive.skillHitsPower' | translate}}</h3>
+  <table>
+    <tr *ngIf="isChaining()">
+      <td>{{'calculation.offensive.sparkChain' | translate}}</td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.isSparkChain" (change)="calculateBuild()"></mat-checkbox>
+      </td>
+    </tr>
+    <tr>
+      <td *ngIf="isChaining()">{{'calculation.offensive.comboIncrement' | translate}}</td>
+      <td *ngIf="!isChaining()">{{'calculation.offensive.comboMultiplier' | translate}}</td>
+      <td>{{result.combosIncrement | number:'1.1-1'}}</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.display.hits' | translate}}</td>
+      <td>{{result.hitsPower.length}}</td>
+    </tr>
+  </table>
+  <p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
+  <h3>{{'calculation.offensive.turnPower' | translate}}</h3>
+  <p>{{result.power | integer}}%</p>
+
+  <h3>{{'calculation.display.calculationParameters' | translate}}</h3>
+  <table>
+    <tr>
+      <td>{{'atk' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.atk | integer}}</td>
+    </tr>
+    <tr>
+      <td>{{'mag' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.mag | integer}}</td>
+    </tr>
+    <tr>
+      <td>{{'def' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.def | integer}}</td>
+    </tr>
+    <tr>
+      <td>{{'spr' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.spr | integer}}</td>
+    </tr>
+    <tr>
+      <td>{{'evo' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.evo | integer}}</td>
+    </tr>
+    <tr>
+      <td>{{'calculation.offensive.esperDamageMultiplier' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.esperDamageModifier | integer}}</td>
+    </tr>
+    <tr *ngIf="result.elements && result.elements.length > 0">
+      <td>{{'calculation.display.supportBreak' | translate}}</td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.isSupportBreakingResistances" (change)="calculateBuild()"></mat-checkbox>
+      </td>
+      <td>
+        <div *ngFor="let element of result.elements" class="resist-icon">
+          <img src="assets/resists/resist_{{element}}.png">
+        </div>
+      </td>
+      <td>
+        <div *ngFor="let element of result.elements" class="resist-label">
+          <select [(ngModel)]="algorithm.supportResistsBreak[element-1]" (change)="convertSupportBreakAndCalculate()">
+            <option value="0">0%</option>
+            <option value="-20">-20%</option>
+            <option value="-30">-30%</option>
+            <option value="-35">-35%</option>
+            <option value="-40">-40%</option>
+            <option value="-50">-50%</option>
+            <option value="-60">-60%</option>
+            <option value="-75">-75%</option>
+            <option value="-100">-100%</option>
+          </select>
+        </div>
+      </td>
+    </tr>
+    <tr *ngIf="result.elements && result.elements.length > 0">
+      <td>{{'calculation.display.resistances' | translate}}</td>
+      <td></td>
+      <td>
+        <div *ngFor="let element of result.elements" class="resist-icon">
+          <img src="assets/resists/resist_{{element}}.png">
+        </div>
+      </td>
+      <td>
+        <div *ngFor="let element of result.elements" class="resist-label">
+          {{result.resistances[element-1] | integer}}%
+        </div>
+      </td>
+    </tr>
+    <tr *ngIf="isPhysical()">
+      <td>{{'calculation.display.opponentDef' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td><input [(ngModel)]="algorithm.opponentDef" (blur)="opponentDefChanged()"></td>
+    </tr>
+    <tr *ngIf="!isPhysical()">
+      <td>{{'calculation.display.opponentSpr' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td><input [(ngModel)]="algorithm.opponentSpr" (blur)="opponentSprChanged()"></td>
+    </tr>
+  </table>
+  <mat-error *ngIf="opponentDefValueError">{{'calculation.offensive.opponentDefValueError' | translate}}</mat-error>
+  <mat-error *ngIf="opponentSprValueError">{{'calculation.offensive.opponentSprValueError' | translate}}</mat-error>
+
+  <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
+  <p *ngIf="isPhysical()">
+    FLOOR( ({{result.atk | integer}} + {{result.def | integer}} + {{result.mag / 2 | integer}}
+    + {{result.spr / 2 | integer}})/100 * (1 + {{result.evo | integer}}/100) )²
+    * {{result.power | integer}}
+    * {{result.esperDamageModifier | integer}}
+    * {{result.levelCorrection | number:'1.1-1'}}
+  </p>
+  <p *ngIf="!isPhysical()">
+    FLOOR( ({{result.mag | integer}} + {{result.spr | integer}} + {{result.atk / 2 | integer}}
+    + {{result.def / 2 | integer}})/100 * (1 + {{result.evo | integer}}/100) )²
+    * {{result.power | integer}}
+    * {{result.esperDamageModifier | integer}}
+    * {{result.levelCorrection | number:'1.1-1'}}
+  </p>
+  <p>= {{getBaseDamages() | integer}}</p>
+
+  <h3 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h3>
+  <p *ngIf="result.averageElementalResistance">
+    {{getKillerDamages() | integer}} * (1-({{result.averageElementalResistance | integer}}%))
+  </p>
+  <p *ngIf="result.averageElementalResistance">= {{getElementalDamages() | integer}}</p>
+
+  <h3>{{'calculation.display.variances' | translate}}</h3>
+  <p>{{result.magicalElementalDamages | integer}} * {{result.finalVariance}}% / {{getOpponentStat() | integer}}</p>
+  <p>= <strong>{{getResult() | integer}}</strong></p>
+</mat-dialog-content>
