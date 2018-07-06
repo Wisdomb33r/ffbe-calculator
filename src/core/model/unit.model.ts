@@ -44,7 +44,9 @@ export class Unit {
       || this.id === 639 // nyx
       || this.id === 775 // 2B
       || this.id === 844 // CG Jake
-      || this.id === 8063; // A2
+      || this.id === 942 // CG Raegen
+      || this.id === 8063 // A2
+      || this.id === 8159; // Rico
   }
 
   public isWithPartialDwForCategory(category: number): boolean {
