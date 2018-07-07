@@ -13,6 +13,7 @@ export class AppComponent {
               private meta: Meta,
               private title: Title) {
     translate.setDefaultLang('en');
+    translate.use('en');
     if (translate.getBrowserLang().startsWith('fr')) {
       translate.use('fr');
     }
