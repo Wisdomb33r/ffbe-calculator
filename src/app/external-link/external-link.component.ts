@@ -1,16 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {ISubscription} from 'rxjs/Subscription';
-import {switchMap} from 'rxjs/operators';
 import {UnitsService} from '../../core/services/units.service';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {Unit} from '../../core/model/unit.model';
-import {Observable} from 'rxjs/Observable';
-import {forkJoin} from 'rxjs/observable/forkJoin';
 import {Equipment} from '../../core/model/equipment.model';
-import 'rxjs/add/observable/of';
 import {ESPER_BUILDS} from '../../core/calculator-constants';
 import {Esper} from '../../core/model/esper.model';
+import {forkJoin, of, Subscription, throwError} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-external-link',
@@ -19,7 +16,7 @@ import {Esper} from '../../core/model/esper.model';
 })
 export class ExternalLinkComponent implements OnInit, OnDestroy {
 
-  private subscription: ISubscription;
+  private subscription: Subscription;
   private unit: number;
   private build: number;
   private right_hand: number;
@@ -70,7 +67,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           this.unitsService.selectedUnit.selectedBuild.equipments.left_hand = null;
 
           const observables = [];
-          observables.push(Observable.of(unit));
+          observables.push(of(unit));
           if (this.right_hand) {
             observables.push(this.unitsService.getAllowedEquipmentsForSlot$('right_hand'));
           }
@@ -104,7 +101,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
 
           return forkJoin(observables);
         }
-        return Observable.throw('No unit identifier');
+        return throwError('No unit identifier');
       }),
     ).subscribe((observablesResults) => {
       let index = 1;

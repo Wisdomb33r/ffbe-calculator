@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material';
 import {EquipmentSelectionComponent} from '../popup/equipment-selection/equipment-selection.component';
 import {Equipment} from '../../core/model/equipment.model';
 import {UnitsService} from '../../core/services/units.service';
-import {ISubscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-equipments-display',
@@ -15,7 +15,7 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
 
   @Input() equipments: EquipmentSet;
   @Output() equipmentChanged: EventEmitter<Equipment> = new EventEmitter<Equipment>();
-  private subscription: ISubscription;
+  private subscription: Subscription;
 
   constructor(private dialog: MatDialog,
               private unitsService: UnitsService) {

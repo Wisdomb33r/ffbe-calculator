@@ -1,4 +1,3 @@
-import 'rxjs/add/observable/of';
 import {UnitStats} from './unit-stats.model';
 import {GOLEM_TANKING} from '../calculator-constants';
 
