@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DatabaseClientService} from './database-client.service';
 import {Unit} from '../model/unit.model';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {Equipment} from '../model/equipment.model';
 import {map} from 'rxjs/operators';
 import {CalculatorUtils} from '../calculator-utils';
@@ -138,14 +138,14 @@ export class UnitsService {
   private checkUniqueness(item: Equipment, slot: string): boolean {
     if (item.unique) {
       if (slot.startsWith('materia') && (
-          item.id === this.selectedUnit.selectedBuild.equipments.materia1.id
-          || item.id === this.selectedUnit.selectedBuild.equipments.materia2.id
-          || item.id === this.selectedUnit.selectedBuild.equipments.materia3.id
-          || item.id === this.selectedUnit.selectedBuild.equipments.materia4.id)) {
+        item.id === this.selectedUnit.selectedBuild.equipments.materia1.id
+        || item.id === this.selectedUnit.selectedBuild.equipments.materia2.id
+        || item.id === this.selectedUnit.selectedBuild.equipments.materia3.id
+        || item.id === this.selectedUnit.selectedBuild.equipments.materia4.id)) {
         return false;
       }
       if (slot.startsWith('accessory') && (item.id === this.selectedUnit.selectedBuild.equipments.accessory1.id
-          || item.id === this.selectedUnit.selectedBuild.equipments.accessory2.id)) {
+        || item.id === this.selectedUnit.selectedBuild.equipments.accessory2.id)) {
         return false;
       }
       if (slot === 'right_hand' || slot === 'left_hand') {

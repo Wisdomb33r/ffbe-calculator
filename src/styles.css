@@ -83,10 +83,13 @@ img.details-opener {
 }
 
 mat-select .mat-select-value,
-.mat-select-placeholder,
-label.mat-input-placeholder,
+span.mat-form-field-label-wrapper label.mat-form-field-label,
 .mat-select-arrow {
   color: white;
+}
+
+div.mat-form-field-wrapper div.mat-form-field-underline {
+  background-color: white;
 }
 
 @media (min-width: 1000px) {

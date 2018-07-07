@@ -1,14 +1,13 @@
 import {inject, TestBed} from '@angular/core/testing';
-
 import {UnitsService} from './units.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable, of} from 'rxjs';
 import {DatabaseClientService} from './database-client.service';
 import {Unit} from '../model/unit.model';
 import {Equipment} from '../model/equipment.model';
 
 class DatabaseClientMock {
   public getEquipmentsForUnitAndSlot$(slot: string, unitId: number): Observable<Object> {
-    return Observable.of(null);
+    return of(null);
   }
 }
 
@@ -118,7 +117,7 @@ describe('UnitsService', () => {
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([new Equipment(JSON.parse('{"id": 111}'))]));
+        .and.returnValue(of([new Equipment(JSON.parse('{"id": 111}'))]));
       // WHEN
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
       // THEN
@@ -133,7 +132,7 @@ describe('UnitsService', () => {
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 9, "unique": true}')), // unique and equipped
         new Equipment(JSON.parse('{"id": 8, "unique": true}')), // unique and equipped
         new Equipment(JSON.parse('{"id": 7, "unique": false}')),
@@ -157,7 +156,7 @@ describe('UnitsService', () => {
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 4, "unique": true}')), // unique and equipped
         new Equipment(JSON.parse('{"id": 5, "unique": false}')),
         new Equipment(JSON.parse('{"id": 11, "unique": true}')),
@@ -181,7 +180,7 @@ describe('UnitsService', () => {
       service.selectedUnit.selectDefaultBuild();
       service.selectedUnit.selectedBuild.equipments.left_hand = new Equipment(JSON.parse('{"id": 77, "unique": true}'));
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 77, "unique": true}')), // unique and equipped
         new Equipment(JSON.parse('{"id": 10, "unique": false}')),
         new Equipment(JSON.parse('{"id": 11, "unique": true}')),
@@ -207,7 +206,7 @@ describe('UnitsService', () => {
       service.selectedUnit.selectedBuild.equipments.right_hand.variance_min = 100;
       service.selectedUnit.selectedBuild.equipments.right_hand.variance_max = 150;
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 11, "category": 9}')), // shield
@@ -230,7 +229,7 @@ describe('UnitsService', () => {
       service.selectedUnit.id = 590; // has native DW
       service.selectedUnit.selectDefaultBuild();
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 12, "category": 9}')), // shield
@@ -256,7 +255,7 @@ describe('UnitsService', () => {
       service.selectedUnit.selectDefaultBuild();
       service.selectedUnit.selectedBuild.equipments.accessory1.id = 935; // has DW
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 12, "category": 9}')), // shield
@@ -281,7 +280,7 @@ describe('UnitsService', () => {
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 12, "category": 9}')), // shield
@@ -306,7 +305,7 @@ describe('UnitsService', () => {
       service.selectedUnit.sex = 2;
       service.selectedUnit.selectDefaultBuild();
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id":1,"sex_restriction":1}')), // male
         new Equipment(JSON.parse('{"id":2,"sex_restriction":2}')), // female
         new Equipment(JSON.parse('{"id":3}')), // no restriction
@@ -332,7 +331,7 @@ describe('UnitsService', () => {
       service.selectedUnit.stats.atk.base_equipment = 300;
       service.selectedUnit.selectedBuild.algorithmId = 1; // physical damage
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "atk": 0, "atk_percent": 0, "atk_dh": 10, "atk_tdh": 0}')), // 30
         new Equipment(JSON.parse('{"id": 11, "atk": 0, "atk_percent": 0, "atk_dh": 0, "atk_tdh": 20}')), // 60
         new Equipment(JSON.parse('{"id": 12, "atk": 10, "atk_percent": 0, "atk_dh": 0, "atk_tdh": 0}')), // 10
@@ -365,7 +364,7 @@ describe('UnitsService', () => {
       service.selectedUnit.stats.mag.base_equipment = 300;
       service.selectedUnit.selectedBuild.algorithmId = 5; // magical damage
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "mag": 0, "mag_percent": 0, "mag_dh": 10, "mag_tdh": 0}')), // 30
         new Equipment(JSON.parse('{"id": 11, "mag": 0, "mag_percent": 0, "mag_dh": 0, "mag_tdh": 20}')), // 60
         new Equipment(JSON.parse('{"id": 12, "mag": 10, "mag_percent": 0, "mag_dh": 0, "mag_tdh": 0}')), // 10
@@ -402,7 +401,7 @@ describe('UnitsService', () => {
       service.selectedUnit.stats.spr.base_equipment = 50;
       service.selectedUnit.selectedBuild.algorithmId = 8; // def
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
-        .and.returnValue(Observable.of([
+        .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "hp": 1000, "hp_percent": 10, "hp_dh": 10, "hp_tdh": 10, "def": 0, "def_percent": 0, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 0, "spr_dh": 0, "spr_tdh": 0}')), // 1360 hp, 0 def, 0 spr = 136
         new Equipment(JSON.parse('{"id": 11, "hp": 0, "hp_percent": 20, "hp_dh": 0, "hp_tdh": 0, "def": 100, "def_percent": 50, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 0, "spr_dh": 0, "spr_tdh": 0}')), // 600 hp, 200 def, 0 spr = 260
         new Equipment(JSON.parse('{"id": 12, "hp": 0, "hp_percent": 0, "hp_dh": 0, "hp_tdh": 0, "def": 0, "def_percent": 0, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 100, "spr_dh": 100, "spr_tdh": 100}')), // 0 hp, 0 def, 200 spr = 200

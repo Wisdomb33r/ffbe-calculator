@@ -1,4 +1,3 @@
-import 'rxjs/add/observable/of';
 import {Equipment} from './equipment.model';
 
 describe('Equipment', () => {
