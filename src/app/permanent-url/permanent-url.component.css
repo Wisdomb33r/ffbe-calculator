@@ -8,10 +8,6 @@ button.mat-raised-button {
   min-width: auto;
 }
 
-/deep/ .mat-input-underline {
-  background-color: white;
-}
-
 mat-form-field.mat-form-field {
   width: calc(100% - 80px);
 }
