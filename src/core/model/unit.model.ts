@@ -36,6 +36,15 @@ export class Unit {
     }
   }
 
+  public selectBuild(id: number) {
+    if (this.builds && id) {
+      const build: Build = this.builds.find(b => b.id === id);
+      if (build) {
+        this.selectedBuild = build;
+      }
+    }
+  }
+
   public isWithNativeDw() {
     // TODO currently hardcoded, need to find a way to retrieve this from backend
     return this.id === 258 // lightning

@@ -10,6 +10,7 @@ import {Result} from '../model/result.model';
 import {EquipmentSet} from '../model/equipment-set.model';
 import {isNullOrUndefined} from 'util';
 import {Build} from '../model/build.model';
+import {Esper} from '../model/esper.model';
 
 @Injectable()
 export class UnitsService {
@@ -183,5 +184,9 @@ export class UnitsService {
 
   public getEquipments(): EquipmentSet {
     return this.selectedUnit.selectedBuild.equipments;
+  }
+
+  public getEsper(): Esper {
+    return this.selectedUnit.selectedBuild.esper;
   }
 }
