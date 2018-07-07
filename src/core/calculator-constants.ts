@@ -60,7 +60,7 @@ export const ESPER_BUILDS: Array<Esper> = [
 
 function getIfritWithKillers(): Esper {
   const esper = new Esper();
-  esper.id = 2;
+  esper.id = 21;
   esper.name_fr = 'Ifrit';
   esper.name_en = 'Ifrit';
   esper.build_fr = 'Tueurs';
@@ -86,7 +86,7 @@ function getIfritWithKillers(): Esper {
 
 function getIfritWithStatsBoost(): Esper {
   const esper = new Esper();
-  esper.id = 2;
+  esper.id = 22;
   esper.name_fr = 'Ifrit';
   esper.name_en = 'Ifrit';
   esper.build_fr = 'Stats boost';
@@ -112,7 +112,7 @@ function getIfritWithStatsBoost(): Esper {
 
 function getIfritWithDamageModifier(): Esper {
   const esper = new Esper();
-  esper.id = 2;
+  esper.id = 23;
   esper.name_fr = 'Ifrit';
   esper.name_en = 'Ifrit';
   esper.build_fr = 'Appel Ardent';
@@ -138,7 +138,7 @@ function getIfritWithDamageModifier(): Esper {
 
 function getShivaWithStatsBoost(): Esper {
   const esper = new Esper();
-  esper.id = 3;
+  esper.id = 31;
   esper.name_fr = 'Shiva';
   esper.name_en = 'Shiva';
   esper.build_fr = 'Stats boost';
@@ -164,7 +164,7 @@ function getShivaWithStatsBoost(): Esper {
 
 function getGolemWithBugKillers(): Esper {
   const esper = new Esper();
-  esper.id = 4;
+  esper.id = 41;
   esper.name_fr = 'Golem';
   esper.name_en = 'Golem';
   esper.build_fr = 'Tue-insectes';
@@ -188,7 +188,7 @@ function getGolemWithBugKillers(): Esper {
 
 function getGolemWithStoneKillers(): Esper {
   const esper = new Esper();
-  esper.id = 4;
+  esper.id = 42;
   esper.name_fr = 'Golem';
   esper.name_en = 'Golem';
   esper.build_fr = 'Tue-pierres';
@@ -212,7 +212,7 @@ function getGolemWithStoneKillers(): Esper {
 
 function getGolemWithDefensivesTraits(): Esper {
   const esper = new Esper();
-  esper.id = 4;
+  esper.id = 43;
   esper.name_fr = 'Golem';
   esper.name_en = 'Golem';
   esper.build_fr = 'Tanking';
@@ -237,7 +237,7 @@ function getGolemWithDefensivesTraits(): Esper {
 
 function getRamuhWithStatsBoostAndDemonKiller(): Esper {
   const esper = new Esper();
-  esper.id = 5;
+  esper.id = 51;
   esper.name_fr = 'Ramuh';
   esper.name_en = 'Ramuh';
   esper.build_fr = 'Stats boost + Tue-démon M.';
@@ -263,7 +263,7 @@ function getRamuhWithStatsBoostAndDemonKiller(): Esper {
 
 function getRamuhWithStatsBoostAndStoneKiller(): Esper {
   const esper = new Esper();
-  esper.id = 5;
+  esper.id = 52;
   esper.name_fr = 'Ramuh';
   esper.name_en = 'Ramuh';
   esper.build_fr = 'Stats boost + Tue-pierre M.';
@@ -289,7 +289,7 @@ function getRamuhWithStatsBoostAndStoneKiller(): Esper {
 
 function getRamuhWithStatsBoostAndDamageModifier(): Esper {
   const esper = new Esper();
-  esper.id = 5;
+  esper.id = 53;
   esper.name_fr = 'Ramuh';
   esper.name_en = 'Ramuh';
   esper.build_fr = 'Appel de sagesse';
@@ -315,7 +315,7 @@ function getRamuhWithStatsBoostAndDamageModifier(): Esper {
 
 function getBahamut(): Esper {
   const esper = new Esper();
-  esper.id = 12;
+  esper.id = 121;
   esper.name_fr = 'Bahamut';
   esper.name_en = 'Bahamut';
   esper.build_fr = 'Max ATT / MAG';

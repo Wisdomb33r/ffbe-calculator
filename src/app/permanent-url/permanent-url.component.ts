@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {Unit} from '../../core/model/unit.model';
 import {Equipment} from '../../core/model/equipment.model';
+import {Esper} from '../../core/model/esper.model';
 
 @Component({
   selector: 'app-permanent-url',
@@ -21,6 +22,7 @@ export class PermanentUrlComponent implements OnInit, OnChanges {
   @Input() materia2: Equipment;
   @Input() materia3: Equipment;
   @Input() materia4: Equipment;
+  @Input() esper: Esper;
 
   constructor() {
   }
@@ -34,7 +36,7 @@ export class PermanentUrlComponent implements OnInit, OnChanges {
   }
 
   public getPermanentUrl(): string {
-    let url = 'https://www.final-fantasy.ch/ffbe/calculator/link/unit/' + this.unit.id;
+    let url = 'https://www.final-fantasy.ch/ffbe/calculator/link/unit/' + this.unit.id + ';build=' + this.unit.selectedBuild.id;
     if (this.right_hand) {
       url += ';right_hand=' + this.right_hand.id;
     }
@@ -64,6 +66,9 @@ export class PermanentUrlComponent implements OnInit, OnChanges {
     }
     if (this.materia4) {
       url += ';materia4=' + this.materia4.id;
+    }
+    if (this.esper) {
+      url += ';esper=' + this.esper.id;
     }
     return url;
   }
