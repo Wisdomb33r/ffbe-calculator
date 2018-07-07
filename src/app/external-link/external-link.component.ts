@@ -59,10 +59,9 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
       switchMap((unit: Unit) => {
         if (unit) {
           this.unitsService.selectedUnit = new Unit(unit);
+          this.unitsService.selectedUnit.selectDefaultBuild();
           if (this.build) {
             this.unitsService.selectedUnit.selectBuild(this.build);
-          } else {
-            this.unitsService.selectedUnit.selectDefaultBuild();
           }
           this.unitsService.selectedUnit.selectedBuild.equipments.left_hand = null;
 
