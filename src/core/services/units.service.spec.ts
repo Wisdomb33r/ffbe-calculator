@@ -17,7 +17,7 @@ function createMinimalUnit(): Unit {
     "stats": {},
     "builds":[{
       "equipments": {
-        "right_hand": {"id": 1},
+        "right_hand": {"id": 1, "category": 1},
         "head": {"id": 2},
         "body": {"id": 3},
         "accessory1": {"id": 4},
@@ -337,7 +337,7 @@ describe('UnitsService', () => {
         new Equipment(JSON.parse('{"id": 12, "atk": 10, "atk_percent": 0, "atk_dh": 0, "atk_tdh": 0}')), // 10
         new Equipment(JSON.parse('{"id": 13, "atk": 0, "atk_percent": 10, "atk_dh": 0, "atk_tdh": 20}')), // 80
         new Equipment(JSON.parse('{"id": 14, "atk": 100, "atk_percent": 0, "atk_dh": 10, "atk_tdh": 0}')), // 130
-        new Equipment(JSON.parse('{"id": 15, "atk": 0, "atk_percent": 0, "atk_dh": 0, "atk_tdh": 0, "conditional_passives": [{"atk": 20}]}')), // 40
+        new Equipment(JSON.parse('{"id": 15, "atk": 0, "atk_percent": 0, "atk_dh": 0, "atk_tdh": 0, "conditional_passives": [{"category": 1, "atk": 20}]}')), // 40
       ]));
       // WHEN
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
@@ -370,7 +370,7 @@ describe('UnitsService', () => {
         new Equipment(JSON.parse('{"id": 12, "mag": 10, "mag_percent": 0, "mag_dh": 0, "mag_tdh": 0}')), // 10
         new Equipment(JSON.parse('{"id": 13, "mag": 0, "mag_percent": 10, "mag_dh": 0, "mag_tdh": 20}')), // 80
         new Equipment(JSON.parse('{"id": 14, "mag": 100, "mag_percent": 0, "mag_dh": 10, "mag_tdh": 0}')), // 130
-        new Equipment(JSON.parse('{"id": 15, "mag": 0, "mag_percent": 0, "mag_dh": 0, "mag_tdh": 0, "conditional_passives": [{"mag": 20}]}')), // 40
+        new Equipment(JSON.parse('{"id": 15, "mag": 0, "mag_percent": 0, "mag_dh": 0, "mag_tdh": 0, "conditional_passives": [{"category": 1, "mag": 20}]}')), // 40
       ]));
       // WHEN
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
@@ -395,17 +395,20 @@ describe('UnitsService', () => {
       service.selectedUnit.selectDefaultBuild();
       service.selectedUnit.stats.hp.base = 3000;
       service.selectedUnit.stats.hp.base_equipment = 300;
+      service.selectedUnit.stats.hp.total = 10000;
       service.selectedUnit.stats.def.base = 200;
       service.selectedUnit.stats.def.base_equipment = 100;
+      service.selectedUnit.stats.def.total = 500;
       service.selectedUnit.stats.spr.base = 100;
       service.selectedUnit.stats.spr.base_equipment = 50;
+      service.selectedUnit.stats.spr.total = 400;
       service.selectedUnit.selectedBuild.algorithmId = 8; // def
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
-        new Equipment(JSON.parse('{"id": 10, "hp": 1000, "hp_percent": 10, "hp_dh": 10, "hp_tdh": 10, "def": 0, "def_percent": 0, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 0, "spr_dh": 0, "spr_tdh": 0}')), // 1360 hp, 0 def, 0 spr = 136
-        new Equipment(JSON.parse('{"id": 11, "hp": 0, "hp_percent": 20, "hp_dh": 0, "hp_tdh": 0, "def": 100, "def_percent": 50, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 0, "spr_dh": 0, "spr_tdh": 0}')), // 600 hp, 200 def, 0 spr = 260
-        new Equipment(JSON.parse('{"id": 12, "hp": 0, "hp_percent": 0, "hp_dh": 0, "hp_tdh": 0, "def": 0, "def_percent": 0, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 100, "spr_dh": 100, "spr_tdh": 100}')), // 0 hp, 0 def, 200 spr = 200
-        new Equipment(JSON.parse('{"id": 13, "hp": 0, "hp_percent": 0, "hp_dh": 0, "hp_tdh": 0, "def": 0, "def_percent": 0, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 0, "spr_dh": 0, "spr_tdh": 0, "conditional_passives": [{"hp": 20, "def": 20}]}')), // 600 hp, 40 def, 0 spr = 100
+        new Equipment(JSON.parse('{"id": 10, "hp": 1000, "hp_percent": 10, "hp_dh": 10, "hp_tdh": 10, "def": 0, "def_percent": 0, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 0, "spr_dh": 0, "spr_tdh": 0}')),
+        new Equipment(JSON.parse('{"id": 11, "hp": 0, "hp_percent": 20, "hp_dh": 0, "hp_tdh": 0, "def": 100, "def_percent": 50, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 0, "spr_dh": 0, "spr_tdh": 0}')),
+        new Equipment(JSON.parse('{"id": 12, "hp": 0, "hp_percent": 0, "hp_dh": 0, "hp_tdh": 0, "def": 0, "def_percent": 0, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 100, "spr_dh": 100, "spr_tdh": 100}')),
+        new Equipment(JSON.parse('{"id": 13, "hp": 0, "hp_percent": 0, "hp_dh": 0, "hp_tdh": 0, "def": 0, "def_percent": 0, "def_dh": 0, "def_tdh": 0, "spr": 0, "spr_percent": 0, "spr_dh": 0, "spr_tdh": 0, "conditional_passives": [{"category": 1, "hp": 20, "def": 20}]}')),
       ]));
       // WHEN
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');

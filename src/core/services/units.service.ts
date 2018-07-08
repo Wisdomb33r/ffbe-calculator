@@ -83,6 +83,9 @@ export class UnitsService {
     if (this.selectedUnit.selectedBuild.algorithmId === 8) {
       return this.compareEquipmentsForDef(a, b);
     }
+    if (this.selectedUnit.selectedBuild.algorithmId === 7) {
+      return this.compareEquipmentsForEvoMag(a, b);
+    }
     return 0;
   }
 
@@ -107,20 +110,38 @@ export class UnitsService {
   }
 
   private compareEquipmentsForDef(a: Equipment, b: Equipment): number {
+    const currentHp = this.selectedUnit.stats.hp.total;
+    const currentDef = this.selectedUnit.stats.def.total;
+    const currentSpr = this.selectedUnit.stats.spr.total;
     const aHp = this.estimateStat(a, 'hp');
     const aDef = this.estimateStat(a, 'def');
     const aSpr = this.estimateStat(a, 'spr');
     const bHp = this.estimateStat(b, 'hp');
     const bDef = this.estimateStat(b, 'def');
     const bSpr = this.estimateStat(b, 'spr');
-    return CalculatorUtils.compareNumbers((aHp / 10) + aDef + aSpr, (bHp / 10) + bDef + bSpr);
+    return CalculatorUtils.compareNumbers(
+      currentHp * (aDef + aSpr) + aHp * (currentDef + currentSpr),
+      currentHp * (bDef + bSpr) + bHp * (currentDef + currentSpr)
+    );
+  }
+
+  private compareEquipmentsForEvoMag(a: Equipment, b: Equipment) {
+    const aEvo = a.evo ? a.evo : 0;
+    const bEvo = b.evo ? b.evo : 0;
+    const comparison = CalculatorUtils.compareNumbers(aEvo, bEvo);
+    return comparison !== 0 ? comparison : this.compareEquipmentsForMag(a, b);
   }
 
   private estimateStat(equipment: Equipment, stat: string) {
-    const conditional_percent = equipment.conditional_passives.map(passive => passive[stat]).reduce((val1, val2) => val1 + val2, 0);
+    const conditional_percent = equipment.conditional_passives
+      .filter(passive => passive.active)
+      .map(passive => passive[stat]).reduce((val1, val2) => val1 + val2, 0);
     const from_passive = this.selectedUnit.stats[stat].base * (equipment[stat + '_percent'] + conditional_percent) / 100;
-    const from_dh = this.selectedUnit.stats[stat].base_equipment * (equipment[stat + '_dh'] + equipment[stat + '_tdh']) / 100;
-    return equipment[stat] + from_passive + from_dh;
+    const from_dh = this.selectedUnit.selectedBuild.equipments.isDoubleHandActive() ?
+      this.selectedUnit.stats[stat].base_equipment * equipment[stat + '_dh'] / 100 : 0;
+    const from_tdh = this.selectedUnit.selectedBuild.equipments.isTrueDoubleHandActive() ?
+      this.selectedUnit.stats[stat].base_equipment * equipment[stat + '_tdh'] / 100 : 0;
+    return equipment[stat] + from_passive + from_dh + from_tdh;
   }
 
   private isAllowed(item: Equipment, slot: string): boolean {
