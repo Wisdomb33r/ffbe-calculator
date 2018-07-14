@@ -231,6 +231,8 @@ class Skill {
   public $damages_type;
   public $calculation_stat;
   public $isBreakingChain;
+  public $isDwBreakingChain;
+  public $isOutOfChain;
   public $resists_break;
   public $elements;
   public $atk_buff;
@@ -238,8 +240,8 @@ class Skill {
   public $def_buff;
   public $spr_buff;
   function __construct($brex_skill, $language, $brex_unit) {
-    $this->isLimitBreak = $brex_skill->is_limite == 1 ? true : false;
-    $this->isEsper = $brex_skill->is_esper == 1 ? true : false;
+    $this->isLimitBreak = $brex_skill->is_limite ? true : false;
+    $this->isEsper = $brex_skill->is_esper ? true : false;
     $this->power = $brex_skill->puissance;
     if ($brex_skill->nb > 1) {
       $this->power = $brex_skill->puissance / $brex_skill->nb;
@@ -248,6 +250,8 @@ class Skill {
     $this->nb = $brex_skill->nb ? $brex_skill->nb : 1;
     $this->elements = $brex_skill->elements ? explode ( ',', $brex_skill->elements ) : null;
     $this->isBreakingChain = $brex_skill->breaking_chain ? true : false;
+    $this->isDwBreakingChain = $brex_skill->dw_breaking_chain ? true : false;
+    $this->isOutOfChain = $brex_skill->out_of_chain ? true : false;
     $this->atk_buff = $brex_skill->att_buff;
     $this->mag_buff = $brex_skill->mag_buff;
     $this->def_buff = $brex_skill->def_buff;
