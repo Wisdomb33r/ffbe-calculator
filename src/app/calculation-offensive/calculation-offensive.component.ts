@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 import {CalculationPhysicalDamagesComponent} from '../popup/calculation-physical-damages/calculation-physical-damages.component';
 import {ResultOffensive} from '../../core/model/result-offensive.model';
 import {CalculationMagicalDamagesComponent} from '../popup/calculation-magical-damages/calculation-magical-damages.component';
-import {ResultChaining} from '../../core/model/result-chaining.model';
+import {ResultTurnDamages} from '../../core/model/result-turn-damages.model';
 import {AlgorithmOffensive} from '../../core/model/algorithm-offensive.model';
 import {CalculationEsperDamagesComponent} from '../popup/calculation-esper-damages/calculation-esper-damages.component';
 
@@ -51,7 +51,7 @@ export class CalculationOffensiveComponent {
   }
 
   public isWithBothPhysicalAndMagicalDamages(): boolean {
-    return this.result.turnDamages.some((result: ResultChaining) => result.physicalResult > 0)
-      && this.result.turnDamages.some((result: ResultChaining) => result.magicalResult > 0);
+    return this.result.turnDamages.some((result: ResultTurnDamages) => result.physicalResult > 0)
+      && this.result.turnDamages.some((result: ResultTurnDamages) => result.magicalResult > 0);
   }
 }

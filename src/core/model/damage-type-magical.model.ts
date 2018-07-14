@@ -1,7 +1,7 @@
 import {DamageType} from './damage-type.model';
 import {isNullOrUndefined} from 'util';
 import {Unit} from './unit.model';
-import {ResultChaining} from './result-chaining.model';
+import {ResultTurnDamages} from './result-turn-damages.model';
 
 export class DamageTypeMagical extends DamageType {
 
@@ -14,12 +14,12 @@ export class DamageTypeMagical extends DamageType {
     }
   }
 
-  public calculateDamages(unit: Unit, result: ResultChaining) {
+  public calculateDamages(unit: Unit, result: ResultTurnDamages) {
     result.magicalDamages = result['buffed_' + this.calculationStat] * result['buffed_' + this.calculationStat]
       * result.power / 100 * result.levelCorrection;
   }
 
-  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultChaining) {
+  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultTurnDamages) {
     result.killerPassive = 0;
     result.magicalKillerDamages = result.magicalDamages;
     if (killer && isKillerActive) {
@@ -28,7 +28,7 @@ export class DamageTypeMagical extends DamageType {
     }
   }
 
-  public calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultChaining) {
+  public calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultTurnDamages) {
     result.elements = elements;
     result.magicalElementalDamages = result.magicalKillerDamages;
     if (elements && elements.length) {
@@ -39,13 +39,13 @@ export class DamageTypeMagical extends DamageType {
     }
   }
 
-  public calculateFinalResult(unit: Unit, def: number, spr: number, result: ResultChaining) {
+  public calculateFinalResult(unit: Unit, def: number, spr: number, result: ResultTurnDamages) {
     this.calculateDamageVariance(unit, result);
     result.magicalResult = result.magicalElementalDamages / spr * result.finalVariance / 100;
     result.result = result.magicalResult;
   }
 
-  private calculateDamageVariance(unit: Unit, result: ResultChaining) {
+  private calculateDamageVariance(unit: Unit, result: ResultTurnDamages) {
     result.finalVariance = 92.5;
   }
 }

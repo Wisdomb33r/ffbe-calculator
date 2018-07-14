@@ -1,6 +1,6 @@
 import {Result} from './result.model';
 
-export class ResultChaining extends Result {
+export class ResultTurnDamages extends Result {
   // stats
   public atk: number;
   public leftHandAtk: number;

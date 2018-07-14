@@ -1,6 +1,6 @@
 import {Result} from './result.model';
-import {ResultChaining} from './result-chaining.model';
+import {ResultTurnDamages} from './result-turn-damages.model';
 
 export class ResultOffensive extends Result {
-  public turnDamages: Array<ResultChaining> = [];
+  public turnDamages: Array<ResultTurnDamages> = [];
 }

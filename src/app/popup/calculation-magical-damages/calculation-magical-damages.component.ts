@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {UnitsService} from '../../../core/services/units.service';
-import {ResultChaining} from '../../../core/model/result-chaining.model';
+import {ResultTurnDamages} from '../../../core/model/result-turn-damages.model';
 import {ResultOffensive} from '../../../core/model/result-offensive.model';
 import {AlgorithmOffensive} from '../../../core/model/algorithm-offensive.model';
 import {AlgorithmChaining} from '../../../core/model/algorithm-chaining.model';
@@ -12,7 +12,7 @@ import {AlgorithmChaining} from '../../../core/model/algorithm-chaining.model';
 })
 export class CalculationMagicalDamagesComponent {
 
-  public result: ResultChaining;
+  public result: ResultTurnDamages;
   public algorithm: AlgorithmOffensive;
   private index: number;
   public opponentSprValueError = false;

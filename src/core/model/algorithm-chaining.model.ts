@@ -2,7 +2,7 @@ import {Result} from './result.model';
 import {Unit} from './unit.model';
 import {isNullOrUndefined} from 'util';
 import {Skill} from './skill.model';
-import {ResultChaining} from './result-chaining.model';
+import {ResultTurnDamages} from './result-turn-damages.model';
 import {ResultOffensive} from './result-offensive.model';
 import {AlgorithmOffensive} from './algorithm-offensive.model';
 
@@ -17,8 +17,8 @@ export class AlgorithmChaining extends AlgorithmOffensive {
     return result;
   }
 
-  private calculateTurn(skill: Skill, unit: Unit): ResultChaining {
-    const result: ResultChaining = new ResultChaining();
+  private calculateTurn(skill: Skill, unit: Unit): ResultTurnDamages {
+    const result: ResultTurnDamages = new ResultTurnDamages();
     skill.damageType.calculateLevelCorrection(unit, result);
     skill.damageType.calculateBuffs(unit, skill, this.isSupportBuffing, this.supportBuff, result);
     this.calculateCombosIncrement(skill, unit, result);
@@ -31,7 +31,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
     return result;
   }
 
-  private calculateCombosIncrement(skill: Skill, unit: Unit, result: ResultChaining) {
+  private calculateCombosIncrement(skill: Skill, unit: Unit, result: ResultTurnDamages) {
     let increment = 0.1;
     const elements = skill.skillType.getElements(skill, unit);
     if (Array.isArray(elements) && elements.length > 0) {
@@ -43,7 +43,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
     result.combosIncrement = increment;
   }
 
-  private calculateHitsPower(skill: Skill, unit: Unit, result: ResultChaining) {
+  private calculateHitsPower(skill: Skill, unit: Unit, result: ResultTurnDamages) {
     if (isNullOrUndefined(skill.hits) || skill.hits < 1) {
       result.hitsPower = [0];
       result.power = 0;

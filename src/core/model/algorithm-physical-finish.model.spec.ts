@@ -1,7 +1,7 @@
 import {Unit} from './unit.model';
 import {CalculatorTestutils} from '../calculator-testutils.spec';
 import {ResultOffensive} from './result-offensive.model';
-import {ResultChaining} from './result-chaining.model';
+import {ResultTurnDamages} from './result-turn-damages.model';
 import {AlgorithmFinish} from './algorithm-finish.model';
 import {Skill} from './skill.model';
 import {IFRIT_EVOKE_BOOST, IFRIT_KILLERS} from '../calculator-constants';
@@ -36,8 +36,8 @@ describe('AlgorithmPhysicalFinish', () => {
     expect(result instanceof ResultOffensive).toBeTruthy();
     expect(result.result).toBeCloseTo(63.13125);
     expect(result['turnDamages'].length).toEqual(2);
-    result['turnDamages'].forEach((turn: ResultChaining) => {
-      expect(turn instanceof ResultChaining).toBeTruthy();
+    result['turnDamages'].forEach((turn: ResultTurnDamages) => {
+      expect(turn instanceof ResultTurnDamages).toBeTruthy();
       expect(turn['atk']).toEqual(1000);
       expect(turn['buffed_atk']).toEqual(1000);
       expect(turn['isDualWielding']).toBeFalsy();
@@ -80,8 +80,8 @@ describe('AlgorithmPhysicalFinish', () => {
     expect(result instanceof ResultOffensive).toBeTruthy();
     expect(result.result).toBeCloseTo(101.556);
     expect(result['turnDamages'].length).toEqual(2);
-    result['turnDamages'].forEach((turn: ResultChaining) => {
-      expect(turn instanceof ResultChaining).toBeTruthy();
+    result['turnDamages'].forEach((turn: ResultTurnDamages) => {
+      expect(turn instanceof ResultTurnDamages).toBeTruthy();
       expect(turn['isDualWielding']).toBeFalsy();
     });
 
