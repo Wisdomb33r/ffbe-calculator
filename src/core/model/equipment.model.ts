@@ -121,4 +121,12 @@ export class Equipment {
       || this.id === 2293 // sasuke's katana
       ;
   }
+
+  public getPhysicalKiller(opponentKillerType): number {
+    return this.physical_killers && this.physical_killers[opponentKillerType] ? this.physical_killers[opponentKillerType] : 0;
+  }
+
+  public getMagicalKiller(opponentKillerType): number {
+    return this.magical_killers && this.magical_killers[opponentKillerType] ? this.magical_killers[opponentKillerType] : 0;
+  }
 }

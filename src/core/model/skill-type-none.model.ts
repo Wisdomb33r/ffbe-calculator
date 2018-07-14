@@ -3,7 +3,7 @@ import {Unit} from './unit.model';
 import {Skill} from './skill.model';
 
 export class SkillTypeNone implements SkillType {
-  getActiveKillers(unit: Unit): number {
+  getActiveKillers(unit: Unit, opponentKillerType: string): number {
     return 0;
   }
 

@@ -8,6 +8,18 @@
   "evo": "INV",
   "dh": "DH",
   "tdh": "TDH",
+  "dragon": "Dragon",
+  "insect": "Insecte",
+  "fairy": "Esprit",
+  "undead": "Mort-vivant",
+  "plant": "Plante",
+  "beast": "Bête",
+  "human": "Humain",
+  "machine": "Machine",
+  "stone": "Pierre",
+  "demon": "Démon",
+  "aquatic": "Aquatique",
+  "bird": "Oiseau",
   "menu": {
     "units": "Unités",
     "languages": "Langues",
@@ -159,6 +171,8 @@
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
     },
     "offensive": {
+      "monsterType": "Type d'ennemi",
+      "monsterTypeUnknown": "Inconnu",
       "turnPower": "Puissance du tour",
       "skillHitsPower": "Puissance des coups",
       "comboIncrement": "Bonus par combo",

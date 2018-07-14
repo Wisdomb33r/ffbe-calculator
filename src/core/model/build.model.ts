@@ -90,7 +90,17 @@ export class Build {
     return (this.physical_killers ? this.physical_killers.getKillerSum() : 0) + this.equipments.getPhysicalKillers();
   }
 
+  public getPhysicalKiller(opponentKillerType: string) {
+    return (this.physical_killers && this.physical_killers[opponentKillerType] ? this.physical_killers[opponentKillerType] : 0)
+      + this.equipments.getPhysicalKiller(opponentKillerType);
+  }
+
   public getMagicalKillers() {
     return (this.magical_killers ? this.magical_killers.getKillerSum() : 0) + this.equipments.getMagicalKillers();
+  }
+
+  public getMagicalKiller(opponentKillerType: string) {
+    return (this.magical_killers && this.magical_killers[opponentKillerType] ? this.magical_killers[opponentKillerType] : 0)
+      + this.equipments.getMagicalKiller(opponentKillerType);
   }
 }

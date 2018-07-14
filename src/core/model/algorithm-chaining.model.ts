@@ -24,7 +24,8 @@ export class AlgorithmChaining extends AlgorithmOffensive {
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
-    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, skill.skillType.getActiveKillers(unit), result);
+    const killerValue: number = skill.skillType.getActiveKillers(unit, this.opponentKillerType);
+    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, killerValue, result);
     this.calculateEffectiveResistances(skill, result);
     skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
     skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);

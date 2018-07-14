@@ -8,6 +8,18 @@
   "evo": "EVO",
   "dh": "DH",
   "tdh": "TDH",
+  "dragon": "Dragon",
+  "insect": "Insect",
+  "fairy": "Fairy",
+  "undead": "Undead",
+  "plant": "Plant",
+  "beast": "Beast",
+  "human": "Human",
+  "machine": "Machine",
+  "stone": "Stone",
+  "demon": "Demon",
+  "aquatic": "Aquatic",
+  "bird": "Bird",
   "menu": {
     "units": "Units",
     "languages": "Languages",
@@ -159,6 +171,8 @@
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
     "offensive": {
+      "monsterType": "Enemy type",
+      "monsterTypeUnknown": "Unknown",
       "turnPower": "Turn power",
       "skillHitsPower": "Skill hits power",
       "comboIncrement": "Combo increment",

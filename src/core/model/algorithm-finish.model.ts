@@ -23,7 +23,8 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     skill.damageType.calculateBuffs(unit, skill, this.isSupportBuffing, this.supportBuff, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
-    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, skill.skillType.getActiveKillers(unit), result);
+    const killerValue = skill.skillType.getActiveKillers(unit, this.opponentKillerType);
+    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, killerValue, result);
     this.calculateEffectiveResistances(skill, result);
     skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
     skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);
