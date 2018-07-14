@@ -14,6 +14,23 @@ export class KillerPassives {
               public bird: number) {
   }
 
+  public static construct(killers: KillerPassives): KillerPassives {
+    return new KillerPassives(
+      killers.dragon,
+      killers.insect,
+      killers.fairy,
+      killers.undead,
+      killers.plant,
+      killers.beast,
+      killers.human,
+      killers.machine,
+      killers.stone,
+      killers.demon,
+      killers.aquatic,
+      killers.bird,
+    );
+  }
+
   public getKillerSum() {
     let sum = 0;
     sum += this.dragon ? this.dragon : 0;

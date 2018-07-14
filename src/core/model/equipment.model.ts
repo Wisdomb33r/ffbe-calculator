@@ -1,5 +1,6 @@
 import {ConditionalPassive} from './conditional-passive.model';
 import {BODY_CATEGORIES, HEAD_CATEGORIES, SHIELDS_CATEGORIES, WEAPONS_CATEGORIES} from '../calculator-constants';
+import {KillerPassives} from './killer-passives.model';
 
 export class Equipment {
   // from backend
@@ -35,8 +36,8 @@ export class Equipment {
   public variance_min: number;
   public variance_max: number;
   public unique: boolean;
-  public physical_killer: number;
-  public magical_killer: number;
+  public physical_killers: KillerPassives;
+  public magical_killers: KillerPassives;
   public sex_restriction: number;
   public conditional_passives: Array<ConditionalPassive> = [];
   public elements: Array<number> = [];
@@ -77,8 +78,12 @@ export class Equipment {
     this.variance_min = equipment.variance_min;
     this.variance_max = equipment.variance_max;
     this.unique = equipment.unique;
-    this.physical_killer = equipment.physical_killer ? equipment.physical_killer : 0;
-    this.magical_killer = equipment.magical_killer ? equipment.magical_killer : 0;
+    if (equipment.physical_killers) {
+      this.physical_killers = KillerPassives.construct(equipment.physical_killers);
+    }
+    if (equipment.magical_killers) {
+      this.magical_killers = KillerPassives.construct(equipment.magical_killers);
+    }
     this.sex_restriction = equipment.sex_restriction === 1 || equipment.sex_restriction === 2 ? equipment.sex_restriction : undefined;
     if (Array.isArray(equipment.conditional_passives)) {
       equipment.conditional_passives
