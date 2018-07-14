@@ -111,6 +111,9 @@ export class Equipment {
 
   public isWeaponWithDw(): boolean {
     // TODO currently hardcoded, need to find a way to retrieve this from backend
-    return this.id === 1199 || this.id === 1352;
+    return this.id === 1199 // second knife
+      || this.id === 1352 // bowie knife
+      || this.id === 2293 // sasuke's katana
+      ;
   }
 }
