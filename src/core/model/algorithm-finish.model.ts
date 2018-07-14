@@ -44,6 +44,12 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       if (skill.isBreakingChain) {
         result.combosIncrement = 2.5;
       }
+      if (skill.isDwBreakingChain && skill.skillType.isExecutingTwice(skill, unit)) {
+        result.combosIncrement = 2.5;
+      }
+      if (skill.isOutOfChain) {
+        result.combosIncrement = 1;
+      }
       for (let i = 0; i < skill.hits; i++) {
         hitsPower.push(skill.power * damages[i] / 100 * result.combosIncrement);
       }
