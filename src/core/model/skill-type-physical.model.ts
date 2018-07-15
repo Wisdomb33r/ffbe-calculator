@@ -3,8 +3,24 @@ import {Unit} from './unit.model';
 import {Skill} from './skill.model';
 
 export class SkillTypePhysical implements SkillType {
-  public getActiveKillers(unit: Unit): number {
-    return unit.getPhysicalKillers() + unit.selectedBuild.esper.physical_killers.getKillerSum();
+  public getActiveKillers(unit: Unit, opponentKillerType: string): number {
+    switch (opponentKillerType) {
+      case 'aquatic':
+      case 'beast':
+      case 'bird':
+      case 'demon':
+      case 'dragon':
+      case 'fairy':
+      case 'human':
+      case 'insect':
+      case 'machine':
+      case 'plant':
+      case 'stone':
+      case 'undead':
+        return 10 * (unit.getPhysicalKiller(opponentKillerType) + unit.selectedBuild.esper.physical_killers[opponentKillerType]);
+      default:
+        return unit.getPhysicalKillers() + unit.selectedBuild.esper.physical_killers.getKillerSum();
+    }
   }
 
   public getElements(skill: Skill, unit: Unit): Array<number> {

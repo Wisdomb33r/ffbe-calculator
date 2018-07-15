@@ -84,6 +84,66 @@ export class EquipmentSet {
     return result;
   }
 
+  public getPhysicalKillers(): number {
+    let result = 0;
+    result += this.right_hand && this.right_hand.physical_killers ? this.right_hand.physical_killers.getKillerSum() : 0;
+    result += this.left_hand && this.left_hand.physical_killers ? this.left_hand.physical_killers.getKillerSum() : 0;
+    result += this.head && this.head.physical_killers ? this.head.physical_killers.getKillerSum() : 0;
+    result += this.body && this.body.physical_killers ? this.body.physical_killers.getKillerSum() : 0;
+    result += this.accessory1 && this.accessory1.physical_killers ? this.accessory1.physical_killers.getKillerSum() : 0;
+    result += this.accessory2 && this.accessory2.physical_killers ? this.accessory2.physical_killers.getKillerSum() : 0;
+    result += this.materia1 && this.materia1.physical_killers ? this.materia1.physical_killers.getKillerSum() : 0;
+    result += this.materia2 && this.materia2.physical_killers ? this.materia2.physical_killers.getKillerSum() : 0;
+    result += this.materia3 && this.materia3.physical_killers ? this.materia3.physical_killers.getKillerSum() : 0;
+    result += this.materia4 && this.materia4.physical_killers ? this.materia4.physical_killers.getKillerSum() : 0;
+    return result;
+  }
+
+  public getPhysicalKiller(opponentKillerType: string): number {
+    let result = 0;
+    result += this.right_hand ? this.right_hand.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.left_hand ? this.left_hand.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.head ? this.head.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.body ? this.body.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.accessory1 ? this.accessory1.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.accessory2 ? this.accessory2.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.materia1 ? this.materia1.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.materia2 ? this.materia2.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.materia3 ? this.materia3.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.materia4 ? this.materia4.getPhysicalKiller(opponentKillerType) : 0;
+    return result;
+  }
+
+  public getMagicalKillers(): number {
+    let result = 0;
+    result += this.right_hand && this.right_hand.magical_killers ? this.right_hand.magical_killers.getKillerSum() : 0;
+    result += this.left_hand && this.left_hand.magical_killers ? this.left_hand.magical_killers.getKillerSum() : 0;
+    result += this.head && this.head.magical_killers ? this.head.magical_killers.getKillerSum() : 0;
+    result += this.body && this.body.magical_killers ? this.body.magical_killers.getKillerSum() : 0;
+    result += this.accessory1 && this.accessory1.magical_killers ? this.accessory1.magical_killers.getKillerSum() : 0;
+    result += this.accessory2 && this.accessory2.magical_killers ? this.accessory2.magical_killers.getKillerSum() : 0;
+    result += this.materia1 && this.materia1.magical_killers ? this.materia1.magical_killers.getKillerSum() : 0;
+    result += this.materia2 && this.materia2.magical_killers ? this.materia2.magical_killers.getKillerSum() : 0;
+    result += this.materia3 && this.materia3.magical_killers ? this.materia3.magical_killers.getKillerSum() : 0;
+    result += this.materia4 && this.materia4.magical_killers ? this.materia4.magical_killers.getKillerSum() : 0;
+    return result;
+  }
+
+  public getMagicalKiller(opponentKillerType: string): number {
+    let result = 0;
+    result += this.right_hand ? this.right_hand.getMagicalKiller(opponentKillerType) : 0;
+    result += this.left_hand ? this.left_hand.getMagicalKiller(opponentKillerType) : 0;
+    result += this.head ? this.head.getMagicalKiller(opponentKillerType) : 0;
+    result += this.body ? this.body.getMagicalKiller(opponentKillerType) : 0;
+    result += this.accessory1 ? this.accessory1.getMagicalKiller(opponentKillerType) : 0;
+    result += this.accessory2 ? this.accessory2.getMagicalKiller(opponentKillerType) : 0;
+    result += this.materia1 ? this.materia1.getMagicalKiller(opponentKillerType) : 0;
+    result += this.materia2 ? this.materia2.getMagicalKiller(opponentKillerType) : 0;
+    result += this.materia3 ? this.materia3.getMagicalKiller(opponentKillerType) : 0;
+    result += this.materia4 ? this.materia4.getMagicalKiller(opponentKillerType) : 0;
+    return result;
+  }
+
   public getWeaponsElements(): Array<number> {
     const elements: Array<number> = [];
     if (this.right_hand) {
@@ -110,7 +170,8 @@ export class EquipmentSet {
       || this.right_hand.id === 2293 // sasuke's katana
       || this.accessory1.id === 935 || this.accessory2.id === 935 // genji gloves
       || this.materia1.id === 791 || this.materia2.id === 791 || this.materia3.id === 791 || this.materia4.id === 791 // dw
-      || this.materia1.id === 1756 || this.materia2.id === 1756 || this.materia3.id === 1756 || this.materia4.id === 1756 // awesome swordsman
+      || this.materia1.id === 1756 || this.materia2.id === 1756
+      || this.materia3.id === 1756 || this.materia4.id === 1756 // awesome swordsman
       ;
   }
 

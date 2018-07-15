@@ -2,7 +2,7 @@ import {Unit} from './unit.model';
 import {ResultOffensive} from './result-offensive.model';
 import {Skill} from './skill.model';
 import {Result} from './result.model';
-import {ResultChaining} from './result-chaining.model';
+import {ResultTurnDamages} from './result-turn-damages.model';
 import {isNullOrUndefined} from 'util';
 import {AlgorithmOffensive} from './algorithm-offensive.model';
 
@@ -17,20 +17,21 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     return result;
   }
 
-  private calculateTurn(skill: Skill, unit: Unit): ResultChaining {
-    const result: ResultChaining = new ResultChaining();
+  private calculateTurn(skill: Skill, unit: Unit): ResultTurnDamages {
+    const result: ResultTurnDamages = new ResultTurnDamages();
     skill.damageType.calculateLevelCorrection(unit, result);
     skill.damageType.calculateBuffs(unit, skill, this.isSupportBuffing, this.supportBuff, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
-    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, skill.skillType.getActiveKillers(unit), result);
+    const killerValue = skill.skillType.getActiveKillers(unit, this.opponentKillerType);
+    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, killerValue, result);
     this.calculateEffectiveResistances(skill, result);
     skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
     skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);
     return result;
   }
 
-  private calculateHitsPower(skill: Skill, unit: Unit, result: ResultChaining) {
+  private calculateHitsPower(skill: Skill, unit: Unit, result: ResultTurnDamages) {
     if (skill.isEsper) {
       skill.power = unit.selectedBuild.esper.power;
     }

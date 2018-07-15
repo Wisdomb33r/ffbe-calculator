@@ -6,6 +6,7 @@ import {Result} from './result.model';
 import {Unit} from './unit.model';
 import {EsperFactory} from './esper-factory.model';
 import {Esper} from './esper.model';
+import {KillerPassives} from './killer-passives.model';
 
 export class Build {
   // from backend
@@ -20,8 +21,8 @@ export class Build {
   public magical_cover: number;
   public physical_resistance: number;
   public magical_resistance: number;
-  public physical_killer: number;
-  public magical_killer: number;
+  public physical_killers: KillerPassives;
+  public magical_killers: KillerPassives;
   public equipments: EquipmentSet;
   public skills: Array<Skill> = [];
 
@@ -42,8 +43,12 @@ export class Build {
     this.magical_cover = build.magical_cover;
     this.physical_resistance = build.physical_resistance;
     this.magical_resistance = build.magical_resistance;
-    this.physical_killer = build.physical_killer;
-    this.magical_killer = build.magical_killer;
+    if (build.physical_killers) {
+      this.physical_killers = KillerPassives.construct(build.physical_killers);
+    }
+    if (build.magical_killers) {
+      this.magical_killers = KillerPassives.construct(build.magical_killers);
+    }
     this.equipments = new EquipmentSet(build.equipments);
     if (Array.isArray(build.skills)) {
       build.skills.forEach((skill: Skill) => {
@@ -82,10 +87,20 @@ export class Build {
   }
 
   public getPhysicalKillers() {
-    return (this.physical_killer ? this.physical_killer : 0) + this.equipments.sumEquipmentStat('physical_killer');
+    return (this.physical_killers ? this.physical_killers.getKillerSum() : 0) + this.equipments.getPhysicalKillers();
+  }
+
+  public getPhysicalKiller(opponentKillerType: string) {
+    return (this.physical_killers && this.physical_killers[opponentKillerType] ? this.physical_killers[opponentKillerType] : 0)
+      + this.equipments.getPhysicalKiller(opponentKillerType);
   }
 
   public getMagicalKillers() {
-    return (this.magical_killer ? this.magical_killer : 0) + this.equipments.sumEquipmentStat('magical_killer');
+    return (this.magical_killers ? this.magical_killers.getKillerSum() : 0) + this.equipments.getMagicalKillers();
+  }
+
+  public getMagicalKiller(opponentKillerType: string) {
+    return (this.magical_killers && this.magical_killers[opponentKillerType] ? this.magical_killers[opponentKillerType] : 0)
+      + this.equipments.getMagicalKiller(opponentKillerType);
   }
 }

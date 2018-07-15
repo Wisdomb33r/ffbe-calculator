@@ -1,7 +1,7 @@
 import {DamageType} from './damage-type.model';
 import {isNullOrUndefined} from 'util';
 import {Unit} from './unit.model';
-import {ResultChaining} from './result-chaining.model';
+import {ResultTurnDamages} from './result-turn-damages.model';
 import {Equipment} from './equipment.model';
 
 export class DamageTypePhysical extends DamageType {
@@ -15,13 +15,13 @@ export class DamageTypePhysical extends DamageType {
     }
   }
 
-  public calculateDamages(unit: Unit, result: ResultChaining) {
+  public calculateDamages(unit: Unit, result: ResultTurnDamages) {
     const rawDamages = unit.selectedBuild.equipments.isDualWielding()
       ? this.calculateDwDamages(unit, result) : this.calculateDhDamages(unit, result);
     result.physicalDamages = rawDamages * result.power / 100 * result.levelCorrection;
   }
 
-  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultChaining) {
+  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultTurnDamages) {
     result.killerPassive = 0;
     result.physicalKillerDamages = result.physicalDamages;
     if (killer && isKillerActive) {
@@ -30,7 +30,7 @@ export class DamageTypePhysical extends DamageType {
     }
   }
 
-  public calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultChaining) {
+  public calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultTurnDamages) {
     result.elements = elements;
     result.physicalElementalDamages = result.physicalKillerDamages;
     if (elements && elements.length) {
@@ -41,26 +41,26 @@ export class DamageTypePhysical extends DamageType {
     }
   }
 
-  public calculateFinalResult(unit: Unit, def: number, spr: number, result: ResultChaining) {
+  public calculateFinalResult(unit: Unit, def: number, spr: number, result: ResultTurnDamages) {
     this.calculateDamageVariance(unit, result);
     result.physicalResult = result.physicalElementalDamages / def * result.averageWeaponVariance / 100 * result.finalVariance / 100;
     result.result = result.physicalResult;
   }
 
-  protected calculateDamageVariance(unit: Unit, result: ResultChaining) {
+  protected calculateDamageVariance(unit: Unit, result: ResultTurnDamages) {
     const right_hand: Equipment = unit.selectedBuild.equipments.right_hand;
     result.averageWeaponVariance = right_hand.isTwoHanded() ? (right_hand.variance_min + right_hand.variance_max) / 2 : 100;
     result.finalVariance = 92.5;
   }
 
-  protected calculateDwDamages(unit: Unit, result: ResultChaining): number {
+  protected calculateDwDamages(unit: Unit, result: ResultTurnDamages): number {
     result.isDualWielding = true;
     result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
     result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
     return (result.buffed_atk - result.leftHandAtk) * (result.buffed_atk - result.rightHandAtk);
   }
 
-  protected calculateDhDamages(unit: Unit, result: ResultChaining): number {
+  protected calculateDhDamages(unit: Unit, result: ResultTurnDamages): number {
     result.isDualWielding = false;
     return result.buffed_atk * result.buffed_atk;
   }

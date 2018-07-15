@@ -1,12 +1,13 @@
 import {Algorithm} from './algorithm.model';
 import {Skill} from './skill.model';
-import {ResultChaining} from './result-chaining.model';
+import {ResultTurnDamages} from './result-turn-damages.model';
 import {Unit} from './unit.model';
 import {Result} from './result.model';
 
 export abstract class AlgorithmOffensive implements Algorithm {
 
   public isKillerActive = true;
+  public opponentKillerType = 'unknown';
   public isSparkChain = false;
   public isSupportBuffing = true;
   public isSupportBreakingResistances = true;
@@ -18,7 +19,7 @@ export abstract class AlgorithmOffensive implements Algorithm {
 
   abstract calculate(unit: Unit): Result;
 
-  protected calculateEffectiveResistances(skill: Skill, result: ResultChaining) {
+  protected calculateEffectiveResistances(skill: Skill, result: ResultTurnDamages) {
     result.resistances = this.isSupportBreakingResistances ?
       this.opponentResistances.map((resist, index) => resist + this.supportResistsBreak[index])
       : this.opponentResistances;

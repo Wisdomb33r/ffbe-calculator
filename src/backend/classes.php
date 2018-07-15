@@ -33,8 +33,8 @@ class Equipment {
   public $variance_min;
   public $variance_max;
   public $unique;
-  public $physical_killer;
-  public $magical_killer;
+  public $physical_killers;
+  public $magical_killers;
   public $sex_restriction;
   public $conditional_passives;
   public $elements = array ();
@@ -71,8 +71,12 @@ class Equipment {
     $this->variance_min = $brex_equipement->variance_min;
     $this->variance_max = $brex_equipement->variance_max;
     $this->unique = $brex_equipement->uniq == 1 ? true : false;
-    $this->physical_killer = $brex_equipement->build_tue;
-    $this->magical_killer = $brex_equipement->build_tue_mag;
+    if ($brex_equipement->tueurs) {
+      $this->physical_killers = new KillerPassives ( $brex_equipement->tueurs );
+    }
+    if ($brex_equipement->tueurs_m) {
+      $this->magical_killers = new KillerPassives ( $brex_equipement->tueurs_m );
+    }
     $this->sex_restriction = $brex_equipement->sex_restrict;
     $brex_build_passives = brex_build_passif::findByRelation1N ( array ('objet' => $brex_equipement->id) );
     if (count ( $brex_build_passives )) {
@@ -104,6 +108,37 @@ class Equipment {
     }
     if ($brex_equipement->res_tenebres >= 100) {
       $this->elements [] = 8;
+    }
+  }
+}
+class KillerPassives {
+  public $dragon;
+  public $insect;
+  public $fairy;
+  public $undead;
+  public $plant;
+  public $beast;
+  public $human;
+  public $machine;
+  public $stone;
+  public $demon;
+  public $aquatic;
+  public $bird;
+  function __construct($tueurs_string) {
+    $splitted = explode ( ',', $tueurs_string );
+    if (count ( $splitted ) == 12) {
+      $this->aquatic = intval ( $splitted [0] );
+      $this->beast = intval ( $splitted [1] );
+      $this->bird = intval ( $splitted [2] );
+      $this->demon = intval ( $splitted [3] );
+      $this->dragon = intval ( $splitted [4] );
+      $this->fairy = intval ( $splitted [5] );
+      $this->human = intval ( $splitted [6] );
+      $this->insect = intval ( $splitted [7] );
+      $this->machine = intval ( $splitted [8] );
+      $this->plant = intval ( $splitted [9] );
+      $this->stone = intval ( $splitted [10] );
+      $this->undead = intval ( $splitted [11] );
     }
   }
 }
@@ -181,8 +216,8 @@ class Build {
   public $magical_cover;
   public $physical_resistance;
   public $magical_resistance;
-  public $physical_killer;
-  public $magical_killer;
+  public $physical_killers;
+  public $magical_killers;
   public $equipments;
   public $skills;
   function __construct($brex_build, $language, $brex_unit, $minimal = false) {
@@ -191,8 +226,12 @@ class Build {
     $this->algorithmId = $brex_build->algorithm->id;
     $this->algorithmName = $language == 'fr' ? $brex_build->algorithm->nom : $brex_build->algorithm->nom_en;
     if (! $minimal) {
-      $this->physical_killer = $brex_build->tue_amelio ? $brex_build->tue_amelio : $brex_build->tue;
-      // TODO magical killer when DB ready
+      if ($brex_build->tueurs) {
+        $this->physical_killers = new KillerPassives ( $brex_build->tueurs );
+      }
+      if ($brex_build->tueurs_m) {
+        $this->magical_killers = new KillerPassives ( $brex_build->tueurs_m );
+      }
       $this->equipments = new EquipmentSet ( $brex_build, $language );
       
       if ($brex_build->algorithm->id == 8) {

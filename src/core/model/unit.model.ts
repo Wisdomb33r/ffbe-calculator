@@ -83,8 +83,16 @@ export class Unit {
     return this.selectedBuild.getPhysicalKillers();
   }
 
+  public getPhysicalKiller(opponentKillerType: string): number {
+    return this.selectedBuild.getPhysicalKiller(opponentKillerType);
+  }
+
   public getMagicalKillers(): number {
     return this.selectedBuild.getMagicalKillers();
+  }
+
+  public getMagicalKiller(opponentKillerType: string): number {
+    return this.selectedBuild.getMagicalKiller(opponentKillerType);
   }
 
   public computeRealStats() {
