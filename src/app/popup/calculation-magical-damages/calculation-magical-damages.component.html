@@ -88,7 +88,8 @@
         <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>
       </td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result.killerPassive | integer}}%</td>
+      <td *ngIf="algorithm.opponentKillerType === 'unknown'">{{result.killerPassive | integer}}%</td>
+      <td *ngIf="algorithm.opponentKillerType !== 'unknown'">{{result.killerPassive / 10 | integer}}%</td>
     </tr>
     <tr *ngIf="result.elements && result.elements.length > 0">
       <td>{{'calculation.display.supportBreak' | translate}}</td>
