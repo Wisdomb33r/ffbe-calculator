@@ -17,7 +17,7 @@ export class SkillTypePhysical implements SkillType {
       case 'plant':
       case 'stone':
       case 'undead':
-        return unit.getPhysicalKiller(opponentKillerType) + unit.selectedBuild.esper.physical_killers[opponentKillerType];
+        return 10 * (unit.getPhysicalKiller(opponentKillerType) + unit.selectedBuild.esper.physical_killers[opponentKillerType]);
       default:
         return unit.getPhysicalKillers() + unit.selectedBuild.esper.physical_killers.getKillerSum();
     }

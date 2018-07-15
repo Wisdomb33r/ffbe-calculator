@@ -17,7 +17,7 @@ export class SkillTypeMagical implements SkillType {
       case 'plant':
       case 'stone':
       case 'undead':
-        return unit.getMagicalKiller(opponentKillerType) + unit.selectedBuild.esper.magical_killers[opponentKillerType];
+        return 10 * (unit.getMagicalKiller(opponentKillerType) + unit.selectedBuild.esper.magical_killers[opponentKillerType]);
       default:
         return unit.getMagicalKillers() + unit.selectedBuild.esper.magical_killers.getKillerSum();
     }
