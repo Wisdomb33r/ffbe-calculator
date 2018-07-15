@@ -4,11 +4,48 @@ import {ResultOffensive} from './result-offensive.model';
 import {ResultTurnDamages} from './result-turn-damages.model';
 import {AlgorithmChaining} from './algorithm-chaining.model';
 
+const PHYSICAL_KILLERS =
+  `{
+      "dragon":50,
+      "insect":0,
+      "fairy":0,
+      "undead":0,
+      "plant":0,
+      "beast":0,
+      "human":0,
+      "machine":0,
+      "stone":0,
+      "demon":0,
+      "aquatic":0,
+      "bird":0
+  }`;
+const MAGICAL_KILLERS =
+  `{
+      "dragon":0,
+      "insect":0,
+      "fairy":0,
+      "undead":25,
+      "plant":0,
+      "beast":25,
+      "human":0,
+      "machine":25,
+      "stone":0,
+      "demon":0,
+      "aquatic":25,
+      "bird":0
+  }`;
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"mag":100}';
 const EQUIPMENTS_TEST_DATA = '{"right_hand":' + EQUIPMENT_TEST_DATA + ',"head":' + EQUIPMENT_TEST_DATA + ',"body":' + EQUIPMENT_TEST_DATA + ',"accessory1":' + EQUIPMENT_TEST_DATA + ',"accessory2":' + EQUIPMENT_TEST_DATA + ',"materia1":' + EQUIPMENT_TEST_DATA + ',"materia2":' + EQUIPMENT_TEST_DATA + ',"materia3":' + EQUIPMENT_TEST_DATA + ',"materia4":' + EQUIPMENT_TEST_DATA + '}';
 const SKILLS_TEST_DATA = '[{"category":7,"power":500,"hits":5,"frames":"10 20 30 40 50","damages":"10 20 30 30 10","damages_type":"magical"},{"category":7,"power":1000,"hits":4,"frames":"10 20 30 40","damages":"10 20 30 40","damages_type":"magical"}]';
-const BUILD_TEST_DATA = '{"algorithmId":2,"physical_killer": 50,"magical_killer":100,"equipments":' + EQUIPMENTS_TEST_DATA + ',"skills":' + SKILLS_TEST_DATA + '}';
+const BUILD_TEST_DATA =
+  `{
+    "algorithmId":2,
+    "physical_killers":${PHYSICAL_KILLERS},
+    "magical_killers":${MAGICAL_KILLERS},
+    "equipments":${EQUIPMENTS_TEST_DATA},
+    "skills":${SKILLS_TEST_DATA}
+  }`;
 const UNIT_TEST_DATA = '{"id":9999,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
 
 describe('AlgorithmMagicalChaining', () => {
