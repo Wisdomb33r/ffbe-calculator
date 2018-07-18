@@ -8,6 +8,7 @@ export abstract class AlgorithmOffensive implements Algorithm {
 
   public isKillerActive = true;
   public opponentKillerType = 'unknown';
+  public opponentKillerType2 = 'none';
   public isSparkChain = false;
   public isSupportBuffing = true;
   public isSupportBreakingResistances = true;

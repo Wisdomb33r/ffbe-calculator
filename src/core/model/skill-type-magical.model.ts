@@ -3,23 +3,20 @@ import {Unit} from './unit.model';
 import {Skill} from './skill.model';
 
 export class SkillTypeMagical implements SkillType {
-  public getActiveKillers(unit: Unit, opponentKillerType: string): number {
+  public getActiveKillers(unit: Unit, opponentKillerType: string, opponentKillerType2: string): number {
     switch (opponentKillerType) {
-      case 'aquatic':
-      case 'beast':
-      case 'bird':
-      case 'demon':
-      case 'dragon':
-      case 'fairy':
-      case 'human':
-      case 'insect':
-      case 'machine':
-      case 'plant':
-      case 'stone':
-      case 'undead':
-        return 10 * (unit.getMagicalKiller(opponentKillerType) + unit.selectedBuild.esper.magical_killers[opponentKillerType]);
-      default:
+      case 'unknown':
         return unit.getMagicalKillers() + unit.selectedBuild.esper.magical_killers.getKillerSum();
+      default:
+        switch (opponentKillerType2) {
+          case 'none':
+            return 10 * (unit.getMagicalKiller(opponentKillerType) + unit.selectedBuild.esper.magical_killers[opponentKillerType]);
+          default:
+            return 5 * (
+              unit.getMagicalKiller(opponentKillerType) + unit.selectedBuild.esper.magical_killers[opponentKillerType]
+              + unit.getMagicalKiller(opponentKillerType2) + unit.selectedBuild.esper.magical_killers[opponentKillerType2]
+            );
+        }
     }
   }
 

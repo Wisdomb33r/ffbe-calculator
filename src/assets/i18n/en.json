@@ -173,6 +173,7 @@
     "offensive": {
       "monsterType": "Enemy type",
       "monsterTypeUnknown": "Unknown",
+      "monsterTypeNone": "None",
       "turnPower": "Turn power",
       "skillHitsPower": "Skill hits power",
       "comboIncrement": "Combo increment",
