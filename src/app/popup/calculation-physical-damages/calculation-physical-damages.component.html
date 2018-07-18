@@ -80,6 +80,22 @@
           <option value="fairy">{{'fairy' | translate}}</option>
           <option value="stone">{{'stone' | translate}}</option>
           <option value="aquatic">{{'aquatic' | translate}}</option>
+        </select><br/>
+        <select [(ngModel)]="algorithm.opponentKillerType2" (change)="calculateBuild()"
+                *ngIf="algorithm.opponentKillerType !== 'unknown'">
+          <option value="none">{{'calculation.offensive.monsterTypeNone' | translate}}</option>
+          <option value="human" *ngIf="algorithm.opponentKillerType !== 'human'">{{'human' | translate}}</option>
+          <option value="dragon" *ngIf="algorithm.opponentKillerType !== 'dragon'">{{'dragon' | translate}}</option>
+          <option value="demon" *ngIf="algorithm.opponentKillerType !== 'demon'">{{'demon' | translate}}</option>
+          <option value="beast" *ngIf="algorithm.opponentKillerType !== 'beast'">{{'beast' | translate}}</option>
+          <option value="machine" *ngIf="algorithm.opponentKillerType !== 'machine'">{{'machine' | translate}}</option>
+          <option value="undead" *ngIf="algorithm.opponentKillerType !== 'undead'">{{'undead' | translate}}</option>
+          <option value="plant" *ngIf="algorithm.opponentKillerType !== 'plant'">{{'plant' | translate}}</option>
+          <option value="bird" *ngIf="algorithm.opponentKillerType !== 'bird'">{{'bird' | translate}}</option>
+          <option value="insect" *ngIf="algorithm.opponentKillerType !== 'insect'">{{'insect' | translate}}</option>
+          <option value="fairy" *ngIf="algorithm.opponentKillerType !== 'fairy'">{{'fairy' | translate}}</option>
+          <option value="stone" *ngIf="algorithm.opponentKillerType !== 'stone'">{{'stone' | translate}}</option>
+          <option value="aquatic" *ngIf="algorithm.opponentKillerType !== 'aquatic'">{{'aquatic' | translate}}</option>
         </select>
       </td>
     </tr>

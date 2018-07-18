@@ -173,6 +173,7 @@
     "offensive": {
       "monsterType": "Type d'ennemi",
       "monsterTypeUnknown": "Inconnu",
+      "monsterTypeNone": "Aucun",
       "turnPower": "Puissance du tour",
       "skillHitsPower": "Puissance des coups",
       "comboIncrement": "Bonus par combo",
