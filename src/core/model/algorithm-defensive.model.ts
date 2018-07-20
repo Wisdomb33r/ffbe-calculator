@@ -53,13 +53,19 @@ export class AlgorithmDefensive implements Algorithm {
       result.buffedSpr += unit.stats.spr.base * this.supportBuff / 100;
     }
 
-    // TODO currently hardcoded for WKN because self-buffs are in skills and defensive characters not configured with a skill rotation
-    if (unit.id === 8016) {
+    // TODO currently hardcoded for tanks because self-buffs are in skills and defensive characters not configured with a skill rotation
+    if (unit.id === 8016) { // WKN
       result.selfDefBuff = 150;
+      result.selfSprBuff = 150;
+    }
+    if (unit.id === 955) { // Awakened Rain
+      result.selfDefBuff = 200;
+      result.selfSprBuff = 200;
+    }
+    if (unit.id === 955 || unit.id === 8016) {
       if (result.selfDefBuff > this.supportBuff) {
         result.buffedDef = result.def + unit.stats.def.base * result.selfDefBuff / 100;
       }
-      result.selfSprBuff = 150;
       if (result.selfSprBuff > this.supportBuff) {
         result.buffedSpr = result.spr + unit.stats.spr.base * result.selfSprBuff / 100;
       }
