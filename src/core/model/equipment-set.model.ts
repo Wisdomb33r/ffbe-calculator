@@ -172,6 +172,7 @@ export class EquipmentSet {
       || this.materia1.id === 791 || this.materia2.id === 791 || this.materia3.id === 791 || this.materia4.id === 791 // dw
       || this.materia1.id === 1756 || this.materia2.id === 1756
       || this.materia3.id === 1756 || this.materia4.id === 1756 // awesome swordsman
+      || this.materia1.id === 2308 || this.materia2.id === 2308 || this.materia3.id === 2308 || this.materia4.id === 2308 // quintessence
       ;
   }
 
