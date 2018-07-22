@@ -57,4 +57,12 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
         }
       );
   }
+
+  public openEquipmentSelectionPaneForRhWeaponTrait(index: number) {
+    this.openEquipmentSelectionPane('rh_trait' + index);
+  }
+
+  public openEquipmentSelectionPaneForLhWeaponTrait(index: number) {
+    this.openEquipmentSelectionPane('lh_trait' + index);
+  }
 }

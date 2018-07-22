@@ -21,6 +21,29 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     } else {
       http_response_code ( 404 );
     }
+  } else if (isset ( $_GET ['weapon'] ) && is_numeric ( $_GET ['weapon'] )) {
+    $weapon_category = $_GET ['weapon'];
+    $categories = array (62);
+    if ($weapon_category == '16') {
+      $categories [] = 63;
+    }
+    if ($weapon_category == '28') {
+      $categories [] = 66;
+    }
+    if ($weapon_category == '2') {
+      $categories [] = 68;
+    }
+    if ($weapon_category == '15') {
+      $categories [] = 76;
+    }
+    
+    $objects = brex_objet_extended::finderByCategoriesForCalculator ( $categories );
+    $equipments = array ();
+    foreach ( $objects as $object ) {
+      $equipments [] = new Equipment ( $object, $language );
+    }
+    
+    echo json_encode ( $equipments, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK );
   } else if (isset ( $_GET ['category'] ) && isset ( $_GET ['unit'] )) {
     $units = brex_unit::finderParNumero ( $_GET ['unit'] );
     $unit = null;

@@ -5,7 +5,13 @@ import {isNullOrUndefined} from 'util';
 export class EquipmentSet {
   // from backend
   public right_hand: Equipment;
+  public rh_trait1: Equipment;
+  public rh_trait2: Equipment;
+  public rh_trait3: Equipment;
   public left_hand: Equipment;
+  public lh_trait1: Equipment;
+  public lh_trait2: Equipment;
+  public lh_trait3: Equipment;
   public head: Equipment;
   public body: Equipment;
   public accessory1: Equipment;
@@ -48,6 +54,24 @@ export class EquipmentSet {
     if (equipments.materia4) {
       this.materia4 = new Equipment(equipments.materia4);
     }
+    if (equipments.rh_trait1) {
+      this.rh_trait1 = new Equipment(equipments.rh_trait1);
+    }
+    if (equipments.rh_trait2) {
+      this.rh_trait2 = new Equipment(equipments.rh_trait2);
+    }
+    if (equipments.rh_trait3) {
+      this.rh_trait3 = new Equipment(equipments.rh_trait3);
+    }
+    if (equipments.lh_trait1) {
+      this.lh_trait1 = new Equipment(equipments.lh_trait1);
+    }
+    if (equipments.lh_trait2) {
+      this.lh_trait2 = new Equipment(equipments.lh_trait2);
+    }
+    if (equipments.lh_trait3) {
+      this.lh_trait3 = new Equipment(equipments.lh_trait3);
+    }
   }
 
   public sumEquipmentStat(statName: string): number {
@@ -81,6 +105,12 @@ export class EquipmentSet {
     result += this.materia2 ? this.materia2[statName + '_percent'] : 0;
     result += this.materia3 ? this.materia3[statName + '_percent'] : 0;
     result += this.materia4 ? this.materia4[statName + '_percent'] : 0;
+    result += this.rh_trait1 ? this.rh_trait1[statName + '_percent'] : 0;
+    result += this.rh_trait2 ? this.rh_trait2[statName + '_percent'] : 0;
+    result += this.rh_trait3 ? this.rh_trait3[statName + '_percent'] : 0;
+    result += this.lh_trait1 ? this.lh_trait1[statName + '_percent'] : 0;
+    result += this.lh_trait2 ? this.lh_trait2[statName + '_percent'] : 0;
+    result += this.lh_trait3 ? this.lh_trait3[statName + '_percent'] : 0;
     return result;
   }
 

@@ -62,7 +62,8 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     $units = array ();
     if (count ( $brex_units ) > 0) {
       foreach ( $brex_units as $brex_unit ) {
-        $unit = new Unit ( $brex_unit, null, null, null, $language );
+        $brex_builds = brex_perso_stuff::findByRelation1N ( array ('unit' => $brex_unit->id) );
+        $unit = new Unit ( $brex_unit, null, null, $brex_builds, $language, true );
         $units [] = $unit;
       }
     }

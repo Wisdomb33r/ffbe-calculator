@@ -30,6 +30,12 @@ export class DatabaseClientService {
     );
   }
 
+  public getEquipmentsForWeaponCategory$(category: number): Observable<Array<Equipment>> {
+    return this.http.get<Array<Equipment>>(
+      EQUIPMENT_PATH + '?weapon=' + category + '&language=' + this.translatorService.currentLang
+    );
+  }
+
   private analyseError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       const message = 'An unexpected error occured : ' + error.error.message;

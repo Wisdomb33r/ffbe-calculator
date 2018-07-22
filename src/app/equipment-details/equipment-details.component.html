@@ -44,3 +44,31 @@
 <p *ngIf="equipment.variance_min > 0 && equipment.variance_max > 0">
   {{equipment.variance_min}}% - {{equipment.variance_max}}%
 </p>
+
+<div class="weapon-trait" *ngIf="displayWeaponTraits && equipment.isWeaponTraitPossible()"
+     (click)="weaponTraitClicked(1)">
+  <p *ngIf="weaponTrait1 && weaponTrait1.hp_percent">+{{weaponTrait1.hp_percent}}% {{'hp' | translate}}</p>
+  <p *ngIf="weaponTrait1 && weaponTrait1.mp_percent">+{{weaponTrait1.mp_percent}}% {{'mp' | translate}}</p>
+  <p *ngIf="weaponTrait1 && weaponTrait1.atk_percent">+{{weaponTrait1.atk_percent}}% {{'atk' | translate}}</p>
+  <p *ngIf="weaponTrait1 && weaponTrait1.mag_percent">+{{weaponTrait1.mag_percent}}% {{'mag' | translate}}</p>
+  <p *ngIf="weaponTrait1 && weaponTrait1.def_percent">+{{weaponTrait1.def_percent}}% {{'def' | translate}}</p>
+  <p *ngIf="weaponTrait1 && weaponTrait1.spr_percent">+{{weaponTrait1.spr_percent}}% {{'spr' | translate}}</p>
+</div>
+<div class="weapon-trait" *ngIf="displayWeaponTraits && equipment.isWeaponTraitPossible()"
+     (click)="weaponTraitClicked(2)">
+  <p *ngIf="weaponTrait2 && weaponTrait2.hp_percent">+{{weaponTrait2.hp_percent}}% {{'hp' | translate}}</p>
+  <p *ngIf="weaponTrait2 && weaponTrait2.mp_percent">+{{weaponTrait2.mp_percent}}% {{'mp' | translate}}</p>
+  <p *ngIf="weaponTrait2 && weaponTrait2.atk_percent">+{{weaponTrait2.atk_percent}}% {{'atk' | translate}}</p>
+  <p *ngIf="weaponTrait2 && weaponTrait2.mag_percent">+{{weaponTrait2.mag_percent}}% {{'mag' | translate}}</p>
+  <p *ngIf="weaponTrait2 && weaponTrait2.def_percent">+{{weaponTrait2.def_percent}}% {{'def' | translate}}</p>
+  <p *ngIf="weaponTrait2 && weaponTrait2.spr_percent">+{{weaponTrait2.spr_percent}}% {{'spr' | translate}}</p>
+</div>
+<div class="weapon-trait" *ngIf="displayWeaponTraits && equipment.isWeaponTraitPossible()"
+     (click)="weaponTraitClicked(3)">
+  <p *ngIf="weaponTrait3 && weaponTrait3.hp_percent">+{{weaponTrait3.hp_percent}}% {{'hp' | translate}}</p>
+  <p *ngIf="weaponTrait3 && weaponTrait3.mp_percent">+{{weaponTrait3.mp_percent}}% {{'mp' | translate}}</p>
+  <p *ngIf="weaponTrait3 && weaponTrait3.atk_percent">+{{weaponTrait3.atk_percent}}% {{'atk' | translate}}</p>
+  <p *ngIf="weaponTrait3 && weaponTrait3.mag_percent">+{{weaponTrait3.mag_percent}}% {{'mag' | translate}}</p>
+  <p *ngIf="weaponTrait3 && weaponTrait3.def_percent">+{{weaponTrait3.def_percent}}% {{'def' | translate}}</p>
+  <p *ngIf="weaponTrait3 && weaponTrait3.spr_percent">+{{weaponTrait3.spr_percent}}% {{'spr' | translate}}</p>
+</div>

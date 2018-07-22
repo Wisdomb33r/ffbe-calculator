@@ -4,6 +4,7 @@ export class UnitStat {
   public passive: number;
   public dh: number;
   public tdh: number;
+  public dw: number;
 
   // transcient
   public base_equipment = 0;
@@ -24,11 +25,12 @@ export class UnitStat {
   public value_from_passive_esper = 0;
   public total = 0;
 
-  constructor(stat: number, stat_passive: number, stat_dh: number, stat_tdh: number) {
+  constructor(stat: number, stat_passive: number, stat_dh: number, stat_tdh: number, stat_dw: number) {
     this.base = stat ? stat : 0;
     this.passive = stat_passive ? stat_passive : 0;
     this.dh = stat_dh ? stat_dh : 0;
     this.tdh = stat_tdh ? stat_tdh : 0;
+    this.dw = stat_dw ? stat_dw : 0;
   }
 
   public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
