@@ -7,7 +7,7 @@ import {Equipment} from '../../core/model/equipment.model';
 import {ESPER_BUILDS} from '../../core/calculator-constants';
 import {Esper} from '../../core/model/esper.model';
 import {forkJoin, of, Subscription, throwError} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-external-link',
@@ -20,7 +20,13 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
   private unit: number;
   private build: number;
   private right_hand: number;
+  private rh_trait1: number;
+  private rh_trait2: number;
+  private rh_trait3: number;
   private left_hand: number;
+  private lh_trait1: number;
+  private lh_trait2: number;
+  private lh_trait3: number;
   private head: number;
   private body: number;
   private accessory1: number;
@@ -43,7 +49,13 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         this.unit = +params.get('id');
         this.build = +params.get('build');
         this.right_hand = +params.get('right_hand');
+        this.rh_trait1 = +params.get('rh_t1');
+        this.rh_trait2 = +params.get('rh_t2');
+        this.rh_trait3 = +params.get('rh_t3');
         this.left_hand = +params.get('left_hand');
+        this.lh_trait1 = +params.get('lh_t1');
+        this.lh_trait2 = +params.get('lh_t2');
+        this.lh_trait3 = +params.get('lh_t3');
         this.head = +params.get('head');
         this.body = +params.get('body');
         this.accessory1 = +params.get('accessory1');
@@ -63,7 +75,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           if (this.build) {
             this.unitsService.selectedUnit.selectBuild(this.build);
           }
-          this.unitsService.selectedUnit.selectedBuild.equipments.left_hand = null;
+          this.unitsService.selectedUnit.selectedBuild.equipments.removeAllRemoveable();
 
           const observables = [];
           observables.push(of(unit));
@@ -82,17 +94,8 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           if (this.accessory2) {
             observables.push(this.unitsService.getAllowedEquipmentsForSlot$('accessory2'));
           }
-          if (this.materia1) {
+          if (this.materia1 || this.materia2 || this.materia3 || this.materia4) {
             observables.push(this.unitsService.getAllowedEquipmentsForSlot$('materia1'));
-          }
-          if (this.materia2) {
-            observables.push(this.unitsService.getAllowedEquipmentsForSlot$('materia2'));
-          }
-          if (this.materia3) {
-            observables.push(this.unitsService.getAllowedEquipmentsForSlot$('materia3'));
-          }
-          if (this.materia4) {
-            observables.push(this.unitsService.getAllowedEquipmentsForSlot$('materia4'));
           }
           if (this.left_hand) {
             observables.push(this.unitsService.getAllowedEquipmentsForSlot$('left_hand'));
@@ -102,54 +105,92 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         }
         return throwError('No unit identifier');
       }),
-    ).subscribe((observablesResults) => {
-      let index = 1;
-      if (this.right_hand) {
-        this.testAndEquip('right_hand', this.right_hand, observablesResults, index);
-        index++;
-      }
-      if (this.head) {
-        this.testAndEquip('head', this.head, observablesResults, index);
-        index++;
-      }
-      if (this.body) {
-        this.testAndEquip('body', this.body, observablesResults, index);
-        index++;
-      }
-      if (this.accessory1) {
-        this.testAndEquip('accessory1', this.accessory1, observablesResults, index);
-        index++;
-      }
-      if (this.accessory2) {
-        this.testAndEquip('accessory2', this.accessory2, observablesResults, index);
-        index++;
-      }
-      if (this.materia1) {
-        this.testAndEquip('materia1', this.materia1, observablesResults, index);
-        index++;
-      }
-      if (this.materia2) {
-        this.testAndEquip('materia2', this.materia2, observablesResults, index);
-        index++;
-      }
-      if (this.materia3) {
-        this.testAndEquip('materia3', this.materia3, observablesResults, index);
-        index++;
-      }
-      if (this.materia4) {
-        this.testAndEquip('materia4', this.materia4, observablesResults, index);
-        index++;
-      }
-      if (this.left_hand) {
-        this.testAndEquip('left_hand', this.left_hand, observablesResults, index);
-        index++;
-      }
-      if (this.esper) {
-        const esper: Esper = ESPER_BUILDS.find(e => e.id === this.esper);
-        if (esper) {
-          this.unitsService.selectedUnit.selectedBuild.esper = esper;
+      tap(observablesResults => {
+        let index = 1;
+        if (this.right_hand) {
+          this.testAndEquip('right_hand', this.right_hand, observablesResults, index);
+          index++;
         }
-      }
+        if (this.head) {
+          this.testAndEquip('head', this.head, observablesResults, index);
+          index++;
+        }
+        if (this.body) {
+          this.testAndEquip('body', this.body, observablesResults, index);
+          index++;
+        }
+        if (this.accessory1) {
+          this.testAndEquip('accessory1', this.accessory1, observablesResults, index);
+          index++;
+        }
+        if (this.accessory2) {
+          this.testAndEquip('accessory2', this.accessory2, observablesResults, index);
+          index++;
+        }
+        if (this.materia1 || this.materia2 || this.materia3 || this.materia4) {
+          if (this.materia1) {
+            this.testAndEquip('materia1', this.materia1, observablesResults, index);
+          }
+          if (this.materia2) {
+            this.testAndEquip('materia2', this.materia2, observablesResults, index);
+          }
+          if (this.materia3) {
+            this.testAndEquip('materia3', this.materia3, observablesResults, index);
+          }
+          if (this.materia4) {
+            this.testAndEquip('materia4', this.materia4, observablesResults, index);
+          }
+          index++;
+        }
+        if (this.left_hand) {
+          this.testAndEquip('left_hand', this.left_hand, observablesResults, index);
+          index++;
+        }
+        if (this.esper) {
+          const esper: Esper = ESPER_BUILDS.find(e => e.id === this.esper);
+          if (esper) {
+            this.unitsService.selectedUnit.selectedBuild.esper = esper;
+          }
+        }
+      }),
+      switchMap(any => {
+        const observables = [];
+        observables.push(of(this.unitsService.selectedUnit));
+        if (this.unitsService.getEquipments().right_hand && (this.rh_trait1 || this.rh_trait2 || this.rh_trait3)) {
+          observables.push(this.unitsService.getAllowedEquipmentsForSlot$('rh_trait1'));
+        }
+        if (this.unitsService.getEquipments().left_hand && (this.lh_trait1 || this.lh_trait2 || this.lh_trait3)) {
+          observables.push(this.unitsService.getAllowedEquipmentsForSlot$('lh_trait1'));
+        }
+        return forkJoin(observables);
+      }),
+      tap(observablesResults => {
+        let index = 1;
+        if (this.unitsService.getEquipments().right_hand && (this.rh_trait1 || this.rh_trait2 || this.rh_trait3)) {
+          if (this.rh_trait1) {
+            this.testAndEquip('rh_trait1', this.rh_trait1, observablesResults, index);
+          }
+          if (this.rh_trait2) {
+            this.testAndEquip('rh_trait2', this.rh_trait2, observablesResults, index);
+          }
+          if (this.rh_trait3) {
+            this.testAndEquip('rh_trait3', this.rh_trait3, observablesResults, index);
+          }
+          index++;
+        }
+        if (this.unitsService.getEquipments().left_hand && (this.lh_trait1 || this.lh_trait2 || this.lh_trait3)) {
+          if (this.lh_trait1) {
+            this.testAndEquip('lh_trait1', this.lh_trait1, observablesResults, index);
+          }
+          if (this.lh_trait2) {
+            this.testAndEquip('lh_trait2', this.lh_trait2, observablesResults, index);
+          }
+          if (this.lh_trait3) {
+            this.testAndEquip('lh_trait3', this.lh_trait3, observablesResults, index);
+          }
+        }
+      }),
+    ).subscribe(any => {
       this.unitsService.selectedUnit.computeAll();
       this.router.navigate(['/']);
     }, error => this.router.navigate(['/']));

@@ -36,16 +36,16 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
 
   public openEquipmentSelectionPane(slot: string) {
     this.unsubscribe();
-    const offhandPresent = this.equipments[slot] ? true : false;
+    const itemPresent = this.equipments[slot] ? true : false;
 
     this.subscription = this.unitsService.getAllowedEquipmentsForSlot$(slot)
       .subscribe((equipments: Array<Equipment>) => {
-          if (equipments.length > 0 || (slot === 'left_hand' && offhandPresent)) {
+          if (equipments.length > 0 || (this.isEquipmentRemoveable(slot) && itemPresent)) {
             const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
               data: {
                 slot: slot,
                 equipments: equipments,
-                offhandPresent: offhandPresent,
+                removeable: (this.isEquipmentRemoveable(slot) && itemPresent),
               }
             }).afterClosed().subscribe((equipment: Equipment) => {
               if (equipment) {
@@ -56,6 +56,13 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
           }
         }
       );
+  }
+
+  private isEquipmentRemoveable(slot: string): boolean {
+    return slot === 'left_hand'
+      || slot === 'rh_trait1' || slot === 'rh_trait2' || slot === 'rh_trait3'
+      || slot === 'lh_trait1' || slot === 'lh_trait2' || slot === 'lh_trait3'
+      ;
   }
 
   public openEquipmentSelectionPaneForRhWeaponTrait(index: number) {

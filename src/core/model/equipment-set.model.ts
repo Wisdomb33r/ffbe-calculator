@@ -74,6 +74,16 @@ export class EquipmentSet {
     }
   }
 
+  public removeAllRemoveable() {
+    this.rh_trait1 = null;
+    this.rh_trait2 = null;
+    this.rh_trait3 = null;
+    this.left_hand = null;
+    this.lh_trait1 = null;
+    this.lh_trait2 = null;
+    this.lh_trait3 = null;
+  }
+
   public sumEquipmentStat(statName: string): number {
     let result = 0;
     if (!statName.endsWith('dh')

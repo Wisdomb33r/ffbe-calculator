@@ -12,7 +12,7 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
 
   private slot: string;
   public equipments: Array<Equipment> = [];
-  public offhandPresent: boolean;
+  public removeable: boolean;
   @ViewChild('itemfilter') itemfilter: ElementRef;
   private filterChangedSubscription: Subscription;
 
@@ -22,7 +22,7 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
               private cdref: ChangeDetectorRef) {
     this.slot = data.slot;
     this.equipments = data.equipments;
-    this.offhandPresent = data.offhandPresent;
+    this.removeable = data.removeable;
   }
 
   ngAfterViewInit() {
@@ -52,9 +52,5 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
 
   public removeEquipment() {
     this.dialogRef.close({id: -1});
-  }
-
-  public isRemovable(): boolean {
-    return this.slot === 'left_hand' && this.offhandPresent;
   }
 }

@@ -55,16 +55,16 @@ export class UnitsService {
       if (this.getEquipments().left_hand && !this.checkDwForSecondWeapon(this.getEquipments().left_hand, 'left_hand')) {
         this.getEquipments().left_hand = null;
       }
-      if (slot === 'right_hand' && !equipment.isWeaponTraitPossible()) {
-        this.getEquipments()['rh_trait1'] = null;
-        this.getEquipments()['rh_trait2'] = null;
-        this.getEquipments()['rh_trait3'] = null;
-      }
-      if (slot === 'left_hand' && !equipment.isWeaponTraitPossible()) {
-        this.getEquipments()['lh_trait1'] = null;
-        this.getEquipments()['lh_trait2'] = null;
-        this.getEquipments()['lh_trait3'] = null;
-      }
+    }
+    if (!this.getEquipments().right_hand || !this.getEquipments().right_hand.isWeaponTraitPossible()) {
+      this.getEquipments()['rh_trait1'] = null;
+      this.getEquipments()['rh_trait2'] = null;
+      this.getEquipments()['rh_trait3'] = null;
+    }
+    if (!this.getEquipments().left_hand || !this.getEquipments().left_hand.isWeaponTraitPossible()) {
+      this.getEquipments()['lh_trait1'] = null;
+      this.getEquipments()['lh_trait2'] = null;
+      this.getEquipments()['lh_trait3'] = null;
     }
   }
 
@@ -206,19 +206,24 @@ export class UnitsService {
   private checkUniqueness(item: Equipment, slot: string): boolean {
     if (item.unique) {
       if (slot.startsWith('materia') && (
-        item.id === this.selectedUnit.selectedBuild.equipments.materia1.id
-        || item.id === this.selectedUnit.selectedBuild.equipments.materia2.id
-        || item.id === this.selectedUnit.selectedBuild.equipments.materia3.id
-        || item.id === this.selectedUnit.selectedBuild.equipments.materia4.id)) {
+        (this.getEquipments().materia1 && item.id === this.getEquipments().materia1.id)
+        || (this.getEquipments().materia2 && item.id === this.getEquipments().materia2.id)
+        || (this.getEquipments().materia3 && item.id === this.getEquipments().materia3.id)
+        || (this.getEquipments().materia4 && item.id === this.getEquipments().materia4.id))
+      ) {
         return false;
       }
-      if (slot.startsWith('accessory') && (item.id === this.selectedUnit.selectedBuild.equipments.accessory1.id
-        || item.id === this.selectedUnit.selectedBuild.equipments.accessory2.id)) {
+      if (slot.startsWith('accessory') && (
+        (this.getEquipments().accessory1 && item.id === this.getEquipments().accessory1.id)
+        || (this.getEquipments().accessory2 && item.id === this.getEquipments().accessory2.id))
+      ) {
         return false;
       }
       if (slot === 'right_hand' || slot === 'left_hand') {
-        if (item.id === this.selectedUnit.selectedBuild.equipments.right_hand.id ||
-          (this.selectedUnit.selectedBuild.equipments.left_hand && item.id === this.selectedUnit.selectedBuild.equipments.left_hand.id)) {
+        if (
+          (this.getEquipments().right_hand && item.id === this.getEquipments().right_hand.id)
+          || (this.selectedUnit.selectedBuild.equipments.left_hand && item.id === this.selectedUnit.selectedBuild.equipments.left_hand.id)
+        ) {
           return false;
         }
       }
