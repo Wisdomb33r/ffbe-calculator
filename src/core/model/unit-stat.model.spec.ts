@@ -1,11 +1,10 @@
-import {UnitStats} from './unit-stats.model';
 import {UnitStat} from './unit-stat.model';
 
 describe('UnitStat', () => {
 
   it('#defineDhActivation should set 0 dh effective value and non null effective tdh value if only true double hand is active', () => {
     // GIVEN
-    const unitStat: UnitStat = new UnitStat(100, 0, 100, 50);
+    const unitStat: UnitStat = new UnitStat(100, 0, 100, 50, 0);
     // WHEN
     unitStat.defineDhActivation(false, true);
     // THEN
@@ -15,7 +14,7 @@ describe('UnitStat', () => {
 
   it('#defineDhActivation should set non null dh effective value and non null tdh effective value if both double hand are active', () => {
     // GIVEN
-    const unitStat: UnitStat = new UnitStat(100, 0, 100, 50);
+    const unitStat: UnitStat = new UnitStat(100, 0, 100, 50, 0);
     // WHEN
     unitStat.defineDhActivation(true, true);
     // THEN
@@ -25,7 +24,7 @@ describe('UnitStat', () => {
 
   it('#defineDhActivation should set 0 effective dh and tdh value if no double hand is active', () => {
     // GIVEN
-    const unitStat: UnitStat = new UnitStat(100, 0, 100, 50);
+    const unitStat: UnitStat = new UnitStat(100, 0, 100, 50, 0);
     // WHEN
     unitStat.defineDhActivation(false, false);
     // THEN
@@ -35,7 +34,7 @@ describe('UnitStat', () => {
 
   it('#computeTotal should compute total as base if no bonus', () => {
     // GIVEN
-    const unitStat: UnitStat = new UnitStat(100, 0, 0, 0);
+    const unitStat: UnitStat = new UnitStat(100, 0, 0, 0, 0);
     // WHEN
     unitStat.computeTotal();
     // THEN
@@ -44,7 +43,7 @@ describe('UnitStat', () => {
 
   it('#computeTotal should set values and totals considering equipment bonuses and conditional passives', () => {
     // GIVEN
-    const unitStat: UnitStat = new UnitStat(100, 50, 50, 50);
+    const unitStat: UnitStat = new UnitStat(100, 50, 50, 50, 0);
     unitStat.base_equipment = 200;
     unitStat.passive_equipment = 50;
     unitStat.dh_equipment = 50;
@@ -67,7 +66,7 @@ describe('UnitStat', () => {
 
   it('#computeTotal should limit the stat passive increase to 300%', () => {
     // GIVEN
-    const unitStat: UnitStat = new UnitStat(100, 150, 0, 0);
+    const unitStat: UnitStat = new UnitStat(100, 150, 0, 0, 0);
     unitStat.passive_equipment = 150;
     unitStat.conditional_passive = 150;
     // WHEN
@@ -81,7 +80,7 @@ describe('UnitStat', () => {
 
   it('#computeTotal should limit the stat dh increase to 300%', () => {
     // GIVEN
-    const unitStat: UnitStat = new UnitStat(100, 0, 100, 100);
+    const unitStat: UnitStat = new UnitStat(100, 0, 100, 100, 0);
     unitStat.base_equipment = 100;
     unitStat.dh_equipment = 100;
     unitStat.tdh_equipment = 100;
