@@ -13,7 +13,13 @@ export class PermanentUrlComponent implements OnInit, OnChanges {
   public url: string;
   @Input() unit: Unit;
   @Input() right_hand: Equipment;
+  @Input() rh_trait1: Equipment;
+  @Input() rh_trait2: Equipment;
+  @Input() rh_trait3: Equipment;
   @Input() left_hand: Equipment;
+  @Input() lh_trait1: Equipment;
+  @Input() lh_trait2: Equipment;
+  @Input() lh_trait3: Equipment;
   @Input() head: Equipment;
   @Input() body: Equipment;
   @Input() accessory1: Equipment;
@@ -69,6 +75,24 @@ export class PermanentUrlComponent implements OnInit, OnChanges {
     }
     if (this.esper) {
       url += ';esper=' + this.esper.id;
+    }
+    if (this.rh_trait1) {
+      url += ';rh_t1=' + this.rh_trait1.id;
+    }
+    if (this.rh_trait2) {
+      url += ';rh_t2=' + this.rh_trait2.id;
+    }
+    if (this.rh_trait3) {
+      url += ';rh_t3=' + this.rh_trait3.id;
+    }
+    if (this.lh_trait1) {
+      url += ';lh_t1=' + this.lh_trait1.id;
+    }
+    if (this.lh_trait2) {
+      url += ';lh_t2=' + this.lh_trait2.id;
+    }
+    if (this.lh_trait3) {
+      url += ';lh_t3=' + this.lh_trait3.id;
     }
     return url;
   }

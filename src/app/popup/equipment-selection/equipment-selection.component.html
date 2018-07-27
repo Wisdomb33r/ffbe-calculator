@@ -4,13 +4,13 @@
       <input matInput #itemfilter placeholder="{{'equipment.selection.filter' | translate}}">
     </mat-form-field>
   </div>
-  <div class="equipment" (click)="removeEquipment()" *ngIf="isRemovable()">
+  <div class="equipment" (click)="removeEquipment()" *ngIf="removeable">
     <p class="unequip"><span>&#8617;</span> {{'equipment.selection.remove' | translate}}</p>
   </div>
   <div class="equipment" *ngFor="let equipment of equipments" [style.display]="equipment.filtered ? 'none' : ''">
     <div>
       <img [src]="equipment.icon" (click)="selectEquipment(equipment)">
     </div>
-    <app-equipment-details [equipment]="equipment"></app-equipment-details>
+    <app-equipment-details [equipment]="equipment" [displayWeaponTraits]="false"></app-equipment-details>
   </div>
 </mat-dialog-content>

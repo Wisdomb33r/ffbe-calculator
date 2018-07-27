@@ -7,14 +7,24 @@
              (click)="openEquipmentSelectionPane('right_hand')">
       </td>
       <td class="equipment-details">
-        <app-equipment-details [equipment]="equipments.right_hand" *ngIf="equipments.right_hand">
+        <app-equipment-details [equipment]="equipments.right_hand" *ngIf="equipments.right_hand"
+                               [weaponTrait1]="equipments.rh_trait1"
+                               [weaponTrait2]="equipments.rh_trait2"
+                               [weaponTrait3]="equipments.rh_trait3"
+                               [displayWeaponTraits]="true"
+                               (weaponTraitEmitter)="openEquipmentSelectionPaneForRhWeaponTrait($event)">
         </app-equipment-details>
       </td>
       <td class="equipment-icon" (click)="openEquipmentSelectionPane('left_hand')">
         <img *ngIf="equipments.left_hand" [src]="equipments.left_hand.icon">
       </td>
       <td class="equipment-details">
-        <app-equipment-details [equipment]="equipments.left_hand" *ngIf="equipments.left_hand">
+        <app-equipment-details [equipment]="equipments.left_hand" *ngIf="equipments.left_hand"
+                               [weaponTrait1]="equipments.lh_trait1"
+                               [weaponTrait2]="equipments.lh_trait2"
+                               [weaponTrait3]="equipments.lh_trait3"
+                               [displayWeaponTraits]="true"
+                               (weaponTraitEmitter)="openEquipmentSelectionPaneForLhWeaponTrait($event)">
         </app-equipment-details>
       </td>
     </tr>

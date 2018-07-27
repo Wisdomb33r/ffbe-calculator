@@ -1,5 +1,6 @@
 <?php
 require_once "../../gestion/genscripts/object_brex_build_passif.class.php";
+require_once "../../gestion/genscripts/object_brex_build_equipment.class.php";
 require_once "../../gestion/genscripts/object_brex_comp_eveil.class.php";
 class Equipment {
   public $id;
@@ -10,26 +11,32 @@ class Equipment {
   public $hp_percent;
   public $hp_dh;
   public $hp_tdh;
+  public $hp_dw;
   public $mp;
   public $mp_percent;
   public $mp_dh;
   public $mp_tdh;
+  public $mp_dw;
   public $atk;
   public $atk_percent;
   public $atk_dh;
   public $atk_tdh;
+  public $atk_dw;
   public $mag;
   public $mag_percent;
   public $mag_dh;
   public $mag_tdh;
+  public $mag_dw;
   public $def;
   public $def_percent;
   public $def_dh;
   public $def_tdh;
+  public $def_dw;
   public $spr;
   public $spr_percent;
   public $spr_dh;
   public $spr_tdh;
+  public $spr_dw;
   public $variance_min;
   public $variance_max;
   public $unique;
@@ -45,28 +52,34 @@ class Equipment {
     $this->icon = $brex_equipement->getImageimgPath ();
     $this->hp = $brex_equipement->pv;
     $this->hp_percent = $brex_equipement->pvp;
-    $this->hp_dh = 0;
-    $this->hp_tdh = 0;
+    $this->hp_dh = $brex_equipement->pv_dh;
+    $this->hp_tdh = $brex_equipement->pv_tdh;
+    $this->hp_dw = $brex_equipement->pv_dw;
     $this->mp = $brex_equipement->pm;
     $this->mp_percent = $brex_equipement->pmp;
-    $this->mp_dh = 0;
-    $this->mp_tdh = 0;
+    $this->mp_dh = $brex_equipement->pm_dh;
+    $this->mp_tdh = $brex_equipement->pm_tdh;
+    $this->mp_dw = $brex_equipement->pm_dw;
     $this->atk = $brex_equipement->att;
     $this->atk_percent = $brex_equipement->attp;
     $this->atk_dh = $brex_equipement->build_att_dh;
     $this->atk_tdh = $brex_equipement->build_att_tdh;
+    $this->atk_dw = $brex_equipement->att_dw;
     $this->mag = $brex_equipement->mag;
     $this->mag_percent = $brex_equipement->magp;
     $this->mag_dh = $brex_equipement->build_mag_dh;
     $this->mag_tdh = $brex_equipement->build_mag_tdh;
+    $this->mag_dw = $brex_equipement->mag_dw;
     $this->def = $brex_equipement->def;
     $this->def_percent = $brex_equipement->defp;
-    $this->def_dh = 0;
-    $this->def_tdh = 0;
+    $this->def_dh = $brex_equipement->def_dh;
+    $this->def_tdh = $brex_equipement->def_tdh;
+    $this->def_dw = $brex_equipement->def_dw;
     $this->spr = $brex_equipement->psy;
     $this->spr_percent = $brex_equipement->psyp;
-    $this->spr_dh = 0;
-    $this->spr_tdh = 0;
+    $this->spr_dh = $brex_equipement->psy_dh;
+    $this->spr_tdh = $brex_equipement->psy_tdh;
+    $this->spr_dw = $brex_equipement->psy_dw;
     $this->evo = $brex_equipement->evop;
     $this->variance_min = $brex_equipement->variance_min;
     $this->variance_max = $brex_equipement->variance_max;
@@ -147,61 +160,125 @@ class ConditionalPassive {
   public $category;
   public $element;
   public $hp;
+  public $hp_dh;
+  public $hp_tdh;
+  public $hp_dw;
   public $mp;
+  public $mp_dh;
+  public $mp_tdh;
+  public $mp_dw;
   public $atk;
+  public $atk_dh;
+  public $atk_tdh;
+  public $atk_dw;
   public $mag;
+  public $mag_dh;
+  public $mag_tdh;
+  public $mag_dw;
   public $def;
+  public $def_dh;
+  public $def_tdh;
+  public $def_dw;
   public $spr;
+  public $spr_dh;
+  public $spr_tdh;
+  public $spr_dw;
   public $partial_dw;
   function __construct($brex_unit_passive) {
     $this->unit = $brex_unit_passive->unit ? $brex_unit_passive->unit->numero : null;
     $this->category = $brex_unit_passive->categorie ? $brex_unit_passive->categorie->id : null;
     $this->element = $brex_unit_passive->element ? $brex_unit_passive->element->id : null;
     $this->hp = $brex_unit_passive->pv;
+    $this->hp_dh = $brex_unit_passive->pv_dh;
+    $this->hp_tdh = $brex_unit_passive->pv_tdh;
+    $this->hp_dw = $brex_unit_passive->pv_dw;
     $this->mp = $brex_unit_passive->pm;
+    $this->mp_dh = $brex_unit_passive->pm_dh;
+    $this->mp_tdh = $brex_unit_passive->pm_tdh;
+    $this->mp_dw = $brex_unit_passive->pm_dw;
     $this->atk = $brex_unit_passive->att;
+    $this->atk_dh = $brex_unit_passive->att_dh;
+    $this->atk_tdh = $brex_unit_passive->att_tdh;
+    $this->atk_dw = $brex_unit_passive->att_dw;
     $this->mag = $brex_unit_passive->mag;
+    $this->mag_dh = $brex_unit_passive->mag_dh;
+    $this->mag_tdh = $brex_unit_passive->mag_tdh;
+    $this->mag_dw = $brex_unit_passive->mag_dw;
     $this->def = $brex_unit_passive->def;
+    $this->def_dh = $brex_unit_passive->def_dh;
+    $this->def_tdh = $brex_unit_passive->def_tdh;
+    $this->def_dw = $brex_unit_passive->def_dw;
     $this->spr = $brex_unit_passive->psy;
+    $this->spr_dh = $brex_unit_passive->psy_dh;
+    $this->spr_tdh = $brex_unit_passive->psy_tdh;
+    $this->spr_dw = $brex_unit_passive->psy_dw;
     $this->partial_dw = $brex_unit_passive->partial_dw ? true : false;
   }
 }
 class UnitStats {
   public $hp;
   public $hp_passive;
+  public $hp_dh;
+  public $hp_tdh;
+  public $hp_dw;
   public $mp;
   public $mp_passive;
+  public $mp_dh;
+  public $mp_tdh;
+  public $mp_dw;
   public $atk;
   public $atk_passive;
+  public $atk_dh;
+  public $atk_tdh;
+  public $atk_dw;
   public $mag;
   public $mag_passive;
+  public $mag_dh;
+  public $mag_tdh;
+  public $mag_dw;
   public $def;
   public $def_passive;
+  public $def_dh;
+  public $def_tdh;
+  public $def_dw;
   public $spr;
   public $spr_passive;
+  public $spr_dh;
+  public $spr_tdh;
+  public $spr_dw;
   public $evo;
-  public $atk_dh;
-  public $mag_dh;
-  public $atk_tdh;
-  public $mag_tdh;
   function __construct($brex_unit_stats) {
     $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
     $this->hp_passive = $brex_unit_stats->pv_passif_amelio > 0 ? $brex_unit_stats->pv_passif_amelio : $brex_unit_stats->pv_passif;
+    $this->hp_dh = $brex_unit_stats->pv_dh;
+    $this->hp_tdh = $brex_unit_stats->pv_tdh;
+    $this->hp_dw = $brex_unit_stats->pv_dw;
     $this->mp = $brex_unit_stats->pm + $brex_unit_stats->pm_pots;
     $this->mp_passive = $brex_unit_stats->pm_passif_amelio > 0 ? $brex_unit_stats->pm_passif_amelio : $brex_unit_stats->pm_passif;
+    $this->mp_dh = $brex_unit_stats->pm_dh;
+    $this->mp_tdh = $brex_unit_stats->pm_tdh;
+    $this->mp_dw = $brex_unit_stats->pm_dw;
     $this->atk = $brex_unit_stats->att + $brex_unit_stats->att_pots;
     $this->atk_passive = $brex_unit_stats->att_passif_amelio > 0 ? $brex_unit_stats->att_passif_amelio : $brex_unit_stats->att_passif;
+    $this->atk_dh = $brex_unit_stats->att_dh_amelio > 0 ? $brex_unit_stats->att_dh_amelio : $brex_unit_stats->att_dh;
+    $this->atk_tdh = $brex_unit_stats->att_tdh_amelio > 0 ? $brex_unit_stats->att_tdh_amelio : $brex_unit_stats->att_tdh;
+    $this->atk_dw = $brex_unit_stats->att_dw;
     $this->mag = $brex_unit_stats->mag + $brex_unit_stats->mag_pots;
     $this->mag_passive = $brex_unit_stats->mag_passif_amelio > 0 ? $brex_unit_stats->mag_passif_amelio : $brex_unit_stats->mag_passif;
+    $this->mag_dh = $brex_unit_stats->mag_dh_amelio > 0 ? $brex_unit_stats->mag_dh_amelio : $brex_unit_stats->mag_dh;
+    $this->mag_tdh = $brex_unit_stats->mag_tdh_amelio > 0 ? $brex_unit_stats->mag_tdh_amelio : $brex_unit_stats->mag_tdh;
+    $this->mag_dw = $brex_unit_stats->mag_dw;
     $this->def = $brex_unit_stats->def + $brex_unit_stats->def_pots;
     $this->def_passive = $brex_unit_stats->def_passif_amelio > 0 ? $brex_unit_stats->def_passif_amelio : $brex_unit_stats->def_passif;
+    $this->def_dh = $brex_unit_stats->def_dh;
+    $this->def_tdh = $brex_unit_stats->def_tdh;
+    $this->def_dw = $brex_unit_stats->def_dw;
     $this->spr = $brex_unit_stats->psy + $brex_unit_stats->psy_pots;
     $this->spr_passive = $brex_unit_stats->psy_passif_amelio > 0 ? $brex_unit_stats->psy_passif_amelio : $brex_unit_stats->psy_passif;
+    $this->spr_dh = $brex_unit_stats->psy_dh;
+    $this->spr_tdh = $brex_unit_stats->psy_tdh;
+    $this->spr_dw = $brex_unit_stats->psy_dw;
     $this->evo = $brex_unit_stats->evop_amelio > 0 ? $brex_unit_stats->evop_amelio : $brex_unit_stats->evop;
-    $this->atk_dh = $brex_unit_stats->att_dh_amelio > 0 ? $brex_unit_stats->att_dh_amelio : $brex_unit_stats->att_dh;
-    $this->mag_dh = $brex_unit_stats->mag_dh_amelio > 0 ? $brex_unit_stats->mag_dh_amelio : $brex_unit_stats->mag_dh;
-    $this->atk_tdh = $brex_unit_stats->att_tdh_amelio > 0 ? $brex_unit_stats->att_tdh_amelio : $brex_unit_stats->att_tdh;
-    $this->mag_tdh = $brex_unit_stats->mag_tdh_amelio > 0 ? $brex_unit_stats->mag_tdh_amelio : $brex_unit_stats->mag_tdh;
   }
 }
 class Build {
@@ -232,7 +309,10 @@ class Build {
       if ($brex_build->tueurs_m) {
         $this->magical_killers = new KillerPassives ( $brex_build->tueurs_m );
       }
-      $this->equipments = new EquipmentSet ( $brex_build, $language );
+      $equipments_filter = array ();
+      $equipments_filter ['build'] = $brex_build->id;
+      $brex_equipments = brex_build_equipment::findByRelation1N ( $equipments_filter );
+      $this->equipments = new EquipmentSet ( $brex_build, $brex_equipments, $language );
       
       if ($brex_build->algorithm->id == 8) {
         $this->mitigation = $brex_build->mitigation;
@@ -362,7 +442,13 @@ class Skill {
 }
 class EquipmentSet {
   public $right_hand;
+  public $rh_trait1;
+  public $rh_trait2;
+  public $rh_trait3;
   public $left_hand;
+  public $lh_trait1;
+  public $lh_trait2;
+  public $lh_trait3;
   public $head;
   public $body;
   public $accessory1;
@@ -371,7 +457,7 @@ class EquipmentSet {
   public $materia2;
   public $materia3;
   public $materia4;
-  function __construct($brex_build, $language) {
+  function __construct($brex_build, $brex_build_equipments, $language) {
     if ($brex_build->main1) {
       $this->right_hand = new Equipment ( $brex_build->main1, $language );
     }
@@ -401,6 +487,12 @@ class EquipmentSet {
     }
     if ($brex_build->aptitude4) {
       $this->materia4 = new Equipment ( $brex_build->aptitude4, $language );
+    }
+    if (count ( $brex_build_equipments )) {
+      foreach ( $brex_build_equipments as $equipment ) {
+        $slot = $equipment->slot->nom;
+        $this->$slot = new Equipment ( $equipment->objet, $language );
+      }
     }
   }
 }

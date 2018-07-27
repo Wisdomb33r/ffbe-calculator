@@ -1,5 +1,14 @@
 import {ConditionalPassive} from './conditional-passive.model';
-import {BODY_CATEGORIES, HEAD_CATEGORIES, SHIELDS_CATEGORIES, WEAPONS_CATEGORIES} from '../calculator-constants';
+import {
+  BODY_CATEGORIES,
+  DAGGERS,
+  GUNS,
+  HEAD_CATEGORIES,
+  KATANAS,
+  RODS,
+  SHIELDS_CATEGORIES,
+  WEAPONS_CATEGORIES
+} from '../calculator-constants';
 import {KillerPassives} from './killer-passives.model';
 
 export class Equipment {
@@ -22,16 +31,22 @@ export class Equipment {
   public spr_percent: number;
   public hp_dh: number;
   public hp_tdh: number;
+  public hp_dw: number;
   public mp_dh: number;
   public mp_tdh: number;
+  public mp_dw: number;
   public atk_dh: number;
   public atk_tdh: number;
+  public atk_dw: number;
   public mag_dh: number;
   public mag_tdh: number;
+  public mag_dw: number;
   public def_dh: number;
   public def_tdh: number;
+  public def_dw: number;
   public spr_dh: number;
   public spr_tdh: number;
+  public spr_dw: number;
   public evo: number;
   public variance_min: number;
   public variance_max: number;
@@ -64,16 +79,22 @@ export class Equipment {
     this.spr_percent = equipment.spr_percent;
     this.hp_dh = equipment.hp_dh;
     this.hp_tdh = equipment.hp_tdh;
+    this.hp_dw = equipment.hp_dw;
     this.mp_dh = equipment.mp_dh;
     this.mp_tdh = equipment.mp_tdh;
+    this.mp_dw = equipment.mp_dw;
     this.atk_dh = equipment.atk_dh;
     this.atk_tdh = equipment.atk_tdh;
+    this.atk_dw = equipment.atk_dw;
     this.mag_dh = equipment.mag_dh;
     this.mag_tdh = equipment.mag_tdh;
+    this.mag_dw = equipment.mag_dw;
     this.def_dh = equipment.def_dh;
     this.def_tdh = equipment.def_tdh;
+    this.def_dw = equipment.def_dw;
     this.spr_dh = equipment.spr_dh;
     this.spr_tdh = equipment.spr_tdh;
+    this.spr_dw = equipment.spr_dw;
     this.evo = equipment.evo;
     this.variance_min = equipment.variance_min;
     this.variance_max = equipment.variance_max;
@@ -128,5 +149,11 @@ export class Equipment {
 
   public getMagicalKiller(opponentKillerType): number {
     return this.magical_killers && this.magical_killers[opponentKillerType] ? this.magical_killers[opponentKillerType] : 0;
+  }
+
+  public isWeaponTraitPossible(): boolean {
+    return this.id < 2379 &&
+      (this.category === DAGGERS || this.category === KATANAS || this.category === RODS || this.category === GUNS
+      );
   }
 }

@@ -12,13 +12,13 @@ export class UnitStats {
   public evo: UnitStat;
 
   constructor(stats: any) {
-    this.hp = new UnitStat(stats.hp, stats.hp_passive, stats.hp_dh, stats.hp_tdh);
-    this.mp = new UnitStat(stats.mp, stats.mp_passive, stats.mp_dh, stats.mp_tdh);
-    this.atk = new UnitStat(stats.atk, stats.atk_passive, stats.atk_dh, stats.atk_tdh);
-    this.mag = new UnitStat(stats.mag, stats.mag_passive, stats.mag_dh, stats.mag_tdh);
-    this.def = new UnitStat(stats.def, stats.def_passive, stats.def_dh, stats.def_tdh);
-    this.spr = new UnitStat(stats.spr, stats.spr_passive, stats.spr_dh, stats.spr_tdh);
-    this.evo = new UnitStat(stats.evo, 0, 0, 0);
+    this.hp = new UnitStat(stats.hp, stats.hp_passive, stats.hp_dh, stats.hp_tdh, stats.hp_dw);
+    this.mp = new UnitStat(stats.mp, stats.mp_passive, stats.mp_dh, stats.mp_tdh, stats.mp_dw);
+    this.atk = new UnitStat(stats.atk, stats.atk_passive, stats.atk_dh, stats.atk_tdh, stats.atk_dw);
+    this.mag = new UnitStat(stats.mag, stats.mag_passive, stats.mag_dh, stats.mag_tdh, stats.mag_dw);
+    this.def = new UnitStat(stats.def, stats.def_passive, stats.def_dh, stats.def_tdh, stats.def_dw);
+    this.spr = new UnitStat(stats.spr, stats.spr_passive, stats.spr_dh, stats.spr_tdh, stats.spr_dw);
+    this.evo = new UnitStat(stats.evo, 0, 0, 0, 0);
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number,

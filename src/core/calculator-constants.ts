@@ -1,6 +1,10 @@
 import {KillerPassives} from './model/killer-passives.model';
 import {Esper} from './model/esper.model';
 
+export const DAGGERS = 16;
+export const KATANAS = 28;
+export const RODS = 2;
+export const GUNS = 15;
 export const WEAPONS_CATEGORIES: Array<number> = [
   1,
   2,

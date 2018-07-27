@@ -56,9 +56,36 @@ export class UnitsService {
         this.getEquipments().left_hand = null;
       }
     }
+    if (!this.getEquipments().right_hand || !this.getEquipments().right_hand.isWeaponTraitPossible()) {
+      this.getEquipments()['rh_trait1'] = null;
+      this.getEquipments()['rh_trait2'] = null;
+      this.getEquipments()['rh_trait3'] = null;
+    }
+    if (!this.getEquipments().left_hand || !this.getEquipments().left_hand.isWeaponTraitPossible()) {
+      this.getEquipments()['lh_trait1'] = null;
+      this.getEquipments()['lh_trait2'] = null;
+      this.getEquipments()['lh_trait3'] = null;
+    }
   }
 
   public getAllowedEquipmentsForSlot$(slot: string): Observable<Array<Equipment>> {
+    if (slot.startsWith('rh_trait') || slot.startsWith('lh_trait')) {
+      let category = 0;
+      if (slot.startsWith('rh_trait')) {
+        category = this.getEquipments().right_hand.category;
+      } else {
+        category = this.getEquipments().left_hand.category;
+      }
+
+      return this.databaseClient.getEquipmentsForWeaponCategory$(category)
+        .pipe(
+          map((items: Array<Equipment>) => items
+            .map((item: Equipment) => new Equipment(item))
+            .filter((item: Equipment) => this.checkWeaponTraitUniqueness(item, slot))
+            .sort((a: Equipment, b: Equipment) => -this.compareEquipmentsForAlgorithm(a, b))
+          )
+        );
+    }
     return this.databaseClient.getEquipmentsForUnitAndSlot$(slot, this.selectedUnit.id)
       .pipe(
         map((items: Array<Equipment>) => items
@@ -156,22 +183,47 @@ export class UnitsService {
     return isNullOrUndefined(item.sex_restriction) || item.sex_restriction === this.selectedUnit.sex;
   }
 
+  private checkWeaponTraitUniqueness(item: Equipment, slot: string): boolean {
+    if (item.unique) {
+      if (slot.startsWith('rh_trait') && (
+        (this.getEquipments().rh_trait1 && item.id === this.getEquipments().rh_trait1.id)
+        || (this.getEquipments().rh_trait2 && item.id === this.getEquipments().rh_trait2.id)
+        || (this.getEquipments().rh_trait3 && item.id === this.getEquipments().rh_trait3.id)
+      )) {
+        return false;
+      }
+      if (slot.startsWith('lh_trait') && (
+        (this.getEquipments().lh_trait1 && item.id === this.getEquipments().lh_trait1.id)
+        || (this.getEquipments().lh_trait2 && item.id === this.getEquipments().lh_trait2.id)
+        || (this.getEquipments().lh_trait3 && item.id === this.getEquipments().lh_trait3.id)
+      )) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   private checkUniqueness(item: Equipment, slot: string): boolean {
     if (item.unique) {
       if (slot.startsWith('materia') && (
-        item.id === this.selectedUnit.selectedBuild.equipments.materia1.id
-        || item.id === this.selectedUnit.selectedBuild.equipments.materia2.id
-        || item.id === this.selectedUnit.selectedBuild.equipments.materia3.id
-        || item.id === this.selectedUnit.selectedBuild.equipments.materia4.id)) {
+        (this.getEquipments().materia1 && item.id === this.getEquipments().materia1.id)
+        || (this.getEquipments().materia2 && item.id === this.getEquipments().materia2.id)
+        || (this.getEquipments().materia3 && item.id === this.getEquipments().materia3.id)
+        || (this.getEquipments().materia4 && item.id === this.getEquipments().materia4.id))
+      ) {
         return false;
       }
-      if (slot.startsWith('accessory') && (item.id === this.selectedUnit.selectedBuild.equipments.accessory1.id
-        || item.id === this.selectedUnit.selectedBuild.equipments.accessory2.id)) {
+      if (slot.startsWith('accessory') && (
+        (this.getEquipments().accessory1 && item.id === this.getEquipments().accessory1.id)
+        || (this.getEquipments().accessory2 && item.id === this.getEquipments().accessory2.id))
+      ) {
         return false;
       }
       if (slot === 'right_hand' || slot === 'left_hand') {
-        if (item.id === this.selectedUnit.selectedBuild.equipments.right_hand.id ||
-          (this.selectedUnit.selectedBuild.equipments.left_hand && item.id === this.selectedUnit.selectedBuild.equipments.left_hand.id)) {
+        if (
+          (this.getEquipments().right_hand && item.id === this.getEquipments().right_hand.id)
+          || (this.selectedUnit.selectedBuild.equipments.left_hand && item.id === this.selectedUnit.selectedBuild.equipments.left_hand.id)
+        ) {
           return false;
         }
       }

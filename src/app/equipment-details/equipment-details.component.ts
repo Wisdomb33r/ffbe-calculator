@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Equipment} from '../../core/model/equipment.model';
 import {ConditionalPassive} from '../../core/model/conditional-passive.model';
 import {UnitsService} from '../../core/services/units.service';
@@ -11,6 +11,11 @@ import {UnitsService} from '../../core/services/units.service';
 export class EquipmentDetailsComponent {
 
   @Input() equipment: Equipment;
+  @Input() weaponTrait1: Equipment;
+  @Input() weaponTrait2: Equipment;
+  @Input() weaponTrait3: Equipment;
+  @Input() displayWeaponTraits: boolean;
+  @Output() weaponTraitEmitter = new EventEmitter();
 
   constructor(public unitsService: UnitsService) {
   }
@@ -30,5 +35,9 @@ export class EquipmentDetailsComponent {
 
   public isItemCategoryDisplayed(): boolean {
     return this.equipment.isWeapon() || this.equipment.isShield() || this.equipment.isHead() || this.equipment.isBody();
+  }
+
+  public weaponTraitClicked(index: number) {
+    this.weaponTraitEmitter.emit(index);
   }
 }

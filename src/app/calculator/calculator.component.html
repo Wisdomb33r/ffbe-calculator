@@ -24,7 +24,13 @@
   <app-calculation-display *ngIf="unitsService.selectedUnit"></app-calculation-display>
   <app-permanent-url *ngIf="unitsService.selectedUnit" [unit]="unitsService.selectedUnit"
                      [right_hand]="unitsService.getEquipments().right_hand"
+                     [rh_trait1]="unitsService.getEquipments().rh_trait1"
+                     [rh_trait2]="unitsService.getEquipments().rh_trait2"
+                     [rh_trait3]="unitsService.getEquipments().rh_trait3"
                      [left_hand]="unitsService.getEquipments().left_hand"
+                     [lh_trait1]="unitsService.getEquipments().lh_trait1"
+                     [lh_trait2]="unitsService.getEquipments().lh_trait2"
+                     [lh_trait3]="unitsService.getEquipments().lh_trait3"
                      [head]="unitsService.getEquipments().head"
                      [body]="unitsService.getEquipments().body"
                      [accessory1]="unitsService.getEquipments().accessory1"
