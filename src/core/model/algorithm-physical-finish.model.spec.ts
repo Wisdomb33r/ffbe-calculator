@@ -78,7 +78,7 @@ describe('AlgorithmPhysicalFinish', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(101.556);
+    expect(result.result).toBeCloseTo(99.83);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn instanceof ResultTurnDamages).toBeTruthy();
@@ -89,26 +89,26 @@ describe('AlgorithmPhysicalFinish', () => {
     expect(turn1['atk']).toEqual(1000);
     expect(turn1['buffed_atk']).toEqual(1200);
     expect(turn1['evo']).toBeFalsy();
-    expect(turn1['killerPassive']).toBeCloseTo(125);
+    expect(turn1['killerPassive']).toBeCloseTo(100);
     expect(turn1['combosIncrement']).toBeCloseTo(2.5);
     expect(turn1['power']).toBeCloseTo(1250);
     expect(turn1['physicalDamages']).toEqual(36000000);
-    expect(turn1['physicalKillerDamages']).toBeCloseTo(40500000);
-    expect(turn1['physicalElementalDamages']).toBeCloseTo(40500000);
+    expect(turn1['physicalKillerDamages']).toBeCloseTo(39600000);
+    expect(turn1['physicalElementalDamages']).toBeCloseTo(39600000);
     expect(turn1['hitsPower'].length).toEqual(2);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [625, 625]);
 
     const turn2 = result['turnDamages'][1];
-    expect(turn2['atk']).toEqual(7800);
-    expect(turn2['mag']).toEqual(4005);
+    expect(turn2['atk']).toEqual(7640);
+    expect(turn2['mag']).toEqual(4150);
     expect(turn2['def']).toEqual(5060);
     expect(turn2['spr']).toEqual(3880);
     expect(turn2['evo']).toEqual(50);
     expect(turn2['combosIncrement']).toBeCloseTo(4);
     expect(turn2['power']).toBeCloseTo(940);
-    expect(turn2['physicalDamages']).toEqual(119387520);
-    expect(turn2['physicalKillerDamages']).toBeCloseTo(119387520);
-    expect(turn2['physicalElementalDamages']).toBeCloseTo(179081280);
+    expect(turn2['physicalDamages']).toEqual(117500000);
+    expect(turn2['physicalKillerDamages']).toBeCloseTo(117500000);
+    expect(turn2['physicalElementalDamages']).toBeCloseTo(176250000);
     expect(turn2['hitsPower'].length).toEqual(1);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [940]);
   });
