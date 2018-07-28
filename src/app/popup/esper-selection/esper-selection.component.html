@@ -4,7 +4,7 @@
     <img [src]="esper.icon" (click)="selectEsper(esper)">
     <div class="esper-info">
       <h3>{{getEsperName(esper)}}</h3>
-      <p>{{getEsperBuildName(esper)}}</p>
+      <p [innerHTML]="getEsperBuildName(esper)"></p>
     </div>
   </div>
 </mat-dialog-content>
