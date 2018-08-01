@@ -231,7 +231,8 @@ export class EquipmentSet {
 
   public checkConditionalPassiveActive(condPassive: ConditionalPassive, unitId: number): boolean {
     // unit-specific bonus of an item
-    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0 && isNullOrUndefined(condPassive.category)) {
+    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0
+      && isNullOrUndefined(condPassive.category) && isNullOrUndefined(condPassive.element)) {
       return unitId === condPassive.unit;
     }
     // unit or item bonus if a category of equipment is present
@@ -244,8 +245,12 @@ export class EquipmentSet {
     }
     // unit or item bonus if a weapon of the right element is present
     if (!isNullOrUndefined(condPassive.element) && condPassive.element > 0) {
-      // TODO implement algorithm to determine if there is an equipped weapon of the right element
-      return false;
+      return (this.right_hand && this.right_hand.isWeapon()
+          && this.right_hand.elements && !isNullOrUndefined(this.right_hand.elements.find(element => element === condPassive.element))
+        )
+        || (this.left_hand && this.left_hand.isWeapon()
+          && this.left_hand.elements && !isNullOrUndefined(this.left_hand.elements.find(element => element === condPassive.element))
+        );
     }
   }
 
