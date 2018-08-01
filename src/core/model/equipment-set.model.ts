@@ -86,9 +86,10 @@ export class EquipmentSet {
 
   public sumEquipmentStat(statName: string): number {
     let result = 0;
-    if (!statName.endsWith('dh')
+    if (!(statName.endsWith('dh') || statName.endsWith('dw'))
       || (statName.endsWith('_dh') && this.isDoubleHandActive())
-      || (statName.endsWith('_tdh') && this.isTrueDoubleHandActive())) {
+      || (statName.endsWith('_tdh') && this.isTrueDoubleHandActive())
+      || (statName.endsWith('_dw') && this.isDualWielding())) {
       result += this.right_hand ? this.right_hand[statName] : 0;
       result += this.left_hand ? this.left_hand[statName] : 0;
       result += this.head ? this.head[statName] : 0;

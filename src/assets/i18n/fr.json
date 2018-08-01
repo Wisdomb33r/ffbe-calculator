@@ -106,6 +106,7 @@
           "passive": "Passifs",
           "equipment": "Équipement",
           "dh": "Deux mains",
+          "dw": "Deux armes",
           "esper": "Chimère",
           "total": "Total",
           "limitWarn": "La caractéristique dépasse la limite de 300% autorisée par le jeu. Une partie du bonus est donc perdue."

@@ -16,10 +16,15 @@
       <td>{{getPassiveValue() | integer}}</td>
       <td class="percent">({{getPassivePercent()}}%)</td>
     </tr>
-    <tr>
+    <tr *ngIf="doublehanding">
       <td>{{'unit.details.stats.popup.dh' | translate}}</td>
       <td>{{getDhValue() | integer}}</td>
       <td class="percent">({{getDhPercent()}}%)</td>
+    </tr>
+    <tr *ngIf="dualwielding">
+      <td>{{'unit.details.stats.popup.dw' | translate}}</td>
+      <td>{{getDwValue() | integer}}</td>
+      <td class="percent">({{getDwPercent()}}%)</td>
     </tr>
     <tr>
       <th>{{'unit.details.stats.popup.equipment' | translate}}</th>
@@ -37,10 +42,15 @@
       <td>{{getEquipmentValue() | integer}}</td>
       <td></td>
     </tr>
-    <tr>
+    <tr *ngIf="doublehanding">
       <td>{{'unit.details.stats.popup.dh' | translate}}</td>
       <td>{{getEquipmentDhValue() | integer}}</td>
       <td class="percent" [class.limit-warn]="isEquipmentDhLimitExceeded()">({{getEquipmentDhPercent()}}%)</td>
+    </tr>
+    <tr *ngIf="dualwielding">
+      <td>{{'unit.details.stats.popup.dw' | translate}}</td>
+      <td>{{getEquipmentDwValue() | integer}}</td>
+      <td class="percent">({{getEquipmentDwPercent()}}%)</td>
     </tr>
     <tr>
       <th>{{'unit.details.stats.popup.esper' | translate}}</th>

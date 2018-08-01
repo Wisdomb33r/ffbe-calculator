@@ -106,6 +106,7 @@
           "passive": "Traits",
           "equipment": "Equipment",
           "dh": "Doublehand",
+          "dw": "Dual Wield",
           "esper": "Esper",
           "total": "Total",
           "limitWarn": "The unit stat increase is over the 300% limit. The bonus is partially lost."

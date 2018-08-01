@@ -10,15 +10,19 @@ export class UnitStat {
   public base_equipment = 0;
   public dh_equipment = 0;
   public tdh_equipment = 0;
+  public dw_equipment = 0;
   public passive_equipment = 0;
   public conditional_passive = 0;
   public passive_esper = 0;
 
   public dh_effective = 0;
   public tdh_effective = 0;
+  public dw_effective = 0;
 
   public value_from_dh = 0;
   public value_from_dh_equipment = 0;
+  public value_from_dw = 0;
+  public value_from_dw_equipment = 0;
   public value_from_passive = 0;
   public value_from_passive_equipment = 0;
   public value_from_esper = 0;
@@ -33,9 +37,10 @@ export class UnitStat {
     this.dw = stat_dw ? stat_dw : 0;
   }
 
-  public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
+  public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
     this.dh_effective = isDoubleHandActive ? this.dh : 0;
     this.tdh_effective = isTrueDoubleHandActive ? this.tdh : 0;
+    this.dw_effective = isDualWielding ? this.dw : 0;
   }
 
   public computeTotal() {
@@ -45,10 +50,12 @@ export class UnitStat {
     this.value_from_passive_equipment = this.base * effectiveEquipmentPassive / 100;
     this.value_from_dh = this.base_equipment * (this.dh_effective + this.tdh_effective) / 100;
     this.value_from_dh_equipment = this.base_equipment * effectiveEquipmentDh / 100;
+    this.value_from_dw = this.base_equipment * this.dw_effective / 100;
+    this.value_from_dw_equipment = this.base_equipment * this.dw_equipment / 100;
     this.value_from_passive_esper = this.base * this.passive_esper / 100;
     this.total = Math.floor(this.base + this.value_from_passive + this.value_from_passive_equipment
-      + this.value_from_dh + this.value_from_dh_equipment + this.base_equipment)
-      + this.value_from_esper + this.value_from_passive_esper;
+      + this.value_from_dh + this.value_from_dh_equipment + this.base_equipment + this.value_from_dw + this.value_from_dw_equipment
+      + this.value_from_esper + this.value_from_passive_esper);
   }
 
   private getEffectiveEquipmentPassive(): number {

@@ -109,6 +109,7 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStat('mag_tdh'),
       this.selectedBuild.equipments.sumEquipmentStat('evo')
     );
+    const equipmentActiveConditionalPassives = this.selectedBuild.equipments.getAllActiveConditionalPassives(this.id);
     this.stats.defineEquipmentPassives(
       this.selectedBuild.equipments.sumEquipmentStatPercent('hp'),
       this.selectedBuild.equipments.sumEquipmentStatPercent('mp'),
@@ -116,14 +117,23 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStatPercent('mag'),
       this.selectedBuild.equipments.sumEquipmentStatPercent('def'),
       this.selectedBuild.equipments.sumEquipmentStatPercent('spr'),
-      this.selectedBuild.equipments.getAllActiveConditionalPassives(this.id)
+      equipmentActiveConditionalPassives
+    );
+    this.stats.defineEquipmentDwBonuses(
+      this.selectedBuild.equipments.sumEquipmentStat('hp_dw'),
+      this.selectedBuild.equipments.sumEquipmentStat('mp_dw'),
+      this.selectedBuild.equipments.sumEquipmentStat('atk_dw'),
+      this.selectedBuild.equipments.sumEquipmentStat('mag_dw'),
+      this.selectedBuild.equipments.sumEquipmentStat('def_dw'),
+      this.selectedBuild.equipments.sumEquipmentStat('spr_dw'),
+      equipmentActiveConditionalPassives
     );
     this.stats.defineEsperStats(this.selectedBuild.esper);
 
     const activeCondPassives = this.filterUnitActiveConditionalPassives();
     this.stats.defineConditionalPassives(activeCondPassives);
     this.stats.defineDhActivation(this.selectedBuild.equipments.isDoubleHandActive(),
-      this.selectedBuild.equipments.isTrueDoubleHandActive());
+      this.selectedBuild.equipments.isTrueDoubleHandActive(), this.selectedBuild.equipments.isDualWielding());
     this.stats.computeTotals();
   }
 

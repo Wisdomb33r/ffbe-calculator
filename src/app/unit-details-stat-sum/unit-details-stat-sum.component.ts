@@ -13,12 +13,16 @@ export class UnitDetailsStatSumComponent {
   public unitStats: UnitStats;
   public stat: string;
   public esper: Esper;
+  public doublehanding: boolean;
+  public dualwielding: boolean;
 
   constructor(private translateService: TranslateService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.unitStats = data.unitStats;
     this.stat = data.stat;
     this.esper = data.esper;
+    this.doublehanding = data.doublehanding;
+    this.dualwielding = data.dualwielding;
   }
 
   public getBaseValue() {
@@ -59,6 +63,22 @@ export class UnitDetailsStatSumComponent {
 
   public getEquipmentDhPercent() {
     return this.unitStats[this.stat].dh_equipment + this.unitStats[this.stat].tdh_equipment;
+  }
+
+  public getDwValue() {
+    return Math.floor(this.unitStats[this.stat].value_from_dw);
+  }
+
+  public getDwPercent() {
+    return this.unitStats[this.stat].dw_effective;
+  }
+
+  public getEquipmentDwValue() {
+    return Math.floor(this.unitStats[this.stat].value_from_dw_equipment);
+  }
+
+  public getEquipmentDwPercent() {
+    return this.unitStats[this.stat].dw_equipment;
   }
 
   public getEsperValue() {

@@ -55,6 +55,16 @@ export class UnitStats {
     this.spr.passive_equipment = spr + passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
   }
 
+  public defineEquipmentDwBonuses(hp_dw: number, mp_dw: number, atk_dw: number, mag_dw: number, def_dw: number, spr_dw: number,
+                                  passives: Array<ConditionalPassive>) {
+    this.hp.dw_equipment = hp_dw + passives.map(passive => passive.hp_dw).reduce((val1, val2) => val1 + val2, 0);
+    this.mp.dw_equipment = mp_dw + passives.map(passive => passive.mp_dw).reduce((val1, val2) => val1 + val2, 0);
+    this.atk.dw_equipment = atk_dw + passives.map(passive => passive.atk_dw).reduce((val1, val2) => val1 + val2, 0);
+    this.mag.dw_equipment = mag_dw + passives.map(passive => passive.mag_dw).reduce((val1, val2) => val1 + val2, 0);
+    this.def.dw_equipment = def_dw + passives.map(passive => passive.def_dw).reduce((val1, val2) => val1 + val2, 0);
+    this.spr.dw_equipment = spr_dw + passives.map(passive => passive.spr_dw).reduce((val1, val2) => val1 + val2, 0);
+  }
+
   public defineEsperStats(esper: Esper) {
     this.hp.value_from_esper = esper.calculateStatIncrease('hp');
     this.hp.passive_esper = esper.hp_percent ? esper.hp_percent : 0;
@@ -70,13 +80,13 @@ export class UnitStats {
     this.spr.passive_esper = esper.spr_percent ? esper.spr_percent : 0;
   }
 
-  public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean) {
-    this.hp.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive);
-    this.mp.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive);
-    this.atk.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive);
-    this.mag.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive);
-    this.def.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive);
-    this.spr.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive);
+  public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
+    this.hp.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.mp.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.atk.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.mag.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.def.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.spr.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
   }
 
   public computeTotals() {
