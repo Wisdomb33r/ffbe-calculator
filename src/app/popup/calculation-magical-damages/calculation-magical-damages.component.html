@@ -8,10 +8,16 @@
         <mat-checkbox [(ngModel)]="algorithm.isSparkChain" (change)="calculateBuild()"></mat-checkbox>
       </td>
     </tr>
-    <tr>
-      <td *ngIf="isChaining()">{{'calculation.offensive.comboIncrement' | translate}}</td>
-      <td *ngIf="!isChaining()">{{'calculation.offensive.comboMultiplier' | translate}}</td>
+    <tr *ngIf="isChaining()">
+      <td>{{'calculation.offensive.comboIncrement' | translate}}</td>
       <td>{{result.combosIncrement | number:'1.1-1'}}</td>
+    </tr>
+    <tr *ngIf="!isChaining()">
+      <td>{{'calculation.offensive.comboMultiplier' | translate}}</td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.withCombo" (change)="calculateBuild()"></mat-checkbox>
+        {{result.combosIncrement | number:'1.1-1'}}
+      </td>
     </tr>
     <tr>
       <td>{{'calculation.display.hits' | translate}}</td>

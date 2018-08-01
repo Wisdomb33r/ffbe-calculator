@@ -8,6 +8,8 @@ import {AlgorithmOffensive} from './algorithm-offensive.model';
 
 export class AlgorithmFinish extends AlgorithmOffensive {
 
+  public withCombo = true;
+
   public calculate(unit: Unit): Result {
     const result: ResultOffensive = new ResultOffensive();
     unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
@@ -48,7 +50,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       if (skill.isDwBreakingChain && skill.skillType.isExecutingTwice(skill, unit)) {
         result.combosIncrement = 2.5;
       }
-      if (skill.isOutOfChain) {
+      if (skill.isOutOfChain || !this.withCombo) {
         result.combosIncrement = 1;
       }
       for (let i = 0; i < skill.hits; i++) {
