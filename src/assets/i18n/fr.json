@@ -83,13 +83,16 @@
       },
       "popup": {
         "title": "Choix de l'unité",
+        "rankFilter": "Filtrage des unités par rang",
         "physicalChainers": "Combos physiques",
         "magicalChainers": "Combos magiques",
         "hybridChainers": "Combos hybrides",
         "physicalFinishers": "Finishers physiques",
         "magicalFinishers": "Finishers magiques",
         "hybridFinishers": "Finishers hybrides",
-        "tanks": "Tanks"
+        "tanks": "Tanks",
+        "sixStarsUnits": "Unités 6★",
+        "sevenStarsUnits": "Unités 7★"
       }
     },
     "details": {

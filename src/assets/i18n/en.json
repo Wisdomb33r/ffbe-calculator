@@ -83,13 +83,16 @@
       },
       "popup": {
         "title": "Unit selection",
+        "rankFilter": "Filter units by rank",
         "physicalChainers": "Physical chaining",
         "magicalChainers": "Magical chaining",
         "hybridChainers": "Hybrid chaining",
         "physicalFinishers": "Physical finishers",
         "magicalFinishers": "Magical finishers",
         "hybridFinishers": "Hybrid finishers",
-        "tanks": "Tanks"
+        "tanks": "Tanks",
+        "sixStarsUnits": "6★ units",
+        "sevenStarsUnits": "7★ units"
       }
     },
     "details": {

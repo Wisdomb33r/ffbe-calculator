@@ -9,6 +9,8 @@ import {UnitsService} from '../../../core/services/units.service';
 })
 export class UnitSelectionComponent {
 
+  public rankFilter = 7;
+
   constructor(public dialogRef: MatDialogRef<UnitSelectionComponent>,
               public unitsService: UnitsService) {
   }

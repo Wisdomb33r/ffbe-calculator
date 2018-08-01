@@ -405,12 +405,18 @@ class Skill {
         if (count ( $enhancements )) {
           foreach ( $enhancements as $e ) {
             if ($e->niveau == 2) {
-              if ($e->hits)
-                $this->hits = $e->hits;
-              if ($e->frames)
-                $this->frames = $e->frames;
-              if ($e->damages)
-                $this->damages = $e->damages;
+              if ($e->comp_amelio) {
+                $this->hits = $e->comp_amelio->hits;
+                $this->frames = $e->comp_amelio->frames;
+                $this->damages = $e->comp_amelio->damages;
+              } else {
+                if ($e->hits)
+                  $this->hits = $e->hits;
+                if ($e->frames)
+                  $this->frames = $e->frames;
+                if ($e->damages)
+                  $this->damages = $e->damages;
+              }
             }
           }
         }
