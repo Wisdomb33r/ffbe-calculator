@@ -40,7 +40,7 @@ describe('UnitStats', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
     // WHEN
-    unitStats.defineEquipmentsStats(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10);
+    unitStats.defineEquipmentsStats(10, 20, 30, 40, 50, 60, 10);
     // THEN
     expect(unitStats.hp.base_equipment).toEqual(10);
     expect(unitStats.mp.base_equipment).toEqual(20);
@@ -48,10 +48,7 @@ describe('UnitStats', () => {
     expect(unitStats.mag.base_equipment).toEqual(40);
     expect(unitStats.def.base_equipment).toEqual(50);
     expect(unitStats.spr.base_equipment).toEqual(60);
-    expect(unitStats.atk.dh_equipment).toEqual(70);
-    expect(unitStats.atk.tdh_equipment).toEqual(80);
-    expect(unitStats.mag.dh_equipment).toEqual(90);
-    expect(unitStats.mag.tdh_equipment).toEqual(100);
+    expect(unitStats.evo.base_equipment).toEqual(10);
   });
 
   it('#defineConditionalPassives should dispatch conditional passive to the different stats', () => {
@@ -108,14 +105,14 @@ describe('UnitStats', () => {
     spyOn(unitStats.def, 'defineDhActivation').and.callThrough();
     spyOn(unitStats.spr, 'defineDhActivation').and.callThrough();
     // WHEN
-    unitStats.defineDhActivation(true, false);
+    unitStats.defineDhActivation(true, false, false);
     // THEN
-    expect(unitStats.hp.defineDhActivation).toHaveBeenCalledWith(true, false);
-    expect(unitStats.mp.defineDhActivation).toHaveBeenCalledWith(true, false);
-    expect(unitStats.atk.defineDhActivation).toHaveBeenCalledWith(true, false);
-    expect(unitStats.mag.defineDhActivation).toHaveBeenCalledWith(true, false);
-    expect(unitStats.def.defineDhActivation).toHaveBeenCalledWith(true, false);
-    expect(unitStats.spr.defineDhActivation).toHaveBeenCalledWith(true, false);
+    expect(unitStats.hp.defineDhActivation).toHaveBeenCalledWith(true, false, false);
+    expect(unitStats.mp.defineDhActivation).toHaveBeenCalledWith(true, false, false);
+    expect(unitStats.atk.defineDhActivation).toHaveBeenCalledWith(true, false, false);
+    expect(unitStats.mag.defineDhActivation).toHaveBeenCalledWith(true, false, false);
+    expect(unitStats.def.defineDhActivation).toHaveBeenCalledWith(true, false, false);
+    expect(unitStats.spr.defineDhActivation).toHaveBeenCalledWith(true, false, false);
   });
 
   it('#computeTotals should delegate to stats objects', () => {

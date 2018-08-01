@@ -6,7 +6,7 @@ describe('UnitStat', () => {
     // GIVEN
     const unitStat: UnitStat = new UnitStat(100, 0, 100, 50, 0);
     // WHEN
-    unitStat.defineDhActivation(false, true);
+    unitStat.defineDhActivation(false, true, false);
     // THEN
     expect(unitStat.dh_effective).toEqual(0);
     expect(unitStat.tdh_effective).toEqual(50);
@@ -16,7 +16,7 @@ describe('UnitStat', () => {
     // GIVEN
     const unitStat: UnitStat = new UnitStat(100, 0, 100, 50, 0);
     // WHEN
-    unitStat.defineDhActivation(true, true);
+    unitStat.defineDhActivation(true, true, false);
     // THEN
     expect(unitStat.dh_effective).toEqual(100);
     expect(unitStat.tdh_effective).toEqual(50);
@@ -26,7 +26,7 @@ describe('UnitStat', () => {
     // GIVEN
     const unitStat: UnitStat = new UnitStat(100, 0, 100, 50, 0);
     // WHEN
-    unitStat.defineDhActivation(false, false);
+    unitStat.defineDhActivation(false, false, false);
     // THEN
     expect(unitStat.dh_effective).toEqual(0);
     expect(unitStat.tdh_effective).toEqual(0);

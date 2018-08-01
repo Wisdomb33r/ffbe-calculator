@@ -103,10 +103,6 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStat('mag'),
       this.selectedBuild.equipments.sumEquipmentStat('def'),
       this.selectedBuild.equipments.sumEquipmentStat('spr'),
-      this.selectedBuild.equipments.sumEquipmentStat('atk_dh'),
-      this.selectedBuild.equipments.sumEquipmentStat('atk_tdh'),
-      this.selectedBuild.equipments.sumEquipmentStat('mag_dh'),
-      this.selectedBuild.equipments.sumEquipmentStat('mag_tdh'),
       this.selectedBuild.equipments.sumEquipmentStat('evo')
     );
     const equipmentActiveConditionalPassives = this.selectedBuild.equipments.getAllActiveConditionalPassives(this.id);
@@ -126,6 +122,24 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStat('mag_dw'),
       this.selectedBuild.equipments.sumEquipmentStat('def_dw'),
       this.selectedBuild.equipments.sumEquipmentStat('spr_dw'),
+      equipmentActiveConditionalPassives
+    );
+    this.stats.defineEquipmentDhBonuses(
+      this.selectedBuild.equipments.sumEquipmentStat('hp_dh'),
+      this.selectedBuild.equipments.sumEquipmentStat('mp_dh'),
+      this.selectedBuild.equipments.sumEquipmentStat('atk_dh'),
+      this.selectedBuild.equipments.sumEquipmentStat('mag_dh'),
+      this.selectedBuild.equipments.sumEquipmentStat('def_dh'),
+      this.selectedBuild.equipments.sumEquipmentStat('spr_dh'),
+      equipmentActiveConditionalPassives
+    );
+    this.stats.defineEquipmentTdhBonuses(
+      this.selectedBuild.equipments.sumEquipmentStat('hp_tdh'),
+      this.selectedBuild.equipments.sumEquipmentStat('mp_tdh'),
+      this.selectedBuild.equipments.sumEquipmentStat('atk_tdh'),
+      this.selectedBuild.equipments.sumEquipmentStat('mag_tdh'),
+      this.selectedBuild.equipments.sumEquipmentStat('def_tdh'),
+      this.selectedBuild.equipments.sumEquipmentStat('spr_tdh'),
       equipmentActiveConditionalPassives
     );
     this.stats.defineEsperStats(this.selectedBuild.esper);

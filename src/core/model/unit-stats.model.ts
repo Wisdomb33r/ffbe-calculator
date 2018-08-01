@@ -21,18 +21,13 @@ export class UnitStats {
     this.evo = new UnitStat(stats.evo, 0, 0, 0, 0);
   }
 
-  public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number,
-                               atk_dh, atk_tdh, mag_dh, mag_tdh, evo) {
+  public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number, evo: number) {
     this.hp.base_equipment = hp;
     this.mp.base_equipment = mp;
     this.atk.base_equipment = atk;
     this.mag.base_equipment = mag;
     this.def.base_equipment = def;
     this.spr.base_equipment = spr;
-    this.atk.dh_equipment = atk_dh;
-    this.atk.tdh_equipment = atk_tdh;
-    this.mag.dh_equipment = mag_dh;
-    this.mag.tdh_equipment = mag_tdh;
     this.evo.base_equipment = evo;
   }
 
@@ -63,6 +58,26 @@ export class UnitStats {
     this.mag.dw_equipment = mag_dw + passives.map(passive => passive.mag_dw).reduce((val1, val2) => val1 + val2, 0);
     this.def.dw_equipment = def_dw + passives.map(passive => passive.def_dw).reduce((val1, val2) => val1 + val2, 0);
     this.spr.dw_equipment = spr_dw + passives.map(passive => passive.spr_dw).reduce((val1, val2) => val1 + val2, 0);
+  }
+
+  public defineEquipmentDhBonuses(hp_dh: number, mp_dh: number, atk_dh: number, mag_dh: number, def_dh: number, spr_dh: number,
+                                  passives: Array<ConditionalPassive>) {
+    this.hp.dh_equipment = hp_dh + passives.map(passive => passive.hp_dh).reduce((val1, val2) => val1 + val2, 0);
+    this.mp.dh_equipment = mp_dh + passives.map(passive => passive.mp_dh).reduce((val1, val2) => val1 + val2, 0);
+    this.atk.dh_equipment = atk_dh + passives.map(passive => passive.atk_dh).reduce((val1, val2) => val1 + val2, 0);
+    this.mag.dh_equipment = mag_dh + passives.map(passive => passive.mag_dh).reduce((val1, val2) => val1 + val2, 0);
+    this.def.dh_equipment = def_dh + passives.map(passive => passive.def_dh).reduce((val1, val2) => val1 + val2, 0);
+    this.spr.dh_equipment = spr_dh + passives.map(passive => passive.spr_dh).reduce((val1, val2) => val1 + val2, 0);
+  }
+
+  public defineEquipmentTdhBonuses(hp_tdh: number, mp_tdh: number, atk_tdh: number, mag_tdh: number, def_tdh: number, spr_tdh: number,
+                                   passives: Array<ConditionalPassive>) {
+    this.hp.tdh_equipment = hp_tdh + passives.map(passive => passive.hp_tdh).reduce((val1, val2) => val1 + val2, 0);
+    this.mp.tdh_equipment = mp_tdh + passives.map(passive => passive.mp_tdh).reduce((val1, val2) => val1 + val2, 0);
+    this.atk.tdh_equipment = atk_tdh + passives.map(passive => passive.atk_tdh).reduce((val1, val2) => val1 + val2, 0);
+    this.mag.tdh_equipment = mag_tdh + passives.map(passive => passive.mag_tdh).reduce((val1, val2) => val1 + val2, 0);
+    this.def.tdh_equipment = def_tdh + passives.map(passive => passive.def_tdh).reduce((val1, val2) => val1 + val2, 0);
+    this.spr.tdh_equipment = spr_tdh + passives.map(passive => passive.spr_tdh).reduce((val1, val2) => val1 + val2, 0);
   }
 
   public defineEsperStats(esper: Esper) {
