@@ -24,6 +24,7 @@ export class UnitsService {
   public hybridFinishers: Array<Unit>;
   public defenders: Array<Unit>;
   public selectedUnit: Unit;
+  public rankFilter = 7;
 
   constructor(private databaseClient: DatabaseClientService) {
   }
