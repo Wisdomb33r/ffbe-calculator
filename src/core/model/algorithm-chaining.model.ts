@@ -57,7 +57,15 @@ export class AlgorithmChaining extends AlgorithmOffensive {
         if (i > 0 && frames[i] - frames[i - 1] > 25) {
           chainCombos = 0;
         }
-        hitsPower.push(skill.power * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2));
+        let hitPower = skill.power * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
+        if (skill.isLimitBreak) {
+          const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
+          if (lbMultiplier > 0) {
+            result.lbMultiplier = lbMultiplier;
+            hitPower = lbMultiplier * hitPower;
+          }
+        }
+        hitsPower.push(hitPower);
         chainCombos++;
       }
       if (skill.isBreakingChain) {

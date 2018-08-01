@@ -156,6 +156,7 @@
       "title": "Résultat des calculs",
       "turn": "Tour",
       "hits": "Coups",
+      "lbMultiplier": "Multiplicateur LB",
       "resistances": "Résistances",
       "elementalResistances": "Résistances élémentaires",
       "calculationParameters": "Paramètres du calcul",

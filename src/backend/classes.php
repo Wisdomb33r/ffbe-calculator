@@ -42,6 +42,7 @@ class Equipment {
   public $unique;
   public $physical_killers;
   public $magical_killers;
+  public $lb_multiplier;
   public $sex_restriction;
   public $conditional_passives;
   public $elements = array ();
@@ -90,6 +91,7 @@ class Equipment {
     if ($brex_equipement->tueurs_m) {
       $this->magical_killers = new KillerPassives ( $brex_equipement->tueurs_m );
     }
+    $this->lb_multiplier = $brex_equipement->lb_boost;
     $this->sex_restriction = $brex_equipement->sex_restrict;
     $brex_build_passives = brex_build_passif::findByRelation1N ( array ('objet' => $brex_equipement->id) );
     if (count ( $brex_build_passives )) {

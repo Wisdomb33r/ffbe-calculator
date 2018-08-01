@@ -23,6 +23,10 @@
       <td>{{'calculation.display.hits' | translate}}</td>
       <td>{{result.hitsPower.length}}</td>
     </tr>
+    <tr *ngIf="result.lbMultiplier">
+      <td>{{'calculation.display.lbMultiplier' | translate}}</td>
+      <td>{{result.lbMultiplier | number:'1.2-2'}}</td>
+    </tr>
   </table>
   <p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
   <h3>{{'calculation.offensive.turnPower' | translate}}</h3>

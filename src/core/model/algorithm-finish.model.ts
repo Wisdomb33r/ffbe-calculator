@@ -54,7 +54,15 @@ export class AlgorithmFinish extends AlgorithmOffensive {
         result.combosIncrement = 1;
       }
       for (let i = 0; i < skill.hits; i++) {
-        hitsPower.push(skill.power * damages[i] / 100 * result.combosIncrement);
+        let hitPower = skill.power * damages[i] / 100 * result.combosIncrement;
+        if (skill.isLimitBreak) {
+          const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
+          if (lbMultiplier > 0) {
+            result.lbMultiplier = lbMultiplier;
+            hitPower = lbMultiplier * hitPower;
+          }
+        }
+        hitsPower.push(hitPower);
       }
       if (skill.skillType.isExecutingTwice(skill, unit)) {
         for (let j = 0; j < skill.hits; j++) {

@@ -53,6 +53,7 @@ export class Equipment {
   public unique: boolean;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
+  public lb_multiplier: number;
   public sex_restriction: number;
   public conditional_passives: Array<ConditionalPassive> = [];
   public elements: Array<number> = [];
@@ -105,6 +106,7 @@ export class Equipment {
     if (equipment.magical_killers) {
       this.magical_killers = KillerPassives.construct(equipment.magical_killers);
     }
+    this.lb_multiplier = equipment.lb_multiplier;
     this.sex_restriction = equipment.sex_restriction === 1 || equipment.sex_restriction === 2 ? equipment.sex_restriction : undefined;
     if (Array.isArray(equipment.conditional_passives)) {
       equipment.conditional_passives
