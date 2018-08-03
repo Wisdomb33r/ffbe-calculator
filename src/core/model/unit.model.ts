@@ -47,8 +47,10 @@ export class Unit {
 
   public isWithNativeDw() {
     // TODO currently hardcoded, need to find a way to retrieve this from backend
-    return this.id === 258 // lightning
-      || this.id === 319 // luneth
+    return this.id === 258 // lightning 6*
+      || this.id === 969 // lightning 7*
+      || this.id === 319 // luneth 6*
+      || this.id === 974 // luneth 7*
       || this.id === 590 // onion knight
       || this.id === 639 // nyx
       || this.id === 775 // 2B
