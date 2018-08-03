@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Equipment} from '../../core/model/equipment.model';
 import {ConditionalPassive} from '../../core/model/conditional-passive.model';
 import {UnitsService} from '../../core/services/units.service';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-equipment-details',
@@ -22,7 +23,8 @@ export class EquipmentDetailsComponent {
 
   public getConditionalPassivesToDisplay(): Array<ConditionalPassive> {
     return this.equipment.conditional_passives
-      .filter(condPassive => condPassive.active || condPassive.category > 0);
+      .filter(condPassive => condPassive.active || isNullOrUndefined(condPassive.unit)
+        || this.unitsService.selectedUnit.id === condPassive.unit);
   }
 
   public isDhActive(): boolean {
@@ -31,6 +33,10 @@ export class EquipmentDetailsComponent {
 
   public isTdhActive(): boolean {
     return this.unitsService.getEquipments().isTrueDoubleHandActive();
+  }
+
+  public isDualWielding(): boolean {
+    return this.unitsService.getEquipments().isDualWielding();
   }
 
   public isItemCategoryDisplayed(): boolean {

@@ -118,23 +118,36 @@ describe('EquipmentSet', () => {
     expect(equipmentActivated.conditional_passives[1].active).toBeTruthy();
   });
 
-  it('#checkConditionalPassiveActive should return true for unit specific passive if the unit is the right one', () => {
+  it('#checkConditionalPassiveActive should return true for unit + category specific passive if the unit is the right one', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     const conditionalPassive = new ConditionalPassive(JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA));
-    conditionalPassive.category = undefined;
-    conditionalPassive.unit = 777;
+    conditionalPassive.unit = 777; // correct unit
+    equipments.right_hand.category = 15; // correct category
     // WHEN
     const isActive = equipments.checkConditionalPassiveActive(conditionalPassive, 777);
     // THEN
     expect(isActive).toBeTruthy();
   });
 
-  it('#checkConditionalPassiveActive should return false for unit specific passive if the unit is not the right one', () => {
+  it('#checkConditionalPassiveActive should return false for unit + category specific passive if the unit is not the right one', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     const conditionalPassive = new ConditionalPassive(JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA));
-    conditionalPassive.unit = 888;
+    conditionalPassive.unit = 888; // wrong unit
+    equipments.right_hand.category = 15; // correct category
+    // WHEN
+    const isActive = equipments.checkConditionalPassiveActive(conditionalPassive, 777);
+    // THEN
+    expect(isActive).toBeFalsy();
+  });
+
+  it('#checkConditionalPassiveActive should return false for unit + category specific passive if the category is not the right one', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    const conditionalPassive = new ConditionalPassive(JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA));
+    conditionalPassive.unit = 777; // correct unit
+    equipments.right_hand.category = 111; // wrong category
     // WHEN
     const isActive = equipments.checkConditionalPassiveActive(conditionalPassive, 777);
     // THEN

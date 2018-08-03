@@ -232,26 +232,29 @@ export class EquipmentSet {
   public checkConditionalPassiveActive(condPassive: ConditionalPassive, unitId: number): boolean {
     // unit-specific bonus of an item
     if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0
-      && isNullOrUndefined(condPassive.category) && isNullOrUndefined(condPassive.element)) {
-      return unitId === condPassive.unit;
+      && unitId !== condPassive.unit) {
+      return false;
     }
     // unit or item bonus if a category of equipment is present
-    if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0 && !condPassive.partial_dw) {
-      return (this.right_hand && this.right_hand.category === condPassive.category)
+    if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0 && !condPassive.partial_dw
+      && !((this.right_hand && this.right_hand.category === condPassive.category)
         || (this.left_hand && this.left_hand.category === condPassive.category)
         || (this.head && this.head.category === condPassive.category)
-        || (this.body && this.body.category === condPassive.category)
-        ;
+        || (this.body && this.body.category === condPassive.category))) {
+      return false;
     }
     // unit or item bonus if a weapon of the right element is present
-    if (!isNullOrUndefined(condPassive.element) && condPassive.element > 0) {
-      return (this.right_hand && this.right_hand.isWeapon()
-          && this.right_hand.elements && !isNullOrUndefined(this.right_hand.elements.find(element => element === condPassive.element))
-        )
+    if (!isNullOrUndefined(condPassive.element) && condPassive.element > 0
+      && !(
+        (this.right_hand && this.right_hand.isWeapon()
+          && this.right_hand.elements && !isNullOrUndefined(this.right_hand.elements.find(element => element === condPassive.element)))
         || (this.left_hand && this.left_hand.isWeapon()
-          && this.left_hand.elements && !isNullOrUndefined(this.left_hand.elements.find(element => element === condPassive.element))
-        );
+          && this.left_hand.elements && !isNullOrUndefined(this.left_hand.elements.find(element => element === condPassive.element)))
+      )) {
+      return false;
     }
+
+    return true;
   }
 
   public getAllActiveConditionalPassives(unitId: number): Array<ConditionalPassive> {

@@ -4,42 +4,103 @@
 </p>
 <p *ngIf="equipment.hp">+{{equipment.hp}} {{'hp' | translate}}</p>
 <p *ngIf="equipment.hp_percent">+{{equipment.hp_percent}}% {{'hp' | translate}}</p>
+<p *ngIf="equipment.hp_dh" [class.inactive]="!isDhActive()">
+  +{{equipment.hp_dh}}% {{'hp' | translate}} {{'dh' | translate}}
+</p>
+<p *ngIf="equipment.hp_tdh" [class.inactive]="!isTdhActive()">
+  +{{equipment.hp_tdh}}% {{'hp' | translate}} {{'tdh' | translate}}
+</p>
+<p *ngIf="equipment.hp_dw" [class.inactive]="!isDualWielding()">
+  +{{equipment.hp_dw}}% {{'hp' | translate}} {{'tdw' | translate}}
+</p>
 <p *ngIf="equipment.mp">+{{equipment.mp}} {{'mp' | translate}}</p>
 <p *ngIf="equipment.mp_percent">+{{equipment.mp_percent}}% {{'mp' | translate}}</p>
+<p *ngIf="equipment.mp_dh" [class.inactive]="!isDhActive()">
+  +{{equipment.mp_dh}}% {{'mp' | translate}} {{'dh' | translate}}
+</p>
+<p *ngIf="equipment.mp_tdh" [class.inactive]="!isTdhActive()">
+  +{{equipment.mp_tdh}}% {{'mp' | translate}} {{'tdh' | translate}}
+</p>
+<p *ngIf="equipment.mp_dw" [class.inactive]="!isDualWielding()">
+  +{{equipment.mp_dw}}% {{'mp' | translate}} {{'tdw' | translate}}
+</p>
 <p *ngIf="equipment.atk">+{{equipment.atk}} {{'atk' | translate}}</p>
 <p *ngIf="equipment.atk_percent">+{{equipment.atk_percent}}% {{'atk' | translate}}</p>
-<p *ngIf="equipment.mag">+{{equipment.mag}} {{'mag' | translate}}</p>
-<p *ngIf="equipment.mag_percent">+{{equipment.mag_percent}}% {{'mag' | translate}}</p>
-<p *ngIf="equipment.def">+{{equipment.def}} {{'def' | translate}}</p>
-<p *ngIf="equipment.def_percent">+{{equipment.def_percent}}% {{'def' | translate}}</p>
-<p *ngIf="equipment.spr">+{{equipment.spr}} {{'spr' | translate}}</p>
-<p *ngIf="equipment.spr_percent">+{{equipment.spr_percent}}% {{'spr' | translate}}</p>
-<p *ngIf="equipment.evo">+{{equipment.evo}}% {{'evo' | translate}}</p>
 <p *ngIf="equipment.atk_dh" [class.inactive]="!isDhActive()">
   +{{equipment.atk_dh}}% {{'atk' | translate}} {{'dh' | translate}}
 </p>
 <p *ngIf="equipment.atk_tdh" [class.inactive]="!isTdhActive()">
   +{{equipment.atk_tdh}}% {{'atk' | translate}} {{'tdh' | translate}}
 </p>
+<p *ngIf="equipment.atk_dw" [class.inactive]="!isDualWielding()">
+  +{{equipment.atk_dw}}% {{'atk' | translate}} {{'tdw' | translate}}
+</p>
+<p *ngIf="equipment.mag">+{{equipment.mag}} {{'mag' | translate}}</p>
+<p *ngIf="equipment.mag_percent">+{{equipment.mag_percent}}% {{'mag' | translate}}</p>
 <p *ngIf="equipment.mag_dh" [class.inactive]="!isDhActive()">
   +{{equipment.mag_dh}}% {{'mag' | translate}} {{'dh' | translate}}
 </p>
 <p *ngIf="equipment.mag_tdh" [class.inactive]="!isTdhActive()">
   +{{equipment.mag_tdh}}% {{'mag' | translate}} {{'tdh' | translate}}
 </p>
+<p *ngIf="equipment.mag_dw" [class.inactive]="!isDualWielding()">
+  +{{equipment.mag_dw}}% {{'mag' | translate}} {{'tdw' | translate}}
+</p>
+<p *ngIf="equipment.def">+{{equipment.def}} {{'def' | translate}}</p>
+<p *ngIf="equipment.def_percent">+{{equipment.def_percent}}% {{'def' | translate}}</p>
+<p *ngIf="equipment.def_dh" [class.inactive]="!isDhActive()">
+  +{{equipment.def_dh}}% {{'def' | translate}} {{'dh' | translate}}
+</p>
+<p *ngIf="equipment.def_tdh" [class.inactive]="!isTdhActive()">
+  +{{equipment.def_tdh}}% {{'def' | translate}} {{'tdh' | translate}}
+</p>
+<p *ngIf="equipment.def_dw" [class.inactive]="!isDualWielding()">
+  +{{equipment.def_dw}}% {{'def' | translate}} {{'tdw' | translate}}
+</p>
+<p *ngIf="equipment.spr">+{{equipment.spr}} {{'spr' | translate}}</p>
+<p *ngIf="equipment.spr_percent">+{{equipment.spr_percent}}% {{'spr' | translate}}</p>
+<p *ngIf="equipment.spr_dh" [class.inactive]="!isDhActive()">
+  +{{equipment.spr_dh}}% {{'spr' | translate}} {{'dh' | translate}}
+</p>
+<p *ngIf="equipment.spr_tdh" [class.inactive]="!isTdhActive()">
+  +{{equipment.spr_tdh}}% {{'spr' | translate}} {{'tdh' | translate}}
+</p>
+<p *ngIf="equipment.spr_dw" [class.inactive]="!isDualWielding()">
+  +{{equipment.spr_dw}}% {{'spr' | translate}} {{'tdw' | translate}}
+</p>
+<p *ngIf="equipment.evo">+{{equipment.evo}}% {{'evo' | translate}}</p>
+
 <p *ngFor="let passive of getConditionalPassivesToDisplay()" class="passive" [class.inactive]="!passive.active">
   <span *ngIf="passive.hp">+{{passive.hp}}% {{'hp' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.hp_dh">+{{passive.hp_dh}}% {{'hp' | translate}} {{'dh' | translate}}</span>
+  <span *ngIf="passive.hp_tdh">+{{passive.hp_tdh}}% {{'hp' | translate}} {{'tdh' | translate}}</span>
+  <span *ngIf="passive.hp_dw">+{{passive.hp_dw}}% {{'hp' | translate}} {{'tdw' | translate}}</span>
   <span *ngIf="passive.mp">+{{passive.mp}}% {{'mp' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.mp_dh">+{{passive.mp_dh}}% {{'mp' | translate}} {{'dh' | translate}}</span>
+  <span *ngIf="passive.mp_tdh">+{{passive.mp_tdh}}% {{'mp' | translate}} {{'tdh' | translate}}</span>
+  <span *ngIf="passive.mp_dw">+{{passive.mp_dw}}% {{'mp' | translate}} {{'tdw' | translate}}</span>
   <span *ngIf="passive.atk">+{{passive.atk}}% {{'atk' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.atk_dh">+{{passive.atk_dh}}% {{'atk' | translate}} {{'dh' | translate}}</span>
+  <span *ngIf="passive.atk_tdh">+{{passive.atk_tdh}}% {{'atk' | translate}} {{'tdh' | translate}}</span>
+  <span *ngIf="passive.atk_dw">+{{passive.atk_dw}}% {{'atk' | translate}} {{'tdw' | translate}}</span>
   <span *ngIf="passive.mag">+{{passive.mag}}% {{'mag' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.mag_dh">+{{passive.mag_dh}}% {{'mag' | translate}} {{'dh' | translate}}</span>
+  <span *ngIf="passive.mag_tdh">+{{passive.mag_tdh}}% {{'mag' | translate}} {{'tdh' | translate}}</span>
+  <span *ngIf="passive.mag_dw">+{{passive.mag_dw}}% {{'mag' | translate}} {{'tdw' | translate}}</span>
   <span *ngIf="passive.def">+{{passive.def}}% {{'def' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.def_dh">+{{passive.def_dh}}% {{'def' | translate}} {{'dh' | translate}}</span>
+  <span *ngIf="passive.def_tdh">+{{passive.def_tdh}}% {{'def' | translate}} {{'tdh' | translate}}</span>
+  <span *ngIf="passive.def_dw">+{{passive.def_dw}}% {{'def' | translate}} {{'tdw' | translate}}</span>
   <span *ngIf="passive.spr">+{{passive.spr}}% {{'spr' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
+  <span *ngIf="passive.spr_dh">+{{passive.spr_dh}}% {{'spr' | translate}} {{'dh' | translate}}</span>
+  <span *ngIf="passive.spr_tdh">+{{passive.spr_tdh}}% {{'spr' | translate}} {{'tdh' | translate}}</span>
+  <span *ngIf="passive.spr_dw">+{{passive.spr_dw}}% {{'spr' | translate}} {{'tdw' | translate}}</span>
 </p>
 <p *ngIf="equipment.variance_min > 0 && equipment.variance_max > 0">
   {{equipment.variance_min}}% - {{equipment.variance_max}}%
