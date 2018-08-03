@@ -33,16 +33,25 @@ export class UnitsService {
     this.databaseClient.getUnits$()
       .subscribe(units => {
         this.units = units;
-        this.physicalChainers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 1).length > 0);
-        this.magicalChainers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 2).length > 0);
-        this.hybridChainers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 3).length > 0);
-        this.physicalFinishers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 4).length > 0);
-        this.magicalFinishers = units.filter(
-          (u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 5 || b.algorithmId === 7).length > 0
-        );
-        this.hybridFinishers = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 6).length > 0);
-        this.defenders = units.filter((u: Unit) => u.builds.filter((b: Build) => b.algorithmId === 8).length > 0);
+        this.filterByRank(7);
       });
+  }
+
+  public filterByRank(rankFilter: number) {
+    this.physicalChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+      u.builds.filter((b: Build) => b.algorithmId === 1).length > 0);
+    this.magicalChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+      u.builds.filter((b: Build) => b.algorithmId === 2).length > 0);
+    this.hybridChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+      u.builds.filter((b: Build) => b.algorithmId === 3).length > 0);
+    this.physicalFinishers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+      u.builds.filter((b: Build) => b.algorithmId === 4).length > 0);
+    this.magicalFinishers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+      u.builds.filter((b: Build) => b.algorithmId === 5 || b.algorithmId === 7).length > 0);
+    this.hybridFinishers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+      u.builds.filter((b: Build) => b.algorithmId === 6).length > 0);
+    this.defenders = this.units.filter((u: Unit) => u.rank === rankFilter &&
+      u.builds.filter((b: Build) => b.algorithmId === 8).length > 0);
   }
 
   public equipInSlot(slot: string, equipment: Equipment) {
