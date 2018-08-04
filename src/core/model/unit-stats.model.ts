@@ -95,22 +95,13 @@ export class UnitStats {
     this.spr.passive_esper = esper.spr_percent ? esper.spr_percent : 0;
   }
 
-  public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
-    this.hp.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.mp.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.atk.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.mag.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.def.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.spr.defineDhActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-  }
-
-  public computeTotals() {
-    this.hp.computeTotal();
-    this.mp.computeTotal();
-    this.atk.computeTotal();
-    this.mag.computeTotal();
-    this.def.computeTotal();
-    this.spr.computeTotal();
-    this.evo.computeTotal();
+  public computeTotals(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
+    this.hp.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.mp.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.atk.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.mag.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.def.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.spr.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.evo.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
   }
 }

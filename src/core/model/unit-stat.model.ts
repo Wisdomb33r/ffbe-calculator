@@ -37,15 +37,10 @@ export class UnitStat {
     this.dw = stat_dw ? stat_dw : 0;
   }
 
-  public defineDhActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
-    this.dh_effective = isDoubleHandActive ? this.dh : 0;
-    this.tdh_effective = isTrueDoubleHandActive ? this.tdh : 0;
-    this.dw_effective = isDualWielding ? this.dw : 0;
-  }
-
-  public computeTotal() {
+  public computeTotal(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
+    this.evaluateDhTdhDwActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
     const effectiveEquipmentPassive = this.getEffectiveEquipmentPassive();
-    const effectiveEquipmentDh = this.getEffectiveEquipmentDh();
+    const effectiveEquipmentDh = this.getEffectiveEquipmentDh(isDoubleHandActive, isTrueDoubleHandActive);
     this.value_from_passive = this.base * (this.passive + this.conditional_passive) / 100;
     this.value_from_passive_equipment = this.base * effectiveEquipmentPassive / 100;
     this.value_from_dh = this.base_equipment * (this.dh_effective + this.tdh_effective) / 100;
@@ -58,6 +53,15 @@ export class UnitStat {
       + this.value_from_esper + this.value_from_passive_esper);
   }
 
+  public evaluateDhTdhDwActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
+    this.dh_effective = isDoubleHandActive ? this.dh : 0;
+    this.tdh_effective = isTrueDoubleHandActive ? this.tdh : 0;
+    this.dw_effective = isDualWielding ? this.dw : 0;
+    this.dh_equipment = isDoubleHandActive ? this.dh_equipment : 0;
+    this.tdh_equipment = isTrueDoubleHandActive ? this.tdh_equipment : 0;
+    this.dw_equipment = isDualWielding ? this.dw_equipment : 0;
+  }
+
   private getEffectiveEquipmentPassive(): number {
     if ((this.passive + this.conditional_passive + this.passive_equipment + this.passive_esper) > 300) {
       return 300 - this.passive - this.conditional_passive - this.passive_esper;
@@ -66,7 +70,7 @@ export class UnitStat {
     }
   }
 
-  private getEffectiveEquipmentDh(): number {
+  private getEffectiveEquipmentDh(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean): number {
     if ((this.dh_effective + this.tdh_effective + this.dh_equipment + this.tdh_equipment) > 300) {
       return 300 - this.dh_effective - this.tdh_effective;
     } else {

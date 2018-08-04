@@ -86,21 +86,16 @@ export class EquipmentSet {
 
   public sumEquipmentStat(statName: string): number {
     let result = 0;
-    if (!(statName.endsWith('dh') || statName.endsWith('dw'))
-      || (statName.endsWith('_dh') && this.isDoubleHandActive())
-      || (statName.endsWith('_tdh') && this.isTrueDoubleHandActive())
-      || (statName.endsWith('_dw') && this.isDualWielding())) {
-      result += this.right_hand ? this.right_hand[statName] : 0;
-      result += this.left_hand ? this.left_hand[statName] : 0;
-      result += this.head ? this.head[statName] : 0;
-      result += this.body ? this.body[statName] : 0;
-      result += this.accessory1 ? this.accessory1[statName] : 0;
-      result += this.accessory2 ? this.accessory2[statName] : 0;
-      result += this.materia1 ? this.materia1[statName] : 0;
-      result += this.materia2 ? this.materia2[statName] : 0;
-      result += this.materia3 ? this.materia3[statName] : 0;
-      result += this.materia4 ? this.materia4[statName] : 0;
-    }
+    result += this.right_hand ? this.right_hand[statName] : 0;
+    result += this.left_hand ? this.left_hand[statName] : 0;
+    result += this.head ? this.head[statName] : 0;
+    result += this.body ? this.body[statName] : 0;
+    result += this.accessory1 ? this.accessory1[statName] : 0;
+    result += this.accessory2 ? this.accessory2[statName] : 0;
+    result += this.materia1 ? this.materia1[statName] : 0;
+    result += this.materia2 ? this.materia2[statName] : 0;
+    result += this.materia3 ? this.materia3[statName] : 0;
+    result += this.materia4 ? this.materia4[statName] : 0;
     return result;
   }
 

@@ -148,9 +148,8 @@ export class Unit {
 
     const activeCondPassives = this.filterUnitActiveConditionalPassives();
     this.stats.defineConditionalPassives(activeCondPassives);
-    this.stats.defineDhActivation(this.selectedBuild.equipments.isDoubleHandActive(),
+    this.stats.computeTotals(this.selectedBuild.equipments.isDoubleHandActive(),
       this.selectedBuild.equipments.isTrueDoubleHandActive(), this.selectedBuild.equipments.isDualWielding());
-    this.stats.computeTotals();
   }
 
   private filterUnitActiveConditionalPassives(): Array<ConditionalPassive> {

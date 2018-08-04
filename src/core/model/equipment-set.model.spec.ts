@@ -68,22 +68,6 @@ describe('EquipmentSet', () => {
     expect(sum).toEqual(275);
   });
 
-  it('#sumEquipmentStat should exclude dh and tdh bonuses if two weapons equipped', () => {
-    // GIVEN
-    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
-    equipments.head.atk_dh = 50;
-    equipments.body.atk_dh = 50;
-    equipments.accessory1.atk_tdh = 50;
-    equipments.accessory2.atk_tdh = 50;
-    equipments.left_hand = new Equipment(JSON.parse(VALID_EQUIPMENT));
-    // WHEN
-    const sumDh = equipments.sumEquipmentStat('atk_dh');
-    const sumTdh = equipments.sumEquipmentStat('atk_tdh');
-    // THEN
-    expect(sumDh).toEqual(0);
-    expect(sumTdh).toEqual(0);
-  });
-
   it('#getAllActiveConditionalPassives should return conditional passives activated by equipments', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));

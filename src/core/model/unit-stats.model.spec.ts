@@ -95,26 +95,6 @@ describe('UnitStats', () => {
     expect(unitStats.hp.passive_esper).toEqual(10);
   });
 
-  it('#defineDhActivation should delegate to stats objects', () => {
-    // GIVEN
-    const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
-    spyOn(unitStats.hp, 'defineDhActivation').and.callThrough();
-    spyOn(unitStats.mp, 'defineDhActivation').and.callThrough();
-    spyOn(unitStats.atk, 'defineDhActivation').and.callThrough();
-    spyOn(unitStats.mag, 'defineDhActivation').and.callThrough();
-    spyOn(unitStats.def, 'defineDhActivation').and.callThrough();
-    spyOn(unitStats.spr, 'defineDhActivation').and.callThrough();
-    // WHEN
-    unitStats.defineDhActivation(true, false, false);
-    // THEN
-    expect(unitStats.hp.defineDhActivation).toHaveBeenCalledWith(true, false, false);
-    expect(unitStats.mp.defineDhActivation).toHaveBeenCalledWith(true, false, false);
-    expect(unitStats.atk.defineDhActivation).toHaveBeenCalledWith(true, false, false);
-    expect(unitStats.mag.defineDhActivation).toHaveBeenCalledWith(true, false, false);
-    expect(unitStats.def.defineDhActivation).toHaveBeenCalledWith(true, false, false);
-    expect(unitStats.spr.defineDhActivation).toHaveBeenCalledWith(true, false, false);
-  });
-
   it('#computeTotals should delegate to stats objects', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
@@ -125,7 +105,7 @@ describe('UnitStats', () => {
     spyOn(unitStats.def, 'computeTotal').and.callThrough();
     spyOn(unitStats.spr, 'computeTotal').and.callThrough();
     // WHEN
-    unitStats.computeTotals();
+    unitStats.computeTotals(true, true, true);
     // THEN
     expect(unitStats.hp.computeTotal).toHaveBeenCalled();
     expect(unitStats.mp.computeTotal).toHaveBeenCalled();
