@@ -40,6 +40,7 @@ class Equipment {
   public $variance_min;
   public $variance_max;
   public $unique;
+  public $changeable;
   public $physical_killers;
   public $magical_killers;
   public $lb_multiplier;
@@ -500,6 +501,7 @@ class EquipmentSet {
       foreach ( $brex_build_equipments as $equipment ) {
         $slot = $equipment->slot->nom;
         $this->$slot = new Equipment ( $equipment->objet, $language );
+        $this->$slot->changeable = $equipment->non_removeable ? false : true;
       }
     }
   }

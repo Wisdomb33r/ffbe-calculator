@@ -23,10 +23,16 @@
   flex-grow: 1;
 }
 
-.unequip {
+.unequip,
+.blocked {
   padding-left: 10px;
+  padding-right: 10px;
   color: white;
   font-weight: bold;
+}
+
+.blocked {
+  max-width: 280px;
 }
 
 .unequip span {

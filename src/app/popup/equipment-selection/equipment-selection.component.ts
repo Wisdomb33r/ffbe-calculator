@@ -13,6 +13,7 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
   private slot: string;
   public equipments: Array<Equipment> = [];
   public removeable: boolean;
+  public changeable: boolean;
   @ViewChild('itemfilter') itemfilter: ElementRef;
   private filterChangedSubscription: Subscription;
 
@@ -23,21 +24,24 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
     this.slot = data.slot;
     this.equipments = data.equipments;
     this.removeable = data.removeable;
+    this.changeable = data.changeable;
   }
 
   ngAfterViewInit() {
-    this.ngzone.runOutsideAngular(() => {
-      this.filterChangedSubscription = fromEvent(this.itemfilter.nativeElement, 'keyup')
-        .pipe(
-          debounceTime(600)
-        )
-        .subscribe((keyboardEvent: any) => {
-          this.equipments.forEach((item: Equipment) =>
-            item.filtered = item.name.toLowerCase().indexOf(keyboardEvent.target.value.toLowerCase()) === -1
-          );
-          this.cdref.detectChanges();
-        });
-    });
+    if (this.changeable) {
+      this.ngzone.runOutsideAngular(() => {
+        this.filterChangedSubscription = fromEvent(this.itemfilter.nativeElement, 'keyup')
+          .pipe(
+            debounceTime(600)
+          )
+          .subscribe((keyboardEvent: any) => {
+            this.equipments.forEach((item: Equipment) =>
+              item.filtered = item.name.toLowerCase().indexOf(keyboardEvent.target.value.toLowerCase()) === -1
+            );
+            this.cdref.detectChanges();
+          });
+      });
+    }
   }
 
   ngOnDestroy() {

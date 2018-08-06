@@ -124,7 +124,8 @@
     "selection": {
       "title": "Equipment",
       "remove": "Remove",
-      "filter": "Filter items"
+      "filter": "Filter items",
+      "changeBlocked": "This item is mandatory for this build as it has an impact the calculator currently cannot activate or deactivate dynamically."
     }
   },
   "skills": {
