@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Unit} from '../core/model/unit.model';
 import {UnitsService} from '../core/services/units.service';
 import {DatabaseClientService} from '../core/services/database-client.service';
@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material';
 import {isNullOrUndefined} from 'util';
 import {Router} from '@angular/router';
 import {Meta, Title} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'app-menus',
@@ -21,7 +22,8 @@ export class AppMenusComponent implements OnInit {
               private translate: TranslateService,
               private router: Router,
               private meta: Meta,
-              private title: Title) {
+              private title: Title,
+              @Inject(DOCUMENT) private document) {
   }
 
   ngOnInit() {
@@ -51,6 +53,7 @@ export class AppMenusComponent implements OnInit {
   public switchLanguage(lang: string) {
     this.translate.use(lang);
 
+    this.document.documentElement.lang = lang;
     this.meta.removeTag('name="description"');
     this.meta.removeTag('name="keywords"');
     this.translate.get('calculator.app.title').subscribe(translated => this.title.setTitle(translated));

@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Meta, Title} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,13 @@ export class AppComponent {
 
   constructor(private translate: TranslateService,
               private meta: Meta,
-              private title: Title) {
+              private title: Title,
+              @Inject(DOCUMENT) private document) {
     translate.setDefaultLang('en');
     translate.use('en');
     if (translate.getBrowserLang().startsWith('fr')) {
       translate.use('fr');
+      this.document.documentElement.lang = 'fr';
     }
 
     this.meta.removeTag('name="description"');
