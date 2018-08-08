@@ -1,3 +1,5 @@
+import {KillerPassives} from './killer-passives.model';
+
 export class ConditionalPassive {
   // from backend
   public unit: number;
@@ -27,6 +29,8 @@ export class ConditionalPassive {
   public spr_dh: number;
   public spr_tdh: number;
   public spr_dw: number;
+  public physical_killers: KillerPassives;
+  public magical_killers: KillerPassives;
   public partial_dw: boolean;
 
   // transcient
@@ -60,6 +64,20 @@ export class ConditionalPassive {
     this.spr_dh = conditionalPassive.spr_dh ? conditionalPassive.spr_dh : 0;
     this.spr_tdh = conditionalPassive.spr_tdh ? conditionalPassive.spr_tdh : 0;
     this.spr_dw = conditionalPassive.spr_dw ? conditionalPassive.spr_dw : 0;
+    if (conditionalPassive.physical_killers) {
+      this.physical_killers = KillerPassives.construct(conditionalPassive.physical_killers);
+    }
+    if (conditionalPassive.magical_killers) {
+      this.magical_killers = KillerPassives.construct(conditionalPassive.magical_killers);
+    }
     this.partial_dw = conditionalPassive.partial_dw ? true : false;
+  }
+
+  public getPhysicalKiller(opponentKillerType): number {
+    return this.physical_killers && this.physical_killers[opponentKillerType] ? this.physical_killers[opponentKillerType] : 0;
+  }
+
+  public getMagicalKiller(opponentKillerType): number {
+    return this.magical_killers && this.magical_killers[opponentKillerType] ? this.magical_killers[opponentKillerType] : 0;
   }
 }

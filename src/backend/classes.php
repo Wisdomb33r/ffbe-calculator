@@ -186,6 +186,8 @@ class ConditionalPassive {
   public $spr_dh;
   public $spr_tdh;
   public $spr_dw;
+  public $physical_killers;
+  public $magical_killers;
   public $partial_dw;
   function __construct($brex_unit_passive) {
     $this->unit = $brex_unit_passive->unit ? $brex_unit_passive->unit->numero : null;
@@ -215,6 +217,12 @@ class ConditionalPassive {
     $this->spr_dh = $brex_unit_passive->psy_dh;
     $this->spr_tdh = $brex_unit_passive->psy_tdh;
     $this->spr_dw = $brex_unit_passive->psy_dw;
+    if ($brex_unit_passive->tueurs) {
+      $this->physical_killers = new KillerPassives ( $brex_unit_passive->tueurs );
+    }
+    if ($brex_unit_passive->tueurs_m) {
+      $this->magical_killers = new KillerPassives ( $brex_unit_passive->tueurs_m );
+    }
     $this->partial_dw = $brex_unit_passive->partial_dw ? true : false;
   }
 }

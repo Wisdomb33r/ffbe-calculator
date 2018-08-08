@@ -132,6 +132,9 @@ export class EquipmentSet {
     result += this.materia2 && this.materia2.physical_killers ? this.materia2.physical_killers.getKillerSum() : 0;
     result += this.materia3 && this.materia3.physical_killers ? this.materia3.physical_killers.getKillerSum() : 0;
     result += this.materia4 && this.materia4.physical_killers ? this.materia4.physical_killers.getKillerSum() : 0;
+    result += this.getAllConditionalPassives()
+      .map((passive: ConditionalPassive) => passive.physical_killers ? passive.physical_killers.getKillerSum() : 0)
+      .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
@@ -147,6 +150,9 @@ export class EquipmentSet {
     result += this.materia2 ? this.materia2.getPhysicalKiller(opponentKillerType) : 0;
     result += this.materia3 ? this.materia3.getPhysicalKiller(opponentKillerType) : 0;
     result += this.materia4 ? this.materia4.getPhysicalKiller(opponentKillerType) : 0;
+    result += this.getAllConditionalPassives()
+      .map((passive: ConditionalPassive) => passive.getPhysicalKiller(opponentKillerType))
+      .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
@@ -162,6 +168,9 @@ export class EquipmentSet {
     result += this.materia2 && this.materia2.magical_killers ? this.materia2.magical_killers.getKillerSum() : 0;
     result += this.materia3 && this.materia3.magical_killers ? this.materia3.magical_killers.getKillerSum() : 0;
     result += this.materia4 && this.materia4.magical_killers ? this.materia4.magical_killers.getKillerSum() : 0;
+    result += this.getAllConditionalPassives()
+      .map((passive: ConditionalPassive) => passive.magical_killers ? passive.magical_killers.getKillerSum() : 0)
+      .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
@@ -177,6 +186,9 @@ export class EquipmentSet {
     result += this.materia2 ? this.materia2.getMagicalKiller(opponentKillerType) : 0;
     result += this.materia3 ? this.materia3.getMagicalKiller(opponentKillerType) : 0;
     result += this.materia4 ? this.materia4.getMagicalKiller(opponentKillerType) : 0;
+    result += this.getAllConditionalPassives()
+      .map((passive: ConditionalPassive) => passive.getMagicalKiller(opponentKillerType))
+      .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
