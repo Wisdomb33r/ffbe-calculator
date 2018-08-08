@@ -82,19 +82,35 @@ export class Unit {
   }
 
   public getPhysicalKillers(): number {
-    return this.selectedBuild.getPhysicalKillers();
+    let killer = this.selectedBuild.getPhysicalKillers();
+    killer += this.filterUnitActiveConditionalPassives()
+      .map((passive: ConditionalPassive) => passive.physical_killers ? passive.physical_killers.getKillerSum() : 0)
+      .reduce((val1, val2) => val1 + val2, 0);
+    return killer;
   }
 
   public getPhysicalKiller(opponentKillerType: string): number {
-    return this.selectedBuild.getPhysicalKiller(opponentKillerType);
+    let killer = this.selectedBuild.getPhysicalKiller(opponentKillerType);
+    killer += this.filterUnitActiveConditionalPassives()
+      .map((passive: ConditionalPassive) => passive.getPhysicalKiller(opponentKillerType))
+      .reduce((val1, val2) => val1 + val2, 0);
+    return killer;
   }
 
   public getMagicalKillers(): number {
-    return this.selectedBuild.getMagicalKillers();
+    let killer = this.selectedBuild.getMagicalKillers();
+    killer += this.filterUnitActiveConditionalPassives()
+      .map((passive: ConditionalPassive) => passive.magical_killers ? passive.magical_killers.getKillerSum() : 0)
+      .reduce((val1, val2) => val1 + val2, 0);
+    return killer;
   }
 
   public getMagicalKiller(opponentKillerType: string): number {
-    return this.selectedBuild.getMagicalKiller(opponentKillerType);
+    let killer = this.selectedBuild.getMagicalKiller(opponentKillerType);
+    killer += this.filterUnitActiveConditionalPassives()
+      .map((passive: ConditionalPassive) => passive.getMagicalKiller(opponentKillerType))
+      .reduce((val1, val2) => val1 + val2, 0);
+    return killer;
   }
 
   public computeRealStats() {
