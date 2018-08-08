@@ -61,7 +61,7 @@
       <td>{{result.esperDamageModifier | integer}}</td>
     </tr>
     <tr *ngIf="result.elements && result.elements.length > 0">
-      <td>{{'calculation.display.supportBreak' | translate}}</td>
+      <td>{{'calculation.display.groupBreak' | translate}}</td>
       <td>
         <mat-checkbox [(ngModel)]="algorithm.isSupportBreakingResistances" (change)="calculateBuild()"></mat-checkbox>
       </td>
