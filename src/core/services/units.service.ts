@@ -174,11 +174,13 @@ export class UnitsService {
       .filter(passive => passive.active)
       .map(passive => passive[stat]).reduce((val1, val2) => val1 + val2, 0);
     const from_passive = this.selectedUnit.stats[stat].base * (equipment[stat + '_percent'] + conditional_percent) / 100;
-    const from_dh = this.selectedUnit.selectedBuild.equipments.isDoubleHandActive() ?
+    const from_dh = this.getEquipments().isDoubleHandActive() ?
       this.selectedUnit.stats[stat].base_equipment * equipment[stat + '_dh'] / 100 : 0;
-    const from_tdh = this.selectedUnit.selectedBuild.equipments.isTrueDoubleHandActive() ?
+    const from_tdh = this.getEquipments().isTrueDoubleHandActive() ?
       this.selectedUnit.stats[stat].base_equipment * equipment[stat + '_tdh'] / 100 : 0;
-    return equipment[stat] + from_passive + from_dh + from_tdh;
+    const from_dw = this.getEquipments().isDualWielding() ?
+      this.selectedUnit.stats[stat].base_equipment * equipment[stat + '_dw'] / 100 : 0;
+    return equipment[stat] + from_passive + from_dh + from_tdh + from_dw;
   }
 
   private isAllowed(item: Equipment, slot: string): boolean {
