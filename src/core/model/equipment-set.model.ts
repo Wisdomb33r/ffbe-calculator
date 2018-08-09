@@ -267,10 +267,21 @@ export class EquipmentSet {
   public getAllActiveConditionalPassives(unitId: number): Array<ConditionalPassive> {
     const allPassives: Array<ConditionalPassive> = this.getAllConditionalPassives();
     allPassives.forEach((cp: ConditionalPassive) => cp.active = false);
+    const uniquePassives = this.filterDuplicatedConditionalPassives(allPassives);
     const activePassives: Array<ConditionalPassive> =
-      allPassives.filter(condPassive => this.checkConditionalPassiveActive(condPassive, unitId));
+      uniquePassives.filter(condPassive => this.checkConditionalPassiveActive(condPassive, unitId));
     activePassives.forEach((cp: ConditionalPassive) => cp.active = true);
     return activePassives;
+  }
+
+  private filterDuplicatedConditionalPassives(passives: Array<ConditionalPassive>): Array<ConditionalPassive> {
+    const filtered: Array<ConditionalPassive> = [];
+    passives.forEach((passive: ConditionalPassive) => {
+      if (!filtered.find(p => p.id === passive.id && p.unique && passive.unique)) {
+        filtered.push(passive);
+      }
+    });
+    return filtered;
   }
 
   public activateEquipmentConditionalPassives(equipment: Equipment, unitId: number): Equipment {

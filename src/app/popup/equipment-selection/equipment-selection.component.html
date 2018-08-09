@@ -1,4 +1,4 @@
-<mat-dialog-content *ngIf="changeable">
+<mat-dialog-content *ngIf="!locked">
   <div class="filter">
     <mat-form-field>
       <input matInput #itemfilter placeholder="{{'equipment.selection.filter' | translate}}">
@@ -16,6 +16,6 @@
 </mat-dialog-content>
 
 
-<mat-dialog-content *ngIf="!changeable">
+<mat-dialog-content *ngIf="locked">
   <div class="equipment"><p class="blocked">{{'equipment.selection.changeBlocked' | translate}}</p></div>
 </mat-dialog-content>
