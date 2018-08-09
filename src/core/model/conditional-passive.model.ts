@@ -2,6 +2,7 @@ import {KillerPassives} from './killer-passives.model';
 
 export class ConditionalPassive {
   // from backend
+  public id: number;
   public unit: number;
   public category: number;
   public element: number;
@@ -32,6 +33,7 @@ export class ConditionalPassive {
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
   public partial_dw: boolean;
+  public unique: boolean;
 
   // transcient
   public active = false;
@@ -71,6 +73,7 @@ export class ConditionalPassive {
       this.magical_killers = KillerPassives.construct(conditionalPassive.magical_killers);
     }
     this.partial_dw = conditionalPassive.partial_dw ? true : false;
+    this.unique = conditionalPassive.unique ? true : false;
   }
 
   public getPhysicalKiller(opponentKillerType): number {

@@ -40,7 +40,7 @@ class Equipment {
   public $variance_min;
   public $variance_max;
   public $unique;
-  public $changeable;
+  public $locked;
   public $physical_killers;
   public $magical_killers;
   public $lb_multiplier;
@@ -159,6 +159,7 @@ class KillerPassives {
   }
 }
 class ConditionalPassive {
+  public $id;
   public $unit;
   public $category;
   public $element;
@@ -189,7 +190,9 @@ class ConditionalPassive {
   public $physical_killers;
   public $magical_killers;
   public $partial_dw;
+  public $unique;
   function __construct($brex_unit_passive) {
+    $this->id = $brex_unit_passive->id;
     $this->unit = $brex_unit_passive->unit ? $brex_unit_passive->unit->numero : null;
     $this->category = $brex_unit_passive->categorie ? $brex_unit_passive->categorie->id : null;
     $this->element = $brex_unit_passive->element ? $brex_unit_passive->element->id : null;
@@ -224,6 +227,7 @@ class ConditionalPassive {
       $this->magical_killers = new KillerPassives ( $brex_unit_passive->tueurs_m );
     }
     $this->partial_dw = $brex_unit_passive->partial_dw ? true : false;
+    $this->unique = $brex_unit_passive->uniq ? true : false;
   }
 }
 class UnitStats {
@@ -509,7 +513,7 @@ class EquipmentSet {
       foreach ( $brex_build_equipments as $equipment ) {
         $slot = $equipment->slot->nom;
         $this->$slot = new Equipment ( $equipment->objet, $language );
-        $this->$slot->changeable = $equipment->non_removeable ? false : true;
+        $this->$slot->locked = $equipment->non_removeable ? true : false;
       }
     }
   }

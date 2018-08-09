@@ -51,7 +51,7 @@ export class Equipment {
   public variance_min: number;
   public variance_max: number;
   public unique: boolean;
-  public changeable: boolean;
+  public locked: boolean;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
   public lb_multiplier: number;
@@ -101,7 +101,7 @@ export class Equipment {
     this.variance_min = equipment.variance_min;
     this.variance_max = equipment.variance_max;
     this.unique = equipment.unique;
-    this.changeable = equipment.changeable;
+    this.locked = equipment.locked;
     if (equipment.physical_killers) {
       this.physical_killers = KillerPassives.construct(equipment.physical_killers);
     }

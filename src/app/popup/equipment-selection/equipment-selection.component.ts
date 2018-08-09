@@ -13,7 +13,7 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
   private slot: string;
   public equipments: Array<Equipment> = [];
   public removeable: boolean;
-  public changeable: boolean;
+  public locked: boolean;
   @ViewChild('itemfilter') itemfilter: ElementRef;
   private filterChangedSubscription: Subscription;
 
@@ -24,11 +24,11 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
     this.slot = data.slot;
     this.equipments = data.equipments;
     this.removeable = data.removeable;
-    this.changeable = data.changeable;
+    this.locked = data.locked;
   }
 
   ngAfterViewInit() {
-    if (this.changeable) {
+    if (!this.locked) {
       this.ngzone.runOutsideAngular(() => {
         this.filterChangedSubscription = fromEvent(this.itemfilter.nativeElement, 'keyup')
           .pipe(

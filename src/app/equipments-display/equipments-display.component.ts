@@ -37,17 +37,17 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
   public openEquipmentSelectionPane(slot: string) {
     this.unsubscribe();
     const itemPresent = this.equipments[slot] ? true : false;
-    const changeable = this.equipments[slot] && this.equipments[slot].changeable ? true : false;
+    const locked = this.equipments[slot] && this.equipments[slot].locked ? true : false;
 
     this.subscription = this.unitsService.getAllowedEquipmentsForSlot$(slot)
       .subscribe((equipments: Array<Equipment>) => {
-          if (equipments.length > 0 || (this.isEquipmentRemoveable(slot) && itemPresent) || !changeable) {
+          if (equipments.length > 0 || (this.isEquipmentRemoveable(slot) && itemPresent) || locked) {
             const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
               data: {
                 slot: slot,
                 equipments: equipments,
                 removeable: (this.isEquipmentRemoveable(slot) && itemPresent),
-                changeable: changeable,
+                locked: locked,
               }
             }).afterClosed().subscribe((equipment: Equipment) => {
               if (equipment) {
