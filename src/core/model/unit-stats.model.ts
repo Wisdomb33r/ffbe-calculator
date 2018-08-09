@@ -10,6 +10,7 @@ export class UnitStats {
   public def: UnitStat;
   public spr: UnitStat;
   public evo: UnitStat;
+  public esper_percent: number;
 
   constructor(stats: any) {
     this.hp = new UnitStat(stats.hp, stats.hp_passive, stats.hp_dh, stats.hp_tdh, stats.hp_dw);
@@ -19,6 +20,7 @@ export class UnitStats {
     this.def = new UnitStat(stats.def, stats.def_passive, stats.def_dh, stats.def_tdh, stats.def_dw);
     this.spr = new UnitStat(stats.spr, stats.spr_passive, stats.spr_dh, stats.spr_tdh, stats.spr_dw);
     this.evo = new UnitStat(stats.evo, 0, 0, 0, 0);
+    this.esper_percent = stats.esper_percent;
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number, evo: number) {
@@ -81,17 +83,17 @@ export class UnitStats {
   }
 
   public defineEsperStats(esper: Esper) {
-    this.hp.value_from_esper = esper.calculateStatIncrease('hp');
+    this.hp.value_from_esper = esper.calculateStatIncrease('hp', this.esper_percent);
     this.hp.passive_esper = esper.hp_percent ? esper.hp_percent : 0;
-    this.mp.value_from_esper = esper.calculateStatIncrease('mp');
+    this.mp.value_from_esper = esper.calculateStatIncrease('mp', this.esper_percent);
     this.mp.passive_esper = esper.mp_percent ? esper.mp_percent : 0;
-    this.atk.value_from_esper = esper.calculateStatIncrease('atk');
+    this.atk.value_from_esper = esper.calculateStatIncrease('atk', this.esper_percent);
     this.atk.passive_esper = esper.atk_percent ? esper.atk_percent : 0;
-    this.mag.value_from_esper = esper.calculateStatIncrease('mag');
+    this.mag.value_from_esper = esper.calculateStatIncrease('mag', this.esper_percent);
     this.mag.passive_esper = esper.mag_percent ? esper.mag_percent : 0;
-    this.def.value_from_esper = esper.calculateStatIncrease('def');
+    this.def.value_from_esper = esper.calculateStatIncrease('def', this.esper_percent);
     this.def.passive_esper = esper.def_percent ? esper.def_percent : 0;
-    this.spr.value_from_esper = esper.calculateStatIncrease('spr');
+    this.spr.value_from_esper = esper.calculateStatIncrease('spr', this.esper_percent);
     this.spr.passive_esper = esper.spr_percent ? esper.spr_percent : 0;
   }
 
