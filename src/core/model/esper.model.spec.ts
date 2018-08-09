@@ -7,9 +7,9 @@ describe('Esper', () => {
     const esper: Esper = new Esper();
     esper.atk = 6000;
     // WHEN
-    const atkBoost = esper.calculateStatIncrease('atk');
+    const atkBoost = esper.calculateStatIncrease('atk', 10);
     // THEN
-    expect(atkBoost).toBeCloseTo(60);
+    expect(atkBoost).toBeCloseTo(66);
   });
 
   it('#calculateStatIncrease should return one hundredth of augmented esper stats with stat boost', () => {
@@ -18,7 +18,7 @@ describe('Esper', () => {
     esper.atk = 6000;
     esper.stats_percent = 20;
     // WHEN
-    const atkBoost = esper.calculateStatIncrease('atk');
+    const atkBoost = esper.calculateStatIncrease('atk', undefined);
     // THEN
     expect(atkBoost).toBeCloseTo(72);
   });
