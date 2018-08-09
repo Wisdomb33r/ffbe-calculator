@@ -29,7 +29,8 @@ export class Esper {
   public damageType: string;
   public elements: Array<number>;
 
-  public calculateStatIncrease(statName: string): number {
-    return (this.stats_percent > 0 ? 1 + this.stats_percent / 100 : 1) * this[statName] / 100;
+  public calculateStatIncrease(statName: string, esper_percent: number): number {
+    const stats_percent = (this.stats_percent > 0 ? this.stats_percent : 0) + (esper_percent > 0 ? esper_percent : 0);
+    return (1 + stats_percent / 100) * this[statName] / 100;
   }
 }
