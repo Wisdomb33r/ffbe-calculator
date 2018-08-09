@@ -11,8 +11,8 @@ export class SkillTypeFixed implements SkillType {
     return skill.isEsper ? unit.selectedBuild.esper.elements : skill.elements;
   }
 
-  isExecutingTwice(skill: Skill, unit: Unit): boolean {
-    return false;
+  getNumberOfExecutions(skill: Skill, unit: Unit): number {
+    return skill.nb ? skill.nb : 1;
   }
 
 }

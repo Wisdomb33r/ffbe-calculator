@@ -34,6 +34,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
   }
 
   private calculateHitsPower(skill: Skill, unit: Unit, result: ResultTurnDamages) {
+    const nbAttacks = skill.skillType.getNumberOfExecutions(skill, unit);
     if (skill.isEsper) {
       skill.power = unit.selectedBuild.esper.power;
     }
@@ -47,7 +48,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       if (skill.isBreakingChain) {
         result.combosIncrement = 2.5;
       }
-      if (skill.isDwBreakingChain && skill.skillType.isExecutingTwice(skill, unit)) {
+      if (skill.isDwBreakingChain && nbAttacks > 1) {
         result.combosIncrement = 2.5;
       }
       if (skill.isOutOfChain || !this.withCombo) {
@@ -64,9 +65,11 @@ export class AlgorithmFinish extends AlgorithmOffensive {
         }
         hitsPower.push(hitPower);
       }
-      if (skill.skillType.isExecutingTwice(skill, unit)) {
-        for (let j = 0; j < skill.hits; j++) {
-          hitsPower.push(skill.power * damages[j] / 100 * result.combosIncrement);
+      if (nbAttacks > 1) {
+        for (let i = 1; i < nbAttacks; i++) {
+          for (let j = 0; j < skill.hits; j++) {
+            hitsPower.push(skill.power * damages[j] / 100 * result.combosIncrement);
+          }
         }
       }
       result.hitsPower = hitsPower;

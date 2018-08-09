@@ -45,6 +45,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
   }
 
   private calculateHitsPower(skill: Skill, unit: Unit, result: ResultTurnDamages) {
+    const nbAttacks = skill.skillType.getNumberOfExecutions(skill, unit);
     if (isNullOrUndefined(skill.hits) || skill.hits < 1) {
       result.hitsPower = [0];
       result.power = 0;
@@ -68,16 +69,18 @@ export class AlgorithmChaining extends AlgorithmOffensive {
         hitsPower.push(hitPower);
         chainCombos++;
       }
-      if (skill.isBreakingChain) {
-        chainCombos = 0;
-      }
-      if (skill.skillType.isExecutingTwice(skill, unit)) {
-        for (let j = 0; j < skill.hits; j++) {
-          if (j > 0 && frames[j] - frames[j - 1] > 25) {
-            chainCombos = 0;
+      if (nbAttacks > 1) {
+        if (skill.isBreakingChain) {
+          chainCombos = 0;
+        }
+        for (let i = 1; i < nbAttacks; i++) {
+          for (let j = 0; j < skill.hits; j++) {
+            if (j > 0 && frames[j] - frames[j - 1] > 25) {
+              chainCombos = 0;
+            }
+            hitsPower.push(skill.power * damages[j] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2));
+            chainCombos++;
           }
-          hitsPower.push(skill.power * damages[j] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2));
-          chainCombos++;
         }
       }
       result.hitsPower = hitsPower;

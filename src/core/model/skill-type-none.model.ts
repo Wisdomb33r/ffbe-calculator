@@ -11,8 +11,8 @@ export class SkillTypeNone implements SkillType {
     return undefined;
   }
 
-  isExecutingTwice(skill: Skill, unit: Unit): boolean {
-    return false;
+  getNumberOfExecutions(skill: Skill, unit: Unit): number {
+    return skill.nb ? skill.nb : 1;
   }
 
 }

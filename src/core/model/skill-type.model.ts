@@ -6,5 +6,5 @@ export interface SkillType {
 
   getElements(skill: Skill, unit: Unit): Array<number>;
 
-  isExecutingTwice(skill: Skill, unit: Unit): boolean;
+  getNumberOfExecutions(skill: Skill, unit: Unit): number;
 }
