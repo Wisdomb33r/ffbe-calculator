@@ -32,7 +32,10 @@ export class SkillTypePhysical implements SkillType {
     return elements ? elements.sort() : elements;
   }
 
-  public isExecutingTwice(skill: Skill, unit: Unit): boolean {
-    return (skill.nb === 2 || unit.selectedBuild.equipments.isDualWielding()) && !skill.isLimitBreak;
+  public getNumberOfExecutions(skill: Skill, unit: Unit): number {
+    if (skill.nb > 2) {
+      return skill.nb;
+    }
+    return (skill.nb === 2 || unit.selectedBuild.equipments.isDualWielding()) && !skill.isLimitBreak ? 2 : 1;
   }
 }

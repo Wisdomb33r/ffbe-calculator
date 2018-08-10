@@ -24,7 +24,7 @@ export class SkillTypeMagical implements SkillType {
     return skill.elements ? skill.elements.sort() : skill.elements;
   }
 
-  public isExecutingTwice(skill: Skill, unit: Unit): boolean {
-    return skill.nb === 2;
+  public getNumberOfExecutions(skill: Skill, unit: Unit): number {
+    return skill.nb ? skill.nb : 1;
   }
 }
