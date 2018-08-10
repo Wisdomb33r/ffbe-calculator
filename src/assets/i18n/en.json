@@ -9,6 +9,7 @@
   "dh": "DH",
   "tdh": "TDH",
   "tdw": "TDW",
+  "lbPower": "LB power",
   "dragon": "Dragon",
   "insect": "Insect",
   "fairy": "Fairy",
@@ -21,6 +22,9 @@
   "demon": "Demon",
   "aquatic": "Aquatic",
   "bird": "Bird",
+  "killer": "killer",
+  "physical": "physical",
+  "magical": "magical",
   "menu": {
     "units": "Units",
     "languages": "Languages",

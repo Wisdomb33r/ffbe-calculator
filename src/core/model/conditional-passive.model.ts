@@ -34,6 +34,7 @@ export class ConditionalPassive {
   public magical_killers: KillerPassives;
   public partial_dw: boolean;
   public unique: boolean;
+  public lb_power: number;
 
   // transcient
   public active = false;
@@ -74,6 +75,7 @@ export class ConditionalPassive {
     }
     this.partial_dw = conditionalPassive.partial_dw ? true : false;
     this.unique = conditionalPassive.unique ? true : false;
+    this.lb_power = conditionalPassive.lb_power;
   }
 
   public getPhysicalKiller(opponentKillerType): number {

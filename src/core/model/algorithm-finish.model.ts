@@ -54,10 +54,18 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       if (skill.isOutOfChain || !this.withCombo) {
         result.combosIncrement = 1;
       }
+
+      const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
+      const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)
+        .map(p => p.lb_power ? p.lb_power : 0)
+        .reduce((val1, val2) => val1 + val2, 0);
+
       for (let i = 0; i < skill.hits; i++) {
         let hitPower = skill.power * damages[i] / 100 * result.combosIncrement;
         if (skill.isLimitBreak) {
-          const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
+          if (lbPower > 0) {
+            hitPower += lbPower * damages[i] / 100 * result.combosIncrement;
+          }
           if (lbMultiplier > 0) {
             result.lbMultiplier = lbMultiplier;
             hitPower = lbMultiplier * hitPower;

@@ -3,6 +3,7 @@ import {Equipment} from '../../core/model/equipment.model';
 import {ConditionalPassive} from '../../core/model/conditional-passive.model';
 import {UnitsService} from '../../core/services/units.service';
 import {isNullOrUndefined} from 'util';
+import {MONSTER_TYPES} from '../../core/calculator-constants';
 
 @Component({
   selector: 'app-equipment-details',
@@ -45,5 +46,9 @@ export class EquipmentDetailsComponent {
 
   public weaponTraitClicked(index: number) {
     this.weaponTraitEmitter.emit(index);
+  }
+
+  public getMonsterTypes() {
+    return MONSTER_TYPES;
   }
 }

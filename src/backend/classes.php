@@ -191,6 +191,7 @@ class ConditionalPassive {
   public $magical_killers;
   public $partial_dw;
   public $unique;
+  public $lb_power;
   function __construct($brex_unit_passive) {
     $this->id = $brex_unit_passive->id;
     $this->unit = $brex_unit_passive->unit ? $brex_unit_passive->unit->numero : null;
@@ -228,6 +229,7 @@ class ConditionalPassive {
     }
     $this->partial_dw = $brex_unit_passive->partial_dw ? true : false;
     $this->unique = $brex_unit_passive->uniq ? true : false;
+    $this->lb_power = $brex_unit_passive->lb_boost;
   }
 }
 class UnitStats {
