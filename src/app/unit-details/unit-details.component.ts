@@ -44,6 +44,10 @@ export class UnitDetailsComponent implements OnChanges {
     return this.unit.selectedBuild.esper['name_' + this.translateService.currentLang];
   }
 
+  public getEsperBuildName(esper: Esper) {
+    return esper['build_' + this.translateService.currentLang];
+  }
+
   public openEsperSelectionPane() {
     this.dialog.open(EsperSelectionComponent)
       .afterClosed().subscribe((esper: Esper) => {

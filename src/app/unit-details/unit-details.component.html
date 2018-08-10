@@ -47,8 +47,13 @@
                  (click)="displayStatDetails('spr')"></td>
         </tr>
       </table>
-      <img [src]="unit.selectedBuild.esper.icon" [alt]="getEsperName()" class="esper"
-           (click)="openEsperSelectionPane()">
+      <div class="esper">
+        <img [src]="unit.selectedBuild.esper.icon" [alt]="getEsperName()" (click)="openEsperSelectionPane()">
+        <div class="esper-info">
+          <h3>{{getEsperName(unit.selectedBuild.esper)}}</h3>
+          <p [innerHTML]="getEsperBuildName(unit.selectedBuild.esper)"></p>
+        </div>
+      </div>
     </div>
   </mat-card-content>
 </mat-card>

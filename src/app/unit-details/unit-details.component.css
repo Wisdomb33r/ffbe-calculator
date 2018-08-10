@@ -29,9 +29,41 @@ mat-card-title.unit-details-mct {
   padding-right: 10px;
 }
 
-img.esper {
+.esper {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.esper-info {
+  flex-grow: 1;
+}
+
+.esper img {
   width: 67px;
+  height: 67px;
   cursor: pointer;
+}
+
+.esper h3 {
+  font-size: 14px;
+  margin: 0;
+  background-color: #0e2d5f;
+  color: white;
+  padding: 2px 5px;
+  border-top: 1px solid #6f96bd;
+  border-right: 1px solid #505139;
+  border-bottom: 1px solid #6f96bd;
+  border-left: 1px solid #505139;
+}
+
+.esper p {
+  margin: 0;
+  font-size: 12px;
+  padding: 0 5px;
+  color: white;
+  background-color: #000c63;
+  border: 1px solid #505139;
+  border-top: 0;
 }
 
 mat-form-field {
