@@ -1,6 +1,20 @@
 import {KillerPassives} from './model/killer-passives.model';
 import {Esper} from './model/esper.model';
 
+export const MONSTER_TYPES = [
+  'dragon',
+  'insect',
+  'fairy',
+  'undead',
+  'plant',
+  'beast',
+  'human',
+  'machine',
+  'stone',
+  'demon',
+  'aquatic',
+  'bird',
+];
 export const DAGGERS = 16;
 export const KATANAS = 28;
 export const RODS = 2;

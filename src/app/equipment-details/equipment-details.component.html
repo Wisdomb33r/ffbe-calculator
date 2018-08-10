@@ -69,6 +69,24 @@
   +{{equipment.spr_dw}}% {{'spr' | translate}} {{'tdw' | translate}}
 </p>
 <p *ngIf="equipment.evo">+{{equipment.evo}}% {{'evo' | translate}}</p>
+<p *ngIf="equipment.physical_killers" class="passive">
+  <ng-container *ngFor="let type of getMonsterTypes()">
+  <span *ngIf="equipment.physical_killers[type]">+{{equipment.physical_killers[type]}}%
+    <img src="assets/equipments/1.png" alt="{{'physical' | translate}}"><img src="assets/icons/killer.png"
+                                                                             alt="{{'killer' | translate}}">
+    {{type | translate}}
+  </span>
+  </ng-container>
+</p>
+<p *ngIf="equipment.magical_killers" class="passive">
+  <ng-container *ngFor="let type of getMonsterTypes()">
+  <span *ngIf="equipment.magical_killers[type]">+{{equipment.magical_killers[type]}}%
+    <img src="assets/equipments/2.png" alt="{{'magical' | translate}}"><img src="assets/icons/killer.png"
+                                                                            alt="{{'killer' | translate}}">
+    {{type | translate}}
+  </span>
+  </ng-container>
+</p>
 
 <p *ngFor="let passive of getConditionalPassivesToDisplay()" class="passive" [class.inactive]="!passive.active">
   <span *ngIf="passive.hp">+{{passive.hp}}% {{'hp' | translate}}
@@ -101,6 +119,7 @@
   <span *ngIf="passive.spr_dh" [class.inactive]="!isDhActive()">+{{passive.spr_dh}}% {{'spr' | translate}} {{'dh' | translate}}</span>
   <span *ngIf="passive.spr_tdh" [class.inactive]="!isTdhActive()">+{{passive.spr_tdh}}% {{'spr' | translate}} {{'tdh' | translate}}</span>
   <span *ngIf="passive.spr_dw" [class.inactive]="!isDualWielding()">+{{passive.spr_dw}}% {{'spr' | translate}} {{'tdw' | translate}}</span>
+  <span *ngIf="passive.lb_power">+{{passive.lb_power}}% {{'lbPower' | translate}}</span>
 </p>
 <p *ngIf="equipment.variance_min > 0 && equipment.variance_max > 0">
   {{equipment.variance_min}}% - {{equipment.variance_max}}%
