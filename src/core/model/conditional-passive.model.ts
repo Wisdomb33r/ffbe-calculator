@@ -40,6 +40,7 @@ export class ConditionalPassive {
   public active = false;
 
   constructor(conditionalPassive: ConditionalPassive) {
+    this.id = conditionalPassive.id;
     this.unit = conditionalPassive.unit;
     this.category = conditionalPassive.category;
     this.element = conditionalPassive.element;
