@@ -16,8 +16,12 @@ export const MONSTER_TYPES = [
   'bird',
 ];
 export const DAGGERS = 16;
+export const SWORDS = 1;
+export const LSWORDS = 27;
 export const KATANAS = 28;
 export const RODS = 2;
+export const WHIPS = 34;
+export const THROWING = 24;
 export const GUNS = 15;
 export const WEAPONS_CATEGORIES: Array<number> = [
   1,

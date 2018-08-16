@@ -5,9 +5,13 @@ import {
   GUNS,
   HEAD_CATEGORIES,
   KATANAS,
+  LSWORDS,
   RODS,
   SHIELDS_CATEGORIES,
-  WEAPONS_CATEGORIES
+  SWORDS,
+  THROWING,
+  WEAPONS_CATEGORIES,
+  WHIPS
 } from '../calculator-constants';
 import {KillerPassives} from './killer-passives.model';
 
@@ -156,8 +160,7 @@ export class Equipment {
   }
 
   public isWeaponTraitPossible(): boolean {
-    return this.id < 2379 &&
-      (this.category === DAGGERS || this.category === KATANAS || this.category === RODS || this.category === GUNS
-      );
+    return (this.id < 2379 && (this.category === DAGGERS || this.category === KATANAS || this.category === RODS || this.category === GUNS))
+      || (this.id < 2464 && (this.category === SWORDS || this.category === LSWORDS || this.category === WHIPS || this.category === THROWING));
   }
 }
