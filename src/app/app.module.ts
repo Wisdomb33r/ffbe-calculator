@@ -47,6 +47,7 @@ import {ClipboardModule} from 'ngx-clipboard';
 import {AppFooterComponent} from './app-footer.component';
 import {EsperSelectionComponent} from './popup/esper-selection/esper-selection.component';
 import {CalculationEsperDamagesComponent} from './popup/calculation-esper-damages/calculation-esper-damages.component';
+import {CalculationEvokerDamagesComponent} from './popup/calculation-evoker-damages/calculation-evoker-damages.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -123,6 +124,7 @@ const appRoutes: Routes = [
     CalculationPhysicalDamagesComponent,
     CalculationMagicalDamagesComponent,
     CalculationEsperDamagesComponent,
+    CalculationEvokerDamagesComponent,
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,

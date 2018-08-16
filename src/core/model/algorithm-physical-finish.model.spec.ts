@@ -16,7 +16,7 @@ const SKILLS_TEST_DATA = '['
 const BUILD_TEST_DATA = '{"algorithmId":4,"equipments":' + EQUIPMENTS_TEST_DATA + ',"skills":' + SKILLS_TEST_DATA + '}';
 const UNIT_TEST_DATA = '{"id":9999,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
 
-describe('AlgorithmPhysicalFinish', () => {
+describe('AlgorithmFinish', () => {
 
   it('#calculate should set the result object values for a single-handed finish move', () => {
     // GIVEN
@@ -37,11 +37,11 @@ describe('AlgorithmPhysicalFinish', () => {
     expect(result.result).toBeCloseTo(63.13125);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn instanceof ResultTurnDamages).toBeTruthy();
       expect(turn['atk']).toEqual(1000);
       expect(turn['buffed_atk']).toEqual(1000);
       expect(turn['isDualWielding']).toBeFalsy();
       expect(turn['killerPassive']).toBeCloseTo(0);
+      expect(turn.levelCorrection).toBeCloseTo(2);
     });
 
     const turn1 = result['turnDamages'][0];
@@ -81,7 +81,6 @@ describe('AlgorithmPhysicalFinish', () => {
     expect(result.result).toBeCloseTo(99.83);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn instanceof ResultTurnDamages).toBeTruthy();
       expect(turn['isDualWielding']).toBeFalsy();
     });
 
@@ -96,6 +95,7 @@ describe('AlgorithmPhysicalFinish', () => {
     expect(turn1['physicalKillerDamages']).toBeCloseTo(39600000);
     expect(turn1['physicalElementalDamages']).toBeCloseTo(39600000);
     expect(turn1['hitsPower'].length).toEqual(2);
+    expect(turn1.levelCorrection).toBeCloseTo(2);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [625, 625]);
 
     const turn2 = result['turnDamages'][1];
@@ -110,6 +110,7 @@ describe('AlgorithmPhysicalFinish', () => {
     expect(turn2['physicalKillerDamages']).toBeCloseTo(117500000);
     expect(turn2['physicalElementalDamages']).toBeCloseTo(176250000);
     expect(turn2['hitsPower'].length).toEqual(1);
+    expect(turn2.levelCorrection).toBeCloseTo(1.6);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [940]);
   });
 });

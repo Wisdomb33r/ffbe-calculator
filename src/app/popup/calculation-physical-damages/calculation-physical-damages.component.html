@@ -181,10 +181,10 @@
   <p *ngIf="result.isDualWielding">
     ({{result.buffed_atk | integer}}-{{result.leftHandAtk | integer}})*({{result.buffed_atk |
     integer}}-{{result.rightHandAtk | integer}})
-    * {{result.power | integer}}% * 2
+    * {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p *ngIf="!result.isDualWielding">
-    {{result.buffed_atk | integer}}² * {{result.power | integer}}% * 2
+    {{result.buffed_atk | integer}}² * {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p>= {{result.physicalDamages | integer}}</p>
 

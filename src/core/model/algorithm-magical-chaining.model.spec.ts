@@ -48,7 +48,7 @@ const BUILD_TEST_DATA =
   }`;
 const UNIT_TEST_DATA = '{"id":9999,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
 
-describe('AlgorithmMagicalChaining', () => {
+describe('AlgorithmChaining', () => {
 
   it('#calculate should set the result object values', () => {
     // GIVEN
@@ -65,10 +65,10 @@ describe('AlgorithmMagicalChaining', () => {
     expect(result.result).toBeCloseTo(37.611);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn instanceof ResultTurnDamages).toBeTruthy();
       expect(turn['mag']).toEqual(1000);
       expect(turn['combosIncrement']).toEqual(0.1);
       expect(turn['killerPassive']).toBeCloseTo(200);
+      expect(turn.levelCorrection).toBeCloseTo(2);
     });
 
     const turn1 = result['turnDamages'][0];

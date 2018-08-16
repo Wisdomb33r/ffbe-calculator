@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{'calculation.offensive.magicalDamagesCalculation' | translate}}</h2>
+<h2 mat-dialog-title>{{'calculation.offensive.evokerDamagesCalculation' | translate}}</h2>
 <mat-dialog-content>
   <h3>{{'calculation.offensive.skillHitsPower' | translate}}</h3>
   <table>
@@ -35,10 +35,10 @@
   <h3>{{'calculation.display.calculationParameters' | translate}}</h3>
   <table>
     <tr>
-      <td>{{result.calculationStat | translate}}</td>
+      <td>{{'mag' | translate}} / {{'spr' | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result[result.calculationStat] | integer}}</td>
+      <td>{{result.mag | integer}} / {{result.spr | integer}}</td>
     </tr>
     <tr>
       <td>{{'calculation.display.groupBuff' | translate}}</td>
@@ -67,57 +67,10 @@
       <td>{{result.self_buff | integer}}%</td>
     </tr>
     <tr>
-      <td>{{'calculation.display.buffed_' + result.calculationStat | translate}}</td>
+      <td>{{'calculation.display.buffedStats' | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result['buffed_' + result.calculationStat] | integer}}</td>
-    </tr>
-    <tr>
-      <td>{{'calculation.offensive.monsterType' | translate}}</td>
-      <td></td>
-      <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>
-        <select [(ngModel)]="algorithm.opponentKillerType" (change)="calculateBuild()">
-          <option value="unknown">{{'calculation.offensive.monsterTypeUnknown' | translate}}</option>
-          <option value="human">{{'human' | translate}}</option>
-          <option value="dragon">{{'dragon' | translate}}</option>
-          <option value="demon">{{'demon' | translate}}</option>
-          <option value="beast">{{'beast' | translate}}</option>
-          <option value="machine">{{'machine' | translate}}</option>
-          <option value="undead">{{'undead' | translate}}</option>
-          <option value="plant">{{'plant' | translate}}</option>
-          <option value="bird">{{'bird' | translate}}</option>
-          <option value="insect">{{'insect' | translate}}</option>
-          <option value="fairy">{{'fairy' | translate}}</option>
-          <option value="stone">{{'stone' | translate}}</option>
-          <option value="aquatic">{{'aquatic' | translate}}</option>
-        </select><br/>
-        <select [(ngModel)]="algorithm.opponentKillerType2" (change)="calculateBuild()"
-                *ngIf="algorithm.opponentKillerType !== 'unknown'">
-          <option value="none">{{'calculation.offensive.monsterTypeNone' | translate}}</option>
-          <option value="human" *ngIf="algorithm.opponentKillerType !== 'human'">{{'human' | translate}}</option>
-          <option value="dragon" *ngIf="algorithm.opponentKillerType !== 'dragon'">{{'dragon' | translate}}</option>
-          <option value="demon" *ngIf="algorithm.opponentKillerType !== 'demon'">{{'demon' | translate}}</option>
-          <option value="beast" *ngIf="algorithm.opponentKillerType !== 'beast'">{{'beast' | translate}}</option>
-          <option value="machine" *ngIf="algorithm.opponentKillerType !== 'machine'">{{'machine' | translate}}</option>
-          <option value="undead" *ngIf="algorithm.opponentKillerType !== 'undead'">{{'undead' | translate}}</option>
-          <option value="plant" *ngIf="algorithm.opponentKillerType !== 'plant'">{{'plant' | translate}}</option>
-          <option value="bird" *ngIf="algorithm.opponentKillerType !== 'bird'">{{'bird' | translate}}</option>
-          <option value="insect" *ngIf="algorithm.opponentKillerType !== 'insect'">{{'insect' | translate}}</option>
-          <option value="fairy" *ngIf="algorithm.opponentKillerType !== 'fairy'">{{'fairy' | translate}}</option>
-          <option value="stone" *ngIf="algorithm.opponentKillerType !== 'stone'">{{'stone' | translate}}</option>
-          <option value="aquatic" *ngIf="algorithm.opponentKillerType !== 'aquatic'">{{'aquatic' | translate}}</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>{{'calculation.display.killer' | translate}}</td>
-      <td>
-        <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>
-      </td>
-      <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td *ngIf="algorithm.opponentKillerType === 'unknown'">{{result.killerPassive | integer}}%</td>
-      <td *ngIf="algorithm.opponentKillerType !== 'unknown'">{{result.killerPassive / 10 | integer}}%</td>
+      <td>{{result['buffed_mag'] | integer}} / {{result['buffed_spr'] | integer}}</td>
     </tr>
     <tr *ngIf="result.elements && result.elements.length > 0">
       <td>{{'calculation.display.groupBreak' | translate}}</td>
@@ -172,16 +125,10 @@
 
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p>
-    {{result['buffed_' + result.calculationStat] | integer}}² * {{result.power | integer}}%
-    * {{result.levelCorrection | number:'1.1-1'}}
+    ({{result['buffed_mag'] | integer}}² + {{result['buffed_psy'] | integer}}²)/2 * (1 + {{result.evo}}/100) *
+    {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p>= {{result.magicalDamages | integer}}</p>
-
-  <h3 *ngIf="result.killerPassive">{{'calculation.display.killerDamages' | translate}}</h3>
-  <p *ngIf="result.killerPassive">
-    {{result.magicalDamages | integer}} * (1+{{result.killerPassive}}%/10)
-  </p>
-  <p *ngIf="result.killerPassive">= {{result.magicalKillerDamages | integer}}</p>
 
   <h3 *ngIf="result.averageElementalResistance">{{'calculation.display.elementalResistances' | translate}}</h3>
   <p *ngIf="result.averageElementalResistance">

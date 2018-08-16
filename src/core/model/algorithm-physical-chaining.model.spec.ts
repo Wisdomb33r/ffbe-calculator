@@ -12,7 +12,7 @@ const SKILLS_TEST_DATA = '[{"category":6,"power":500,"hits":5,"frames":"10 20 30
 const BUILD_TEST_DATA = '{"algorithmId":1,"equipments":' + EQUIPMENTS_TEST_DATA + ',"skills":' + SKILLS_TEST_DATA + '}';
 const UNIT_TEST_DATA = '{"id":9999,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
 
-describe('AlgorithmPhysicalChaining', () => {
+describe('AlgorithmChaining', () => {
 
   it('#calculate should set the result object values for a single-handed chain', () => {
     // GIVEN
@@ -33,12 +33,12 @@ describe('AlgorithmPhysicalChaining', () => {
     expect(result.result).toBeCloseTo(36.376);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn instanceof ResultTurnDamages).toBeTruthy();
       expect(turn['atk']).toEqual(1000);
       expect(turn['buffed_atk']).toEqual(1000);
       expect(turn['isDualWielding']).toBeFalsy();
       expect(turn['combosIncrement']).toBeCloseTo(0.25);
       expect(turn['killerPassive']).toBeCloseTo(0);
+      expect(turn.levelCorrection).toBeCloseTo(2);
     });
 
     const turn1 = result['turnDamages'][0];
@@ -75,12 +75,12 @@ describe('AlgorithmPhysicalChaining', () => {
     expect(result.result).toBeCloseTo(190.463);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn instanceof ResultTurnDamages).toBeTruthy();
       expect(turn['atk']).toEqual(1000);
       expect(turn['buffed_atk']).toEqual(1200);
       expect(turn['isDualWielding']).toBeTruthy();
       expect(turn['combosIncrement']).toBeCloseTo(0.3);
       expect(turn['killerPassive']).toBeCloseTo(100);
+      expect(turn.levelCorrection).toBeCloseTo(2);
     });
 
     const turn1 = result['turnDamages'][0];
