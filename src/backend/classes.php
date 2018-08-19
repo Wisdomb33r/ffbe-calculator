@@ -450,6 +450,9 @@ class Skill {
       if ($brex_skill->competence->hybride) {
         $this->damages_type = 'hybrid';
       }
+      if ($brex_skill->competence->esper) {
+        $this->damages_type = 'evoker';
+      }
       if ($brex_skill->competence->elements) {
         $elements = explode ( ',', $brex_skill->competence->elements );
         if (! is_array ( $this->elements )) {
