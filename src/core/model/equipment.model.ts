@@ -161,6 +161,6 @@ export class Equipment {
 
   public isWeaponTraitPossible(): boolean {
     return (this.id < 2379 && (this.category === DAGGERS || this.category === KATANAS || this.category === RODS || this.category === GUNS))
-      || (this.id < 2464 && (this.category === SWORDS || this.category === LSWORDS || this.category === WHIPS || this.category === THROWING));
+      || (this.id < 2478 && (this.category === SWORDS || this.category === LSWORDS || this.category === WHIPS || this.category === THROWING));
   }
 }
