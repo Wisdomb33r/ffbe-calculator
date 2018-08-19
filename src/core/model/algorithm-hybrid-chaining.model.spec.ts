@@ -48,7 +48,7 @@ const BUILD_TEST_DATA =
   }`;
 const UNIT_TEST_DATA = '{"id":9999,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
 
-describe('AlgorithmHybridChaining', () => {
+describe('AlgorithmChaining', () => {
 
   it('#calculate should set the result object values for a dual-wielded chain', () => {
     // GIVEN
@@ -65,7 +65,6 @@ describe('AlgorithmHybridChaining', () => {
     expect(result.result).toBeCloseTo(60.315);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn instanceof ResultTurnDamages).toBeTruthy();
       expect(turn['atk']).toEqual(800);
       expect(turn['buffed_atk']).toEqual(1000);
       expect(turn['mag']).toEqual(1000);
@@ -73,6 +72,7 @@ describe('AlgorithmHybridChaining', () => {
       expect(turn['isDualWielding']).toBeTruthy();
       expect(turn['combosIncrement']).toBeCloseTo(0.1);
       expect(turn['killerPassive']).toBeCloseTo(50);
+      expect(turn.levelCorrection).toBeCloseTo(2);
     });
 
     const turn1 = result['turnDamages'][0];
@@ -122,7 +122,6 @@ describe('AlgorithmHybridChaining', () => {
     expect(result.result).toBeCloseTo(47.956);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn instanceof ResultTurnDamages).toBeTruthy();
       expect(turn['atk']).toEqual(800);
       expect(turn['buffed_atk']).toEqual(800);
       expect(turn['mag']).toEqual(1000);
@@ -130,6 +129,7 @@ describe('AlgorithmHybridChaining', () => {
       expect(turn['isDualWielding']).toBeFalsy();
       expect(turn['combosIncrement']).toBeCloseTo(0.45);
       expect(turn['killerPassive']).toBeCloseTo(0);
+      expect(turn.levelCorrection).toBeCloseTo(2);
     });
 
     const turn1 = result['turnDamages'][0];

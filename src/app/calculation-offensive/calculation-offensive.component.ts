@@ -6,6 +6,7 @@ import {CalculationMagicalDamagesComponent} from '../popup/calculation-magical-d
 import {ResultTurnDamages} from '../../core/model/result-turn-damages.model';
 import {AlgorithmOffensive} from '../../core/model/algorithm-offensive.model';
 import {CalculationEsperDamagesComponent} from '../popup/calculation-esper-damages/calculation-esper-damages.component';
+import {CalculationEvokerDamagesComponent} from '../popup/calculation-evoker-damages/calculation-evoker-damages.component';
 
 @Component({
   selector: 'app-calculation-offensive',
@@ -22,6 +23,16 @@ export class CalculationOffensiveComponent {
 
   public displayPhysicalDamages(index: number) {
     this.dialog.open(CalculationPhysicalDamagesComponent, {
+      data: {
+        result: this.result.turnDamages[index],
+        algorithm: this.algorithm,
+        index: index,
+      }
+    });
+  }
+
+  public displayEvokerDamages(index: number) {
+    this.dialog.open(CalculationEvokerDamagesComponent, {
       data: {
         result: this.result.turnDamages[index],
         algorithm: this.algorithm,

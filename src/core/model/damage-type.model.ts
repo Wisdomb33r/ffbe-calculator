@@ -26,6 +26,6 @@ export abstract class DamageType {
   abstract calculateFinalResult(unit: Unit, def: number, spr: number, result: ResultTurnDamages);
 
   public calculateLevelCorrection(unit: Unit, result: ResultTurnDamages) {
-    result.levelCorrection = 2;
+    result.levelCorrection = unit.rank === 7 ? 2.2 : 2;
   }
 }

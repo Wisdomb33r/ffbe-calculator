@@ -34,12 +34,13 @@ export class ResultTurnDamages extends Result {
   public averageElementalResistance: number;
 
   // damages
-  public physicalDamages;
-  public magicalDamages;
-  public physicalKillerDamages;
-  public magicalKillerDamages;
-  public physicalElementalDamages;
-  public magicalElementalDamages;
-  public physicalResult;
-  public magicalResult;
+  public damageAlgorithm: string;
+  public physicalDamages: number;
+  public magicalDamages: number;
+  public physicalKillerDamages: number;
+  public magicalKillerDamages: number;
+  public physicalElementalDamages: number;
+  public magicalElementalDamages: number;
+  public physicalResult: number;
+  public magicalResult: number;
 }
