@@ -64,9 +64,12 @@ export const GOLEM_STONE_KILLERS: Esper = getGolemWithStoneKillers();
 export const GOLEM_TANKING: Esper = getGolemWithDefensivesTraits();
 export const RAMUH_DEMON_KILLER: Esper = getRamuhWithKillers();
 export const RAMUH_EVOKE_BOOST: Esper = getRamuhWithStatsBoostAndDamageModifier();
+export const DIABOLOS_KILLERS: Esper = getDiabolosWithKillers();
+export const DIABOLOS_EVOKE_BOOST: Esper = getDiabolosWithDamageModifier();
 export const CARBUNCLE_SPR: Esper = getCarbuncleSpr();
 export const CARBUNCLE_SUPPORT: Esper = getCarbuncleSupport();
 export const TITAN: Esper = getTitan();
+export const TETRA_SYLPHID_KILLER: Esper = getTetraSylphidWithKiller();
 export const BAHAMUT: Esper = getBahamut();
 export const ESPER_BUILDS: Array<Esper> = [
   IFRIT_KILLERS,
@@ -78,9 +81,12 @@ export const ESPER_BUILDS: Array<Esper> = [
   GOLEM_TANKING,
   RAMUH_DEMON_KILLER,
   RAMUH_EVOKE_BOOST,
+  DIABOLOS_KILLERS,
+  DIABOLOS_EVOKE_BOOST,
   CARBUNCLE_SPR,
   CARBUNCLE_SUPPORT,
   TITAN,
+  TETRA_SYLPHID_KILLER,
   BAHAMUT,
 ];
 
@@ -167,15 +173,15 @@ function getShivaWithStatsBoost(): Esper {
   esper.id = 31;
   esper.name_fr = 'Shiva';
   esper.name_en = 'Shiva';
-  esper.build_fr = 'Stats boost x2<br />Bonus PSY';
-  esper.build_en = 'Stats boost x2<br />SPR bonuses';
+  esper.build_fr = 'Stats boost x2<br />Bonus PSY<br />Bonus MAG';
+  esper.build_en = 'Stats boost x2<br />SPR bonuses<br />MAG bonuses';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/003_c1dc12.png';
   esper.hp = 5800 + 900;
-  esper.mp = 7500;
+  esper.mp = 7500 + 25;
   esper.atk = 3960 + 300;
-  esper.mag = 7020;
+  esper.mag = 7020 + 300;
   esper.def = 4460;
   esper.spr = 7020 + 300;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -198,12 +204,12 @@ function getGolemWithBugKillers(): Esper {
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
-  esper.hp = 9000;
-  esper.mp = 7000;
-  esper.atk = 6200 + 400;
-  esper.mag = 3900;
-  esper.def = 8800 + 360;
-  esper.spr = 3900 + 100;
+  esper.hp = 7800;
+  esper.mp = 6000;
+  esper.atk = 5080 + 400;
+  esper.mag = 3020;
+  esper.def = 7280 + 360;
+  esper.spr = 3020 + 100;
   esper.physical_killers = new KillerPassives(0, 125, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 0;
@@ -222,13 +228,13 @@ function getGolemWithStoneKillers(): Esper {
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
-  esper.hp = 9000;
-  esper.mp = 7000;
-  esper.atk = 6200 + 100;
-  esper.mag = 3900;
-  esper.def = 8800 + 800;
+  esper.hp = 7800;
+  esper.mp = 6000;
+  esper.atk = 5080 + 135;
+  esper.mag = 3020;
+  esper.def = 7280 + 800;
   esper.def_percent = 10;
-  esper.spr = 3900 + 100;
+  esper.spr = 3020 + 100;
   esper.physical_killers = new KillerPassives(0, 50, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 75, 0, 0, 0);
   esper.power = 0;
@@ -247,13 +253,13 @@ function getGolemWithDefensivesTraits(): Esper {
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
-  esper.hp = 9000 + 1500;
+  esper.hp = 7800 + 1500;
   esper.hp_percent = 10;
-  esper.mp = 7000 + 100;
-  esper.atk = 6200;
-  esper.mag = 3900 + 15;
-  esper.def = 8800 + 360;
-  esper.spr = 3900 + 100;
+  esper.mp = 6000 + 100;
+  esper.atk = 5080;
+  esper.mag = 3020 + 15;
+  esper.def = 7280 + 500;
+  esper.spr = 3020 + 100;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 0;
@@ -272,7 +278,7 @@ function getRamuhWithKillers(): Esper {
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/005_c96c38.png';
-  esper.hp = 5200;
+  esper.hp = 4480;
   esper.mp = 8000;
   esper.atk = 3600;
   esper.mag = 7640 + 400;
@@ -282,7 +288,7 @@ function getRamuhWithKillers(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0);
   esper.power = 210;
   esper.damage_modifier = 1;
-  esper.stats_percent = 20;
+  esper.stats_percent = 10;
   esper.damageType = 'magical';
   esper.elements = [3];
   return esper;
@@ -298,7 +304,7 @@ function getRamuhWithStatsBoostAndDamageModifier(): Esper {
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/005_c96c38.png';
-  esper.hp = 5200 + 410;
+  esper.hp = 4480 + 410;
   esper.mp = 8000;
   esper.atk = 3600 + 195;
   esper.mag = 7640 + 310;
@@ -314,6 +320,58 @@ function getRamuhWithStatsBoostAndDamageModifier(): Esper {
   return esper;
 }
 
+function getDiabolosWithKillers(): Esper {
+  const esper = new Esper();
+  esper.id = 61;
+  esper.name_fr = 'Diabolos';
+  esper.name_en = 'Diabolos';
+  esper.build_fr = 'Tueur +<br />Tue-démons +';
+  esper.build_en = 'Man-Eater+<br />Demon Killer+';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/006_8886af.png';
+  esper.hp = 6680;
+  esper.mp = 7580 + 40;
+  esper.atk = 2860 + 255;
+  esper.mag = 6480 + 355;
+  esper.def = 4440;
+  esper.spr = 4360;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 125, 0, 0, 125, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 75, 0, 0, 75, 0, 0);
+  esper.power = 300;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 0;
+  esper.damageType = 'magical';
+  esper.elements = [8];
+  return esper;
+}
+
+function getDiabolosWithDamageModifier(): Esper {
+  const esper = new Esper();
+  esper.id = 62;
+  esper.name_fr = 'Diabolos';
+  esper.name_en = 'Diabolos';
+  esper.build_fr = 'Appel de démon x2<br />Stats boost x2';
+  esper.build_en = 'Demon Evocation x2<br />Stats boost x2';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/006_8886af.png';
+  esper.hp = 6680 + 500;
+  esper.mp = 7580 + 245;
+  esper.atk = 2860;
+  esper.mag = 6480 + 115;
+  esper.def = 4440;
+  esper.spr = 4360 + 160;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 300;
+  esper.damage_modifier = 2;
+  esper.stats_percent = 20;
+  esper.damageType = 'magical';
+  esper.elements = [8];
+  return esper;
+}
+
 function getCarbuncleSpr(): Esper {
   const esper = new Esper();
   esper.id = 71;
@@ -324,12 +382,12 @@ function getCarbuncleSpr(): Esper {
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/007_fea4ed.png';
-  esper.hp = 6400;
-  esper.mp = 8000 + 200;
-  esper.atk = 3000;
-  esper.mag = 5800;
-  esper.def = 8000;
-  esper.spr = 8800 + 510;
+  esper.hp = 5280;
+  esper.mp = 7200 + 200;
+  esper.atk = 2560;
+  esper.mag = 5280;
+  esper.def = 6160;
+  esper.spr = 7760 + 560;
   esper.spr_percent = 10;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -344,18 +402,18 @@ function getCarbuncleSupport(): Esper {
   esper.id = 71;
   esper.name_fr = 'Carbuncle';
   esper.name_en = 'Carbuncle';
-  esper.build_fr = 'Stats boost<br />Anti-feu X<br />Anti-foudre X<br />PV +10%';
-  esper.build_en = 'Stats boost<br />Barfiraga<br />Barthundara<br />HP +10%';
+  esper.build_fr = 'Stats boost<br />Anti-feu X<br />Anti-glace X<br />Anti-foudre X<br />PV +10%';
+  esper.build_en = 'Stats boost<br />Barfiraga<br />Barblizzaga<br />Barthundaga<br />HP +10%';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/007_fea4ed.png';
-  esper.hp = 6400 + 270;
+  esper.hp = 5280 + 270;
   esper.hp_percent = 10;
-  esper.mp = 8000 + 200;
-  esper.atk = 3000;
-  esper.mag = 5800;
-  esper.def = 8000 + 30;
-  esper.spr = 8800 + 25;
+  esper.mp = 7200 + 20;
+  esper.atk = 2560;
+  esper.mag = 5280;
+  esper.def = 6160 + 30;
+  esper.spr = 7760 + 340;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 0;
@@ -369,15 +427,15 @@ function getTitan(): Esper {
   esper.id = 91;
   esper.name_fr = 'Titan';
   esper.name_en = 'Titan';
-  esper.build_fr = 'Stats boost x2<br />Appel gigantesque x2<br />Anti-Terre X';
-  esper.build_en = 'Stats boost x2<br />Gigantic Evocation<br />Barstonga';
+  esper.build_fr = 'Stats boost x2<br />Bonus ATT';
+  esper.build_en = 'Stats boost x2<br />ATT bonuses';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/009_6e1a82.png';
   esper.hp = 8640 + 950;
   esper.mp = 3360;
-  esper.atk = 7120 + 110;
-  esper.mag = 3160 + 40;
+  esper.atk = 7120 + 490;
+  esper.mag = 3160;
   esper.def = 6280;
   esper.spr = 4320 + 200;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -390,6 +448,31 @@ function getTitan(): Esper {
   return esper;
 }
 
+function getTetraSylphidWithKiller(): Esper {
+  const esper = new Esper();
+  esper.id = 111;
+  esper.name_fr = 'Tétra-Sylphides';
+  esper.name_en = 'Tetra Sylphid';
+  esper.build_fr = 'Tue-oiseaux +<br />Stats boost';
+  esper.build_en = 'Bird Killer+<br />Stats boost';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/011_30eaf4.png';
+  esper.hp = 5960 + 400;
+  esper.mp = 6860 + 300;
+  esper.atk = 4300;
+  esper.mag = 7800 + 300;
+  esper.def = 3880 + 200;
+  esper.spr = 5040 + 130;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 125);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75);
+  esper.power = 230;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 10;
+  esper.damageType = 'magical';
+  esper.elements = [5];
+  return esper;
+}
 
 function getBahamut(): Esper {
   const esper = new Esper();
