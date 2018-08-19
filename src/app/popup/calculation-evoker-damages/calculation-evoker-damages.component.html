@@ -67,7 +67,7 @@
       <td>{{result.self_buff | integer}}%</td>
     </tr>
     <tr>
-      <td>{{'calculation.display.buffedStats' | translate}}</td>
+      <td>{{'calculation.display.buffed_magspr' | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
       <td>{{result['buffed_mag'] | integer}} / {{result['buffed_spr'] | integer}}</td>
@@ -125,7 +125,7 @@
 
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p>
-    ({{result['buffed_mag'] | integer}}² + {{result['buffed_psy'] | integer}}²)/2 * (1 + {{result.evo}}/100) *
+    ({{result.buffed_mag | integer}}² + {{result.buffed_spr | integer}}²)/2 * (1 + {{result.evo}}/100) *
     {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p>= {{result.magicalDamages | integer}}</p>

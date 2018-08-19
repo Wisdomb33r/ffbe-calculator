@@ -81,6 +81,7 @@ const appRoutes: Routes = [
     CalculationPhysicalDamagesComponent,
     CalculationMagicalDamagesComponent,
     CalculationEsperDamagesComponent,
+    CalculationEvokerDamagesComponent,
     CalculationPhysicalEhpComponent,
     CalculationMagicalEhpComponent,
     CalculationEhpComponent,
