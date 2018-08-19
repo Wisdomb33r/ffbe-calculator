@@ -62,6 +62,7 @@ export const SHIVA_STATS_BOOST: Esper = getShivaWithStatsBoost();
 export const GOLEM_BUG_KILLERS: Esper = getGolemWithBugKillers();
 export const GOLEM_STONE_KILLERS: Esper = getGolemWithStoneKillers();
 export const GOLEM_TANKING: Esper = getGolemWithDefensivesTraits();
+export const GOLEM_TANKING_2: Esper = getGolemWithDefensivesTraits2();
 export const RAMUH_DEMON_KILLER: Esper = getRamuhWithKillers();
 export const RAMUH_EVOKE_BOOST: Esper = getRamuhWithStatsBoostAndDamageModifier();
 export const DIABOLOS_KILLERS: Esper = getDiabolosWithKillers();
@@ -79,6 +80,7 @@ export const ESPER_BUILDS: Array<Esper> = [
   GOLEM_BUG_KILLERS,
   GOLEM_STONE_KILLERS,
   GOLEM_TANKING,
+  GOLEM_TANKING_2,
   RAMUH_DEMON_KILLER,
   RAMUH_EVOKE_BOOST,
   DIABOLOS_KILLERS,
@@ -268,6 +270,32 @@ function getGolemWithDefensivesTraits(): Esper {
   return esper;
 }
 
+function getGolemWithDefensivesTraits2(): Esper {
+  const esper = new Esper();
+  esper.id = 44;
+  esper.name_fr = 'Golem';
+  esper.name_en = 'Golem';
+  esper.build_fr = 'Provocation<br />PV +10%<br />DÉF +10%<br />Stats boost';
+  esper.build_en = 'Provoke<br />HP +10%<br />DEF +10%<br />Stats boost';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
+  esper.hp = 7800 + 1500;
+  esper.hp_percent = 10;
+  esper.mp = 6000;
+  esper.atk = 5080;
+  esper.mag = 3020 + 15;
+  esper.def = 7280 + 800;
+  esper.def_percent = 10;
+  esper.spr = 3020 + 100;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 0;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 10;
+  return esper;
+}
+
 function getRamuhWithKillers(): Esper {
   const esper = new Esper();
   esper.id = 51;
@@ -399,7 +427,7 @@ function getCarbuncleSpr(): Esper {
 
 function getCarbuncleSupport(): Esper {
   const esper = new Esper();
-  esper.id = 71;
+  esper.id = 72;
   esper.name_fr = 'Carbuncle';
   esper.name_en = 'Carbuncle';
   esper.build_fr = 'Stats boost<br />Anti-feu X<br />Anti-glace X<br />Anti-foudre X<br />PV +10%';
