@@ -46,6 +46,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
 
   private calculateHitsPower(skill: Skill, unit: Unit, result: ResultTurnDamages) {
     const nbAttacks = skill.skillType.getNumberOfExecutions(skill, unit);
+    result.isTurnCounting = skill.isTurnCounting;
     if (isNullOrUndefined(skill.hits) || skill.hits < 1) {
       result.hitsPower = [0];
       result.power = 0;
@@ -54,6 +55,9 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
       let chainCombos = 0;
+      if (skill.chainCombo) {
+        chainCombos = skill.chainCombo;
+      }
       const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
       const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)
         .map(p => p.lb_power ? p.lb_power : 0)

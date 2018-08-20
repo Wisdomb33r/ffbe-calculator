@@ -10,7 +10,7 @@ const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100}';
 const EQUIPMENTS_TEST_DATA = '{"right_hand":' + EQUIPMENT_TEST_DATA + '}';
 const SKILLS_TEST_DATA = '['
-  + '{"category":6,"power":500,"hits":2,"frames":"20 200","damages":"50 50","damages_type":"physical","isBreakingChain":true},'
+  + '{"category":6,"power":500,"hits":2,"frames":"20 200","damages":"50 50","damages_type":"physical","chainCombo":2.5},'
   + '{"category":6,"power":1000,"hits":1,"frames":"50","damages":"100","damages_type":"physical"}'
   + ']';
 const BUILD_TEST_DATA = '{"algorithmId":4,"equipments":' + EQUIPMENTS_TEST_DATA + ',"skills":' + SKILLS_TEST_DATA + '}';

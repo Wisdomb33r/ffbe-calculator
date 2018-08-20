@@ -38,6 +38,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     if (skill.isEsper) {
       skill.power = unit.selectedBuild.esper.power;
     }
+    result.isTurnCounting = skill.isTurnCounting;
     if (isNullOrUndefined(skill.hits) || skill.hits < 1) {
       result.hitsPower = [0];
       result.power = 0;
@@ -45,14 +46,8 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       result.combosIncrement = 4;
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
-      if (skill.isBreakingChain) {
-        result.combosIncrement = 2.5;
-      }
-      if (skill.isDwBreakingChain && nbAttacks > 1) {
-        result.combosIncrement = 2.5;
-      }
-      if (skill.isOutOfChain || !this.withCombo) {
-        result.combosIncrement = 1;
+      if (skill.chainCombo) {
+        result.combosIncrement = skill.chainCombo;
       }
 
       const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
