@@ -59,6 +59,7 @@ export class Unit {
       || this.id === 8063 // A2
       || this.id === 8159 // Rico
       || this.id === 8168 // Adam Jensen
+      || this.id === 8171 // Viktor Marchenko
       ;
   }
 
