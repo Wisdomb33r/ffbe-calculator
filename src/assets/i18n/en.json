@@ -166,6 +166,7 @@
       "hits": "Hits",
       "lbMultiplier": "LB multiplier",
       "resistances": "Resists",
+      "enemyBaseResistances": "Enemy resists",
       "elementalResistances": "Elemental resists",
       "calculationParameters": "Calculation parameters",
       "groupBuff": "Group buff",
