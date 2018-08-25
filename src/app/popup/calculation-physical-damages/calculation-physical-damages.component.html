@@ -35,10 +35,10 @@
   <h3>{{'calculation.display.calculationParameters' | translate}}</h3>
   <table>
     <tr>
-      <td>{{'atk' | translate}}</td>
+      <td>{{result.calculationStat | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result.atk | integer}}</td>
+      <td>{{result[result.calculationStat] | integer}}</td>
     </tr>
     <tr>
       <td>{{'calculation.display.groupBuff' | translate}}</td>
@@ -68,10 +68,10 @@
       <td>{{result.self_buff | integer}}%</td>
     </tr>
     <tr>
-      <td>{{'calculation.display.buffed_atk' | translate}}</td>
+      <td>{{'calculation.display.buffed_' + result.calculationStat | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result.buffed_atk | integer}}</td>
+      <td>{{result['buffed_' + result.calculationStat] | integer}}</td>
     </tr>
     <tr>
       <td>{{'calculation.offensive.monsterType' | translate}}</td>
@@ -179,12 +179,13 @@
 
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p *ngIf="result.isDualWielding">
-    ({{result.buffed_atk | integer}}-{{result.leftHandAtk | integer}})*({{result.buffed_atk |
-    integer}}-{{result.rightHandAtk | integer}})
+    ({{result['buffed_' + result.calculationStat] | integer}}-{{result.leftHandStat | integer}})*({{result['buffed_' +
+    result.calculationStat] | integer}}-{{result.rightHandStat | integer}})
     * {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p *ngIf="!result.isDualWielding">
-    {{result.buffed_atk | integer}}² * {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
+    {{result['buffed_' + result.calculationStat] | integer}}²
+    * {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p>= {{result.physicalDamages | integer}}</p>
 

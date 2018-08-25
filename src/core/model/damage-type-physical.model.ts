@@ -55,13 +55,14 @@ export class DamageTypePhysical extends DamageType {
 
   protected calculateDwDamages(unit: Unit, result: ResultTurnDamages): number {
     result.isDualWielding = true;
-    result.leftHandAtk = unit.selectedBuild.equipments.left_hand.atk;
-    result.rightHandAtk = unit.selectedBuild.equipments.right_hand.atk;
-    return (result.buffed_atk - result.leftHandAtk) * (result.buffed_atk - result.rightHandAtk);
+    result.leftHandStat = unit.selectedBuild.equipments.left_hand[this.calculationStat];
+    result.rightHandStat = unit.selectedBuild.equipments.right_hand[this.calculationStat];
+    return (result['buffed_' + this.calculationStat] - result.leftHandStat)
+      * (result['buffed_' + this.calculationStat] - result.rightHandStat);
   }
 
   protected calculateDhDamages(unit: Unit, result: ResultTurnDamages): number {
     result.isDualWielding = false;
-    return result.buffed_atk * result.buffed_atk;
+    return result['buffed_' + this.calculationStat] * result['buffed_' + this.calculationStat];
   }
 }
