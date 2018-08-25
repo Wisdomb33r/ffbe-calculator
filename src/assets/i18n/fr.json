@@ -166,6 +166,7 @@
       "hits": "Coups",
       "lbMultiplier": "Multiplicateur LB",
       "resistances": "Résistances",
+      "enemyBaseResistances": "Résist. adversaire",
       "elementalResistances": "Résistances élémentaires",
       "calculationParameters": "Paramètres du calcul",
       "groupBuff": "Bonus du groupe",

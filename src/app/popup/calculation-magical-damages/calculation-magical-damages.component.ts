@@ -48,4 +48,9 @@ export class CalculationMagicalDamagesComponent {
     this.algorithm.supportResistsBreak = this.algorithm.supportResistsBreak.map(res => +res);
     this.calculateBuild();
   }
+
+  public convertEnemyResistAndCalculate() {
+    this.algorithm.opponentResistances = this.algorithm.opponentResistances.map(res => +res);
+    this.calculateBuild();
+  }
 }
