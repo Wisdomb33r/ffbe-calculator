@@ -10,13 +10,13 @@
     </tr>
     <tr *ngIf="isChaining()">
       <td>{{'calculation.offensive.comboIncrement' | translate}}</td>
-      <td>{{result.combosIncrement | number:'1.1-1'}}</td>
+      <td>{{result.combosIncrement | number:'1.2-2'}}</td>
     </tr>
     <tr *ngIf="!isChaining()">
       <td>{{'calculation.offensive.comboMultiplier' | translate}}</td>
       <td>
         <mat-checkbox [(ngModel)]="algorithm.withCombo" (change)="calculateBuild()"></mat-checkbox>
-        {{result.combosIncrement | number:'1.1-1'}}
+        {{result.combosIncrement | number:'1.2-2'}}
       </td>
     </tr>
     <tr>
