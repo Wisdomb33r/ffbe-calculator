@@ -486,36 +486,6 @@ class EquipmentSet {
   public $materia3;
   public $materia4;
   function __construct($brex_build, $brex_build_equipments, $language) {
-    if ($brex_build->main1) {
-      $this->right_hand = new Equipment ( $brex_build->main1, $language );
-    }
-    if ($brex_build->main2) {
-      $this->left_hand = new Equipment ( $brex_build->main2, $language );
-    }
-    if ($brex_build->tete) {
-      $this->head = new Equipment ( $brex_build->tete, $language );
-    }
-    if ($brex_build->torse) {
-      $this->body = new Equipment ( $brex_build->torse, $language );
-    }
-    if ($brex_build->accessoire1) {
-      $this->accessory1 = new Equipment ( $brex_build->accessoire1, $language );
-    }
-    if ($brex_build->accessoire2) {
-      $this->accessory2 = new Equipment ( $brex_build->accessoire2, $language );
-    }
-    if ($brex_build->aptitude1) {
-      $this->materia1 = new Equipment ( $brex_build->aptitude1, $language );
-    }
-    if ($brex_build->aptitude2) {
-      $this->materia2 = new Equipment ( $brex_build->aptitude2, $language );
-    }
-    if ($brex_build->aptitude3) {
-      $this->materia3 = new Equipment ( $brex_build->aptitude3, $language );
-    }
-    if ($brex_build->aptitude4) {
-      $this->materia4 = new Equipment ( $brex_build->aptitude4, $language );
-    }
     if (count ( $brex_build_equipments )) {
       foreach ( $brex_build_equipments as $equipment ) {
         $slot = $equipment->slot->nom;
