@@ -10,8 +10,8 @@ const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100}';
 const EQUIPMENTS_TEST_DATA = '{"right_hand":' + EQUIPMENT_TEST_DATA + '}';
 const SKILLS_TEST_DATA = '['
-  + '{"category":6,"power":500,"hits":2,"frames":"20 200","damages":"50 50","damages_type":"physical","chainCombo":2.5},'
-  + '{"category":6,"power":1000,"hits":1,"frames":"50","damages":"100","damages_type":"physical"}'
+  + '{"category":6,"power":500,"hits":2,"frames":"20 200","damages":"50 50","damages_type":"physical","chainCombo":2.5,"isTurnCounting":true},'
+  + '{"category":6,"power":1000,"hits":1,"frames":"50","damages":"100","damages_type":"physical","isTurnCounting":true}'
   + ']';
 const BUILD_TEST_DATA = '{"algorithmId":4,"equipments":' + EQUIPMENTS_TEST_DATA + ',"skills":' + SKILLS_TEST_DATA + '}';
 const UNIT_TEST_DATA = '{"id":9999,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
@@ -70,7 +70,7 @@ describe('AlgorithmFinish', () => {
     unit.selectDefaultBuild();
     unit.stats.atk.total = 1000;
     unit.stats.evo.total = 50;
-    const ESPER_SKILL = '{"category":9,"power":235,"hits":1,"frames":"50","damages":"100","damages_type":"esper","elements":[1]}';
+    const ESPER_SKILL = '{"category":9,"power":235,"hits":1,"frames":"50","damages":"100","damages_type":"esper","elements":[1],"isTurnCounting":true}';
     unit.selectedBuild.skills[1] = new Skill(JSON.parse(ESPER_SKILL));
     unit.selectedBuild.esper = IFRIT_EVOKE_BOOST;
     // WHEN
