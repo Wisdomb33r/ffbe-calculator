@@ -3,8 +3,8 @@ import {Result} from './result.model';
 export class ResultTurnDamages extends Result {
   // stats
   public atk: number;
-  public leftHandAtk: number;
-  public rightHandAtk: number;
+  public leftHandStat: number;
+  public rightHandStat: number;
   public buffed_atk: number;
   public mag: number;
   public buffed_mag: number;

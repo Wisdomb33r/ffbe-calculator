@@ -8,8 +8,6 @@ import {AlgorithmOffensive} from './algorithm-offensive.model';
 
 export class AlgorithmFinish extends AlgorithmOffensive {
 
-  public withCombo = true;
-
   public calculate(unit: Unit): Result {
     const result: ResultOffensive = new ResultOffensive();
     unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));

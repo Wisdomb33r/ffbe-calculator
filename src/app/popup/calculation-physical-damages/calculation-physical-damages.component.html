@@ -10,13 +10,13 @@
     </tr>
     <tr *ngIf="isChaining()">
       <td>{{'calculation.offensive.comboIncrement' | translate}}</td>
-      <td>{{result.combosIncrement | number:'1.1-1'}}</td>
+      <td>{{result.combosIncrement | number:'1.2-2'}}</td>
     </tr>
     <tr *ngIf="!isChaining()">
       <td>{{'calculation.offensive.comboMultiplier' | translate}}</td>
       <td>
         <mat-checkbox [(ngModel)]="algorithm.withCombo" (change)="calculateBuild()"></mat-checkbox>
-        {{result.combosIncrement | number:'1.1-1'}}
+        {{result.combosIncrement | number:'1.2-2'}}
       </td>
     </tr>
     <tr>
@@ -35,10 +35,10 @@
   <h3>{{'calculation.display.calculationParameters' | translate}}</h3>
   <table>
     <tr>
-      <td>{{'atk' | translate}}</td>
+      <td>{{result.calculationStat | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result.atk | integer}}</td>
+      <td>{{result[result.calculationStat] | integer}}</td>
     </tr>
     <tr>
       <td>{{'calculation.display.groupBuff' | translate}}</td>
@@ -68,10 +68,10 @@
       <td>{{result.self_buff | integer}}%</td>
     </tr>
     <tr>
-      <td>{{'calculation.display.buffed_atk' | translate}}</td>
+      <td>{{'calculation.display.buffed_' + result.calculationStat | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result.buffed_atk | integer}}</td>
+      <td>{{result['buffed_' + result.calculationStat] | integer}}</td>
     </tr>
     <tr>
       <td>{{'calculation.offensive.monsterType' | translate}}</td>
@@ -119,6 +119,41 @@
       <td *ngIf="result.elements && result.elements.length > 0"></td>
       <td *ngIf="algorithm.opponentKillerType === 'unknown'">{{result.killerPassive | integer}}%</td>
       <td *ngIf="algorithm.opponentKillerType !== 'unknown'">{{result.killerPassive / 10 | integer}}%</td>
+    </tr>
+    <tr *ngIf="result.elements && result.elements.length > 0">
+      <td>{{'calculation.display.enemyBaseResistances' | translate}}</td>
+      <td></td>
+      <td>
+        <div *ngFor="let element of result.elements" class="resist-icon">
+          <img src="assets/resists/resist_{{element}}.png">
+        </div>
+      </td>
+      <td>
+        <div *ngFor="let element of result.elements" class="resist-label">
+          <select [(ngModel)]="algorithm.opponentResistances[element-1]" (change)="convertEnemyResistAndCalculate()">
+            <option value="300">300%</option>
+            <option value="200">200%</option>
+            <option value="100">100%</option>
+            <option value="75">75%</option>
+            <option value="50">50%</option>
+            <option value="25">25%</option>
+            <option value="0">0%</option>
+            <option value="-25">-25%</option>
+            <option value="-50">-50%</option>
+            <option value="-75">-75%</option>
+            <option value="-100">-100%</option>
+            <option value="-200">-200%</option>
+            <option value="-300">-300%</option>
+            <option value="-400">-400%</option>
+            <option value="-500">-500%</option>
+            <option value="-600">-600%</option>
+            <option value="-700">-700%</option>
+            <option value="-800">-800%</option>
+            <option value="-900">-900%</option>
+            <option value="-1000">-1000%</option>
+          </select>
+        </div>
+      </td>
     </tr>
     <tr *ngIf="result.elements && result.elements.length > 0">
       <td>{{'calculation.display.groupBreak' | translate}}</td>
@@ -179,12 +214,13 @@
 
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p *ngIf="result.isDualWielding">
-    ({{result.buffed_atk | integer}}-{{result.leftHandAtk | integer}})*({{result.buffed_atk |
-    integer}}-{{result.rightHandAtk | integer}})
+    ({{result['buffed_' + result.calculationStat] | integer}}-{{result.leftHandStat | integer}})*({{result['buffed_' +
+    result.calculationStat] | integer}}-{{result.rightHandStat | integer}})
     * {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p *ngIf="!result.isDualWielding">
-    {{result.buffed_atk | integer}}² * {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
+    {{result['buffed_' + result.calculationStat] | integer}}²
+    * {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p>= {{result.physicalDamages | integer}}</p>
 
