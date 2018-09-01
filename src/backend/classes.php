@@ -369,8 +369,8 @@ class Skill {
   public $damages_type;
   public $calculation_stat;
   public $isBreakingChain;
-  public $isDwBreakingChain;
-  public $isOutOfChain;
+  public $isTurnCounting;
+  public $chainCombo;
   public $resists_break;
   public $elements;
   public $atk_buff;
@@ -388,8 +388,8 @@ class Skill {
     $this->nb = $brex_skill->nb ? $brex_skill->nb : 1;
     $this->elements = $brex_skill->elements ? explode ( ',', $brex_skill->elements ) : null;
     $this->isBreakingChain = $brex_skill->breaking_chain ? true : false;
-    $this->isDwBreakingChain = $brex_skill->dw_breaking_chain ? true : false;
-    $this->isOutOfChain = $brex_skill->out_of_chain ? true : false;
+    $this->isTurnCounting = $brex_skill->not_turn_counting == 1 ? false : true;
+    $this->chainCombo = $brex_skill->chain_combo;
     $this->atk_buff = $brex_skill->att_buff;
     $this->mag_buff = $brex_skill->mag_buff;
     $this->def_buff = $brex_skill->def_buff;

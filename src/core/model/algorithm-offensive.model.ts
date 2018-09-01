@@ -6,7 +6,6 @@ import {Result} from './result.model';
 
 export abstract class AlgorithmOffensive implements Algorithm {
 
-  public withCombo = true;
   public isKillerActive = true;
   public opponentKillerType = 'unknown';
   public opponentKillerType2 = 'none';

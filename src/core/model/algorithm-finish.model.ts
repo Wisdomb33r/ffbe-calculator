@@ -13,14 +13,16 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
     result.result = result.turnDamages
       .map(r => r.result)
-      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.length;
+      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.filter((turn: ResultTurnDamages) => turn.isTurnCounting).length;
     return result;
   }
 
   private calculateTurn(skill: Skill, unit: Unit): ResultTurnDamages {
     const result: ResultTurnDamages = new ResultTurnDamages();
+    result.skill = skill;
     skill.damageType.calculateLevelCorrection(unit, result);
     skill.damageType.calculateBuffs(unit, skill, this.isSupportBuffing, this.supportBuff, result);
+    this.calculateComboMultiplier(skill, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
     const killerValue = skill.skillType.getActiveKillers(unit, this.opponentKillerType, this.opponentKillerType2);
@@ -29,6 +31,15 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
     skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);
     return result;
+  }
+
+  private calculateComboMultiplier(skill: Skill, result: ResultTurnDamages) {
+    result.combosIncrement = 4;
+    if (skill.chainCombo) {
+      result.combosIncrement = +skill.chainCombo;
+    } else {
+      skill.chainCombo = '4.0';
+    }
   }
 
   private calculateHitsPower(skill: Skill, unit: Unit, result: ResultTurnDamages) {
@@ -41,12 +52,8 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       result.hitsPower = [0];
       result.power = 0;
     } else {
-      result.combosIncrement = 4;
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
-      if (skill.chainCombo) {
-        result.combosIncrement = skill.chainCombo;
-      }
 
       const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
       const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)

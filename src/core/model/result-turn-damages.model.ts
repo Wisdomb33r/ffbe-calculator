@@ -1,6 +1,9 @@
 import {Result} from './result.model';
+import {Skill} from './skill.model';
 
 export class ResultTurnDamages extends Result {
+  public skill: Skill;
+
   // stats
   public atk: number;
   public leftHandStat: number;
