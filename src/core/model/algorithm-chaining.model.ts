@@ -13,12 +13,13 @@ export class AlgorithmChaining extends AlgorithmOffensive {
     unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
     result.result = result.turnDamages
       .map(r => r.result)
-      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.length;
+      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.filter((turn: ResultTurnDamages) => turn.isTurnCounting).length;
     return result;
   }
 
   private calculateTurn(skill: Skill, unit: Unit): ResultTurnDamages {
     const result: ResultTurnDamages = new ResultTurnDamages();
+    result.skill = skill;
     skill.damageType.calculateLevelCorrection(unit, result);
     skill.damageType.calculateBuffs(unit, skill, this.isSupportBuffing, this.supportBuff, result);
     this.calculateCombosIncrement(skill, unit, result);
@@ -46,6 +47,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
 
   private calculateHitsPower(skill: Skill, unit: Unit, result: ResultTurnDamages) {
     const nbAttacks = skill.skillType.getNumberOfExecutions(skill, unit);
+    result.isTurnCounting = skill.isTurnCounting;
     if (isNullOrUndefined(skill.hits) || skill.hits < 1) {
       result.hitsPower = [0];
       result.power = 0;
@@ -54,6 +56,8 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
       let chainCombos = 0;
+      const baseCombo: number = skill.chainCombo ? +skill.chainCombo : 0;
+
       const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
       const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)
         .map(p => p.lb_power ? p.lb_power : 0)
@@ -62,7 +66,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
         if (i > 0 && frames[i] - frames[i - 1] > 25) {
           chainCombos = 0;
         }
-        let hitPower = skill.power * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
+        let hitPower = skill.power * damages[i] / 100 * Math.min(4, 1 + baseCombo + chainCombos * result.combosIncrement * 2);
         if (skill.isLimitBreak) {
           if (lbPower > 0) {
             hitPower += lbPower * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);

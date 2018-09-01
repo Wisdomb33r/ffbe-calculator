@@ -1,6 +1,9 @@
 import {Result} from './result.model';
+import {Skill} from './skill.model';
 
 export class ResultTurnDamages extends Result {
+  public skill: Skill;
+
   // stats
   public atk: number;
   public leftHandStat: number;
@@ -26,6 +29,7 @@ export class ResultTurnDamages extends Result {
 
   // skill behavior
   public isDualWielding: boolean;
+  public isTurnCounting: boolean;
   public averageWeaponVariance: number;
   public finalVariance: number;
   public killerPassive: number;

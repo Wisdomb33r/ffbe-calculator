@@ -15,8 +15,15 @@
     <tr *ngIf="!isChaining()">
       <td>{{'calculation.offensive.comboMultiplier' | translate}}</td>
       <td>
-        <mat-checkbox [(ngModel)]="algorithm.withCombo" (change)="calculateBuild()"></mat-checkbox>
-        {{result.combosIncrement | number:'1.2-2'}}
+        <select [(ngModel)]="result.skill.chainCombo" (change)="calculateBuild()">
+          <option value="4.0">4.0</option>
+          <option value="3.5">3.5</option>
+          <option value="3.0">3.0</option>
+          <option value="2.5">2.5</option>
+          <option value="2.0">2.0</option>
+          <option value="1.5">1.5</option>
+          <option value="1.0">1.0</option>
+        </select>
       </td>
     </tr>
     <tr>

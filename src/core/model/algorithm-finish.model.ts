@@ -13,14 +13,16 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
     result.result = result.turnDamages
       .map(r => r.result)
-      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.length;
+      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.filter((turn: ResultTurnDamages) => turn.isTurnCounting).length;
     return result;
   }
 
   private calculateTurn(skill: Skill, unit: Unit): ResultTurnDamages {
     const result: ResultTurnDamages = new ResultTurnDamages();
+    result.skill = skill;
     skill.damageType.calculateLevelCorrection(unit, result);
     skill.damageType.calculateBuffs(unit, skill, this.isSupportBuffing, this.supportBuff, result);
+    this.calculateComboMultiplier(skill, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
     const killerValue = skill.skillType.getActiveKillers(unit, this.opponentKillerType, this.opponentKillerType2);
@@ -31,27 +33,27 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     return result;
   }
 
+  private calculateComboMultiplier(skill: Skill, result: ResultTurnDamages) {
+    result.combosIncrement = 4;
+    if (skill.chainCombo) {
+      result.combosIncrement = +skill.chainCombo;
+    } else {
+      skill.chainCombo = '4.0';
+    }
+  }
+
   private calculateHitsPower(skill: Skill, unit: Unit, result: ResultTurnDamages) {
     const nbAttacks = skill.skillType.getNumberOfExecutions(skill, unit);
     if (skill.isEsper) {
       skill.power = unit.selectedBuild.esper.power;
     }
+    result.isTurnCounting = skill.isTurnCounting;
     if (isNullOrUndefined(skill.hits) || skill.hits < 1) {
       result.hitsPower = [0];
       result.power = 0;
     } else {
-      result.combosIncrement = 4;
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
-      if (skill.isBreakingChain) {
-        result.combosIncrement = 2.5;
-      }
-      if (skill.isDwBreakingChain && nbAttacks > 1) {
-        result.combosIncrement = 2.5;
-      }
-      if (skill.isOutOfChain || !this.withCombo) {
-        result.combosIncrement = 1;
-      }
 
       const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
       const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)

@@ -65,4 +65,8 @@ export class CalculationOffensiveComponent {
     return this.result.turnDamages.some((result: ResultTurnDamages) => result.physicalResult > 0)
       && this.result.turnDamages.some((result: ResultTurnDamages) => result.magicalResult > 0);
   }
+
+  public getTurnCount(index: number): number {
+    return this.result.getTurnCount(index);
+  }
 }

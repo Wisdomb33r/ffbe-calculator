@@ -39,8 +39,8 @@ const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"mag":100,"spr":50}';
 const EQUIPMENTS_TEST_DATA = '{"right_hand":' + EQUIPMENT_TEST_DATA + ',"accessory1":' + EQUIPMENT_TEST_DATA + '}';
 const SKILLS_TEST_DATA =
   `[
-    {"category":9,"power":2000,"hits":5,"frames":"10 20 30 40 50","damages":"10 20 30 30 10","damages_type":"evoker"},
-    {"category":7,"power":100,"hits":4,"frames":"10 20 30 40","damages":"10 20 30 40","damages_type":"magical"}
+    {"category":9,"power":2000,"hits":5,"frames":"10 20 30 40 50","damages":"10 20 30 30 10","damages_type":"evoker","isTurnCounting":true},
+    {"category":7,"power":100,"hits":4,"frames":"10 20 30 40","damages":"10 20 30 40","damages_type":"magical","isTurnCounting":true}
   ]`;
 const BUILD_TEST_DATA =
   `{

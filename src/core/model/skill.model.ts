@@ -2,6 +2,7 @@ import {SkillType} from './skill-type.model';
 import {SkillTypeFactory} from './skill-type-factory.model';
 import {DamageType} from './damage-type.model';
 import {DamageTypeFactory} from './damage-type-factory.model';
+import {isNullOrUndefined} from 'util';
 
 export class Skill {
   // from backend
@@ -19,8 +20,8 @@ export class Skill {
   public damages_type: string;
   public calculation_stat: string;
   public isBreakingChain: boolean;
-  public isDwBreakingChain: boolean;
-  public isOutOfChain: boolean;
+  public isTurnCounting: boolean;
+  public chainCombo: string;
   public atk_buff: number;
   public mag_buff: number;
   public def_buff: number;
@@ -47,8 +48,8 @@ export class Skill {
     this.damages_type = skill.damages_type;
     this.calculation_stat = skill.calculation_stat;
     this.isBreakingChain = skill.isBreakingChain;
-    this.isDwBreakingChain = skill.isDwBreakingChain;
-    this.isOutOfChain = skill.isOutOfChain;
+    this.isTurnCounting = skill.isTurnCounting;
+    this.chainCombo = this.formatChainCombo(skill.chainCombo);
     this.atk_buff = skill.atk_buff;
     this.mag_buff = skill.mag_buff;
     this.def_buff = skill.def_buff;
@@ -57,5 +58,15 @@ export class Skill {
     this.elements = skill.elements;
     this.skillType = SkillTypeFactory.getInstance(this.category);
     this.damageType = DamageTypeFactory.getInstance(this.damages_type, this.calculation_stat);
+  }
+
+  private formatChainCombo(chainCombo: string) {
+    if (!isNullOrUndefined(chainCombo)) {
+      const chainComboString = '' + chainCombo;
+      if (chainComboString.search('.') === -1) {
+        return chainCombo + '.0';
+      }
+    }
+    return chainCombo;
   }
 }
