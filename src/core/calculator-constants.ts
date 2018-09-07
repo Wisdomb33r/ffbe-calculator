@@ -138,7 +138,7 @@ function getIfritWithStatsBoost(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 235;
   esper.damage_modifier = 1;
-  esper.stats_percent = 20;
+  esper.stats_percent = 40;
   esper.damageType = 'physical';
   esper.elements = [1];
   return esper;
@@ -190,7 +190,7 @@ function getShivaWithStatsBoost(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 190;
   esper.damage_modifier = 2;
-  esper.stats_percent = 20;
+  esper.stats_percent = 40;
   esper.damageType = 'magical';
   esper.elements = [2];
   return esper;
@@ -216,7 +216,7 @@ function getGolemWithBugKillers(): Esper {
   esper.magical_killers = new KillerPassives(0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 0;
   esper.damage_modifier = 1;
-  esper.stats_percent = 10;
+  esper.stats_percent = 20;
   return esper;
 }
 
@@ -241,7 +241,7 @@ function getGolemWithStoneKillers(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 75, 0, 0, 0);
   esper.power = 0;
   esper.damage_modifier = 1;
-  esper.stats_percent = 10;
+  esper.stats_percent = 20;
   return esper;
 }
 
@@ -266,7 +266,7 @@ function getGolemWithDefensivesTraits(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 0;
   esper.damage_modifier = 1;
-  esper.stats_percent = 20;
+  esper.stats_percent = 40;
   return esper;
 }
 
@@ -292,7 +292,7 @@ function getGolemWithDefensivesTraits2(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 0;
   esper.damage_modifier = 1;
-  esper.stats_percent = 10;
+  esper.stats_percent = 20;
   return esper;
 }
 
@@ -316,7 +316,7 @@ function getRamuhWithKillers(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 50, 50, 0, 0);
   esper.power = 210;
   esper.damage_modifier = 1;
-  esper.stats_percent = 10;
+  esper.stats_percent = 20;
   esper.damageType = 'magical';
   esper.elements = [3];
   return esper;
@@ -342,7 +342,7 @@ function getRamuhWithStatsBoostAndDamageModifier(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 210;
   esper.damage_modifier = 2;
-  esper.stats_percent = 10;
+  esper.stats_percent = 20;
   esper.damageType = 'magical';
   esper.elements = [3];
   return esper;
@@ -394,7 +394,7 @@ function getDiabolosWithDamageModifier(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 300;
   esper.damage_modifier = 2;
-  esper.stats_percent = 20;
+  esper.stats_percent = 40;
   esper.damageType = 'magical';
   esper.elements = [8];
   return esper;
@@ -421,7 +421,7 @@ function getCarbuncleSpr(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 0;
   esper.damage_modifier = 1;
-  esper.stats_percent = 20;
+  esper.stats_percent = 40;
   return esper;
 }
 
@@ -470,7 +470,7 @@ function getTitan(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 220;
   esper.damage_modifier = 2;
-  esper.stats_percent = 20;
+  esper.stats_percent = 40;
   esper.damageType = 'physical';
   esper.elements = [6];
   return esper;
@@ -496,7 +496,7 @@ function getTetraSylphidWithKiller(): Esper {
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75);
   esper.power = 230;
   esper.damage_modifier = 1;
-  esper.stats_percent = 10;
+  esper.stats_percent = 20;
   esper.damageType = 'magical';
   esper.elements = [5];
   return esper;
