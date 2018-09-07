@@ -58,6 +58,7 @@ export class UnitsService {
     if (equipment.id === -1) {
       this.selectedUnit.selectedBuild.equipments[slot] = null;
     } else {
+      this.unequipWeaponEnhancementsIfWeaponTypeChange(slot, equipment);
       if (slot === 'right_hand' && equipment.isTwoHanded()) {
         this.selectedUnit.selectedBuild.equipments['left_hand'] = null;
       }
@@ -72,6 +73,19 @@ export class UnitsService {
       this.getEquipments()['rh_trait3'] = null;
     }
     if (!this.getEquipments().left_hand || !this.getEquipments().left_hand.isWeaponTraitPossible()) {
+      this.getEquipments()['lh_trait1'] = null;
+      this.getEquipments()['lh_trait2'] = null;
+      this.getEquipments()['lh_trait3'] = null;
+    }
+  }
+
+  private unequipWeaponEnhancementsIfWeaponTypeChange(slot: string, equipment: Equipment) {
+    if (this.getEquipments().right_hand && slot === 'right_hand' && equipment.category !== this.getEquipments().right_hand.category) {
+      this.getEquipments()['rh_trait1'] = null;
+      this.getEquipments()['rh_trait2'] = null;
+      this.getEquipments()['rh_trait3'] = null;
+    }
+    if (this.getEquipments().left_hand && slot === 'left_hand' && equipment.category !== this.getEquipments().left_hand.category) {
       this.getEquipments()['lh_trait1'] = null;
       this.getEquipments()['lh_trait2'] = null;
       this.getEquipments()['lh_trait3'] = null;
