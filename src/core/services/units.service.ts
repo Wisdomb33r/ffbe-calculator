@@ -11,6 +11,7 @@ import {EquipmentSet} from '../model/equipment-set.model';
 import {isNullOrUndefined} from 'util';
 import {Build} from '../model/build.model';
 import {Esper} from '../model/esper.model';
+import {SPECIAL_WEAPON_ENHANCEMENTS} from '../calculator-constants';
 
 @Injectable()
 export class UnitsService {
@@ -81,14 +82,26 @@ export class UnitsService {
 
   private unequipWeaponEnhancementsIfWeaponTypeChange(slot: string, equipment: Equipment) {
     if (this.getEquipments().right_hand && slot === 'right_hand' && equipment.category !== this.getEquipments().right_hand.category) {
-      this.getEquipments()['rh_trait1'] = null;
-      this.getEquipments()['rh_trait2'] = null;
-      this.getEquipments()['rh_trait3'] = null;
+      if (this.getEquipments().rh_trait1 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().rh_trait1.id) > -1) {
+        this.getEquipments().rh_trait1 = null;
+      }
+      if (this.getEquipments().rh_trait2 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().rh_trait2.id) > -1) {
+        this.getEquipments().rh_trait2 = null;
+      }
+      if (this.getEquipments().rh_trait3 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().rh_trait3.id) > -1) {
+        this.getEquipments().rh_trait3 = null;
+      }
     }
     if (this.getEquipments().left_hand && slot === 'left_hand' && equipment.category !== this.getEquipments().left_hand.category) {
-      this.getEquipments()['lh_trait1'] = null;
-      this.getEquipments()['lh_trait2'] = null;
-      this.getEquipments()['lh_trait3'] = null;
+      if (this.getEquipments().lh_trait1 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().lh_trait1.id) > -1) {
+        this.getEquipments().lh_trait1 = null;
+      }
+      if (this.getEquipments().lh_trait2 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().lh_trait2.id) > -1) {
+        this.getEquipments().lh_trait2 = null;
+      }
+      if (this.getEquipments().lh_trait3 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().lh_trait3.id) > -1) {
+        this.getEquipments().lh_trait3 = null;
+      }
     }
   }
 

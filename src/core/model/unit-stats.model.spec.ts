@@ -150,12 +150,12 @@ describe('UnitStats', () => {
     // WHEN
     unitStats.defineEsperStats(GOLEM_TANKING);
     // THEN
-    expect(unitStats.hp.value_from_esper).toBeCloseTo(111.6);
-    expect(unitStats.mp.value_from_esper).toBeCloseTo(73.2);
-    expect(unitStats.atk.value_from_esper).toBeCloseTo(60.96);
-    expect(unitStats.mag.value_from_esper).toBeCloseTo(36.42);
-    expect(unitStats.def.value_from_esper).toBeCloseTo(93.36);
-    expect(unitStats.spr.value_from_esper).toBeCloseTo(37.44);
+    expect(unitStats.hp.value_from_esper).toBeCloseTo(130.2);
+    expect(unitStats.mp.value_from_esper).toBeCloseTo(85.4);
+    expect(unitStats.atk.value_from_esper).toBeCloseTo(71.12);
+    expect(unitStats.mag.value_from_esper).toBeCloseTo(42.49);
+    expect(unitStats.def.value_from_esper).toBeCloseTo(108.92);
+    expect(unitStats.spr.value_from_esper).toBeCloseTo(43.68);
     expect(unitStats.hp.passive_esper).toEqual(10);
   });
 

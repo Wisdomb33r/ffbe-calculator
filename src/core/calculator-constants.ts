@@ -55,6 +55,16 @@ export const BODY_CATEGORIES: Array<number> = [
   14,
   35,
 ];
+export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
+  2317, // daggers
+  2461, // swords
+  2462, // larges swords
+  2318, // katanas
+  2319, // rods
+  2463, // whips
+  2464, // throwing weapons
+  2320, // guns
+];
 export const IFRIT_KILLERS: Esper = getIfritWithKillers();
 export const IFRIT_STATS_BOOST: Esper = getIfritWithStatsBoost();
 export const IFRIT_EVOKE_BOOST: Esper = getIfritWithDamageModifier();
