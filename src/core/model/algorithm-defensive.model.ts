@@ -58,7 +58,7 @@ export class AlgorithmDefensive implements Algorithm {
       result.selfDefBuff = 150;
       result.selfSprBuff = 150;
     }
-    if (unit.id === 955) { // Awakened Rain
+    if (unit.id === 955 || unit.id === 1136) { // Awakened Rain
       result.selfDefBuff = 200;
       result.selfSprBuff = 200;
     }
