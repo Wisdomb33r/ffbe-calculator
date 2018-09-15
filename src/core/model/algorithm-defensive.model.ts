@@ -62,7 +62,7 @@ export class AlgorithmDefensive implements Algorithm {
       result.selfDefBuff = 200;
       result.selfSprBuff = 200;
     }
-    if (unit.id === 955 || unit.id === 8016) {
+    if (unit.id === 955 || unit.id === 8016 || unit.id === 1136) {
       if (result.selfDefBuff > this.supportBuff) {
         result.buffedDef = result.def + unit.stats.def.base * result.selfDefBuff / 100;
       }
