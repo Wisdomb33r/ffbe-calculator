@@ -30,6 +30,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     $values ['creation_datemins'] = date ( 'i' );
     $values ['nom'] = 'unit';
     $values ['identity'] = $_GET ['id'];
+    $values ['language'] = $language;
     $brex_calculator_count = new brex_calculator_count ( $values );
     $brex_calculator_count->store ();
     
