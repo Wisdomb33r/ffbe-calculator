@@ -39,6 +39,12 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     if ($weapon_category == '2') {
       $categories [] = 68; // rods
     }
+    if ($weapon_category == '6') {
+      $categories [] = 69; // bows
+    }
+    if ($weapon_category == '32') {
+      $categories [] = 72; // spears
+    }
     if ($weapon_category == '34') {
       $categories [] = 74; // whips
     }
@@ -47,6 +53,12 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     }
     if ($weapon_category == '15') {
       $categories [] = 76; // guns
+    }
+    if ($weapon_category == '26') {
+      $categories [] = 77; // maces
+    }
+    if ($weapon_category == '18') {
+      $categories [] = 78; // claws
     }
     
     $objects = brex_objet_extended::finderByCategoriesForCalculator ( $categories );
