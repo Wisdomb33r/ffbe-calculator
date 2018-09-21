@@ -51,8 +51,10 @@ export class Unit {
       || this.id === 969 // lightning 7*
       || this.id === 319 // luneth 6*
       || this.id === 974 // luneth 7*
-      || this.id === 590 // onion knight
+      || this.id === 590 // onion knight 6*
+      || this.id === 988 // onion knight 7*
       || this.id === 639 // nyx
+      || this.id === 1122 // nyx 7*
       || this.id === 775 // 2B
       || this.id === 844 // CG Jake
       || this.id === 942 // CG Raegen
@@ -61,6 +63,7 @@ export class Unit {
       || this.id === 8159 // Rico
       || this.id === 8168 // Adam Jensen
       || this.id === 8171 // Viktor Marchenko
+      || this.id === 8174 // Aloha Lasswell
       ;
   }
 
