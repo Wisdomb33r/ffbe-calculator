@@ -20,9 +20,13 @@ export const SWORDS = 1;
 export const LSWORDS = 27;
 export const KATANAS = 28;
 export const RODS = 2;
+export const BOWS = 6;
+export const SPEARS = 32;
 export const WHIPS = 34;
 export const THROWING = 24;
 export const GUNS = 15;
+export const MACES = 26;
+export const CLAWS = 18;
 export const WEAPONS_CATEGORIES: Array<number> = [
   1,
   2,
@@ -61,9 +65,13 @@ export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
   2462, // larges swords
   2318, // katanas
   2319, // rods
+  2620, // bows
+  2623, // spears
   2463, // whips
   2464, // throwing weapons
   2320, // guns
+  2621, // maces
+  2622, // claws
 ];
 export const IFRIT_KILLERS: Esper = getIfritWithKillers();
 export const IFRIT_STATS_BOOST: Esper = getIfritWithStatsBoost();
