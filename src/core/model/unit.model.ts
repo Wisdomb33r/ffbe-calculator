@@ -59,6 +59,7 @@ export class Unit {
       || this.id === 844 // CG Jake
       || this.id === 942 // CG Raegen
       || this.id === 1004 // Estark
+      || (this.id === 8053 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1305) // Reberta
       || this.id === 8063 // A2
       || this.id === 8159 // Rico
       || this.id === 8168 // Adam Jensen
