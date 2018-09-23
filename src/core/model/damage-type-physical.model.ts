@@ -62,6 +62,24 @@ export class DamageTypePhysical extends DamageType {
       result.leftHandStat *= 1 + dw_bonus / 100;
       result.rightHandStat *= 1 + dw_bonus / 100;
     }
+    if (result.skill.isLimitBreak) {
+      return this.calculateDwLbDamages(unit, result);
+    } else {
+      return this.calculateDwAbilityDamages(unit, result);
+    }
+  }
+
+  protected calculateDwLbDamages(unit, result): number {
+    if (result.leftHandStat > result.rightHandStat) {
+      result.leftHandStat = result.rightHandStat;
+    } else {
+      result.rightHandStat = result.leftHandStat;
+    }
+    return (result['buffed_' + this.calculationStat] - result.leftHandStat)
+      * (result['buffed_' + this.calculationStat] - result.rightHandStat);
+  }
+
+  protected calculateDwAbilityDamages(unit: Unit, result: ResultTurnDamages): number {
     return (result['buffed_' + this.calculationStat] - result.leftHandStat)
       * (result['buffed_' + this.calculationStat] - result.rightHandStat);
   }
