@@ -57,6 +57,11 @@ export class DamageTypePhysical extends DamageType {
     result.isDualWielding = true;
     result.leftHandStat = unit.selectedBuild.equipments.left_hand[this.calculationStat];
     result.rightHandStat = unit.selectedBuild.equipments.right_hand[this.calculationStat];
+    const dw_bonus = unit.stats[this.calculationStat]['dw'] + unit.stats[this.calculationStat]['dw_equipment'];
+    if (dw_bonus) {
+      result.leftHandStat *= 1 + dw_bonus / 100;
+      result.rightHandStat *= 1 + dw_bonus / 100;
+    }
     return (result['buffed_' + this.calculationStat] - result.leftHandStat)
       * (result['buffed_' + this.calculationStat] - result.rightHandStat);
   }
