@@ -67,7 +67,7 @@ describe('AlgorithmFinish', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(47.57);
+    expect(result.result).toBeCloseTo(47.37);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn.mag).toEqual(500);
@@ -92,11 +92,11 @@ describe('AlgorithmFinish', () => {
     expect(turn2['evo']).toBeUndefined();
     expect(turn2['spr']).toBeUndefined();
     expect(turn2['buffed_spr']).toBeUndefined();
-    expect(turn2['killerPassive']).toBeCloseTo(200); // 100 are from esper
+    expect(turn2['killerPassive']).toBeCloseTo(100);
     expect(turn2['power']).toBeCloseTo(400);
     expect(turn2['magicalDamages']).toBeCloseTo(4312000);
-    expect(turn2['magicalKillerDamages']).toBeCloseTo(5174400);
-    expect(turn2['magicalElementalDamages']).toBeCloseTo(5174400);
+    expect(turn2['magicalKillerDamages']).toBeCloseTo(4743200);
+    expect(turn2['magicalElementalDamages']).toBeCloseTo(4743200);
     expect(turn2['hitsPower'].length).toEqual(4);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [40, 80, 120, 160]);
   });
