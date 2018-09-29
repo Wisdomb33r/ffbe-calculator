@@ -89,6 +89,7 @@ export const CARBUNCLE_SPR: Esper = getCarbuncleSpr();
 export const CARBUNCLE_SUPPORT: Esper = getCarbuncleSupport();
 export const TITAN: Esper = getTitan();
 export const TETRA_SYLPHID_KILLER: Esper = getTetraSylphidWithKiller();
+export const FENRIR: Esper = getFenrir();
 export const BAHAMUT: Esper = getBahamut();
 export const ESPER_BUILDS: Array<Esper> = [
   IFRIT_KILLERS,
@@ -108,6 +109,7 @@ export const ESPER_BUILDS: Array<Esper> = [
   TITAN,
   TETRA_SYLPHID_KILLER,
   BAHAMUT,
+  FENRIR,
 ];
 
 function getIfritWithKillers(): Esper {
@@ -542,5 +544,29 @@ function getBahamut(): Esper {
   esper.damage_modifier = 1;
   esper.stats_percent = 0;
   esper.damageType = 'magical';
+  return esper;
+}
+
+function getFenrir(): Esper {
+  const esper = new Esper();
+  esper.id = 131;
+  esper.name_fr = 'Fenrir';
+  esper.name_en = 'Fenrir';
+  esper.build_fr = 'Stats boost x2<br />Bonus ATT / MAG';
+  esper.build_en = 'Stats boost x2<br />ATK / MAG bonuses';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/013_3e4b8e.png';
+  esper.hp = 6800 + 300;
+  esper.mp = 4880 + 300;
+  esper.atk = 7320 + 200;
+  esper.mag = 7320 + 200;
+  esper.def = 3960 + 200;
+  esper.spr = 3960 + 200;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 0;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 40;
   return esper;
 }
