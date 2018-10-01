@@ -14,7 +14,6 @@ export abstract class DamageType {
     if (buff) {
       result['buffed_' + this.calculationStat] += unit.stats[this.calculationStat].base * buff / 100;
     }
-    result.calculationStat = this.calculationStat;
   }
 
   abstract calculateDamages(unit: Unit, result: ResultTurnDamages);
