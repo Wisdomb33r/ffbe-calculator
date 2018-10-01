@@ -17,6 +17,7 @@ export class DamageTypeMagical extends DamageType {
   public calculateDamages(unit: Unit, result: ResultTurnDamages) {
     result.magicalDamages = result['buffed_' + this.calculationStat] * result['buffed_' + this.calculationStat]
       * result.power / 100 * result.levelCorrection;
+    result.magicalStat = this.calculationStat;
   }
 
   public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultTurnDamages) {
