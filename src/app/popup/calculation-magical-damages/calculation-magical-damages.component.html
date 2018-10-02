@@ -42,10 +42,10 @@
   <h3>{{'calculation.display.calculationParameters' | translate}}</h3>
   <table>
     <tr>
-      <td>{{result.calculationStat | translate}}</td>
+      <td>{{result.magicalStat | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result[result.calculationStat] | integer}}</td>
+      <td>{{result[result.magicalStat] | integer}}</td>
     </tr>
     <tr>
       <td>{{'calculation.display.groupBuff' | translate}}</td>
@@ -75,10 +75,10 @@
       <td>{{result.self_buff | integer}}%</td>
     </tr>
     <tr>
-      <td>{{'calculation.display.buffed_' + result.calculationStat | translate}}</td>
+      <td>{{'calculation.display.buffed_' + result.magicalStat | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result['buffed_' + result.calculationStat] | integer}}</td>
+      <td>{{result['buffed_' + result.magicalStat] | integer}}</td>
     </tr>
     <tr>
       <td>{{'calculation.offensive.monsterType' | translate}}</td>
@@ -215,7 +215,7 @@
 
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p>
-    {{result['buffed_' + result.calculationStat] | integer}}² * {{result.power | integer}}%
+    {{result['buffed_' + result.magicalStat] | integer}}² * {{result.power | integer}}%
     * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p>= {{result.magicalDamages | integer}}</p>

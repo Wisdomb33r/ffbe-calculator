@@ -45,6 +45,7 @@ class Equipment {
   public $magical_killers;
   public $lb_multiplier;
   public $sex_restriction;
+  public $esper_percent;
   public $conditional_passives;
   public $elements = array ();
   function __construct($brex_equipement, $language) {
@@ -94,6 +95,7 @@ class Equipment {
     }
     $this->lb_multiplier = $brex_equipement->lb_boost;
     $this->sex_restriction = $brex_equipement->sex_restrict;
+    $this->esper_percent = $brex_equipement->esper_percent;
     $brex_build_passives = brex_build_passif::findByRelation1N ( array ('objet' => $brex_equipement->id) );
     if (count ( $brex_build_passives )) {
       $this->conditional_passives = array ();
@@ -192,6 +194,7 @@ class ConditionalPassive {
   public $partial_dw;
   public $unique;
   public $lb_power;
+  public $esper_percent;
   function __construct($brex_unit_passive) {
     $this->id = $brex_unit_passive->id;
     $this->unit = $brex_unit_passive->unit ? $brex_unit_passive->unit->numero : null;
@@ -230,6 +233,7 @@ class ConditionalPassive {
     $this->partial_dw = $brex_unit_passive->partial_dw ? true : false;
     $this->unique = $brex_unit_passive->uniq ? true : false;
     $this->lb_power = $brex_unit_passive->lb_boost;
+    $this->esper_percent = $brex_unit_passive->esper_percent;
   }
 }
 class UnitStats {

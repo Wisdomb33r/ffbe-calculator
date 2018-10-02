@@ -19,6 +19,7 @@ export class DamageTypePhysical extends DamageType {
     const rawDamages = unit.selectedBuild.equipments.isDualWielding()
       ? this.calculateDwDamages(unit, result) : this.calculateDhDamages(unit, result);
     result.physicalDamages = rawDamages * result.power / 100 * result.levelCorrection;
+    result.physicalStat = this.calculationStat;
   }
 
   public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultTurnDamages) {

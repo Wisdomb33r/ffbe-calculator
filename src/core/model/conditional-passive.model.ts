@@ -36,6 +36,7 @@ export class ConditionalPassive {
   public partial_dw: boolean;
   public unique: boolean;
   public lb_power: number;
+  public esper_percent: number;
 
   // transcient
   public active = false;
@@ -79,6 +80,7 @@ export class ConditionalPassive {
     this.partial_dw = conditionalPassive.partial_dw ? true : false;
     this.unique = conditionalPassive.unique ? true : false;
     this.lb_power = conditionalPassive.lb_power;
+    this.esper_percent = conditionalPassive.esper_percent;
   }
 
   public getPhysicalKiller(opponentKillerType): number {

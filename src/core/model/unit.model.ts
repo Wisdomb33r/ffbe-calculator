@@ -170,6 +170,10 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStat('spr_tdh'),
       equipmentActiveConditionalPassives
     );
+    this.stats.defineEquipmentEsperPercent(
+      this.selectedBuild.equipments.sumEquipmentStat('esper_percent'),
+      equipmentActiveConditionalPassives
+    );
     this.stats.defineEsperStats(this.selectedBuild.esper);
 
     const activeCondPassives = this.filterUnitActiveConditionalPassives();
