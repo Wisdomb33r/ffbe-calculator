@@ -165,6 +165,7 @@
       "turn": "Turn",
       "hits": "Hits",
       "lbMultiplier": "LB multiplier",
+      "jumpMultiplier": "Jump multiplier",
       "resistances": "Resists",
       "enemyBaseResistances": "Enemy resists",
       "elementalResistances": "Elemental resists",
