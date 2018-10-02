@@ -27,6 +27,7 @@ export class ResultTurnDamages extends Result {
   public esperDamageModifier: number;
   public levelCorrection: number;
   public lbMultiplier: number;
+  public jumpMultiplier: number;
 
   // skill behavior
   public isDualWielding: boolean;

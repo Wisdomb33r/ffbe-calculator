@@ -82,8 +82,11 @@ describe('UnitStats', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
     // WHEN
-    unitStats.defineEquipmentPassives(10, 20, 30, 40, 50, 60,
-      [JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA), JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA)]);
+    unitStats.defineEquipmentPassives(10, 20, 30, 40, 50, 60, 100,
+      [
+        new ConditionalPassive(JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA)),
+        new ConditionalPassive(JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA)),
+      ]);
     // THEN
     expect(unitStats.hp.passive_equipment).toEqual(30);
     expect(unitStats.mp.passive_equipment).toEqual(60);
@@ -91,6 +94,8 @@ describe('UnitStats', () => {
     expect(unitStats.mag.passive_equipment).toEqual(120);
     expect(unitStats.def.passive_equipment).toEqual(150);
     expect(unitStats.spr.passive_equipment).toEqual(180);
+    expect(unitStats.jump).toBeUndefined();
+    expect(unitStats.equipment_jump).toEqual(100);
   });
 
   it('#defineEquipmentDwBonuses should set equipment DW passives', () => {
