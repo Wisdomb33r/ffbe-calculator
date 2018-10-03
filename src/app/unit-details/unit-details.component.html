@@ -54,6 +54,7 @@
           <p [innerHTML]="getEsperBuildName(unit.selectedBuild.esper)"></p>
         </div>
       </div>
+      <app-unit-traits [passives]="unit.conditional_passives"></app-unit-traits>
     </div>
   </mat-card-content>
 </mat-card>
