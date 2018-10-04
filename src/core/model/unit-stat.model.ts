@@ -40,13 +40,14 @@ export class UnitStat {
   public computeTotal(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
     this.evaluateDhTdhDwActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
     const effectiveEquipmentPassive = this.getEffectiveEquipmentPassive();
-    const effectiveEquipmentDh = this.getEffectiveEquipmentDh(isDoubleHandActive, isTrueDoubleHandActive);
+    const effectiveEquipmentDh = this.getEffectiveEquipmentDh();
+    const effectiveEquipmentTdw = this.getEffectiveEquipmentTdw();
     this.value_from_passive = this.base * (this.passive + this.conditional_passive) / 100;
     this.value_from_passive_equipment = this.base * effectiveEquipmentPassive / 100;
     this.value_from_dh = this.base_equipment * (this.dh_effective + this.tdh_effective) / 100;
     this.value_from_dh_equipment = this.base_equipment * effectiveEquipmentDh / 100;
     this.value_from_dw = this.base_equipment * this.dw_effective / 100;
-    this.value_from_dw_equipment = this.base_equipment * this.dw_equipment / 100;
+    this.value_from_dw_equipment = this.base_equipment * effectiveEquipmentTdw / 100;
     this.value_from_passive_esper = this.base * this.passive_esper / 100;
     this.total = Math.floor(this.base + this.value_from_passive + this.value_from_passive_equipment
       + this.value_from_dh + this.value_from_dh_equipment + this.base_equipment + this.value_from_dw + this.value_from_dw_equipment
@@ -70,11 +71,19 @@ export class UnitStat {
     }
   }
 
-  private getEffectiveEquipmentDh(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean): number {
+  private getEffectiveEquipmentDh(): number {
     if ((this.dh_effective + this.tdh_effective + this.dh_equipment + this.tdh_equipment) > 300) {
       return 300 - this.dh_effective - this.tdh_effective;
     } else {
       return this.dh_equipment + this.tdh_equipment;
+    }
+  }
+
+  private getEffectiveEquipmentTdw(): number {
+    if ((this.dw_effective + this.dw_equipment) > 100) {
+      return 100 - this.dw_effective;
+    } else {
+      return this.dw_equipment;
     }
   }
 }
