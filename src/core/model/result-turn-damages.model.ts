@@ -34,6 +34,7 @@ export class ResultTurnDamages extends Result {
   public averageWeaponVariance: number;
   public finalVariance: number;
   public killerPassive: number;
+  public isKillerLimitExceeded = false;
   public elements: Array<number>;
   public resistances: Array<number>;
   public averageElementalResistance: number;

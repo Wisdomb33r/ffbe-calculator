@@ -1,3 +1,5 @@
+import {DH_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_LIMIT_CAP} from '../calculator-constants';
+
 export class UnitStat {
   // from backend
   public base: number;
@@ -64,24 +66,24 @@ export class UnitStat {
   }
 
   private getEffectiveEquipmentPassive(): number {
-    if ((this.passive + this.conditional_passive + this.passive_equipment + this.passive_esper) > 300) {
-      return 300 - this.passive - this.conditional_passive - this.passive_esper;
+    if ((this.passive + this.conditional_passive + this.passive_equipment + this.passive_esper) > PASSIVE_LIMIT_CAP) {
+      return PASSIVE_LIMIT_CAP - this.passive - this.conditional_passive - this.passive_esper;
     } else {
       return this.passive_equipment;
     }
   }
 
   private getEffectiveEquipmentDh(): number {
-    if ((this.dh_effective + this.tdh_effective + this.dh_equipment + this.tdh_equipment) > 300) {
-      return 300 - this.dh_effective - this.tdh_effective;
+    if ((this.dh_effective + this.tdh_effective + this.dh_equipment + this.tdh_equipment) > DH_LIMIT_CAP) {
+      return DH_LIMIT_CAP - this.dh_effective - this.tdh_effective;
     } else {
       return this.dh_equipment + this.tdh_equipment;
     }
   }
 
   private getEffectiveEquipmentTdw(): number {
-    if ((this.dw_effective + this.dw_equipment) > 100) {
-      return 100 - this.dw_effective;
+    if ((this.dw_effective + this.dw_equipment) > TDW_LIMIT_CAP) {
+      return TDW_LIMIT_CAP - this.dw_effective;
     } else {
       return this.dw_equipment;
     }

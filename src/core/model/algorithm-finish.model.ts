@@ -25,7 +25,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     this.calculateComboMultiplier(skill, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
-    const killerValue = skill.skillType.getActiveKillers(unit, this.opponentKillerType, this.opponentKillerType2);
+    const killerValue = skill.skillType.getActiveKillers(unit, this.opponentKillerType, this.opponentKillerType2, result);
     skill.damageType.calculateKillerDamages(unit, this.isKillerActive, killerValue, result);
     this.calculateEffectiveResistances(skill, result);
     skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
