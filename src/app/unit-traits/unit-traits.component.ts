@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ConditionalPassive} from '../../core/model/conditional-passive.model';
+import {MONSTER_TYPES} from '../../core/calculator-constants';
 
 @Component({
   selector: 'app-unit-traits',
@@ -13,4 +14,7 @@ export class UnitTraitsComponent {
   constructor() {
   }
 
+  public getMonsterTypes() {
+    return MONSTER_TYPES;
+  }
 }
