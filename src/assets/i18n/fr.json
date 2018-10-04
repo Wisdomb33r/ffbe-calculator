@@ -114,7 +114,7 @@
           "dw": "Deux armes",
           "esper": "Chimère",
           "total": "Total",
-          "limitWarn": "La caractéristique dépasse la limite de 300% autorisée par le jeu. Une partie du bonus est donc perdue."
+          "limitWarn": "La caractéristique dépasse la limite autorisée par le jeu (300% passifs, 300% deux mains, 100% deux armes). Une partie du bonus est donc perdue."
         }
       }
     }

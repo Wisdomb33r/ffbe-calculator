@@ -98,11 +98,15 @@ export class UnitDetailsStatSumComponent {
   }
 
   public isEquipmentPassiveLimitExceeded(): boolean {
-    return this.getPassivePercent() + this.getEquipmentPassivePercent() > 300;
+    return this.getPassivePercent() + this.getEquipmentPassivePercent() + this.getEsperPassivePercent() > 300;
   }
 
   public isEquipmentDhLimitExceeded(): boolean {
     return this.getDhPercent() + this.getEquipmentDhPercent() > 300;
+  }
+
+  public isEquipmentDwLimitExceeded(): boolean {
+    return this.getDwPercent() + this.getEquipmentDwPercent() > 100;
   }
 
   public getEsperName() {
