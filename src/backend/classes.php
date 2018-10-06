@@ -37,6 +37,7 @@ class Equipment {
   public $spr_dh;
   public $spr_tdh;
   public $spr_dw;
+  public $jump;
   public $variance_min;
   public $variance_max;
   public $unique;
@@ -84,6 +85,7 @@ class Equipment {
     $this->spr_tdh = $brex_equipement->psy_tdh;
     $this->spr_dw = $brex_equipement->psy_dw;
     $this->evo = $brex_equipement->evop;
+    $this->jump = $brex_equipement->jump;
     $this->variance_min = $brex_equipement->variance_min;
     $this->variance_max = $brex_equipement->variance_max;
     $this->unique = $brex_equipement->uniq == 1 ? true : false;
@@ -189,6 +191,7 @@ class ConditionalPassive {
   public $spr_dh;
   public $spr_tdh;
   public $spr_dw;
+  public $jump;
   public $physical_killers;
   public $magical_killers;
   public $partial_dw;
@@ -224,6 +227,7 @@ class ConditionalPassive {
     $this->spr_dh = $brex_unit_passive->psy_dh;
     $this->spr_tdh = $brex_unit_passive->psy_tdh;
     $this->spr_dw = $brex_unit_passive->psy_dw;
+    $this->jump = $brex_unit_passive->jump;
     if ($brex_unit_passive->tueurs) {
       $this->physical_killers = new KillerPassives ( $brex_unit_passive->tueurs );
     }
@@ -268,6 +272,7 @@ class UnitStats {
   public $spr_tdh;
   public $spr_dw;
   public $evo;
+  public $jump;
   public $esper_percent;
   function __construct($brex_unit_stats) {
     $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
@@ -301,6 +306,7 @@ class UnitStats {
     $this->spr_tdh = $brex_unit_stats->psy_tdh;
     $this->spr_dw = $brex_unit_stats->psy_dw;
     $this->evo = $brex_unit_stats->evop_amelio > 0 ? $brex_unit_stats->evop_amelio : $brex_unit_stats->evop;
+    $this->jump = $brex_unit_stats->jump;
     $this->esper_percent = $brex_unit_stats->esper_percent;
   }
 }
@@ -366,6 +372,7 @@ class Skill {
   public $power;
   public $isLimitBreak;
   public $isEsper;
+  public $isJump;
   public $nb;
   public $hits;
   public $frames;
@@ -384,6 +391,7 @@ class Skill {
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite ? true : false;
     $this->isEsper = $brex_skill->is_esper ? true : false;
+    $this->isJump = $brex_skill->is_jump ? true : false;
     $this->power = $brex_skill->puissance;
     if ($brex_skill->nb > 1) {
       $this->power = $brex_skill->puissance / $brex_skill->nb;

@@ -36,7 +36,7 @@
     </tr>
     <tr *ngIf="result.jumpMultiplier">
       <td>{{'calculation.display.jumpMultiplier' | translate}}</td>
-      <td>{{result.jumpMultiplier | integer}}</td>
+      <td>{{result.jumpMultiplier | integer}}%</td>
     </tr>
   </table>
   <p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
