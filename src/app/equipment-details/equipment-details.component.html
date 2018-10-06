@@ -69,6 +69,7 @@
   +{{equipment.spr_dw}}% {{'spr' | translate}} {{'tdw' | translate}}
 </p>
 <p *ngIf="equipment.evo">+{{equipment.evo}}% {{'evo' | translate}}</p>
+<p *ngIf="equipment.jump" class="jump">+{{equipment.jump}}% <img src="assets/icons/jump.png" class="jump"></p>
 <p *ngIf="equipment.physical_killers" class="passive">
   <ng-container *ngFor="let type of getMonsterTypes()">
   <span *ngIf="equipment.physical_killers[type]">+{{equipment.physical_killers[type]}}%
