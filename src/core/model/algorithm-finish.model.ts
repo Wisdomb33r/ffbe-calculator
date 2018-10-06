@@ -59,6 +59,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)
         .map(p => p.lb_power ? p.lb_power : 0)
         .reduce((val1, val2) => val1 + val2, 0);
+      const jumpMultiplier = 100 + (skill.isJump ? unit.stats.jump + unit.stats.equipment_jump : 0);
 
       for (let i = 0; i < skill.hits; i++) {
         let hitPower = skill.power * damages[i] / 100 * result.combosIncrement;
@@ -71,12 +72,20 @@ export class AlgorithmFinish extends AlgorithmOffensive {
             hitPower = lbMultiplier * hitPower;
           }
         }
+        if (skill.isJump) {
+          result.jumpMultiplier = jumpMultiplier;
+          hitPower *= jumpMultiplier / 100;
+        }
         hitsPower.push(hitPower);
       }
       if (nbAttacks > 1) {
         for (let i = 1; i < nbAttacks; i++) {
           for (let j = 0; j < skill.hits; j++) {
-            hitsPower.push(skill.power * damages[j] / 100 * result.combosIncrement);
+            let hitPower = skill.power * damages[j] / 100 * result.combosIncrement;
+            if (skill.isJump) {
+              hitPower *= jumpMultiplier / 100;
+            }
+            hitsPower.push(hitPower);
           }
         }
       }

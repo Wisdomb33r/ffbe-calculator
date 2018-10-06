@@ -140,6 +140,7 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStatPercent('mag'),
       this.selectedBuild.equipments.sumEquipmentStatPercent('def'),
       this.selectedBuild.equipments.sumEquipmentStatPercent('spr'),
+      this.selectedBuild.equipments.sumEquipmentStat('jump'),
       equipmentActiveConditionalPassives
     );
     this.stats.defineEquipmentDwBonuses(

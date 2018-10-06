@@ -30,6 +30,7 @@ export class ConditionalPassive {
   public spr_dh: number;
   public spr_tdh: number;
   public spr_dw: number;
+  public jump: number;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
   public partial_dw: boolean;
@@ -69,6 +70,7 @@ export class ConditionalPassive {
     this.spr_dh = conditionalPassive.spr_dh ? conditionalPassive.spr_dh : 0;
     this.spr_tdh = conditionalPassive.spr_tdh ? conditionalPassive.spr_tdh : 0;
     this.spr_dw = conditionalPassive.spr_dw ? conditionalPassive.spr_dw : 0;
+    this.jump = conditionalPassive.jump ? conditionalPassive.jump : 0;
     if (conditionalPassive.physical_killers) {
       this.physical_killers = KillerPassives.construct(conditionalPassive.physical_killers);
     }

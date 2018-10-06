@@ -34,6 +34,10 @@
       <td>{{'calculation.display.lbMultiplier' | translate}}</td>
       <td>{{result.lbMultiplier | number:'1.2-2'}}</td>
     </tr>
+    <tr *ngIf="result.jumpMultiplier">
+      <td>{{'calculation.display.jumpMultiplier' | translate}}</td>
+      <td>{{result.jumpMultiplier | integer}}%</td>
+    </tr>
   </table>
   <p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
   <h3>{{'calculation.offensive.turnPower' | translate}}</h3>

@@ -165,6 +165,7 @@
       "turn": "Tour",
       "hits": "Coups",
       "lbMultiplier": "Multiplicateur LB",
+      "jumpMultiplier": "Multiplicateur saut",
       "resistances": "Résistances",
       "enemyBaseResistances": "Résist. adversaire",
       "elementalResistances": "Résistances élémentaires",

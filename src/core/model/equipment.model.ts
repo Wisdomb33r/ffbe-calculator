@@ -56,6 +56,7 @@ export class Equipment {
   public spr_tdh: number;
   public spr_dw: number;
   public evo: number;
+  public jump: number;
   public variance_min: number;
   public variance_max: number;
   public unique: boolean;
@@ -107,6 +108,7 @@ export class Equipment {
     this.spr_tdh = equipment.spr_tdh;
     this.spr_dw = equipment.spr_dw;
     this.evo = equipment.evo;
+    this.jump = equipment.jump;
     this.variance_min = equipment.variance_min;
     this.variance_max = equipment.variance_max;
     this.unique = equipment.unique;
