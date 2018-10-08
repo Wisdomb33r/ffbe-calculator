@@ -8,7 +8,7 @@
     "build": "ng build --prod --base-href /ffbe/calculator/",
     "test": "ng test --browsers Chrome",
     "test-ci": "ng test --watch=false --browsers ChromeHeadless",
-    "test-cc": "ng test --watch=false --browsers ChromeHeadless --code-coverage",
+    "test-cc": "ng test --watch=false --browsers ChromeHeadless --code-coverage --source-map",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
