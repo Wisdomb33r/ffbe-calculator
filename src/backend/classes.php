@@ -197,6 +197,7 @@ class ConditionalPassive {
   public $partial_dw;
   public $unique;
   public $lb_power;
+  public $evo;
   public $esper_percent;
   function __construct($brex_unit_passive) {
     $this->id = $brex_unit_passive->id;
@@ -237,6 +238,7 @@ class ConditionalPassive {
     $this->partial_dw = $brex_unit_passive->partial_dw ? true : false;
     $this->unique = $brex_unit_passive->uniq ? true : false;
     $this->lb_power = $brex_unit_passive->lb_boost;
+    $this->evo = $brex_unit_passive->evop;
     $this->esper_percent = $brex_unit_passive->esper_percent;
   }
 }

@@ -56,6 +56,7 @@ export class UnitStats {
     this.mag.passive_equipment = mag + passives.map(passive => passive.mag).reduce((val1, val2) => val1 + val2, 0);
     this.def.passive_equipment = def + passives.map(passive => passive.def).reduce((val1, val2) => val1 + val2, 0);
     this.spr.passive_equipment = spr + passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
+    this.evo.passive_equipment = passives.map(passive => passive.evo).reduce((val1, val2) => val1 + val2, 0);
     this.equipment_jump = jump + passives.map(passive => passive.jump).reduce((val1, val2) => val1 + val2, 0);
   }
 
@@ -116,6 +117,6 @@ export class UnitStats {
     this.mag.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
     this.def.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
     this.spr.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.evo.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.evo.computeEvoTotal();
   }
 }

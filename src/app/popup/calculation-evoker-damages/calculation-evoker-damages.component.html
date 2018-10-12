@@ -48,6 +48,12 @@
       <td>{{result.mag | integer}} / {{result.spr | integer}}</td>
     </tr>
     <tr>
+      <td>{{'evo' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.evo}}%</td>
+    </tr>
+    <tr>
       <td>{{'calculation.display.groupBuff' | translate}}</td>
       <td>
         <mat-checkbox [(ngModel)]="algorithm.isSupportBuffing" (change)="calculateBuild()"></mat-checkbox>

@@ -1,4 +1,4 @@
-import {DH_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_LIMIT_CAP} from '../calculator-constants';
+import {DH_LIMIT_CAP, EVO_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_LIMIT_CAP} from '../calculator-constants';
 
 export class UnitStat {
   // from backend
@@ -54,6 +54,13 @@ export class UnitStat {
     this.total = Math.floor(this.base + this.value_from_passive + this.value_from_passive_equipment
       + this.value_from_dh + this.value_from_dh_equipment + this.base_equipment + this.value_from_dw + this.value_from_dw_equipment
       + this.value_from_esper + this.value_from_passive_esper);
+  }
+
+  public computeEvoTotal() {
+    this.total = this.base + this.base_equipment + this.passive_equipment;
+    if (this.total > EVO_LIMIT_CAP) {
+      this.total = EVO_LIMIT_CAP;
+    }
   }
 
   public evaluateDhTdhDwActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {

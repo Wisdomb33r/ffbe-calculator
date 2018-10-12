@@ -5,6 +5,7 @@ export const KILLER_LIMIT_CAP = 300;
 export const TDW_LIMIT_CAP = 100;
 export const DH_LIMIT_CAP = 300;
 export const PASSIVE_LIMIT_CAP = 300;
+export const EVO_LIMIT_CAP = 300;
 export const MONSTER_TYPES = [
   'dragon',
   'insect',
