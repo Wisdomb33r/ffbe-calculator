@@ -72,6 +72,7 @@ export class Build {
               break;
           }
           if (build.id === 197) { // Citra LB
+            skill.category = 9;
             skill.damages_type = 'evoker';
           }
         }
