@@ -97,9 +97,6 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           if (this.materia1 || this.materia2 || this.materia3 || this.materia4) {
             observables.push(this.unitsService.getAllowedEquipmentsForSlot$('materia1'));
           }
-          if (this.left_hand) {
-            observables.push(this.unitsService.getAllowedEquipmentsForSlot$('left_hand'));
-          }
 
           return forkJoin(observables);
         }
@@ -142,15 +139,24 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           }
           index++;
         }
-        if (this.left_hand) {
-          this.testAndEquip('left_hand', this.left_hand, observablesResults, index);
-          index++;
-        }
         if (this.esper) {
           const esper: Esper = ESPER_BUILDS.find(e => e.id === this.esper);
           if (esper) {
             this.unitsService.selectedUnit.selectedBuild.esper = esper;
           }
+        }
+      }),
+      switchMap(any => {
+        const observables = [];
+        observables.push(of(true));
+        if (this.left_hand) {
+          observables.push(this.unitsService.getAllowedEquipmentsForSlot$('left_hand'));
+        }
+        return forkJoin(observables);
+      }),
+      tap(observablesResults => {
+        if (this.left_hand) {
+          this.testAndEquip('left_hand', this.left_hand, observablesResults, 1);
         }
       }),
       switchMap(any => {
