@@ -71,6 +71,9 @@ export class Build {
               skill.damages_type = 'hybrid';
               break;
           }
+          if (build.id === 197) { // Citra LB
+            skill.damages_type = 'evoker';
+          }
         }
 
         this.skills.push(new Skill(skill));
