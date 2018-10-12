@@ -36,11 +36,17 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     if ($weapon_category == '28') {
       $categories [] = 66; // katanas
     }
+    if ($weapon_category == '17') {
+      $categories [] = 67; // staves
+    }
     if ($weapon_category == '2') {
       $categories [] = 68; // rods
     }
     if ($weapon_category == '6') {
       $categories [] = 69; // bows
+    }
+    if ($weapon_category == '13') {
+      $categories [] = 71; // hammers
     }
     if ($weapon_category == '32') {
       $categories [] = 72; // spears
@@ -51,8 +57,8 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     if ($weapon_category == '24') {
       $categories [] = 75; // throwing weapons
     }
-    if ($weapon_category == '15') {
-      $categories [] = 76; // guns
+    if ($weapon_category == '15' || $weapon_category == '29') {
+      $categories [] = 76; // guns and axes
     }
     if ($weapon_category == '26') {
       $categories [] = 77; // maces

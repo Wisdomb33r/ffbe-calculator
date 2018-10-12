@@ -19,8 +19,11 @@ export const DAGGERS = 16;
 export const SWORDS = 1;
 export const LSWORDS = 27;
 export const KATANAS = 28;
+export const STAVES = 17;
 export const RODS = 2;
 export const BOWS = 6;
+export const AXES = 29;
+export const HAMMERS = 13;
 export const SPEARS = 32;
 export const WHIPS = 34;
 export const THROWING = 24;
@@ -64,12 +67,14 @@ export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
   2461, // swords
   2462, // larges swords
   2318, // katanas
+  2683, // staves
   2319, // rods
   2620, // bows
+  2694, // hammers
   2623, // spears
   2463, // whips
   2464, // throwing weapons
-  2320, // guns
+  2320, // guns and axes
   2621, // maces
   2622, // claws
 ];

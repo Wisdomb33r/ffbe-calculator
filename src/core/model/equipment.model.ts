@@ -1,10 +1,12 @@
 import {ConditionalPassive} from './conditional-passive.model';
 import {
+  AXES,
   BODY_CATEGORIES,
   BOWS,
   CLAWS,
   DAGGERS,
   GUNS,
+  HAMMERS,
   HEAD_CATEGORIES,
   KATANAS,
   LSWORDS,
@@ -12,6 +14,7 @@ import {
   RODS,
   SHIELDS_CATEGORIES,
   SPEARS,
+  STAVES,
   SWORDS,
   THROWING,
   WEAPONS_CATEGORIES,
@@ -168,8 +171,9 @@ export class Equipment {
   }
 
   public isWeaponTraitPossible(): boolean {
-    return (this.id < 2379 && (this.category === DAGGERS || this.category === KATANAS || this.category === RODS || this.category === GUNS))
+    return (this.id < 2379 && (this.category === KATANAS || this.category === RODS || this.category === GUNS))
       || (this.id < 2478 && (this.category === SWORDS || this.category === LSWORDS || this.category === WHIPS || this.category === THROWING))
-      || (this.id < 2620 && (this.category === SPEARS || this.category === MACES || this.category === CLAWS || this.category === BOWS));
+      || (this.id < 2620 && (this.category === SPEARS || this.category === MACES || this.category === CLAWS || this.category === BOWS))
+      || (this.id < 2707 && (this.category === DAGGERS || this.category === STAVES || this.category === AXES || this.category === HAMMERS));
   }
 }
