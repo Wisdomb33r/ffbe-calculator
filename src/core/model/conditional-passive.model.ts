@@ -6,6 +6,10 @@ export class ConditionalPassive {
   public unit: number;
   public category: number;
   public element: number;
+  public skill: number;
+  public skill_name: string;
+  public skill_icon: string;
+  public skill_mod: number;
   public hp: number;
   public hp_dh: number;
   public hp_tdh: number;
@@ -47,6 +51,10 @@ export class ConditionalPassive {
     this.unit = conditionalPassive.unit;
     this.category = conditionalPassive.category;
     this.element = conditionalPassive.element;
+    this.skill = conditionalPassive.skill;
+    this.skill_name = conditionalPassive.skill_name;
+    this.skill_icon = conditionalPassive.skill_icon;
+    this.skill_mod = conditionalPassive.skill_mod;
     this.hp = conditionalPassive.hp ? conditionalPassive.hp : 0;
     this.hp_dh = conditionalPassive.hp_dh ? conditionalPassive.hp_dh : 0;
     this.hp_tdh = conditionalPassive.hp_tdh ? conditionalPassive.hp_tdh : 0;

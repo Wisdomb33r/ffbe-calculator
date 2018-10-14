@@ -238,10 +238,15 @@ export class EquipmentSet {
 
   public checkConditionalPassiveActive(condPassive: ConditionalPassive, unitId: number): boolean {
     // unit-specific bonus of an item
-    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0
-      && unitId !== condPassive.unit) {
+    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0 && unitId !== condPassive.unit) {
       return false;
     }
+
+    // skill modifier increase
+    if (!isNullOrUndefined(condPassive.skill)) {
+      return true;
+    }
+
     // unit or item bonus if a category of equipment is present
     if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0 && !condPassive.partial_dw
       && !((this.right_hand && this.right_hand.category === condPassive.category)
@@ -302,5 +307,12 @@ export class EquipmentSet {
       ...this.materia3 ? this.materia3.conditional_passives : [],
       ...this.materia4 ? this.materia4.conditional_passives : [],
     ];
+  }
+
+  public sumSkillModIncrease(skillId: number) {
+    return this.getAllConditionalPassives()
+      .filter((cond: ConditionalPassive) => !isNullOrUndefined(cond.skill) && !isNullOrUndefined(skillId) && cond.skill === skillId)
+      .map((cond: ConditionalPassive) => cond.skill_mod)
+      .reduce((val1, val2) => val1 + val2, 0);
   }
 }
