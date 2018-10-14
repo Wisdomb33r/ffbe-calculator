@@ -71,7 +71,7 @@ export class Build {
               skill.damages_type = 'hybrid';
               break;
           }
-          if (build.id === 197) { // Citra LB
+          if (build.id === 197 || build.id === 211) { // Citra LB
             skill.category = 9;
             skill.damages_type = 'evoker';
           }

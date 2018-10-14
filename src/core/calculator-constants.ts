@@ -219,7 +219,7 @@ function getShivaWithStatsBoost(): Esper {
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 190;
-  esper.damage_modifier = 2;
+  esper.damage_modifier = 1;
   esper.stats_percent = 40;
   esper.damageType = 'magical';
   esper.elements = [2];
@@ -499,7 +499,7 @@ function getTitan(): Esper {
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 220;
-  esper.damage_modifier = 2;
+  esper.damage_modifier = 1;
   esper.stats_percent = 40;
   esper.damageType = 'physical';
   esper.elements = [6];
