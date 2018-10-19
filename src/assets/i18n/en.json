@@ -114,7 +114,7 @@
           "dw": "Dual Wield",
           "esper": "Esper",
           "total": "Total",
-          "limitWarn": "The unit stat increase is over the allowed limit (300% traits, 300% doublehand, 100% dual wield). The bonus is partially lost."
+          "limitWarn": "The unit stat increase is over the allowed limit (400% traits, 300% doublehand, 100% dual wield). The bonus is partially lost."
         }
       }
     }

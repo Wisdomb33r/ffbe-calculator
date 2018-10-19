@@ -120,7 +120,7 @@ export class EquipmentSet {
     return result;
   }
 
-  public getPhysicalKillers(): number {
+  public getPhysicalKillers(unitId: number): number {
     let result = 0;
     result += this.right_hand && this.right_hand.physical_killers ? this.right_hand.physical_killers.getKillerSum() : 0;
     result += this.left_hand && this.left_hand.physical_killers ? this.left_hand.physical_killers.getKillerSum() : 0;
@@ -132,13 +132,13 @@ export class EquipmentSet {
     result += this.materia2 && this.materia2.physical_killers ? this.materia2.physical_killers.getKillerSum() : 0;
     result += this.materia3 && this.materia3.physical_killers ? this.materia3.physical_killers.getKillerSum() : 0;
     result += this.materia4 && this.materia4.physical_killers ? this.materia4.physical_killers.getKillerSum() : 0;
-    result += this.getAllConditionalPassives()
+    result += this.getAllActiveConditionalPassives(unitId)
       .map((passive: ConditionalPassive) => passive.physical_killers ? passive.physical_killers.getKillerSum() : 0)
       .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
-  public getPhysicalKiller(opponentKillerType: string): number {
+  public getPhysicalKiller(opponentKillerType: string, unitId: number): number {
     let result = 0;
     result += this.right_hand ? this.right_hand.getPhysicalKiller(opponentKillerType) : 0;
     result += this.left_hand ? this.left_hand.getPhysicalKiller(opponentKillerType) : 0;
@@ -150,13 +150,13 @@ export class EquipmentSet {
     result += this.materia2 ? this.materia2.getPhysicalKiller(opponentKillerType) : 0;
     result += this.materia3 ? this.materia3.getPhysicalKiller(opponentKillerType) : 0;
     result += this.materia4 ? this.materia4.getPhysicalKiller(opponentKillerType) : 0;
-    result += this.getAllConditionalPassives()
+    result += this.getAllActiveConditionalPassives(unitId)
       .map((passive: ConditionalPassive) => passive.getPhysicalKiller(opponentKillerType))
       .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
-  public getMagicalKillers(): number {
+  public getMagicalKillers(unitId: number): number {
     let result = 0;
     result += this.right_hand && this.right_hand.magical_killers ? this.right_hand.magical_killers.getKillerSum() : 0;
     result += this.left_hand && this.left_hand.magical_killers ? this.left_hand.magical_killers.getKillerSum() : 0;
@@ -168,13 +168,13 @@ export class EquipmentSet {
     result += this.materia2 && this.materia2.magical_killers ? this.materia2.magical_killers.getKillerSum() : 0;
     result += this.materia3 && this.materia3.magical_killers ? this.materia3.magical_killers.getKillerSum() : 0;
     result += this.materia4 && this.materia4.magical_killers ? this.materia4.magical_killers.getKillerSum() : 0;
-    result += this.getAllConditionalPassives()
+    result += this.getAllActiveConditionalPassives(unitId)
       .map((passive: ConditionalPassive) => passive.magical_killers ? passive.magical_killers.getKillerSum() : 0)
       .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
-  public getMagicalKiller(opponentKillerType: string): number {
+  public getMagicalKiller(opponentKillerType: string, unitId: number): number {
     let result = 0;
     result += this.right_hand ? this.right_hand.getMagicalKiller(opponentKillerType) : 0;
     result += this.left_hand ? this.left_hand.getMagicalKiller(opponentKillerType) : 0;
@@ -186,7 +186,7 @@ export class EquipmentSet {
     result += this.materia2 ? this.materia2.getMagicalKiller(opponentKillerType) : 0;
     result += this.materia3 ? this.materia3.getMagicalKiller(opponentKillerType) : 0;
     result += this.materia4 ? this.materia4.getMagicalKiller(opponentKillerType) : 0;
-    result += this.getAllConditionalPassives()
+    result += this.getAllActiveConditionalPassives(unitId)
       .map((passive: ConditionalPassive) => passive.getMagicalKiller(opponentKillerType))
       .reduce((val1, val2) => val1 + val2, 0);
     return result;

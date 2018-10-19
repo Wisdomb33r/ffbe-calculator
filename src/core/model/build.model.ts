@@ -90,21 +90,21 @@ export class Build {
     }
   }
 
-  public getPhysicalKillers() {
-    return (this.physical_killers ? this.physical_killers.getKillerSum() : 0) + this.equipments.getPhysicalKillers();
+  public getPhysicalKillers(unitId: number) {
+    return (this.physical_killers ? this.physical_killers.getKillerSum() : 0) + this.equipments.getPhysicalKillers(unitId);
   }
 
-  public getPhysicalKiller(opponentKillerType: string) {
+  public getPhysicalKiller(opponentKillerType: string, unitId: number) {
     return (this.physical_killers && this.physical_killers[opponentKillerType] ? this.physical_killers[opponentKillerType] : 0)
-      + this.equipments.getPhysicalKiller(opponentKillerType);
+      + this.equipments.getPhysicalKiller(opponentKillerType, unitId);
   }
 
-  public getMagicalKillers() {
-    return (this.magical_killers ? this.magical_killers.getKillerSum() : 0) + this.equipments.getMagicalKillers();
+  public getMagicalKillers(unitId: number) {
+    return (this.magical_killers ? this.magical_killers.getKillerSum() : 0) + this.equipments.getMagicalKillers(unitId);
   }
 
-  public getMagicalKiller(opponentKillerType: string) {
+  public getMagicalKiller(opponentKillerType: string, unitId: number) {
     return (this.magical_killers && this.magical_killers[opponentKillerType] ? this.magical_killers[opponentKillerType] : 0)
-      + this.equipments.getMagicalKiller(opponentKillerType);
+      + this.equipments.getMagicalKiller(opponentKillerType, unitId);
   }
 }
