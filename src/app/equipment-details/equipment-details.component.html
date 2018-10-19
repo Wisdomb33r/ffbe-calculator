@@ -122,6 +122,7 @@
   <span *ngIf="passive.spr_dw" [class.inactive]="!isDualWielding()">+{{passive.spr_dw}}% {{'spr' | translate}} {{'tdw' | translate}}</span>
   <span *ngIf="passive.evo">+{{passive.evo}}% {{'evo' | translate}}</span>
   <span *ngIf="passive.lb_power">+{{passive.lb_power}}% {{'lbPower' | translate}}</span>
+  <span *ngIf="passive.skill">+{{passive.skill_mod}}% <img src="{{passive.skill_icon}}">{{passive.skill_name}}</span>
 
   <span *ngIf="passive.physical_killers" class="passive">
     <ng-container *ngFor="let type of getMonsterTypes()">
