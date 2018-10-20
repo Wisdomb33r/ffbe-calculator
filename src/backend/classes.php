@@ -102,7 +102,7 @@ class Equipment {
     if (count ( $brex_build_passives )) {
       $this->conditional_passives = array ();
       foreach ( $brex_build_passives as $passive ) {
-        $this->conditional_passives [] = new ConditionalPassive ( $passive );
+        $this->conditional_passives [] = new ConditionalPassive ( $passive, $language );
       }
     }
     if ($brex_equipement->res_feu >= 100) {
@@ -167,6 +167,9 @@ class ConditionalPassive {
   public $unit;
   public $category;
   public $element;
+  public $skill;
+  public $skill_name;
+  public $skill_icon;
   public $hp;
   public $hp_dh;
   public $hp_tdh;
@@ -199,11 +202,16 @@ class ConditionalPassive {
   public $lb_power;
   public $evo;
   public $esper_percent;
-  function __construct($brex_unit_passive) {
+  function __construct($brex_unit_passive, $language) {
     $this->id = $brex_unit_passive->id;
     $this->unit = $brex_unit_passive->unit ? $brex_unit_passive->unit->numero : null;
     $this->category = $brex_unit_passive->categorie ? $brex_unit_passive->categorie->id : null;
     $this->element = $brex_unit_passive->element ? $brex_unit_passive->element->id : null;
+    if ($brex_unit_passive->passif) {
+      $this->skill = $brex_unit_passive->passif->id;
+      $this->skill_name = $language == 'fr' ? $brex_unit_passive->passif->nom : $brex_unit_passive->passif->nom_en;
+      $this->skill_icon = $brex_unit_passive->passif->icone->getImageimgPath ();
+    }
     $this->hp = $brex_unit_passive->pv;
     $this->hp_dh = $brex_unit_passive->pv_dh;
     $this->hp_tdh = $brex_unit_passive->pv_tdh;
@@ -238,6 +246,7 @@ class ConditionalPassive {
     $this->partial_dw = $brex_unit_passive->partial_dw ? true : false;
     $this->unique = $brex_unit_passive->uniq ? true : false;
     $this->lb_power = $brex_unit_passive->lb_boost;
+    $this->skill_mod = $brex_unit_passive->skill_mod;
     $this->evo = $brex_unit_passive->evop;
     $this->esper_percent = $brex_unit_passive->esper_percent;
   }
@@ -539,7 +548,7 @@ class Unit {
       $this->conditional_passives = array ();
       foreach ( $brex_unit_passives as $brex_unit_passive ) {
         if (! $brex_unit_passive->objet) {
-          $this->conditional_passives [] = new ConditionalPassive ( $brex_unit_passive );
+          $this->conditional_passives [] = new ConditionalPassive ( $brex_unit_passive, $language );
         }
       }
     }
