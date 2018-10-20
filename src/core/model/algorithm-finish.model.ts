@@ -60,9 +60,10 @@ export class AlgorithmFinish extends AlgorithmOffensive {
         .map(p => p.lb_power ? p.lb_power : 0)
         .reduce((val1, val2) => val1 + val2, 0);
       const jumpMultiplier = 100 + (skill.isJump ? unit.stats.jump + unit.stats.equipment_jump : 0);
+      const skillTotalPower = skill.power + unit.selectedBuild.equipments.sumSkillModIncrease(skill.id);
 
       for (let i = 0; i < skill.hits; i++) {
-        let hitPower = skill.power * damages[i] / 100 * result.combosIncrement;
+        let hitPower = skillTotalPower * damages[i] / 100 * result.combosIncrement;
         if (skill.isLimitBreak) {
           if (lbPower > 0) {
             hitPower += lbPower * damages[i] / 100 * result.combosIncrement;
@@ -81,7 +82,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       if (nbAttacks > 1) {
         for (let i = 1; i < nbAttacks; i++) {
           for (let j = 0; j < skill.hits; j++) {
-            let hitPower = skill.power * damages[j] / 100 * result.combosIncrement;
+            let hitPower = skillTotalPower * damages[j] / 100 * result.combosIncrement;
             if (skill.isJump) {
               hitPower *= jumpMultiplier / 100;
             }

@@ -107,4 +107,12 @@ export class Build {
     return (this.magical_killers && this.magical_killers[opponentKillerType] ? this.magical_killers[opponentKillerType] : 0)
       + this.equipments.getMagicalKiller(opponentKillerType, unitId);
   }
+
+  public getSkillIdentifiers(): Array<number> {
+    let identifiers = [];
+    if (this.skills && this.skills.length > 0) {
+      identifiers = this.skills.map((skill: Skill) => skill.id);
+    }
+    return identifiers;
+  }
 }

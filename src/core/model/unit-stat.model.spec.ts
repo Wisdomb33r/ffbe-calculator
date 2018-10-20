@@ -81,18 +81,18 @@ describe('UnitStat', () => {
     expect(unitStat.total).toEqual(900);
   });
 
-  it('#computeTotal should limit the stat passive increase to 300%', () => {
+  it('#computeTotal should limit the stat passive increase to 400%', () => {
     // GIVEN
     const unitStat: UnitStat = new UnitStat(100, 150, 0, 0, 0);
     unitStat.passive_equipment = 150;
-    unitStat.conditional_passive = 100;
+    unitStat.conditional_passive = 150;
     // WHEN
     unitStat.computeTotal(true, true, false);
     // THEN
     expect(unitStat.base).toEqual(100);
-    expect(unitStat.value_from_passive).toEqual(250); // 150% + 100% conditional
-    expect(unitStat.value_from_passive_equipment).toEqual(50); // only 50% out of the 150%
-    expect(unitStat.total).toEqual(400);
+    expect(unitStat.value_from_passive).toEqual(300); // 150% + 150% conditional
+    expect(unitStat.value_from_passive_equipment).toEqual(100); // only 50% out of the 150%
+    expect(unitStat.total).toEqual(500);
   });
 
   it('#computeTotal should limit the stat dh increase to 300%', () => {

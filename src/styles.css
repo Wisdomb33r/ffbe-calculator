@@ -30,6 +30,7 @@ mat-toolbar.mat-toolbar button:first-child {
 
 mat-card.mat-card {
   margin: 0 5px 5px 5px;
+  padding: 10px 10px;
   background: #001f66; /* Old browsers */
   background: -moz-linear-gradient(left, #000000 0%, #000b26 20%, #001f66 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(left, #000000 0%, #000b26 20%, #001f66 100%); /* Chrome10-25,Safari5.1-6 */
@@ -105,5 +106,10 @@ img.details-opener {
     width: 50%;
     margin: 0;
     padding: 0;
+  }
+
+  mat-card.mat-card {
+    margin: 0 5px 5px 5px;
+    padding: 20px 20px;
   }
 }
