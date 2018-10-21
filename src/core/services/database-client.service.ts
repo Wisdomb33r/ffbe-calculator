@@ -40,7 +40,7 @@ export class DatabaseClientService {
   }
 
   private pushBuildResult$(buildId: number, result: number): Observable<any> {
-    return this.http.post<any>(BUILD_PUSH_URL, {buildId: buildId, result: Math.floor(result)});
+    return this.http.post<any>(BUILD_PUSH_URL, {buildId: buildId, result: Math.round(result)});
   }
 
   private pushItem$(buildId: number, slotId: number, itemId: number) {
