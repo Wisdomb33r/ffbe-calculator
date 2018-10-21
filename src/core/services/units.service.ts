@@ -285,6 +285,10 @@ export class UnitsService {
       ;
   }
 
+  public pushBuild(isResultToBePushed: boolean) {
+    this.databaseClient.pushBuild$(this.selectedUnit, isResultToBePushed).subscribe();
+  }
+
   // SHORTCUT GETTERS
   public getAlgorithm(): Algorithm {
     return this.selectedUnit.selectedBuild.algorithm;

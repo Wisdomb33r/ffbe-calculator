@@ -41,4 +41,5 @@
                      [materia4]="unitsService.getEquipments().materia4"
                      [esper]="unitsService.getEsper()">
   </app-permanent-url>
+  <app-push-build *ngIf="unitsService.selectedUnit && pushBuildDisplayed"></app-push-build>
 </div>
