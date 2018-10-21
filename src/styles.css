@@ -93,6 +93,10 @@ img.details-opener {
   background-color: white;
 }
 
+.push-build div.mat-checkbox-frame {
+  background-color: white;
+}
+
 @media (min-width: 1000px) {
   div.left {
     float: left;
