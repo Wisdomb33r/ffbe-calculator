@@ -36,6 +36,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
   private materia3: number;
   private materia4: number;
   private esper: number;
+  private idType: string;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -65,6 +66,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         this.materia3 = +params.get('materia3');
         this.materia4 = +params.get('materia4');
         this.esper = +params.get('esper');
+        this.idType = params.get('id_type');
 
         return this.databaseClient.getUnitById$(this.unit);
       }),
@@ -211,7 +213,12 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
   private testAndEquip(slot: string, equipment_id: number, observablesResults, index: number) {
     const equipments: Array<Equipment> = observablesResults[index];
     if (equipments && equipments.length > 0) {
-      const equipment: Equipment = equipments.find((e: Equipment) => e.id === equipment_id);
+      let equipment: Equipment;
+      if (this.idType === 'gumi') {
+        equipment = equipments.find((e: Equipment) => e.gumiId === equipment_id);
+      } else {
+        equipment = equipments.find((e: Equipment) => e.id === equipment_id);
+      }
       if (equipment) {
         this.unitsService.equipInSlot(slot, equipment);
       }
