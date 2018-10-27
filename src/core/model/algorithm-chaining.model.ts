@@ -58,7 +58,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       let chainCombos = 0;
       const baseCombo: number = skill.chainCombo ? +skill.chainCombo : 0;
 
-      const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
+      const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentLbBoost();
       const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)
         .map(p => p.lb_power ? p.lb_power : 0)
         .reduce((val1, val2) => val1 + val2, 0);
