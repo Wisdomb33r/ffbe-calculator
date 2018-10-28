@@ -326,7 +326,8 @@ export class EquipmentSet {
 
   public sumSkillModIncrease(skillId: number) {
     return this.getAllConditionalPassives()
-      .filter((cond: ConditionalPassive) => !isNullOrUndefined(cond.skill) && !isNullOrUndefined(skillId) && cond.skill === skillId)
+      .filter((cond: ConditionalPassive) =>
+        cond.active && !isNullOrUndefined(cond.skill) && !isNullOrUndefined(skillId) && cond.skill === skillId)
       .map((cond: ConditionalPassive) => cond.skill_mod)
       .reduce((val1, val2) => val1 + val2, 0);
   }
