@@ -58,18 +58,16 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       const lbMultiplier = unit.getLbMultiplier();
       const lbPower = unit.getLbPowerIncrease();
       const jumpMultiplier = 100 + (skill.isJump ? unit.stats.jump + unit.stats.equipment_jump : 0);
-      const skillTotalPower = skill.power + unit.selectedBuild.equipments.sumSkillModIncrease(skill.id);
+      let skillTotalPower = skill.power + unit.selectedBuild.equipments.sumSkillModIncrease(skill.id);
+      if (skill.isLimitBreak && lbPower > 0) {
+        skillTotalPower += lbPower;
+      }
 
       for (let i = 0; i < skill.hits; i++) {
         let hitPower = skillTotalPower * damages[i] / 100 * result.combosIncrement;
-        if (skill.isLimitBreak) {
-          if (lbPower > 0) {
-            hitPower += lbPower * damages[i] / 100 * result.combosIncrement;
-          }
-          if (lbMultiplier > 1) {
-            result.lbMultiplier = lbMultiplier;
-            hitPower = lbMultiplier * hitPower;
-          }
+        if (skill.isLimitBreak && lbMultiplier > 1) {
+          result.lbMultiplier = lbMultiplier;
+          hitPower = lbMultiplier * hitPower;
         }
         if (skill.isJump) {
           result.jumpMultiplier = jumpMultiplier;

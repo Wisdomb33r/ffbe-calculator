@@ -60,21 +60,19 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       const lbMultiplier = unit.getLbMultiplier();
       const lbPower = unit.getLbPowerIncrease();
       const jumpMultiplier = 100 + (skill.isJump ? unit.stats.jump + unit.stats.equipment_jump : 0);
-      const skillTotalPower = skill.power + unit.selectedBuild.equipments.sumSkillModIncrease(skill.id);
+      let skillTotalPower = skill.power + unit.selectedBuild.equipments.sumSkillModIncrease(skill.id);
+      if (skill.isLimitBreak && lbPower > 0) {
+        skillTotalPower += lbPower;
+      }
 
       for (let i = 0; i < skill.hits; i++) {
         if (i > 0 && frames[i] - frames[i - 1] > 25) {
           chainCombos = 0;
         }
         let hitPower = skillTotalPower * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
-        if (skill.isLimitBreak) {
-          if (lbPower > 0) {
-            hitPower += lbPower * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
-          }
-          if (lbMultiplier > 1) {
-            result.lbMultiplier = lbMultiplier;
-            hitPower *= lbMultiplier;
-          }
+        if (skill.isLimitBreak && lbMultiplier > 1) {
+          result.lbMultiplier = lbMultiplier;
+          hitPower *= lbMultiplier;
         }
         if (skill.isJump) {
           result.jumpMultiplier = jumpMultiplier;
