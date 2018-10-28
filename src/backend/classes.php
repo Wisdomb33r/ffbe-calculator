@@ -4,6 +4,7 @@ require_once "../../gestion/genscripts/object_brex_build_equipment.class.php";
 require_once "../../gestion/genscripts/object_brex_comp_eveil.class.php";
 class Equipment {
   public $id;
+  public $gumiId;
   public $category;
   public $name;
   public $icon;
@@ -51,6 +52,7 @@ class Equipment {
   public $elements = array ();
   function __construct($brex_equipement, $language) {
     $this->id = $brex_equipement->id;
+    $this->gumiId = $brex_equipement->gumi_id;
     $this->category = $brex_equipement->categorie->id;
     $this->name = $language == 'fr' ? $brex_equipement->nom : $brex_equipement->nom_en;
     $this->icon = $brex_equipement->getImageimgPath ();

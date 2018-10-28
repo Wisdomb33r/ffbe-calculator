@@ -25,6 +25,7 @@ import {KillerPassives} from './killer-passives.model';
 export class Equipment {
   // from backend
   public id: number;
+  public gumiId: number;
   public category: number;
   public name: string;
   public icon: string;
@@ -77,6 +78,7 @@ export class Equipment {
 
   constructor(equipment: Equipment) {
     this.id = equipment.id;
+    this.gumiId = equipment.gumiId;
     this.category = equipment.category;
     this.name = equipment.name;
     this.icon = equipment.icon;
