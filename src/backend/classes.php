@@ -287,6 +287,7 @@ class UnitStats {
   public $evo;
   public $jump;
   public $esper_percent;
+  public $lb_multiplier;
   function __construct($brex_unit_stats) {
     $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
     $this->hp_passive = $brex_unit_stats->pv_passif_amelio > 0 ? $brex_unit_stats->pv_passif_amelio : $brex_unit_stats->pv_passif;
@@ -321,6 +322,7 @@ class UnitStats {
     $this->evo = $brex_unit_stats->evop_amelio > 0 ? $brex_unit_stats->evop_amelio : $brex_unit_stats->evop;
     $this->jump = $brex_unit_stats->jump;
     $this->esper_percent = $brex_unit_stats->esper_percent;
+    $this->lb_multiplier = $brex_unit_stats->lb_boost;
   }
 }
 class Build {

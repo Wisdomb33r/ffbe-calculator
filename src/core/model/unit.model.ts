@@ -125,6 +125,15 @@ export class Unit {
     return killer;
   }
 
+  public getLbMultiplier() {
+    return this.selectedBuild.equipments.sumEquipmentLbBoost(this.id)
+      + (this.stats.lb_multiplier ? this.stats.lb_multiplier - 1 : 0);
+  }
+
+  public getLbPowerIncrease() {
+    return this.selectedBuild.equipments.sumEquipmentLbMod(this.id);
+  }
+
   public computeRealStats() {
     this.stats.defineEquipmentsStats(
       this.selectedBuild.equipments.sumEquipmentStat('hp'),

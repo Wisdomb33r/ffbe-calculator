@@ -122,7 +122,10 @@
   <span *ngIf="passive.spr_tdh" [class.inactive]="!isTdhActive()">+{{passive.spr_tdh}}% {{'spr' | translate}} {{'tdh' | translate}}</span>
   <span *ngIf="passive.spr_dw" [class.inactive]="!isDualWielding()">+{{passive.spr_dw}}% {{'spr' | translate}} {{'tdw' | translate}}</span>
   <span *ngIf="passive.evo">+{{passive.evo}}% {{'evo' | translate}}</span>
-  <span *ngIf="passive.lb_power">+{{passive.lb_power}}% {{'lbPower' | translate}}</span>
+  <span *ngIf="passive.lb_power && passive.lb_power >= 10">+{{passive.lb_power}}% {{'lbPower' | translate}}</span>
+  <span *ngIf="passive.lb_power && passive.lb_power < 9">
+    +{{(passive.lb_power - 1) * 100 | integer}}% {{'lbDamages' | translate}}
+  </span>
   <span *ngIf="passive.skill">+{{passive.skill_mod}}% <img src="{{passive.skill_icon}}">{{passive.skill_name}}</span>
 
   <span *ngIf="passive.physical_killers" class="passive">

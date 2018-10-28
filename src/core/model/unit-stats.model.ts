@@ -12,6 +12,7 @@ export class UnitStats {
   public evo: UnitStat;
   public jump: number;
   public esper_percent: number;
+  public lb_multiplier: number;
 
   // transcient
   public equipment_jump: number;
@@ -27,6 +28,7 @@ export class UnitStats {
     this.evo = new UnitStat(stats.evo, 0, 0, 0, 0);
     this.jump = stats.jump;
     this.esper_percent = stats.esper_percent;
+    this.lb_multiplier = stats.lb_multiplier;
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number, evo: number) {

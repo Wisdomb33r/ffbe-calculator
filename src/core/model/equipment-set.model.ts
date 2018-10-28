@@ -99,7 +99,7 @@ export class EquipmentSet {
     return result;
   }
 
-  public sumEquipmentLbBoost() {
+  public sumEquipmentLbBoost(unitId: number) {
     let result = 1;
     result += this.right_hand && this.right_hand.lb_multiplier ? this.right_hand.lb_multiplier - 1 : 0;
     result += this.left_hand && this.left_hand.lb_multiplier ? this.left_hand.lb_multiplier - 1 : 0;
@@ -109,9 +109,23 @@ export class EquipmentSet {
     result += this.accessory2 && this.accessory2.lb_multiplier ? this.accessory2.lb_multiplier - 1 : 0;
     result += this.materia1 && this.materia1.lb_multiplier ? this.materia1.lb_multiplier - 1 : 0;
     result += this.materia2 && this.materia2.lb_multiplier ? this.materia2.lb_multiplier - 1 : 0;
+    result += this.materia3 && this.materia3.lb_multiplier ? this.materia3.lb_multiplier - 1 : 0;
     result += this.materia4 && this.materia4.lb_multiplier ? this.materia4.lb_multiplier - 1 : 0;
+    this.getAllActiveConditionalPassives(unitId)
+      .filter((cond: ConditionalPassive) => cond.lb_power > 1 && cond.lb_power < 10)
+      .map(cond => cond.lb_power)
+      .forEach(lbMultiplier => {
+        result += lbMultiplier - 1;
+      });
 
     return result;
+  }
+
+  public sumEquipmentLbMod(unitId: number) {
+    return this.getAllActiveConditionalPassives(unitId)
+      .filter((cond: ConditionalPassive) => cond.lb_power >= 10)
+      .map(cond => cond.lb_power)
+      .reduce((val1, val2) => val1 + val2, 0);
   }
 
   public sumEquipmentStatPercent(statName: string): number {
