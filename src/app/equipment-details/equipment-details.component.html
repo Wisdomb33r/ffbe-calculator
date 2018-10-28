@@ -88,6 +88,7 @@
   </span>
   </ng-container>
 </p>
+<p *ngIf="equipment.lb_multiplier">+{{(equipment.lb_multiplier - 1) * 100 | integer}}% {{'lbDamages' | translate}}</p>
 
 <p *ngFor="let passive of getConditionalPassivesToDisplay()" class="passive" [class.inactive]="!passive.active">
   <span *ngIf="passive.hp">+{{passive.hp}}% {{'hp' | translate}}
