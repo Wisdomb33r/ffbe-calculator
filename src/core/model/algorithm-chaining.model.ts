@@ -55,8 +55,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       const frames: Array<number> = ('' + skill.frames).split(' ').map((s: string) => +s);
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
-      let chainCombos = 0;
-      const baseCombo: number = skill.chainCombo ? +skill.chainCombo : 0;
+      let chainCombos = skill.chainCombo ? +skill.chainCombo / 2 : 0;
 
       const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentLbBoost();
       const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)
@@ -69,7 +68,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
         if (i > 0 && frames[i] - frames[i - 1] > 25) {
           chainCombos = 0;
         }
-        let hitPower = skillTotalPower * damages[i] / 100 * Math.min(4, 1 + baseCombo + chainCombos * result.combosIncrement * 2);
+        let hitPower = skillTotalPower * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
         if (skill.isLimitBreak) {
           if (lbPower > 0) {
             hitPower += lbPower * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
