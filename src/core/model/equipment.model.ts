@@ -161,6 +161,7 @@ export class Equipment {
     return this.id === 1199 // second knife
       || this.id === 1352 // bowie knife
       || this.id === 2293 // sasuke's katana
+      || this.id === 2779 // excalibur (ff type-0)
       ;
   }
 
