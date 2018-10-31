@@ -60,6 +60,7 @@ export class Unit {
       || this.id === 942 // CG Raegen
       || this.id === 980 // Aileen 7*
       || this.id === 1004 // Estark
+      || this.id === 1161 // Machina
       || (this.id === 8053 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1305) // Reberta
       || this.id === 8063 // A2
       || this.id === 8159 // Rico
