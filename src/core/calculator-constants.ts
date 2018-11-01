@@ -97,10 +97,13 @@ export const DIABOLOS_KILLERS: Esper = getDiabolosWithKillers();
 export const DIABOLOS_EVOKE_BOOST: Esper = getDiabolosWithDamageModifier();
 export const CARBUNCLE_SPR: Esper = getCarbuncleSpr();
 export const CARBUNCLE_SUPPORT: Esper = getCarbuncleSupport();
+export const ODIN_KILLERS: Esper = getOdinKillers();
 export const TITAN: Esper = getTitan();
 export const TETRA_SYLPHID_KILLER: Esper = getTetraSylphidWithKiller();
-export const FENRIR: Esper = getFenrir();
 export const BAHAMUT: Esper = getBahamut();
+export const FENRIR: Esper = getFenrir();
+export const PHOENIX_KILLER: Esper = getPhoenixKillers();
+export const PHOENIX_TANKING: Esper = getPhoenixTanking();
 export const ESPER_BUILDS: Array<Esper> = [
   IFRIT_KILLERS,
   IFRIT_STATS_BOOST,
@@ -116,10 +119,13 @@ export const ESPER_BUILDS: Array<Esper> = [
   DIABOLOS_EVOKE_BOOST,
   CARBUNCLE_SPR,
   CARBUNCLE_SUPPORT,
+  ODIN_KILLERS,
   TITAN,
   TETRA_SYLPHID_KILLER,
   BAHAMUT,
   FENRIR,
+  PHOENIX_KILLER,
+  PHOENIX_TANKING,
 ];
 
 function getIfritWithKillers(): Esper {
@@ -606,7 +612,7 @@ function getFenrir(): Esper {
   return esper;
 }
 
-function getPhenixKillers(): Esper {
+function getPhoenixKillers(): Esper {
   const esper = new Esper();
   esper.id = 151;
   esper.name_fr = 'Phénix';
@@ -633,12 +639,12 @@ function getPhenixKillers(): Esper {
   return esper;
 }
 
-function getPhenixTanking(): Esper {
+function getPhoenixTanking(): Esper {
   const esper = new Esper();
   esper.id = 152;
   esper.name_fr = 'Phénix';
   esper.name_en = 'Phoenix';
-  esper.build_fr = 'Tueur de morts-vivants+<br />Stats boost';
+  esper.build_fr = 'Garde de Phénix<br />Stats boost';
   esper.build_en = 'Phoenix Guard<br />Stats boost x2';
   esper.rank = 3;
   esper.level = 60;
