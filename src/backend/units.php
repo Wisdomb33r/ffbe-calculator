@@ -11,6 +11,10 @@ function dieWithError($statusCode, $errorMessages) {
   die ();
 }
 
+if (isset ( $_SERVER ['HTTP_ORIGIN'] ) && ($_SERVER ['HTTP_ORIGIN'] == "http://www.ffbeequip.com" || $_SERVER ['HTTP_ORIGIN'] == "http://www.ffbeEquip.com" || $_SERVER ['HTTP_ORIGIN'] == "https://www.ffbeequip.com" || $_SERVER ['HTTP_ORIGIN'] == "https://www.ffbeEquip.com")) {
+  header ( "Access-Control-Allow-Origin: $_SERVER ['HTTP_ORIGIN']" );
+}
+
 if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
   $language = 'en';
   if (isset ( $_GET ['language'] ) && $_GET ['language'] == 'fr') {

@@ -7,6 +7,7 @@ import {
   DAGGERS,
   GUNS,
   HAMMERS,
+  HARPS,
   HEAD_CATEGORIES,
   KATANAS,
   LSWORDS,
@@ -174,9 +175,12 @@ export class Equipment {
   }
 
   public isWeaponTraitPossible(): boolean {
-    return (this.id < 2379 && (this.category === KATANAS || this.category === RODS || this.category === GUNS))
-      || (this.id < 2478 && (this.category === SWORDS || this.category === LSWORDS || this.category === WHIPS || this.category === THROWING))
-      || (this.id < 2620 && (this.category === SPEARS || this.category === MACES || this.category === CLAWS || this.category === BOWS))
-      || (this.id < 2707 && (this.category === DAGGERS || this.category === STAVES || this.category === AXES || this.category === HAMMERS));
+    return (this.id < 2379 && (this.category === RODS))
+      || (this.id < 2478 && (this.category === SWORDS))
+      || (this.id < 2620 && (this.category === SPEARS || this.category === BOWS))
+      || (this.id < 2707 && (this.category === DAGGERS || this.category === STAVES || this.category === AXES || this.category === HAMMERS))
+      || (this.id < 2795 && (this.category === LSWORDS || this.category === KATANAS || this.category === HARPS || this.category === WHIPS
+        || this.category === THROWING || this.category === GUNS || this.category === MACES || this.category === CLAWS))
+      ;
   }
 }

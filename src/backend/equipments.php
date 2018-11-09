@@ -41,6 +41,9 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     if ($weapon_category == '13') {
       $objects [] = brex_objet::findByPrimaryId ( 2694 ); // hammers
     }
+    if ($weapon_category == '33') {
+      $objects [] = brex_objet::findByPrimaryId ( 2791 ); // harps
+    }
     if ($weapon_category == '34') {
       $objects [] = brex_objet::findByPrimaryId ( 2463 ); // whips
     }

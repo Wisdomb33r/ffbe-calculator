@@ -30,6 +30,7 @@ export const BOWS = 6;
 export const AXES = 29;
 export const HAMMERS = 13;
 export const SPEARS = 32;
+export const HARPS = 33;
 export const WHIPS = 34;
 export const THROWING = 24;
 export const GUNS = 15;
