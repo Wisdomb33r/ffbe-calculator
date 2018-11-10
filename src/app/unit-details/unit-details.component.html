@@ -47,6 +47,7 @@
                  (click)="displayStatDetails('spr')"></td>
         </tr>
       </table>
+      <app-unit-traits [passives]="unit.conditional_passives"></app-unit-traits>
       <div class="esper">
         <img [src]="unit.selectedBuild.esper.icon" [alt]="getEsperName()" (click)="openEsperSelectionPane()">
         <div class="esper-info">
@@ -54,7 +55,6 @@
           <p [innerHTML]="getEsperBuildName(unit.selectedBuild.esper)"></p>
         </div>
       </div>
-      <app-unit-traits [passives]="unit.conditional_passives"></app-unit-traits>
     </div>
   </mat-card-content>
 </mat-card>
