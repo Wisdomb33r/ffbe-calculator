@@ -75,6 +75,9 @@ export class Build {
             skill.category = 9;
             skill.damages_type = 'evoker';
           }
+          if (build.id === 162 || build.id === 163 || build.id === 164) { // viktor marchenko LB
+            skill.calculation_stat = 'def';
+          }
         }
 
         this.skills.push(new Skill(skill));
