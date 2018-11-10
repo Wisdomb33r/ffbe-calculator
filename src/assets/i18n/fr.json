@@ -10,6 +10,7 @@
   "tdh": "TDH",
   "tdw": "TDW",
   "lbPower": "puissance LB",
+  "lbDamages": "dégâts LB",
   "dragon": "Dragon",
   "insect": "Insecte",
   "fairy": "Esprit",
@@ -114,7 +115,7 @@
           "dw": "Deux armes",
           "esper": "Chimère",
           "total": "Total",
-          "limitWarn": "La caractéristique dépasse la limite de 300% autorisée par le jeu. Une partie du bonus est donc perdue."
+          "limitWarn": "La caractéristique dépasse la limite autorisée par le jeu (400% passifs, 300% deux mains, 100% deux armes). Une partie du bonus est donc perdue."
         }
       }
     }
@@ -165,6 +166,7 @@
       "turn": "Tour",
       "hits": "Coups",
       "lbMultiplier": "Multiplicateur LB",
+      "jumpMultiplier": "Multiplicateur saut",
       "resistances": "Résistances",
       "enemyBaseResistances": "Résist. adversaire",
       "elementalResistances": "Résistances élémentaires",
@@ -183,6 +185,7 @@
       "variances": "Variances",
       "killer": "Tueurs",
       "killerDamages": "Dégâts après tueurs",
+      "killerLimitExceeded": "Limite de 300% de passifs de tueurs (par type de monstre) dépassée, une partie du bonus est perdue",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
     },
     "offensive": {

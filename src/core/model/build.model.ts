@@ -71,6 +71,10 @@ export class Build {
               skill.damages_type = 'hybrid';
               break;
           }
+          if (build.id === 197 || build.id === 211) { // Citra LB
+            skill.category = 9;
+            skill.damages_type = 'evoker';
+          }
         }
 
         this.skills.push(new Skill(skill));
@@ -86,21 +90,29 @@ export class Build {
     }
   }
 
-  public getPhysicalKillers() {
-    return (this.physical_killers ? this.physical_killers.getKillerSum() : 0) + this.equipments.getPhysicalKillers();
+  public getPhysicalKillers(unitId: number) {
+    return (this.physical_killers ? this.physical_killers.getKillerSum() : 0) + this.equipments.getPhysicalKillers(unitId);
   }
 
-  public getPhysicalKiller(opponentKillerType: string) {
+  public getPhysicalKiller(opponentKillerType: string, unitId: number) {
     return (this.physical_killers && this.physical_killers[opponentKillerType] ? this.physical_killers[opponentKillerType] : 0)
-      + this.equipments.getPhysicalKiller(opponentKillerType);
+      + this.equipments.getPhysicalKiller(opponentKillerType, unitId);
   }
 
-  public getMagicalKillers() {
-    return (this.magical_killers ? this.magical_killers.getKillerSum() : 0) + this.equipments.getMagicalKillers();
+  public getMagicalKillers(unitId: number) {
+    return (this.magical_killers ? this.magical_killers.getKillerSum() : 0) + this.equipments.getMagicalKillers(unitId);
   }
 
-  public getMagicalKiller(opponentKillerType: string) {
+  public getMagicalKiller(opponentKillerType: string, unitId: number) {
     return (this.magical_killers && this.magical_killers[opponentKillerType] ? this.magical_killers[opponentKillerType] : 0)
-      + this.equipments.getMagicalKiller(opponentKillerType);
+      + this.equipments.getMagicalKiller(opponentKillerType, unitId);
+  }
+
+  public getSkillIdentifiers(): Array<number> {
+    let identifiers = [];
+    if (this.skills && this.skills.length > 0) {
+      identifiers = this.skills.map((skill: Skill) => skill.id);
+    }
+    return identifiers;
   }
 }

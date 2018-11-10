@@ -58,14 +58,18 @@ export class Unit {
       || this.id === 775 // 2B
       || this.id === 844 // CG Jake
       || this.id === 942 // CG Raegen
+      || this.id === 980 // Aileen 7*
       || this.id === 1004 // Estark
+      || this.id === 1161 // Machina
       || (this.id === 8053 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1305) // Reberta
       || this.id === 8063 // A2
       || this.id === 8159 // Rico
+      || this.id === 8061 // Zargabaath 7*
       || this.id === 8168 // Adam Jensen
       || this.id === 8171 // Viktor Marchenko
       || this.id === 8174 // Aloha Lasswell
       || this.id === 8186 // Malphasie
+      || this.id === 8204 // Lucius
       ;
   }
 
@@ -91,7 +95,7 @@ export class Unit {
   }
 
   public getPhysicalKillers(): number {
-    let killer = this.selectedBuild.getPhysicalKillers();
+    let killer = this.selectedBuild.getPhysicalKillers(this.id);
     killer += this.filterUnitActiveConditionalPassives()
       .map((passive: ConditionalPassive) => passive.physical_killers ? passive.physical_killers.getKillerSum() : 0)
       .reduce((val1, val2) => val1 + val2, 0);
@@ -99,7 +103,7 @@ export class Unit {
   }
 
   public getPhysicalKiller(opponentKillerType: string): number {
-    let killer = this.selectedBuild.getPhysicalKiller(opponentKillerType);
+    let killer = this.selectedBuild.getPhysicalKiller(opponentKillerType, this.id);
     killer += this.filterUnitActiveConditionalPassives()
       .map((passive: ConditionalPassive) => passive.getPhysicalKiller(opponentKillerType))
       .reduce((val1, val2) => val1 + val2, 0);
@@ -107,7 +111,7 @@ export class Unit {
   }
 
   public getMagicalKillers(): number {
-    let killer = this.selectedBuild.getMagicalKillers();
+    let killer = this.selectedBuild.getMagicalKillers(this.id);
     killer += this.filterUnitActiveConditionalPassives()
       .map((passive: ConditionalPassive) => passive.magical_killers ? passive.magical_killers.getKillerSum() : 0)
       .reduce((val1, val2) => val1 + val2, 0);
@@ -115,11 +119,20 @@ export class Unit {
   }
 
   public getMagicalKiller(opponentKillerType: string): number {
-    let killer = this.selectedBuild.getMagicalKiller(opponentKillerType);
+    let killer = this.selectedBuild.getMagicalKiller(opponentKillerType, this.id);
     killer += this.filterUnitActiveConditionalPassives()
       .map((passive: ConditionalPassive) => passive.getMagicalKiller(opponentKillerType))
       .reduce((val1, val2) => val1 + val2, 0);
     return killer;
+  }
+
+  public getLbMultiplier() {
+    return this.selectedBuild.equipments.sumEquipmentLbBoost(this.id)
+      + (this.stats.lb_multiplier ? this.stats.lb_multiplier - 1 : 0);
+  }
+
+  public getLbPowerIncrease() {
+    return this.selectedBuild.equipments.sumEquipmentLbMod(this.id);
   }
 
   public computeRealStats() {
@@ -140,6 +153,7 @@ export class Unit {
       this.selectedBuild.equipments.sumEquipmentStatPercent('mag'),
       this.selectedBuild.equipments.sumEquipmentStatPercent('def'),
       this.selectedBuild.equipments.sumEquipmentStatPercent('spr'),
+      this.selectedBuild.equipments.sumEquipmentStat('jump'),
       equipmentActiveConditionalPassives
     );
     this.stats.defineEquipmentDwBonuses(

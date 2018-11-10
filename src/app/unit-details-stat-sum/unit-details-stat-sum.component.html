@@ -50,7 +50,7 @@
     <tr *ngIf="dualwielding">
       <td>{{'unit.details.stats.popup.dw' | translate}}</td>
       <td>{{getEquipmentDwValue() | integer}}</td>
-      <td class="percent">({{getEquipmentDwPercent()}}%)</td>
+      <td class="percent" [class.limit-warn]="isEquipmentDwLimitExceeded()">({{getEquipmentDwPercent()}}%)</td>
     </tr>
     <tr>
       <th>{{'unit.details.stats.popup.esper' | translate}}</th>
@@ -65,7 +65,7 @@
     <tr>
       <td>{{'unit.details.stats.popup.passive' | translate}}</td>
       <td>{{getEsperPassiveValue() | integer}}</td>
-      <td class="percent" [class.limit-warn]="isEquipmentPassiveLimitExceeded()">({{getEsperPassivePercent()}}%)
+      <td class="percent">({{getEsperPassivePercent()}}%)
       </td>
     </tr>
     <tr class="total">
@@ -74,6 +74,6 @@
       <td></td>
     </tr>
   </table>
-  <p *ngIf="isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded()" class="limit-warn">
+  <p *ngIf="isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded() || isEquipmentDwLimitExceeded()" class="limit-warn">
     {{'unit.details.stats.popup.limitWarn' | translate}}</p>
 </mat-dialog-content>

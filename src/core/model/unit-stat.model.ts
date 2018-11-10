@@ -1,3 +1,5 @@
+import {DH_LIMIT_CAP, EVO_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_LIMIT_CAP} from '../calculator-constants';
+
 export class UnitStat {
   // from backend
   public base: number;
@@ -40,17 +42,25 @@ export class UnitStat {
   public computeTotal(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
     this.evaluateDhTdhDwActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
     const effectiveEquipmentPassive = this.getEffectiveEquipmentPassive();
-    const effectiveEquipmentDh = this.getEffectiveEquipmentDh(isDoubleHandActive, isTrueDoubleHandActive);
+    const effectiveEquipmentDh = this.getEffectiveEquipmentDh();
+    const effectiveEquipmentTdw = this.getEffectiveEquipmentTdw();
     this.value_from_passive = this.base * (this.passive + this.conditional_passive) / 100;
     this.value_from_passive_equipment = this.base * effectiveEquipmentPassive / 100;
     this.value_from_dh = this.base_equipment * (this.dh_effective + this.tdh_effective) / 100;
     this.value_from_dh_equipment = this.base_equipment * effectiveEquipmentDh / 100;
     this.value_from_dw = this.base_equipment * this.dw_effective / 100;
-    this.value_from_dw_equipment = this.base_equipment * this.dw_equipment / 100;
+    this.value_from_dw_equipment = this.base_equipment * effectiveEquipmentTdw / 100;
     this.value_from_passive_esper = this.base * this.passive_esper / 100;
     this.total = Math.floor(this.base + this.value_from_passive + this.value_from_passive_equipment
       + this.value_from_dh + this.value_from_dh_equipment + this.base_equipment + this.value_from_dw + this.value_from_dw_equipment
       + this.value_from_esper + this.value_from_passive_esper);
+  }
+
+  public computeEvoTotal() {
+    this.total = this.base + this.base_equipment + this.passive_equipment;
+    if (this.total > EVO_LIMIT_CAP) {
+      this.total = EVO_LIMIT_CAP;
+    }
   }
 
   public evaluateDhTdhDwActivation(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
@@ -63,18 +73,26 @@ export class UnitStat {
   }
 
   private getEffectiveEquipmentPassive(): number {
-    if ((this.passive + this.conditional_passive + this.passive_equipment + this.passive_esper) > 300) {
-      return 300 - this.passive - this.conditional_passive - this.passive_esper;
+    if ((this.passive + this.conditional_passive + this.passive_equipment + this.passive_esper) > PASSIVE_LIMIT_CAP) {
+      return PASSIVE_LIMIT_CAP - this.passive - this.conditional_passive - this.passive_esper;
     } else {
       return this.passive_equipment;
     }
   }
 
-  private getEffectiveEquipmentDh(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean): number {
-    if ((this.dh_effective + this.tdh_effective + this.dh_equipment + this.tdh_equipment) > 300) {
-      return 300 - this.dh_effective - this.tdh_effective;
+  private getEffectiveEquipmentDh(): number {
+    if ((this.dh_effective + this.tdh_effective + this.dh_equipment + this.tdh_equipment) > DH_LIMIT_CAP) {
+      return DH_LIMIT_CAP - this.dh_effective - this.tdh_effective;
     } else {
       return this.dh_equipment + this.tdh_equipment;
+    }
+  }
+
+  private getEffectiveEquipmentTdw(): number {
+    if ((this.dw_effective + this.dw_equipment) > TDW_LIMIT_CAP) {
+      return TDW_LIMIT_CAP - this.dw_effective;
+    } else {
+      return this.dw_equipment;
     }
   }
 }

@@ -10,6 +10,7 @@
   "tdh": "TDH",
   "tdw": "TDW",
   "lbPower": "LB power",
+  "lbDamages": "LB damage",
   "dragon": "Dragon",
   "insect": "Insect",
   "fairy": "Fairy",
@@ -114,7 +115,7 @@
           "dw": "Dual Wield",
           "esper": "Esper",
           "total": "Total",
-          "limitWarn": "The unit stat increase is over the 300% limit. The bonus is partially lost."
+          "limitWarn": "The unit stat increase is over the allowed limit (400% traits, 300% doublehand, 100% dual wield). The bonus is partially lost."
         }
       }
     }
@@ -165,6 +166,7 @@
       "turn": "Turn",
       "hits": "Hits",
       "lbMultiplier": "LB multiplier",
+      "jumpMultiplier": "Jump multiplier",
       "resistances": "Resists",
       "enemyBaseResistances": "Enemy resists",
       "elementalResistances": "Elemental resists",
@@ -183,6 +185,7 @@
       "variances": "Variances",
       "killer": "Killers",
       "killerDamages": "Damages after killers",
+      "killerLimitExceeded": "300% killer limit (per monster type) exceeded, bonus is partially lost",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
     "offensive": {

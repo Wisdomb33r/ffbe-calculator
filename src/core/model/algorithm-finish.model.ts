@@ -25,7 +25,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     this.calculateComboMultiplier(skill, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
-    const killerValue = skill.skillType.getActiveKillers(unit, this.opponentKillerType, this.opponentKillerType2);
+    const killerValue = skill.skillType.getActiveKillers(unit, this.opponentKillerType, this.opponentKillerType2, result);
     skill.damageType.calculateKillerDamages(unit, this.isKillerActive, killerValue, result);
     this.calculateEffectiveResistances(skill, result);
     skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
@@ -55,28 +55,34 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
 
-      const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
-      const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)
-        .map(p => p.lb_power ? p.lb_power : 0)
-        .reduce((val1, val2) => val1 + val2, 0);
+      const lbMultiplier = unit.getLbMultiplier();
+      const lbPower = unit.getLbPowerIncrease();
+      const jumpMultiplier = 100 + (skill.isJump ? unit.stats.jump + unit.stats.equipment_jump : 0);
+      let skillTotalPower = skill.power + unit.selectedBuild.equipments.sumSkillModIncrease(skill.id);
+      if (skill.isLimitBreak && lbPower > 0) {
+        skillTotalPower += lbPower;
+      }
 
       for (let i = 0; i < skill.hits; i++) {
-        let hitPower = skill.power * damages[i] / 100 * result.combosIncrement;
-        if (skill.isLimitBreak) {
-          if (lbPower > 0) {
-            hitPower += lbPower * damages[i] / 100 * result.combosIncrement;
-          }
-          if (lbMultiplier > 0) {
-            result.lbMultiplier = lbMultiplier;
-            hitPower = lbMultiplier * hitPower;
-          }
+        let hitPower = skillTotalPower * damages[i] / 100 * result.combosIncrement;
+        if (skill.isLimitBreak && lbMultiplier > 1) {
+          result.lbMultiplier = lbMultiplier;
+          hitPower = lbMultiplier * hitPower;
+        }
+        if (skill.isJump) {
+          result.jumpMultiplier = jumpMultiplier;
+          hitPower *= jumpMultiplier / 100;
         }
         hitsPower.push(hitPower);
       }
       if (nbAttacks > 1) {
         for (let i = 1; i < nbAttacks; i++) {
           for (let j = 0; j < skill.hits; j++) {
-            hitsPower.push(skill.power * damages[j] / 100 * result.combosIncrement);
+            let hitPower = skillTotalPower * damages[j] / 100 * result.combosIncrement;
+            if (skill.isJump) {
+              hitPower *= jumpMultiplier / 100;
+            }
+            hitsPower.push(hitPower);
           }
         }
       }

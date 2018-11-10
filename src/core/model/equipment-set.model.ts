@@ -99,6 +99,35 @@ export class EquipmentSet {
     return result;
   }
 
+  public sumEquipmentLbBoost(unitId: number) {
+    let result = 1;
+    result += this.right_hand && this.right_hand.lb_multiplier ? this.right_hand.lb_multiplier - 1 : 0;
+    result += this.left_hand && this.left_hand.lb_multiplier ? this.left_hand.lb_multiplier - 1 : 0;
+    result += this.head && this.head.lb_multiplier ? this.head.lb_multiplier - 1 : 0;
+    result += this.body && this.body.lb_multiplier ? this.body.lb_multiplier - 1 : 0;
+    result += this.accessory1 && this.accessory1.lb_multiplier ? this.accessory1.lb_multiplier - 1 : 0;
+    result += this.accessory2 && this.accessory2.lb_multiplier ? this.accessory2.lb_multiplier - 1 : 0;
+    result += this.materia1 && this.materia1.lb_multiplier ? this.materia1.lb_multiplier - 1 : 0;
+    result += this.materia2 && this.materia2.lb_multiplier ? this.materia2.lb_multiplier - 1 : 0;
+    result += this.materia3 && this.materia3.lb_multiplier ? this.materia3.lb_multiplier - 1 : 0;
+    result += this.materia4 && this.materia4.lb_multiplier ? this.materia4.lb_multiplier - 1 : 0;
+    this.getAllActiveConditionalPassives(unitId)
+      .filter((cond: ConditionalPassive) => cond.lb_power > 1 && cond.lb_power < 10)
+      .map(cond => cond.lb_power)
+      .forEach(lbMultiplier => {
+        result += lbMultiplier - 1;
+      });
+
+    return result;
+  }
+
+  public sumEquipmentLbMod(unitId: number) {
+    return this.getAllActiveConditionalPassives(unitId)
+      .filter((cond: ConditionalPassive) => cond.lb_power >= 10)
+      .map(cond => cond.lb_power)
+      .reduce((val1, val2) => val1 + val2, 0);
+  }
+
   public sumEquipmentStatPercent(statName: string): number {
     let result = 0;
     result += this.right_hand ? this.right_hand[statName + '_percent'] : 0;
@@ -120,7 +149,7 @@ export class EquipmentSet {
     return result;
   }
 
-  public getPhysicalKillers(): number {
+  public getPhysicalKillers(unitId: number): number {
     let result = 0;
     result += this.right_hand && this.right_hand.physical_killers ? this.right_hand.physical_killers.getKillerSum() : 0;
     result += this.left_hand && this.left_hand.physical_killers ? this.left_hand.physical_killers.getKillerSum() : 0;
@@ -132,13 +161,13 @@ export class EquipmentSet {
     result += this.materia2 && this.materia2.physical_killers ? this.materia2.physical_killers.getKillerSum() : 0;
     result += this.materia3 && this.materia3.physical_killers ? this.materia3.physical_killers.getKillerSum() : 0;
     result += this.materia4 && this.materia4.physical_killers ? this.materia4.physical_killers.getKillerSum() : 0;
-    result += this.getAllConditionalPassives()
+    result += this.getAllActiveConditionalPassives(unitId)
       .map((passive: ConditionalPassive) => passive.physical_killers ? passive.physical_killers.getKillerSum() : 0)
       .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
-  public getPhysicalKiller(opponentKillerType: string): number {
+  public getPhysicalKiller(opponentKillerType: string, unitId: number): number {
     let result = 0;
     result += this.right_hand ? this.right_hand.getPhysicalKiller(opponentKillerType) : 0;
     result += this.left_hand ? this.left_hand.getPhysicalKiller(opponentKillerType) : 0;
@@ -150,13 +179,13 @@ export class EquipmentSet {
     result += this.materia2 ? this.materia2.getPhysicalKiller(opponentKillerType) : 0;
     result += this.materia3 ? this.materia3.getPhysicalKiller(opponentKillerType) : 0;
     result += this.materia4 ? this.materia4.getPhysicalKiller(opponentKillerType) : 0;
-    result += this.getAllConditionalPassives()
+    result += this.getAllActiveConditionalPassives(unitId)
       .map((passive: ConditionalPassive) => passive.getPhysicalKiller(opponentKillerType))
       .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
-  public getMagicalKillers(): number {
+  public getMagicalKillers(unitId: number): number {
     let result = 0;
     result += this.right_hand && this.right_hand.magical_killers ? this.right_hand.magical_killers.getKillerSum() : 0;
     result += this.left_hand && this.left_hand.magical_killers ? this.left_hand.magical_killers.getKillerSum() : 0;
@@ -168,13 +197,13 @@ export class EquipmentSet {
     result += this.materia2 && this.materia2.magical_killers ? this.materia2.magical_killers.getKillerSum() : 0;
     result += this.materia3 && this.materia3.magical_killers ? this.materia3.magical_killers.getKillerSum() : 0;
     result += this.materia4 && this.materia4.magical_killers ? this.materia4.magical_killers.getKillerSum() : 0;
-    result += this.getAllConditionalPassives()
+    result += this.getAllActiveConditionalPassives(unitId)
       .map((passive: ConditionalPassive) => passive.magical_killers ? passive.magical_killers.getKillerSum() : 0)
       .reduce((val1, val2) => val1 + val2, 0);
     return result;
   }
 
-  public getMagicalKiller(opponentKillerType: string): number {
+  public getMagicalKiller(opponentKillerType: string, unitId: number): number {
     let result = 0;
     result += this.right_hand ? this.right_hand.getMagicalKiller(opponentKillerType) : 0;
     result += this.left_hand ? this.left_hand.getMagicalKiller(opponentKillerType) : 0;
@@ -186,7 +215,7 @@ export class EquipmentSet {
     result += this.materia2 ? this.materia2.getMagicalKiller(opponentKillerType) : 0;
     result += this.materia3 ? this.materia3.getMagicalKiller(opponentKillerType) : 0;
     result += this.materia4 ? this.materia4.getMagicalKiller(opponentKillerType) : 0;
-    result += this.getAllConditionalPassives()
+    result += this.getAllActiveConditionalPassives(unitId)
       .map((passive: ConditionalPassive) => passive.getMagicalKiller(opponentKillerType))
       .reduce((val1, val2) => val1 + val2, 0);
     return result;
@@ -238,10 +267,15 @@ export class EquipmentSet {
 
   public checkConditionalPassiveActive(condPassive: ConditionalPassive, unitId: number): boolean {
     // unit-specific bonus of an item
-    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0
-      && unitId !== condPassive.unit) {
+    if (!isNullOrUndefined(condPassive.unit) && condPassive.unit > 0 && unitId !== condPassive.unit) {
       return false;
     }
+
+    // skill modifier increase
+    if (!isNullOrUndefined(condPassive.skill)) {
+      return true;
+    }
+
     // unit or item bonus if a category of equipment is present
     if (!isNullOrUndefined(condPassive.category) && condPassive.category > 0 && !condPassive.partial_dw
       && !((this.right_hand && this.right_hand.category === condPassive.category)
@@ -302,5 +336,13 @@ export class EquipmentSet {
       ...this.materia3 ? this.materia3.conditional_passives : [],
       ...this.materia4 ? this.materia4.conditional_passives : [],
     ];
+  }
+
+  public sumSkillModIncrease(skillId: number) {
+    return this.getAllConditionalPassives()
+      .filter((cond: ConditionalPassive) =>
+        cond.active && !isNullOrUndefined(cond.skill) && !isNullOrUndefined(skillId) && cond.skill === skillId)
+      .map((cond: ConditionalPassive) => cond.skill_mod)
+      .reduce((val1, val2) => val1 + val2, 0);
   }
 }

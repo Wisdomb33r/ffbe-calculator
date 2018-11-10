@@ -48,6 +48,7 @@ import {AppFooterComponent} from './app-footer.component';
 import {EsperSelectionComponent} from './popup/esper-selection/esper-selection.component';
 import {CalculationEsperDamagesComponent} from './popup/calculation-esper-damages/calculation-esper-damages.component';
 import {CalculationEvokerDamagesComponent} from './popup/calculation-evoker-damages/calculation-evoker-damages.component';
+import {PushBuildComponent} from './push-build/push-build.component';
 import {UnitTraitsComponent} from './unit-traits/unit-traits.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -92,6 +93,7 @@ const appRoutes: Routes = [
     ExternalLinkComponent,
     PermanentUrlComponent,
     EsperSelectionComponent,
+    PushBuildComponent,
     UnitTraitsComponent,
   ],
   imports: [

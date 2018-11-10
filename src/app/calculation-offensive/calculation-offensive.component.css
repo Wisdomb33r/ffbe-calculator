@@ -17,10 +17,6 @@ td {
   padding-right: 5px;
 }
 
-td:last-child {
-  padding-right: 0;
-}
-
 p {
   font-size: 12px;
   margin-bottom: 0;

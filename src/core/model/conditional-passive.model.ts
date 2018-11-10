@@ -6,6 +6,10 @@ export class ConditionalPassive {
   public unit: number;
   public category: number;
   public element: number;
+  public skill: number;
+  public skill_name: string;
+  public skill_icon: string;
+  public skill_mod: number;
   public hp: number;
   public hp_dh: number;
   public hp_tdh: number;
@@ -30,11 +34,13 @@ export class ConditionalPassive {
   public spr_dh: number;
   public spr_tdh: number;
   public spr_dw: number;
+  public jump: number;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
   public partial_dw: boolean;
   public unique: boolean;
   public lb_power: number;
+  public evo: number;
   public esper_percent: number;
 
   // transcient
@@ -45,6 +51,10 @@ export class ConditionalPassive {
     this.unit = conditionalPassive.unit;
     this.category = conditionalPassive.category;
     this.element = conditionalPassive.element;
+    this.skill = conditionalPassive.skill;
+    this.skill_name = conditionalPassive.skill_name;
+    this.skill_icon = conditionalPassive.skill_icon;
+    this.skill_mod = conditionalPassive.skill_mod;
     this.hp = conditionalPassive.hp ? conditionalPassive.hp : 0;
     this.hp_dh = conditionalPassive.hp_dh ? conditionalPassive.hp_dh : 0;
     this.hp_tdh = conditionalPassive.hp_tdh ? conditionalPassive.hp_tdh : 0;
@@ -69,6 +79,7 @@ export class ConditionalPassive {
     this.spr_dh = conditionalPassive.spr_dh ? conditionalPassive.spr_dh : 0;
     this.spr_tdh = conditionalPassive.spr_tdh ? conditionalPassive.spr_tdh : 0;
     this.spr_dw = conditionalPassive.spr_dw ? conditionalPassive.spr_dw : 0;
+    this.jump = conditionalPassive.jump ? conditionalPassive.jump : 0;
     if (conditionalPassive.physical_killers) {
       this.physical_killers = KillerPassives.construct(conditionalPassive.physical_killers);
     }
@@ -78,6 +89,7 @@ export class ConditionalPassive {
     this.partial_dw = conditionalPassive.partial_dw ? true : false;
     this.unique = conditionalPassive.unique ? true : false;
     this.lb_power = conditionalPassive.lb_power;
+    this.evo = conditionalPassive.evo;
     this.esper_percent = conditionalPassive.esper_percent;
   }
 

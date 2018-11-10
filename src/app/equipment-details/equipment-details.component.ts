@@ -24,6 +24,8 @@ export class EquipmentDetailsComponent {
 
   public getConditionalPassivesToDisplay(): Array<ConditionalPassive> {
     return this.equipment.conditional_passives
+      .filter((condPassive: ConditionalPassive) => isNullOrUndefined(condPassive.skill)
+        || this.unitsService.selectedUnit.selectedBuild.getSkillIdentifiers().find((id: number) => id === condPassive.skill))
       .filter(condPassive => condPassive.active || isNullOrUndefined(condPassive.unit)
         || this.unitsService.selectedUnit.id === condPassive.unit);
   }

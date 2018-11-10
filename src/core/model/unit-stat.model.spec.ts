@@ -81,18 +81,18 @@ describe('UnitStat', () => {
     expect(unitStat.total).toEqual(900);
   });
 
-  it('#computeTotal should limit the stat passive increase to 300%', () => {
+  it('#computeTotal should limit the stat passive increase to 400%', () => {
     // GIVEN
     const unitStat: UnitStat = new UnitStat(100, 150, 0, 0, 0);
     unitStat.passive_equipment = 150;
-    unitStat.conditional_passive = 100;
+    unitStat.conditional_passive = 150;
     // WHEN
     unitStat.computeTotal(true, true, false);
     // THEN
     expect(unitStat.base).toEqual(100);
-    expect(unitStat.value_from_passive).toEqual(250); // 150% + 100% conditional
-    expect(unitStat.value_from_passive_equipment).toEqual(50); // only 50% out of the 150%
-    expect(unitStat.total).toEqual(400);
+    expect(unitStat.value_from_passive).toEqual(300); // 150% + 150% conditional
+    expect(unitStat.value_from_passive_equipment).toEqual(100); // only 50% out of the 150%
+    expect(unitStat.total).toEqual(500);
   });
 
   it('#computeTotal should limit the stat dh increase to 300%', () => {
@@ -110,5 +110,20 @@ describe('UnitStat', () => {
     expect(unitStat.value_from_dh).toEqual(200); // 100% DH + 100% TDH
     expect(unitStat.value_from_dh_equipment).toEqual(100); // 100% DH + 100% TDH exceed the limit, only 100% taken
     expect(unitStat.total).toEqual(500);
+  });
+
+  it('#computeTotal should limit the stat dw increase to 100%', () => {
+    // GIVEN
+    const unitStat: UnitStat = new UnitStat(100, 0, 0, 0, 80);
+    unitStat.base_equipment = 100;
+    unitStat.dw_equipment = 80;
+    // WHEN
+    unitStat.computeTotal(false, false, true);
+    // THEN
+    expect(unitStat.base).toEqual(100);
+    expect(unitStat.base_equipment).toEqual(100);
+    expect(unitStat.value_from_dw).toEqual(80); // 80% DW
+    expect(unitStat.value_from_dw_equipment).toEqual(20); // only 20% taken
+    expect(unitStat.total).toEqual(300);
   });
 });

@@ -1,10 +1,13 @@
 import {ConditionalPassive} from './conditional-passive.model';
 import {
+  AXES,
   BODY_CATEGORIES,
   BOWS,
   CLAWS,
   DAGGERS,
   GUNS,
+  HAMMERS,
+  HARPS,
   HEAD_CATEGORIES,
   KATANAS,
   LSWORDS,
@@ -12,6 +15,7 @@ import {
   RODS,
   SHIELDS_CATEGORIES,
   SPEARS,
+  STAVES,
   SWORDS,
   THROWING,
   WEAPONS_CATEGORIES,
@@ -22,6 +26,7 @@ import {KillerPassives} from './killer-passives.model';
 export class Equipment {
   // from backend
   public id: number;
+  public gumiId: number;
   public category: number;
   public name: string;
   public icon: string;
@@ -56,6 +61,7 @@ export class Equipment {
   public spr_tdh: number;
   public spr_dw: number;
   public evo: number;
+  public jump: number;
   public variance_min: number;
   public variance_max: number;
   public unique: boolean;
@@ -73,6 +79,7 @@ export class Equipment {
 
   constructor(equipment: Equipment) {
     this.id = equipment.id;
+    this.gumiId = equipment.gumiId;
     this.category = equipment.category;
     this.name = equipment.name;
     this.icon = equipment.icon;
@@ -107,6 +114,7 @@ export class Equipment {
     this.spr_tdh = equipment.spr_tdh;
     this.spr_dw = equipment.spr_dw;
     this.evo = equipment.evo;
+    this.jump = equipment.jump;
     this.variance_min = equipment.variance_min;
     this.variance_max = equipment.variance_max;
     this.unique = equipment.unique;
@@ -154,6 +162,7 @@ export class Equipment {
     return this.id === 1199 // second knife
       || this.id === 1352 // bowie knife
       || this.id === 2293 // sasuke's katana
+      || this.id === 2779 // excalibur (ff type-0)
       ;
   }
 
@@ -166,8 +175,12 @@ export class Equipment {
   }
 
   public isWeaponTraitPossible(): boolean {
-    return (this.id < 2379 && (this.category === DAGGERS || this.category === KATANAS || this.category === RODS || this.category === GUNS))
-      || (this.id < 2478 && (this.category === SWORDS || this.category === LSWORDS || this.category === WHIPS || this.category === THROWING))
-      || (this.id < 2620 && (this.category === SPEARS || this.category === MACES || this.category === CLAWS || this.category === BOWS));
+    return (this.id < 2379 && (this.category === RODS))
+      || (this.id < 2478 && (this.category === SWORDS))
+      || (this.id < 2620 && (this.category === SPEARS || this.category === BOWS))
+      || (this.id < 2707 && (this.category === DAGGERS || this.category === STAVES || this.category === AXES || this.category === HAMMERS))
+      || (this.id < 2795 && (this.category === LSWORDS || this.category === KATANAS || this.category === HARPS || this.category === WHIPS
+        || this.category === THROWING || this.category === GUNS || this.category === MACES || this.category === CLAWS))
+      ;
   }
 }

@@ -9,6 +9,7 @@ export class Esper {
   public rank: number;
   public level: number;
   public icon: string;
+  public build: string;
   public hp: number;
   public hp_percent: number;
   public mp: number;

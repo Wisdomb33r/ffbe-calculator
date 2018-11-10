@@ -4,6 +4,7 @@ require_once "../../gestion/genscripts/object_brex_build_equipment.class.php";
 require_once "../../gestion/genscripts/object_brex_comp_eveil.class.php";
 class Equipment {
   public $id;
+  public $gumiId;
   public $category;
   public $name;
   public $icon;
@@ -37,6 +38,7 @@ class Equipment {
   public $spr_dh;
   public $spr_tdh;
   public $spr_dw;
+  public $jump;
   public $variance_min;
   public $variance_max;
   public $unique;
@@ -50,6 +52,7 @@ class Equipment {
   public $elements = array ();
   function __construct($brex_equipement, $language) {
     $this->id = $brex_equipement->id;
+    $this->gumiId = $brex_equipement->gumi_id;
     $this->category = $brex_equipement->categorie->id;
     $this->name = $language == 'fr' ? $brex_equipement->nom : $brex_equipement->nom_en;
     $this->icon = $brex_equipement->getImageimgPath ();
@@ -84,6 +87,7 @@ class Equipment {
     $this->spr_tdh = $brex_equipement->psy_tdh;
     $this->spr_dw = $brex_equipement->psy_dw;
     $this->evo = $brex_equipement->evop;
+    $this->jump = $brex_equipement->jump;
     $this->variance_min = $brex_equipement->variance_min;
     $this->variance_max = $brex_equipement->variance_max;
     $this->unique = $brex_equipement->uniq == 1 ? true : false;
@@ -100,7 +104,7 @@ class Equipment {
     if (count ( $brex_build_passives )) {
       $this->conditional_passives = array ();
       foreach ( $brex_build_passives as $passive ) {
-        $this->conditional_passives [] = new ConditionalPassive ( $passive );
+        $this->conditional_passives [] = new ConditionalPassive ( $passive, $language );
       }
     }
     if ($brex_equipement->res_feu >= 100) {
@@ -165,6 +169,9 @@ class ConditionalPassive {
   public $unit;
   public $category;
   public $element;
+  public $skill;
+  public $skill_name;
+  public $skill_icon;
   public $hp;
   public $hp_dh;
   public $hp_tdh;
@@ -189,17 +196,24 @@ class ConditionalPassive {
   public $spr_dh;
   public $spr_tdh;
   public $spr_dw;
+  public $jump;
   public $physical_killers;
   public $magical_killers;
   public $partial_dw;
   public $unique;
   public $lb_power;
+  public $evo;
   public $esper_percent;
-  function __construct($brex_unit_passive) {
+  function __construct($brex_unit_passive, $language) {
     $this->id = $brex_unit_passive->id;
     $this->unit = $brex_unit_passive->unit ? $brex_unit_passive->unit->numero : null;
     $this->category = $brex_unit_passive->categorie ? $brex_unit_passive->categorie->id : null;
     $this->element = $brex_unit_passive->element ? $brex_unit_passive->element->id : null;
+    if ($brex_unit_passive->passif) {
+      $this->skill = $brex_unit_passive->passif->id;
+      $this->skill_name = $language == 'fr' ? $brex_unit_passive->passif->nom : $brex_unit_passive->passif->nom_en;
+      $this->skill_icon = $brex_unit_passive->passif->icone->getImageimgPath ();
+    }
     $this->hp = $brex_unit_passive->pv;
     $this->hp_dh = $brex_unit_passive->pv_dh;
     $this->hp_tdh = $brex_unit_passive->pv_tdh;
@@ -224,6 +238,7 @@ class ConditionalPassive {
     $this->spr_dh = $brex_unit_passive->psy_dh;
     $this->spr_tdh = $brex_unit_passive->psy_tdh;
     $this->spr_dw = $brex_unit_passive->psy_dw;
+    $this->jump = $brex_unit_passive->jump;
     if ($brex_unit_passive->tueurs) {
       $this->physical_killers = new KillerPassives ( $brex_unit_passive->tueurs );
     }
@@ -233,6 +248,8 @@ class ConditionalPassive {
     $this->partial_dw = $brex_unit_passive->partial_dw ? true : false;
     $this->unique = $brex_unit_passive->uniq ? true : false;
     $this->lb_power = $brex_unit_passive->lb_boost;
+    $this->skill_mod = $brex_unit_passive->skill_mod;
+    $this->evo = $brex_unit_passive->evop;
     $this->esper_percent = $brex_unit_passive->esper_percent;
   }
 }
@@ -268,7 +285,9 @@ class UnitStats {
   public $spr_tdh;
   public $spr_dw;
   public $evo;
+  public $jump;
   public $esper_percent;
+  public $lb_multiplier;
   function __construct($brex_unit_stats) {
     $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
     $this->hp_passive = $brex_unit_stats->pv_passif_amelio > 0 ? $brex_unit_stats->pv_passif_amelio : $brex_unit_stats->pv_passif;
@@ -301,7 +320,9 @@ class UnitStats {
     $this->spr_tdh = $brex_unit_stats->psy_tdh;
     $this->spr_dw = $brex_unit_stats->psy_dw;
     $this->evo = $brex_unit_stats->evop_amelio > 0 ? $brex_unit_stats->evop_amelio : $brex_unit_stats->evop;
+    $this->jump = $brex_unit_stats->jump;
     $this->esper_percent = $brex_unit_stats->esper_percent;
+    $this->lb_multiplier = $brex_unit_stats->lb_boost;
   }
 }
 class Build {
@@ -366,6 +387,7 @@ class Skill {
   public $power;
   public $isLimitBreak;
   public $isEsper;
+  public $isJump;
   public $nb;
   public $hits;
   public $frames;
@@ -384,6 +406,7 @@ class Skill {
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite ? true : false;
     $this->isEsper = $brex_skill->is_esper ? true : false;
+    $this->isJump = $brex_skill->is_jump ? true : false;
     $this->power = $brex_skill->puissance;
     if ($brex_skill->nb > 1) {
       $this->power = $brex_skill->puissance / $brex_skill->nb;
@@ -529,7 +552,7 @@ class Unit {
       $this->conditional_passives = array ();
       foreach ( $brex_unit_passives as $brex_unit_passive ) {
         if (! $brex_unit_passive->objet) {
-          $this->conditional_passives [] = new ConditionalPassive ( $brex_unit_passive );
+          $this->conditional_passives [] = new ConditionalPassive ( $brex_unit_passive, $language );
         }
       }
     }

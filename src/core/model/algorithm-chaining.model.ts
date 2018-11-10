@@ -25,7 +25,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
     this.calculateCombosIncrement(skill, unit, result);
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
-    const killerValue: number = skill.skillType.getActiveKillers(unit, this.opponentKillerType, this.opponentKillerType2);
+    const killerValue: number = skill.skillType.getActiveKillers(unit, this.opponentKillerType, this.opponentKillerType2, result);
     skill.damageType.calculateKillerDamages(unit, this.isKillerActive, killerValue, result);
     this.calculateEffectiveResistances(skill, result);
     skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
@@ -55,26 +55,28 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       const frames: Array<number> = ('' + skill.frames).split(' ').map((s: string) => +s);
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
-      let chainCombos = 0;
-      const baseCombo: number = skill.chainCombo ? +skill.chainCombo : 0;
+      let chainCombos = skill.chainCombo ? +skill.chainCombo / 2 : 0;
 
-      const lbMultiplier = unit.selectedBuild.equipments.sumEquipmentStat('lb_multiplier');
-      const lbPower = unit.selectedBuild.equipments.getAllActiveConditionalPassives(unit.id)
-        .map(p => p.lb_power ? p.lb_power : 0)
-        .reduce((val1, val2) => val1 + val2, 0);
+      const lbMultiplier = unit.getLbMultiplier();
+      const lbPower = unit.getLbPowerIncrease();
+      const jumpMultiplier = 100 + (skill.isJump ? unit.stats.jump + unit.stats.equipment_jump : 0);
+      let skillTotalPower = skill.power + unit.selectedBuild.equipments.sumSkillModIncrease(skill.id);
+      if (skill.isLimitBreak && lbPower > 0) {
+        skillTotalPower += lbPower;
+      }
+
       for (let i = 0; i < skill.hits; i++) {
-        if (i > 0 && frames[i] - frames[i - 1] > 25) {
+        if (i > 0 && frames[i] - frames[i - 1] > 20) {
           chainCombos = 0;
         }
-        let hitPower = skill.power * damages[i] / 100 * Math.min(4, 1 + baseCombo + chainCombos * result.combosIncrement * 2);
-        if (skill.isLimitBreak) {
-          if (lbPower > 0) {
-            hitPower += lbPower * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
-          }
-          if (lbMultiplier > 0) {
-            result.lbMultiplier = lbMultiplier;
-            hitPower *= lbMultiplier;
-          }
+        let hitPower = skillTotalPower * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
+        if (skill.isLimitBreak && lbMultiplier > 1) {
+          result.lbMultiplier = lbMultiplier;
+          hitPower *= lbMultiplier;
+        }
+        if (skill.isJump) {
+          result.jumpMultiplier = jumpMultiplier;
+          hitPower *= jumpMultiplier / 100;
         }
         hitsPower.push(hitPower);
         chainCombos++;
@@ -85,10 +87,14 @@ export class AlgorithmChaining extends AlgorithmOffensive {
         }
         for (let i = 1; i < nbAttacks; i++) {
           for (let j = 0; j < skill.hits; j++) {
-            if (j > 0 && frames[j] - frames[j - 1] > 25) {
+            if (j > 0 && frames[j] - frames[j - 1] > 20) {
               chainCombos = 0;
             }
-            hitsPower.push(skill.power * damages[j] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2));
+            let hitPower = skillTotalPower * damages[j] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
+            if (skill.isJump) {
+              hitPower *= jumpMultiplier / 100;
+            }
+            hitsPower.push(hitPower);
             chainCombos++;
           }
         }

@@ -62,10 +62,70 @@ describe('EquipmentSet', () => {
   it('#sumEquipmentStat should sum all equipment stat', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.left_hand = equipments.right_hand;
     // WHEN
     const sum = equipments.sumEquipmentStat('atk');
     // THEN
-    expect(sum).toEqual(275);
+    expect(sum).toEqual(405);
+  });
+
+  it('#sumEquipmentStat should return 0 if no item equipped', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse('{}'));
+    // WHEN
+    const sum = equipments.sumEquipmentStat('atk');
+    // THEN
+    expect(sum).toEqual(0);
+  });
+
+  it('#sumEquipmentStatPercent should sum all equipment stat percent', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.left_hand = equipments.right_hand;
+    // WHEN
+    const sum = equipments.sumEquipmentStatPercent('atk');
+    // THEN
+    expect(sum).toEqual(40);
+  });
+
+  it('#sumEquipmentStatPercent should return 0 if no item equipped', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse('{}'));
+    // WHEN
+    const sum = equipments.sumEquipmentStatPercent('atk');
+    // THEN
+    expect(sum).toEqual(0);
+  });
+
+  it('#removeAllRemoveable should remove left hand and weapon enhancements', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.left_hand = equipments.right_hand;
+    equipments.lh_trait1 = equipments.right_hand;
+    equipments.lh_trait2 = equipments.right_hand;
+    equipments.lh_trait3 = equipments.right_hand;
+    equipments.rh_trait1 = equipments.right_hand;
+    equipments.rh_trait2 = equipments.right_hand;
+    equipments.rh_trait3 = equipments.right_hand;
+    // WHEN
+    equipments.removeAllRemoveable();
+    // THEN
+    expect(equipments.right_hand).toBeTruthy();
+    expect(equipments.rh_trait1).toBeFalsy();
+    expect(equipments.rh_trait2).toBeFalsy();
+    expect(equipments.rh_trait3).toBeFalsy();
+    expect(equipments.left_hand).toBeFalsy();
+    expect(equipments.lh_trait1).toBeFalsy();
+    expect(equipments.lh_trait2).toBeFalsy();
+    expect(equipments.lh_trait3).toBeFalsy();
+    expect(equipments.head).toBeTruthy();
+    expect(equipments.body).toBeTruthy();
+    expect(equipments.accessory1).toBeTruthy();
+    expect(equipments.accessory2).toBeTruthy();
+    expect(equipments.materia1).toBeTruthy();
+    expect(equipments.materia2).toBeTruthy();
+    expect(equipments.materia3).toBeTruthy();
+    expect(equipments.materia4).toBeTruthy();
   });
 
   it('#getAllActiveConditionalPassives should return conditional passives activated by equipments', () => {

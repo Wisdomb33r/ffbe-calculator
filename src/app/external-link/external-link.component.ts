@@ -36,6 +36,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
   private materia3: number;
   private materia4: number;
   private esper: number;
+  private idType: string;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -65,6 +66,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         this.materia3 = +params.get('materia3');
         this.materia4 = +params.get('materia4');
         this.esper = +params.get('esper');
+        this.idType = params.get('id_type');
 
         return this.databaseClient.getUnitById$(this.unit);
       }),
@@ -96,9 +98,6 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           }
           if (this.materia1 || this.materia2 || this.materia3 || this.materia4) {
             observables.push(this.unitsService.getAllowedEquipmentsForSlot$('materia1'));
-          }
-          if (this.left_hand) {
-            observables.push(this.unitsService.getAllowedEquipmentsForSlot$('left_hand'));
           }
 
           return forkJoin(observables);
@@ -142,15 +141,24 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           }
           index++;
         }
-        if (this.left_hand) {
-          this.testAndEquip('left_hand', this.left_hand, observablesResults, index);
-          index++;
-        }
         if (this.esper) {
           const esper: Esper = ESPER_BUILDS.find(e => e.id === this.esper);
           if (esper) {
             this.unitsService.selectedUnit.selectedBuild.esper = esper;
           }
+        }
+      }),
+      switchMap(any => {
+        const observables = [];
+        observables.push(of(true));
+        if (this.left_hand) {
+          observables.push(this.unitsService.getAllowedEquipmentsForSlot$('left_hand'));
+        }
+        return forkJoin(observables);
+      }),
+      tap(observablesResults => {
+        if (this.left_hand) {
+          this.testAndEquip('left_hand', this.left_hand, observablesResults, 1);
         }
       }),
       switchMap(any => {
@@ -205,7 +213,12 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
   private testAndEquip(slot: string, equipment_id: number, observablesResults, index: number) {
     const equipments: Array<Equipment> = observablesResults[index];
     if (equipments && equipments.length > 0) {
-      const equipment: Equipment = equipments.find((e: Equipment) => e.id === equipment_id);
+      let equipment: Equipment;
+      if (this.idType === 'gumi') {
+        equipment = equipments.find((e: Equipment) => e.gumiId === equipment_id);
+      } else {
+        equipment = equipments.find((e: Equipment) => e.id === equipment_id);
+      }
       if (equipment) {
         this.unitsService.equipInSlot(slot, equipment);
       }

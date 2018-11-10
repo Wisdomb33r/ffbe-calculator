@@ -10,9 +10,12 @@ export class UnitStats {
   public def: UnitStat;
   public spr: UnitStat;
   public evo: UnitStat;
+  public jump: number;
   public esper_percent: number;
+  public lb_multiplier: number;
 
   // transcient
+  public equipment_jump: number;
   public equipment_esper_percent: number;
 
   constructor(stats: any) {
@@ -23,7 +26,9 @@ export class UnitStats {
     this.def = new UnitStat(stats.def, stats.def_passive, stats.def_dh, stats.def_tdh, stats.def_dw);
     this.spr = new UnitStat(stats.spr, stats.spr_passive, stats.spr_dh, stats.spr_tdh, stats.spr_dw);
     this.evo = new UnitStat(stats.evo, 0, 0, 0, 0);
+    this.jump = stats.jump;
     this.esper_percent = stats.esper_percent;
+    this.lb_multiplier = stats.lb_multiplier;
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number, evo: number) {
@@ -45,7 +50,7 @@ export class UnitStats {
     this.spr.conditional_passive = passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
   }
 
-  public defineEquipmentPassives(hp: number, mp: number, atk: number, mag: number, def: number, spr: number,
+  public defineEquipmentPassives(hp: number, mp: number, atk: number, mag: number, def: number, spr: number, jump: number,
                                  passives: Array<ConditionalPassive>) {
     this.hp.passive_equipment = hp + passives.map(passive => passive.hp).reduce((val1, val2) => val1 + val2, 0);
     this.mp.passive_equipment = mp + passives.map(passive => passive.mp).reduce((val1, val2) => val1 + val2, 0);
@@ -53,6 +58,8 @@ export class UnitStats {
     this.mag.passive_equipment = mag + passives.map(passive => passive.mag).reduce((val1, val2) => val1 + val2, 0);
     this.def.passive_equipment = def + passives.map(passive => passive.def).reduce((val1, val2) => val1 + val2, 0);
     this.spr.passive_equipment = spr + passives.map(passive => passive.spr).reduce((val1, val2) => val1 + val2, 0);
+    this.evo.passive_equipment = passives.map(passive => passive.evo).reduce((val1, val2) => val1 + val2, 0);
+    this.equipment_jump = jump + passives.map(passive => passive.jump).reduce((val1, val2) => val1 + val2, 0);
   }
 
   public defineEquipmentDwBonuses(hp_dw: number, mp_dw: number, atk_dw: number, mag_dw: number, def_dw: number, spr_dw: number,
@@ -112,6 +119,6 @@ export class UnitStats {
     this.mag.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
     this.def.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
     this.spr.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.evo.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.evo.computeEvoTotal();
   }
 }

@@ -34,6 +34,10 @@
       <td>{{'calculation.display.lbMultiplier' | translate}}</td>
       <td>{{result.lbMultiplier | number:'1.2-2'}}</td>
     </tr>
+    <tr *ngIf="result.jumpMultiplier">
+      <td>{{'calculation.display.jumpMultiplier' | translate}}</td>
+      <td>{{result.jumpMultiplier | integer}}%</td>
+    </tr>
   </table>
   <p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
   <h3>{{'calculation.offensive.turnPower' | translate}}</h3>
@@ -125,7 +129,9 @@
       </td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
       <td *ngIf="algorithm.opponentKillerType === 'unknown'">{{result.killerPassive | integer}}%</td>
-      <td *ngIf="algorithm.opponentKillerType !== 'unknown'">{{result.killerPassive / 10 | integer}}%</td>
+      <td *ngIf="algorithm.opponentKillerType !== 'unknown'" [class.limit-warn]="result.isKillerLimitExceeded">
+        {{result.killerPassive / 10 | integer}}%
+      </td>
     </tr>
     <tr *ngIf="result.elements && result.elements.length > 0">
       <td>{{'calculation.display.enemyBaseResistances' | translate}}</td>
@@ -232,6 +238,8 @@
   <p>= {{result.physicalDamages | integer}}</p>
 
   <h3 *ngIf="result.killerPassive">{{'calculation.display.killerDamages' | translate}}</h3>
+  <p *ngIf="result.isKillerLimitExceeded" class="limit-warn">
+    {{'calculation.display.killerLimitExceeded' | translate}}</p>
   <p *ngIf="result.killerPassive">
     {{result.physicalDamages | integer}} * (1+{{result.killerPassive}}%/10)
   </p>

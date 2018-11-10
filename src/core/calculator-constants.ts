@@ -1,6 +1,11 @@
 import {KillerPassives} from './model/killer-passives.model';
 import {Esper} from './model/esper.model';
 
+export const KILLER_LIMIT_CAP = 300;
+export const TDW_LIMIT_CAP = 100;
+export const DH_LIMIT_CAP = 300;
+export const PASSIVE_LIMIT_CAP = 400;
+export const EVO_LIMIT_CAP = 300;
 export const MONSTER_TYPES = [
   'dragon',
   'insect',
@@ -19,9 +24,13 @@ export const DAGGERS = 16;
 export const SWORDS = 1;
 export const LSWORDS = 27;
 export const KATANAS = 28;
+export const STAVES = 17;
 export const RODS = 2;
 export const BOWS = 6;
+export const AXES = 29;
+export const HAMMERS = 13;
 export const SPEARS = 32;
+export const HARPS = 33;
 export const WHIPS = 34;
 export const THROWING = 24;
 export const GUNS = 15;
@@ -64,12 +73,14 @@ export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
   2461, // swords
   2462, // larges swords
   2318, // katanas
+  2683, // staves
   2319, // rods
   2620, // bows
+  2694, // hammers
   2623, // spears
   2463, // whips
   2464, // throwing weapons
-  2320, // guns
+  2320, // guns and axes
   2621, // maces
   2622, // claws
 ];
@@ -87,10 +98,13 @@ export const DIABOLOS_KILLERS: Esper = getDiabolosWithKillers();
 export const DIABOLOS_EVOKE_BOOST: Esper = getDiabolosWithDamageModifier();
 export const CARBUNCLE_SPR: Esper = getCarbuncleSpr();
 export const CARBUNCLE_SUPPORT: Esper = getCarbuncleSupport();
+export const ODIN_KILLERS: Esper = getOdinKillers();
 export const TITAN: Esper = getTitan();
 export const TETRA_SYLPHID_KILLER: Esper = getTetraSylphidWithKiller();
-export const FENRIR: Esper = getFenrir();
 export const BAHAMUT: Esper = getBahamut();
+export const FENRIR: Esper = getFenrir();
+export const PHOENIX_KILLER: Esper = getPhoenixKillers();
+export const PHOENIX_TANKING: Esper = getPhoenixTanking();
 export const ESPER_BUILDS: Array<Esper> = [
   IFRIT_KILLERS,
   IFRIT_STATS_BOOST,
@@ -106,10 +120,13 @@ export const ESPER_BUILDS: Array<Esper> = [
   DIABOLOS_EVOKE_BOOST,
   CARBUNCLE_SPR,
   CARBUNCLE_SUPPORT,
+  ODIN_KILLERS,
   TITAN,
   TETRA_SYLPHID_KILLER,
   BAHAMUT,
   FENRIR,
+  PHOENIX_KILLER,
+  PHOENIX_TANKING,
 ];
 
 function getIfritWithKillers(): Esper {
@@ -209,7 +226,7 @@ function getShivaWithStatsBoost(): Esper {
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 190;
-  esper.damage_modifier = 2;
+  esper.damage_modifier = 1;
   esper.stats_percent = 40;
   esper.damageType = 'magical';
   esper.elements = [2];
@@ -470,6 +487,31 @@ function getCarbuncleSupport(): Esper {
   return esper;
 }
 
+function getOdinKillers(): Esper {
+  const esper = new Esper();
+  esper.id = 81;
+  esper.name_fr = 'Odin';
+  esper.name_en = 'Odin';
+  esper.build_fr = 'Tue-dragons+<br />Tueur de morts-vivants<br />Stats boost<br />Transpercer';
+  esper.build_en = 'Dragon Killer+<br />Undead Killer<br />Stats boost<br />Lance';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/008_a384c8.png';
+  esper.build = 'https://ffbeequip.com/espers.html?server=GL&o#eyJPZGluIjp7Im5hbWUiOiJPZGluIiwicmFyaXR5IjozLCJsZXZlbCI6NjAsInNlbGVjdGVkU2tpbGxzIjpbIjFfMCIsIjBfbTEiLCIxX20xIiwiMl9tMSIsIjNfMCIsIjRfMSIsIjRfMCIsIjNfbTEiLCIyX20yIiwiMV8xIiwibTFfMCIsIm0xX20xIiwibTJfbTEiLCJtMl9tMiIsIm0yX20zIiwibTJfbTQiLCJtM19tNCIsIm00X200IiwiMl8xIiwiMl8yIiwiM18yIiwiM18zIiwiMl8zIiwiMF9tMiIsIjFfbTIiLCJtMl8wIiwibTNfbTEiLCJtM18wIl19fQ==';
+  esper.hp = 7340 + 450;
+  esper.mp = 6100 + 20;
+  esper.atk = 8040 + 575;
+  esper.mag = 4800 + 300;
+  esper.def = 6640 + 20;
+  esper.spr = 5000;
+  esper.physical_killers = new KillerPassives(125, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 210;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 20;
+  return esper;
+}
+
 function getTitan(): Esper {
   const esper = new Esper();
   esper.id = 91;
@@ -489,7 +531,7 @@ function getTitan(): Esper {
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 220;
-  esper.damage_modifier = 2;
+  esper.damage_modifier = 1;
   esper.stats_percent = 40;
   esper.damageType = 'physical';
   esper.elements = [6];
@@ -568,5 +610,59 @@ function getFenrir(): Esper {
   esper.power = 0;
   esper.damage_modifier = 1;
   esper.stats_percent = 40;
+  return esper;
+}
+
+function getPhoenixKillers(): Esper {
+  const esper = new Esper();
+  esper.id = 151;
+  esper.name_fr = 'Phénix';
+  esper.name_en = 'Phoenix';
+  esper.build_fr = 'Tueur de morts-vivants+<br />Stats boost';
+  esper.build_en = 'Undead Killer+<br />Stats boost';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/015_917942.png';
+  esper.build = 'https://ffbeequip.com/espers.html?server=GL&o#eyJQaG9lbml4Ijp7Im5hbWUiOiJQaG9lbml4IiwicmFyaXR5IjozLCJsZXZlbCI6NjAsInNlbGVjdGVkU2tpbGxzIjpbIjBfbTEiLCIxX20xIiwiMV8wIiwiMV8xIiwiMl8xIiwiMl8yIiwiM18yIiwiM18zIiwiM180IiwiNF80IiwiNF8zIiwiNF8yIiwiMF9tMiIsIm0xX20yIiwibTFfbTMiLCJtMl9tMyIsIm0zX200IiwibTJfbTQiXX19';
+  esper.hp = 7640 + 900;
+  esper.mp = 6480;
+  esper.atk = 3900 + 140;
+  esper.mag = 4860 + 370;
+  esper.def = 4760;
+  esper.spr = 7080;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 125, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 200;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 20;
+  esper.damageType = 'magical';
+  esper.elements = [1];
+  return esper;
+}
+
+function getPhoenixTanking(): Esper {
+  const esper = new Esper();
+  esper.id = 152;
+  esper.name_fr = 'Phénix';
+  esper.name_en = 'Phoenix';
+  esper.build_fr = 'Garde de Phénix<br />Stats boost x2';
+  esper.build_en = 'Phoenix Guard<br />Stats boost x2';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/015_917942.png';
+  esper.build = 'https://ffbeequip.com/espers.html?server=GL&o#eyJQaG9lbml4Ijp7Im5hbWUiOiJQaG9lbml4IiwicmFyaXR5IjozLCJsZXZlbCI6NjAsInNlbGVjdGVkU2tpbGxzIjpbIm0xX20xIiwibTJfbTEiLCJtMl9tMiIsIm0zX20yIiwibTNfbTEiLCJtNF9tMSIsIm00X20yIiwiMF9tMSIsIjBfbTIiLCJtMV9tMiIsIm0xX20zIiwibTJfbTMiLCJtM19tNCIsIm0yX200IiwiMF9tMyIsIjBfbTQiLCJtMV9tNCIsIm0xXzAiLCIwXzEiLCIwXzIiLCIxXzIiLCIyXzMiLCIxXzMiLCJtMV8xIl19fQ==';
+  esper.hp = 7640 + 1350;
+  esper.mp = 6480 + 150;
+  esper.atk = 3900;
+  esper.mag = 4860 + 20;
+  esper.def = 4760 + 20;
+  esper.spr = 7080 + 165;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 200;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 40;
+  esper.damageType = 'magical';
+  esper.elements = [1];
   return esper;
 }
