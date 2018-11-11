@@ -11,6 +11,9 @@
           Sur la <a href="https://www.final-fantasy.ch/Ffexvius/ffexvius_calculator.php" target="_blank">page de
           présentation du calculateur</a> (langue française uniquement)
         </li>
+        <li *ngIf="translateService.currentLang === 'en'">
+          On reddit (<a href="https://www.reddit.com/user/Wisdomb33r" target="_blank">/u/Wisdomb33r</a>).
+        </li>
         <li>{{'calculator.report.mail' | translate}} <a href="mailto:info@final-fantasy.ch">info@final-fantasy.ch</a>
         </li>
       </ul>
