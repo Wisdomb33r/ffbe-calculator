@@ -1,0 +1,47 @@
+<div *ngFor="let passive of passives" class="passive" [class.inactive]="!passive.active">
+  <span *ngIf="passive.hp">+{{passive.hp}}% {{'hp' | translate}}
+    <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
+  </span>
+  <span *ngIf="passive.mp">+{{passive.mp}}% {{'mp' | translate}}
+    <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
+  </span>
+  <span *ngIf="passive.atk">+{{passive.atk}}% {{'atk' | translate}}
+    <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
+  </span>
+  <span *ngIf="passive.mag">+{{passive.mag}}% {{'mag' | translate}}
+    <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
+  </span>
+  <span *ngIf="passive.def">+{{passive.def}}% {{'def' | translate}}
+    <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
+  </span>
+  <span *ngIf="passive.spr">+{{passive.spr}}% {{'spr' | translate}}
+    <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
+  </span>
+
+  <ng-container *ngIf="passive.physical_killers">
+    <ng-container *ngFor="let type of getMonsterTypes()">
+      <span *ngIf="passive.physical_killers[type]">+{{passive.physical_killers[type]}}%
+        <img src="assets/equipments/1.png" alt="{{'physical' | translate}}"><img
+          src="assets/icons/killer.png" alt="{{'killer' | translate}}">
+        {{type | translate}}
+        <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+      </span>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="passive.magical_killers">
+    <ng-container *ngFor="let type of getMonsterTypes()">
+      <span *ngIf="passive.magical_killers[type]">+{{passive.magical_killers[type]}}%
+        <img src="assets/equipments/2.png" alt="{{'magical' | translate}}"><img
+          src="assets/icons/killer.png" alt="{{'killer' | translate}}">
+        {{type | translate}}
+        <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+      </span>
+    </ng-container>
+  </ng-container>
+</div>

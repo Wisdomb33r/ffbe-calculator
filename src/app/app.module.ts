@@ -49,6 +49,7 @@ import {EsperSelectionComponent} from './popup/esper-selection/esper-selection.c
 import {CalculationEsperDamagesComponent} from './popup/calculation-esper-damages/calculation-esper-damages.component';
 import {CalculationEvokerDamagesComponent} from './popup/calculation-evoker-damages/calculation-evoker-damages.component';
 import {PushBuildComponent} from './push-build/push-build.component';
+import {UnitTraitsComponent} from './unit-traits/unit-traits.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -93,6 +94,7 @@ const appRoutes: Routes = [
     PermanentUrlComponent,
     EsperSelectionComponent,
     PushBuildComponent,
+    UnitTraitsComponent,
   ],
   imports: [
     BrowserModule,
