@@ -12,6 +12,7 @@ import {isNullOrUndefined} from 'util';
 import {Build} from '../model/build.model';
 import {Esper} from '../model/esper.model';
 import {SPECIAL_WEAPON_ENHANCEMENTS} from '../calculator-constants';
+import {Skill} from '../model/skill.model';
 
 @Injectable()
 export class UnitsService {
@@ -136,9 +137,15 @@ export class UnitsService {
 
   private compareEquipmentsForAlgorithm(a: Equipment, b: Equipment): number {
     if (this.selectedUnit.selectedBuild.algorithmId === 1 || this.selectedUnit.selectedBuild.algorithmId === 4) {
+      if (this.selectedUnit.selectedBuild.skills.find((skill: Skill) => skill.calculation_stat === 'def')) {
+        return this.compareEquipmentsForStat(a, b, 'def');
+      }
       return this.compareEquipmentsForStat(a, b, 'atk');
     }
     if (this.selectedUnit.selectedBuild.algorithmId === 2 || this.selectedUnit.selectedBuild.algorithmId === 5) {
+      if (this.selectedUnit.selectedBuild.skills.find((skill: Skill) => skill.calculation_stat === 'spr')) {
+        return this.compareEquipmentsForStat(a, b, 'spr');
+      }
       return this.compareEquipmentsForStat(a, b, 'mag');
     }
     if (this.selectedUnit.selectedBuild.algorithmId === 3 || this.selectedUnit.selectedBuild.algorithmId === 6) {
