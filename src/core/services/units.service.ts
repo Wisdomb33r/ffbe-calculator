@@ -136,13 +136,13 @@ export class UnitsService {
 
   private compareEquipmentsForAlgorithm(a: Equipment, b: Equipment): number {
     if (this.selectedUnit.selectedBuild.algorithmId === 1 || this.selectedUnit.selectedBuild.algorithmId === 4) {
-      return this.compareEquipmentsForAtk(a, b);
+      return this.compareEquipmentsForStat(a, b, 'atk');
     }
     if (this.selectedUnit.selectedBuild.algorithmId === 2 || this.selectedUnit.selectedBuild.algorithmId === 5) {
-      return this.compareEquipmentsForMag(a, b);
+      return this.compareEquipmentsForStat(a, b, 'mag');
     }
     if (this.selectedUnit.selectedBuild.algorithmId === 3 || this.selectedUnit.selectedBuild.algorithmId === 6) {
-      return this.compareEquipmentsForHybrid(a, b);
+      return this.compareEquipmentsForHybrid(a, b, 'atk', 'mag');
     }
     if (this.selectedUnit.selectedBuild.algorithmId === 8) {
       return this.compareEquipmentsForDef(a, b);
@@ -153,24 +153,18 @@ export class UnitsService {
     return 0;
   }
 
-  private compareEquipmentsForAtk(a: Equipment, b: Equipment): number {
-    const aAtk = this.estimateStat(a, 'atk');
-    const bAtk = this.estimateStat(b, 'atk');
-    return CalculatorUtils.compareNumbers(aAtk, bAtk);
+  private compareEquipmentsForStat(a: Equipment, b: Equipment, stat: string): number {
+    const aStat = this.estimateStat(a, stat);
+    const bStat = this.estimateStat(b, stat);
+    return CalculatorUtils.compareNumbers(aStat, bStat);
   }
 
-  private compareEquipmentsForMag(a: Equipment, b: Equipment): number {
-    const aMag = this.estimateStat(a, 'mag');
-    const bMag = this.estimateStat(b, 'mag');
-    return CalculatorUtils.compareNumbers(aMag, bMag);
-  }
-
-  private compareEquipmentsForHybrid(a: Equipment, b: Equipment): number {
-    const aAtk = this.estimateStat(a, 'atk');
-    const bAtk = this.estimateStat(b, 'atk');
-    const aMag = this.estimateStat(a, 'mag');
-    const bMag = this.estimateStat(b, 'mag');
-    return CalculatorUtils.compareNumbers(aAtk + aMag, bAtk + bMag);
+  private compareEquipmentsForHybrid(a: Equipment, b: Equipment, stat1: string, stat2: string): number {
+    const aStat1 = this.estimateStat(a, stat1);
+    const bStat1 = this.estimateStat(b, stat1);
+    const aStat2 = this.estimateStat(a, stat2);
+    const bStat2 = this.estimateStat(b, stat2);
+    return CalculatorUtils.compareNumbers(aStat1 + aStat2, bStat1 + bStat2);
   }
 
   private compareEquipmentsForDef(a: Equipment, b: Equipment): number {
@@ -193,7 +187,7 @@ export class UnitsService {
     const aEvo = a.evo ? a.evo : 0;
     const bEvo = b.evo ? b.evo : 0;
     const comparison = CalculatorUtils.compareNumbers(aEvo, bEvo);
-    return comparison !== 0 ? comparison : this.compareEquipmentsForMag(a, b);
+    return comparison !== 0 ? comparison : this.compareEquipmentsForHybrid(a, b, 'mag', 'spr');
   }
 
   private estimateStat(equipment: Equipment, stat: string) {
