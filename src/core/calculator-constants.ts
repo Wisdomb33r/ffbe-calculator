@@ -70,19 +70,16 @@ export const BODY_CATEGORIES: Array<number> = [
 ];
 export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
   2317, // daggers
-  2461, // swords
-  2462, // larges swords
-  2318, // katanas
+  2318, // swords, lswords, katanas, spears, claws
   2683, // staves
   2319, // rods
   2620, // bows
   2694, // hammers
-  2623, // spears
+  2791, // harps
   2463, // whips
   2464, // throwing weapons
   2320, // guns and axes
   2621, // maces
-  2622, // claws
 ];
 export const IFRIT_KILLERS: Esper = getIfritWithKillers();
 export const IFRIT_STATS_BOOST: Esper = getIfritWithStatsBoost();
