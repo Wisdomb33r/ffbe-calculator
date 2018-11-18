@@ -122,7 +122,8 @@
   },
   "esper": {
     "selection": {
-      "title": "Choix de la chimère"
+      "title": "Choix de la chimère",
+      "viewInFfbeEquip": "Voir sur ffbe-equip"
     }
   },
   "equipment": {

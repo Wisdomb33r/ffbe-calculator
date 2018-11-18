@@ -122,7 +122,8 @@
   },
   "esper": {
     "selection": {
-      "title": "Esper choice"
+      "title": "Esper choice",
+      "viewInFfbeEquip": "View in ffbe-equip"
     }
   },
   "equipment": {

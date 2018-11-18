@@ -53,6 +53,12 @@
         <div class="esper-info">
           <h3>{{getEsperName(unit.selectedBuild.esper)}}</h3>
           <p [innerHTML]="getEsperBuildName(unit.selectedBuild.esper)"></p>
+          <p class="ffbe-equip-link">
+            <a *ngIf="unit.selectedBuild.esper.build" target="_blank" href="{{unit.selectedBuild.esper.build}}">
+              <img src="assets/equipments/7.png" alt="ffbe-equip logo">
+              {{'esper.selection.viewInFfbeEquip' | translate}}
+            </a>
+          </p>
         </div>
       </div>
     </div>

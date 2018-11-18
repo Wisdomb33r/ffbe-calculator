@@ -44,6 +44,12 @@ mat-card-title.unit-details-mct {
   cursor: pointer;
 }
 
+.esper .ffbe-equip-link img {
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
+}
+
 .esper h3 {
   font-size: 14px;
   margin: 0;
@@ -63,7 +69,12 @@ mat-card-title.unit-details-mct {
   color: white;
   background-color: #000c63;
   border: 1px solid #505139;
+  border-bottom: 0;
   border-top: 0;
+}
+
+.esper p:last-child {
+  border-bottom: 1px solid #505139;
 }
 
 mat-form-field {

@@ -133,6 +133,7 @@ function getIfritWithKillers(): Esper {
   esper.name_en = 'Ifrit';
   esper.build_fr = 'Tue-végétaux+<br />Tue-bêtes +';
   esper.build_en = 'Plant killer+<br />Beast killer+';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJJZnJpdCI6eyJuYW1lIjoiSWZyaXQiLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsibTFfMCIsIm0xX20xIiwibTJfbTIiLCJtMl9tMyIsIm0zX20zIiwibTNfbTQiLCJtNF9tNCIsIm00X20zIiwibTJfbTEiLCJtM19tMSIsIm0zXzAiLCJtNF8wIiwibTRfbTEiLCJtNF9tMiIsIm0zX20yIl19fQ==';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/002_a7253e.png';
@@ -159,6 +160,7 @@ function getIfritWithStatsBoost(): Esper {
   esper.name_en = 'Ifrit';
   esper.build_fr = 'Stats boost x2<br />Tue-végétaux<br />Tue-bêtes';
   esper.build_en = 'Stats boost x2<br />Plant Killer<br />Beast killer';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJJZnJpdCI6eyJuYW1lIjoiSWZyaXQiLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsibTFfMCIsIm0xX20xIiwibTJfbTIiLCJtMl9tMSIsIm0zX20xIiwibTNfMCIsIm0yX20zIiwiMV8wIiwiMV8xIiwiMl8yIiwiM18yIiwiNF8yIiwiNF8zIiwiMF8xIiwiMV8yIiwiMl8zIiwiM18zIiwiM180IiwiNF80IiwibTNfbTMiLCJtM19tNCIsIm00XzAiLCJtM19tMiJdfX0=';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/002_a7253e.png';
@@ -185,6 +187,7 @@ function getIfritWithDamageModifier(): Esper {
   esper.name_en = 'Ifrit';
   esper.build_fr = 'Appel Ardent x2<br />Stats boost<br />Tue-végétaux<br />Tue-bêtes';
   esper.build_en = 'Blazing Evocation x2<br />Stats boost<br />Plant Killer<br />Beast Killer';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJJZnJpdCI6eyJuYW1lIjoiSWZyaXQiLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsibTFfMCIsIjBfMSIsIjFfMiIsIjBfMiIsIjFfMyIsIjBfMyIsIm0xXzIiLCJtMV8zIiwiMF80IiwiMV80IiwiMl80IiwiMl8zIiwiM18zIiwiM180IiwiNF80IiwibTFfbTEiLCJtMl9tMiIsIm0yX20xIiwibTNfbTEiLCJtM18wIiwibTJfbTMiLCJtM19tMyJdfX0=';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/002_a7253e.png';
@@ -209,17 +212,18 @@ function getShivaWithStatsBoost(): Esper {
   esper.id = 31;
   esper.name_fr = 'Shiva';
   esper.name_en = 'Shiva';
-  esper.build_fr = 'Stats boost x2<br />Bonus PSY<br />Bonus MAG';
-  esper.build_en = 'Stats boost x2<br />SPR bonuses<br />MAG bonuses';
+  esper.build_fr = 'Stats boost x2<br />Anti-glace X<br />Bonus PSY<br />Bonus MAG';
+  esper.build_en = 'Stats boost x2<br />Barblizzaga<br />SPR bonuses<br />MAG bonuses';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJTaGl2YSI6eyJuYW1lIjoiU2hpdmEiLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsibTFfbTEiLCJtMl9tMiIsIm0yX20xIiwibTNfbTIiLCJtM19tMSIsIm00X20yIiwibTRfbTMiLCJtMV8wIiwibTJfMCIsIm0zXzAiLCJtNF8wIiwibTRfbTEiLCIwXzEiLCIxXzIiLCIyXzMiLCIxXzMiLCIwXzMiLCIxXzEiLCIxXzAiLCIyXzAiLCIzXzAiLCI0XzAiLCIyXzIiLCIzXzMiLCI0XzQiLCIzXzQiXX19';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/003_c1dc12.png';
   esper.hp = 5800 + 900;
   esper.mp = 7500 + 25;
   esper.atk = 3960 + 300;
-  esper.mag = 7020 + 300;
+  esper.mag = 7020 + 200;
   esper.def = 4460;
-  esper.spr = 7020 + 300;
+  esper.spr = 7020 + 180;
   esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   esper.power = 190;
@@ -237,6 +241,7 @@ function getGolemWithBugKillers(): Esper {
   esper.name_en = 'Golem';
   esper.build_fr = 'Tue-insecte+<br />Stats boost<br />Tue-pierre';
   esper.build_en = 'Bug Killer+<br />Stats boost<br />Stone Killer';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJHb2xlbSI6eyJuYW1lIjoiR29sZW0iLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsibTFfMCIsIm0yXzAiLCJtMV8xIiwiMF8yIiwibTFfMiIsIm0yXzEiLCJtM18wIiwibTRfbTEiLCJtNF8wIiwibTNfMSIsIm0yXzIiLCIwXzEiLCIxXzEiLCIxXzIiLCIyXzIiLCIyXzEiLCIzXzIiLCIzXzMiLCIyXzMiLCIxXzMiLCIwXzMiLCIzXzEiLCI0XzIiLCI0XzEiXX19';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
@@ -261,6 +266,7 @@ function getGolemWithStoneKillers(): Esper {
   esper.name_en = 'Golem';
   esper.build_fr = 'Tue-pierre+<br />Stats boost<br />Tue-insecte<br />DÉF +10%';
   esper.build_en = 'Stone Killer+<br />Stats boost<br />Bug Killer<br />DEF +10%';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJHb2xlbSI6eyJuYW1lIjoiR29sZW0iLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsiMF8xIiwiMV8xIiwiMV8yIiwiMl8yIiwiMl8xIiwiM18yIiwiM18zIiwiMl8zIiwiMV8zIiwiMl80IiwiMV80IiwiMF80IiwibTFfMyIsIjBfMyIsIm0xXzAiLCJtMl8wIiwibTFfMSIsIjBfMiIsIm0xXzIiLCJtMl8xIiwiM18xIiwiNF8yIiwiNF8xIiwiM180IiwibTNfMCJdfX0=';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
@@ -286,6 +292,7 @@ function getGolemWithDefensivesTraits(): Esper {
   esper.name_en = 'Golem';
   esper.build_fr = 'Provocation<br />PV +10%<br />Stats boost x2';
   esper.build_en = 'Provoke<br />HP +10%<br />Stats boost x2';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJHb2xlbSI6eyJuYW1lIjoiR29sZW0iLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsiMF9tMSIsIm0xX20yIiwibTFfbTEiLCJtMl9tMSIsIm0yX20yIiwibTNfbTIiLCJtM19tMyIsIm00X20zIiwibTRfbTIiLCIxXzAiLCIxX20xIiwiMl8wIiwiMl9tMSIsIjNfMCIsIjNfbTEiLCI0XzAiLCIwXzEiLCIxXzEiLCIxXzIiLCIyXzIiLCIyXzEiLCIzXzEiLCI0XzIiLCI0XzEiLCIzXzIiLCIzXzMiLCIyXzMiLCIxXzMiLCIyXzQiXX19';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
@@ -311,6 +318,7 @@ function getGolemWithDefensivesTraits2(): Esper {
   esper.name_en = 'Golem';
   esper.build_fr = 'Provocation<br />PV +10%<br />DÉF +10%<br />Stats boost';
   esper.build_en = 'Provoke<br />HP +10%<br />DEF +10%<br />Stats boost';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJHb2xlbSI6eyJuYW1lIjoiR29sZW0iLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsiMF9tMSIsIm0xX20yIiwibTFfbTEiLCJtMl9tMSIsIm0yX20yIiwibTNfbTIiLCJtM19tMyIsIm00X20zIiwibTRfbTIiLCIwXzEiLCIxXzEiLCIxXzIiLCIyXzIiLCIyXzEiLCIzXzIiLCIzXzMiLCIyXzMiLCIxXzMiLCIyXzQiLCIzXzQiLCIzXzEiLCI0XzIiLCI0XzEiLCIxXzQiLCIwXzQiXX19';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/004_a84098.png';
@@ -337,6 +345,7 @@ function getRamuhWithKillers(): Esper {
   esper.name_en = 'Ramuh';
   esper.build_fr = 'Stats boost<br />Tue-démon M.<br />Tue-pierre M.';
   esper.build_en = 'Stats boost<br />M Demon Killer<br />M Stone Killer';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJSYW11aCI6eyJuYW1lIjoiUmFtdWgiLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsiMV8wIiwiMl8wIiwiM18xIiwiM18wIiwiNF8wIiwiM19tMSIsIjJfbTIiLCIyXzEiLCIyXzIiLCIzXzIiLCI0XzMiLCI0XzIiLCI0XzEiLCIwX20xIiwiMV9tMSIsIjFfbTIiLCIxX20zIiwiMF9tNCIsIm0xX200Il19fQ==';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/005_c96c38.png';
@@ -363,6 +372,7 @@ function getRamuhWithStatsBoostAndDamageModifier(): Esper {
   esper.name_en = 'Ramuh';
   esper.build_fr = 'Appel de sagesse x2<br />Stats boost';
   esper.build_en = 'Wise Evocation x2<br />Stats boost';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJSYW11aCI6eyJuYW1lIjoiUmFtdWgiLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsibTFfMCIsIm0yX20xIiwibTJfMCIsIm0zX20xIiwibTNfbTIiLCJtNF9tMyIsIm00X200IiwibTRfbTIiLCJtNF9tMSIsIjBfbTEiLCIxX20xIiwiMV9tMiIsIjFfbTMiLCIwX200IiwibTFfbTQiLCIxXzAiLCIyXzAiLCIzXzEiLCIzXzAiLCI0XzAiLCIzX20xIl19fQ==';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/005_c96c38.png';
@@ -389,6 +399,7 @@ function getDiabolosWithKillers(): Esper {
   esper.name_en = 'Diabolos';
   esper.build_fr = 'Tueur +<br />Tue-démons +';
   esper.build_en = 'Man-Eater+<br />Demon Killer+';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJEaWFib2xvcyI6eyJuYW1lIjoiRGlhYm9sb3MiLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsiMV8wIiwiMF9tMSIsIjFfbTEiLCIwX20yIiwiMV9tMiIsIjJfbTIiLCIxX20zIiwiMF9tNCIsIm0xX200IiwiMV8xIiwiMl8xIiwiMl8yIiwiMV8yIiwiMF8yIiwiMV8zIiwiMF8zIiwibTFfMiIsIm0yXzIiLCJtMV8zIiwiMF80IiwiMV80Il19fQ==';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/006_8886af.png';
@@ -415,6 +426,7 @@ function getDiabolosWithDamageModifier(): Esper {
   esper.name_en = 'Diabolos';
   esper.build_fr = 'Appel de démon x2<br />Stats boost x2';
   esper.build_en = 'Demon Evocation x2<br />Stats boost x2';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJEaWFib2xvcyI6eyJuYW1lIjoiRGlhYm9sb3MiLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsibTFfMCIsIm0yX20xIiwibTNfbTEiLCJtM19tMiIsIm00X20zIiwibTRfbTQiLCIxXzEiLCIyXzEiLCIyXzIiLCIyXzMiLCIzXzMiLCIzXzIiLCI0XzIiLCI0XzEiLCI0XzMiLCI0XzQiLCJtMV9tMSIsIm0yX20yIiwibTNfbTMiLCJtMl9tMyIsIm0yX200IiwibTNfbTQiXX19';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/006_8886af.png';
@@ -441,6 +453,7 @@ function getCarbuncleSpr(): Esper {
   esper.name_en = 'Carbuncle';
   esper.build_fr = 'Stats boost x2<br />PSY +10%<br />Bonus PSY';
   esper.build_en = 'Stats boost x2<br />SPR +10%<br />SPR bonuses';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJDYXJidW5jbGUiOnsibmFtZSI6IkNhcmJ1bmNsZSIsInJhcml0eSI6MywibGV2ZWwiOjYwLCJzZWxlY3RlZFNraWxscyI6WyIxXzAiLCIxXzEiLCIyXzEiLCIyXzIiLCIzXzMiLCIyXzMiLCIxXzMiLCIyXzQiLCIzXzQiLCI0XzQiLCI0XzMiLCI0XzIiLCIyXzAiLCIxX20xIiwiMl9tMSIsIjNfbTEiLCI0XzAiLCI0XzEiLCIzXzIiLCIxXzIiLCIxXzQiXX19';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/007_fea4ed.png';
@@ -466,6 +479,7 @@ function getCarbuncleSupport(): Esper {
   esper.name_en = 'Carbuncle';
   esper.build_fr = 'Stats boost<br />Anti-feu X<br />Anti-glace X<br />Anti-foudre X<br />PV +10%';
   esper.build_en = 'Stats boost<br />Barfiraga<br />Barblizzaga<br />Barthundaga<br />HP +10%';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJDYXJidW5jbGUiOnsibmFtZSI6IkNhcmJ1bmNsZSIsInJhcml0eSI6MywibGV2ZWwiOjYwLCJzZWxlY3RlZFNraWxscyI6WyJtMV9tMSIsIm0yX20xIiwibTNfbTEiLCJtNF9tMSIsIm0yX20yIiwibTNfbTIiLCJtNF9tMiIsIjBfbTEiLCJtMV9tMiIsIjBfbTIiLCIxX20yIiwiMl9tMiIsIm0xX20zIiwiMF9tMyIsIjBfbTQiLCIxX20zIiwiMV8wIiwiMV8xIiwiMl8xIiwiMl8yIiwiM18zIiwiNF80IiwiNF8zIiwiNF8yIiwiMV8yIiwiMl8zIiwiMl8wIl19fQ==';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/007_fea4ed.png';
@@ -514,8 +528,9 @@ function getTitan(): Esper {
   esper.id = 91;
   esper.name_fr = 'Titan';
   esper.name_en = 'Titan';
-  esper.build_fr = 'Stats boost x2<br />Bonus ATT';
-  esper.build_en = 'Stats boost x2<br />ATT bonuses';
+  esper.build_fr = 'Stats boost x2<br />Anti-terre X<br />Bonus ATT';
+  esper.build_en = 'Stats boost x2<br />Barstonga<br />ATT bonuses';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJUaXRhbiI6eyJuYW1lIjoiVGl0YW4iLCJyYXJpdHkiOjMsImxldmVsIjo2MCwic2VsZWN0ZWRTa2lsbHMiOlsibTFfbTEiLCJtMl9tMSIsIm0yX20yIiwibTNfbTMiLCJtMl9tMyIsIm0zX200IiwibTRfbTQiLCJtM19tMiIsIm00X20yIiwibTRfbTMiLCIxXzEiLCIxXzIiLCIyXzMiLCIxXzMiLCIwXzMiLCIwXzQiLCIxXzQiLCIzXzMiLCI0XzQiLCJtM19tMSIsIm00X20xIl19fQ==';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/009_6e1a82.png';
@@ -542,6 +557,7 @@ function getTetraSylphidWithKiller(): Esper {
   esper.name_en = 'Tetra Sylphid';
   esper.build_fr = 'Tue-oiseaux +<br />Stats boost';
   esper.build_en = 'Bird Killer+<br />Stats boost';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJUZXRyYSBTeWxwaGlkIjp7Im5hbWUiOiJUZXRyYSBTeWxwaGlkIiwicmFyaXR5IjozLCJsZXZlbCI6NjAsInNlbGVjdGVkU2tpbGxzIjpbIjFfMCIsIjJfMSIsIjJfMiIsIjJfMyIsIjNfMyIsIjNfMiIsIjNfMSIsIjNfMCIsIjRfMSIsIjRfMCIsIjNfbTEiLCIyX20yIiwibTFfbTEiLCJtMV9tMiIsIjBfbTEiLCIxX20xIiwiMl9tMSIsIjFfbTIiLCIwX20zIiwiMV9tMyIsIjBfbTQiLCJtMV9tNCIsIjFfMSIsIjFfMiIsIjBfMiIsIjFfMyIsIjJfMCIsIjBfMSIsIm0xXzEiLCJtMl8xIl19fQ==';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/011_30eaf4.png';
@@ -568,6 +584,7 @@ function getBahamut(): Esper {
   esper.name_en = 'Bahamut';
   esper.build_fr = 'Max ATT / MAG';
   esper.build_en = 'Max ATK / MAG';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJCYWhhbXV0Ijp7Im5hbWUiOiJCYWhhbXV0IiwicmFyaXR5IjoxLCJsZXZlbCI6MzAsInNlbGVjdGVkU2tpbGxzIjpbIm0xXzAiLCJtMl9tMSIsIm0yXzAiLCIxXzAiLCIyXzEiLCIyXzAiXX19';
   esper.rank = 1;
   esper.level = 30;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/012_0da633.png';
@@ -593,6 +610,7 @@ function getFenrir(): Esper {
   esper.name_en = 'Fenrir';
   esper.build_fr = 'Stats boost x2<br />Bonus ATT / MAG';
   esper.build_en = 'Stats boost x2<br />ATK / MAG bonuses';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJGZW5yaXIiOnsibmFtZSI6IkZlbnJpciIsInJhcml0eSI6MywibGV2ZWwiOjYwLCJzZWxlY3RlZFNraWxscyI6WyIwX20xIiwibTFfbTIiLCJtMl9tMiIsIm0yX20xIiwibTNfbTEiLCJtNF9tMSIsIm00X20yIiwibTRfbTMiLCIwXzEiLCIxXzIiLCIyXzIiLCIyXzEiLCIzXzEiLCI0XzEiLCI0XzIiLCI0XzMiLCIwXzIiLCJtMV8yIiwiMF9tMiIsIjFfbTIiLCJtMV8wIiwiMV8wIiwibTJfMCIsIm0zXzAiLCIyXzAiLCIzXzAiXX19';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/013_3e4b8e.png';
