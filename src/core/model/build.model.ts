@@ -50,8 +50,13 @@ export class Build {
       this.magical_killers = KillerPassives.construct(build.magical_killers);
     }
     this.equipments = new EquipmentSet(build.equipments);
+    let turnCount = 0;
     if (Array.isArray(build.skills)) {
       build.skills.forEach((skill: Skill) => {
+
+        turnCount += skill.isTurnCounting ? 1 : 0;
+        skill.turnCount = turnCount;
+
         // TODO find a better way to handle the skill and damage type of limit breaks
         if (!skill.category && skill.isLimitBreak) {
           switch (build.algorithmId) {

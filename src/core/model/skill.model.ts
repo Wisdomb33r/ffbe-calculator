@@ -22,6 +22,7 @@ export class Skill {
   public calculation_stat: string;
   public isBreakingChain: boolean;
   public isTurnCounting: boolean;
+  public turnCount: number;
   public chainCombo: string;
   public atk_buff: number;
   public mag_buff: number;

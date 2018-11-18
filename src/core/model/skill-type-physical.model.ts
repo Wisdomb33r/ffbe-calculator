@@ -49,9 +49,10 @@ export class SkillTypePhysical implements SkillType {
   }
 
   public getNumberOfExecutions(skill: Skill, unit: Unit): number {
-    if (skill.nb > 2) {
+    if (skill.nb >= 2) {
       return skill.nb;
     }
-    return (skill.nb === 2 || unit.selectedBuild.equipments.isDualWielding()) && !skill.isLimitBreak ? 2 : 1;
+    const isMultiSkill = unit.selectedBuild.skills.filter((s: Skill) => s.turnCount === skill.turnCount).length > 1;
+    return unit.selectedBuild.equipments.isDualWielding() && !skill.isLimitBreak && !isMultiSkill ? 2 : 1;
   }
 }

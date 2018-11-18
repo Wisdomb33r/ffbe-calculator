@@ -315,4 +315,8 @@ export class UnitsService {
   public getEsper(): Esper {
     return this.selectedUnit.selectedBuild.esper;
   }
+
+  public getSkills(): Array<Skill> {
+    return this.selectedUnit.selectedBuild.skills;
+  }
 }
