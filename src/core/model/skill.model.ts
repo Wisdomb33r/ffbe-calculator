@@ -52,6 +52,7 @@ export class Skill {
     this.calculation_stat = skill.calculation_stat;
     this.isBreakingChain = skill.isBreakingChain;
     this.isTurnCounting = skill.isTurnCounting;
+    this.turnCount = skill.turnCount;
     this.chainCombo = this.formatChainCombo(skill.chainCombo);
     this.atk_buff = skill.atk_buff;
     this.mag_buff = skill.mag_buff;
