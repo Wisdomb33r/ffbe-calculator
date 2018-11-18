@@ -201,13 +201,22 @@ export class UnitsService {
     const conditional_percent = equipment.conditional_passives
       .filter(passive => passive.active)
       .map(passive => passive[stat]).reduce((val1, val2) => val1 + val2, 0);
+    const conditional_dh = equipment.conditional_passives
+      .filter(passive => passive.active)
+      .map(passive => passive[stat + '_dh']).reduce((val1, val2) => val1 + val2, 0);
+    const conditional_tdh = equipment.conditional_passives
+      .filter(passive => passive.active)
+      .map(passive => passive[stat + '_tdh']).reduce((val1, val2) => val1 + val2, 0);
+    const conditional_dw = equipment.conditional_passives
+      .filter(passive => passive.active)
+      .map(passive => passive[stat + '_dw']).reduce((val1, val2) => val1 + val2, 0);
     const from_passive = this.selectedUnit.stats[stat].base * (equipment[stat + '_percent'] + conditional_percent) / 100;
     const from_dh = this.getEquipments().isDoubleHandActive() ?
-      this.selectedUnit.stats[stat].base_equipment * equipment[stat + '_dh'] / 100 : 0;
+      this.selectedUnit.stats[stat].base_equipment * (equipment[stat + '_dh'] + conditional_dh) / 100 : 0;
     const from_tdh = this.getEquipments().isTrueDoubleHandActive() ?
-      this.selectedUnit.stats[stat].base_equipment * equipment[stat + '_tdh'] / 100 : 0;
+      this.selectedUnit.stats[stat].base_equipment * (equipment[stat + '_tdh'] + conditional_tdh) / 100 : 0;
     const from_dw = this.getEquipments().isDualWielding() ?
-      this.selectedUnit.stats[stat].base_equipment * equipment[stat + '_dw'] / 100 : 0;
+      this.selectedUnit.stats[stat].base_equipment * (equipment[stat + '_dw'] + conditional_dw) / 100 : 0;
     return equipment[stat] + from_passive + from_dh + from_tdh + from_dw;
   }
 
