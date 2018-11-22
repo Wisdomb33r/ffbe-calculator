@@ -56,6 +56,7 @@ export class Unit {
       || this.id === 639 // nyx
       || this.id === 1122 // nyx 7*
       || this.id === 775 // 2B
+      || this.id === 1385 // 2B 7*
       || this.id === 844 // CG Jake
       || this.id === 942 // CG Raegen
       || this.id === 980 // Aileen 7*
@@ -65,6 +66,7 @@ export class Unit {
       || (this.id === 8044 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1202) // Fryevia
       || (this.id === 8053 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1305) // Reberta
       || this.id === 8063 // A2
+      || this.id === 8064 // A2 7*
       || this.id === 8159 // Rico
       || this.id === 8061 // Zargabaath 7*
       || this.id === 8168 // Adam Jensen
