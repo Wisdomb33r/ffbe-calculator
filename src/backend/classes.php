@@ -288,7 +288,7 @@ class UnitStats {
   public $jump;
   public $esper_percent;
   public $lb_multiplier;
-  public $hasDualWield;
+  public $dual_wield;
   function __construct($brex_unit_stats) {
     $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
     $this->hp_passive = $brex_unit_stats->pv_passif_amelio > 0 ? $brex_unit_stats->pv_passif_amelio : $brex_unit_stats->pv_passif;
