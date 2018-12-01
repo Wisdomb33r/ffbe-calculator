@@ -288,6 +288,7 @@ class UnitStats {
   public $jump;
   public $esper_percent;
   public $lb_multiplier;
+  public $dual_wield;
   function __construct($brex_unit_stats) {
     $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
     $this->hp_passive = $brex_unit_stats->pv_passif_amelio > 0 ? $brex_unit_stats->pv_passif_amelio : $brex_unit_stats->pv_passif;
@@ -323,6 +324,7 @@ class UnitStats {
     $this->jump = $brex_unit_stats->jump;
     $this->esper_percent = $brex_unit_stats->esper_percent;
     $this->lb_multiplier = $brex_unit_stats->lb_boost;
+    $this->dual_wield = $brex_unit_stats->dual_wield == '1' ? true : false;
   }
 }
 class Build {
@@ -403,6 +405,8 @@ class Skill {
   public $mag_buff;
   public $def_buff;
   public $spr_buff;
+  public $physical_killers;
+  public $magical_killers;
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite ? true : false;
     $this->isEsper = $brex_skill->is_esper ? true : false;
@@ -421,6 +425,12 @@ class Skill {
     $this->mag_buff = $brex_skill->mag_buff;
     $this->def_buff = $brex_skill->def_buff;
     $this->spr_buff = $brex_skill->psy_buff;
+    if ($brex_skill->tueurs) {
+      $this->physical_killers = new KillerPassives ( $brex_skill->tueurs );
+    }
+    if ($brex_skill->tueurs_m) {
+      $this->magical_killers = new KillerPassives ( $brex_skill->tueurs_m );
+    }
     if ($this->isLimitBreak) {
       $this->name = $language === 'fr' ? $brex_unit->limite : $brex_unit->limite_en;
       $this->icon = null;

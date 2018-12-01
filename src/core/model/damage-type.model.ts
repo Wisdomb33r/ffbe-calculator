@@ -18,7 +18,7 @@ export abstract class DamageType {
 
   abstract calculateDamages(unit: Unit, result: ResultTurnDamages);
 
-  abstract calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultTurnDamages);
+  abstract calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, killerActive: number, result: ResultTurnDamages);
 
   abstract calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultTurnDamages);
 

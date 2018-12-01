@@ -26,7 +26,8 @@ export class AlgorithmFinish extends AlgorithmOffensive {
     this.calculateHitsPower(skill, unit, result);
     skill.damageType.calculateDamages(unit, result);
     const killerValue = skill.skillType.getActiveKillers(unit, this.opponentKillerType, this.opponentKillerType2, result);
-    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, killerValue, result);
+    const killerActive: number = skill.skillType.getSkillActiveKillers(skill, this.opponentKillerType, this.opponentKillerType2);
+    skill.damageType.calculateKillerDamages(unit, this.isKillerActive, killerValue, killerActive, result);
     this.calculateEffectiveResistances(skill, result);
     skill.damageType.calculateElementalDamages(unit, skill.skillType.getElements(skill, unit), result);
     skill.damageType.calculateFinalResult(unit, this.opponentDef, this.opponentSpr, result);

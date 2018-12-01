@@ -86,7 +86,9 @@
     </tr>
     <tr>
       <td>{{'calculation.offensive.monsterType' | translate}}</td>
-      <td></td>
+      <td>
+        <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>
+      </td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
       <td>
         <select [(ngModel)]="algorithm.opponentKillerType" (change)="calculateBuild()">
@@ -123,14 +125,21 @@
       </td>
     </tr>
     <tr>
-      <td>{{'calculation.display.killer' | translate}}</td>
-      <td>
-        <mat-checkbox [(ngModel)]="algorithm.isKillerActive" (change)="calculateBuild()"></mat-checkbox>
-      </td>
+      <td>{{'calculation.display.killerPassive' | translate}}</td>
+      <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
       <td *ngIf="algorithm.opponentKillerType === 'unknown'">{{result.killerPassive | integer}}%</td>
       <td *ngIf="algorithm.opponentKillerType !== 'unknown'" [class.limit-warn]="result.isKillerLimitExceeded">
         {{result.killerPassive / 10 | integer}}%
+      </td>
+    </tr>
+    <tr>
+      <td>{{'calculation.display.killerActive' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td *ngIf="algorithm.opponentKillerType === 'unknown'">{{result.killerActive | integer}}%</td>
+      <td *ngIf="algorithm.opponentKillerType !== 'unknown'">
+        {{result.killerActive / 10 | integer}}%
       </td>
     </tr>
     <tr *ngIf="result.elements && result.elements.length > 0">
@@ -206,7 +215,7 @@
       </td>
       <td>
         <div *ngFor="let element of result.elements" class="resist-label">
-          {{result.resistances[element-1] | integer}}%
+          {{result.resistances[element - 1] | integer}}%
         </div>
       </td>
     </tr>
@@ -228,7 +237,7 @@
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p *ngIf="result.isDualWielding">
     ({{result['buffed_' + result.physicalStat] | integer}}-{{result.leftHandStat | integer}})*({{result['buffed_' +
-    result.physicalStat] | integer}}-{{result.rightHandStat | integer}})
+  result.physicalStat] | integer}}-{{result.rightHandStat | integer}})
     * {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p *ngIf="!result.isDualWielding">
@@ -241,7 +250,7 @@
   <p *ngIf="result.isKillerLimitExceeded" class="limit-warn">
     {{'calculation.display.killerLimitExceeded' | translate}}</p>
   <p *ngIf="result.killerPassive">
-    {{result.physicalDamages | integer}} * (1+{{result.killerPassive}}%/10)
+    {{result.physicalDamages | integer}} * (1+{{result.killerPassive}}%/10+{{result.killerActive}}%/10)
   </p>
   <p *ngIf="result.killerPassive">= {{result.physicalKillerDamages | integer}}</p>
 

@@ -22,12 +22,14 @@ export class DamageTypePhysical extends DamageType {
     result.physicalStat = this.calculationStat;
   }
 
-  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultTurnDamages) {
+  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, killerActive: number, result: ResultTurnDamages) {
     result.killerPassive = 0;
+    result.killerActive = 0;
     result.physicalKillerDamages = result.physicalDamages;
-    if (killer && isKillerActive) {
+    if ((killer || killerActive) && isKillerActive) {
       result.killerPassive = killer;
-      result.physicalKillerDamages *= (1 + result.killerPassive / 1000);
+      result.killerActive = killerActive;
+      result.physicalKillerDamages *= (1 + (killer + killerActive) / 1000);
     }
   }
 

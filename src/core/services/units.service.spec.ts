@@ -227,6 +227,7 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.id = 590; // has native DW
+      service.selectedUnit.stats.dual_wield = true;
       service.selectedUnit.selectDefaultBuild();
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([

@@ -3,6 +3,7 @@ import {SkillTypeFactory} from './skill-type-factory.model';
 import {DamageType} from './damage-type.model';
 import {DamageTypeFactory} from './damage-type-factory.model';
 import {isNullOrUndefined} from 'util';
+import {KillerPassives} from './killer-passives.model';
 
 export class Skill {
   // from backend
@@ -28,6 +29,8 @@ export class Skill {
   public mag_buff: number;
   public def_buff: number;
   public spr_buff: number;
+  public physical_killers: KillerPassives;
+  public magical_killers: KillerPassives;
   public resists_break: Array<number>;
   public elements: Array<number>;
 
@@ -62,6 +65,12 @@ export class Skill {
     this.elements = skill.elements;
     this.skillType = SkillTypeFactory.getInstance(this.category);
     this.damageType = DamageTypeFactory.getInstance(this.damages_type, this.calculation_stat);
+    if (skill.physical_killers) {
+      this.physical_killers = KillerPassives.construct(skill.physical_killers);
+    }
+    if (skill.magical_killers) {
+      this.magical_killers = KillerPassives.construct(skill.magical_killers);
+    }
   }
 
   private formatChainCombo(chainCombo: string) {
