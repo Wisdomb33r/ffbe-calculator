@@ -184,7 +184,8 @@
       "opponentSpr": "PSY adverse",
       "weaponVariance": "Variance arme",
       "variances": "Variances",
-      "killer": "Tueurs",
+      "killerPassive": "Tueurs (passifs)",
+      "killerActive": "Tueurs (actifs)",
       "killerDamages": "Dégâts après tueurs",
       "killerLimitExceeded": "Limite de 300% de passifs de tueurs (par type de monstre) dépassée, une partie du bonus est perdue",
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."

@@ -184,7 +184,8 @@
       "opponentSpr": "Enemy SPR",
       "weaponVariance": "Weapon variance",
       "variances": "Variances",
-      "killer": "Killers",
+      "killerPassive": "Killers (passive)",
+      "killerActive": "Killers (active)",
       "killerDamages": "Damages after killers",
       "killerLimitExceeded": "300% killer limit (per monster type) exceeded, bonus is partially lost",
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."

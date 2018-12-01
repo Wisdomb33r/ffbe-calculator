@@ -28,9 +28,9 @@ export class DamageTypeHybrid extends DamageType {
     this.magical.calculateDamages(unit, result);
   }
 
-  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultTurnDamages) {
-    this.physical.calculateKillerDamages(unit, isKillerActive, killer, result);
-    this.magical.calculateKillerDamages(unit, isKillerActive, killer, result);
+  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, killerActive: number, result: ResultTurnDamages) {
+    this.physical.calculateKillerDamages(unit, isKillerActive, killer, killerActive, result);
+    this.magical.calculateKillerDamages(unit, isKillerActive, killer, killerActive, result);
   }
 
   public calculateElementalDamages(unit: Unit, elements: Array<number>, result: ResultTurnDamages) {

@@ -5,6 +5,22 @@ import {ResultTurnDamages} from './result-turn-damages.model';
 import {KILLER_LIMIT_CAP} from '../calculator-constants';
 
 export class SkillTypeMagical implements SkillType {
+  public getSkillActiveKillers(skill: Skill, opponentKillerType: string, opponentKillerType2: string): number {
+    switch (opponentKillerType) {
+      case 'unknown':
+        return skill.magical_killers ? skill.magical_killers.getKillerSum() : 0;
+      default:
+        switch (opponentKillerType2) {
+          case 'none':
+            return 10 * (skill.magical_killers ? skill.magical_killers[opponentKillerType] : 0);
+          default:
+            const killerType1 = (skill.magical_killers ? skill.magical_killers[opponentKillerType] : 0);
+            const killerType2 = (skill.magical_killers ? skill.magical_killers[opponentKillerType2] : 0);
+            return 5 * (killerType1 + killerType2);
+        }
+    }
+  }
+
   public getActiveKillers(unit: Unit, opponentKillerType: string, opponentKillerType2: string, result: ResultTurnDamages): number {
     switch (opponentKillerType) {
       case 'unknown':

@@ -405,6 +405,8 @@ class Skill {
   public $mag_buff;
   public $def_buff;
   public $spr_buff;
+  public $physical_killers;
+  public $magical_killers;
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite ? true : false;
     $this->isEsper = $brex_skill->is_esper ? true : false;
@@ -423,6 +425,12 @@ class Skill {
     $this->mag_buff = $brex_skill->mag_buff;
     $this->def_buff = $brex_skill->def_buff;
     $this->spr_buff = $brex_skill->psy_buff;
+    if ($brex_skill->tueurs) {
+      $this->physical_killers = new KillerPassives ( $brex_skill->tueurs );
+    }
+    if ($brex_skill->tueurs_m) {
+      $this->magical_killers = new KillerPassives ( $brex_skill->tueurs_m );
+    }
     if ($this->isLimitBreak) {
       $this->name = $language === 'fr' ? $brex_unit->limite : $brex_unit->limite_en;
       $this->icon = null;

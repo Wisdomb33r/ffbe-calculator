@@ -4,6 +4,10 @@ import {Skill} from './skill.model';
 import {ResultTurnDamages} from './result-turn-damages.model';
 
 export class SkillTypeNone implements SkillType {
+  getSkillActiveKillers(skill: Skill, opponentKillerType: string, opponentKillerType2: string): number {
+    return 0;
+  }
+
   getActiveKillers(unit: Unit, opponentKillerType: string, opponentKillerType2: string, result: ResultTurnDamages): number {
     return 0;
   }

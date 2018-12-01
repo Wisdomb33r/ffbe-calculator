@@ -20,12 +20,14 @@ export class DamageTypeMagical extends DamageType {
     result.magicalStat = this.calculationStat;
   }
 
-  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, result: ResultTurnDamages) {
+  public calculateKillerDamages(unit: Unit, isKillerActive: boolean, killer: number, killerActive: number, result: ResultTurnDamages) {
     result.killerPassive = 0;
+    result.killerActive = 0;
     result.magicalKillerDamages = result.magicalDamages;
-    if (killer && isKillerActive) {
+    if ((killer || killerActive) && isKillerActive) {
       result.killerPassive = killer;
-      result.magicalKillerDamages *= (1 + result.killerPassive / 1000);
+      result.killerActive = killerActive;
+      result.magicalKillerDamages *= (1 + (killer + killerActive) / 1000);
     }
   }
 
