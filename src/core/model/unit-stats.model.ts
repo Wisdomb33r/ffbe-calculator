@@ -13,6 +13,7 @@ export class UnitStats {
   public jump: number;
   public esper_percent: number;
   public lb_multiplier: number;
+  public dual_wield: boolean;
 
   // transcient
   public equipment_jump: number;
@@ -29,6 +30,7 @@ export class UnitStats {
     this.jump = stats.jump;
     this.esper_percent = stats.esper_percent;
     this.lb_multiplier = stats.lb_multiplier;
+    this.dual_wield = stats.dual_wield;
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number, evo: number) {
