@@ -46,35 +46,9 @@ export class Unit {
   }
 
   public isWithNativeDw() {
-    // TODO currently hardcoded, need to find a way to retrieve this from backend
     return this.stats.dual_wield
-      || this.id === 258 // lightning 6*
-      || this.id === 969 // lightning 7*
-      || this.id === 319 // luneth 6*
-      || this.id === 974 // luneth 7*
-      || this.id === 590 // onion knight 6*
-      || this.id === 988 // onion knight 7*
-      || this.id === 639 // nyx
-      || this.id === 1122 // nyx 7*
-      || this.id === 775 // 2B
-      || this.id === 1385 // 2B 7*
-      || this.id === 844 // CG Jake
-      || this.id === 942 // CG Raegen
-      || this.id === 980 // Aileen 7*
-      || this.id === 1004 // Estark
-      || this.id === 1033 // loren
-      || this.id === 1161 // Machina
       || (this.id === 8044 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1202) // Fryevia
       || (this.id === 8053 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1305) // Reberta
-      || this.id === 8063 // A2
-      || this.id === 8064 // A2 7*
-      || this.id === 8159 // Rico
-      || this.id === 8061 // Zargabaath 7*
-      || this.id === 8168 // Adam Jensen
-      || this.id === 8171 // Viktor Marchenko
-      || this.id === 8174 // Aloha Lasswell
-      || this.id === 8186 // Malphasie
-      || this.id === 8204 // Lucius
       ;
   }
 
