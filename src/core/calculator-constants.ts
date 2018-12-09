@@ -100,6 +100,8 @@ export const TITAN: Esper = getTitan();
 export const TETRA_SYLPHID_KILLER: Esper = getTetraSylphidWithKiller();
 export const BAHAMUT: Esper = getBahamut();
 export const FENRIR: Esper = getFenrir();
+export const LEVIATHAN_KILLERS: Esper = getLeviathanWithKillers();
+export const LEVIATHAN_EVOKE_BOOST: Esper = getLeviathanWithDamageModifier();
 export const PHOENIX_KILLER: Esper = getPhoenixKillers();
 export const PHOENIX_TANKING: Esper = getPhoenixTanking();
 export const ESPER_BUILDS: Array<Esper> = [
@@ -122,6 +124,8 @@ export const ESPER_BUILDS: Array<Esper> = [
   TETRA_SYLPHID_KILLER,
   BAHAMUT,
   FENRIR,
+  LEVIATHAN_KILLERS,
+  LEVIATHAN_EVOKE_BOOST,
   PHOENIX_KILLER,
   PHOENIX_TANKING,
 ];
@@ -625,6 +629,60 @@ function getFenrir(): Esper {
   esper.power = 0;
   esper.damage_modifier = 1;
   esper.stats_percent = 40;
+  return esper;
+}
+
+function getLeviathanWithKillers(): Esper {
+  const esper = new Esper();
+  esper.id = 141;
+  esper.name_fr = 'Léviathan';
+  esper.name_en = 'Leviathan';
+  esper.build_fr = 'Tue-esprits +<br />Tue-aquatiques +';
+  esper.build_en = 'Spirit Killer+<br />Aquan Killer+';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJMZXZpYXRoYW4iOnsibmFtZSI6IkxldmlhdGhhbiIsInJhcml0eSI6MywibGV2ZWwiOjYwLCJzZWxlY3RlZFNraWxscyI6WyJtMV8wIiwibTJfbTEiLCJtMl8wIiwibTFfMSIsIm0yXzEiLCJtM18wIiwibTNfbTEiLCJtNF9tMiIsIm00X20xIiwibTRfMCIsIjFfMSIsIjFfMCIsIjJfMCIsIjJfMSIsIjJfMiIsIjNfMyIsIjNfMiIsIjNfMSIsIjNfMCIsIjRfMCIsIjRfMSIsIjRfMiJdfX0=';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/014_b9abab.png';
+  esper.hp = 9560;
+  esper.mp = 6920;
+  esper.atk = 6300;
+  esper.mag = 7660 + 850;
+  esper.def = 5960 + 500;
+  esper.spr = 6080;
+  esper.physical_killers = new KillerPassives(0, 0, 75, 0, 0, 0, 0, 0, 0, 0, 75, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 125, 0, 0, 0, 0, 0, 0, 0, 125, 0);
+  esper.power = 400;
+  esper.damage_modifier = 1;
+  esper.stats_percent = 0;
+  esper.damageType = 'magical';
+  esper.elements = [4];
+  return esper;
+}
+
+function getLeviathanWithDamageModifier(): Esper {
+  const esper = new Esper();
+  esper.id = 142;
+  esper.name_fr = 'Léviathan';
+  esper.name_en = 'Leviathan';
+  esper.build_fr = 'Appel dieu de l\'eau x2<br />Stats boost';
+  esper.build_en = 'Water God Evocation x2<br />Stats boost';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJMZXZpYXRoYW4iOnsibmFtZSI6IkxldmlhdGhhbiIsInJhcml0eSI6MywibGV2ZWwiOjYwLCJzZWxlY3RlZFNraWxscyI6WyIxXzEiLCIwXzEiLCIwXzIiLCIxXzIiLCIyXzMiLCIxXzMiLCIxXzQiLCIyXzQiLCJtMV9tMSIsIm0xX20yIiwibTJfbTIiLCJtMl9tMyIsIm0zX20zIiwibTNfbTIiLCJtNF9tMyIsIm00X200IiwibTNfbTQiLCIxXzAiLCIyXzAiLCIyXzEiLCIyXzIiLCIzXzMiLCI0XzQiLCIzXzQiLCIzXzIiLCIzXzEiXX19';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/014_b9abab.png';
+  esper.hp = 9560;
+  esper.mp = 6920 + 700;
+  esper.atk = 6300 + 380;
+  esper.mag = 7660 + 550;
+  esper.def = 5960 + 500;
+  esper.spr = 6080;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  esper.power = 400;
+  esper.damage_modifier = 2;
+  esper.stats_percent = 20;
+  esper.damageType = 'magical';
+  esper.elements = [4];
   return esper;
 }
 
