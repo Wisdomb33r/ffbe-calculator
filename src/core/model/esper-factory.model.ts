@@ -1,4 +1,4 @@
-import {FENRIR, GOLEM_TANKING, IFRIT_STATS_BOOST, RAMUH_EVOKE_BOOST} from '../calculator-constants';
+import {FENRIR, GOLEM_TANKING, LEVIATHAN_EVOKE_BOOST} from '../calculator-constants';
 import {Esper} from './esper.model';
 
 export class EsperFactory {
@@ -14,11 +14,11 @@ export class EsperFactory {
       case 6:
         return FENRIR;
       case 7:
-        return RAMUH_EVOKE_BOOST;
+        return LEVIATHAN_EVOKE_BOOST;
       case 8:
         return GOLEM_TANKING;
       default:
-        return IFRIT_STATS_BOOST;
+        return FENRIR;
     }
   }
 }
