@@ -163,6 +163,7 @@ export class Equipment {
       || this.id === 1352 // bowie knife
       || this.id === 2293 // sasuke's katana
       || this.id === 2779 // excalibur (ff type-0)
+      || this.id === 2893 // executioner (ff xv)
       ;
   }
 
@@ -175,12 +176,14 @@ export class Equipment {
   }
 
   public isWeaponTraitPossible(): boolean {
-    return (this.id < 2379 && (this.category === RODS))
-      || (this.id < 2478 && (this.category === SWORDS))
-      || (this.id < 2620 && (this.category === SPEARS || this.category === BOWS))
-      || (this.id < 2707 && (this.category === DAGGERS || this.category === STAVES || this.category === AXES || this.category === HAMMERS))
-      || (this.id < 2795 && (this.category === LSWORDS || this.category === KATANAS || this.category === HARPS || this.category === WHIPS
-        || this.category === THROWING || this.category === GUNS || this.category === MACES || this.category === CLAWS))
+    return (this.id < 2795 && (this.category === LSWORDS || this.category === KATANAS || this.category === HARPS || this.category === WHIPS
+        || this.category === THROWING || this.category === GUNS || this.category === MACES || this.category === CLAWS)
+      )
+      ||
+      (this.id < 2898 && this.id !== 2862 && (this.category === RODS || this.category === SWORDS || this.category === SPEARS
+          || this.category === BOWS || this.category === DAGGERS || this.category === STAVES || this.category === AXES
+          || this.category === HAMMERS)
+      )
       ;
   }
 }

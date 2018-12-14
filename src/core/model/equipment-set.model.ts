@@ -242,9 +242,7 @@ export class EquipmentSet {
 
   public isDwEquipped(): boolean {
     // TODO currently hard-coded, find a way to retrieve this value from database
-    return this.right_hand.id === 1199 // second knife
-      || this.right_hand.id === 1352 // bowie knife
-      || this.right_hand.id === 2293 // sasuke's katana
+    return this.right_hand.isWeaponWithDw()
       || this.accessory1.id === 935 || this.accessory2.id === 935 // genji gloves
       || this.materia1.id === 791 || this.materia2.id === 791 || this.materia3.id === 791 || this.materia4.id === 791 // dw
       || this.materia1.id === 1756 || this.materia2.id === 1756
