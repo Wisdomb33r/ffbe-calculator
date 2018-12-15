@@ -43,6 +43,7 @@ class Equipment {
   public $variance_max;
   public $unique;
   public $locked;
+  public $stmr;
   public $physical_killers;
   public $magical_killers;
   public $lb_multiplier;
@@ -91,6 +92,7 @@ class Equipment {
     $this->variance_min = $brex_equipement->variance_min;
     $this->variance_max = $brex_equipement->variance_max;
     $this->unique = $brex_equipement->uniq == 1 ? true : false;
+    $this->stmr = $brex_equipement->stars == 9 ? true : false;
     if ($brex_equipement->tueurs) {
       $this->physical_killers = new KillerPassives ( $brex_equipement->tueurs );
     }
