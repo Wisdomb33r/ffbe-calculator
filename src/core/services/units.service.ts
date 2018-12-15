@@ -27,6 +27,7 @@ export class UnitsService {
   public defenders: Array<Unit>;
   public selectedUnit: Unit;
   public rankFilter = 7;
+  public stmrExclusion = false;
 
   constructor(private databaseClient: DatabaseClientService) {
   }

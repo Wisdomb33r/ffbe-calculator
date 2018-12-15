@@ -17,10 +17,9 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
   @Input() equipments: EquipmentSet;
   @Output() equipmentChanged: EventEmitter<Equipment> = new EventEmitter<Equipment>();
   private subscription: Subscription;
-  public areStmrExcluded = false;
 
   constructor(private dialog: MatDialog,
-              private unitsService: UnitsService) {
+              public unitsService: UnitsService) {
   }
 
   ngOnInit() {
@@ -43,7 +42,9 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
 
     this.subscription = this.unitsService.getAllowedEquipmentsForSlot$(slot)
       .pipe(
-        map((equipments: Array<Equipment>) => equipments.filter((equipment: Equipment) => !this.areStmrExcluded || !equipment.stmr))
+        map((equipments: Array<Equipment>) => equipments.filter(
+          (equipment: Equipment) => !this.unitsService.stmrExclusion || !equipment.stmr)
+        )
       )
       .subscribe((equipments: Array<Equipment>) => {
           if (equipments.length > 0 || (this.isEquipmentRemoveable(slot) && itemPresent) || locked) {
