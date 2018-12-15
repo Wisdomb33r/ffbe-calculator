@@ -66,6 +66,7 @@ export class Equipment {
   public variance_max: number;
   public unique: boolean;
   public locked: boolean;
+  public stmr: boolean;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
   public lb_multiplier: number;
@@ -119,6 +120,7 @@ export class Equipment {
     this.variance_max = equipment.variance_max;
     this.unique = equipment.unique;
     this.locked = equipment.locked;
+    this.stmr = equipment.stmr;
     if (equipment.physical_killers) {
       this.physical_killers = KillerPassives.construct(equipment.physical_killers);
     }

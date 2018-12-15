@@ -5,6 +5,7 @@ import {EquipmentSelectionComponent} from '../popup/equipment-selection/equipmen
 import {Equipment} from '../../core/model/equipment.model';
 import {UnitsService} from '../../core/services/units.service';
 import {Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-equipments-display',
@@ -16,6 +17,7 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
   @Input() equipments: EquipmentSet;
   @Output() equipmentChanged: EventEmitter<Equipment> = new EventEmitter<Equipment>();
   private subscription: Subscription;
+  public areStmrExcluded = false;
 
   constructor(private dialog: MatDialog,
               private unitsService: UnitsService) {
@@ -40,6 +42,9 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
     const locked = this.equipments[slot] && this.equipments[slot].locked ? true : false;
 
     this.subscription = this.unitsService.getAllowedEquipmentsForSlot$(slot)
+      .pipe(
+        map((equipments: Array<Equipment>) => equipments.filter((equipment: Equipment) => !this.areStmrExcluded || !equipment.stmr))
+      )
       .subscribe((equipments: Array<Equipment>) => {
           if (equipments.length > 0 || (this.isEquipmentRemoveable(slot) && itemPresent) || locked) {
             const dialogRef = this.dialog.open(EquipmentSelectionComponent, {

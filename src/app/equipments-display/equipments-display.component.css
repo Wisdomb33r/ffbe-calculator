@@ -27,3 +27,7 @@ div.flexcontainer {
   border-left: 0;
   background-color: #000c63;
 }
+
+p.stmr-exclude {
+  margin-top: 5px;
+}
