@@ -74,15 +74,6 @@ mat-dialog-content.mat-dialog-content {
   max-height: 75vh;
 }
 
-app-equipments-display mat-checkbox .mat-checkbox-frame {
-  border-color: rgba(200, 200, 200, 0.8);
-}
-
-app-equipments-display mat-checkbox .mat-checkbox-label {
-  color: white;
-  font-size: 12px;
-}
-
 img.inline-icon {
   vertical-align: middle;
   margin-top: -2px;

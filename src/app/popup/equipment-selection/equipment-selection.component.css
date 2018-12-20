@@ -38,3 +38,7 @@
 .unequip span {
   font-size: 18px;
 }
+
+p.stmr-exclude {
+  margin-top: 5px;
+}

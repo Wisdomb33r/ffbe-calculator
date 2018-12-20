@@ -41,11 +41,6 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
     const locked = this.equipments[slot] && this.equipments[slot].locked ? true : false;
 
     this.subscription = this.unitsService.getAllowedEquipmentsForSlot$(slot)
-      .pipe(
-        map((equipments: Array<Equipment>) => equipments.filter(
-          (equipment: Equipment) => !this.unitsService.stmrExclusion || !equipment.stmr)
-        )
-      )
       .subscribe((equipments: Array<Equipment>) => {
           if (equipments.length > 0 || (this.isEquipmentRemoveable(slot) && itemPresent) || locked) {
             const dialogRef = this.dialog.open(EquipmentSelectionComponent, {

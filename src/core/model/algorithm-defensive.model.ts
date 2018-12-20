@@ -54,7 +54,7 @@ export class AlgorithmDefensive implements Algorithm {
     }
 
     // TODO currently hardcoded for tanks because self-buffs are in skills and defensive characters not configured with a skill rotation
-    if (unit.id === 8016) { // WKN
+    if (unit.id === 8016 || unit.id === 8017) { // WKN
       result.selfDefBuff = 150;
       result.selfSprBuff = 150;
     }

@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Equipment} from '../../../core/model/equipment.model';
 import {fromEvent, Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import {UnitsService} from '../../../core/services/units.service';
 
 @Component({
   templateUrl: './equipment-selection.component.html',
@@ -17,7 +18,8 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
   @ViewChild('itemfilter') itemfilter: ElementRef;
   private filterChangedSubscription: Subscription;
 
-  constructor(public dialogRef: MatDialogRef<EquipmentSelectionComponent>,
+  constructor(public unitsService: UnitsService,
+              public dialogRef: MatDialogRef<EquipmentSelectionComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private ngzone: NgZone,
               private cdref: ChangeDetectorRef) {
