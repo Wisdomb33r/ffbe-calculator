@@ -100,6 +100,12 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     }
     
     $objects = brex_objet_extended::finderByCategoriesForCalculator ( $intersecting_categories );
+    
+    // Sora exclusive weapon
+    if (($_GET ['category'] == 'right_hand' || $_GET ['category'] == 'left_hand') && $unit->numero == 1507) {
+      $objects [] = brex_objet::findByPrimaryId ( 2925 );
+    }
+    
     $equipments = array ();
     foreach ( $objects as $object ) {
       $equipments [] = new Equipment ( $object, $language );
