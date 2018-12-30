@@ -77,7 +77,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           if (this.build) {
             this.unitsService.selectedUnit.selectBuild(this.build);
           }
-          this.unitsService.selectedUnit.selectedBuild.equipments.removeAllRemoveable();
+          this.unitsService.selectedUnit.selectedBuild.equipments.removeAll();
 
           const observables = [];
           observables.push(of(unit));
