@@ -55,9 +55,9 @@ describe('DatabaseClientService', () => {
   it('should delegate to HttpClient for accessing equipments by unit id and slot',
     inject([DatabaseClientService], (service: DatabaseClientService) => {
       // WHEN
-      service.getEquipmentsForUnitAndSlot$('head', 555);
+      service.getEquipmentsForUnitAndSlot$('head', 555, [4, 13]);
       // THEN
       expect(httpClient.get).toHaveBeenCalled();
-      expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/equipments.php?category=head&unit=555&language=fr');
+      expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/equipments.php?category=head&unit=555&language=fr&addedTypes=4-13');
     }));
 });
