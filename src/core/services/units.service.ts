@@ -125,7 +125,7 @@ export class UnitsService {
           )
         );
     }
-    return this.databaseClient.getEquipmentsForUnitAndSlot$(slot, this.selectedUnit.id)
+    return this.databaseClient.getEquipmentsForUnitAndSlot$(slot, this.selectedUnit.id, this.getEquipments().getExtraEquipmentTypes())
       .pipe(
         map((items: Array<Equipment>) => items
           .map((item: Equipment) => new Equipment(item))

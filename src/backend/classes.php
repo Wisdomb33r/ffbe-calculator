@@ -49,6 +49,8 @@ class Equipment {
   public $lb_multiplier;
   public $sex_restriction;
   public $esper_percent;
+  public $dual_wield;
+  public $extra_equip;
   public $conditional_passives;
   public $elements = array ();
   function __construct($brex_equipement, $language) {
@@ -102,6 +104,8 @@ class Equipment {
     $this->lb_multiplier = $brex_equipement->lb_boost;
     $this->sex_restriction = $brex_equipement->sex_restrict;
     $this->esper_percent = $brex_equipement->esper_percent;
+    $this->dual_wield = $brex_equipement->dual_wield == '1' ? true : false;
+    $this->extra_equip = $brex_equipement->extra_equip;
     $brex_build_passives = brex_build_passif::findByRelation1N ( array ('objet' => $brex_equipement->id) );
     if (count ( $brex_build_passives )) {
       $this->conditional_passives = array ();
