@@ -11,8 +11,9 @@ import {EquipmentSet} from '../model/equipment-set.model';
 import {isNullOrUndefined} from 'util';
 import {Build} from '../model/build.model';
 import {Esper} from '../model/esper.model';
-import {SPECIAL_WEAPON_ENHANCEMENTS} from '../calculator-constants';
+import {EQUIPMENT_EXCLUSIONS, SPECIAL_WEAPON_ENHANCEMENTS} from '../calculator-constants';
 import {Skill} from '../model/skill.model';
+import {EquipmentExclusion} from '../model/equipment-exclusion.model';
 
 @Injectable()
 export class UnitsService {
@@ -120,7 +121,7 @@ export class UnitsService {
         .pipe(
           map((items: Array<Equipment>) => items
             .map((item: Equipment) => new Equipment(item))
-            .filter((item: Equipment) => this.checkWeaponTraitUniqueness(item, slot))
+            .filter((item: Equipment) => this.checkWeaponTraitUniqueness(item, slot) && this.checkExclusions(item, slot))
             .sort((a: Equipment, b: Equipment) => -this.compareEquipmentsForAlgorithm(a, b))
           )
         );
@@ -223,6 +224,7 @@ export class UnitsService {
 
   private isAllowed(item: Equipment, slot: string): boolean {
     let isAllowed = this.checkUniqueness(item, slot);
+    isAllowed = isAllowed && this.checkExclusions(item, slot);
     isAllowed = isAllowed && this.checkTwoHandedMainHandForOffhand(slot);
     isAllowed = isAllowed && this.checkDwForSecondWeapon(item, slot);
     isAllowed = isAllowed && this.checkSexRestrictions(item);
@@ -276,6 +278,48 @@ export class UnitsService {
         ) {
           return false;
         }
+      }
+    }
+    return true;
+  }
+
+  private checkExclusions(item: Equipment, slot: string): boolean {
+    const exclusion = EQUIPMENT_EXCLUSIONS.find((e: EquipmentExclusion) => e.id === item.id);
+    if (exclusion) {
+      let slotsToCheck: Array<string> = [];
+      if (slot === 'rh_trait1') {
+        slotsToCheck = ['rh_trait2', 'rh_trait3'];
+      }
+      if (slot === 'rh_trait2') {
+        slotsToCheck = ['rh_trait1', 'rh_trait3'];
+      }
+      if (slot === 'rh_trait3') {
+        slotsToCheck = ['rh_trait1', 'rh_trait2'];
+      }
+      if (slot === 'lh_trait1') {
+        slotsToCheck = ['lh_trait2', 'lh_trait3'];
+      }
+      if (slot === 'lh_trait2') {
+        slotsToCheck = ['lh_trait1', 'lh_trait3'];
+      }
+      if (slot === 'lh_trait3') {
+        slotsToCheck = ['lh_trait1', 'lh_trait2'];
+      }
+      if (slot === 'materia1') {
+        slotsToCheck = ['materia2', 'materia3', 'materia4'];
+      }
+      if (slot === 'materia2') {
+        slotsToCheck = ['materia1', 'materia3', 'materia4'];
+      }
+      if (slot === 'materia3') {
+        slotsToCheck = ['materia1', 'materia2', 'materia4'];
+      }
+      if (slot === 'materia4') {
+        slotsToCheck = ['materia1', 'materia2', 'materia3'];
+      }
+      if (slotsToCheck.some(
+        (s: string) => this.getEquipments()[s] && exclusion.exclude.find(excludedBy => excludedBy === this.getEquipments()[s].id) > 0)) {
+        return false;
       }
     }
     return true;

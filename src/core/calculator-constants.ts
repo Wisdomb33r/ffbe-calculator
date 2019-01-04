@@ -1,5 +1,6 @@
 import {KillerPassives} from './model/killer-passives.model';
 import {Esper} from './model/esper.model';
+import {EquipmentExclusion} from './model/equipment-exclusion.model';
 
 export const KILLER_LIMIT_CAP = 300;
 export const TDW_LIMIT_CAP = 100;
@@ -84,6 +85,18 @@ export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
   2952, // guns and axes
   2621, // maces
   2953, // maces
+];
+export const EQUIPMENT_EXCLUSIONS: Array<EquipmentExclusion> = [
+  new EquipmentExclusion(1424, [1425]), // adventurer III
+  new EquipmentExclusion(1425, [1424]), // adventurer IV
+  new EquipmentExclusion(2318, [2950]), // life / power seal 3
+  new EquipmentExclusion(2950, [2318]), // life / power seal 4
+  new EquipmentExclusion(2464, [2951]), // life / skill seal 3
+  new EquipmentExclusion(2951, [2464]), // life / skill seal 4
+  new EquipmentExclusion(2320, [2952]), // ATK 30%
+  new EquipmentExclusion(2952, [2320]), // ATK 40%
+  new EquipmentExclusion(2621, [2953]), // HP +30%
+  new EquipmentExclusion(2953, [2621]), // HP +40%
 ];
 export const IFRIT_KILLERS: Esper = getIfritWithKillers();
 export const IFRIT_STATS_BOOST: Esper = getIfritWithStatsBoost();
