@@ -66,7 +66,7 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id": 1199}'));
+      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id": 1199, "dual_wield": true}'));
       // WHEN
       service.equipInSlot('right_hand', new Equipment(JSON.parse('{"id":66,"variance_min":100,"variance_max":150}')));
       // THEN
@@ -105,7 +105,7 @@ describe('UnitsService', () => {
       service.selectedUnit.selectDefaultBuild();
       service.getEquipments().left_hand = new Equipment(JSON.parse('{"id":10,"category":1}'));
       // WHEN
-      service.equipInSlot('accessory1', new Equipment(JSON.parse('{"id":935}'))); // item with DW
+      service.equipInSlot('accessory1', new Equipment(JSON.parse('{"id":935, "dual_wield": true}')));
       // THEN
       expect(service.getEquipments().left_hand).toBeTruthy();
       expect(service.getEquipments().left_hand.id).toEqual(10);
@@ -202,6 +202,7 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.id = 590; // has native DW
+      service.selectedUnit.stats.dual_wield = true;
       service.selectedUnit.selectDefaultBuild();
       service.selectedUnit.selectedBuild.equipments.right_hand.variance_min = 100;
       service.selectedUnit.selectedBuild.equipments.right_hand.variance_max = 150;
@@ -210,7 +211,7 @@ describe('UnitsService', () => {
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 11, "category": 9}')), // shield
-        new Equipment(JSON.parse('{"id": 1352}')), // weapon with dw
+        new Equipment(JSON.parse('{"id": 1352, "dual_wield": true}')), // weapon with dw
       ]));
       // WHEN
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('left_hand');
@@ -234,7 +235,7 @@ describe('UnitsService', () => {
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 12, "category": 9}')), // shield
-        new Equipment(JSON.parse('{"id": 1352}')), // weapon with dw
+        new Equipment(JSON.parse('{"id": 1352, "dual_wield": true}')), // weapon with dw
       ]));
       // WHEN
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('left_hand');
@@ -254,13 +255,14 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.selectedUnit.selectedBuild.equipments.accessory1.id = 935; // has DW
+      service.selectedUnit.selectedBuild.equipments.accessory1.id = 935;
+      service.selectedUnit.selectedBuild.equipments.accessory1.dual_wield = true;
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 12, "category": 9}')), // shield
-        new Equipment(JSON.parse('{"id": 1352}')), // weapon with dw
+        new Equipment(JSON.parse('{"id": 1352, "dual_wield": true}')),
       ]));
       // WHEN
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('left_hand');
@@ -285,7 +287,7 @@ describe('UnitsService', () => {
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 12, "category": 9}')), // shield
-        new Equipment(JSON.parse('{"id": 1352}')), // weapon with dw
+        new Equipment(JSON.parse('{"id": 1352, "dual_wield": true}')), // weapon with dw
       ]));
       // WHEN
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('left_hand');

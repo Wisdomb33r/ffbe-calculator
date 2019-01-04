@@ -289,7 +289,7 @@ export class UnitsService {
     return slot !== 'left_hand' || item.isShield()
       || (this.getEquipments().isDwEquipped() && !item.isTwoHanded())
       || (this.selectedUnit.isWithNativeDw() && !item.isTwoHanded())
-      || item.isWeaponWithDw()
+      || item.dual_wield
       || (this.selectedUnit.isWithPartialDwForCategory(item.category)
         && this.selectedUnit.isWithPartialDwForCategory(this.getEquipments().right_hand.category)
         && !item.isTwoHanded())

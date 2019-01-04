@@ -254,14 +254,11 @@ export class EquipmentSet {
   }
 
   public isDwEquipped(): boolean {
-    // TODO currently hard-coded, find a way to retrieve this value from database
-    return this.right_hand.isWeaponWithDw()
-      || this.accessory1.id === 935 || this.accessory2.id === 935 // genji gloves
-      || this.materia1.id === 791 || this.materia2.id === 791 || this.materia3.id === 791 || this.materia4.id === 791 // dw
-      || this.materia1.id === 1756 || this.materia2.id === 1756
-      || this.materia3.id === 1756 || this.materia4.id === 1756 // awesome swordsman
-      || this.materia1.id === 2308 || this.materia2.id === 2308 || this.materia3.id === 2308 || this.materia4.id === 2308 // quintessence
-      ;
+    return (this.right_hand && this.right_hand.dual_wield)
+      || (this.head && this.head.dual_wield) || (this.body && this.body.dual_wield)
+      || (this.accessory1 && this.accessory1.dual_wield) || (this.accessory2 && this.accessory2.dual_wield)
+      || (this.materia1 && this.materia1.dual_wield) || (this.materia2 && this.materia2.dual_wield)
+      || (this.materia3 && this.materia3.dual_wield) || (this.materia4 && this.materia4.dual_wield);
   }
 
   public isDualWielding(): boolean {

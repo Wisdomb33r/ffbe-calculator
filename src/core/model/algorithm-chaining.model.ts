@@ -67,7 +67,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       }
 
       for (let i = 0; i < skill.hits; i++) {
-        if (i > 0 && frames[i] - frames[i - 1] > 20) {
+        if (i > 0 && ((frames[i] - frames[i - 1] > 20 && this.isSparkChain) || (frames[i] - frames[i - 1] > 23))) {
           chainCombos = 0;
         }
         let hitPower = skillTotalPower * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
@@ -88,7 +88,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
         }
         for (let i = 1; i < nbAttacks; i++) {
           for (let j = 0; j < skill.hits; j++) {
-            if (j > 0 && frames[j] - frames[j - 1] > 20) {
+            if (j > 0 && ((frames[j] - frames[j - 1] > 20 && this.isSparkChain) || (frames[i] - frames[i - 1] > 23))) {
               chainCombos = 0;
             }
             let hitPower = skillTotalPower * damages[j] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);

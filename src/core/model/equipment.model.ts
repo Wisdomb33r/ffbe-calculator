@@ -72,6 +72,7 @@ export class Equipment {
   public lb_multiplier: number;
   public sex_restriction: number;
   public esper_percent: number;
+  public dual_wield: boolean;
   public conditional_passives: Array<ConditionalPassive> = [];
   public elements: Array<number> = [];
 
@@ -130,6 +131,7 @@ export class Equipment {
     this.lb_multiplier = equipment.lb_multiplier;
     this.sex_restriction = equipment.sex_restriction === 1 || equipment.sex_restriction === 2 ? equipment.sex_restriction : undefined;
     this.esper_percent = equipment.esper_percent;
+    this.dual_wield = equipment.dual_wield;
     if (Array.isArray(equipment.conditional_passives)) {
       equipment.conditional_passives
         .forEach(conditional_passive => this.conditional_passives.push(new ConditionalPassive(conditional_passive)));
@@ -157,16 +159,6 @@ export class Equipment {
 
   public isTwoHanded(): boolean {
     return this.variance_min > 0 && this.variance_max > 0;
-  }
-
-  public isWeaponWithDw(): boolean {
-    // TODO currently hardcoded, need to find a way to retrieve this from backend
-    return this.id === 1199 // second knife
-      || this.id === 1352 // bowie knife
-      || this.id === 2293 // sasuke's katana
-      || this.id === 2779 // excalibur (ff type-0)
-      || this.id === 2893 // executioner (ff xv)
-      ;
   }
 
   public getPhysicalKiller(opponentKillerType): number {
