@@ -37,22 +37,22 @@ export const GUNS = 15;
 export const MACES = 26;
 export const CLAWS = 18;
 export const WEAPONS_CATEGORIES: Array<number> = [
-  1,
-  2,
-  6,
-  13,
-  15,
-  16,
-  17,
-  18,
-  24,
-  26,
-  27,
-  28,
-  29,
-  32,
-  33,
-  34,
+  DAGGERS,
+  SWORDS,
+  LSWORDS,
+  KATANAS,
+  STAVES,
+  RODS,
+  BOWS,
+  AXES,
+  HAMMERS,
+  SPEARS,
+  HARPS,
+  WHIPS,
+  THROWING,
+  GUNS,
+  MACES,
+  CLAWS,
 ];
 export const SHIELDS_CATEGORIES: Array<number> = [
   9,
@@ -71,6 +71,7 @@ export const BODY_CATEGORIES: Array<number> = [
 export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
   2317, // daggers
   2318, // swords, lswords, katanas, spears, claws
+  2950, // swords, lswords, katanas, spears, claws
   2683, // staves
   2319, // rods
   2620, // bows
@@ -78,8 +79,11 @@ export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
   2791, // harps
   2463, // whips
   2464, // throwing weapons
+  2951, // throwing weapons
   2320, // guns and axes
+  2952, // guns and axes
   2621, // maces
+  2953, // maces
 ];
 export const IFRIT_KILLERS: Esper = getIfritWithKillers();
 export const IFRIT_STATS_BOOST: Esper = getIfritWithStatsBoost();

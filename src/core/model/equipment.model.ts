@@ -1,26 +1,5 @@
 import {ConditionalPassive} from './conditional-passive.model';
-import {
-  AXES,
-  BODY_CATEGORIES,
-  BOWS,
-  CLAWS,
-  DAGGERS,
-  GUNS,
-  HAMMERS,
-  HARPS,
-  HEAD_CATEGORIES,
-  KATANAS,
-  LSWORDS,
-  MACES,
-  RODS,
-  SHIELDS_CATEGORIES,
-  SPEARS,
-  STAVES,
-  SWORDS,
-  THROWING,
-  WEAPONS_CATEGORIES,
-  WHIPS
-} from '../calculator-constants';
+import {BODY_CATEGORIES, HEAD_CATEGORIES, SHIELDS_CATEGORIES, WEAPONS_CATEGORIES} from '../calculator-constants';
 import {KillerPassives} from './killer-passives.model';
 
 export class Equipment {
@@ -172,14 +151,6 @@ export class Equipment {
   }
 
   public isWeaponTraitPossible(): boolean {
-    return (this.id < 2795 && (this.category === LSWORDS || this.category === KATANAS || this.category === HARPS || this.category === WHIPS
-        || this.category === THROWING || this.category === GUNS || this.category === MACES || this.category === CLAWS)
-      )
-      ||
-      (this.id < 2898 && this.id !== 2862 && (this.category === RODS || this.category === SWORDS || this.category === SPEARS
-          || this.category === BOWS || this.category === DAGGERS || this.category === STAVES || this.category === AXES
-          || this.category === HAMMERS)
-      )
-      ;
+    return this.id < 2954 && this.id !== 2862 && WEAPONS_CATEGORIES.find(categ => categ === this.category) > 0;
   }
 }

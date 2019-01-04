@@ -29,6 +29,9 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     if ($weapon_category == '1' || $weapon_category == '27' || $weapon_category == '28' || $weapon_category == '32' || $weapon_category == '18') {
       $objects [] = brex_objet::findByPrimaryId ( 2318 ); // swords, great swords, katanas, spears
     }
+    if ($weapon_category == '27') {
+      $objects [] = brex_objet::findByPrimaryId ( 2950 ); // great swords
+    }
     if ($weapon_category == '17') {
       $objects [] = brex_objet::findByPrimaryId ( 2683 ); // staves
     }
@@ -47,14 +50,19 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     if ($weapon_category == '34') {
       $objects [] = brex_objet::findByPrimaryId ( 2463 ); // whips
     }
-    if ($weapon_category == '24') {
-      $objects [] = brex_objet::findByPrimaryId ( 2464 ); // throwing weapons
+    if ($weapon_category == '24') { // throwing weapons
+      $objects [] = brex_objet::findByPrimaryId ( 2464 );
+      $objects [] = brex_objet::findByPrimaryId ( 2951 );
     }
     if ($weapon_category == '15' || $weapon_category == '29') {
       $objects [] = brex_objet::findByPrimaryId ( 2320 ); // guns and axes
     }
-    if ($weapon_category == '26') {
-      $objects [] = brex_objet::findByPrimaryId ( 2621 ); // maces
+    if ($weapon_category == '15') {
+      $objects [] = brex_objet::findByPrimaryId ( 2952 ); // guns
+    }
+    if ($weapon_category == '26') { // maces
+      $objects [] = brex_objet::findByPrimaryId ( 2621 );
+      $objects [] = brex_objet::findByPrimaryId ( 2953 );
     }
     
     $equipments = array ();
