@@ -245,6 +245,35 @@ export class EquipmentSet {
     return elements;
   }
 
+  public getExtraEquipmentTypes(): Array<number> {
+    const types: Array<number> = [];
+    if (this.head && this.head.extra_equip) {
+      types.push(this.head.extra_equip);
+    }
+    if (this.body && this.body.extra_equip) {
+      types.push(this.body.extra_equip);
+    }
+    if (this.accessory1 && this.accessory1.extra_equip) {
+      types.push(this.accessory1.extra_equip);
+    }
+    if (this.accessory2 && this.accessory2.extra_equip) {
+      types.push(this.accessory2.extra_equip);
+    }
+    if (this.materia1 && this.materia1.extra_equip) {
+      types.push(this.materia1.extra_equip);
+    }
+    if (this.materia2 && this.materia2.extra_equip) {
+      types.push(this.materia2.extra_equip);
+    }
+    if (this.materia3 && this.materia3.extra_equip) {
+      types.push(this.materia3.extra_equip);
+    }
+    if (this.materia4 && this.materia4.extra_equip) {
+      types.push(this.materia4.extra_equip);
+    }
+    return types;
+  }
+
   public isDoubleHandActive(): boolean {
     return !this.left_hand && this.right_hand && !this.right_hand.isTwoHanded();
   }

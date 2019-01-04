@@ -122,7 +122,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999, []);
       equipments.subscribe(result => expect(result.length).toEqual(1));
     }));
 
@@ -142,7 +142,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('materia1');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('materia1', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('materia1', 9999, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(2);
         expect(result[0].id).toEqual(7);
@@ -165,7 +165,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('accessory2');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('accessory2', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('accessory2', 9999, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(2);
         expect(result[0].id).toEqual(5);
@@ -189,7 +189,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('right_hand');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('right_hand', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('right_hand', 9999, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(2);
         expect(result[0].id).toEqual(10);
@@ -217,7 +217,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('left_hand');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('left_hand', 590);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('left_hand', 590, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(0);
       });
@@ -241,7 +241,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('left_hand');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('left_hand', 590);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('left_hand', 590, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(3);
         expect(result[0].id).toEqual(11);
@@ -268,7 +268,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('left_hand');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('left_hand', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('left_hand', 9999, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(3);
         expect(result[0].id).toEqual(11);
@@ -293,7 +293,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('left_hand');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('left_hand', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('left_hand', 9999, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(2);
         expect(result[0].id).toEqual(12);
@@ -317,7 +317,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(2);
         expect(result[0].id).toEqual(2);
@@ -346,7 +346,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(6);
         expect(result[0].id).toEqual(14);
@@ -379,7 +379,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(6);
         expect(result[0].id).toEqual(14);
@@ -417,7 +417,7 @@ describe('UnitsService', () => {
       const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
       // THEN
       expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
-      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999);
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999, []);
       equipments.subscribe(result => {
         expect(result.length).toEqual(4);
         expect(result[0].id).toEqual(11);

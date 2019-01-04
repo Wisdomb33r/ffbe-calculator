@@ -95,6 +95,28 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     $unit_categories = $unit->perso->relationNMequipement;
     $unit_categories [] = 57; // materias category is not listed in unit equipment types
     $intersecting_categories = array_intersect ( $categories, $unit_categories );
+    
+    // extra categories from equip_XXX
+    if (isset ( $_GET ['addedTypes'] )) {
+      $splittedTypes = explode ( '-', $_GET ['addedTypes'] );
+      if (count ( $splittedTypes )) {
+        foreach ( $splittedTypes as $addded_category ) {
+          if ($_GET ['category'] == 'right_hand' && in_array ( $addded_category, array (16, 1, 27, 28, 17, 2, 6, 29, 13, 32, 33, 34, 24, 15, 26, 18) )) {
+            $intersecting_categories [] = $addded_category;
+          }
+          if ($_GET ['category'] == 'left_hand' && in_array ( $addded_category, array (16, 1, 27, 28, 17, 2, 6, 29, 13, 32, 33, 34, 24, 15, 26, 18, 9, 10) )) {
+            $intersecting_categories [] = $addded_category;
+          }
+          if ($_GET ['category'] == 'head' && in_array ( $addded_category, array (12, 11) )) {
+            $intersecting_categories [] = $addded_category;
+          }
+          if ($_GET ['category'] == 'body' && in_array ( $addded_category, array (35, 8, 7, 14) )) {
+            $intersecting_categories [] = $addded_category;
+          }
+        }
+      }
+    }
+    
     if (! count ( $intersecting_categories )) {
       dieWithError ( 500, 'Unexpected error, unit equipments does not intersect with requested categories' );
     }
