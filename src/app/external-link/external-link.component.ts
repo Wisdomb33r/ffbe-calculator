@@ -81,20 +81,8 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
 
           const observables = [];
           observables.push(of(unit));
-          if (this.right_hand) {
-            observables.push(this.unitsService.getAllowedEquipmentsForSlot$('right_hand'));
-          }
-          if (this.head) {
-            observables.push(this.unitsService.getAllowedEquipmentsForSlot$('head'));
-          }
-          if (this.body) {
-            observables.push(this.unitsService.getAllowedEquipmentsForSlot$('body'));
-          }
-          if (this.accessory1) {
+          if (this.accessory1 || this.accessory2) {
             observables.push(this.unitsService.getAllowedEquipmentsForSlot$('accessory1'));
-          }
-          if (this.accessory2) {
-            observables.push(this.unitsService.getAllowedEquipmentsForSlot$('accessory2'));
           }
           if (this.materia1 || this.materia2 || this.materia3 || this.materia4) {
             observables.push(this.unitsService.getAllowedEquipmentsForSlot$('materia1'));
@@ -102,28 +90,17 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
 
           return forkJoin(observables);
         }
-        return throwError('No unit identifier');
+        return throwError('No unit found');
       }),
       tap(observablesResults => {
         let index = 1;
-        if (this.right_hand) {
-          this.testAndEquip('right_hand', this.right_hand, observablesResults, index);
-          index++;
-        }
-        if (this.head) {
-          this.testAndEquip('head', this.head, observablesResults, index);
-          index++;
-        }
-        if (this.body) {
-          this.testAndEquip('body', this.body, observablesResults, index);
-          index++;
-        }
-        if (this.accessory1) {
-          this.testAndEquip('accessory1', this.accessory1, observablesResults, index);
-          index++;
-        }
-        if (this.accessory2) {
-          this.testAndEquip('accessory2', this.accessory2, observablesResults, index);
+        if (this.accessory1 || this.accessory2) {
+          if (this.accessory1) {
+            this.testAndEquip('accessory1', this.accessory1, observablesResults, index);
+          }
+          if (this.accessory2) {
+            this.testAndEquip('accessory2', this.accessory2, observablesResults, index);
+          }
           index++;
         }
         if (this.materia1 || this.materia2 || this.materia3 || this.materia4) {
@@ -146,6 +123,36 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           if (esper) {
             this.unitsService.selectedUnit.selectedBuild.esper = esper;
           }
+        }
+      }),
+      switchMap(anything => {
+        const observables = [];
+        observables.push(of(true));
+        if (this.right_hand) {
+          observables.push(this.unitsService.getAllowedEquipmentsForSlot$('right_hand'));
+        }
+        if (this.head) {
+          observables.push(this.unitsService.getAllowedEquipmentsForSlot$('head'));
+        }
+        if (this.body) {
+          observables.push(this.unitsService.getAllowedEquipmentsForSlot$('body'));
+        }
+
+        return forkJoin(observables);
+      }),
+      tap(observablesResults => {
+        let index = 1;
+        if (this.right_hand) {
+          this.testAndEquip('right_hand', this.right_hand, observablesResults, index);
+          index++;
+        }
+        if (this.head) {
+          this.testAndEquip('head', this.head, observablesResults, index);
+          index++;
+        }
+        if (this.body) {
+          this.testAndEquip('body', this.body, observablesResults, index);
+          index++;
         }
       }),
       switchMap(any => {
