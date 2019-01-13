@@ -37,7 +37,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
   private materia4: number;
   private esper: number;
   private idType: string;
-  private currentStep = 1;
+  public currentStep = 1;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
