@@ -37,6 +37,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
   private materia4: number;
   private esper: number;
   private idType: string;
+  private currentStep = 1;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -71,6 +72,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         return this.databaseClient.getUnitById$(this.unit);
       }),
       switchMap((unit: Unit) => {
+        this.currentStep = 2;
         if (unit) {
           this.unitsService.selectedUnit = new Unit(unit);
           this.unitsService.selectedUnit.selectDefaultBuild();
@@ -93,6 +95,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         return throwError('No unit found');
       }),
       tap(observablesResults => {
+        this.currentStep = 3;
         let index = 1;
         if (this.accessory1 || this.accessory2) {
           if (this.accessory1) {
@@ -141,6 +144,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         return forkJoin(observables);
       }),
       tap(observablesResults => {
+        this.currentStep = 4;
         let index = 1;
         if (this.right_hand) {
           this.testAndEquip('right_hand', this.right_hand, observablesResults, index);
@@ -164,6 +168,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         return forkJoin(observables);
       }),
       tap(observablesResults => {
+        this.currentStep = 5;
         if (this.left_hand) {
           this.testAndEquip('left_hand', this.left_hand, observablesResults, 1);
         }
@@ -180,6 +185,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         return forkJoin(observables);
       }),
       tap(observablesResults => {
+        this.currentStep = 6;
         let index = 1;
         if (this.unitsService.getEquipments().right_hand && (this.rh_trait1 || this.rh_trait2 || this.rh_trait3)) {
           if (this.rh_trait1) {

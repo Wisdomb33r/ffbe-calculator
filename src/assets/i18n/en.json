@@ -69,7 +69,7 @@
       "chainersWithDuplicate": "Chainers are considered with a duplicate (same unit, same equipment for elemental weapons).",
       "finishersWithChainers": "Finishers are considered with a couple of chainers in the group to start a combo (damage multiplier x4).",
       "finishersTooLongAttack": "Finisher moves with long delay between first and last hit (over 100 to 120 frames) have a reduced combo (damage multiplier x2.5 to simulate a half-in / half-out scenario).",
-      "finishersOutOfChainAttack": "Finisher moves that cannot enter a chain (e.g. jumps) have no combo (damage multiplier x1).",
+      "finishersOutOfChainAttack": "Finisher moves that cannot enter a chain (non-timed jumps) have no combo (damage multiplier x1).",
       "chainCalculationSimplified": "The combo calculation for a chainer and its duplicate is slightly simplified. Namely, it does not consider multiple skills hits overlap.",
       "chainImpossibleCases": "The calculator does not prevent cases that are not possible in game (for instance Victoria cannot spark chain and Tidus cannot chain without spark nor combo break).",
       "supportPresence": "By default, the calculator assumes there are supports in the group to buff (+100%, i.e. Ramza) and debuff (-50% to resists, for example Seven, 9S or Kryla).",
@@ -80,6 +80,10 @@
       "summary": "You wish for a new functionality ? You want to report a bug ? The calculator does not work for you ? Here are a few way to give us feedback :",
       "github": "Directly on our Github project (preferred channel) ",
       "mail": "With e-mail at "
+    },
+    "externalLink": {
+      "title": "Loading build",
+      "summary": "Loading steps to build calculation : "
     }
   },
   "unit": {

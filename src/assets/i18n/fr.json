@@ -69,7 +69,7 @@
       "chainersWithDuplicate": "Un chaîneur est considéré comme étant accompagné d'un seul clone (même unité, même matériel pour les éléments des armes).",
       "finishersWithChainers": "Un finisher est considéré comme étant accompagné d'un duo de chaîneurs pour former le combo (multiplicateur x4).",
       "finishersTooLongAttack": "Les attaques de finisher avec trop de temps entre le premier et le dernier coup (plus que 100 à 120 frames) ont une réduction sur le combo (multiplicateur x2.5 qui simule la moitié des coups dans la chaîne et l'autre moitié en dehors).",
-      "finishersOutOfChainAttack": "Les attaques de finisher ne pouvant pas entrer dans une chaîne de combo (les sauts sont un exemple) sont hors du combo (multiplicateur x1).",
+      "finishersOutOfChainAttack": "Les attaques de finisher ne pouvant pas entrer dans une chaîne de combo (certains sauts par exemple) sont hors du combo (multiplicateur x1).",
       "chainCalculationSimplified": "Le calcul du combo d'un chaîneur et de son clone utilise un algorithme simplifié. Il est notamment réalisé sans considérer la superposition des coups des multiples exécutions d'une compétence.",
       "chainImpossibleCases": "Le calculateur ne bloque également pas certains cas qu'il est impossible de réaliser en jeu (par exemple que Victoria ne peut pas faire de chaînes étincelles, ou que Tidus ne peut pas faire de chaîne parfaite sans étincelles).",
       "supportPresence": "Par défaut, tout calcul considère la présence d'un support pour buff (+100%, par exemple Ramza) et pour debuff (-50% aux résistances, par exemple Seven, 9S ou Kryla).",
@@ -80,6 +80,10 @@
       "summary": "Vous souhaitez une nouvelle fonctionnalité ? Vous avez découvert un bug ? Le calculateur ne fonctionne pas ou mal ? Voici quelques moyens pour nous contacter :",
       "github": "Directement sur notre projet Github ",
       "mail": "Par e-mail à "
+    },
+    "externalLink": {
+      "title": "Chargement du build",
+      "summary": "Étapes du chargement du build en cours : "
     }
   },
   "unit": {
