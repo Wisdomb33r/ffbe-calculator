@@ -3,6 +3,7 @@ import {Skill} from './skill.model';
 import {ResultTurnDamages} from './result-turn-damages.model';
 import {Unit} from './unit.model';
 import {Result} from './result.model';
+import {ResultOffensive} from './result-offensive.model';
 
 export abstract class AlgorithmOffensive implements Algorithm {
 
@@ -18,7 +19,21 @@ export abstract class AlgorithmOffensive implements Algorithm {
   public supportResistsBreak: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
   public opponentResistances: Array<number> = [0, 0, 0, 0, 0, 0, 0, 0];
 
-  abstract calculate(unit: Unit): Result;
+  protected abstract calculateTurn(skill: Skill, unit: Unit): ResultTurnDamages;
+
+  public calculate(unit: Unit): Result {
+    const result: ResultOffensive = new ResultOffensive();
+    unit.selectedBuild.startPhaseSkills.forEach((skill: Skill) => result.startPhaseTurnDamages.push(this.calculateTurn(skill, unit)));
+    result.startPhaseResult = result.startPhaseTurnDamages
+      .map(r => r.result)
+      .reduce((val1, val2) => val1 + val2, 0) / result.startPhaseTurnDamages.filter((turn: ResultTurnDamages) => turn.isTurnCounting)
+      .length;
+    unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
+    result.result = result.turnDamages
+      .map(r => r.result)
+      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.filter((turn: ResultTurnDamages) => turn.isTurnCounting).length;
+    return result;
+  }
 
   protected calculateEffectiveResistances(skill: Skill, result: ResultTurnDamages) {
     result.resistances = this.isSupportBreakingResistances ?

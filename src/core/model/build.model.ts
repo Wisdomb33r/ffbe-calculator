@@ -25,6 +25,7 @@ export class Build {
   public magical_killers: KillerPassives;
   public equipments: EquipmentSet;
   public skills: Array<Skill> = [];
+  public startPhaseSkills: Array<Skill> = [];
 
   // transcient
   public algorithm: Algorithm;
@@ -85,7 +86,12 @@ export class Build {
           }
         }
 
-        this.skills.push(new Skill(skill));
+        const s = new Skill(skill);
+        if (s.isStartPhase) {
+          this.startPhaseSkills.push(s);
+        } else {
+          this.skills.push(new Skill(skill));
+        }
       });
     }
     this.algorithm = AlgorithmFactory.getInstance(this.algorithmId);

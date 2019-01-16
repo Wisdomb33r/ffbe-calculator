@@ -1,23 +1,12 @@
-import {Result} from './result.model';
 import {Unit} from './unit.model';
 import {isNullOrUndefined} from 'util';
 import {Skill} from './skill.model';
 import {ResultTurnDamages} from './result-turn-damages.model';
-import {ResultOffensive} from './result-offensive.model';
 import {AlgorithmOffensive} from './algorithm-offensive.model';
 
 export class AlgorithmChaining extends AlgorithmOffensive {
 
-  public calculate(unit: Unit): Result {
-    const result: ResultOffensive = new ResultOffensive();
-    unit.selectedBuild.skills.forEach((skill: Skill) => result.turnDamages.push(this.calculateTurn(skill, unit)));
-    result.result = result.turnDamages
-      .map(r => r.result)
-      .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.filter((turn: ResultTurnDamages) => turn.isTurnCounting).length;
-    return result;
-  }
-
-  private calculateTurn(skill: Skill, unit: Unit): ResultTurnDamages {
+  protected calculateTurn(skill: Skill, unit: Unit): ResultTurnDamages {
     const result: ResultTurnDamages = new ResultTurnDamages();
     result.skill = skill;
     skill.damageType.calculateLevelCorrection(unit, result);
