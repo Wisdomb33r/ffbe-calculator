@@ -28,74 +28,37 @@ describe('PermanentUrlComponent', () => {
         TranslateModule.forRoot(),
         ClipboardModule,
       ]
-    })
-      .compileComponents();
-  }));
-
-  beforeEach(() => {
+    }).compileComponents();
     fixture = TestBed.createComponent(PermanentUrlComponent);
     component = fixture.componentInstance;
-  });
+  }));
 
   it('should construct a URL based on unit equipment and display it in the HTML input field', () => {
     // GIVEN
     const UNIT_DATA = `
     {
       "id": 1234,
-      "stats": {
-      },
+      "stats": {},
       "builds": [
         {
           "id": 999,
           "equipments": {
-            "right_hand": {
-              "id": 1
-            },
-            "left_hand": {
-              "id": 2
-            },
-            "head": {
-              "id": 3
-            },
-            "body": {
-              "id": 4
-            },
-            "accessory1": {
-              "id": 5
-            },
-            "accessory2": {
-              "id": 6
-            },
-            "materia1": {
-              "id": 7
-            },
-            "materia2": {
-              "id": 8
-            },
-            "materia3": {
-              "id": 9
-            },
-            "materia4": {
-              "id": 10
-            },
-            "rh_trait1": {
-              "id": 11
-            },
-            "rh_trait2": {
-              "id": 12
-            },
-            "rh_trait3": {
-              "id": 13
-            },
-            "lh_trait1": {
-              "id": 14
-            },
-            "lh_trait2": {
-              "id": 15
-            },
-            "lh_trait3": {
-              "id": 16
-            }
+            "right_hand": {"id": 1},
+            "left_hand": {"id": 2},
+            "head": {"id": 3},
+            "body": {"id": 4},
+            "accessory1": {"id": 5},
+            "accessory2": {"id": 6},
+            "materia1": {"id": 7},
+            "materia2": {"id": 8},
+            "materia3": {"id": 9},
+            "materia4": {"id": 10},
+            "rh_trait1": {"id": 11},
+            "rh_trait2": {"id": 12},
+            "rh_trait3": {"id": 13},
+            "lh_trait1": {"id": 14},
+            "lh_trait2": {"id": 15},
+            "lh_trait3": {"id": 16}
           }
         }
       ]
