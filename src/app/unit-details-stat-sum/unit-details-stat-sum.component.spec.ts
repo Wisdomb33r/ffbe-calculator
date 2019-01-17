@@ -4,7 +4,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {UnitDetailsStatSumComponent} from './unit-details-stat-sum.component';
 import {Component, NgModule} from '@angular/core';
 import {OverlayContainer} from '@angular/cdk/overlay';
-import {IFRIT_STATS_BOOST} from '../../core/calculator-constants';
+import {GOLEM_TANKING, IFRIT_STATS_BOOST} from '../../core/calculator-constants';
 import {UnitStats} from '../../core/model/unit-stats.model';
 import {TranslateModule} from '@ngx-translate/core';
 import {IntegerPipe} from '../../core/pipes/integer.pipe';
@@ -52,7 +52,7 @@ describe('UnitDetailsStatSumComponent', () => {
     noop = TestBed.createComponent(NoopComponent);
   }));
 
-  fit('should display unit stats', () => {
+  it('should display unit stats for DW', () => {
     // GIVEN
     const UNIT_STATS_TEST_DATA = `{
       "hp":1000,"mp":100,"atk":100,"mag":100,"def":100,"spr":100,
@@ -83,7 +83,6 @@ describe('UnitDetailsStatSumComponent', () => {
 
     // THEN
     const table = overlayContainerElement.querySelector('table.stat-details');
-    console.log(table);
     expect(table).toBeTruthy();
 
     // unit header line
@@ -94,11 +93,162 @@ describe('UnitDetailsStatSumComponent', () => {
     const unitBaseLine = table.querySelector('tr:nth-child(2)');
     expect(unitBaseLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.base');
     expect(unitBaseLine.querySelector('td:nth-child(2)').textContent).toEqual('1,000');
+    expect(unitBaseLine.querySelector('td:nth-child(3)').textContent).toEqual('');
 
     // unit passive line
     const unitPassiveLine = table.querySelector('tr:nth-child(3)');
     expect(unitPassiveLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.passive');
     expect(unitPassiveLine.querySelector('td:nth-child(2)').textContent).toEqual('1,000');
     expect(unitPassiveLine.querySelector('td:nth-child(3)').textContent).toEqual('(100%)');
+
+    // unit dw line
+    const unitDwLine = table.querySelector('tr:nth-child(4)');
+    expect(unitDwLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.dw');
+    expect(unitDwLine.querySelector('td:nth-child(2)').textContent).toEqual('250');
+    expect(unitDwLine.querySelector('td:nth-child(3)').textContent).toEqual('(50%)');
+
+    // equipment header line
+    const equipmentHeaderLine = table.querySelector('tr:nth-child(5)');
+    expect(equipmentHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.equipment');
+
+    // equipment passive line
+    const equipmentPassiveLine = table.querySelector('tr:nth-child(6)');
+    expect(equipmentPassiveLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.passive');
+    expect(equipmentPassiveLine.querySelector('td:nth-child(2)').textContent).toEqual('500');
+    expect(equipmentPassiveLine.querySelector('td:nth-child(3)').textContent.trim()).toEqual('(50%)');
+
+    // equipment base line
+    const equipmentBaseLine = table.querySelector('tr:nth-child(7)');
+    expect(equipmentBaseLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.base');
+    expect(equipmentBaseLine.querySelector('td:nth-child(2)').textContent).toEqual('500');
+    expect(equipmentBaseLine.querySelector('td:nth-child(3)').textContent).toEqual('');
+
+    // equipment dw line
+    const equipmentDwLine = table.querySelector('tr:nth-child(8)');
+    expect(equipmentDwLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.dw');
+    expect(equipmentDwLine.querySelector('td:nth-child(2)').textContent).toEqual('125');
+    expect(equipmentDwLine.querySelector('td:nth-child(3)').textContent).toEqual('(25%)');
+
+    // esper header line
+    const esperHeaderLine = table.querySelector('tr:nth-child(9)');
+    expect(esperHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.esper');
+
+    // esper base line
+    const esperBaseLine = table.querySelector('tr:nth-child(10)');
+    expect(esperBaseLine.querySelector('td:nth-child(1)').textContent).toEqual(''); // TODO would it not be better to display 'unit.details.stats.popup.base'
+    expect(esperBaseLine.querySelector('td:nth-child(2)').textContent).toEqual('105');
+    expect(esperBaseLine.querySelector('td:nth-child(3)').textContent).toEqual('');
+
+    // esper passive line
+    const esperPassiveLine = table.querySelector('tr:nth-child(11)');
+    expect(esperPassiveLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.passive');
+    expect(esperPassiveLine.querySelector('td:nth-child(2)').textContent).toEqual('0');
+    expect(esperPassiveLine.querySelector('td:nth-child(3)').textContent.trim()).toEqual('(0%)');
+
+    // total line
+    const totalLine = table.querySelector('tr:nth-child(12)');
+    expect(totalLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.total');
+    expect(totalLine.querySelector('td:nth-child(2)').textContent).toEqual('3,480');
+    expect(totalLine.querySelector('td:nth-child(3)').textContent.trim()).toEqual('');
+  });
+
+  it('should display unit stats for DH and warning for exceeding limit', () => {
+    // GIVEN
+    const UNIT_STATS_TEST_DATA = `{
+      "hp":1000,"mp":100,"atk":100,"mag":100,"def":100,"spr":100,
+      "hp_passive":100,"mp_passive":10,"atk_passive":10,"mag_passive":10,"def_passive":10,"spr_passive":10,
+      "hp_dh":100,"mp_dh":10,"atk_dh":10,"mag_dh":10,"def_dh":10,"spr_dh":10,
+      "hp_tdh":100,"mp_tdh":10,"atk_tdh":10,"mag_tdh":10,"def_tdh":10,"spr_tdh":10,
+      "hp_dw":50,"mp_dw":10,"atk_dw":10,"mag_dw":10,"def_dw":10,"spr_dw":10
+    }`;
+    const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
+    unitStats.defineEquipmentsStats(500, 100, 100, 100, 100, 100, 10);
+    unitStats.defineEquipmentPassives(50, 10, 10, 10, 10, 10, 10, []);
+    unitStats.defineEquipmentDhBonuses(250, 10, 10, 10, 10, 10, []);
+    unitStats.defineEsperStats(GOLEM_TANKING);
+    unitStats.computeTotals(true, true, false);
+    const dialogConfig = {
+      data: {
+        unitStats: unitStats,
+        stat: 'hp',
+        esper: GOLEM_TANKING,
+        doublehanding: true,
+        dualwielding: false,
+      }
+    };
+
+    // WHEN
+    dialog.open(UnitDetailsStatSumComponent, dialogConfig);
+    noop.detectChanges();
+
+    // THEN
+    const table = overlayContainerElement.querySelector('table.stat-details');
+    expect(table).toBeTruthy();
+
+    // unit header line
+    const unitHeaderLine = table.querySelector('tr:nth-child(1)');
+    expect(unitHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.unit');
+
+    // unit base line
+    const unitBaseLine = table.querySelector('tr:nth-child(2)');
+    expect(unitBaseLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.base');
+    expect(unitBaseLine.querySelector('td:nth-child(2)').textContent).toEqual('1,000');
+    expect(unitBaseLine.querySelector('td:nth-child(3)').textContent).toEqual('');
+
+    // unit passive line
+    const unitPassiveLine = table.querySelector('tr:nth-child(3)');
+    expect(unitPassiveLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.passive');
+    expect(unitPassiveLine.querySelector('td:nth-child(2)').textContent).toEqual('1,000');
+    expect(unitPassiveLine.querySelector('td:nth-child(3)').textContent).toEqual('(100%)');
+
+    // unit dw line
+    const unitDwLine = table.querySelector('tr:nth-child(4)');
+    expect(unitDwLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.dh');
+    expect(unitDwLine.querySelector('td:nth-child(2)').textContent).toEqual('1,000');
+    expect(unitDwLine.querySelector('td:nth-child(3)').textContent).toEqual('(200%)');
+
+    // equipment header line
+    const equipmentHeaderLine = table.querySelector('tr:nth-child(5)');
+    expect(equipmentHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.equipment');
+
+    // equipment passive line
+    const equipmentPassiveLine = table.querySelector('tr:nth-child(6)');
+    expect(equipmentPassiveLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.passive');
+    expect(equipmentPassiveLine.querySelector('td:nth-child(2)').textContent).toEqual('500');
+    expect(equipmentPassiveLine.querySelector('td:nth-child(3)').textContent.trim()).toEqual('(50%)');
+
+    // equipment base line
+    const equipmentBaseLine = table.querySelector('tr:nth-child(7)');
+    expect(equipmentBaseLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.base');
+    expect(equipmentBaseLine.querySelector('td:nth-child(2)').textContent).toEqual('500');
+    expect(equipmentBaseLine.querySelector('td:nth-child(3)').textContent).toEqual('');
+
+    // equipment dw line
+    const equipmentDwLine = table.querySelector('tr:nth-child(8)');
+    expect(equipmentDwLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.dh');
+    expect(equipmentDwLine.querySelector('td:nth-child(2)').textContent).toEqual('500');
+    expect(equipmentDwLine.querySelector('td.limit-warn').textContent).toEqual('(250%)');
+
+    // esper header line
+    const esperHeaderLine = table.querySelector('tr:nth-child(9)');
+    expect(esperHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.esper');
+
+    // esper base line
+    const esperBaseLine = table.querySelector('tr:nth-child(10)');
+    expect(esperBaseLine.querySelector('td:nth-child(1)').textContent).toEqual(''); // TODO would it not be better to display 'unit.details.stats.popup.base'
+    expect(esperBaseLine.querySelector('td:nth-child(2)').textContent).toEqual('130');
+    expect(esperBaseLine.querySelector('td:nth-child(3)').textContent).toEqual('');
+
+    // esper passive line
+    const esperPassiveLine = table.querySelector('tr:nth-child(11)');
+    expect(esperPassiveLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.passive');
+    expect(esperPassiveLine.querySelector('td:nth-child(2)').textContent).toEqual('100');
+    expect(esperPassiveLine.querySelector('td:nth-child(3)').textContent.trim()).toEqual('(10%)');
+
+    // total line
+    const totalLine = table.querySelector('tr:nth-child(12)');
+    expect(totalLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.total');
+    expect(totalLine.querySelector('td:nth-child(2)').textContent).toEqual('4,730');
+    expect(totalLine.querySelector('td:nth-child(3)').textContent.trim()).toEqual('');
   });
 });
