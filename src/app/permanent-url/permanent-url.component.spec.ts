@@ -38,6 +38,7 @@ describe('PermanentUrlComponent', () => {
   });
 
   it('should construct a URL based on unit equipment and display it in the HTML input field', () => {
+    // GIVEN
     const UNIT_DATA = `
     {
       "id": 1234,
@@ -119,7 +120,11 @@ describe('PermanentUrlComponent', () => {
     component.lh_trait2 = unit.selectedBuild.equipments.lh_trait2;
     component.lh_trait3 = unit.selectedBuild.equipments.lh_trait3;
     component.esper = IFRIT_KILLERS;
+
+    // WHEN
     fixture.detectChanges();
+
+    // THEN
     expect(component).toBeTruthy();
     fixture.whenStable().then(() => {
       const input = fixture.debugElement.query(By.css('input'));
@@ -130,7 +135,8 @@ describe('PermanentUrlComponent', () => {
     });
   });
 
-  it('should construct a minimal URL based on unit without equipment and display it in the HTML input field', () => {
+  it('should construct a minimal URL based on unit without equipment', () => {
+    // GIVEN
     const UNIT_DATA = `
     {
       "id": 1234,
@@ -147,12 +153,11 @@ describe('PermanentUrlComponent', () => {
     const unit: Unit = new Unit(JSON.parse(UNIT_DATA));
     unit.selectDefaultBuild();
     component.unit = unit;
-    fixture.detectChanges();
-    expect(component).toBeTruthy();
-    fixture.whenStable().then(() => {
-      const input = fixture.debugElement.query(By.css('input'));
-      const inputElement = input.nativeElement;
-      expect(inputElement.value).toBe('https://www.final-fantasy.ch/ffbe/calculator/link/unit/1234;build=999');
-    });
+
+    // WHEN
+    component.ngOnChanges();
+
+    // THEN
+    expect(component.url).toBe('https://www.final-fantasy.ch/ffbe/calculator/link/unit/1234;build=999');
   });
 });
