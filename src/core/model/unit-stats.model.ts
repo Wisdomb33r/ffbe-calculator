@@ -112,7 +112,7 @@ export class UnitStats {
     this[stat].value_from_esper_percent = esper.calculateStatIncrease(stat, this.esper_percent);
     this[stat].value_from_equipment_esper_percent = esper.calculateStatIncrease(stat, this.equipment_esper_percent);
     this[stat].value_from_esper_esper_percent = esper.calculateStatIncrease(stat, esper.stats_percent);
-    this[stat].passive_esper = esper.hp_percent ? esper.hp_percent : 0;
+    this[stat].passive_esper = esper[stat + '_percent'] ? esper[stat + '_percent'] : 0;
   }
 
   public computeTotals(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {

@@ -189,6 +189,11 @@ describe('UnitStats', () => {
     expect(unitStats.spr.value_from_esper_esper_percent).toBeCloseTo(12.48);
 
     expect(unitStats.hp.passive_esper).toEqual(10);
+    expect(unitStats.mp.passive_esper).toEqual(0);
+    expect(unitStats.atk.passive_esper).toEqual(0);
+    expect(unitStats.mag.passive_esper).toEqual(0);
+    expect(unitStats.def.passive_esper).toEqual(0);
+    expect(unitStats.spr.passive_esper).toEqual(0);
   });
 
   it('#computeTotals should delegate to stats objects', () => {
