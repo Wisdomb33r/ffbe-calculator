@@ -99,19 +99,20 @@ export class UnitStats {
   }
 
   public defineEsperStats(esper: Esper) {
-    const total_esper_percent = this.esper_percent + this.equipment_esper_percent;
-    this.hp.value_from_esper = esper.calculateStatIncrease('hp', total_esper_percent);
-    this.hp.passive_esper = esper.hp_percent ? esper.hp_percent : 0;
-    this.mp.value_from_esper = esper.calculateStatIncrease('mp', total_esper_percent);
-    this.mp.passive_esper = esper.mp_percent ? esper.mp_percent : 0;
-    this.atk.value_from_esper = esper.calculateStatIncrease('atk', total_esper_percent);
-    this.atk.passive_esper = esper.atk_percent ? esper.atk_percent : 0;
-    this.mag.value_from_esper = esper.calculateStatIncrease('mag', total_esper_percent);
-    this.mag.passive_esper = esper.mag_percent ? esper.mag_percent : 0;
-    this.def.value_from_esper = esper.calculateStatIncrease('def', total_esper_percent);
-    this.def.passive_esper = esper.def_percent ? esper.def_percent : 0;
-    this.spr.value_from_esper = esper.calculateStatIncrease('spr', total_esper_percent);
-    this.spr.passive_esper = esper.spr_percent ? esper.spr_percent : 0;
+    this.defineEsperStat(esper, 'hp');
+    this.defineEsperStat(esper, 'mp');
+    this.defineEsperStat(esper, 'atk');
+    this.defineEsperStat(esper, 'mag');
+    this.defineEsperStat(esper, 'def');
+    this.defineEsperStat(esper, 'spr');
+  }
+
+  public defineEsperStat(esper: Esper, stat: string) {
+    this[stat].value_from_esper = esper[stat] / 100;
+    this[stat].value_from_esper_percent = esper.calculateStatIncrease(stat, this.esper_percent);
+    this[stat].value_from_equipment_esper_percent = esper.calculateStatIncrease(stat, this.equipment_esper_percent);
+    this[stat].value_from_esper_esper_percent = esper.calculateStatIncrease(stat, esper.stats_percent);
+    this[stat].passive_esper = esper.hp_percent ? esper.hp_percent : 0;
   }
 
   public computeTotals(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {

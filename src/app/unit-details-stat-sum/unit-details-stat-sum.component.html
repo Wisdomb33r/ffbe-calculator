@@ -26,9 +26,19 @@
       <td>{{getDwValue() | integer}}</td>
       <td class="percent">({{getDwPercent()}}%)</td>
     </tr>
+    <tr *ngIf="getEsperPercentValue()">
+      <td>{{'unit.details.stats.popup.esperPercent' | translate}}</td>
+      <td>{{getEsperPercentValue() | integer}}</td>
+      <td class="percent">({{getEsperPercent()}}%)
+    </tr>
     <tr>
       <th>{{'unit.details.stats.popup.equipment' | translate}}</th>
       <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>{{'unit.details.stats.popup.base' | translate}}</td>
+      <td>{{getEquipmentValue() | integer}}</td>
       <td></td>
     </tr>
     <tr>
@@ -36,11 +46,6 @@
       <td>{{getEquipmentPassiveValue() | integer}}</td>
       <td class="percent" [class.limit-warn]="isEquipmentPassiveLimitExceeded()">({{getEquipmentPassivePercent()}}%)
       </td>
-    </tr>
-    <tr>
-      <td>{{'unit.details.stats.popup.base' | translate}}</td>
-      <td>{{getEquipmentValue() | integer}}</td>
-      <td></td>
     </tr>
     <tr *ngIf="doublehanding">
       <td>{{'unit.details.stats.popup.dh' | translate}}</td>
@@ -51,6 +56,11 @@
       <td>{{'unit.details.stats.popup.dw' | translate}}</td>
       <td>{{getEquipmentDwValue() | integer}}</td>
       <td class="percent" [class.limit-warn]="isEquipmentDwLimitExceeded()">({{getEquipmentDwPercent()}}%)</td>
+    </tr>
+    <tr *ngIf="getEquipmentEsperPercentValue()">
+      <td>{{'unit.details.stats.popup.esperPercent' | translate}}</td>
+      <td>{{getEquipmentEsperPercentValue() | integer}}</td>
+      <td class="percent">({{getEquipmentEsperPercent()}}%)
     </tr>
     <tr>
       <th>{{'unit.details.stats.popup.esper' | translate}}</th>
@@ -68,12 +78,18 @@
       <td class="percent">({{getEsperPassivePercent()}}%)
       </td>
     </tr>
+    <tr *ngIf="getEsperEsperPercentValue()">
+      <td>{{'unit.details.stats.popup.esperPercent' | translate}}</td>
+      <td>{{getEsperEsperPercentValue() | integer}}</td>
+      <td class="percent">({{getEsperEsperPercent()}}%)
+    </tr>
     <tr class="total">
       <th>{{'unit.details.stats.popup.total' | translate}}</th>
       <td>{{getTotalValue() | integer}}</td>
       <td></td>
     </tr>
   </table>
-  <p *ngIf="isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded() || isEquipmentDwLimitExceeded()" class="limit-warn">
+  <p *ngIf="isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded() || isEquipmentDwLimitExceeded()"
+     class="limit-warn">
     {{'unit.details.stats.popup.limitWarn' | translate}}</p>
 </mat-dialog-content>

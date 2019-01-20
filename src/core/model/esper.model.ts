@@ -31,7 +31,6 @@ export class Esper {
   public elements: Array<number>;
 
   public calculateStatIncrease(statName: string, esper_percent: number): number {
-    const stats_percent = (this.stats_percent > 0 ? this.stats_percent : 0) + (esper_percent > 0 ? esper_percent : 0);
-    return (1 + stats_percent / 100) * this[statName] / 100;
+    return ((esper_percent > 0 ? esper_percent : 0) / 100) * this[statName] / 100;
   }
 }
