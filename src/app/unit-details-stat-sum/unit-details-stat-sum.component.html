@@ -29,7 +29,7 @@
     <tr *ngIf="getEsperPercentValue()">
       <td>{{'unit.details.stats.popup.esperPercent' | translate}}</td>
       <td>{{getEsperPercentValue() | integer}}</td>
-      <td class="percent">({{getEsperPercent()}}%)
+      <td class="percent">({{getEsperPercent()}}%)</td>
     </tr>
     <tr>
       <th>{{'unit.details.stats.popup.equipment' | translate}}</th>
@@ -44,8 +44,8 @@
     <tr>
       <td>{{'unit.details.stats.popup.passive' | translate}}</td>
       <td>{{getEquipmentPassiveValue() | integer}}</td>
-      <td class="percent" [class.limit-warn]="isEquipmentPassiveLimitExceeded()">({{getEquipmentPassivePercent()}}%)
-      </td>
+      <td class="percent"
+          [class.limit-warn]="isEquipmentPassiveLimitExceeded()">({{getEquipmentPassivePercent()}}%)</td>
     </tr>
     <tr *ngIf="doublehanding">
       <td>{{'unit.details.stats.popup.dh' | translate}}</td>
@@ -60,7 +60,7 @@
     <tr *ngIf="getEquipmentEsperPercentValue()">
       <td>{{'unit.details.stats.popup.esperPercent' | translate}}</td>
       <td>{{getEquipmentEsperPercentValue() | integer}}</td>
-      <td class="percent">({{getEquipmentEsperPercent()}}%)
+      <td class="percent">({{getEquipmentEsperPercent()}}%)</td>
     </tr>
     <tr>
       <th>{{'unit.details.stats.popup.esper' | translate}}</th>
@@ -75,13 +75,12 @@
     <tr>
       <td>{{'unit.details.stats.popup.passive' | translate}}</td>
       <td>{{getEsperPassiveValue() | integer}}</td>
-      <td class="percent">({{getEsperPassivePercent()}}%)
-      </td>
+      <td class="percent">({{getEsperPassivePercent()}}%)</td>
     </tr>
     <tr *ngIf="getEsperEsperPercentValue()">
       <td>{{'unit.details.stats.popup.esperPercent' | translate}}</td>
       <td>{{getEsperEsperPercentValue() | integer}}</td>
-      <td class="percent">({{getEsperEsperPercent()}}%)
+      <td class="percent">({{getEsperEsperPercent()}}%)</td>
     </tr>
     <tr class="total">
       <th>{{'unit.details.stats.popup.total' | translate}}</th>
