@@ -31,7 +31,7 @@ export class UnitDetailsStatSumComponent {
   }
 
   public getPassiveValue() {
-    return Math.floor(this.unitStats[this.stat].value_from_passive);
+    return this.unitStats[this.stat].value_from_passive;
   }
 
   public getPassivePercent() {
@@ -43,7 +43,7 @@ export class UnitDetailsStatSumComponent {
   }
 
   public getEquipmentPassiveValue() {
-    return Math.floor(this.unitStats[this.stat].value_from_passive_equipment);
+    return this.unitStats[this.stat].value_from_passive_equipment;
   }
 
   public getEquipmentPassivePercent() {
@@ -51,7 +51,7 @@ export class UnitDetailsStatSumComponent {
   }
 
   public getDhValue() {
-    return Math.floor(this.unitStats[this.stat].value_from_dh);
+    return this.unitStats[this.stat].value_from_dh;
   }
 
   public getDhPercent() {
@@ -59,7 +59,7 @@ export class UnitDetailsStatSumComponent {
   }
 
   public getEquipmentDhValue() {
-    return Math.floor(this.unitStats[this.stat].value_from_dh_equipment);
+    return this.unitStats[this.stat].value_from_dh_equipment;
   }
 
   public getEquipmentDhPercent() {
@@ -67,7 +67,7 @@ export class UnitDetailsStatSumComponent {
   }
 
   public getDwValue() {
-    return Math.floor(this.unitStats[this.stat].value_from_dw);
+    return this.unitStats[this.stat].value_from_dw;
   }
 
   public getDwPercent() {
@@ -75,7 +75,7 @@ export class UnitDetailsStatSumComponent {
   }
 
   public getEquipmentDwValue() {
-    return Math.floor(this.unitStats[this.stat].value_from_dw_equipment);
+    return this.unitStats[this.stat].value_from_dw_equipment;
   }
 
   public getEquipmentDwPercent() {
@@ -86,8 +86,32 @@ export class UnitDetailsStatSumComponent {
     return this.unitStats[this.stat].value_from_esper;
   }
 
+  public getEsperPercentValue() {
+    return this.unitStats[this.stat].value_from_esper_percent;
+  }
+
+  public getEsperPercent() {
+    return this.unitStats.esper_percent;
+  }
+
+  public getEquipmentEsperPercentValue() {
+    return this.unitStats[this.stat].value_from_equipment_esper_percent;
+  }
+
+  public getEquipmentEsperPercent() {
+    return this.unitStats.equipment_esper_percent;
+  }
+
+  public getEsperEsperPercentValue() {
+    return this.unitStats[this.stat].value_from_esper_esper_percent;
+  }
+
+  public getEsperEsperPercent() {
+    return this.esper.stats_percent;
+  }
+
   public getEsperPassiveValue() {
-    return Math.floor(this.unitStats[this.stat].value_from_passive_esper);
+    return this.unitStats[this.stat].value_from_passive_esper;
   }
 
   public getEsperPassivePercent() {

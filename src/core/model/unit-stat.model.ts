@@ -28,6 +28,9 @@ export class UnitStat {
   public value_from_passive = 0;
   public value_from_passive_equipment = 0;
   public value_from_esper = 0;
+  public value_from_esper_percent = 0;
+  public value_from_equipment_esper_percent = 0;
+  public value_from_esper_esper_percent = 0;
   public value_from_passive_esper = 0;
   public total = 0;
 
@@ -51,9 +54,10 @@ export class UnitStat {
     this.value_from_dw = this.base_equipment * this.dw_effective / 100;
     this.value_from_dw_equipment = this.base_equipment * effectiveEquipmentTdw / 100;
     this.value_from_passive_esper = this.base * this.passive_esper / 100;
-    this.total = Math.floor(this.base + this.value_from_passive + this.value_from_passive_equipment
-      + this.value_from_dh + this.value_from_dh_equipment + this.base_equipment + this.value_from_dw + this.value_from_dw_equipment
-      + this.value_from_esper + this.value_from_passive_esper);
+    this.total = Math.floor(this.base + this.value_from_passive + this.value_from_passive_equipment + this.value_from_dh
+      + this.value_from_dh_equipment + this.base_equipment + this.value_from_dw + this.value_from_dw_equipment + this.value_from_esper
+      + this.value_from_esper_percent + this.value_from_equipment_esper_percent + this.value_from_esper_esper_percent
+      + this.value_from_passive_esper);
   }
 
   public computeEvoTotal() {
