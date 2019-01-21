@@ -152,16 +152,48 @@ describe('UnitStats', () => {
   it('#defineEsperStats should set esper stats', () => {
     // GIVEN
     const unitStats: UnitStats = new UnitStats(JSON.parse(UNIT_STATS_TEST_DATA));
+    unitStats.esper_percent = 20;
     // WHEN
+    unitStats.defineEquipmentEsperPercent(50, []);
     unitStats.defineEsperStats(GOLEM_TANKING);
     // THEN
-    expect(unitStats.hp.value_from_esper).toBeCloseTo(130.2);
-    expect(unitStats.mp.value_from_esper).toBeCloseTo(85.4);
-    expect(unitStats.atk.value_from_esper).toBeCloseTo(71.12);
-    expect(unitStats.mag.value_from_esper).toBeCloseTo(42.49);
-    expect(unitStats.def.value_from_esper).toBeCloseTo(108.92);
-    expect(unitStats.spr.value_from_esper).toBeCloseTo(43.68);
+    expect(unitStats.equipment_esper_percent).toBeCloseTo(50);
+    expect(unitStats.hp.value_from_esper).toBeCloseTo(93);
+    expect(unitStats.hp.value_from_esper_percent).toBeCloseTo(18.6);
+    expect(unitStats.hp.value_from_equipment_esper_percent).toBeCloseTo(46.5);
+    expect(unitStats.hp.value_from_esper_esper_percent).toBeCloseTo(37.2);
+
+    expect(unitStats.mp.value_from_esper).toBeCloseTo(61);
+    expect(unitStats.mp.value_from_esper_percent).toBeCloseTo(12.2);
+    expect(unitStats.mp.value_from_equipment_esper_percent).toBeCloseTo(30.5);
+    expect(unitStats.mp.value_from_esper_esper_percent).toBeCloseTo(24.4);
+
+    expect(unitStats.atk.value_from_esper).toBeCloseTo(50.8);
+    expect(unitStats.atk.value_from_esper_percent).toBeCloseTo(10.16);
+    expect(unitStats.atk.value_from_equipment_esper_percent).toBeCloseTo(25.4);
+    expect(unitStats.atk.value_from_esper_esper_percent).toBeCloseTo(20.32);
+
+    expect(unitStats.mag.value_from_esper).toBeCloseTo(30.35);
+    expect(unitStats.mag.value_from_esper_percent).toBeCloseTo(6.07);
+    expect(unitStats.mag.value_from_equipment_esper_percent).toBeCloseTo(15.175);
+    expect(unitStats.mag.value_from_esper_esper_percent).toBeCloseTo(12.14);
+
+    expect(unitStats.def.value_from_esper).toBeCloseTo(77.8);
+    expect(unitStats.def.value_from_esper_percent).toBeCloseTo(15.56);
+    expect(unitStats.def.value_from_equipment_esper_percent).toBeCloseTo(38.9);
+    expect(unitStats.def.value_from_esper_esper_percent).toBeCloseTo(31.12);
+
+    expect(unitStats.spr.value_from_esper).toBeCloseTo(31.2);
+    expect(unitStats.spr.value_from_esper_percent).toBeCloseTo(6.24);
+    expect(unitStats.spr.value_from_equipment_esper_percent).toBeCloseTo(15.6);
+    expect(unitStats.spr.value_from_esper_esper_percent).toBeCloseTo(12.48);
+
     expect(unitStats.hp.passive_esper).toEqual(10);
+    expect(unitStats.mp.passive_esper).toEqual(0);
+    expect(unitStats.atk.passive_esper).toEqual(0);
+    expect(unitStats.mag.passive_esper).toEqual(0);
+    expect(unitStats.def.passive_esper).toEqual(0);
+    expect(unitStats.spr.passive_esper).toEqual(0);
   });
 
   it('#computeTotals should delegate to stats objects', () => {

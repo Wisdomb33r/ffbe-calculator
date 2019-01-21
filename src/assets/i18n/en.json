@@ -11,6 +11,7 @@
   "tdw": "TDW",
   "lbPower": "LB power",
   "lbDamages": "LB damage",
+  "esperPercent": "stats from esper",
   "dragon": "Dragon",
   "insect": "Insect",
   "fairy": "Fairy",
@@ -118,6 +119,7 @@
           "dh": "Doublehand",
           "dw": "Dual Wield",
           "esper": "Esper",
+          "esperPercent": "Stats from esper",
           "total": "Total",
           "limitWarn": "The unit stat increase is over the allowed limit (400% traits, 300% doublehand, 100% dual wield). The bonus is partially lost."
         }

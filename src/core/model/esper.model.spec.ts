@@ -7,19 +7,21 @@ describe('Esper', () => {
     const esper: Esper = new Esper();
     esper.atk = 6000;
     // WHEN
-    const atkBoost = esper.calculateStatIncrease('atk', 10);
+    const atkBoost = esper.calculateStatIncrease('atk', 100);
     // THEN
-    expect(atkBoost).toBeCloseTo(66);
+    expect(atkBoost).toBeCloseTo(60);
   });
 
-  it('#calculateStatIncrease should return one hundredth of augmented esper stats with stat boost from build', () => {
+  it('#calculateStatIncrease should return 0 for undefined or null values', () => {
     // GIVEN
     const esper: Esper = new Esper();
     esper.atk = 6000;
     esper.stats_percent = 20;
     // WHEN
-    const atkBoost = esper.calculateStatIncrease('atk', undefined);
+    const atkBoostUndefined = esper.calculateStatIncrease('atk', undefined);
+    const atkBoostNull = esper.calculateStatIncrease('atk', null);
     // THEN
-    expect(atkBoost).toBeCloseTo(72);
+    expect(atkBoostUndefined).toBeCloseTo(0);
+    expect(atkBoostNull).toBeCloseTo(0);
   });
 });
