@@ -146,3 +146,86 @@ describe('ExternalLinkComponent', () => {
     });
   });
 });
+
+describe('ExternalLinkComponent', () => {
+  let component: ExternalLinkComponent;
+  let fixture: ComponentFixture<ExternalLinkComponent>;
+  const unitFake = JSON.parse(`{
+      "id":999,
+      "stats": {"hp":3000,"mp":200,"atk":300,"mag":400,"def":500,"spr":600},
+      "builds":[
+        {
+          "algorithmId":8,
+          "equipments":{
+            "right_hand":{"id":1},
+            "left_hand":{"id":10},
+            "head":{"id":2},
+            "body":{"id":3},
+            "accessory1":{"id":4},
+            "accessory2":{"id":5},
+            "materia1":{"id":6},
+            "materia2":{"id":7}
+          }
+        }
+      ]
+    }`);
+  const unitServiceMock = {
+    getAllowedEquipmentsForSlot$: jasmine.createSpy('getAllowedEquipmentsForSlot$'),
+    equipInSlot: jasmine.createSpy('equipInSlot'),
+    getEquipments: jasmine.createSpy('getEquipments'),
+  };
+  const routerMock = {
+    navigate: jasmine.createSpy('navigate'),
+  };
+  const databaseClientMock = {
+    getUnitById$: jasmine.createSpy('getUnitById$').and.returnValue(of(unitFake)),
+  };
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        ExternalLinkComponent
+      ],
+      imports: [
+        MatCardModule,
+        TranslateModule.forRoot(),
+      ],
+      providers: [
+        {provide: DatabaseClientService, useValue: databaseClientMock},
+        {provide: UnitsService, useValue: unitServiceMock},
+        {provide: Router, useValue: routerMock},
+        {
+          provide: ActivatedRoute, useValue: {
+            paramMap: of(convertToParamMap({
+              id: '999',
+              esper: 31,
+            }))
+          }
+        },
+      ]
+    }).compileComponents();
+    fixture = TestBed.createComponent(ExternalLinkComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('should load a unit even with minimal equipment parameters', () => {
+    // GIVEN
+    const unit = new Unit(unitFake);
+    unitServiceMock.getEquipments.and.returnValue(unit.builds[0].equipments);
+
+    // WHEN
+    fixture.detectChanges();
+
+    // THEN
+    expect(component).toBeTruthy();
+    fixture.whenStable().then(() => {
+      expect(databaseClientMock.getUnitById$).toHaveBeenCalledTimes(1);
+      expect(databaseClientMock.getUnitById$).toHaveBeenCalledWith(999);
+      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledTimes(0);
+      expect(unitServiceMock.equipInSlot).toHaveBeenCalledTimes(0);
+      // TODO expect not working, seems that unitServiceMock here is another instance thant injected into component
+      // expect(unitServiceMock['selectedUnit'].selectedBuild.esper).toEqual(SHIVA_STATS_BOOST);
+      expect(component.currentStep).toEqual(6);
+    });
+  });
+});
