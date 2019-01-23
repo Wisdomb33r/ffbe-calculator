@@ -8,11 +8,9 @@ import {UnitsService} from '../../core/services/units.service';
 import {ActivatedRoute, convertToParamMap, Router} from '@angular/router';
 import {Equipment} from '../../core/model/equipment.model';
 import {Unit} from '../../core/model/unit.model';
+import {SHIVA_STATS_BOOST} from '../../core/calculator-constants';
 
-describe('ExternalLinkComponent', () => {
-  let component: ExternalLinkComponent;
-  let fixture: ComponentFixture<ExternalLinkComponent>;
-  const unitFake = JSON.parse(`{
+const unitFake = JSON.parse(`{
       "id":999,
       "stats": {"hp":3000,"mp":200,"atk":300,"mag":400,"def":500,"spr":600},
       "builds":[
@@ -31,6 +29,10 @@ describe('ExternalLinkComponent', () => {
         }
       ]
     }`);
+
+describe('ExternalLinkComponent', () => {
+  let component: ExternalLinkComponent;
+  let fixture: ComponentFixture<ExternalLinkComponent>;
   const unitServiceMock = {
     getAllowedEquipmentsForSlot$: jasmine.createSpy('getAllowedEquipmentsForSlot$'),
     equipInSlot: jasmine.createSpy('equipInSlot'),
@@ -114,34 +116,36 @@ describe('ExternalLinkComponent', () => {
     // THEN
     expect(component).toBeTruthy();
     fixture.whenStable().then(() => {
-      expect(databaseClientMock.getUnitById$).toHaveBeenCalledTimes(1);
-      expect(databaseClientMock.getUnitById$).toHaveBeenCalledWith(999);
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledTimes(8);
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('right_hand');
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('head');
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('body');
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('accessory1');
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('materia1');
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('left_hand');
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('rh_trait1');
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('lh_trait1');
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledTimes(16);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('right_hand', right_hand);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('left_hand', left_hand);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('head', head);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('body', body);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('accessory1', accessory1);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('accessory2', accessory2);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('materia1', materia1);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('materia2', materia2);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('materia3', materia3);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('materia4', materia4);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('rh_trait1', rh_trait1);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('rh_trait2', rh_trait2);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('rh_trait3', rh_trait3);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('lh_trait1', lh_trait1);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('lh_trait2', lh_trait2);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('lh_trait3', lh_trait3);
+      const databaseMock = TestBed.get(DatabaseClientService);
+      const serviceMock = TestBed.get(UnitsService);
+      expect(databaseMock.getUnitById$).toHaveBeenCalledTimes(1);
+      expect(databaseMock.getUnitById$).toHaveBeenCalledWith(999);
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledTimes(8);
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('right_hand');
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('head');
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('body');
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('accessory1');
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('materia1');
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('left_hand');
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('rh_trait1');
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledWith('lh_trait1');
+      expect(serviceMock.equipInSlot).toHaveBeenCalledTimes(16);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('right_hand', right_hand);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('left_hand', left_hand);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('head', head);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('body', body);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('accessory1', accessory1);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('accessory2', accessory2);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('materia1', materia1);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('materia2', materia2);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('materia3', materia3);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('materia4', materia4);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('rh_trait1', rh_trait1);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('rh_trait2', rh_trait2);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('rh_trait3', rh_trait3);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('lh_trait1', lh_trait1);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('lh_trait2', lh_trait2);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledWith('lh_trait3', lh_trait3);
       expect(component.currentStep).toEqual(6);
     });
   });
@@ -150,25 +154,6 @@ describe('ExternalLinkComponent', () => {
 describe('ExternalLinkComponent', () => {
   let component: ExternalLinkComponent;
   let fixture: ComponentFixture<ExternalLinkComponent>;
-  const unitFake = JSON.parse(`{
-      "id":999,
-      "stats": {"hp":3000,"mp":200,"atk":300,"mag":400,"def":500,"spr":600},
-      "builds":[
-        {
-          "algorithmId":8,
-          "equipments":{
-            "right_hand":{"id":1},
-            "left_hand":{"id":10},
-            "head":{"id":2},
-            "body":{"id":3},
-            "accessory1":{"id":4},
-            "accessory2":{"id":5},
-            "materia1":{"id":6},
-            "materia2":{"id":7}
-          }
-        }
-      ]
-    }`);
   const unitServiceMock = {
     getAllowedEquipmentsForSlot$: jasmine.createSpy('getAllowedEquipmentsForSlot$'),
     equipInSlot: jasmine.createSpy('equipInSlot'),
@@ -219,12 +204,13 @@ describe('ExternalLinkComponent', () => {
     // THEN
     expect(component).toBeTruthy();
     fixture.whenStable().then(() => {
-      expect(databaseClientMock.getUnitById$).toHaveBeenCalledTimes(1);
-      expect(databaseClientMock.getUnitById$).toHaveBeenCalledWith(999);
-      expect(unitServiceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledTimes(0);
-      expect(unitServiceMock.equipInSlot).toHaveBeenCalledTimes(0);
-      // TODO expect not working, seems that unitServiceMock here is another instance thant injected into component
-      // expect(unitServiceMock['selectedUnit'].selectedBuild.esper).toEqual(SHIVA_STATS_BOOST);
+      const databaseMock = TestBed.get(DatabaseClientService);
+      const serviceMock = TestBed.get(UnitsService);
+      expect(databaseMock.getUnitById$).toHaveBeenCalledTimes(1);
+      expect(databaseMock.getUnitById$).toHaveBeenCalledWith(999);
+      expect(serviceMock.getAllowedEquipmentsForSlot$).toHaveBeenCalledTimes(0);
+      expect(serviceMock.equipInSlot).toHaveBeenCalledTimes(0);
+      expect(serviceMock.selectedUnit.selectedBuild.esper).toEqual(SHIVA_STATS_BOOST);
       expect(component.currentStep).toEqual(6);
     });
   });
