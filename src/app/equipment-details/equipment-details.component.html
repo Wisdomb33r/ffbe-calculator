@@ -189,6 +189,10 @@
       </span>
     </ng-container>
   </span>
+
+  <span *ngIf="passive.esper" class="passive esper-damage">
+    {{passive.esper_damage}}% <img src="{{getEsperImage()}}" alt="{{getEsperName()}}"> {{'damages' | translate}}
+  </span>
 </p>
 <p *ngIf="equipment.variance_min > 0 && equipment.variance_max > 0">
   {{equipment.variance_min}}% - {{equipment.variance_max}}%

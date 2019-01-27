@@ -42,6 +42,8 @@ export class ConditionalPassive {
   public lb_power: number;
   public evo: number;
   public esper_percent: number;
+  public esper: number;
+  public esper_damage: number;
 
   // transcient
   public active = false;
@@ -91,6 +93,8 @@ export class ConditionalPassive {
     this.lb_power = conditionalPassive.lb_power;
     this.evo = conditionalPassive.evo;
     this.esper_percent = conditionalPassive.esper_percent;
+    this.esper = conditionalPassive.esper;
+    this.esper_damage = conditionalPassive.esper_damage;
   }
 
   public getPhysicalKiller(opponentKillerType): number {

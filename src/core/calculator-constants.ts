@@ -149,7 +149,8 @@ export const ESPER_BUILDS: Array<Esper> = [
 
 function getIfritWithKillers(): Esper {
   const esper = new Esper();
-  esper.id = 21;
+  esper.id = 2;
+  esper.buildId = 21;
   esper.name_fr = 'Ifrit';
   esper.name_en = 'Ifrit';
   esper.build_fr = 'Tue-végétaux+<br />Tue-bêtes +';
@@ -176,7 +177,8 @@ function getIfritWithKillers(): Esper {
 
 function getIfritWithStatsBoost(): Esper {
   const esper = new Esper();
-  esper.id = 22;
+  esper.id = 2;
+  esper.buildId = 22;
   esper.name_fr = 'Ifrit';
   esper.name_en = 'Ifrit';
   esper.build_fr = 'Stats boost x2<br />Tue-végétaux<br />Tue-bêtes';
@@ -203,7 +205,8 @@ function getIfritWithStatsBoost(): Esper {
 
 function getIfritWithDamageModifier(): Esper {
   const esper = new Esper();
-  esper.id = 23;
+  esper.id = 2;
+  esper.buildId = 23;
   esper.name_fr = 'Ifrit';
   esper.name_en = 'Ifrit';
   esper.build_fr = 'Appel Ardent x2<br />Stats boost<br />Tue-végétaux<br />Tue-bêtes';
@@ -230,7 +233,8 @@ function getIfritWithDamageModifier(): Esper {
 
 function getShivaWithStatsBoost(): Esper {
   const esper = new Esper();
-  esper.id = 31;
+  esper.id = 3;
+  esper.buildId = 31;
   esper.name_fr = 'Shiva';
   esper.name_en = 'Shiva';
   esper.build_fr = 'Stats boost x2<br />Anti-glace X<br />Bonus PSY<br />Bonus MAG';
@@ -257,7 +261,8 @@ function getShivaWithStatsBoost(): Esper {
 
 function getGolemWithBugKillers(): Esper {
   const esper = new Esper();
-  esper.id = 41;
+  esper.id = 4;
+  esper.buildId = 41;
   esper.name_fr = 'Golem';
   esper.name_en = 'Golem';
   esper.build_fr = 'Tue-insecte+<br />Stats boost<br />Tue-pierre';
@@ -282,7 +287,8 @@ function getGolemWithBugKillers(): Esper {
 
 function getGolemWithStoneKillers(): Esper {
   const esper = new Esper();
-  esper.id = 42;
+  esper.id = 4;
+  esper.buildId = 42;
   esper.name_fr = 'Golem';
   esper.name_en = 'Golem';
   esper.build_fr = 'Tue-pierre+<br />Stats boost<br />Tue-insecte<br />DÉF +10%';
@@ -308,7 +314,8 @@ function getGolemWithStoneKillers(): Esper {
 
 function getGolemWithDefensivesTraits(): Esper {
   const esper = new Esper();
-  esper.id = 43;
+  esper.id = 4;
+  esper.buildId = 43;
   esper.name_fr = 'Golem';
   esper.name_en = 'Golem';
   esper.build_fr = 'Provocation<br />PV +10%<br />Stats boost x2';
@@ -334,7 +341,8 @@ function getGolemWithDefensivesTraits(): Esper {
 
 function getGolemWithDefensivesTraits2(): Esper {
   const esper = new Esper();
-  esper.id = 44;
+  esper.id = 4;
+  esper.buildId = 44;
   esper.name_fr = 'Golem';
   esper.name_en = 'Golem';
   esper.build_fr = 'Provocation<br />PV +10%<br />DÉF +10%<br />Stats boost';
@@ -361,7 +369,8 @@ function getGolemWithDefensivesTraits2(): Esper {
 
 function getRamuhWithKillers(): Esper {
   const esper = new Esper();
-  esper.id = 51;
+  esper.id = 5;
+  esper.buildId = 51;
   esper.name_fr = 'Ramuh';
   esper.name_en = 'Ramuh';
   esper.build_fr = 'Stats boost<br />Tue-démon M.<br />Tue-pierre M.';
@@ -388,7 +397,8 @@ function getRamuhWithKillers(): Esper {
 
 function getRamuhWithStatsBoostAndDamageModifier(): Esper {
   const esper = new Esper();
-  esper.id = 53;
+  esper.id = 5;
+  esper.buildId = 53;
   esper.name_fr = 'Ramuh';
   esper.name_en = 'Ramuh';
   esper.build_fr = 'Appel de sagesse x2<br />Stats boost';
@@ -415,7 +425,8 @@ function getRamuhWithStatsBoostAndDamageModifier(): Esper {
 
 function getDiabolosWithKillers(): Esper {
   const esper = new Esper();
-  esper.id = 61;
+  esper.id = 6;
+  esper.buildId = 61;
   esper.name_fr = 'Diabolos';
   esper.name_en = 'Diabolos';
   esper.build_fr = 'Tueur +<br />Tue-démons +';
@@ -442,7 +453,8 @@ function getDiabolosWithKillers(): Esper {
 
 function getDiabolosWithDamageModifier(): Esper {
   const esper = new Esper();
-  esper.id = 62;
+  esper.id = 6;
+  esper.buildId = 62;
   esper.name_fr = 'Diabolos';
   esper.name_en = 'Diabolos';
   esper.build_fr = 'Appel de démon x2<br />Stats boost x2';
@@ -469,7 +481,8 @@ function getDiabolosWithDamageModifier(): Esper {
 
 function getCarbuncleSpr(): Esper {
   const esper = new Esper();
-  esper.id = 71;
+  esper.id = 7;
+  esper.buildId = 71;
   esper.name_fr = 'Carbuncle';
   esper.name_en = 'Carbuncle';
   esper.build_fr = 'Stats boost x2<br />PSY +10%<br />Bonus PSY';
@@ -495,7 +508,8 @@ function getCarbuncleSpr(): Esper {
 
 function getCarbuncleSupport(): Esper {
   const esper = new Esper();
-  esper.id = 72;
+  esper.id = 7;
+  esper.buildId = 72;
   esper.name_fr = 'Carbuncle';
   esper.name_en = 'Carbuncle';
   esper.build_fr = 'Stats boost<br />Anti-feu X<br />Anti-glace X<br />Anti-foudre X<br />PV +10%';
@@ -521,7 +535,8 @@ function getCarbuncleSupport(): Esper {
 
 function getOdinKillers(): Esper {
   const esper = new Esper();
-  esper.id = 81;
+  esper.id = 8;
+  esper.buildId = 81;
   esper.name_fr = 'Odin';
   esper.name_en = 'Odin';
   esper.build_fr = 'Tue-dragons+<br />Tueur de morts-vivants<br />Stats boost<br />Transpercer';
@@ -546,7 +561,8 @@ function getOdinKillers(): Esper {
 
 function getTitan(): Esper {
   const esper = new Esper();
-  esper.id = 91;
+  esper.id = 9;
+  esper.buildId = 91;
   esper.name_fr = 'Titan';
   esper.name_en = 'Titan';
   esper.build_fr = 'Stats boost x2<br />Anti-terre X<br />Bonus ATT';
@@ -573,7 +589,8 @@ function getTitan(): Esper {
 
 function getTetraSylphidWithKiller(): Esper {
   const esper = new Esper();
-  esper.id = 111;
+  esper.id = 11;
+  esper.buildId = 111;
   esper.name_fr = 'Tétra-Sylphides';
   esper.name_en = 'Tetra Sylphid';
   esper.build_fr = 'Tue-oiseaux +<br />Stats boost';
@@ -600,7 +617,8 @@ function getTetraSylphidWithKiller(): Esper {
 
 function getBahamut(): Esper {
   const esper = new Esper();
-  esper.id = 121;
+  esper.id = 12;
+  esper.buildId = 121;
   esper.name_fr = 'Bahamut';
   esper.name_en = 'Bahamut';
   esper.build_fr = 'Max ATT / MAG';
@@ -626,7 +644,8 @@ function getBahamut(): Esper {
 
 function getFenrir(): Esper {
   const esper = new Esper();
-  esper.id = 131;
+  esper.id = 13;
+  esper.buildId = 131;
   esper.name_fr = 'Fenrir';
   esper.name_en = 'Fenrir';
   esper.build_fr = 'Stats boost x2<br />Bonus ATT / MAG';
@@ -651,7 +670,8 @@ function getFenrir(): Esper {
 
 function getLeviathanWithKillers(): Esper {
   const esper = new Esper();
-  esper.id = 141;
+  esper.id = 14;
+  esper.buildId = 141;
   esper.name_fr = 'Léviathan';
   esper.name_en = 'Leviathan';
   esper.build_fr = 'Tue-esprits +<br />Tue-aquatiques +';
@@ -678,7 +698,8 @@ function getLeviathanWithKillers(): Esper {
 
 function getLeviathanWithDamageModifier(): Esper {
   const esper = new Esper();
-  esper.id = 142;
+  esper.id = 14;
+  esper.buildId = 142;
   esper.name_fr = 'Léviathan';
   esper.name_en = 'Leviathan';
   esper.build_fr = 'Appel dieu de l\'eau x2<br />Stats boost';
@@ -705,7 +726,8 @@ function getLeviathanWithDamageModifier(): Esper {
 
 function getPhoenixKillers(): Esper {
   const esper = new Esper();
-  esper.id = 151;
+  esper.id = 15;
+  esper.buildId = 151;
   esper.name_fr = 'Phénix';
   esper.name_en = 'Phoenix';
   esper.build_fr = 'Tueur de morts-vivants+<br />Stats boost';
@@ -732,7 +754,8 @@ function getPhoenixKillers(): Esper {
 
 function getPhoenixTanking(): Esper {
   const esper = new Esper();
-  esper.id = 152;
+  esper.id = 15;
+  esper.buildId = 152;
   esper.name_fr = 'Phénix';
   esper.name_en = 'Phoenix';
   esper.build_fr = 'Garde de Phénix<br />Stats boost x2';

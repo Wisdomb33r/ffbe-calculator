@@ -29,6 +29,12 @@ p.element span, p.element img {
   vertical-align: middle;
 }
 
+.esper-damage img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
 .jump img {
   width: 20px;
   height: 20px;

@@ -308,8 +308,8 @@ export class EquipmentSet {
       return false;
     }
 
-    // skill modifier increase
-    if (!isNullOrUndefined(condPassive.skill)) {
+    // skill modifier increase and esper-specific bonuses (tested elsewhere)
+    if (!isNullOrUndefined(condPassive.skill) || !isNullOrUndefined(condPassive.esper)) {
       return true;
     }
 
