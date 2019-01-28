@@ -122,7 +122,7 @@ export class Equipment {
     }
 
     // TODO adapt backend structure to hold this information
-    if (this.id === 2679) { // 3004) { // The Divine Art of War
+    if (this.id === 3004) { // The Divine Art of War
       this.conditional_passives.push(new ConditionalPassive(JSON.parse('{"id":9000001,"esper":14,"esper_damage":75}')));
     }
   }
