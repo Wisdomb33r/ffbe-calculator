@@ -128,7 +128,7 @@ describe('EquipmentSet', () => {
     expect(equipments.materia4).toBeTruthy();
   });
 
-  it('#getAllActiveConditionalPassives should return conditional passives activated by equipments', () => {
+  it('#getAllActiveConditionalPassives should return conditional passives activated by equipment', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     equipments.head.conditional_passives = [JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA), JSON.parse(CONDITIONAL_PASSIVE_TEST_DATA)];
@@ -148,7 +148,7 @@ describe('EquipmentSet', () => {
     expect(passives.every(passive => passive.active)).toBeTruthy();
   });
 
-  it('#activateEquipmentConditionalPassives should activate the conditional passives of an equipment which are valid according to equipments', () => {
+  it('#activateEquipmentConditionalPassives should activate the conditional passives if valid according to equipment', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     const equipment: Equipment = new Equipment(JSON.parse(VALID_EQUIPMENT));
