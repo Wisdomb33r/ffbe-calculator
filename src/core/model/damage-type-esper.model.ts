@@ -54,11 +54,11 @@ export class DamageTypeEsper extends DamageType {
 
   private calculatePhysicalDamages(unit: Unit, result: ResultTurnDamages) {
     const base = Math.floor((result.atk + result.def + result.mag / 2 + result.spr / 2) / 100 * (1 + unit.stats.evo.total / 100));
-    result.physicalDamages = Math.pow(base, 2) * result.power * result.esperDamageModifier;
+    result.physicalDamages = Math.pow(base, 2) * result.power * result.esperDamageModifier / 100 * result.levelCorrection;
   }
 
   private calculateMagicalDamages(unit: Unit, result: ResultTurnDamages) {
     const base = Math.floor((result.mag + result.spr + result.atk / 2 + result.def / 2) / 100 * (1 + unit.stats.evo.total / 100));
-    result.magicalDamages = Math.pow(base, 2) * result.power * result.esperDamageModifier * result.levelCorrection;
+    result.magicalDamages = Math.pow(base, 2) * result.power * result.esperDamageModifier / 100 * result.levelCorrection;
   }
 }

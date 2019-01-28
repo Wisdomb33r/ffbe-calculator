@@ -91,7 +91,7 @@ export class ConditionalPassive {
     this.partial_dw = conditionalPassive.partial_dw ? true : false;
     this.unique = conditionalPassive.unique ? true : false;
     this.lb_power = conditionalPassive.lb_power;
-    this.evo = conditionalPassive.evo;
+    this.evo = conditionalPassive.evo ? conditionalPassive.evo : 0;
     this.esper_percent = conditionalPassive.esper_percent;
     this.esper = conditionalPassive.esper;
     this.esper_damage = conditionalPassive.esper_damage;

@@ -1,9 +1,10 @@
 import {AlgorithmFinish} from './algorithm-finish.model';
 import {Unit} from './unit.model';
 import {ResultOffensive} from './result-offensive.model';
-import {ResultTurnDamages} from './result-turn-damages.model';
-import {CalculatorTestutils} from '../calculator-testutils.spec';
 import {LEVIATHAN_EVOKE_BOOST} from '../calculator-constants';
+import {CalculatorTestutils} from '../calculator-testutils.spec';
+import {ResultTurnDamages} from './result-turn-damages.model';
+import {ConditionalPassive} from './conditional-passive.model';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"mag":100,"spr":50}';
@@ -21,49 +22,42 @@ const BUILD_TEST_DATA =
 const UNIT_TEST_DATA = '{"id":9999,"rank":7,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
 
 describe('AlgorithmFinish for esper invocation', () => {
-  it('#calculate should set the result object values', () => {
+  fit('#calculate should set the result object values', () => {
     // GIVEN
     const algorithm = new AlgorithmFinish();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
     unit.selectDefaultBuild();
     unit.selectedBuild.esper = LEVIATHAN_EVOKE_BOOST;
+    unit.stats.evo.total = 80;
+    unit.selectedBuild.equipments.right_hand.conditional_passives = [new ConditionalPassive(JSON.parse('{"esper":14,"esper_damage":100}'))];
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(307.347456);
+    expect(result.result).toBeCloseTo(1498.5);
     expect(result['turnDamages'].length).toEqual(1);
-    result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn.atk).toEqual(6680);
-      expect(turn.mag).toEqual(8210);
-      // expect(turn.buffed_mag).toEqual(700);
-      // expect(turn.combosIncrement).toBeCloseTo(4.0);
-      // expect(turn.levelCorrection).toBeCloseTo(2.2);
-    });
 
-    // const turn1 = result['turnDamages'][0];
-    // expect(turn1['evo']).toEqual(50);
-    // expect(turn1['spr']).toEqual(400);
-    // expect(turn1['buffed_spr']).toEqual(500);
-    // expect(turn1['killerPassive']).toBeCloseTo(0);
-    // expect(turn1['power']).toBeCloseTo(8000);
-    // expect(turn1['magicalDamages']).toBeCloseTo(97680000);
-    // expect(turn1['magicalKillerDamages']).toBeCloseTo(97680000);
-    // expect(turn1['magicalElementalDamages']).toBeCloseTo(97680000);
-    // expect(turn1['hitsPower'].length).toEqual(5);
-    // CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [800, 1600, 2400, 2400, 800]);
-    //
-    // const turn2 = result['turnDamages'][1];
-    // expect(turn2['evo']).toBeUndefined();
-    // expect(turn2['spr']).toBeUndefined();
-    // expect(turn2['buffed_spr']).toBeUndefined();
-    // expect(turn2['killerPassive']).toBeCloseTo(100);
-    // expect(turn2['power']).toBeCloseTo(400);
-    // expect(turn2['magicalDamages']).toBeCloseTo(4312000);
-    // expect(turn2['magicalKillerDamages']).toBeCloseTo(4743200);
-    // expect(turn2['magicalElementalDamages']).toBeCloseTo(4743200);
-    // expect(turn2['hitsPower'].length).toEqual(4);
-    // CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [40, 80, 120, 160]);
+    const turn1: ResultTurnDamages = result['turnDamages'][0];
+    expect(turn1.atk).toEqual(6680);
+    expect(turn1.mag).toEqual(8210);
+    expect(turn1.def).toEqual(6460);
+    expect(turn1.spr).toEqual(6080);
+    expect(turn1.buffed_atk).toBeUndefined();
+    expect(turn1.buffed_mag).toBeUndefined();
+    expect(turn1.buffed_def).toBeUndefined();
+    expect(turn1.buffed_spr).toBeUndefined();
+    expect(turn1.combosIncrement).toBeCloseTo(4.0);
+    expect(turn1.levelCorrection).toBeCloseTo(1.6);
+    expect(turn1.evo).toEqual(80);
+    expect(turn1.esperDamageModifier).toBeCloseTo(300);
+    expect(turn1.killerActive).toBeCloseTo(0);
+    expect(turn1.killerPassive).toBeCloseTo(0);
+    expect(turn1.power).toBeCloseTo(1600);
+    expect(turn1.magicalDamages).toBeCloseTo(1080000000);
+    expect(turn1.magicalKillerDamages).toBeCloseTo(1080000000);
+    expect(turn1.magicalElementalDamages).toBeCloseTo(1620000000);
+    expect(turn1.hitsPower.length).toEqual(1);
+    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [1600]);
   });
 });
