@@ -19,7 +19,7 @@ export class DamageTypeEsper extends DamageType {
     result.def = unit.selectedBuild.esper.def;
     result.spr = unit.selectedBuild.esper.spr;
     result.evo = unit.stats.evo.total;
-    result.esperDamageModifier = unit.selectedBuild.esper.damage_modifier;
+    result.esperDamageModifier = unit.getEsperDamageModifier();
   }
 
   public calculateDamages(unit: Unit, result: ResultTurnDamages) {

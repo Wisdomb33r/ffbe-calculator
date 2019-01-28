@@ -123,4 +123,8 @@ export class Build {
     }
     return identifiers;
   }
+
+  public getEsperDamageModifier(): number {
+    return this.esper.damage_modifier + this.equipments.getEsperDamageModifier(this.esper.id) / 100;
+  }
 }

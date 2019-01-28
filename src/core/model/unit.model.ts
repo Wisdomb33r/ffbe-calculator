@@ -114,6 +114,10 @@ export class Unit {
     return this.selectedBuild.equipments.sumEquipmentLbMod(this.id);
   }
 
+  public getEsperDamageModifier() {
+    return this.selectedBuild.getEsperDamageModifier();
+  }
+
   public computeRealStats() {
     this.stats.defineEquipmentsStats(
       this.selectedBuild.equipments.sumEquipmentStat('hp'),
