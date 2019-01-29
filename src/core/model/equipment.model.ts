@@ -120,6 +120,11 @@ export class Equipment {
     if (Array.isArray(equipment.elements)) {
       this.elements = equipment.elements;
     }
+
+    // TODO adapt backend structure to hold this information
+    if (this.id === 3004) { // The Divine Art of War
+      this.conditional_passives.push(new ConditionalPassive(JSON.parse('{"id":9000001,"esper":14,"esper_damage":75}')));
+    }
   }
 
   public isWeapon(): boolean {

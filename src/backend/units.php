@@ -61,6 +61,8 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     $brex_unit_passives = brex_build_passif::findByRelation1N ( array ('unit' => $brex_unit->id) );
     
     $unit = new Unit ( $brex_unit, $brex_unit_stats [0], $brex_unit_passives, $brex_builds, $language );
+    
+    header ( 'Content-Type: application/json' );
     echo json_encode ( $unit, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK );
   } else {
     $brex_units = brex_unit::finderForCalculator ();
@@ -72,6 +74,8 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
         $units [] = $unit;
       }
     }
+    
+    header ( 'Content-Type: application/json' );
     echo json_encode ( $units, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK );
   }
 }

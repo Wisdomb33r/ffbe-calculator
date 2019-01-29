@@ -74,7 +74,7 @@ export class PermanentUrlComponent implements OnInit, OnChanges {
       url += ';materia4=' + this.materia4.id;
     }
     if (this.esper) {
-      url += ';esper=' + this.esper.id;
+      url += ';esper=' + this.esper.buildId;
     }
     if (this.rh_trait1) {
       url += ';rh_t1=' + this.rh_trait1.id;
