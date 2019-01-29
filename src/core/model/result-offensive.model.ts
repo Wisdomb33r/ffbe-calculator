@@ -2,6 +2,7 @@ import {Result} from './result.model';
 import {ResultTurnDamages} from './result-turn-damages.model';
 
 export class ResultOffensive extends Result {
+  public tenTurnsResult: number;
   public startPhaseResult: number;
   public startPhaseTurnDamages: Array<ResultTurnDamages> = [];
   public turnDamages: Array<ResultTurnDamages> = [];

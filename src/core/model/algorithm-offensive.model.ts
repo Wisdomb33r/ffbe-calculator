@@ -32,6 +32,7 @@ export abstract class AlgorithmOffensive implements Algorithm {
     result.result = result.turnDamages
       .map(r => r.result)
       .reduce((val1, val2) => val1 + val2, 0) / result.turnDamages.filter((turn: ResultTurnDamages) => turn.isTurnCounting).length;
+    this.calculateTenTurnsResult(result);
     return result;
   }
 
@@ -43,5 +44,59 @@ export abstract class AlgorithmOffensive implements Algorithm {
       result.resistances = result.resistances.map((resist, index) =>
         Math.min(resist, this.opponentResistances[index] + skill.resists_break[index]));
     }
+  }
+
+  protected calculateTenTurnsResult(result: ResultOffensive) {
+    const tenTurnsSkills: Array<ResultTurnDamages> = [];
+    let turnsCount = 0;
+    if (result.startPhaseTurnDamages) {
+      const nbTurnsDamages = result.startPhaseTurnDamages.length;
+      let currentTurnDamageIndex = 0;
+      // fill the ten turns skills with as much start phase skills as possible, but stop at 10-th counting skill
+      while (currentTurnDamageIndex < nbTurnsDamages && turnsCount < 10) {
+        const currentTurnDamage = result.startPhaseTurnDamages[currentTurnDamageIndex];
+        tenTurnsSkills.push(currentTurnDamage);
+        if (currentTurnDamage.isTurnCounting) {
+          turnsCount++;
+        }
+        currentTurnDamageIndex++;
+      }
+      // add the non-counting turn damages that are just after the 10-th counting skill if exist
+      while (currentTurnDamageIndex < nbTurnsDamages) {
+        const currentTurnDamage = result.startPhaseTurnDamages[currentTurnDamageIndex];
+        if (currentTurnDamage.isTurnCounting) {
+          break;
+        } else {
+          tenTurnsSkills.push(currentTurnDamage);
+        }
+        currentTurnDamageIndex++;
+      }
+    }
+    while (turnsCount < 10) {
+      const nbTurnsDamages = result.turnDamages.length;
+      let currentTurnDamageIndex = 0;
+      // fill the rest of the ten turns skills with stable skills, but stop at 10-th counting skill
+      while (currentTurnDamageIndex < nbTurnsDamages && turnsCount < 10) {
+        const currentTurnDamage = result.turnDamages[currentTurnDamageIndex];
+        tenTurnsSkills.push(currentTurnDamage);
+        if (currentTurnDamage.isTurnCounting) {
+          turnsCount++;
+        }
+        currentTurnDamageIndex++;
+      }
+      // add the non-counting turn damages that are just after the 10-th counting skill if exist
+      while (currentTurnDamageIndex < nbTurnsDamages) {
+        const currentTurnDamage = result.turnDamages[currentTurnDamageIndex];
+        if (currentTurnDamage.isTurnCounting) {
+          break;
+        } else {
+          tenTurnsSkills.push(currentTurnDamage);
+        }
+        currentTurnDamageIndex++;
+      }
+    }
+    result.tenTurnsResult = tenTurnsSkills
+      .map(r => r.result)
+      .reduce((val1, val2) => val1 + val2, 0) / tenTurnsSkills.filter((turn: ResultTurnDamages) => turn.isTurnCounting).length;
   }
 }
