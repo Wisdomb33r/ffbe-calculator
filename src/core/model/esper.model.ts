@@ -2,6 +2,7 @@ import {KillerPassives} from './killer-passives.model';
 
 export class Esper {
   public id: number;
+  public buildId: number;
   public name_fr: string;
   public name_en: string;
   public build_fr: string;

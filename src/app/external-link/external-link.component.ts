@@ -122,7 +122,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           index++;
         }
         if (this.esper) {
-          const esper: Esper = ESPER_BUILDS.find(e => e.id === this.esper);
+          const esper: Esper = ESPER_BUILDS.find(e => e.buildId === this.esper);
           if (esper) {
             this.unitsService.selectedUnit.selectedBuild.esper = esper;
           }

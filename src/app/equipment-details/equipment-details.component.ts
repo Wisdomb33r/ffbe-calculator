@@ -3,7 +3,9 @@ import {Equipment} from '../../core/model/equipment.model';
 import {ConditionalPassive} from '../../core/model/conditional-passive.model';
 import {UnitsService} from '../../core/services/units.service';
 import {isNullOrUndefined} from 'util';
-import {MONSTER_TYPES} from '../../core/calculator-constants';
+import {ESPER_BUILDS, MONSTER_TYPES} from '../../core/calculator-constants';
+import {TranslateService} from '@ngx-translate/core';
+import {Esper} from '../../core/model/esper.model';
 
 @Component({
   selector: 'app-equipment-details',
@@ -19,7 +21,8 @@ export class EquipmentDetailsComponent {
   @Input() displayWeaponTraits: boolean;
   @Output() weaponTraitEmitter = new EventEmitter();
 
-  constructor(public unitsService: UnitsService) {
+  constructor(public unitsService: UnitsService,
+              private translateService: TranslateService) {
   }
 
   public getConditionalPassivesToDisplay(): Array<ConditionalPassive> {
@@ -52,5 +55,15 @@ export class EquipmentDetailsComponent {
 
   public getMonsterTypes() {
     return MONSTER_TYPES;
+  }
+
+  public getEsperImage(esperId: number): string {
+    const esper: Esper = ESPER_BUILDS.find((e: Esper) => e.id === esperId);
+    return esper.icon;
+  }
+
+  public getEsperName(esperId: number): string {
+    const esper: Esper = ESPER_BUILDS.find((e: Esper) => e.id === esperId);
+    return esper['name_' + this.translateService.currentLang];
   }
 }

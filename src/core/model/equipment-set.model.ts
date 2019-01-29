@@ -274,6 +274,13 @@ export class EquipmentSet {
     return types;
   }
 
+  public getEsperDamageModifier(esperId: number) {
+    return this.getAllConditionalPassives()
+      .filter((condPassive: ConditionalPassive) => condPassive.esper === esperId)
+      .map((condPassive: ConditionalPassive) => condPassive.esper_damage)
+      .reduce((val1, val2) => val1 + val2, 0);
+  }
+
   public isDoubleHandActive(): boolean {
     return !this.left_hand && this.right_hand && !this.right_hand.isTwoHanded();
   }
@@ -308,8 +315,8 @@ export class EquipmentSet {
       return false;
     }
 
-    // skill modifier increase
-    if (!isNullOrUndefined(condPassive.skill)) {
+    // skill modifier increase and esper-specific bonuses (tested elsewhere)
+    if (!isNullOrUndefined(condPassive.skill) || !isNullOrUndefined(condPassive.esper)) {
       return true;
     }
 
