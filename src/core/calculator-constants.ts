@@ -788,8 +788,8 @@ function getAlexanderKillers(): Esper {
   esper.buildId = 161;
   esper.name_fr = 'Alexandre';
   esper.name_en = 'Alexander';
-  esper.build_fr = 'Tue-machine+<br />Stats boost';
-  esper.build_en = 'Machine Killer+<br />Stats boost';
+  esper.build_fr = 'Tue-machine M<br />Tue-machine+<br />Stats boost';
+  esper.build_en = 'M Machine Killer<br />Machine Killer+<br />Stats boost';
   esper.rank = 3;
   esper.level = 60;
   esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/016_226401.png';
