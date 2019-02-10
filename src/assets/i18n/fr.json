@@ -144,7 +144,8 @@
   },
   "skills": {
     "display": {
-      "title": "Cycle d'attaque",
+      "battleStartTitle": "Attaques de début de combat",
+      "stableTitle": "Cycle d'attaques stable",
       "attackType": "Type d'attaque",
       "attackType_1": "Magique",
       "attackType_2": "Magique",

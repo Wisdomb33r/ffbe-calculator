@@ -1,5 +1,20 @@
 <mat-card>
-  <mat-card-title class="equipment-selection-mct">{{'skills.display.title' | translate}}</mat-card-title>
+  <mat-card-title *ngIf="unitsService.selectedUnit.selectedBuild.startPhaseSkills.length">
+    {{'skills.display.battleStartTitle' | translate}}
+  </mat-card-title>
+  <div *ngIf="unitsService.selectedUnit.selectedBuild.startPhaseSkills.length">
+    <ng-container *ngFor="let skill of unitsService.selectedUnit.selectedBuild.startPhaseSkills; let i = index">
+      <span *ngIf="i > 0 && skill.isTurnCounting" class="turn-separator"></span>
+      <img *ngIf="!skill.isLimitBreak && !skill.isEsper" [src]="skill.icon" (click)="displaySkill(skill)">
+      <img *ngIf="skill.isLimitBreak"
+           [src]="translate.currentLang === 'fr' ? 'assets/icons/lb_fr.png' : 'assets/icons/lb_en.png'"
+           (click)="displaySkill(skill)">
+      <img *ngIf="skill.isEsper" [src]="getEsperImage()" (click)="displaySkill(skill)">
+    </ng-container>
+  </div>
+  <mat-card-title class="stable-skills-title">
+    {{'skills.display.stableTitle' | translate}}
+  </mat-card-title>
   <div>
     <ng-container *ngFor="let skill of unitsService.selectedUnit.selectedBuild.skills; let i = index">
       <span *ngIf="i > 0 && skill.isTurnCounting" class="turn-separator"></span>

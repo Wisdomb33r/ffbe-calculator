@@ -144,7 +144,8 @@
   },
   "skills": {
     "display": {
-      "title": "Skill rotation",
+      "battleStartTitle": "Battle start skills",
+      "stableTitle": "Stable skills rotation",
       "attackType": "Attack type",
       "attackType_1": "Magical",
       "attackType_2": "Magical",
