@@ -65,7 +65,7 @@ describe('SkillsDisplayComponent', () => {
     unitServiceMock.selectedUnit.selectDefaultBuild();
     unitServiceMock.selectedUnit.selectedBuild.startPhaseSkills = [
       new Skill(JSON.parse(`{
-        "category":1,
+        "category":6,
         "power":1000,
         "hits":4,
         "frames":"10 20 30 40",
@@ -77,13 +77,13 @@ describe('SkillsDisplayComponent', () => {
     ];
     unitServiceMock.selectedUnit.selectedBuild.skills = [
       new Skill(JSON.parse(`{
-        "category":1,
+        "category":9,
         "power":500,
         "hits":1,
         "frames":"100",
         "damages":"100",
-        "damages_type":"physical",
-        "icon":"2.jpg",
+        "damages_type":"esper",
+        "isEsper":true,
         "isStartPhase":false
       }`))
     ];
@@ -101,7 +101,7 @@ describe('SkillsDisplayComponent', () => {
     const stableTitleElement: HTMLElement = fixture.debugElement.query(By.css('mat-card-title.stable-skills-title')).nativeElement;
     expect(stableTitleElement.textContent.trim()).toEqual('skills.display.stableTitle');
     const stableSkillImage: DebugElement = fixture.debugElement.query(By.css('div.stable-skills-content img'));
-    expect(stableSkillImage.nativeElement['src']).toContain('2.jpg');
+    expect(stableSkillImage.nativeElement['src']).toContain('/gestion/resources/brex_invocation/img/000/000/native/013_3e4b8e.png');
   });
 
   it('should display only stable phases skills with LB image and open dialog to display details', () => {
