@@ -78,7 +78,7 @@ describe('AlgorithmFinish', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(99.83);
+    expect(result.result).toBeCloseTo(148.74);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn['isDualWielding']).toBeFalsy();
@@ -106,9 +106,9 @@ describe('AlgorithmFinish', () => {
     expect(turn2['evo']).toEqual(50);
     expect(turn2['combosIncrement']).toBeCloseTo(4);
     expect(turn2['power']).toBeCloseTo(940);
-    expect(turn2['physicalDamages']).toEqual(117500000);
-    expect(turn2['physicalKillerDamages']).toBeCloseTo(117500000);
-    expect(turn2['physicalElementalDamages']).toBeCloseTo(176250000);
+    expect(turn2['physicalDamages']).toEqual(188000000);
+    expect(turn2['physicalKillerDamages']).toBeCloseTo(188000000);
+    expect(turn2['physicalElementalDamages']).toBeCloseTo(282000000);
     expect(turn2['hitsPower'].length).toEqual(1);
     expect(turn2.levelCorrection).toBeCloseTo(1.6);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [940]);

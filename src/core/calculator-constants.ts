@@ -121,6 +121,7 @@ export const LEVIATHAN_KILLERS: Esper = getLeviathanWithKillers();
 export const LEVIATHAN_EVOKE_BOOST: Esper = getLeviathanWithDamageModifier();
 export const PHOENIX_KILLER: Esper = getPhoenixKillers();
 export const PHOENIX_TANKING: Esper = getPhoenixTanking();
+export const ALEXANDER_KILLERS: Esper = getAlexanderKillers();
 export const ESPER_BUILDS: Array<Esper> = [
   IFRIT_KILLERS,
   IFRIT_STATS_BOOST,
@@ -145,6 +146,7 @@ export const ESPER_BUILDS: Array<Esper> = [
   LEVIATHAN_EVOKE_BOOST,
   PHOENIX_KILLER,
   PHOENIX_TANKING,
+  ALEXANDER_KILLERS,
 ];
 
 function getIfritWithKillers(): Esper {
@@ -777,5 +779,33 @@ function getPhoenixTanking(): Esper {
   esper.stats_percent = 40;
   esper.damageType = 'magical';
   esper.elements = [1];
+  return esper;
+}
+
+function getAlexanderKillers(): Esper {
+  const esper = new Esper();
+  esper.id = 16;
+  esper.buildId = 161;
+  esper.name_fr = 'Alexandre';
+  esper.name_en = 'Alexander';
+  esper.build_fr = 'Tue-machine M<br />Tue-machine+<br />Stats boost';
+  esper.build_en = 'M Machine Killer<br />Machine Killer+<br />Stats boost';
+  esper.rank = 3;
+  esper.level = 60;
+  esper.icon = '/gestion/resources/brex_invocation/img/000/000/native/016_226401.png';
+  esper.build = 'http://ffbeEquip.com/espers.html?server=GL&o#eyJBbGV4YW5kZXIiOnsibmFtZSI6IkFsZXhhbmRlciIsInJhcml0eSI6MywibGV2ZWwiOjYwLCJzZWxlY3RlZFNraWxscyI6WyIxXzEiLCIxXzIiLCIyXzIiLCIyXzEiLCIyXzAiLCIzXzAiLCIzXzEiLCIzXzIiLCIzXzMiLCI0XzMiLCI0XzQiLCIzXzQiLCIyXzQiLCIwXzEiLCIwXzIiLCIwXzMiLCIxXzMiLCIxXzQiLCIwXzQiLCJtMV8zIl19fQ==';
+  esper.hp = 7180;
+  esper.mp = 3520 + 200;
+  esper.atk = 4040;
+  esper.mag = 5720 + 400;
+  esper.def = 6480;
+  esper.spr = 7500 + 370;
+  esper.physical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 75, 0, 0, 0, 0);
+  esper.magical_killers = new KillerPassives(0, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0, 0);
+  esper.power = 210;
+  esper.damage_modifier = 100;
+  esper.stats_percent = 20;
+  esper.damageType = 'magical';
+  esper.elements = [7];
   return esper;
 }
