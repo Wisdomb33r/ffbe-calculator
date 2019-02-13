@@ -22,7 +22,7 @@ const BUILD_TEST_DATA =
 const UNIT_TEST_DATA = '{"id":9999,"rank":7,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
 
 describe('AlgorithmFinish for esper invocation', () => {
-  fit('#calculate should set the result object values', () => {
+  it('#calculate should set the result object values', () => {
     // GIVEN
     const algorithm = new AlgorithmFinish();
     const unit = new Unit(JSON.parse(UNIT_TEST_DATA));
