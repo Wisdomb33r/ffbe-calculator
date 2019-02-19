@@ -5,7 +5,6 @@ import {EquipmentSelectionComponent} from '../popup/equipment-selection/equipmen
 import {Equipment} from '../../core/model/equipment.model';
 import {UnitsService} from '../../core/services/units.service';
 import {Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-equipments-display',
@@ -52,6 +51,22 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
               }
             }).afterClosed().subscribe((equipment: Equipment) => {
               if (equipment) {
+                if (equipment.id && equipment.id > 0) {
+                  (<any>window).ga('send', 'event', {
+                    eventCategory: 'calculatorEquipment',
+                    eventLabel: 'Equip item',
+                    eventAction: 'equipItem',
+                    eventValue: equipment.id
+                  });
+                }
+                if (equipment.id === -1) {
+                  (<any>window).ga('send', 'event', {
+                    eventCategory: 'calculatorEquipment',
+                    eventLabel: 'Remove item',
+                    eventAction: 'removeItem',
+                    eventValue: this.unitsService.getEquipments()[slot].id
+                  });
+                }
                 this.unitsService.equipInSlot(slot, equipment);
                 this.equipmentChanged.emit(equipment);
               }

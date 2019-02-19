@@ -34,7 +34,7 @@ export class UnitDetailsComponent implements OnChanges {
         stat: stat,
         esper: this.unit.selectedBuild.esper,
         doublehanding: this.unit.selectedBuild.equipments.isDoubleHandActive()
-        || this.unit.selectedBuild.equipments.isTrueDoubleHandActive(),
+          || this.unit.selectedBuild.equipments.isTrueDoubleHandActive(),
         dualwielding: this.unit.selectedBuild.equipments.isDualWielding(),
       }
     });
@@ -52,6 +52,13 @@ export class UnitDetailsComponent implements OnChanges {
     this.dialog.open(EsperSelectionComponent)
       .afterClosed().subscribe((esper: Esper) => {
       if (esper) {
+        (<any>window).ga('send', 'event', {
+          eventCategory: 'calculatorEsper',
+          eventLabel: 'Change Esper',
+          eventAction: 'changeEsper',
+          eventValue: esper.id
+        });
+
         this.unit.selectedBuild.esper = esper;
         this.esperChanged.emit(esper);
       }
