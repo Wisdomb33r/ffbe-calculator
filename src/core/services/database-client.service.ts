@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {forkJoin, Observable, of, throwError} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {forkJoin, Observable} from 'rxjs';
 import {Unit} from '../model/unit.model';
 import {Equipment} from '../model/equipment.model';
 import {TranslateService} from '@ngx-translate/core';
@@ -102,19 +102,5 @@ export class DatabaseClientService {
       observables.push(this.pushItem$(unit.selectedBuild.id, 16, unit.selectedBuild.equipments.lh_trait3.id));
     }
     return forkJoin(observables);
-  }
-
-  private analyseError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      const message = 'An unexpected error occured : ' + error.error.message;
-      return throwError(message);
-    } else {
-      if (error.status === 404) {
-        return of(undefined);
-      } else {
-        const message = 'Code d\'erreur en provenance du backend ' + error.status;
-        return throwError(message);
-      }
-    }
   }
 }
