@@ -65,6 +65,15 @@ describe('DatabaseClientService', () => {
       expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/equipments.php?category=head&unit=555&language=fr&addedTypes=4-13');
     }));
 
+  it('should delegate to HttpClient for accessing weapon enhancements',
+    inject([DatabaseClientService], (service: DatabaseClientService) => {
+      // WHEN
+      service.getEquipmentsForWeaponCategory$(1);
+      // THEN
+      expect(httpClient.get).toHaveBeenCalled();
+      expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/equipments.php?weapon=1&language=fr');
+    }));
+
   it('should delegate to HttpClient for pushing equipment to backend',
     inject([DatabaseClientService], (service: DatabaseClientService) => {
       // GIVEN
