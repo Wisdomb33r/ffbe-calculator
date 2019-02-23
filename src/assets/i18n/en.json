@@ -200,6 +200,8 @@
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
     "offensive": {
+      "startTitle": "Damages (battle start)",
+      "stableTitle": "Damages (stable rotation)",
       "monsterType": "Enemy type",
       "monsterTypeUnknown": "Unknown",
       "monsterTypeNone": "None",
@@ -210,7 +212,8 @@
       "sparkChain": "Spark chain",
       "esperDamageMultiplier": "Esper multiplier",
       "baseDamages": "Base damages",
-      "averageDamages": "Average damages",
+      "averageDamages10turns": "Average damages (10 first turns)",
+      "averageDamages": "Average damages (stable rotation)",
       "physicalDamagesCalculation": "Physical damages calculation",
       "magicalDamagesCalculation": "Magical damages calculation",
       "esperDamagesCalculation": "Esper damages calculation",

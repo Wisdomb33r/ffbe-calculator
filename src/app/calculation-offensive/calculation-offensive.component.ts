@@ -17,6 +17,7 @@ export class CalculationOffensiveComponent {
 
   @Input() algorithm: AlgorithmOffensive;
   @Input() result: ResultOffensive;
+  @Input() isStartPhase: boolean;
 
   constructor(private dialog: MatDialog) {
   }
@@ -24,8 +25,9 @@ export class CalculationOffensiveComponent {
   public displayPhysicalDamages(index: number) {
     this.dialog.open(CalculationPhysicalDamagesComponent, {
       data: {
-        result: this.result.turnDamages[index],
+        result: this.isStartPhase ? this.result.startPhaseTurnDamages[index] : this.result.turnDamages[index],
         algorithm: this.algorithm,
+        isStartPhase: this.isStartPhase,
         index: index,
       }
     });
@@ -34,8 +36,9 @@ export class CalculationOffensiveComponent {
   public displayEvokerDamages(index: number) {
     this.dialog.open(CalculationEvokerDamagesComponent, {
       data: {
-        result: this.result.turnDamages[index],
+        result: this.isStartPhase ? this.result.startPhaseTurnDamages[index] : this.result.turnDamages[index],
         algorithm: this.algorithm,
+        isStartPhase: this.isStartPhase,
         index: index,
       }
     });
@@ -44,8 +47,9 @@ export class CalculationOffensiveComponent {
   public displayMagicalDamages(index: number) {
     this.dialog.open(CalculationMagicalDamagesComponent, {
       data: {
-        result: this.result.turnDamages[index],
+        result: this.isStartPhase ? this.result.startPhaseTurnDamages[index] : this.result.turnDamages[index],
         algorithm: this.algorithm,
+        isStartPhase: this.isStartPhase,
         index: index,
       }
     });
@@ -54,19 +58,19 @@ export class CalculationOffensiveComponent {
   public displayEsperDamages(index: number) {
     this.dialog.open(CalculationEsperDamagesComponent, {
       data: {
-        result: this.result.turnDamages[index],
+        result: this.isStartPhase ? this.result.startPhaseTurnDamages[index] : this.result.turnDamages[index],
         algorithm: this.algorithm,
+        isStartPhase: this.isStartPhase,
         index: index,
       }
     });
   }
 
-  public isWithBothPhysicalAndMagicalDamages(): boolean {
-    return this.result.turnDamages.some((result: ResultTurnDamages) => result.physicalResult > 0)
-      && this.result.turnDamages.some((result: ResultTurnDamages) => result.magicalResult > 0);
+  public getTurnCount(index: number): number {
+    return this.isStartPhase ? this.result.getStartPhaseTurnCount(index) : this.result.getTurnCount(index);
   }
 
-  public getTurnCount(index: number): number {
-    return this.result.getTurnCount(index);
+  public getTurnDamagesToDisplay(): Array<ResultTurnDamages> {
+    return this.isStartPhase ? this.result.startPhaseTurnDamages : this.result.turnDamages;
   }
 }

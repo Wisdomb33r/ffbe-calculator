@@ -35,7 +35,10 @@ describe('SkillsDisplayComponent', () => {
 
   beforeEach(() => {
     const unitServiceMock = {
-      selectedUnit: undefined
+      selectedUnit: undefined,
+      getStartPhaseSkills() {
+        return this.selectedUnit.selectedBuild.startPhaseSkills;
+      }
     };
     const matDialogMock = {
       open: jasmine.createSpy('open'),
@@ -63,6 +66,7 @@ describe('SkillsDisplayComponent', () => {
     const unitServiceMock: UnitsService = TestBed.get(UnitsService);
     unitServiceMock.selectedUnit = new Unit(UNIT_FAKE);
     unitServiceMock.selectedUnit.selectDefaultBuild();
+    unitServiceMock.selectedUnit.selectedBuild.isStartPhaseReady = true;
     unitServiceMock.selectedUnit.selectedBuild.startPhaseSkills = [
       new Skill(JSON.parse(`{
         "category":6,
@@ -95,12 +99,12 @@ describe('SkillsDisplayComponent', () => {
     expect(component).toBeTruthy();
     const startTitleElement: HTMLElement = fixture.debugElement.query(By.css('mat-card-title.start-skills-title')).nativeElement;
     expect(startTitleElement.textContent.trim()).toEqual('skills.display.battleStartTitle');
-    const startSkillImage: DebugElement = fixture.debugElement.query(By.css('div.start-skills-content img'));
+    const startSkillImage: DebugElement = fixture.debugElement.query(By.css('mat-card-content.start-skills-content img'));
     expect(startSkillImage.nativeElement['src']).toContain('1.jpg');
 
     const stableTitleElement: HTMLElement = fixture.debugElement.query(By.css('mat-card-title.stable-skills-title')).nativeElement;
     expect(stableTitleElement.textContent.trim()).toEqual('skills.display.stableTitle');
-    const stableSkillImage: DebugElement = fixture.debugElement.query(By.css('div.stable-skills-content img'));
+    const stableSkillImage: DebugElement = fixture.debugElement.query(By.css('mat-card-content.stable-skills-content img'));
     expect(stableSkillImage.nativeElement['src']).toContain('/gestion/resources/brex_invocation/img/000/000/native/013_3e4b8e.png');
   });
 
@@ -131,12 +135,12 @@ describe('SkillsDisplayComponent', () => {
     expect(component).toBeTruthy();
     const startTitleElement: DebugElement = fixture.debugElement.query(By.css('mat-card-title.start-skills-title'));
     expect(startTitleElement).toBeNull();
-    const startSkillImage: DebugElement = fixture.debugElement.query(By.css('div.start-skills-content img'));
+    const startSkillImage: DebugElement = fixture.debugElement.query(By.css('mat-card-content.start-skills-content img'));
     expect(startSkillImage).toBeNull();
 
     const stableTitleElement: HTMLElement = fixture.debugElement.query(By.css('mat-card-title.stable-skills-title')).nativeElement;
     expect(stableTitleElement.textContent.trim()).toEqual('skills.display.stableTitle');
-    const stableSkillImage: DebugElement = fixture.debugElement.query(By.css('div.stable-skills-content img'));
+    const stableSkillImage: DebugElement = fixture.debugElement.query(By.css('mat-card-content.stable-skills-content img'));
     expect(stableSkillImage.nativeElement['src']).toContain('lb_en.png');
     stableSkillImage.triggerEventHandler('click', {button: 0});
     expect(matDialogMock.open).toHaveBeenCalledTimes(1);

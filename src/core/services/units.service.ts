@@ -364,4 +364,8 @@ export class UnitsService {
   public getSkills(): Array<Skill> {
     return this.selectedUnit.selectedBuild.skills;
   }
+
+  public getStartPhaseSkills(): Array<Skill> {
+    return this.selectedUnit.selectedBuild.startPhaseSkills;
+  }
 }
