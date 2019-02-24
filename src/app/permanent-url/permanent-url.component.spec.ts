@@ -28,73 +28,37 @@ describe('PermanentUrlComponent', () => {
         TranslateModule.forRoot(),
         ClipboardModule,
       ]
-    })
-      .compileComponents();
-  }));
-
-  beforeEach(() => {
+    }).compileComponents();
     fixture = TestBed.createComponent(PermanentUrlComponent);
     component = fixture.componentInstance;
-  });
+  }));
 
   it('should construct a URL based on unit equipment and display it in the HTML input field', () => {
+    // GIVEN
     const UNIT_DATA = `
     {
       "id": 1234,
-      "stats": {
-      },
+      "stats": {},
       "builds": [
         {
           "id": 999,
           "equipments": {
-            "right_hand": {
-              "id": 1
-            },
-            "left_hand": {
-              "id": 2
-            },
-            "head": {
-              "id": 3
-            },
-            "body": {
-              "id": 4
-            },
-            "accessory1": {
-              "id": 5
-            },
-            "accessory2": {
-              "id": 6
-            },
-            "materia1": {
-              "id": 7
-            },
-            "materia2": {
-              "id": 8
-            },
-            "materia3": {
-              "id": 9
-            },
-            "materia4": {
-              "id": 10
-            },
-            "rh_trait1": {
-              "id": 11
-            },
-            "rh_trait2": {
-              "id": 12
-            },
-            "rh_trait3": {
-              "id": 13
-            },
-            "lh_trait1": {
-              "id": 14
-            },
-            "lh_trait2": {
-              "id": 15
-            },
-            "lh_trait3": {
-              "id": 16
-            }
+            "right_hand": {"id": 1},
+            "left_hand": {"id": 2},
+            "head": {"id": 3},
+            "body": {"id": 4},
+            "accessory1": {"id": 5},
+            "accessory2": {"id": 6},
+            "materia1": {"id": 7},
+            "materia2": {"id": 8},
+            "materia3": {"id": 9},
+            "materia4": {"id": 10},
+            "rh_trait1": {"id": 11},
+            "rh_trait2": {"id": 12},
+            "rh_trait3": {"id": 13},
+            "lh_trait1": {"id": 14},
+            "lh_trait2": {"id": 15},
+            "lh_trait3": {"id": 16}
           }
         }
       ]
@@ -119,7 +83,11 @@ describe('PermanentUrlComponent', () => {
     component.lh_trait2 = unit.selectedBuild.equipments.lh_trait2;
     component.lh_trait3 = unit.selectedBuild.equipments.lh_trait3;
     component.esper = IFRIT_KILLERS;
+
+    // WHEN
     fixture.detectChanges();
+
+    // THEN
     expect(component).toBeTruthy();
     fixture.whenStable().then(() => {
       const input = fixture.debugElement.query(By.css('input'));
@@ -130,7 +98,8 @@ describe('PermanentUrlComponent', () => {
     });
   });
 
-  it('should construct a minimal URL based on unit without equipment and display it in the HTML input field', () => {
+  it('should construct a minimal URL based on unit without equipment', () => {
+    // GIVEN
     const UNIT_DATA = `
     {
       "id": 1234,
@@ -147,12 +116,11 @@ describe('PermanentUrlComponent', () => {
     const unit: Unit = new Unit(JSON.parse(UNIT_DATA));
     unit.selectDefaultBuild();
     component.unit = unit;
-    fixture.detectChanges();
-    expect(component).toBeTruthy();
-    fixture.whenStable().then(() => {
-      const input = fixture.debugElement.query(By.css('input'));
-      const inputElement = input.nativeElement;
-      expect(inputElement.value).toBe('https://www.final-fantasy.ch/ffbe/calculator/link/unit/1234;build=999');
-    });
+
+    // WHEN
+    component.ngOnChanges();
+
+    // THEN
+    expect(component.url).toBe('https://www.final-fantasy.ch/ffbe/calculator/link/unit/1234;build=999');
   });
 });

@@ -1,0 +1,13 @@
+<table>
+  <tr *ngIf="unitsService.selectedUnit.selectedBuild.isStartPhaseReady">
+    <th>{{'calculation.offensive.averageDamages10turns' | translate}}</th>
+    <td>{{result.tenTurnsResult | integer}}</td>
+  </tr>
+  <tr>
+    <th>{{'calculation.offensive.averageDamages' | translate}}</th>
+    <td>{{result.result | integer}}</td>
+  </tr>
+</table>
+<p *ngIf="algorithm.opponentDef === 1000000 && algorithm.opponentSpr === 1000000">
+  {{'calculation.offensive.defaultDefSprExplanations' | translate}}
+</p>

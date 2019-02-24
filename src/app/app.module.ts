@@ -50,6 +50,7 @@ import {CalculationEsperDamagesComponent} from './popup/calculation-esper-damage
 import {CalculationEvokerDamagesComponent} from './popup/calculation-evoker-damages/calculation-evoker-damages.component';
 import {PushBuildComponent} from './push-build/push-build.component';
 import {UnitTraitsComponent} from './unit-traits/unit-traits.component';
+import {CalculationOffensiveTotalsComponent} from './calculation-offensive-totals/calculation-offensive-totals.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -80,6 +81,7 @@ const appRoutes: Routes = [
     SkillsDisplayComponent,
     CalculationDefensiveComponent,
     CalculationOffensiveComponent,
+    CalculationOffensiveTotalsComponent,
     CalculationPhysicalDamagesComponent,
     CalculationMagicalDamagesComponent,
     CalculationEsperDamagesComponent,

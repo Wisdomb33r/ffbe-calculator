@@ -1,6 +1,6 @@
 <table>
-  <tr *ngFor="let turn of result.turnDamages; let i = index">
-    <th>{{'calculation.display.turn' | translate}} n+{{getTurnCount(i)}}</th>
+  <tr *ngFor="let turn of getTurnDamagesToDisplay(); let i = index">
+    <th>{{'calculation.display.turn' | translate}} <span *ngIf="!isStartPhase">n+</span>{{getTurnCount(i)}}</th>
     <td *ngIf="turn.physicalResult">{{turn.physicalResult | integer}}</td>
     <td *ngIf="turn.physicalResult && !turn.esperDamageModifier">
       <img class="inline-icon details-opener" src="assets/icons/grey/question.png" (click)="displayPhysicalDamages(i)">
@@ -16,14 +16,4 @@
       <img class="inline-icon details-opener" src="assets/icons/grey/question.png" (click)="displayEsperDamages(i)">
     </td>
   </tr>
-  <tr class="total">
-    <th>{{'calculation.offensive.averageDamages' | translate}}</th>
-    <td>{{result.result | integer}}</td>
-    <td></td>
-    <td *ngIf="isWithBothPhysicalAndMagicalDamages()"></td>
-    <td *ngIf="isWithBothPhysicalAndMagicalDamages()"></td>
-  </tr>
 </table>
-<p *ngIf="algorithm.opponentDef === 1000000 && algorithm.opponentSpr === 1000000">
-  {{'calculation.offensive.defaultDefSprExplanations' | translate}}
-</p>

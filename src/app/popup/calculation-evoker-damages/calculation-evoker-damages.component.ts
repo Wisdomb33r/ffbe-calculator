@@ -14,6 +14,7 @@ export class CalculationEvokerDamagesComponent {
 
   public result: ResultTurnDamages;
   public algorithm: AlgorithmOffensive;
+  private isStartPhase: boolean;
   private index: number;
   public opponentSprValueError = false;
 
@@ -21,13 +22,14 @@ export class CalculationEvokerDamagesComponent {
               private unitsService: UnitsService) {
     this.result = data.result;
     this.algorithm = data.algorithm;
+    this.isStartPhase = data.isStartPhase;
     this.index = data.index;
   }
 
   public calculateBuild() {
     this.unitsService.selectedUnit.calculateResults();
     const result: ResultOffensive = this.unitsService.getResult() as ResultOffensive;
-    this.result = result.turnDamages[this.index];
+    this.result = this.isStartPhase ? result.startPhaseTurnDamages[this.index] : result.turnDamages[this.index];
   }
 
   public isChaining() {

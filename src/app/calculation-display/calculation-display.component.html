@@ -1,16 +1,31 @@
-<mat-card>
+<mat-card *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 8">
   <mat-card-title>{{'calculation.display.title' | translate}}</mat-card-title>
-  <mat-card-content *ngIf="!unitsService.getAlgorithm()">
-    {{'calculation.display.missingAlgorithm' | translate}}
-  </mat-card-content>
-  <mat-card-content *ngIf="unitsService.getAlgorithm()">
-    <app-calculation-offensive *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId < 8"
-                               [algorithm]="unitsService.getAlgorithm()"
-                               [result]="unitsService.getResult()">
-    </app-calculation-offensive>
-    <app-calculation-defensive *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 8"
-                               [algorithm]="unitsService.getAlgorithm()"
-                               [result]="unitsService.getResult()">
+  <mat-card-content>
+    <app-calculation-defensive [algorithm]="unitsService.getAlgorithm()" [result]="unitsService.getResult()">
     </app-calculation-defensive>
+  </mat-card-content>
+</mat-card>
+<mat-card *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId < 8">
+  <mat-card-title *ngIf="isBuildStartPhaseReadyAndWithStartPhaseSkills()">
+    {{'calculation.offensive.startTitle' | translate}}
+  </mat-card-title>
+  <mat-card-content *ngIf="isBuildStartPhaseReadyAndWithStartPhaseSkills()">
+    <app-calculation-offensive [algorithm]="unitsService.getAlgorithm()"
+                               [result]="unitsService.getResult()"
+                               [isStartPhase]="true">
+    </app-calculation-offensive>
+  </mat-card-content>
+  <mat-card-title>{{'calculation.offensive.stableTitle' | translate}}</mat-card-title>
+  <mat-card-content>
+    <app-calculation-offensive [algorithm]="unitsService.getAlgorithm()"
+                               [result]="unitsService.getResult()"
+                               [isStartPhase]="false">
+    </app-calculation-offensive>
+  </mat-card-content>
+  <mat-card-title>{{'calculation.display.title' | translate}}</mat-card-title>
+  <mat-card-content>
+    <app-calculation-offensive-totals [algorithm]="unitsService.getAlgorithm()"
+                                      [result]="unitsService.getResult()">
+    </app-calculation-offensive-totals>
   </mat-card-content>
 </mat-card>

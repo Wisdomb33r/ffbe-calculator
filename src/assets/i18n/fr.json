@@ -144,7 +144,8 @@
   },
   "skills": {
     "display": {
-      "title": "Cycle d'attaque",
+      "battleStartTitle": "Attaques de début de combat",
+      "stableTitle": "Cycle d'attaques stable",
       "attackType": "Type d'attaque",
       "attackType_1": "Magique",
       "attackType_2": "Magique",
@@ -199,6 +200,8 @@
       "missingAlgorithm": "L'algorithme pour ce type de personnage n'est pas encore disponible."
     },
     "offensive": {
+      "startTitle": "Dégâts (début de combat)",
+      "stableTitle": "Dégâts (cycle stable)",
       "monsterType": "Type d'ennemi",
       "monsterTypeUnknown": "Inconnu",
       "monsterTypeNone": "Aucun",
@@ -209,7 +212,8 @@
       "sparkChain": "Chaîne étincelle",
       "esperDamageMultiplier": "Multiplicateur chimère",
       "baseDamages": "Dégâts de base",
-      "averageDamages": "Dégâts moyens",
+      "averageDamages10turns": "Dégâts moyens (10 premiers tours)",
+      "averageDamages": "Dégâts moyens (cycle stable)",
       "physicalDamagesCalculation": "Calcul dégâts physiques",
       "magicalDamagesCalculation": "Calcul dégâts magiques",
       "esperDamagesCalculation": "Calcul dégâts chimères",

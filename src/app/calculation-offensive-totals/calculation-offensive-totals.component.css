@@ -12,3 +12,8 @@ td {
   text-align: right;
   padding-right: 5px;
 }
+
+p {
+  font-size: 12px;
+  margin-bottom: 0;
+}

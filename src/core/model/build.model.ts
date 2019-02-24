@@ -21,10 +21,12 @@ export class Build {
   public magical_cover: number;
   public physical_resistance: number;
   public magical_resistance: number;
+  public isStartPhaseReady: boolean;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
   public equipments: EquipmentSet;
   public skills: Array<Skill> = [];
+  public startPhaseSkills: Array<Skill> = [];
 
   // transcient
   public algorithm: Algorithm;
@@ -43,6 +45,7 @@ export class Build {
     this.magical_cover = build.magical_cover;
     this.physical_resistance = build.physical_resistance;
     this.magical_resistance = build.magical_resistance;
+    this.isStartPhaseReady = build.isStartPhaseReady;
     if (build.physical_killers) {
       this.physical_killers = KillerPassives.construct(build.physical_killers);
     }
@@ -85,7 +88,12 @@ export class Build {
           }
         }
 
-        this.skills.push(new Skill(skill));
+        const s = new Skill(skill);
+        if (s.isStartPhase) {
+          this.startPhaseSkills.push(s);
+        } else {
+          this.skills.push(new Skill(skill));
+        }
       });
     }
     this.algorithm = AlgorithmFactory.getInstance(this.algorithmId);

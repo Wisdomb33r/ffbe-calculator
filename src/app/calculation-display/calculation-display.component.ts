@@ -11,4 +11,8 @@ export class CalculationDisplayComponent {
   constructor(public unitsService: UnitsService) {
   }
 
+  public isBuildStartPhaseReadyAndWithStartPhaseSkills() {
+    return this.unitsService.selectedUnit.selectedBuild.isStartPhaseReady
+      && this.unitsService.getStartPhaseSkills() && this.unitsService.getStartPhaseSkills().length;
+  }
 }
