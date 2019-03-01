@@ -73,13 +73,15 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
       }),
       switchMap((unit: Unit) => {
         this.currentStep = 2;
-        if (unit && (<any>window).ga) {
-          (<any>window).ga('send', 'event', {
-            eventCategory: 'calculatorUnit',
-            eventLabel: 'Load URL build for ' + unit.id,
-            eventAction: 'loadUrlBuild',
-            eventValue: 1
-          });
+        if (unit) {
+          if ((<any>window).ga) {
+            (<any>window).ga('send', 'event', {
+              eventCategory: 'calculatorUnit',
+              eventLabel: 'Load URL build for ' + unit.id,
+              eventAction: 'loadUrlBuild',
+              eventValue: 1
+            });
+          }
 
           this.unitsService.selectedUnit = new Unit(unit);
           this.unitsService.selectedUnit.selectDefaultBuild();
