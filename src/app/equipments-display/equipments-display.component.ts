@@ -51,20 +51,20 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
               }
             }).afterClosed().subscribe((equipment: Equipment) => {
               if (equipment) {
-                if (equipment.id && equipment.id > 0) {
+                if (equipment.id && equipment.id > 0 && (<any>window).ga) {
                   (<any>window).ga('send', 'event', {
                     eventCategory: 'calculatorEquipment',
-                    eventLabel: 'Equip item',
+                    eventLabel: 'Equip item ' + equipment.id,
                     eventAction: 'equipItem',
-                    eventValue: equipment.id
+                    eventValue: 1
                   });
                 }
-                if (equipment.id === -1) {
+                if (equipment.id === -1 && (<any>window).ga) {
                   (<any>window).ga('send', 'event', {
                     eventCategory: 'calculatorEquipment',
-                    eventLabel: 'Remove item',
+                    eventLabel: 'Remove item from ' + slot,
                     eventAction: 'removeItem',
-                    eventValue: this.unitsService.getEquipments()[slot].id
+                    eventValue: 1
                   });
                 }
                 this.unitsService.equipInSlot(slot, equipment);
