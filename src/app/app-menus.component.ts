@@ -41,6 +41,14 @@ export class AppMenusComponent implements OnInit {
               this.unitsService.selectedUnit = new Unit(unit);
               this.unitsService.selectedUnit.selectDefaultBuild();
               this.unitsService.selectedUnit.computeAll();
+              if ((<any>window).ga) {
+                (<any>window).ga('send', 'event', {
+                  eventCategory: 'calculatorUnit',
+                  eventLabel: 'Select unit ' + unit.id,
+                  eventAction: 'selectUnit',
+                  eventValue: 1
+                });
+              }
               this.router.navigate(['/']);
             });
         }

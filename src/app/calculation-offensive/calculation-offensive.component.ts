@@ -23,6 +23,14 @@ export class CalculationOffensiveComponent {
   }
 
   public displayPhysicalDamages(index: number) {
+    if ((<any>window).ga) {
+      (<any>window).ga('send', 'event', {
+        eventCategory: 'calculatorCalculation',
+        eventLabel: 'Display physical calculation',
+        eventAction: 'displayPhysicalCalculation',
+        eventValue: 1
+      });
+    }
     this.dialog.open(CalculationPhysicalDamagesComponent, {
       data: {
         result: this.isStartPhase ? this.result.startPhaseTurnDamages[index] : this.result.turnDamages[index],
@@ -34,6 +42,14 @@ export class CalculationOffensiveComponent {
   }
 
   public displayEvokerDamages(index: number) {
+    if ((<any>window).ga) {
+      (<any>window).ga('send', 'event', {
+        eventCategory: 'calculatorCalculation',
+        eventLabel: 'Display evoker calculation',
+        eventAction: 'displayEvokerCalculation',
+        eventValue: 1
+      });
+    }
     this.dialog.open(CalculationEvokerDamagesComponent, {
       data: {
         result: this.isStartPhase ? this.result.startPhaseTurnDamages[index] : this.result.turnDamages[index],
@@ -45,6 +61,14 @@ export class CalculationOffensiveComponent {
   }
 
   public displayMagicalDamages(index: number) {
+    if ((<any>window).ga) {
+      (<any>window).ga('send', 'event', {
+        eventCategory: 'calculatorCalculation',
+        eventLabel: 'Display magical calculation',
+        eventAction: 'displayMagicalCalculation',
+        eventValue: 1
+      });
+    }
     this.dialog.open(CalculationMagicalDamagesComponent, {
       data: {
         result: this.isStartPhase ? this.result.startPhaseTurnDamages[index] : this.result.turnDamages[index],
@@ -56,6 +80,14 @@ export class CalculationOffensiveComponent {
   }
 
   public displayEsperDamages(index: number) {
+    if ((<any>window).ga) {
+      (<any>window).ga('send', 'event', {
+        eventCategory: 'calculatorCalculation',
+        eventLabel: 'Display esper calculation',
+        eventAction: 'displayEsperCalculation',
+        eventValue: 1
+      });
+    }
     this.dialog.open(CalculationEsperDamagesComponent, {
       data: {
         result: this.isStartPhase ? this.result.startPhaseTurnDamages[index] : this.result.turnDamages[index],

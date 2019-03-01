@@ -28,13 +28,21 @@ export class UnitDetailsComponent implements OnChanges {
   }
 
   displayStatDetails(stat: string) {
+    if ((<any>window).ga) {
+      (<any>window).ga('send', 'event', {
+        eventCategory: 'calculatorUnit',
+        eventLabel: 'Display ' + stat + ' stat',
+        eventAction: 'displayUnitStat',
+        eventValue: 1
+      });
+    }
     this.dialog.open(UnitDetailsStatSumComponent, {
       data: {
         unitStats: this.unit.stats,
         stat: stat,
         esper: this.unit.selectedBuild.esper,
         doublehanding: this.unit.selectedBuild.equipments.isDoubleHandActive()
-        || this.unit.selectedBuild.equipments.isTrueDoubleHandActive(),
+          || this.unit.selectedBuild.equipments.isTrueDoubleHandActive(),
         dualwielding: this.unit.selectedBuild.equipments.isDualWielding(),
       }
     });
@@ -51,7 +59,14 @@ export class UnitDetailsComponent implements OnChanges {
   public openEsperSelectionPane() {
     this.dialog.open(EsperSelectionComponent)
       .afterClosed().subscribe((esper: Esper) => {
-      if (esper) {
+      if (esper && (<any>window).ga) {
+        (<any>window).ga('send', 'event', {
+          eventCategory: 'calculatorEsper',
+          eventLabel: 'Change Esper for ' + esper.buildId,
+          eventAction: 'changeEsper',
+          eventValue: 1
+        });
+
         this.unit.selectedBuild.esper = esper;
         this.esperChanged.emit(esper);
       }
@@ -60,6 +75,14 @@ export class UnitDetailsComponent implements OnChanges {
 
   public changeBuild(build) {
     if (build.id !== this.unit.selectedBuild.id) {
+      if ((<any>window).ga) {
+        (<any>window).ga('send', 'event', {
+          eventCategory: 'calculatorUnit',
+          eventLabel: 'Select build ' + build.id,
+          eventAction: 'switchBuild',
+          eventValue: 1
+        });
+      }
       this.unit.selectedBuild = build;
       this.unit.computeAll();
     }
