@@ -41,6 +41,10 @@ export class UnitsService {
       });
   }
 
+  /**
+   * @Deprecated : To remove in version 4 of the tool when all 6 stars units builds will be dead.
+   * @param rankFilter
+   */
   public filterByRank(rankFilter: number) {
     this.physicalChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
       u.builds.filter((b: Build) => b.algorithmId === 1).length > 0);
