@@ -1,7 +1,7 @@
 div.flexcontainer {
   display: flex;
   flex-flow: row wrap;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .equipment-icon img {
