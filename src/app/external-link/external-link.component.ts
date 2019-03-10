@@ -79,7 +79,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           if (this.build) {
             this.unitsService.selectedUnit.selectBuild(this.build);
           }
-          this.unitsService.selectedUnit.selectedBuild.equipments.removeAll();
+          this.unitsService.selectedUnit.selectedBuild.equipments.removeAllNonLocked();
 
           const observables = [];
           observables.push(of(unit));
@@ -232,7 +232,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
       } else {
         equipment = equipments.find((e: Equipment) => e.id === equipment_id);
       }
-      if (equipment) {
+      if (equipment && (!this.unitsService.getEquipments()[slot] || !this.unitsService.getEquipments()[slot].locked)) {
         this.unitsService.equipInSlot(slot, equipment);
       }
     }
