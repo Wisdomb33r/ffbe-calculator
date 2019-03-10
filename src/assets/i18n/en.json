@@ -138,6 +138,7 @@
       "title": "Equipment",
       "remove": "Remove",
       "filter": "Filter items",
+      "empty": "empty",
       "excludeStmr": "Exclude STMR's",
       "changeBlocked": "This item is mandatory for this build as it has an impact the calculator currently cannot activate or deactivate dynamically."
     }

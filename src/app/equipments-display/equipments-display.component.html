@@ -5,6 +5,9 @@
       <td class="equipment-icon">
         <img *ngIf="equipments.right_hand" [src]="equipments.right_hand.icon"
              (click)="openEquipmentSelectionPane('right_hand')">
+        <div *ngIf="!equipments.right_hand" class="empty-slot" (click)="openEquipmentSelectionPane('right_hand')">
+          {{'equipment.selection.empty' | translate}}
+        </div>
       </td>
       <td class="equipment-details">
         <app-equipment-details [equipment]="equipments.right_hand" *ngIf="equipments.right_hand"
@@ -14,9 +17,14 @@
                                [displayWeaponTraits]="true"
                                (weaponTraitEmitter)="openEquipmentSelectionPaneForRhWeaponTrait($event)">
         </app-equipment-details>
+        <h2 *ngIf="!equipments.right_hand"></h2>
       </td>
-      <td class="equipment-icon" (click)="openEquipmentSelectionPane('left_hand')">
-        <img *ngIf="equipments.left_hand" [src]="equipments.left_hand.icon">
+      <td class="equipment-icon">
+        <img *ngIf="equipments.left_hand" [src]="equipments.left_hand.icon"
+             (click)="openEquipmentSelectionPane('left_hand')">
+        <div *ngIf="!equipments.left_hand" class="empty-slot" (click)="openEquipmentSelectionPane('left_hand')">
+          {{'equipment.selection.empty' | translate}}
+        </div>
       </td>
       <td class="equipment-details">
         <app-equipment-details [equipment]="equipments.left_hand" *ngIf="equipments.left_hand"
@@ -26,6 +34,7 @@
                                [displayWeaponTraits]="true"
                                (weaponTraitEmitter)="openEquipmentSelectionPaneForLhWeaponTrait($event)">
         </app-equipment-details>
+        <h2 *ngIf="!equipments.left_hand"></h2>
       </td>
     </tr>
     <tr *ngIf="equipments.head || equipments.body">

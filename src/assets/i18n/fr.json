@@ -138,6 +138,7 @@
       "title": "Équipement",
       "remove": "Retirer",
       "filter": "Filtrer les objets",
+      "empty": "vide",
       "excludeStmr": "Exclure les STMR",
       "changeBlocked": "Cet objet est obligatoire pour ce build à cause d'un effet que le calculateur ne peut actuellement pas activer ou désactiver dynamiquement."
     }
