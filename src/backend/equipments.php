@@ -29,10 +29,10 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     $objects = brex_objet_extended::finderByCategoriesForCalculator ( $categories );
     
     if ($weapon_category == '1' || $weapon_category == '27' || $weapon_category == '28' || $weapon_category == '32' || $weapon_category == '18') {
-      $objects [] = brex_objet::findByPrimaryId ( 2318 ); // swords, great swords, katanas, spears
+      $objects [] = brex_objet::findByPrimaryId ( 2318 ); // swords, great swords, katanas, spears, claws
     }
-    if ($weapon_category == '27' || $weapon_category == '28') {
-      $objects [] = brex_objet::findByPrimaryId ( 2950 ); // great swords, katanas
+    if ($weapon_category == '27' || $weapon_category == '28' || $weapon_category == '18') {
+      $objects [] = brex_objet::findByPrimaryId ( 2950 ); // great swords, katanas, claws
     }
     if ($weapon_category == '17') { // staves
       $objects [] = brex_objet::findByPrimaryId ( 2683 );
@@ -45,11 +45,13 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     if ($weapon_category == '6') {
       $objects [] = brex_objet::findByPrimaryId ( 2620 ); // bows
     }
-    if ($weapon_category == '13') {
-      $objects [] = brex_objet::findByPrimaryId ( 2694 ); // hammers
+    if ($weapon_category == '13') { // hammers
+      $objects [] = brex_objet::findByPrimaryId ( 2694 );
+      $objects [] = brex_objet::findByPrimaryId ( 3155 );
     }
-    if ($weapon_category == '33') {
-      $objects [] = brex_objet::findByPrimaryId ( 2791 ); // harps
+    if ($weapon_category == '33') { // harps
+      $objects [] = brex_objet::findByPrimaryId ( 2791 );
+      $objects [] = brex_objet::findByPrimaryId ( 3156 );
     }
     if ($weapon_category == '34') { // whips
       $objects [] = brex_objet::findByPrimaryId ( 2463 );
