@@ -78,7 +78,6 @@ export class EquipmentSet {
     this.rh_trait1 = null;
     this.rh_trait2 = null;
     this.rh_trait3 = null;
-    this.left_hand = null;
     this.lh_trait1 = null;
     this.lh_trait2 = null;
     this.lh_trait3 = null;
@@ -86,31 +85,34 @@ export class EquipmentSet {
 
   public removeAllNonLocked() {
     this.removeAllRemoveable();
-    if (!this.right_hand.locked) {
+    if (this.right_hand && !this.right_hand.locked) {
       this.right_hand = null;
     }
-    if (!this.head.locked) {
+    if (this.left_hand && !this.left_hand.locked) {
+      this.right_hand = null;
+    }
+    if (this.head && !this.head.locked) {
       this.head = null;
     }
-    if (!this.body.locked) {
+    if (this.body && !this.body.locked) {
       this.body = null;
     }
-    if (!this.accessory1.locked) {
+    if (this.accessory1 && !this.accessory1.locked) {
       this.accessory1 = null;
     }
-    if (!this.accessory2.locked) {
+    if (this.accessory2 && !this.accessory2.locked) {
       this.accessory2 = null;
     }
-    if (!this.materia1.locked) {
+    if (this.materia1 && !this.materia1.locked) {
       this.materia1 = null;
     }
-    if (!this.materia2.locked) {
+    if (this.materia2 && !this.materia2.locked) {
       this.materia2 = null;
     }
-    if (!this.materia3.locked) {
+    if (this.materia3 && !this.materia3.locked) {
       this.materia3 = null;
     }
-    if (!this.materia4.locked) {
+    if (this.materia4 && !this.materia4.locked) {
       this.materia4 = null;
     }
   }
