@@ -78,23 +78,43 @@ export class EquipmentSet {
     this.rh_trait1 = null;
     this.rh_trait2 = null;
     this.rh_trait3 = null;
-    this.left_hand = null;
     this.lh_trait1 = null;
     this.lh_trait2 = null;
     this.lh_trait3 = null;
   }
 
-  public removeAll() {
+  public removeAllNonLocked() {
     this.removeAllRemoveable();
-    this.right_hand = null;
-    this.head = null;
-    this.body = null;
-    this.accessory1 = null;
-    this.accessory2 = null;
-    this.materia1 = null;
-    this.materia2 = null;
-    this.materia3 = null;
-    this.materia4 = null;
+    if (this.right_hand && !this.right_hand.locked) {
+      this.right_hand = null;
+    }
+    if (this.left_hand && !this.left_hand.locked) {
+      this.right_hand = null;
+    }
+    if (this.head && !this.head.locked) {
+      this.head = null;
+    }
+    if (this.body && !this.body.locked) {
+      this.body = null;
+    }
+    if (this.accessory1 && !this.accessory1.locked) {
+      this.accessory1 = null;
+    }
+    if (this.accessory2 && !this.accessory2.locked) {
+      this.accessory2 = null;
+    }
+    if (this.materia1 && !this.materia1.locked) {
+      this.materia1 = null;
+    }
+    if (this.materia2 && !this.materia2.locked) {
+      this.materia2 = null;
+    }
+    if (this.materia3 && !this.materia3.locked) {
+      this.materia3 = null;
+    }
+    if (this.materia4 && !this.materia4.locked) {
+      this.materia4 = null;
+    }
   }
 
   public sumEquipmentStat(statName: string): number {

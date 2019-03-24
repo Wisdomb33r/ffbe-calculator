@@ -97,7 +97,7 @@ describe('EquipmentSet', () => {
     expect(sum).toEqual(0);
   });
 
-  it('#removeAllRemoveable should remove left hand and weapon enhancements', () => {
+  it('#removeAllRemoveable should remove weapon enhancements', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     equipments.left_hand = equipments.right_hand;
@@ -114,7 +114,7 @@ describe('EquipmentSet', () => {
     expect(equipments.rh_trait1).toBeFalsy();
     expect(equipments.rh_trait2).toBeFalsy();
     expect(equipments.rh_trait3).toBeFalsy();
-    expect(equipments.left_hand).toBeFalsy();
+    expect(equipments.left_hand).toBeTruthy();
     expect(equipments.lh_trait1).toBeFalsy();
     expect(equipments.lh_trait2).toBeFalsy();
     expect(equipments.lh_trait3).toBeFalsy();

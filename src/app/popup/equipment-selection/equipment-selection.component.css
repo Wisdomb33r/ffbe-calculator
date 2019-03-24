@@ -23,7 +23,7 @@
   flex-grow: 1;
 }
 
-.unequip,
+.unequip p,
 .blocked {
   padding-left: 10px;
   padding-right: 10px;
@@ -31,11 +31,15 @@
   font-weight: bold;
 }
 
+.unequip {
+  cursor: pointer;
+}
+
 .blocked {
   max-width: 280px;
 }
 
-.unequip span {
+.unequip p span {
   font-size: 18px;
 }
 

@@ -52,7 +52,7 @@ export class DamageTypePhysical extends DamageType {
 
   protected calculateDamageVariance(unit: Unit, result: ResultTurnDamages) {
     const right_hand: Equipment = unit.selectedBuild.equipments.right_hand;
-    result.averageWeaponVariance = right_hand.isTwoHanded() ? (right_hand.variance_min + right_hand.variance_max) / 2 : 100;
+    result.averageWeaponVariance = right_hand && right_hand.isTwoHanded() ? (right_hand.variance_min + right_hand.variance_max) / 2 : 100;
     result.finalVariance = 92.5;
   }
 

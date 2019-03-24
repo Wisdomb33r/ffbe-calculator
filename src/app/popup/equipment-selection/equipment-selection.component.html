@@ -9,8 +9,8 @@
       {{'equipment.selection.excludeStmr' | translate}}
     </mat-checkbox>
   </div>
-  <div class="equipment" (click)="removeEquipment()" *ngIf="removeable">
-    <p class="unequip"><span>&#8617;</span> {{'equipment.selection.remove' | translate}}</p>
+  <div class="equipment unequip" (click)="removeEquipment()" *ngIf="removeable">
+    <p><span>&#8617;</span> {{'equipment.selection.remove' | translate}}</p>
   </div>
   <ng-container *ngFor="let equipment of equipments">
     <div class="equipment" *ngIf="!unitsService.stmrExclusion || !equipment.stmr"
