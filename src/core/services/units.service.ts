@@ -330,7 +330,7 @@ export class UnitsService {
   }
 
   private checkTwoHandedMainHandForOffhand(slot: string) {
-    return slot !== 'left_hand' || !this.getEquipments().right_hand.isTwoHanded();
+    return slot !== 'left_hand' || !this.getEquipments().right_hand || !this.getEquipments().right_hand.isTwoHanded();
   }
 
   private checkDwForSecondWeapon(item: Equipment, slot: string): boolean {

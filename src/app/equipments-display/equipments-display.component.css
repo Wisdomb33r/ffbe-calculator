@@ -26,6 +26,7 @@ div.flexcontainer {
   border: 1px solid #505139;
   border-left: 0;
   background-color: #000c63;
+  min-width: 60px;
 }
 
 .empty-slot {

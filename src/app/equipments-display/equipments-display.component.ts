@@ -41,12 +41,12 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
 
     this.subscription = this.unitsService.getAllowedEquipmentsForSlot$(slot)
       .subscribe((equipments: Array<Equipment>) => {
-          if (equipments.length > 0 || (this.isEquipmentRemoveable(slot) && itemPresent) || locked) {
+          if (equipments.length > 0 || itemPresent || locked) {
             const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
               data: {
                 slot: slot,
                 equipments: equipments,
-                removeable: (this.isEquipmentRemoveable(slot) && itemPresent),
+                removeable: itemPresent,
                 locked: locked,
               }
             }).afterClosed().subscribe((equipment: Equipment) => {
