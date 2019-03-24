@@ -74,11 +74,16 @@ export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
   2318, // swords, lswords, katanas, spears, claws
   2950, // swords, lswords, katanas, spears, claws
   2683, // staves
+  3081, // staves
   2319, // rods
+  3080, // rods
   2620, // bows
   2694, // hammers
+  3155, // hammers
   2791, // harps
+  3156, // harps
   2463, // whips
+  3082, // whips
   2464, // throwing weapons
   2951, // throwing weapons
   2320, // guns and axes
@@ -89,14 +94,24 @@ export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
 export const EQUIPMENT_EXCLUSIONS: Array<EquipmentExclusion> = [
   new EquipmentExclusion(1424, [1425]), // adventurer III
   new EquipmentExclusion(1425, [1424]), // adventurer IV
+  new EquipmentExclusion(2694, [3155]), // life / arms seal 3
+  new EquipmentExclusion(3155, [2694]), // life / arms seal 4
   new EquipmentExclusion(2318, [2950]), // life / power seal 3
   new EquipmentExclusion(2950, [2318]), // life / power seal 4
   new EquipmentExclusion(2464, [2951]), // life / skill seal 3
   new EquipmentExclusion(2951, [2464]), // life / skill seal 4
+  new EquipmentExclusion(2791, [3156]), // life / soul seal 3
+  new EquipmentExclusion(3156, [2791]), // life / soul seal 4
+  new EquipmentExclusion(2319, [3080]), // skill / magic seal 3
+  new EquipmentExclusion(3080, [2319]), // skill / magic seal 4
+  new EquipmentExclusion(2683, [3081]), // skill / soul seal 3
+  new EquipmentExclusion(3081, [2683]), // skill / soul seal 4
   new EquipmentExclusion(2320, [2952]), // ATK 30%
   new EquipmentExclusion(2952, [2320]), // ATK 40%
   new EquipmentExclusion(2621, [2953]), // HP +30%
   new EquipmentExclusion(2953, [2621]), // HP +40%
+  new EquipmentExclusion(2463, [3082]), // PM 30%
+  new EquipmentExclusion(3082, [2463]), // PM 40%
 ];
 export const IFRIT_KILLERS: Esper = getIfritWithKillers();
 export const IFRIT_STATS_BOOST: Esper = getIfritWithStatsBoost();
