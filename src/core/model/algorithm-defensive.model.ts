@@ -10,11 +10,11 @@ export class AlgorithmDefensive implements Algorithm {
   public isSupportPhysicalMitigating = false;
   public supportPhysicalMitigation = 30;
   public isSupportMagicalMitigating = false;
-  public supportMagicalMitigation = 25;
+  public supportMagicalMitigation = 30;
   public isPhysicalCovering = false;
   public isMagicalCovering = false;
   public isSupportBuffing = true;
-  public supportBuff = 100;
+  public supportBuff = 150;
   private isInitialized = false;
 
   public init(unit: Unit) {

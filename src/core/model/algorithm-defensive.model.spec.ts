@@ -24,16 +24,16 @@ describe('AlgorithmDefensive', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultDefensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(20);
+    expect(result.result).toBeCloseTo(25.357);
     expect(result['hp']).toBeCloseTo(10000);
     expect(result['def']).toBeCloseTo(500);
     expect(result['spr']).toBeCloseTo(300);
-    expect(result['buffedDef']).toBeCloseTo(1000);
-    expect(result['buffedSpr']).toBeCloseTo(800);
-    expect(result['basePhysicalEffectiveHp']).toBeCloseTo(10000000);
-    expect(result['baseMagicalEffectiveHp']).toBeCloseTo(8000000);
+    expect(result['buffedDef']).toBeCloseTo(1250);
+    expect(result['buffedSpr']).toBeCloseTo(1050);
+    expect(result['basePhysicalEffectiveHp']).toBeCloseTo(12500000);
+    expect(result['baseMagicalEffectiveHp']).toBeCloseTo(10500000);
     expect(result['effectivePhysicalCover']).toBeCloseTo(50);
-    expect(result['physicalEffectiveHp']).toBeCloseTo(28571428.571);
-    expect(result['magicalEffectiveHp']).toBeCloseTo(11428571.428);
+    expect(result['physicalEffectiveHp']).toBeCloseTo(35714285.714);
+    expect(result['magicalEffectiveHp']).toBeCloseTo(15000000);
   });
 });

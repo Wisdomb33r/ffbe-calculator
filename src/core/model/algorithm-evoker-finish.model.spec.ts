@@ -67,11 +67,11 @@ describe('AlgorithmFinish', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(47.37);
+    expect(result.result).toBeCloseTo(60.405);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn.mag).toEqual(500);
-      expect(turn.buffed_mag).toEqual(700);
+      expect(turn.buffed_mag).toEqual(800);
       expect(turn.combosIncrement).toBeCloseTo(4.0);
       expect(turn.levelCorrection).toBeCloseTo(2.2);
     });
@@ -79,12 +79,12 @@ describe('AlgorithmFinish', () => {
     const turn1 = result['turnDamages'][0];
     expect(turn1['evo']).toEqual(50);
     expect(turn1['spr']).toEqual(400);
-    expect(turn1['buffed_spr']).toEqual(500);
+    expect(turn1['buffed_spr']).toEqual(550);
     expect(turn1['killerPassive']).toBeCloseTo(0);
     expect(turn1['power']).toBeCloseTo(8000);
-    expect(turn1['magicalDamages']).toBeCloseTo(97680000);
-    expect(turn1['magicalKillerDamages']).toBeCloseTo(97680000);
-    expect(turn1['magicalElementalDamages']).toBeCloseTo(97680000);
+    expect(turn1['magicalDamages']).toBeCloseTo(124410000);
+    expect(turn1['magicalKillerDamages']).toBeCloseTo(124410000);
+    expect(turn1['magicalElementalDamages']).toBeCloseTo(124410000);
     expect(turn1['hitsPower'].length).toEqual(5);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [800, 1600, 2400, 2400, 800]);
 
@@ -94,9 +94,9 @@ describe('AlgorithmFinish', () => {
     expect(turn2['buffed_spr']).toBeUndefined();
     expect(turn2['killerPassive']).toBeCloseTo(100);
     expect(turn2['power']).toBeCloseTo(400);
-    expect(turn2['magicalDamages']).toBeCloseTo(4312000);
-    expect(turn2['magicalKillerDamages']).toBeCloseTo(4743200);
-    expect(turn2['magicalElementalDamages']).toBeCloseTo(4743200);
+    expect(turn2['magicalDamages']).toBeCloseTo(5632000);
+    expect(turn2['magicalKillerDamages']).toBeCloseTo(6195200);
+    expect(turn2['magicalElementalDamages']).toBeCloseTo(6195200);
     expect(turn2['hitsPower'].length).toEqual(4);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [40, 80, 120, 160]);
   });

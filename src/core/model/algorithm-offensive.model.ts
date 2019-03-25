@@ -13,7 +13,7 @@ export abstract class AlgorithmOffensive implements Algorithm {
   public isSparkChain = false;
   public isSupportBuffing = true;
   public isSupportBreakingResistances = true;
-  public supportBuff = 100;
+  public supportBuff = 150;
   public opponentDef = 1000000;
   public opponentSpr = 1000000;
   public supportResistsBreak: Array<number> = [-50, -50, -50, -50, -50, -50, -50, -50];
