@@ -118,6 +118,10 @@ export class Unit {
     return this.selectedBuild.getEsperDamageModifier();
   }
 
+  public emptySlot(slot: string) {
+    this.selectedBuild.emptySlot(slot);
+  }
+
   public computeRealStats() {
     this.stats.defineEquipmentsStats(
       this.selectedBuild.equipments.sumEquipmentStat('hp'),

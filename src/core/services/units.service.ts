@@ -27,7 +27,6 @@ export class UnitsService {
   public hybridFinishers: Array<Unit>;
   public defenders: Array<Unit>;
   public selectedUnit: Unit;
-  public rankFilter = 7;
   public stmrExclusion = false;
 
   constructor(private databaseClient: DatabaseClientService) {
@@ -41,10 +40,6 @@ export class UnitsService {
       });
   }
 
-  /**
-   * @Deprecated : To remove in version 4 of the tool when all 6 stars units builds will be dead.
-   * @param rankFilter
-   */
   public filterByRank(rankFilter: number) {
     this.physicalChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
       u.builds.filter((b: Build) => b.algorithmId === 1).length > 0);
@@ -64,7 +59,7 @@ export class UnitsService {
 
   public equipInSlot(slot: string, equipment: Equipment) {
     if (equipment.id === -1) {
-      this.selectedUnit.selectedBuild.equipments[slot] = null;
+      this.selectedUnit.emptySlot(slot);
     } else {
       this.unequipWeaponEnhancementsIfWeaponTypeChange(slot, equipment);
       if (slot === 'right_hand' && equipment.isTwoHanded()) {

@@ -117,6 +117,21 @@ export class EquipmentSet {
     }
   }
 
+  public removeAllFromCategory(category: number) {
+    if (this.right_hand && this.right_hand.category === category) {
+      this.right_hand = null;
+    }
+    if (this.left_hand && this.left_hand.category === category) {
+      this.left_hand = null;
+    }
+    if (this.head && this.head.category === category) {
+      this.head = null;
+    }
+    if (this.body && this.body.category === category) {
+      this.body = null;
+    }
+  }
+
   public sumEquipmentStat(statName: string): number {
     let result = 0;
     result += this.right_hand ? this.right_hand[statName] : 0;
@@ -263,6 +278,19 @@ export class EquipmentSet {
       elements.push(...this.left_hand.elements.filter(element => elements.indexOf(element) === -1));
     }
     return elements;
+  }
+
+  public emptySlot(slot: string) {
+    if (this[slot]) {
+      const extraEquipmentTypeFromRemovedItem = this[slot].extra_equip;
+      this[slot] = null;
+      if (extraEquipmentTypeFromRemovedItem) {
+        const extraEquipmentTypes: Array<number> = this.getExtraEquipmentTypes();
+        if (!extraEquipmentTypes.find((equipmentType: number) => equipmentType === extraEquipmentTypeFromRemovedItem)) {
+          this.removeAllFromCategory(extraEquipmentTypeFromRemovedItem);
+        }
+      }
+    }
   }
 
   public getExtraEquipmentTypes(): Array<number> {

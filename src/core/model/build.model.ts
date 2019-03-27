@@ -135,4 +135,8 @@ export class Build {
   public getEsperDamageModifier(): number {
     return this.esper.damage_modifier + this.equipments.getEsperDamageModifier(this.esper.id);
   }
+
+  public emptySlot(slot: string) {
+    this.equipments.emptySlot(slot);
+  }
 }
