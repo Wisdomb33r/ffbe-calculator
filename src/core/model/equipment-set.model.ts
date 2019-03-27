@@ -1,6 +1,7 @@
 import {Equipment} from './equipment.model';
 import {ConditionalPassive} from './conditional-passive.model';
 import {isNullOrUndefined} from 'util';
+import {SPECIAL_WEAPON_ENHANCEMENTS} from '../calculator-constants';
 
 export class EquipmentSet {
   // from backend
@@ -117,7 +118,7 @@ export class EquipmentSet {
     }
   }
 
-  public removeAllFromCategory(category: number) {
+  private removeAllFromCategory(category: number) {
     if (this.right_hand && this.right_hand.category === category) {
       this.right_hand = null;
     }
@@ -129,6 +130,19 @@ export class EquipmentSet {
     }
     if (this.body && this.body.category === category) {
       this.body = null;
+    }
+  }
+
+  private removeWeaponEnhancementsFromSlot(slot: string) {
+    if (slot === 'right_hand') {
+      this.rh_trait1 = null;
+      this.rh_trait2 = null;
+      this.rh_trait3 = null;
+    }
+    if (slot === 'left_hand') {
+      this.lh_trait1 = null;
+      this.lh_trait2 = null;
+      this.lh_trait3 = null;
     }
   }
 
@@ -289,6 +303,50 @@ export class EquipmentSet {
         if (!extraEquipmentTypes.find((equipmentType: number) => equipmentType === extraEquipmentTypeFromRemovedItem)) {
           this.removeAllFromCategory(extraEquipmentTypeFromRemovedItem);
         }
+      }
+    }
+    this.removeWeaponEnhancementsFromSlot(slot);
+  }
+
+  public equipInSlot(slot: string, equipment: Equipment) {
+    this.removeWeaponSpecialEnhancementsIfWeaponTypeChange(slot, equipment);
+    this.removeWeaponEnhancementsIfWeaponCannotBeEnhanced(slot, equipment);
+    if (slot === 'right_hand' && equipment.isTwoHanded()) {
+      this.emptySlot('left_hand');
+    }
+    this[slot] = equipment;
+  }
+
+  private removeWeaponEnhancementsIfWeaponCannotBeEnhanced(slot: string, equipment: Equipment) {
+    if (slot === 'right_hand' && !equipment.isWeaponTraitPossible()) {
+      this.removeWeaponEnhancementsFromSlot('right_hand');
+    }
+    if (slot === 'left_hand' && !equipment.isWeaponTraitPossible()) {
+      this.removeWeaponEnhancementsFromSlot('left_hand');
+    }
+  }
+
+  private removeWeaponSpecialEnhancementsIfWeaponTypeChange(slot: string, equipment: Equipment) {
+    if (this.right_hand && slot === 'right_hand' && equipment.category !== this.right_hand.category) {
+      if (this.rh_trait1 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.rh_trait1.id) > -1) {
+        this.rh_trait1 = null;
+      }
+      if (this.rh_trait2 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.rh_trait2.id) > -1) {
+        this.rh_trait2 = null;
+      }
+      if (this.rh_trait3 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.rh_trait3.id) > -1) {
+        this.rh_trait3 = null;
+      }
+    }
+    if (this.left_hand && slot === 'left_hand' && equipment.category !== this.left_hand.category) {
+      if (this.lh_trait1 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.lh_trait1.id) > -1) {
+        this.lh_trait1 = null;
+      }
+      if (this.lh_trait2 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.lh_trait2.id) > -1) {
+        this.lh_trait2 = null;
+      }
+      if (this.lh_trait3 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.lh_trait3.id) > -1) {
+        this.lh_trait3 = null;
       }
     }
   }

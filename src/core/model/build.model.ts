@@ -7,6 +7,7 @@ import {Unit} from './unit.model';
 import {EsperFactory} from './esper-factory.model';
 import {Esper} from './esper.model';
 import {KillerPassives} from './killer-passives.model';
+import {Equipment} from './equipment.model';
 
 export class Build {
   // from backend
@@ -138,5 +139,9 @@ export class Build {
 
   public emptySlot(slot: string) {
     this.equipments.emptySlot(slot);
+  }
+
+  public equipInSlot(slot: string, equipment: Equipment) {
+    this.equipments.equipInSlot(slot, equipment);
   }
 }
