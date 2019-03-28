@@ -63,7 +63,7 @@ export class UnitsService {
     } else {
       this.selectedUnit.equipInSlot(slot, equipment);
       if (this.getEquipments().left_hand && !this.checkDwForSecondWeapon(this.getEquipments().left_hand, 'left_hand')) {
-        this.getEquipments().left_hand = null;
+        this.selectedUnit.emptySlot('left_hand');
       }
     }
   }

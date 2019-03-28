@@ -299,22 +299,30 @@ export class EquipmentSet {
       const extraEquipmentTypeFromRemovedItem = this[slot].extra_equip;
       this[slot] = null;
       if (extraEquipmentTypeFromRemovedItem) {
-        const extraEquipmentTypes: Array<number> = this.getExtraEquipmentTypes();
-        if (!extraEquipmentTypes.find((equipmentType: number) => equipmentType === extraEquipmentTypeFromRemovedItem)) {
-          this.removeAllFromCategory(extraEquipmentTypeFromRemovedItem);
-        }
+        this.removeItemsOfCategoryIfNotWearable(extraEquipmentTypeFromRemovedItem);
       }
     }
     this.removeWeaponEnhancementsFromSlot(slot);
   }
 
+  private removeItemsOfCategoryIfNotWearable(category: number) {
+    const extraEquipmentTypes: Array<number> = this.getExtraEquipmentTypes();
+    if (!extraEquipmentTypes.find((equipmentType: number) => equipmentType === category)) {
+      this.removeAllFromCategory(category);
+    }
+  }
+
   public equipInSlot(slot: string, equipment: Equipment) {
+    const removedItem: Equipment = this[slot];
     this.removeWeaponSpecialEnhancementsIfWeaponTypeChange(slot, equipment);
     this.removeWeaponEnhancementsIfWeaponCannotBeEnhanced(slot, equipment);
     if (slot === 'right_hand' && equipment.isTwoHanded()) {
       this.emptySlot('left_hand');
     }
     this[slot] = equipment;
+    if (removedItem && removedItem.extra_equip) {
+      this.removeItemsOfCategoryIfNotWearable(removedItem.extra_equip);
+    }
   }
 
   private removeWeaponEnhancementsIfWeaponCannotBeEnhanced(slot: string, equipment: Equipment) {
