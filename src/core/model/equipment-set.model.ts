@@ -90,7 +90,7 @@ export class EquipmentSet {
       this.right_hand = null;
     }
     if (this.left_hand && !this.left_hand.locked) {
-      this.right_hand = null;
+      this.left_hand = null;
     }
     if (this.head && !this.head.locked) {
       this.head = null;
