@@ -121,9 +121,11 @@ export class EquipmentSet {
   private removeAllFromCategory(category: number) {
     if (this.right_hand && this.right_hand.category === category) {
       this.right_hand = null;
+      this.removeWeaponEnhancementsFromSlot('right_hand');
     }
     if (this.left_hand && this.left_hand.category === category) {
       this.left_hand = null;
+      this.removeWeaponEnhancementsFromSlot('left_hand');
     }
     if (this.head && this.head.category === category) {
       this.head = null;
