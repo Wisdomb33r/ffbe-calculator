@@ -2,6 +2,7 @@ import {UnitStats} from './unit-stats.model';
 import {Build} from './build.model';
 import {ConditionalPassive} from './conditional-passive.model';
 import {isNullOrUndefined} from 'util';
+import {Equipment} from './equipment.model';
 
 export class Unit {
   // from backend
@@ -116,6 +117,14 @@ export class Unit {
 
   public getEsperDamageModifier() {
     return this.selectedBuild.getEsperDamageModifier();
+  }
+
+  public emptySlot(slot: string) {
+    this.selectedBuild.emptySlot(slot);
+  }
+
+  public equipInSlot(slot: string, equipment: Equipment) {
+    this.selectedBuild.equipInSlot(slot, equipment);
   }
 
   public computeRealStats() {

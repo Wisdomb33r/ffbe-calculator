@@ -1,6 +1,7 @@
 import {Equipment} from './equipment.model';
 import {ConditionalPassive} from './conditional-passive.model';
 import {isNullOrUndefined} from 'util';
+import {SPECIAL_WEAPON_ENHANCEMENTS} from '../calculator-constants';
 
 export class EquipmentSet {
   // from backend
@@ -114,6 +115,36 @@ export class EquipmentSet {
     }
     if (this.materia4 && !this.materia4.locked) {
       this.materia4 = null;
+    }
+  }
+
+  private removeAllFromCategory(category: number) {
+    if (this.right_hand && this.right_hand.category === category) {
+      this.right_hand = null;
+      this.removeWeaponEnhancementsFromSlot('right_hand');
+    }
+    if (this.left_hand && this.left_hand.category === category) {
+      this.left_hand = null;
+      this.removeWeaponEnhancementsFromSlot('left_hand');
+    }
+    if (this.head && this.head.category === category) {
+      this.head = null;
+    }
+    if (this.body && this.body.category === category) {
+      this.body = null;
+    }
+  }
+
+  private removeWeaponEnhancementsFromSlot(slot: string) {
+    if (slot === 'right_hand') {
+      this.rh_trait1 = null;
+      this.rh_trait2 = null;
+      this.rh_trait3 = null;
+    }
+    if (slot === 'left_hand') {
+      this.lh_trait1 = null;
+      this.lh_trait2 = null;
+      this.lh_trait3 = null;
     }
   }
 
@@ -263,6 +294,71 @@ export class EquipmentSet {
       elements.push(...this.left_hand.elements.filter(element => elements.indexOf(element) === -1));
     }
     return elements;
+  }
+
+  public emptySlot(slot: string) {
+    if (this[slot]) {
+      const extraEquipmentTypeFromRemovedItem = this[slot].extra_equip;
+      this[slot] = null;
+      if (extraEquipmentTypeFromRemovedItem) {
+        this.removeItemsOfCategoryIfNotWearable(extraEquipmentTypeFromRemovedItem);
+      }
+    }
+    this.removeWeaponEnhancementsFromSlot(slot);
+  }
+
+  private removeItemsOfCategoryIfNotWearable(category: number) {
+    const extraEquipmentTypes: Array<number> = this.getExtraEquipmentTypes();
+    if (!extraEquipmentTypes.find((equipmentType: number) => equipmentType === category)) {
+      this.removeAllFromCategory(category);
+    }
+  }
+
+  public equipInSlot(slot: string, equipment: Equipment) {
+    const removedItem: Equipment = this[slot];
+    this.removeWeaponSpecialEnhancementsIfWeaponTypeChange(slot, equipment);
+    this.removeWeaponEnhancementsIfWeaponCannotBeEnhanced(slot, equipment);
+    if (slot === 'right_hand' && equipment.isTwoHanded()) {
+      this.emptySlot('left_hand');
+    }
+    this[slot] = equipment;
+    if (removedItem && removedItem.extra_equip) {
+      this.removeItemsOfCategoryIfNotWearable(removedItem.extra_equip);
+    }
+  }
+
+  private removeWeaponEnhancementsIfWeaponCannotBeEnhanced(slot: string, equipment: Equipment) {
+    if (slot === 'right_hand' && !equipment.isWeaponTraitPossible()) {
+      this.removeWeaponEnhancementsFromSlot('right_hand');
+    }
+    if (slot === 'left_hand' && !equipment.isWeaponTraitPossible()) {
+      this.removeWeaponEnhancementsFromSlot('left_hand');
+    }
+  }
+
+  private removeWeaponSpecialEnhancementsIfWeaponTypeChange(slot: string, equipment: Equipment) {
+    if (this.right_hand && slot === 'right_hand' && equipment.category !== this.right_hand.category) {
+      if (this.rh_trait1 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.rh_trait1.id) > -1) {
+        this.rh_trait1 = null;
+      }
+      if (this.rh_trait2 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.rh_trait2.id) > -1) {
+        this.rh_trait2 = null;
+      }
+      if (this.rh_trait3 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.rh_trait3.id) > -1) {
+        this.rh_trait3 = null;
+      }
+    }
+    if (this.left_hand && slot === 'left_hand' && equipment.category !== this.left_hand.category) {
+      if (this.lh_trait1 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.lh_trait1.id) > -1) {
+        this.lh_trait1 = null;
+      }
+      if (this.lh_trait2 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.lh_trait2.id) > -1) {
+        this.lh_trait2 = null;
+      }
+      if (this.lh_trait3 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.lh_trait3.id) > -1) {
+        this.lh_trait3 = null;
+      }
+    }
   }
 
   public getExtraEquipmentTypes(): Array<number> {
