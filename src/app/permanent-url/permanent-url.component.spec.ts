@@ -118,7 +118,7 @@ describe('PermanentUrlComponent', () => {
     component.unit = unit;
 
     // WHEN
-    component.ngOnChanges();
+    component.ngDoCheck();
 
     // THEN
     expect(component.url).toBe('https://www.final-fantasy.ch/ffbe/calculator/link/unit/1234;build=999');

@@ -4,10 +4,11 @@ import {UnitsService} from '../../core/services/units.service';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {Unit} from '../../core/model/unit.model';
 import {Equipment} from '../../core/model/equipment.model';
-import {ESPER_BUILDS} from '../../core/calculator-constants';
+import {ESPER_BUILDS, MONSTER_TYPES} from '../../core/calculator-constants';
 import {Esper} from '../../core/model/esper.model';
 import {forkJoin, of, Subscription, throwError} from 'rxjs';
 import {switchMap, tap} from 'rxjs/operators';
+import {AlgorithmOffensive} from '../../core/model/algorithm-offensive.model';
 
 @Component({
   selector: 'app-external-link',
@@ -39,6 +40,33 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
   private idType: string;
   public currentStep = 1;
 
+  // algorithm parameters
+  private killers: string;
+  private type1: string;
+  private type2: string;
+  private spark: string;
+  private buffing: string;
+  private breaks: string;
+  private buffs: number;
+  private enemyDef: number;
+  private enemySpr: number;
+  private enemyResist0: number;
+  private enemyResist1: number;
+  private enemyResist2: number;
+  private enemyResist3: number;
+  private enemyResist4: number;
+  private enemyResist5: number;
+  private enemyResist6: number;
+  private enemyResist7: number;
+  private breakResist0: number;
+  private breakResist1: number;
+  private breakResist2: number;
+  private breakResist3: number;
+  private breakResist4: number;
+  private breakResist5: number;
+  private breakResist6: number;
+  private breakResist7: number;
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private unitsService: UnitsService,
@@ -69,6 +97,33 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         this.esper = +params.get('esper');
         this.idType = params.get('id_type');
 
+        // algorithm configuration
+        this.killers = params.get('killers');
+        this.type1 = params.get('type1');
+        this.type2 = params.get('type2');
+        this.spark = params.get('spark');
+        this.buffing = params.get('buffing');
+        this.breaks = params.get('breaks');
+        this.buffs = +params.get('buffs');
+        this.enemyDef = +params.get('enemyDef');
+        this.enemySpr = +params.get('enemySpr');
+        this.enemyResist0 = +params.get('enemyResist0');
+        this.enemyResist1 = +params.get('enemyResist1');
+        this.enemyResist2 = +params.get('enemyResist2');
+        this.enemyResist3 = +params.get('enemyResist3');
+        this.enemyResist4 = +params.get('enemyResist4');
+        this.enemyResist5 = +params.get('enemyResist5');
+        this.enemyResist6 = +params.get('enemyResist6');
+        this.enemyResist7 = +params.get('enemyResist7');
+        this.breakResist0 = +params.get('breakResist0');
+        this.breakResist1 = +params.get('breakResist1');
+        this.breakResist2 = +params.get('breakResist2');
+        this.breakResist3 = +params.get('breakResist3');
+        this.breakResist4 = +params.get('breakResist4');
+        this.breakResist5 = +params.get('breakResist5');
+        this.breakResist6 = +params.get('breakResist6');
+        this.breakResist7 = +params.get('breakResist7');
+
         return this.databaseClient.getUnitById$(this.unit);
       }),
       switchMap((unit: Unit) => {
@@ -88,6 +143,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           if (this.build) {
             this.unitsService.selectedUnit.selectBuild(this.build);
           }
+          this.restoreAlgorithmConfiguration();
           this.unitsService.selectedUnit.selectedBuild.equipments.removeAllNonLocked();
 
           const observables = [];
@@ -243,6 +299,49 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
       }
       if (equipment && (!this.unitsService.getEquipments()[slot] || !this.unitsService.getEquipments()[slot].locked)) {
         this.unitsService.equipInSlot(slot, equipment);
+      }
+    }
+  }
+
+  private restoreAlgorithmConfiguration() {
+    if (this.unitsService.selectedUnit.selectedBuild.algorithm instanceof AlgorithmOffensive) {
+      const algorithm: AlgorithmOffensive = this.unitsService.selectedUnit.selectedBuild.algorithm as AlgorithmOffensive;
+      if (this.killers === 'false') {
+        algorithm.isKillerActive = false;
+      }
+      if (this.type1 && MONSTER_TYPES.find(type => type === this.type1)) {
+        algorithm.opponentKillerType = this.type1;
+      }
+      if (this.type2 && MONSTER_TYPES.find(type => type === this.type2)) {
+        algorithm.opponentKillerType2 = this.type2;
+      }
+      if (this.spark === 'true') {
+        algorithm.isSparkChain = true;
+      }
+      if (this.buffing === 'false') {
+        algorithm.isSupportBuffing = false;
+      }
+      if (this.breaks === 'false') {
+        algorithm.isSupportBreakingResistances = false;
+      }
+      if (this.buffs > 0 && this.buffs <= 200) {
+        algorithm.supportBuff = this.buffs;
+      }
+      if (this.enemyDef > 0 && this.enemyDef <= 1000000) {
+        algorithm.opponentDef = this.enemyDef;
+      }
+      if (this.enemySpr > 0 && this.enemySpr <= 1000000) {
+        algorithm.opponentSpr = this.enemySpr;
+      }
+      for (let i = 0; i < 8; i++) {
+        if (this['enemyResist' + i] >= -1000 && this['enemyResist' + i] <= 300) {
+          algorithm.opponentResistances[i] = this['enemyResist' + i];
+        }
+      }
+      for (let i = 0; i < 8; i++) {
+        if (this['breakResist' + i] >= -120 && this['breakResist' + i] < 0) {
+          algorithm.supportResistsBreak[i] = this['breakResist' + i];
+        }
       }
     }
   }
