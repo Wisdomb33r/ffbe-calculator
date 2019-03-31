@@ -7,7 +7,7 @@ export const TDW_LIMIT_CAP = 100;
 export const DH_LIMIT_CAP = 300;
 export const PASSIVE_LIMIT_CAP = 400;
 export const EVO_LIMIT_CAP = 300;
-export const MONSTER_TYPES = [
+export const MONSTER_TYPES: Array<string> = [
   'dragon',
   'insect',
   'fairy',
