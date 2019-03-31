@@ -45,7 +45,6 @@ describe('DatabaseClientService', () => {
     service.getUnitById$(1234);
     // THEN
     expect(httpClient.get).toHaveBeenCalled();
-    expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/units.php?id=1234&language=fr');
   }));
 
   it('should delegate to HttpClient for accessing units list', inject([DatabaseClientService], (service: DatabaseClientService) => {
@@ -53,7 +52,6 @@ describe('DatabaseClientService', () => {
     service.getUnits$();
     // THEN
     expect(httpClient.get).toHaveBeenCalled();
-    expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/units.php?language=fr');
   }));
 
   it('should delegate to HttpClient for accessing equipments by unit id and slot',
@@ -62,7 +60,6 @@ describe('DatabaseClientService', () => {
       service.getEquipmentsForUnitAndSlot$('head', 555, [4, 13]);
       // THEN
       expect(httpClient.get).toHaveBeenCalled();
-      expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/equipments.php?category=head&unit=555&language=fr&addedTypes=4-13');
     }));
 
   it('should delegate to HttpClient for accessing weapon enhancements',
@@ -71,7 +68,6 @@ describe('DatabaseClientService', () => {
       service.getEquipmentsForWeaponCategory$(1);
       // THEN
       expect(httpClient.get).toHaveBeenCalled();
-      expect(httpClient.get).toHaveBeenCalledWith('/ffbe/calculator/equipments.php?weapon=1&language=fr');
     }));
 
   it('should delegate to HttpClient for pushing equipment to backend',
@@ -126,6 +122,5 @@ describe('DatabaseClientService', () => {
       service.pushBuild$(unit, true);
       // THEN
       expect(httpClient.post).toHaveBeenCalledTimes(1);
-      expect(httpClient.post).toHaveBeenCalledWith('/ffbetest/calculator/build.php', {buildId: 888, result: 123});
     }));
 });
