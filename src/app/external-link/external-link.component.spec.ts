@@ -16,7 +16,7 @@ const unitFake = JSON.parse(`{
       "stats": {"hp":3000,"mp":200,"atk":300,"mag":400,"def":500,"spr":600},
       "builds":[
         {
-          "algorithmId":8,
+          "algorithmId":4,
           "equipments":{
             "right_hand":{"id":1},
             "left_hand":{"id":10},
@@ -26,7 +26,21 @@ const unitFake = JSON.parse(`{
             "accessory2":{"id":5},
             "materia1":{"id":6},
             "materia2":{"id":7}
-          }
+          },
+          "skills": [
+            {
+              "category":6,
+              "power":500,
+              "hits":2,"frames":"20 200","damages":"50 50","damages_type":"physical",
+              "isTurnCounting":true
+            },
+            {
+              "category":6,
+              "power":1000,
+              "hits":1,"frames":"50","damages":"100","damages_type":"physical",
+              "isTurnCounting":true
+            }
+          ]
         }
       ]
     }`);
@@ -80,6 +94,32 @@ describe('ExternalLinkComponent', () => {
               lh_t1: 14,
               lh_t2: 15,
               lh_t3: 16,
+              killers: 'false',
+              type1: 'dragon',
+              type2: 'human',
+              spark: 'true',
+              buffing: 'false',
+              breaks: 'false',
+              buffs: 80,
+              enemyDef: 555,
+              enemySpr: 777,
+              enemyResist0: 11,
+              enemyResist1: 22,
+              enemyResist2: 33,
+              enemyResist3: 44,
+              enemyResist4: 55,
+              enemyResist5: 66,
+              enemyResist6: 77,
+              enemyResist7: 88,
+              breakResist0: -10,
+              breakResist1: -20,
+              breakResist2: -30,
+              breakResist3: -40,
+              breakResist4: -50,
+              breakResist5: -60,
+              breakResist6: -70,
+              breakResist7: -80,
+              skillcombo1: '3.0',
             }))
           }
         },
@@ -148,6 +188,22 @@ describe('ExternalLinkComponent', () => {
     expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('lh_trait1', lh_trait1);
     expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('lh_trait2', lh_trait2);
     expect(unitServiceMock.equipInSlot).toHaveBeenCalledWith('lh_trait3', lh_trait3);
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['isKillerActive']).toBeDefined();
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['isKillerActive']).toBeFalsy();
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['opponentKillerType']).toEqual('dragon');
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['opponentKillerType2']).toEqual('human');
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['isSparkChain']).toBeTruthy();
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['isSupportBuffing']).toBeDefined();
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['isSupportBuffing']).toBeFalsy();
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['isSupportBreakingResistances']).toBeDefined();
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['isSupportBreakingResistances']).toBeFalsy();
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['supportBuff']).toEqual(80);
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['opponentDef']).toEqual(555);
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['opponentSpr']).toEqual(777);
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['opponentResistances']).toEqual([11, 22, 33, 44, 55, 66, 77, 88]);
+    expect(unitServiceMock.selectedUnit.selectedBuild.algorithm['supportResistsBreak']).toEqual([-10, -20, -30, -40, -50, -60, -70, -80]);
+    expect(unitServiceMock.selectedUnit.selectedBuild.skills[0].chainCombo).toEqual('4.0');
+    expect(unitServiceMock.selectedUnit.selectedBuild.skills[1].chainCombo).toEqual('3.0');
     expect(component.currentStep).toEqual(6);
     expect(routerMock.navigate).toHaveBeenCalledTimes(1);
     expect(routerMock.navigate).toHaveBeenCalledWith(['/']);

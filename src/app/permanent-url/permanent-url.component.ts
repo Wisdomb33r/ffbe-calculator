@@ -3,6 +3,7 @@ import {Unit} from '../../core/model/unit.model';
 import {Equipment} from '../../core/model/equipment.model';
 import {Esper} from '../../core/model/esper.model';
 import {AlgorithmOffensive} from '../../core/model/algorithm-offensive.model';
+import {AlgorithmFinish} from '../../core/model/algorithm-finish.model';
 
 @Component({
   selector: 'app-permanent-url',
@@ -138,6 +139,13 @@ export class PermanentUrlComponent implements OnInit, DoCheck {
       for (let i = 0; i < 8; i++) {
         if (algorithm.supportResistsBreak[i] !== -50) {
           url += ';breakResist' + i + '=' + algorithm.supportResistsBreak[i];
+        }
+      }
+    }
+    if (this.unit.selectedBuild.algorithm instanceof AlgorithmFinish) {
+      for (let i = 0; i < this.unit.selectedBuild.skills.length; i++) {
+        if (+this.unit.selectedBuild.skills[i].chainCombo < 3.6) {
+          url += ';skillcombo' + i + '=' + this.unit.selectedBuild.skills[i].chainCombo;
         }
       }
     }

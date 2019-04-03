@@ -9,6 +9,8 @@ import {Esper} from '../../core/model/esper.model';
 import {forkJoin, of, Subscription, throwError} from 'rxjs';
 import {switchMap, tap} from 'rxjs/operators';
 import {AlgorithmOffensive} from '../../core/model/algorithm-offensive.model';
+import {AlgorithmFinish} from '../../core/model/algorithm-finish.model';
+import {Skill} from '../../core/model/skill.model';
 
 @Component({
   selector: 'app-external-link',
@@ -66,6 +68,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
   private breakResist5: number;
   private breakResist6: number;
   private breakResist7: number;
+  private skillcombos: Array<string> = [];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -123,6 +126,11 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         this.breakResist5 = +params.get('breakResist5');
         this.breakResist6 = +params.get('breakResist6');
         this.breakResist7 = +params.get('breakResist7');
+        for (let i = 0; i < 20; i++) {
+          if (params.has('skillcombo' + i)) {
+            this.skillcombos[i] = params.get('skillcombo' + i);
+          }
+        }
 
         return this.databaseClient.getUnitById$(this.unit);
       }),
@@ -342,6 +350,16 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         if (this['breakResist' + i] >= -120 && this['breakResist' + i] < 0) {
           algorithm.supportResistsBreak[i] = this['breakResist' + i];
         }
+      }
+    }
+    if (this.unitsService.selectedUnit.selectedBuild.algorithm instanceof AlgorithmFinish) {
+      if (this.skillcombos && this.skillcombos.length) {
+        const skills: Array<Skill> = this.unitsService.selectedUnit.selectedBuild.skills;
+        this.skillcombos.forEach((skillcombo: string, index: number) => {
+          if (skills[index]) {
+            skills[index].chainCombo = skillcombo;
+          }
+        });
       }
     }
   }
