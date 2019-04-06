@@ -6,7 +6,7 @@ h2 {
   padding: 2px;
   border-top: 1px solid #6f96bd;
   border-bottom: 1px solid #6f96bd;
-  height: 16px;
+  min-height: 16px;
   line-height: 16px;
 }
 
