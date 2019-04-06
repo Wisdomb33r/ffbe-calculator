@@ -345,6 +345,7 @@ class Build {
   public $magical_cover;
   public $physical_resistance;
   public $magical_resistance;
+  public $isStartPhaseReady;
   public $physical_killers;
   public $magical_killers;
   public $equipments;
@@ -365,6 +366,7 @@ class Build {
       $equipments_filter ['build'] = $brex_build->id;
       $brex_equipments = brex_build_equipment::findByRelation1N ( $equipments_filter );
       $this->equipments = new EquipmentSet ( $brex_build, $brex_equipments, $language );
+      $this->isStartPhaseReady = $brex_build->start_phase ? true : false;
       
       if ($brex_build->algorithm->id == 8) {
         $this->mitigation = $brex_build->mitigation;
@@ -404,6 +406,7 @@ class Skill {
   public $calculation_stat;
   public $isBreakingChain;
   public $isTurnCounting;
+  public $isStartPhase;
   public $chainCombo;
   public $resists_break;
   public $elements;
@@ -426,6 +429,7 @@ class Skill {
     $this->elements = $brex_skill->elements ? explode ( ',', $brex_skill->elements ) : null;
     $this->isBreakingChain = $brex_skill->breaking_chain ? true : false;
     $this->isTurnCounting = $brex_skill->not_turn_counting == 1 ? false : true;
+    $this->isStartPhase = $brex_skill->start_phase ? true : false;
     $this->chainCombo = $brex_skill->chain_combo;
     $this->atk_buff = $brex_skill->att_buff;
     $this->mag_buff = $brex_skill->mag_buff;
