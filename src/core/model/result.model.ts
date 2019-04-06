@@ -1,3 +1,3 @@
 export abstract class Result {
-  public result;
+  public result: number;
 }

@@ -11,7 +11,7 @@ import {EquipmentSet} from '../model/equipment-set.model';
 import {isNullOrUndefined} from 'util';
 import {Build} from '../model/build.model';
 import {Esper} from '../model/esper.model';
-import {EQUIPMENT_EXCLUSIONS, SPECIAL_WEAPON_ENHANCEMENTS} from '../calculator-constants';
+import {EQUIPMENT_EXCLUSIONS} from '../calculator-constants';
 import {Skill} from '../model/skill.model';
 import {EquipmentExclusion} from '../model/equipment-exclusion.model';
 
@@ -27,7 +27,6 @@ export class UnitsService {
   public hybridFinishers: Array<Unit>;
   public defenders: Array<Unit>;
   public selectedUnit: Unit;
-  public rankFilter = 7;
   public stmrExclusion = false;
 
   constructor(private databaseClient: DatabaseClientService) {
@@ -60,50 +59,11 @@ export class UnitsService {
 
   public equipInSlot(slot: string, equipment: Equipment) {
     if (equipment.id === -1) {
-      this.selectedUnit.selectedBuild.equipments[slot] = null;
+      this.selectedUnit.emptySlot(slot);
     } else {
-      this.unequipWeaponEnhancementsIfWeaponTypeChange(slot, equipment);
-      if (slot === 'right_hand' && equipment.isTwoHanded()) {
-        this.selectedUnit.selectedBuild.equipments['left_hand'] = null;
-      }
-      this.selectedUnit.selectedBuild.equipments[slot] = equipment;
+      this.selectedUnit.equipInSlot(slot, equipment);
       if (this.getEquipments().left_hand && !this.checkDwForSecondWeapon(this.getEquipments().left_hand, 'left_hand')) {
-        this.getEquipments().left_hand = null;
-      }
-    }
-    if (!this.getEquipments().right_hand || !this.getEquipments().right_hand.isWeaponTraitPossible()) {
-      this.getEquipments()['rh_trait1'] = null;
-      this.getEquipments()['rh_trait2'] = null;
-      this.getEquipments()['rh_trait3'] = null;
-    }
-    if (!this.getEquipments().left_hand || !this.getEquipments().left_hand.isWeaponTraitPossible()) {
-      this.getEquipments()['lh_trait1'] = null;
-      this.getEquipments()['lh_trait2'] = null;
-      this.getEquipments()['lh_trait3'] = null;
-    }
-  }
-
-  private unequipWeaponEnhancementsIfWeaponTypeChange(slot: string, equipment: Equipment) {
-    if (this.getEquipments().right_hand && slot === 'right_hand' && equipment.category !== this.getEquipments().right_hand.category) {
-      if (this.getEquipments().rh_trait1 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().rh_trait1.id) > -1) {
-        this.getEquipments().rh_trait1 = null;
-      }
-      if (this.getEquipments().rh_trait2 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().rh_trait2.id) > -1) {
-        this.getEquipments().rh_trait2 = null;
-      }
-      if (this.getEquipments().rh_trait3 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().rh_trait3.id) > -1) {
-        this.getEquipments().rh_trait3 = null;
-      }
-    }
-    if (this.getEquipments().left_hand && slot === 'left_hand' && equipment.category !== this.getEquipments().left_hand.category) {
-      if (this.getEquipments().lh_trait1 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().lh_trait1.id) > -1) {
-        this.getEquipments().lh_trait1 = null;
-      }
-      if (this.getEquipments().lh_trait2 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().lh_trait2.id) > -1) {
-        this.getEquipments().lh_trait2 = null;
-      }
-      if (this.getEquipments().lh_trait3 && SPECIAL_WEAPON_ENHANCEMENTS.indexOf(this.getEquipments().lh_trait3.id) > -1) {
-        this.getEquipments().lh_trait3 = null;
+        this.selectedUnit.emptySlot('left_hand');
       }
     }
   }
@@ -326,7 +286,7 @@ export class UnitsService {
   }
 
   private checkTwoHandedMainHandForOffhand(slot: string) {
-    return slot !== 'left_hand' || !this.getEquipments().right_hand.isTwoHanded();
+    return slot !== 'left_hand' || !this.getEquipments().right_hand || !this.getEquipments().right_hand.isTwoHanded();
   }
 
   private checkDwForSecondWeapon(item: Equipment, slot: string): boolean {
@@ -363,5 +323,9 @@ export class UnitsService {
 
   public getSkills(): Array<Skill> {
     return this.selectedUnit.selectedBuild.skills;
+  }
+
+  public getStartPhaseSkills(): Array<Skill> {
+    return this.selectedUnit.selectedBuild.startPhaseSkills;
   }
 }

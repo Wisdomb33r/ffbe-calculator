@@ -11,7 +11,7 @@ class DatabaseClientMock {
   }
 }
 
-function createMinimalUnit(): Unit {
+export function createMinimalUnit(): Unit {
   return new Unit(JSON.parse(`{
     "id": 9999,
     "stats": {},

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {forkJoin, Observable, of, throwError} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {forkJoin, Observable} from 'rxjs';
 import {Unit} from '../model/unit.model';
 import {Equipment} from '../model/equipment.model';
 import {TranslateService} from '@ngx-translate/core';
@@ -20,23 +20,23 @@ export class DatabaseClientService {
   }
 
   public getUnitById$(id: number): Observable<Unit> {
-    return this.http.get<Unit>(UNIT_PATH + '?id=' + id + '&language=' + this.translatorService.currentLang);
+    return this.http.get<Unit>(UNIT_PATH + '?id=' + id + '&language=' + this.translatorService.currentLang + '&time=' + Date.now());
   }
 
   public getUnits$(): Observable<Array<Unit>> {
-    return this.http.get<Array<Unit>>(UNIT_PATH + '?language=' + this.translatorService.currentLang);
+    return this.http.get<Array<Unit>>(UNIT_PATH + '?language=' + this.translatorService.currentLang + '&time=' + Date.now());
   }
 
   public getEquipmentsForUnitAndSlot$(slot: string, unitId: number, extraEquipmentTypes: Array<number>): Observable<Array<Equipment>> {
     return this.http.get<Array<Equipment>>(
       EQUIPMENT_PATH + '?category=' + slot + '&unit=' + unitId + '&language=' + this.translatorService.currentLang
-      + (extraEquipmentTypes && extraEquipmentTypes.length ? '&addedTypes=' + extraEquipmentTypes.join('-') : '')
+      + (extraEquipmentTypes && extraEquipmentTypes.length ? '&addedTypes=' + extraEquipmentTypes.join('-') : '') + '&time=' + Date.now()
     );
   }
 
   public getEquipmentsForWeaponCategory$(category: number): Observable<Array<Equipment>> {
     return this.http.get<Array<Equipment>>(
-      EQUIPMENT_PATH + '?weapon=' + category + '&language=' + this.translatorService.currentLang
+      EQUIPMENT_PATH + '?weapon=' + category + '&language=' + this.translatorService.currentLang + '&time=' + Date.now()
     );
   }
 
@@ -102,19 +102,5 @@ export class DatabaseClientService {
       observables.push(this.pushItem$(unit.selectedBuild.id, 16, unit.selectedBuild.equipments.lh_trait3.id));
     }
     return forkJoin(observables);
-  }
-
-  private analyseError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      const message = 'An unexpected error occured : ' + error.error.message;
-      return throwError(message);
-    } else {
-      if (error.status === 404) {
-        return of(undefined);
-      } else {
-        const message = 'Code d\'erreur en provenance du backend ' + error.status;
-        return throwError(message);
-      }
-    }
   }
 }

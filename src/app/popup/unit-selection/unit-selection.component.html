@@ -1,17 +1,5 @@
 <h2 mat-dialog-title>{{'unit.selection.popup.title' | translate}}</h2>
 <mat-dialog-content>
-  <div>
-    <mat-form-field>
-      <mat-select [(ngModel)]="unitsService.rankFilter" placeholder="{{'unit.selection.popup.rankFilter' | translate}}">
-        <mat-option [value]="6" (click)="unitsService.filterByRank(6)">
-          {{'unit.selection.popup.sixStarsUnits' | translate}}
-        </mat-option>
-        <mat-option [value]="7" (click)="unitsService.filterByRank(7)">
-          {{'unit.selection.popup.sevenStarsUnits' | translate}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
   <h3>{{'unit.selection.popup.physicalChainers' | translate}}</h3>
   <div class="flexcontainer">
     <div class="unit" *ngFor="let unit of unitsService.physicalChainers">

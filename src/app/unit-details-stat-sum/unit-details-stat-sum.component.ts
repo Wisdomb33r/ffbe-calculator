@@ -135,6 +135,6 @@ export class UnitDetailsStatSumComponent {
   }
 
   public getEsperName() {
-    return this.esper['name_' + this.translateService.currentLang];
+    return this.esper['name_' + (this.translateService.currentLang && this.translateService.currentLang.startsWith('fr') ? 'fr' : 'en')];
   }
 }

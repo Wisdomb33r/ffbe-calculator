@@ -62,7 +62,7 @@ describe('AlgorithmChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(34.477);
+    expect(result.result).toBeCloseTo(36.283);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn['mag']).toEqual(1000);
@@ -73,11 +73,11 @@ describe('AlgorithmChaining', () => {
 
     const turn1 = result['turnDamages'][0];
     expect(turn1['self_buff']).toEqual(0);
-    expect(turn1['buffed_mag']).toEqual(1200);
+    expect(turn1['buffed_mag']).toEqual(1300);
     expect(turn1['power']).toBeCloseTo(710);
-    expect(turn1['magicalDamages']).toEqual(20448000);
-    expect(turn1['magicalKillerDamages']).toBeCloseTo(22492800);
-    expect(turn1['magicalElementalDamages']).toBeCloseTo(22492800);
+    expect(turn1['magicalDamages']).toEqual(23998000);
+    expect(turn1['magicalKillerDamages']).toBeCloseTo(26397800);
+    expect(turn1['magicalElementalDamages']).toBeCloseTo(26397800);
     expect(turn1['hitsPower'].length).toEqual(5);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [50, 120, 210, 240, 90]);
 

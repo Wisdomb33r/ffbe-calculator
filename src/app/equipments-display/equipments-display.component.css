@@ -1,7 +1,7 @@
 div.flexcontainer {
   display: flex;
   flex-flow: row wrap;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .equipment-icon img {
@@ -26,4 +26,26 @@ div.flexcontainer {
   border: 1px solid #505139;
   border-left: 0;
   background-color: #000c63;
+  min-width: 60px;
+}
+
+.empty-slot {
+  height: 58px;
+  width: 58px;
+  background-color: #000431;
+  border: 1px solid #7d9fc4;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+  line-height: 56px;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+  background-color: #0e2d5f;
+  border-top: 1px solid #6f96bd;
+  border-bottom: 1px solid #6f96bd;
+  height: 20px
 }

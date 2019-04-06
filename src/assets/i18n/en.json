@@ -70,10 +70,10 @@
       "summary": "Mathematical formulae are the ones used by the game. A few hypotheses and simplifications are however needed to evaluate a character out of their group :",
       "chainersWithDuplicate": "Chainers are considered with a duplicate (same unit, same equipment for elemental weapons).",
       "finishersWithChainers": "Finishers are considered with a couple of chainers in the group to start a combo (damage multiplier x4).",
-      "finishersTooLongAttack": "Finisher moves with long delay between first and last hit (over 100 to 120 frames) have a reduced combo (damage multiplier x2.5 to simulate a half-in / half-out scenario).",
-      "finishersOutOfChainAttack": "Finisher moves that cannot enter a chain (non-timed jumps) have no combo (damage multiplier x1).",
+      "finishersTooLongAttack": "Finisher moves with long delay between first and last hit (over 150 frames) have a reduced combo (damage multiplier x2.5 to simulate a half-in / half-out scenario).",
+      "finishersOutOfChainAttack": "Finisher moves that cannot enter a chain (non-timed jumps or chaining moves with close hits for a finisher) have no combo (damage multiplier x1).",
       "chainCalculationSimplified": "The combo calculation for a chainer and its duplicate is slightly simplified. Namely, it does not consider multiple skills hits overlap.",
-      "chainImpossibleCases": "The calculator does not prevent cases that are not possible in game (for instance Victoria cannot spark chain and Tidus cannot chain without spark nor combo break).",
+      "chainImpossibleCases": "The calculator does not prevent cases that are not possible in game (for instance QH frames moves cannot chain without spark nor combo break).",
       "supportPresence": "By default, the calculator assumes there are supports in the group to buff (+100%, i.e. Ramza) and debuff (-50% to resists, for example Seven, 9S or Kryla).",
       "killersCalculation": "By default, the killer traits are considered on average. For a +50% damages on a specific type of monsters, the calculation adds a net 5% increase."
     },
@@ -138,13 +138,15 @@
       "title": "Equipment",
       "remove": "Remove",
       "filter": "Filter items",
+      "empty": "empty",
       "excludeStmr": "Exclude STMR's",
       "changeBlocked": "This item is mandatory for this build as it has an impact the calculator currently cannot activate or deactivate dynamically."
     }
   },
   "skills": {
     "display": {
-      "title": "Skill rotation",
+      "battleStartTitle": "Battle start skills",
+      "stableTitle": "Stable skills rotation",
       "attackType": "Attack type",
       "attackType_1": "Magical",
       "attackType_2": "Magical",
@@ -199,6 +201,8 @@
       "missingAlgorithm": "The algorithm for this kind of character is not yet implemented."
     },
     "offensive": {
+      "startTitle": "Damages (battle start)",
+      "stableTitle": "Damages (stable rotation)",
       "monsterType": "Enemy type",
       "monsterTypeUnknown": "Unknown",
       "monsterTypeNone": "None",
@@ -209,7 +213,8 @@
       "sparkChain": "Spark chain",
       "esperDamageMultiplier": "Esper multiplier",
       "baseDamages": "Base damages",
-      "averageDamages": "Average damages",
+      "averageDamages10turns": "Average damages (10 first turns)",
+      "averageDamages": "Average damages (stable rotation)",
       "physicalDamagesCalculation": "Physical damages calculation",
       "magicalDamagesCalculation": "Magical damages calculation",
       "esperDamagesCalculation": "Esper damages calculation",

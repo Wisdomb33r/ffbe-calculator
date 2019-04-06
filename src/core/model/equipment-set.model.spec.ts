@@ -1,6 +1,7 @@
 import {EquipmentSet} from './equipment-set.model';
 import {Equipment} from './equipment.model';
 import {ConditionalPassive} from './conditional-passive.model';
+import {SPECIAL_WEAPON_ENHANCEMENTS} from '../calculator-constants';
 
 const VALID_TWO_HANDED_EQUIPMENT_SET = '{"right_hand":{"id":1873,"category":27,"name":"Scie motorisée","icon":"/gestion/resources/brex_objet/img/000/001/native/873_c29f0a.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":130,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":100,"variance_max":160,"unique":false,"conditional_passives":null},"left_hand":null,"head":{"id":1640,"category":12,"name":"Épingle de Prishe","icon":"/gestion/resources/brex_objet/img/000/001/native/640_27b187.png","hp":null,"hp_percent":10,"mp":null,"mp_percent":10,"atk":45,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":false,"conditional_passives":null},"body":{"id":1717,"category":35,"name":"Vêtements d\'entraînement","icon":"/gestion/resources/brex_objet/img/000/001/native/717_81c9ff.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":20,"atk":20,"atk_percent":null,"mag":null,"mag_percent":null,"def":32,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":false,"conditional_passives":null},"accessory1":{"id":1871,"category":25,"name":"Gant de maréchal","icon":"/gestion/resources/brex_objet/img/000/001/native/871_636760.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":40,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":50,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":false,"conditional_passives":null},"accessory2":{"id":1871,"category":25,"name":"Gant de maréchal","icon":"/gestion/resources/brex_objet/img/000/001/native/871_636760.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":40,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":50,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":false,"conditional_passives":null},"materia1":{"id":1870,"category":57,"name":"Forme de casseur","icon":"/gestion/resources/brex_objet/img/000/001/native/870_77d1d7.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":null,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":100,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":true,"conditional_passives":null},"materia2":{"id":1205,"category":57,"name":"Maîtrise des épées longues","icon":"/gestion/resources/brex_objet/img/000/001/native/205_2bfefd.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":null,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":true,"conditional_passives":[{"category":27,"element":null,"hp":null,"mp":null,"atk":50,"mag":null,"def":null,"spr":null}]},"materia3":{"id":1641,"category":57,"name":"Escrimeur fier","icon":"/gestion/resources/brex_objet/img/000/001/native/641_6f3083.png","hp":null,"hp_percent":20,"mp":null,"mp_percent":null,"atk":null,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":true,"conditional_passives":[{"category":27,"element":null,"hp":null,"mp":null,"atk":40,"mag":null,"def":null,"spr":null}]},"materia4":{"id":1425,"category":57,"name":"Aventurier++++","icon":"/gestion/resources/brex_objet/img/000/001/native/425_5b2514.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":null,"atk_percent":40,"mag":null,"mag_percent":40,"def":null,"def_percent":40,"spr":null,"spr_percent":40,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":null,"variance_max":null,"unique":true,"conditional_passives":null}}';
 const VALID_EQUIPMENT = '{"id":1873,"category":27,"name":"Scie motorisée","icon":"/gestion/resources/brex_objet/img/000/001/native/873_c29f0a.png","hp":null,"hp_percent":null,"mp":null,"mp_percent":null,"atk":130,"atk_percent":null,"mag":null,"mag_percent":null,"def":null,"def_percent":null,"spr":null,"spr_percent":null,"atk_dh":null,"atk_tdh":null,"mag_dh":null,"mag_tdh":null,"variance_min":100,"variance_max":160,"unique":false,"conditional_passives":null}';
@@ -97,7 +98,7 @@ describe('EquipmentSet', () => {
     expect(sum).toEqual(0);
   });
 
-  it('#removeAllRemoveable should remove left hand and weapon enhancements', () => {
+  it('#removeAllRemoveable should remove weapon enhancements', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     equipments.left_hand = equipments.right_hand;
@@ -114,7 +115,7 @@ describe('EquipmentSet', () => {
     expect(equipments.rh_trait1).toBeFalsy();
     expect(equipments.rh_trait2).toBeFalsy();
     expect(equipments.rh_trait3).toBeFalsy();
-    expect(equipments.left_hand).toBeFalsy();
+    expect(equipments.left_hand).toBeTruthy();
     expect(equipments.lh_trait1).toBeFalsy();
     expect(equipments.lh_trait2).toBeFalsy();
     expect(equipments.lh_trait3).toBeFalsy();
@@ -221,5 +222,130 @@ describe('EquipmentSet', () => {
     expect(elements.find(x => x === 2)).toBeTruthy();
     expect(elements.find(x => x === 4)).toBeTruthy();
     expect(elements.find(x => x === 6)).toBeTruthy();
+  });
+
+  it('#emptySlot should remove enhancements it weapon is removed', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.rh_trait1 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipments.rh_trait2 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipments.rh_trait3 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    // WHEN
+    equipments.emptySlot('right_hand');
+    // THEN
+    expect(equipments.right_hand).toBeFalsy();
+    expect(equipments.rh_trait1).toBeFalsy();
+    expect(equipments.rh_trait2).toBeFalsy();
+    expect(equipments.rh_trait3).toBeFalsy();
+  });
+
+  it('#emptySlot should remove items of category if extra equipment item is removed', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.right_hand.category = 27;
+    equipments.materia1.extra_equip = 27;
+    // WHEN
+    equipments.emptySlot('materia1');
+    // THEN
+    expect(equipments.right_hand).toBeFalsy();
+    expect(equipments.materia1).toBeFalsy();
+  });
+
+  it('#emptySlot should not remove items of category if extra equipment still present', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.right_hand.category = 27;
+    equipments.materia1.extra_equip = 27;
+    equipments.materia2.extra_equip = 27;
+    // WHEN
+    equipments.emptySlot('materia1');
+    // THEN
+    expect(equipments.right_hand).toBeTruthy();
+    expect(equipments.materia1).toBeFalsy();
+  });
+
+  it('#equipInSlot should remove weapon special enhancement at weapon type switch', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.right_hand.category = 27;
+    equipments.rh_trait1 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipments.rh_trait1.id = SPECIAL_WEAPON_ENHANCEMENTS[0];
+    equipments.rh_trait2 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipments.rh_trait3 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    const newWeapon: Equipment = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    newWeapon.category = 1;
+    // WHEN
+    equipments.equipInSlot('right_hand', newWeapon);
+    // THEN
+    expect(equipments.right_hand).toBeTruthy();
+    expect(equipments.right_hand.category).toEqual(1);
+    expect(equipments.rh_trait1).toBeFalsy();
+    expect(equipments.rh_trait2).toBeTruthy();
+    expect(equipments.rh_trait3).toBeTruthy();
+  });
+
+  it('#equipInSlot should not remove weapon special enhancement if equipping same weapon type', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.right_hand.category = 27;
+    equipments.rh_trait1 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipments.rh_trait1.id = SPECIAL_WEAPON_ENHANCEMENTS[0];
+    equipments.rh_trait2 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipments.rh_trait3 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    const newWeapon: Equipment = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    newWeapon.category = 27;
+    // WHEN
+    equipments.equipInSlot('right_hand', newWeapon);
+    // THEN
+    expect(equipments.right_hand).toBeTruthy();
+    expect(equipments.rh_trait1).toBeTruthy();
+    expect(equipments.rh_trait2).toBeTruthy();
+    expect(equipments.rh_trait3).toBeTruthy();
+  });
+
+  it('#equipInSlot should remove weapon special enhancement while equipping non-enhanceable weapon', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.right_hand.category = 27;
+    equipments.rh_trait1 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipments.rh_trait2 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    equipments.rh_trait3 = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    const newWeapon: Equipment = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    newWeapon.id = 100000;
+    // WHEN
+    equipments.equipInSlot('right_hand', newWeapon);
+    // THEN
+    expect(equipments.right_hand).toBeTruthy();
+    expect(equipments.right_hand.id).toEqual(100000);
+    expect(equipments.rh_trait1).toBeFalsy();
+    expect(equipments.rh_trait2).toBeFalsy();
+    expect(equipments.rh_trait3).toBeFalsy();
+  });
+
+  it('#equipInSlot should remove items of category if extra equipment item is removed', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.right_hand.category = 27;
+    equipments.materia1.extra_equip = 27;
+    const newMateria: Equipment = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    // WHEN
+    equipments.equipInSlot('materia1', newMateria);
+    // THEN
+    expect(equipments.right_hand).toBeFalsy();
+    expect(equipments.materia1).toEqual(newMateria);
+  });
+
+  it('#equipInSlot should not remove items of category if extra equipment still present', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    equipments.right_hand.category = 27;
+    equipments.materia1.extra_equip = 27;
+    equipments.materia2.extra_equip = 27;
+    const newMateria: Equipment = new Equipment(JSON.parse(VALID_EQUIPMENT));
+    // WHEN
+    equipments.equipInSlot('materia1', newMateria);
+    // THEN
+    expect(equipments.right_hand).toBeTruthy();
+    expect(equipments.materia1).toEqual(newMateria);
   });
 });

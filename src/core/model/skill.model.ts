@@ -33,6 +33,7 @@ export class Skill {
   public magical_killers: KillerPassives;
   public resists_break: Array<number>;
   public elements: Array<number>;
+  public isStartPhase: boolean;
 
   // transcient
   public skillType: SkillType;
@@ -71,6 +72,7 @@ export class Skill {
     if (skill.magical_killers) {
       this.magical_killers = KillerPassives.construct(skill.magical_killers);
     }
+    this.isStartPhase = skill.isStartPhase;
   }
 
   private formatChainCombo(chainCombo: string) {

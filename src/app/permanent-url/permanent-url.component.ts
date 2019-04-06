@@ -1,14 +1,16 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, DoCheck, Input, OnInit} from '@angular/core';
 import {Unit} from '../../core/model/unit.model';
 import {Equipment} from '../../core/model/equipment.model';
 import {Esper} from '../../core/model/esper.model';
+import {AlgorithmOffensive} from '../../core/model/algorithm-offensive.model';
+import {AlgorithmFinish} from '../../core/model/algorithm-finish.model';
 
 @Component({
   selector: 'app-permanent-url',
   templateUrl: './permanent-url.component.html',
   styleUrls: ['./permanent-url.component.css']
 })
-export class PermanentUrlComponent implements OnInit, OnChanges {
+export class PermanentUrlComponent implements OnInit, DoCheck {
 
   public url: string;
   @Input() unit: Unit;
@@ -37,7 +39,7 @@ export class PermanentUrlComponent implements OnInit, OnChanges {
     this.url = this.getPermanentUrl();
   }
 
-  ngOnChanges() {
+  ngDoCheck() {
     this.url = this.getPermanentUrl();
   }
 
@@ -94,7 +96,59 @@ export class PermanentUrlComponent implements OnInit, OnChanges {
     if (this.lh_trait3) {
       url += ';lh_t3=' + this.lh_trait3.id;
     }
+    url += this.getPermanentUrlForAlgorithmConfiguration();
     return url;
   }
 
+  private getPermanentUrlForAlgorithmConfiguration(): string {
+    let url = '';
+    if (this.unit.selectedBuild.algorithm instanceof AlgorithmOffensive) {
+      const algorithm: AlgorithmOffensive = this.unit.selectedBuild.algorithm as AlgorithmOffensive;
+      if (!algorithm.isKillerActive) {
+        url += ';killers=false';
+      }
+      if (algorithm.opponentKillerType !== 'unknown') {
+        url += ';type1=' + algorithm.opponentKillerType;
+      }
+      if (algorithm.opponentKillerType2 !== 'none') {
+        url += ';type2=' + algorithm.opponentKillerType2;
+      }
+      if (algorithm.isSparkChain) {
+        url += ';spark=true';
+      }
+      if (!algorithm.isSupportBuffing) {
+        url += ';buffing=false';
+      }
+      if (!algorithm.isSupportBreakingResistances) {
+        url += ';breaks=false';
+      }
+      if (algorithm.supportBuff !== 150) {
+        url += ';buffs=' + algorithm.supportBuff;
+      }
+      if (algorithm.opponentDef !== 1000000) {
+        url += ';enemyDef=' + algorithm.opponentDef;
+      }
+      if (algorithm.opponentSpr !== 1000000) {
+        url += ';enemySpr=' + algorithm.opponentSpr;
+      }
+      for (let i = 0; i < 8; i++) {
+        if (algorithm.opponentResistances[i] !== 0) {
+          url += ';enemyResist' + i + '=' + algorithm.opponentResistances[i];
+        }
+      }
+      for (let i = 0; i < 8; i++) {
+        if (algorithm.supportResistsBreak[i] !== -50) {
+          url += ';breakResist' + i + '=' + algorithm.supportResistsBreak[i];
+        }
+      }
+    }
+    if (this.unit.selectedBuild.algorithm instanceof AlgorithmFinish) {
+      for (let i = 0; i < this.unit.selectedBuild.skills.length; i++) {
+        if (+this.unit.selectedBuild.skills[i].chainCombo < 3.6) {
+          url += ';skillcombo' + i + '=' + this.unit.selectedBuild.skills[i].chainCombo;
+        }
+      }
+    }
+    return url;
+  }
 }
