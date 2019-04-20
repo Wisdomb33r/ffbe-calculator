@@ -47,7 +47,10 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       const hitsPower: Array<number> = [];
       let chainCombos = skill.chainCombo ? +skill.chainCombo / 2 : 0;
 
-      const lbMultiplier = unit.getLbMultiplier();
+      let lbMultiplier = unit.getLbMultiplier();
+      if (skill.lb_multiplier && skill.lb_multiplier > 1) {
+        lbMultiplier += skill.lb_multiplier - 1;
+      }
       const lbPower = unit.getLbPowerIncrease();
       const jumpMultiplier = 100 + (skill.isJump ? unit.stats.jump + unit.stats.equipment_jump : 0);
       let skillTotalPower = skill.power + unit.selectedBuild.equipments.sumSkillModIncrease(skill.id);

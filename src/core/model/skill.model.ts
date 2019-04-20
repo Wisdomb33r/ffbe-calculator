@@ -34,6 +34,7 @@ export class Skill {
   public resists_break: Array<number>;
   public elements: Array<number>;
   public isStartPhase: boolean;
+  public lb_multiplier: number;
 
   // transcient
   public skillType: SkillType;
@@ -72,6 +73,7 @@ export class Skill {
     if (skill.magical_killers) {
       this.magical_killers = KillerPassives.construct(skill.magical_killers);
     }
+    this.lb_multiplier = skill.lb_multiplier;
     this.isStartPhase = skill.isStartPhase;
   }
 
