@@ -43,6 +43,7 @@ class Equipment {
   public $variance_max;
   public $unique;
   public $locked;
+  public $locked_alternatives;
   public $stmr;
   public $physical_killers;
   public $magical_killers;
@@ -540,6 +541,7 @@ class EquipmentSet {
         $slot = $equipment->slot->nom;
         $this->$slot = new Equipment ( $equipment->objet, $language );
         $this->$slot->locked = $equipment->non_removeable ? true : false;
+        $this->$slot->locked_alternatives = $equipment->alternatives ? explode ( ',', $equipment->alternatives ) : null;
       }
     }
   }

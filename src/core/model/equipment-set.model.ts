@@ -505,4 +505,18 @@ export class EquipmentSet {
       .map((cond: ConditionalPassive) => cond.skill_mod)
       .reduce((val1, val2) => val1 + val2, 0);
   }
+
+  public isEquippedOneOf(locked_alternatives: Array<number>) {
+    return locked_alternatives.find((id: number) => this.right_hand && id === this.right_hand.id)
+      || locked_alternatives.find((id: number) => this.left_hand && id === this.right_hand.id)
+      || locked_alternatives.find((id: number) => this.head && id === this.head.id)
+      || locked_alternatives.find((id: number) => this.body && id === this.body.id)
+      || locked_alternatives.find((id: number) => this.accessory1 && id === this.accessory1.id)
+      || locked_alternatives.find((id: number) => this.accessory2 && id === this.accessory2.id)
+      || locked_alternatives.find((id: number) => this.materia1 && id === this.materia1.id)
+      || locked_alternatives.find((id: number) => this.materia2 && id === this.materia2.id)
+      || locked_alternatives.find((id: number) => this.materia3 && id === this.materia3.id)
+      || locked_alternatives.find((id: number) => this.materia4 && id === this.materia4.id)
+      ;
+  }
 }

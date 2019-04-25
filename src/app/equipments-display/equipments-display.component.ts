@@ -4,7 +4,9 @@ import {MatDialog} from '@angular/material';
 import {EquipmentSelectionComponent} from '../popup/equipment-selection/equipment-selection.component';
 import {Equipment} from '../../core/model/equipment.model';
 import {UnitsService} from '../../core/services/units.service';
-import {Subscription} from 'rxjs';
+import {forkJoin, Observable, of, Subscription} from 'rxjs';
+import {DatabaseClientService} from '../../core/services/database-client.service';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-equipments-display',
@@ -18,6 +20,7 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private dialog: MatDialog,
+              private databaseService: DatabaseClientService,
               public unitsService: UnitsService) {
   }
 
@@ -36,18 +39,60 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
 
   public openEquipmentSelectionPane(slot: string) {
     this.unsubscribe();
-    const itemPresent = this.equipments[slot] ? true : false;
-    const locked = this.equipments[slot] && this.equipments[slot].locked ? true : false;
+    if (this.equipments[slot] && this.equipments[slot].locked) {
+      if (this.equipments[slot].locked_alternatives && this.equipments[slot].locked_alternatives.length
+        && this.equipments.isEquippedOneOf(this.equipments[slot].locked_alternatives)) {
+        this.openNonLockedEquipmentSelectionPane(slot);
+      } else {
+        this.openLockedEquipmentSelectionPane(slot);
+      }
+    } else {
+      this.openNonLockedEquipmentSelectionPane(slot);
+    }
+  }
 
+  public openLockedEquipmentSelectionPane(slot: string) {
+    const observables: Array<Observable<any>> = [];
+    if (this.equipments[slot].locked_alternatives && this.equipments[slot].locked_alternatives.length) {
+      this.equipments[slot].locked_alternatives.forEach(
+        (itemId: number) => observables.push(this.databaseService.getItemById(itemId))
+      );
+    }
+    observables.push(of(slot));
+
+    this.subscription = forkJoin(observables).pipe(
+      tap(results => {
+        const equipments: Array<Equipment> = [];
+        if (this.equipments[slot].locked_alternatives && this.equipments[slot].locked_alternatives.length) {
+          this.equipments[slot].locked_alternatives.forEach((itemId: number, index: number) => {
+            if (results[index]) {
+              equipments.push(new Equipment(results[index]));
+            }
+          });
+        }
+        this.dialog.open(EquipmentSelectionComponent, {
+          data: {
+            slot: slot,
+            equipments: equipments,
+            removeable: false,
+            locked: true,
+          }
+        });
+      })
+    ).subscribe();
+  }
+
+  public openNonLockedEquipmentSelectionPane(slot: string) {
+    const itemPresent = !!this.equipments[slot];
     this.subscription = this.unitsService.getAllowedEquipmentsForSlot$(slot)
       .subscribe((equipments: Array<Equipment>) => {
-          if (equipments.length > 0 || itemPresent || locked) {
+          if (equipments.length > 0 || itemPresent) {
             const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
               data: {
                 slot: slot,
                 equipments: equipments,
                 removeable: itemPresent,
-                locked: locked,
+                locked: false,
               }
             }).afterClosed().subscribe((equipment: Equipment) => {
               if (equipment) {
@@ -74,13 +119,6 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
           }
         }
       );
-  }
-
-  private isEquipmentRemoveable(slot: string): boolean {
-    return slot === 'left_hand'
-      || slot === 'rh_trait1' || slot === 'rh_trait2' || slot === 'rh_trait3'
-      || slot === 'lh_trait1' || slot === 'lh_trait2' || slot === 'lh_trait3'
-      ;
   }
 
   public openEquipmentSelectionPaneForRhWeaponTrait(index: number) {
