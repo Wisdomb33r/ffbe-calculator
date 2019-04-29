@@ -45,7 +45,7 @@ export class Equipment {
   public variance_max: number;
   public unique: boolean;
   public locked: boolean;
-  public locked_alternatives: Array<number>;
+  public locked_alternative: number;
   public stmr: boolean;
   public extra_equip: number;
   public physical_killers: KillerPassives;
@@ -102,7 +102,7 @@ export class Equipment {
     this.variance_max = equipment.variance_max;
     this.unique = equipment.unique;
     this.locked = equipment.locked;
-    this.locked_alternatives = equipment.locked_alternatives;
+    this.locked_alternative = equipment.locked_alternative;
     this.stmr = equipment.stmr;
     this.extra_equip = equipment.extra_equip;
     if (equipment.physical_killers) {

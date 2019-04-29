@@ -506,17 +506,48 @@ export class EquipmentSet {
       .reduce((val1, val2) => val1 + val2, 0);
   }
 
-  public isEquippedOneOf(locked_alternatives: Array<number>) {
-    return locked_alternatives.find((id: number) => this.right_hand && id === this.right_hand.id)
-      || locked_alternatives.find((id: number) => this.left_hand && id === this.right_hand.id)
-      || locked_alternatives.find((id: number) => this.head && id === this.head.id)
-      || locked_alternatives.find((id: number) => this.body && id === this.body.id)
-      || locked_alternatives.find((id: number) => this.accessory1 && id === this.accessory1.id)
-      || locked_alternatives.find((id: number) => this.accessory2 && id === this.accessory2.id)
-      || locked_alternatives.find((id: number) => this.materia1 && id === this.materia1.id)
-      || locked_alternatives.find((id: number) => this.materia2 && id === this.materia2.id)
-      || locked_alternatives.find((id: number) => this.materia3 && id === this.materia3.id)
-      || locked_alternatives.find((id: number) => this.materia4 && id === this.materia4.id)
-      ;
+  public isEquipped(itemId: number) {
+    return !isNullOrUndefined(this.getEquippedItemById(itemId));
+  }
+
+  public transferLockedStatusToAlternative(alternative: number) {
+    const equippedItem: Equipment = this.getEquippedItemById(alternative);
+    if (equippedItem) {
+      equippedItem.locked = true;
+    }
+  }
+
+  private getEquippedItemById(itemId: number): Equipment {
+    if (this.right_hand && this.right_hand.id === itemId) {
+      return this.right_hand;
+    }
+    if (this.left_hand && this.left_hand.id === itemId) {
+      return this.left_hand;
+    }
+    if (this.head && this.head.id === itemId) {
+      return this.head;
+    }
+    if (this.body && this.body.id === itemId) {
+      return this.body;
+    }
+    if (this.accessory1 && this.accessory1.id === itemId) {
+      return this.accessory1;
+    }
+    if (this.accessory2 && this.accessory2.id === itemId) {
+      return this.accessory2;
+    }
+    if (this.materia1 && this.materia1.id === itemId) {
+      return this.materia1;
+    }
+    if (this.materia2 && this.materia2.id === itemId) {
+      return this.materia2;
+    }
+    if (this.materia3 && this.materia3.id === itemId) {
+      return this.materia3;
+    }
+    if (this.materia4 && this.materia4.id === itemId) {
+      return this.materia4;
+    }
+    return null;
   }
 }

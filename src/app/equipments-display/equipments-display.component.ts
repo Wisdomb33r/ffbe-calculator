@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material';
 import {EquipmentSelectionComponent} from '../popup/equipment-selection/equipment-selection.component';
 import {Equipment} from '../../core/model/equipment.model';
 import {UnitsService} from '../../core/services/units.service';
-import {forkJoin, Observable, of, Subscription} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {tap} from 'rxjs/operators';
 
@@ -40,8 +40,7 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
   public openEquipmentSelectionPane(slot: string) {
     this.unsubscribe();
     if (this.equipments[slot] && this.equipments[slot].locked) {
-      if (this.equipments[slot].locked_alternatives && this.equipments[slot].locked_alternatives.length
-        && this.equipments.isEquippedOneOf(this.equipments[slot].locked_alternatives)) {
+      if (this.equipments[slot].locked_alternative && this.equipments.isEquipped(this.equipments[slot].locked_alternative)) {
         this.openNonLockedEquipmentSelectionPane(slot);
       } else {
         this.openLockedEquipmentSelectionPane(slot);
@@ -52,23 +51,14 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
   }
 
   public openLockedEquipmentSelectionPane(slot: string) {
-    const observables: Array<Observable<any>> = [];
-    if (this.equipments[slot].locked_alternatives && this.equipments[slot].locked_alternatives.length) {
-      this.equipments[slot].locked_alternatives.forEach(
-        (itemId: number) => observables.push(this.databaseService.getItemById(itemId))
-      );
-    }
-    observables.push(of(slot));
+    const observable: Observable<Equipment> = this.equipments[slot].locked_alternative ?
+      this.databaseService.getItemById(this.equipments[slot].locked_alternative) : of(null);
 
-    this.subscription = forkJoin(observables).pipe(
-      tap(results => {
+    this.subscription = observable.pipe(
+      tap((item: Equipment) => {
         const equipments: Array<Equipment> = [];
-        if (this.equipments[slot].locked_alternatives && this.equipments[slot].locked_alternatives.length) {
-          this.equipments[slot].locked_alternatives.forEach((itemId: number, index: number) => {
-            if (results[index]) {
-              equipments.push(new Equipment(results[index]));
-            }
-          });
+        if (item) {
+          equipments.push(item);
         }
         this.dialog.open(EquipmentSelectionComponent, {
           data: {
@@ -96,6 +86,9 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
               }
             }).afterClosed().subscribe((equipment: Equipment) => {
               if (equipment) {
+                if (this.equipments[slot] && this.equipments[slot].locked && this.equipments[slot].locked_alternative) {
+                  this.equipments.transferLockedStatusToAlternative(this.equipments[slot].locked_alternative);
+                }
                 if (equipment.id && equipment.id > 0 && (<any>window).ga) {
                   (<any>window).ga('send', 'event', {
                     eventCategory: 'calculatorEquipment',

@@ -15,7 +15,6 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
   public equipments: Array<Equipment> = [];
   public removeable: boolean;
   public locked: boolean;
-  public locked_alternatives: Array<Equipment>;
   @ViewChild('itemfilter') itemfilter: ElementRef;
   private filterChangedSubscription: Subscription;
 
@@ -28,7 +27,6 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
     this.equipments = data.equipments;
     this.removeable = data.removeable;
     this.locked = data.locked;
-    this.locked_alternatives = data.locked_alternatives;
   }
 
   ngAfterViewInit() {
