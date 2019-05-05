@@ -59,6 +59,7 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
         const equipments: Array<Equipment> = [];
         if (item) {
           equipments.push(new Equipment(item));
+          this.equipments.activateEquipmentConditionalPassives(equipments[0], this.unitsService.selectedUnit.id);
         }
         this.dialog.open(EquipmentSelectionComponent, {
           data: {
