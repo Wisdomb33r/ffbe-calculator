@@ -75,10 +75,10 @@ export class AlgorithmChaining extends AlgorithmOffensive {
         chainCombos++;
       }
       if (nbAttacks > 1) {
-        if (skill.isBreakingChain) {
-          chainCombos = 0;
-        }
         for (let i = 1; i < nbAttacks; i++) {
+          if (skill.isBreakingChain) {
+            chainCombos = 0;
+          }
           for (let j = 0; j < skill.hits; j++) {
             if (j > 0 && ((frames[j] - frames[j - 1] > 20 && this.isSparkChain) || (frames[i] - frames[i - 1] > 23))) {
               chainCombos = 0;
