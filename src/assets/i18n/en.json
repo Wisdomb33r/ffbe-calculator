@@ -140,7 +140,8 @@
       "filter": "Filter items",
       "empty": "empty",
       "excludeStmr": "Exclude STMR's",
-      "changeBlocked": "This item is mandatory for this build as it has an impact the calculator currently cannot activate or deactivate dynamically."
+      "changeBlocked": "This item is mandatory for this build as it has an effect the calculator currently cannot activate or deactivate dynamically.",
+      "changeBlockedWithAlternatives": "This item has an effect the calculator cannot activate or deactivate dynamically. To remove or change it, you need to equip first the following item activating the same effect :"
     }
   },
   "skills": {

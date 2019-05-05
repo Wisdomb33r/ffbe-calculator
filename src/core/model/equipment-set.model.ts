@@ -510,10 +510,11 @@ export class EquipmentSet {
     return !isNullOrUndefined(this.getEquippedItemById(itemId));
   }
 
-  public transferLockedStatusToAlternative(alternative: number) {
+  public transferLockedStatusToAlternative(alternative: number, newAlternative: number) {
     const equippedItem: Equipment = this.getEquippedItemById(alternative);
     if (equippedItem) {
       equippedItem.locked = true;
+      equippedItem.locked_alternative = newAlternative;
     }
   }
 

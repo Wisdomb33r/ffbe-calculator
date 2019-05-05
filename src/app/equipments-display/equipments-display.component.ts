@@ -52,13 +52,13 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
 
   public openLockedEquipmentSelectionPane(slot: string) {
     const observable: Observable<Equipment> = this.equipments[slot].locked_alternative ?
-      this.databaseService.getItemById(this.equipments[slot].locked_alternative) : of(null);
+      this.databaseService.getItemById$(this.equipments[slot].locked_alternative) : of(null);
 
     this.subscription = observable.pipe(
       tap((item: Equipment) => {
         const equipments: Array<Equipment> = [];
         if (item) {
-          equipments.push(item);
+          equipments.push(new Equipment(item));
         }
         this.dialog.open(EquipmentSelectionComponent, {
           data: {
@@ -87,7 +87,7 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
             }).afterClosed().subscribe((equipment: Equipment) => {
               if (equipment) {
                 if (this.equipments[slot] && this.equipments[slot].locked && this.equipments[slot].locked_alternative) {
-                  this.equipments.transferLockedStatusToAlternative(this.equipments[slot].locked_alternative);
+                  this.equipments.transferLockedStatusToAlternative(this.equipments[slot].locked_alternative, this.equipments[slot].id);
                 }
                 if (equipment.id && equipment.id > 0 && (<any>window).ga) {
                   (<any>window).ga('send', 'event', {
