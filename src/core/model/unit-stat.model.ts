@@ -1,4 +1,4 @@
-import {DH_LIMIT_CAP, EVO_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_LIMIT_CAP} from '../calculator-constants';
+import {DH_LIMIT_CAP, EVO_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_EXTENDED_LIMIT_CAP, TDW_LIMIT_CAP} from '../calculator-constants';
 
 export class UnitStat {
   // from backend
@@ -42,11 +42,11 @@ export class UnitStat {
     this.dw = stat_dw ? stat_dw : 0;
   }
 
-  public computeTotal(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
+  public computeTotal(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean, hasTdwCapIncrease: boolean) {
     this.evaluateDhTdhDwActivation(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
     const effectiveEquipmentPassive = this.getEffectiveEquipmentPassive();
     const effectiveEquipmentDh = this.getEffectiveEquipmentDh();
-    const effectiveEquipmentTdw = this.getEffectiveEquipmentTdw();
+    const effectiveEquipmentTdw = this.getEffectiveEquipmentTdw(hasTdwCapIncrease);
     this.value_from_passive = this.base * (this.passive + this.conditional_passive) / 100;
     this.value_from_passive_equipment = this.base * effectiveEquipmentPassive / 100;
     this.value_from_dh = this.base_equipment * (this.dh_effective + this.tdh_effective) / 100;
@@ -92,8 +92,10 @@ export class UnitStat {
     }
   }
 
-  private getEffectiveEquipmentTdw(): number {
-    if ((this.dw_effective + this.dw_equipment) > TDW_LIMIT_CAP) {
+  private getEffectiveEquipmentTdw(hasTdwCapIncrease: boolean): number {
+    if (hasTdwCapIncrease && (this.dw_effective + this.dw_equipment) > TDW_EXTENDED_LIMIT_CAP) {
+      return TDW_EXTENDED_LIMIT_CAP - this.dw_effective;
+    } else if ((this.dw_effective + this.dw_equipment) > TDW_LIMIT_CAP) {
       return TDW_LIMIT_CAP - this.dw_effective;
     } else {
       return this.dw_equipment;
