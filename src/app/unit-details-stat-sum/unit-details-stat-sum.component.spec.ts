@@ -121,7 +121,7 @@ describe('UnitDetailsStatSumComponent', () => {
     const equipmentBaseLine = table.querySelector('tr:nth-child(7)');
     expect(equipmentBaseLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.passive');
     expect(equipmentBaseLine.querySelector('td:nth-child(2)').textContent).toEqual('500');
-    expect(equipmentBaseLine.querySelector('td:nth-child(3)').textContent).toEqual('(50%)');
+    expect(equipmentBaseLine.querySelector('td:nth-child(3)').textContent).toEqual('(50%) ');
 
     // equipment dw line
     const equipmentDwLine = table.querySelector('tr:nth-child(8)');
@@ -235,7 +235,7 @@ describe('UnitDetailsStatSumComponent', () => {
     const equipmentPassiveLine = table.querySelector('tr:nth-child(8)');
     expect(equipmentPassiveLine.querySelector('td:nth-child(1)').textContent).toEqual('unit.details.stats.popup.passive');
     expect(equipmentPassiveLine.querySelector('td:nth-child(2)').textContent).toEqual('500');
-    expect(equipmentPassiveLine.querySelector('td:nth-child(3)').textContent).toEqual('(50%)');
+    expect(equipmentPassiveLine.querySelector('td:nth-child(3)').textContent).toEqual('(50%) ');
 
     // equipment dh line
     const equipmentDhLine = table.querySelector('tr:nth-child(9)');
