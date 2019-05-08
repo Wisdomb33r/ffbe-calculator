@@ -95,7 +95,7 @@ export class UnitStat {
   private getEffectiveEquipmentTdw(hasTdwCapIncrease: boolean): number {
     if (hasTdwCapIncrease && (this.dw_effective + this.dw_equipment) > TDW_EXTENDED_LIMIT_CAP) {
       return TDW_EXTENDED_LIMIT_CAP - this.dw_effective;
-    } else if ((this.dw_effective + this.dw_equipment) > TDW_LIMIT_CAP) {
+    } else if (!hasTdwCapIncrease && ((this.dw_effective + this.dw_equipment) > TDW_LIMIT_CAP)) {
       return TDW_LIMIT_CAP - this.dw_effective;
     } else {
       return this.dw_equipment;
