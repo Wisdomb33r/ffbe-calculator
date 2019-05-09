@@ -46,7 +46,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
       let chainCombos = skill.chainCombo ? +skill.chainCombo / 2 : 0;
-      const maxChainCombo = unit.stats.tdwCapIncrease ? 6 : 4;
+      const maxChainCombo = unit.stats.tdwCapIncrease && unit.selectedBuild.equipments.isDualWielding() ? 6 : 4;
 
       let lbMultiplier = unit.getLbMultiplier();
       if (skill.lb_multiplier && skill.lb_multiplier > 1) {
