@@ -466,7 +466,7 @@ class Skill {
       $this->icon = $brex_skill->competence->icone->getImageimgPath ();
       $this->hits = $brex_skill->competence->hits;
       $this->frames = $brex_skill->competence->frames;
-      $this->damages = $brex_skill->competence->damages;
+      $this->damages = $brex_skill->damages ? $brex_skill->damages : $brex_skill->competence->damages;
       if ($brex_skill->is_enhanced == 1) {
         $values = array ();
         $values ['perso'] = $brex_unit->perso->id;

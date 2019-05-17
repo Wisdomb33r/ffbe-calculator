@@ -156,6 +156,6 @@ export class Equipment {
   }
 
   public isWeaponTraitPossible(): boolean {
-    return this.id < 3263 && WEAPONS_CATEGORIES.find(categ => categ === this.category) > 0;
+    return WEAPONS_CATEGORIES.find(categ => categ === this.category) > 0;
   }
 }
