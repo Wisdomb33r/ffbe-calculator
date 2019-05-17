@@ -92,15 +92,15 @@ First section of a build display, this is where you find the major unit-specific
 
 The equipment section is self-explanatory as it is almost identical to the in-game display. Clicking any item icon do load from server the list of items the unit can equip. The result is then filtered according to several rules (for instance the ability to wield a second weapon). If there is at least one item that can be equipped, opens a pop-up display to switch the item (see the corresponding section of this guide for more information).
 
-Unlike the game, the tool does not let you place a two-handed weapon in the left hand slot. The right hand slot (located on the left) is always considered as the _main weapon_ hand. The left hand can only hold a second one-handed weapon (if dual wielding is authorized), or shields.
-
 ![Unit equipment](https://www.final-fantasy.ch/upload/calculator_equipment.png)
+
+Unlike the game, the tool does not let you place a two-handed weapon in the left hand slot. The right hand slot (located on the left) is always considered as the _main weapon_ hand. The left hand can only hold a second one-handed weapon (if dual wielding is authorized), or shields.
 
 #### Skill rotation
 
 The skills used by the tool for the calculation are displayed within this section. A skill can be either categorized as part of the _start phase_, which represent the very first skills you might want to use at the beginning of a battle, and a _stable rotation_, which is possible when all the skills and/or the LB is available. The stable rotation should be the list of skills you might want to use for optimal damages if an opponent lives long enough.
 
-Note : the calculator does not consider specific battles, so unit death is not considered at all. In real life however, this is important for a few characters as some of the unlocked skills can be altered of impossible to cast after a death/raise. 2B is an example of such unit and does struggle when dying frequently.
+Note : the calculator does not consider specific battles, so unit death is not considered at all. In real game however, this is important for many characters as some of the unlocked skills can be altered or impossible to cast after a death/raise. 2B is an example of such unit and does struggle when dying frequently.
 
 Clicking any of the skills does open a simple pop-up display with additional information, including name of the skill, power, type of attack and damage, hits, frames and damage distribution, and the number of attacks (the latter for multi-cast units).
 
