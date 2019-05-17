@@ -80,29 +80,29 @@ When you select a unit, you immediately get a result according to a pre-defined 
 First section of a build display, this is where you find the major unit-specific information, as well as the equipped esper :
 
 1. Unit basic information including name of the character, rank and in-game compendium number.
-1. Build selection if there is more than one (not all possible skill rotations are configured, but you should find the most powerful ones).
+1. Build selection if there are more than one (not all possible skill rotations are configured, but you should find the most powerful ones).
 1. Unit icon.
 1. Unit total stats, including equipment and buffs. Next to each stat, a question mark icon can be clicked to open a pop-up display of the stat calculation detail (see the corresponding section of this guide for more information).
-1. Unit conditional traits (like stat bonus for equipping a category of weapon), if there is some for this character.
-1. Current esper. Clicking the icon do open the pop-up display to switch for another esper (see the corresponding section of this guide for more information).
+1. Unit conditional traits (like stat bonus for equipping a category of weapon), if any for this character.
+1. Current esper. Clicking the icon opens the pop-up display to switch for another esper (see the corresponding section of this guide for more information).
 
 ![Unit details](https://www.final-fantasy.ch/upload/calculator_unit_details.png)
 
 ### Unit equipment
 
-The equipment section is self-explanatory as it is almost identical to the in-game display. Clicking any item icon do load from server the list of items the unit can equip. The result is then filtered according to several rules (for instance the ability to wield a second weapon). If there is at least one item that can be equipped, opens a pop-up display to switch the item (see the corresponding section of this guide for more information).
+The equipment section is self-explanatory as it is almost identical to the in-game display. Clicking any item icon loads from server the list of items the unit can equip. The result is then filtered according to several rules (for instance the ability to wield a second weapon). If there is at least one item that can be equipped, opens a pop-up display to switch the item (see the corresponding section of this guide for more information).
 
 ![Unit equipment](https://www.final-fantasy.ch/upload/calculator_equipment.png)
 
-Unlike the game, the tool does not let you place a two-handed weapon in the left hand slot. The right hand slot (located on the left) is always considered as the _main weapon_ hand. The left hand can only hold a second one-handed weapon (if dual wielding is authorized), or shields.
+Unlike the game, the tool does not let you place a two-handed weapon in the left hand slot. The right hand slot (located on the left) is always considered as the _main weapon_ hand. The left hand can only hold a second one-handed weapon (if dual wielding is authorized), or a shield.
 
 ### Skill rotation
 
 The skills used by the tool for the calculation are displayed within this section. A skill can be either categorized as part of the _start phase_, which represent the very first skills you might want to use at the beginning of a battle, and a _stable rotation_, which is possible when all the skills and/or the LB is available. The stable rotation should be the list of skills you might want to use for optimal damages if an opponent lives long enough.
 
-Note : the calculator does not consider specific battles, so unit death is not considered at all. In real game however, this is important for many characters as some of the unlocked skills can be altered or impossible to cast after a death/raise. 2B is an example of such unit and does struggle when dying frequently.
+Note : the calculator does not consider specific battles, so unit death is not considered at all. In real game however, this is important for many characters as some of the unlocked skills can be altered or impossible to cast after a death/raise. 2B is an example of such unit which struggle when dying frequently.
 
-Clicking any of the skills does open a simple pop-up display with additional information, including name of the skill, power, type of attack and damage, hits, frames and damage distribution, and the number of attacks (the latter for multi-cast units).
+Clicking any of the skills opens a simple pop-up display with additional information, including name of the skill, power, type of attack and damage, hits, frames and damage distribution, and the number of attacks (the latter for multi-cast units).
 
 ![Skill rotation](https://www.final-fantasy.ch/upload/calculator_skill_rotation.png)
 
@@ -117,18 +117,18 @@ This is the major section of the tool and contains the results of the build calc
 
 ![Damage results](https://www.final-fantasy.ch/upload/calculator_damage_results.png)
 
-Next to each per-turn damage result, clicking the question mark icon does open the damage calculation math details. This pop-up display is also the one that contains all the calculation configuration parameters (see the corresponding section of this guide for more information). 
+Clicking the question mark icon next to each per-turn damage result opens the damage calculation math details. This pop-up display also provides all calculation configuration parameters (see the corresponding section of this guide for more information). 
 
 ### Permanent URL
 
-The permanent URL contains all the parameters needed to reproduce your calculation. The _Copy_ button is placing the URL value to your device clipboard. You can paste this URL anywhere on the internet to make a link to your calculation.
+The permanent URL contains all the parameters needed to reproduce your calculation. The _Copy_ button places the URL value to your device clipboard. You can paste this URL anywhere on the internet to make a link to your calculation.
 
 ### Stat calculation (pop-up)
 
 This pop-up, opened by clicking the question mark icon next to a stat value, is displaying the maths details behind it :
 
 1. Unit base value (pots included)
-1. Unit % value increase (applied on unit base value, skills considered enhanced)
+1. Unit % value increase (applied on unit base value, skills are considered enhanced)
 1. Unit DH/TDH/TDW value increase (applied on equipment base value)
 1. Unit increase to value from esper (applied on esper base value)
 1. Equipment base value
@@ -146,7 +146,7 @@ The _total_ value is what you should read in the game _Units_ menu (+- 1 or 2 po
 
 ### Esper selection (pop-up)
 
-This pop-up, opened by clicking the currently equipped esper icon, let you choose between a few pre-defined esper builds. Each build is identified by a short list of the most important build features (especially boost to stat value from esper and killers). A link to ffbeequip.com is available to see exactly which board skills are considered active.
+This pop-up, opened by clicking the currently equipped esper icon, let you choose between a few pre-defined esper builds. Each build is identified by a short list of the most important build features (especially boosts to stat value from esper and killers). A link to ffbeequip.com is available to see exactly which board skills are considered active.
 
 ![Esper selection](https://www.final-fantasy.ch/upload/calculator_esper_selection.png)
 
@@ -175,7 +175,7 @@ This first part displays the math values related to combo and hits calculation.
 
 1. Combo multiplier of the chain (finishers only, x4 if the skill is short enough and have no risk of breaking the chain, a lower value otherwise)
 1. Spark chain activation checkbox (chainers only)
-1. Combo increment to apply to each consecutive hit (chainers only, calculated with a 0.1 base, +0.3 for each element and +0.5 every other hit for spark)
+1. Combo increment to be applied to each consecutive hit (chainers only, calculated with a 0.1 base, +0.3 for each element and +0.5 every other hit for spark)
 1. Skill(s) hits power
 1. Total power of the turn
 
@@ -186,14 +186,14 @@ This first part displays the math values related to combo and hits calculation.
 The second part of the damage calculation is where you find most of the configuration options to simulate as close as possible a real case scenario :
 
 1. Unit offensive stat(s) (including equipment and esper)
-1. Stat buff from group configuration (default to +150%, can be switched off using the checkbox on the left)
+1. Stat buff from group configuration (default to +150%, can be switched off by clicking the checkbox on the left)
 1. Stat self-buff (if available for this unit)
 1. Stat total value after buffs (the buff is the max value of the group buff and self-buff)
-1. Monster type(s) configuration (killer calculation can be switched off using the checkbox on the left)
+1. Monster type(s) configuration (killer calculation can be switched off by clicking the checkbox on the left)
 1. Passive killer value (unit traits and equipment value)
 1. Active killer value (from used skills in the rotation)
 1. Enemy resistance to each elements of the attack configuration (default to 0)
-1. Group resistance break to each elements of the attack configuration (default to -50, can be switched off using checkbox on the left)
+1. Group resistance break to each elements of the attack configuration (default to -50, can be switched off by clicking the checkbox on the left)
 1. Enemy final resistance to each elements of the attack (including skills breaks)
 1. Enemy DEF or SPR (default to 1 million)
 1. Weapon variance (two-handed only)
@@ -204,7 +204,7 @@ The second part of the damage calculation is where you find most of the configur
 
 The last part of the damage calculation pop-up holds the maths details. It has several partial calculation meant to clarify the steps :
 
-1. Calculation of the base damages, which includes the unit stat value (after buff), power of the turn (after combo) and level of the unit. The ATK of the weapons are also included for dual wielding units calculation.
+1. Calculation of the base damages, including the unit stat value (after buff), power of the turn (after combo) and level of the unit. The ATK of the weapons are also included for dual wielding units calculation.
 1. Calculation including the killer value
 1. Calculation including the average elemental resistance of the enemy
 1. Final turn calculation including variances (two-handed weapon variance optionally)
