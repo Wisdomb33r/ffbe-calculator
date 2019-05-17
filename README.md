@@ -71,13 +71,13 @@ The bottom toolbar contains social networks interaction as well as a PayPal link
 
 To really dive into the calculation, simply hit the _Units_ button to choose your favourite unit by clicking its in-game icon. The units are categorized as _physical chainers_, _magical chainers_, _hybrid chainers_, _physical finishers_, _magical finishers_, _hybrid finishers_ or _tanks_. They can be located in several categories. Within a category, the units are more-or-less sorted according to their release order.
 
----- insert screenshot ----
+![Unit selection](https://www.final-fantasy.ch/upload/calculator_unit_selection.png)
 
 When you select a unit, you immediately get a result according to a pre-defined build. There is a lot of information, split into several sections. Additional information, mostly related to calculation details, can be found in pop-up windows.
 
 #### Unit details
 
-First section of a display, this is where you find the major unit-specific information, as well as the equipped esper :
+First section of a build display, this is where you find the major unit-specific information, as well as the equipped esper :
 
 1. Unit basic information including name of the character, rank and in-game compendium number.
 1. Build selection if there is more than one (not all possible skill rotations are configured, but you should find the most powerful ones).
@@ -86,7 +86,7 @@ First section of a display, this is where you find the major unit-specific infor
 1. Unit conditional traits (like stat bonus for equipping a category of weapon), if there is some for this character.
 1. Current esper. Clicking the icon do open the pop-up display to switch for another esper (see the corresponding section of this guide for more information).
 
----- insert screenshot with numbers ----
+![Unit details](https://www.final-fantasy.ch/upload/calculator_unit_details.png)
 
 #### Unit equipment
 
@@ -94,7 +94,7 @@ The equipment section is self-explanatory as it is almost identical to the in-ga
 
 Unlike the game, the tool does not let you place a two-handed weapon in the left hand slot. The right hand slot (located on the left) is always considered as the _main weapon_ hand. The left hand can only hold a second one-handed weapon (if dual wielding is authorized), or shields.
 
----- insert screenshot ----
+![Unit equipment](https://www.final-fantasy.ch/upload/calculator_equipment.png)
 
 #### Skill rotation
 
@@ -104,9 +104,9 @@ Note : the calculator does not consider specific battles, so unit death is not c
 
 Clicking any of the skills does open a simple pop-up display with additional information, including name of the skill, power, type of attack and damage, hits, frames and damage distribution, and the number of attacks (the latter for multi-cast units).
 
----- insert screenshot ---- 
+![Skill rotation](https://www.final-fantasy.ch/upload/calculator_skill_rotation.png)
 
-#### Damage calculation result
+#### Damage calculations results
 
 This is the major section of the tool and contains the results of the build calculation. It displays per-turn damages for two different calculations :
 
@@ -115,7 +115,7 @@ This is the major section of the tool and contains the results of the build calc
 1. Average turn damages calculated for the 10 first turns of the battle.
 1. Average turn damages calculated for the stable rotation (optimal damages of the character for long-term battles).
 
----- insert screenshot with numbers ----
+![Damage results](https://www.final-fantasy.ch/upload/calculator_damage_results.png)
 
 Next to each per-turn damage result, clicking the question mark icon does open the damage calculation math details. This pop-up display is also the one that contains all the calculation configuration parameters (see the corresponding section of this guide for more information). 
 
@@ -142,13 +142,13 @@ This pop-up, opened by clicking the question mark icon next to a stat value, is 
 
 The _total_ value is what you should read in the game _Units_ menu (+- 1 or 2 points due to roundings). This result is before battle buffs.
 
----- insert screenshot with numbers ----
+![Stats calculation](https://www.final-fantasy.ch/upload/calculator_unit_stats_calculation.png)
 
 #### Esper selection (pop-up)
 
 This pop-up, opened by clicking the currently equipped esper icon, let you choose between a few pre-defined esper builds. Each build is identified by a short list of the most important build features (especially boost to stat value from esper and killers). A link to ffbeequip.com is available to see exactly which board skills are considered active.
 
----- insert screenshot ----
+![Esper selection](https://www.final-fantasy.ch/upload/calculator_esper_selection.png)
 
 #### Equipment selection (pop-up)
 
@@ -158,6 +158,8 @@ This pop-up, opened by clicking an equipment slot, let you remove, change or add
 1. Exclude STMR's from items list
 1. Remove item from the build
 1. Available items list for this slot
+
+![Equipment selection](https://www.final-fantasy.ch/upload/calculator_equipment_selection.png)
 
 To avoid long loading time, not all the items available in the game are configured in the tool. A large part is excluded due to being completely outdated in the current meta.
 
@@ -177,22 +179,26 @@ This first part displays the math values related to combo and hits calculation.
 1. Skill(s) hits power
 1. Total power of the turn
 
+![Skill hits calculation](https://www.final-fantasy.ch/upload/calculator_skill_hits_calculation.png)
+
 ###### Group and battle configuration
 
 The second part of the damage calculation is where you find most of the configuration options to simulate as close as possible a real case scenario :
 
 1. Unit offensive stat(s) (including equipment and esper)
-1. Stat buff from group configuration (default to +150%)
+1. Stat buff from group configuration (default to +150%, can be switched off using the checkbox on the left)
 1. Stat self-buff (if available for this unit)
 1. Stat total value after buffs (the buff is the max value of the group buff and self-buff)
-1. Monster type(s) configuration
+1. Monster type(s) configuration (killer calculation can be switched off using the checkbox on the left)
 1. Passive killer value (unit traits and equipment value)
 1. Active killer value (from used skills in the rotation)
 1. Enemy resistance to each elements of the attack configuration (default to 0)
-1. Group resistance break to each elements of the attack configuration (default to -50)
+1. Group resistance break to each elements of the attack configuration (default to -50, can be switched off using checkbox on the left)
 1. Enemy final resistance to each elements of the attack (including skills breaks)
 1. Enemy DEF or SPR (default to 1 million)
 1. Weapon variance (two-handed only)
+
+![Group and battle configuration](https://www.final-fantasy.ch/upload/calculator_damage_calculation_parameters.png)
 
 ###### Damage calculation maths
 
@@ -202,3 +208,5 @@ The last part of the damage calculation pop-up holds the maths details. It has s
 1. Calculation including the killer value
 1. Calculation including the average elemental resistance of the enemy
 1. Final turn calculation including variances (two-handed weapon variance optionally)
+
+![Damage calculations](https://www.final-fantasy.ch/upload/calculator_damage_calculations.png)
