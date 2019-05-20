@@ -57,6 +57,26 @@ export class UnitsService {
       u.builds.filter((b: Build) => b.algorithmId === 8).length > 0);
   }
 
+  public getUnitListByAlgorithm(algorithm: number) {
+    switch (algorithm) {
+      case 1:
+        return this.physicalChainers;
+      case 2:
+        return this.magicalChainers;
+      case 3:
+        return this.hybridChainers;
+      case 4:
+        return this.physicalFinishers;
+      case 5:
+        return this.magicalFinishers;
+      case 6:
+        return this.hybridFinishers;
+      case 8:
+        return this.defenders;
+    }
+    return [];
+  }
+
   public equipInSlot(slot: string, equipment: Equipment) {
     if (equipment.id === -1) {
       this.selectedUnit.emptySlot(slot);

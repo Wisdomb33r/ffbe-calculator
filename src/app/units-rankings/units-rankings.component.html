@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-title>{{'rankings.title' | translate}}</mat-card-title>
+  <mat-card-content>
+    <p>{{'rankings.summary' | translate}}</p>
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedAlgorithmId" placeholder="{{'rankings.algorithmSelection' | translate}}">
+        <mat-option></mat-option>
+        <mat-option [value]="1" (change)="changeAlgorithm()">{{'rankings.physicalChainers' | translate}}</mat-option>
+        <mat-option [value]="2" (change)="changeAlgorithm()">{{'rankings.magicalChainers' | translate}}</mat-option>
+        <mat-option [value]="3" (change)="changeAlgorithm()">{{'rankings.hybridChainers' | translate}}</mat-option>
+        <mat-option [value]="4" (change)="changeAlgorithm()">{{'rankings.physicalFinishers' | translate}}</mat-option>
+        <mat-option [value]="5" (change)="changeAlgorithm()">{{'rankings.magicalFinishers' | translate}}</mat-option>
+        <mat-option [value]="6" (change)="changeAlgorithm()">{{'rankings.hybridFinishers' | translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
