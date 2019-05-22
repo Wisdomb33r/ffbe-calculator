@@ -1,5 +1,5 @@
-<mat-card>
-  <mat-card-title>{{'rankings.title' | translate}}</mat-card-title>
+<mat-card class="rankings-configuration">
+  <mat-card-title>{{'rankings.configurationTitle' | translate}}</mat-card-title>
   <mat-card-content>
     <p>{{'rankings.summary' | translate}}</p>
     <mat-form-field>
@@ -13,5 +13,33 @@
         <mat-option [value]="6" (change)="changeAlgorithm()">{{'rankings.hybridFinishers' | translate}}</mat-option>
       </mat-select>
     </mat-form-field>
+
+    <div>
+      <mat-checkbox [(ngModel)]="isWithKillers" (change)="switchKillers()"></mat-checkbox>
+    </div>
+
+    <div>
+      <button mat-raised-button color="accent"
+              (click)="calculateMissingBuilds()">{{'rankings.calculateMissingBuilds' | translate}}</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="rankedUnits && rankedUnits.length" class="rankings-results">
+  <mat-card-title>{{'rankings.rankingsTitle' | translate}}</mat-card-title>
+  <mat-card-content>
+    <table>
+      <tr>
+        <th>{{'rankings.rankingHeader' | translate}}</th>
+        <th>{{'rankings.damageHeader' | translate}}</th>
+        <th>{{'rankings.unitHeader' | translate}}</th>
+      </tr>
+      <tr *ngFor="let rankedUnit of rankedUnits;let i = index">
+        <td>{{i + 1}}</td>
+        <td *ngIf="rankedUnit.rankingResult">{{rankedUnit.rankingResult | integer}}</td>
+        <td *ngIf="!rankedUnit.rankingResult"></td>
+        <td>{{rankedUnit.name}}</td>
+      </tr>
+    </table>
   </mat-card-content>
 </mat-card>
