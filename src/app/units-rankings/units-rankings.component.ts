@@ -58,6 +58,9 @@ export class UnitsRankingsComponent implements OnInit {
           .filter((build: Build) => build.algorithmId === this.selectedAlgorithmId)
           .map((build: Build) => {
             unit.selectBuild(build.id);
+            if (!this.isWithKillers) {
+              unit.selectedBuild.algorithm['isKillerActive'] = false;
+            }
             unit.computeAll();
             return build;
           })
