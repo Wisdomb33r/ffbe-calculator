@@ -114,6 +114,15 @@ class Equipment {
         $this->conditional_passives [] = new ConditionalPassive ( $passive, $language );
       }
     }
+    $brex_build_passives = brex_build_passif::finderParStmrRelation ( $brex_equipement->id );
+    if (count ( $brex_build_passives )) {
+      if (! $this->conditional_passives) {
+        $this->conditional_passives = array ();
+      }
+      foreach ( $brex_build_passives as $passive ) {
+        $this->conditional_passives [] = new ConditionalPassive ( $passive, $language );
+      }
+    }
     if ($brex_equipement->res_feu >= 100) {
       $this->elements [] = 1;
     }
