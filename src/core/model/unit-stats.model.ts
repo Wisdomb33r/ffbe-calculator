@@ -14,6 +14,7 @@ export class UnitStats {
   public esper_percent: number;
   public lb_multiplier: number;
   public dual_wield: boolean;
+  public tdwCapIncrease: boolean;
 
   // transcient
   public equipment_jump: number;
@@ -31,6 +32,7 @@ export class UnitStats {
     this.esper_percent = stats.esper_percent;
     this.lb_multiplier = stats.lb_multiplier;
     this.dual_wield = stats.dual_wield;
+    this.tdwCapIncrease = stats.tdwCapIncrease;
   }
 
   public defineEquipmentsStats(hp: number, mp: number, atk: number, mag: number, def: number, spr: number, evo: number) {
@@ -116,12 +118,12 @@ export class UnitStats {
   }
 
   public computeTotals(isDoubleHandActive: boolean, isTrueDoubleHandActive: boolean, isDualWielding: boolean) {
-    this.hp.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.mp.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.atk.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.mag.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.def.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
-    this.spr.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding);
+    this.hp.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding, this.tdwCapIncrease);
+    this.mp.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding, this.tdwCapIncrease);
+    this.atk.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding, this.tdwCapIncrease);
+    this.mag.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding, this.tdwCapIncrease);
+    this.def.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding, this.tdwCapIncrease);
+    this.spr.computeTotal(isDoubleHandActive, isTrueDoubleHandActive, isDualWielding, this.tdwCapIncrease);
     this.evo.computeEvoTotal();
   }
 }

@@ -296,6 +296,7 @@ class UnitStats {
   public $esper_percent;
   public $lb_multiplier;
   public $dual_wield;
+  public $tdwCapIncrease;
   function __construct($brex_unit_stats) {
     $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
     $this->hp_passive = $brex_unit_stats->pv_passif_amelio > 0 ? $brex_unit_stats->pv_passif_amelio : $brex_unit_stats->pv_passif;
@@ -332,6 +333,7 @@ class UnitStats {
     $this->esper_percent = $brex_unit_stats->esper_percent;
     $this->lb_multiplier = $brex_unit_stats->lb_boost;
     $this->dual_wield = $brex_unit_stats->dual_wield == '1' ? true : false;
+    $this->tdwCapIncrease = $brex_unit_stats->boosted_dw == '1' ? true : false;
   }
 }
 class Build {
@@ -465,7 +467,7 @@ class Skill {
       $this->icon = $brex_skill->competence->icone->getImageimgPath ();
       $this->hits = $brex_skill->competence->hits;
       $this->frames = $brex_skill->competence->frames;
-      $this->damages = $brex_skill->competence->damages;
+      $this->damages = $brex_skill->damages ? $brex_skill->damages : $brex_skill->competence->damages;
       if ($brex_skill->is_enhanced == 1) {
         $values = array ();
         $values ['perso'] = $brex_unit->perso->id;

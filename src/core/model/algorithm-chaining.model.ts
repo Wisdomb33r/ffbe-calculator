@@ -46,6 +46,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       const damages: Array<number> = ('' + skill.damages).split(' ').map((s: string) => +s);
       const hitsPower: Array<number> = [];
       let chainCombos = skill.chainCombo ? +skill.chainCombo / 2 : 0;
+      const maxChainCombo = unit.stats.tdwCapIncrease && unit.selectedBuild.equipments.isDualWielding() ? 6 : 4;
 
       let lbMultiplier = unit.getLbMultiplier();
       if (skill.lb_multiplier && skill.lb_multiplier > 1) {
@@ -62,7 +63,7 @@ export class AlgorithmChaining extends AlgorithmOffensive {
         if (i > 0 && ((frames[i] - frames[i - 1] > 20 && this.isSparkChain) || (frames[i] - frames[i - 1] > 23))) {
           chainCombos = 0;
         }
-        let hitPower = skillTotalPower * damages[i] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
+        let hitPower = skillTotalPower * damages[i] / 100 * Math.min(maxChainCombo, 1 + chainCombos * result.combosIncrement * 2);
         if (skill.isLimitBreak && lbMultiplier > 1) {
           result.lbMultiplier = lbMultiplier;
           hitPower *= lbMultiplier;
@@ -75,15 +76,15 @@ export class AlgorithmChaining extends AlgorithmOffensive {
         chainCombos++;
       }
       if (nbAttacks > 1) {
-        if (skill.isBreakingChain) {
-          chainCombos = 0;
-        }
         for (let i = 1; i < nbAttacks; i++) {
+          if (skill.isBreakingChain) {
+            chainCombos = 0;
+          }
           for (let j = 0; j < skill.hits; j++) {
             if (j > 0 && ((frames[j] - frames[j - 1] > 20 && this.isSparkChain) || (frames[i] - frames[i - 1] > 23))) {
               chainCombos = 0;
             }
-            let hitPower = skillTotalPower * damages[j] / 100 * Math.min(4, 1 + chainCombos * result.combosIncrement * 2);
+            let hitPower = skillTotalPower * damages[j] / 100 * Math.min(maxChainCombo, 1 + chainCombos * result.combosIncrement * 2);
             if (skill.isJump) {
               hitPower *= jumpMultiplier / 100;
             }
