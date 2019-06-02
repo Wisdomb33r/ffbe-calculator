@@ -352,17 +352,19 @@ describe('EquipmentSet', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     // WHEN
-    equipments.transferLockedStatusToAlternative(1873);
+    equipments.transferLockedStatusToAlternative(1873, 2222);
     // THEN
     expect(equipments.right_hand.locked).toBeTruthy();
+    expect(equipments.right_hand.locked_alternative).toEqual(2222);
   });
 
   it('#transferLockedStatusToAlternative should do nothing if the alternative item if not equipped', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
     // WHEN
-    equipments.transferLockedStatusToAlternative(18733);
+    equipments.transferLockedStatusToAlternative(18733, 2222);
     // THEN
     expect(equipments.right_hand.locked).toBeFalsy();
+    expect(equipments.right_hand.locked_alternative).toBeFalsy();
   });
 });
