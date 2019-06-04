@@ -505,4 +505,50 @@ export class EquipmentSet {
       .map((cond: ConditionalPassive) => cond.skill_mod)
       .reduce((val1, val2) => val1 + val2, 0);
   }
+
+  public isEquipped(itemId: number) {
+    return !isNullOrUndefined(this.getEquippedItemById(itemId));
+  }
+
+  public transferLockedStatusToAlternative(alternative: number, newAlternative: number) {
+    const equippedItem: Equipment = this.getEquippedItemById(alternative);
+    if (equippedItem) {
+      equippedItem.locked = true;
+      equippedItem.locked_alternative = newAlternative;
+    }
+  }
+
+  private getEquippedItemById(itemId: number): Equipment {
+    if (this.right_hand && this.right_hand.id === itemId) {
+      return this.right_hand;
+    }
+    if (this.left_hand && this.left_hand.id === itemId) {
+      return this.left_hand;
+    }
+    if (this.head && this.head.id === itemId) {
+      return this.head;
+    }
+    if (this.body && this.body.id === itemId) {
+      return this.body;
+    }
+    if (this.accessory1 && this.accessory1.id === itemId) {
+      return this.accessory1;
+    }
+    if (this.accessory2 && this.accessory2.id === itemId) {
+      return this.accessory2;
+    }
+    if (this.materia1 && this.materia1.id === itemId) {
+      return this.materia1;
+    }
+    if (this.materia2 && this.materia2.id === itemId) {
+      return this.materia2;
+    }
+    if (this.materia3 && this.materia3.id === itemId) {
+      return this.materia3;
+    }
+    if (this.materia4 && this.materia4.id === itemId) {
+      return this.materia4;
+    }
+    return null;
+  }
 }

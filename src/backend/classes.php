@@ -43,6 +43,7 @@ class Equipment {
   public $variance_max;
   public $unique;
   public $locked;
+  public $locked_alternative;
   public $stmr;
   public $physical_killers;
   public $magical_killers;
@@ -109,6 +110,15 @@ class Equipment {
     $brex_build_passives = brex_build_passif::findByRelation1N ( array ('objet' => $brex_equipement->id) );
     if (count ( $brex_build_passives )) {
       $this->conditional_passives = array ();
+      foreach ( $brex_build_passives as $passive ) {
+        $this->conditional_passives [] = new ConditionalPassive ( $passive, $language );
+      }
+    }
+    $brex_build_passives = brex_build_passif::finderParStmrRelation ( $brex_equipement->id );
+    if (count ( $brex_build_passives )) {
+      if (! $this->conditional_passives) {
+        $this->conditional_passives = array ();
+      }
       foreach ( $brex_build_passives as $passive ) {
         $this->conditional_passives [] = new ConditionalPassive ( $passive, $language );
       }
@@ -542,6 +552,7 @@ class EquipmentSet {
         $slot = $equipment->slot->nom;
         $this->$slot = new Equipment ( $equipment->objet, $language );
         $this->$slot->locked = $equipment->non_removeable ? true : false;
+        $this->$slot->locked_alternative = $equipment->alternative;
       }
     }
   }

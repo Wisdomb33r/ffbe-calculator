@@ -16,6 +16,9 @@
 
 .equipment img {
   width: 58px;
+}
+
+img.clickable {
   cursor: pointer;
 }
 
