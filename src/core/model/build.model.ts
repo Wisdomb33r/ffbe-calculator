@@ -144,4 +144,12 @@ export class Build {
   public equipInSlot(slot: string, equipment: Equipment) {
     this.equipments.equipInSlot(slot, equipment);
   }
+
+  public isMultiSkill(skill: Skill): boolean {
+    if (skill.isStartPhase) {
+      return this.startPhaseSkills.filter((s: Skill) => s.turnCount === skill.turnCount).length > 1;
+    } else {
+      return this.skills.filter((s: Skill) => s.turnCount === skill.turnCount).length > 1;
+    }
+  }
 }
