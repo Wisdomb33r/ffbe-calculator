@@ -53,10 +53,10 @@ export class Unit {
       || (this.id === 8044 && this.selectedBuild.equipments.accessory2 && this.selectedBuild.equipments.accessory2.id === 2799) // Fryevia
 
       || (this.id === 8053 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1305) // Reberta
-      || (this.id === 8053 && this.selectedBuild.equipments.materia1 && this.selectedBuild.equipments.materia1.id === 2597) // Beowulf
-      || (this.id === 8053 && this.selectedBuild.equipments.materia2 && this.selectedBuild.equipments.materia2.id === 2597) // Beowulf
-      || (this.id === 8053 && this.selectedBuild.equipments.materia3 && this.selectedBuild.equipments.materia3.id === 2597) // Beowulf
-      || (this.id === 8053 && this.selectedBuild.equipments.materia4 && this.selectedBuild.equipments.materia4.id === 2597) // Beowulf
+      || (this.id === 8053 && this.selectedBuild.equipments.materia1 && this.selectedBuild.equipments.materia1.id === 2597) // Reberta
+      || (this.id === 8053 && this.selectedBuild.equipments.materia2 && this.selectedBuild.equipments.materia2.id === 2597) // Reberta
+      || (this.id === 8053 && this.selectedBuild.equipments.materia3 && this.selectedBuild.equipments.materia3.id === 2597) // Reberta
+      || (this.id === 8053 && this.selectedBuild.equipments.materia4 && this.selectedBuild.equipments.materia4.id === 2597) // Reberta
 
       || (this.id === 1275 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 3216) // Beowulf
       || (this.id === 1275 && this.selectedBuild.equipments.materia1 && this.selectedBuild.equipments.materia1.id === 3215) // Beowulf
