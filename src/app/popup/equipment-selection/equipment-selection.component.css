@@ -6,6 +6,10 @@
   margin-bottom: -.8rem;
 }
 
+.equipment-scroll-viewport {
+  height: 50vh;
+}
+
 .equipment {
   display: flex;
   flex-flow: row nowrap;

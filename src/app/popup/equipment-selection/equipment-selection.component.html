@@ -5,22 +5,21 @@
     </mat-form-field>
   </div>
   <div class="stmr-exclude">
-    <mat-checkbox [(ngModel)]="unitsService.stmrExclusion">
+    <mat-checkbox [(ngModel)]="unitsService.stmrExclusion" (change)="filter()">
       {{'equipment.selection.excludeStmr' | translate}}
     </mat-checkbox>
   </div>
   <div class="equipment unequip" (click)="removeEquipment()" *ngIf="removeable">
     <p><span>&#8617;</span> {{'equipment.selection.remove' | translate}}</p>
   </div>
-  <ng-container *ngFor="let equipment of equipments">
-    <div class="equipment" *ngIf="!unitsService.stmrExclusion || !equipment.stmr"
-         [style.display]="equipment.filtered ? 'none' : ''">
+  <cdk-virtual-scroll-viewport autosize class="equipment-scroll-viewport">
+    <div class="equipment" *cdkVirtualFor="let equipment of currentDisplayedEquipments">
       <div>
         <img class="clickable" [src]="equipment.icon" (click)="selectEquipment(equipment)">
       </div>
       <app-equipment-details [equipment]="equipment" [displayWeaponTraits]="false"></app-equipment-details>
     </div>
-  </ng-container>
+  </cdk-virtual-scroll-viewport>
 </mat-dialog-content>
 
 

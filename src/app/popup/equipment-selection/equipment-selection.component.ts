@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, NgZone, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Equipment} from '../../../core/model/equipment.model';
 import {fromEvent, Subscription} from 'rxjs';
@@ -9,13 +9,15 @@ import {UnitsService} from '../../../core/services/units.service';
   templateUrl: './equipment-selection.component.html',
   styleUrls: ['./equipment-selection.component.css']
 })
-export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
+export class EquipmentSelectionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private slot: string;
   public equipments: Array<Equipment> = [];
+  public currentDisplayedEquipments: Array<Equipment> = [];
   public removeable: boolean;
   public locked: boolean;
   @ViewChild('itemfilter') itemfilter: ElementRef;
+  public currentTextFilter = '';
   private filterChangedSubscription: Subscription;
 
   constructor(public unitsService: UnitsService,
@@ -29,6 +31,10 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
     this.locked = data.locked;
   }
 
+  ngOnInit() {
+    this.currentDisplayedEquipments = this.equipments;
+  }
+
   ngAfterViewInit() {
     if (!this.locked) {
       this.ngzone.runOutsideAngular(() => {
@@ -37,9 +43,12 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
             debounceTime(600)
           )
           .subscribe((keyboardEvent: any) => {
-            this.equipments.forEach((item: Equipment) =>
-              item.filtered = item.name.toLowerCase().indexOf(keyboardEvent.target.value.toLowerCase()) === -1
-            );
+            if (keyboardEvent.target.value && keyboardEvent.target.value.length) {
+              this.currentTextFilter = keyboardEvent.target.value.toLowerCase();
+            } else {
+              this.currentTextFilter = '';
+            }
+            this.filter();
             this.cdref.detectChanges();
           });
       });
@@ -58,5 +67,13 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
 
   public removeEquipment() {
     this.dialogRef.close({id: -1});
+  }
+
+  public filter() {
+    this.currentDisplayedEquipments = [];
+    this.currentDisplayedEquipments = this.equipments.filter((item: Equipment) =>
+      (this.currentTextFilter === '' || item.name.toLowerCase().indexOf(this.currentTextFilter) >= 0)
+      && (!this.unitsService.stmrExclusion || !item.stmr)
+    );
   }
 }
