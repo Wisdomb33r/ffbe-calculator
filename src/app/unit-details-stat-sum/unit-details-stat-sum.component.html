@@ -45,7 +45,8 @@
       <td>{{'unit.details.stats.popup.passive' | translate}}</td>
       <td>{{getEquipmentPassiveValue() | integer}}</td>
       <td class="percent"
-          [class.limit-warn]="isEquipmentPassiveLimitExceeded()">({{getEquipmentPassivePercent()}}%)</td>
+          [class.limit-warn]="isEquipmentPassiveLimitExceeded()">({{getEquipmentPassivePercent()}}%)
+      </td>
     </tr>
     <tr *ngIf="doublehanding">
       <td>{{'unit.details.stats.popup.dh' | translate}}</td>
@@ -88,7 +89,12 @@
       <td></td>
     </tr>
   </table>
-  <p *ngIf="isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded() || isEquipmentDwLimitExceeded()"
+  <p *ngIf="!hasUnitExctendedTdwLimitCap() &&
+    (isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded() || isEquipmentDwLimitExceeded())"
      class="limit-warn">
     {{'unit.details.stats.popup.limitWarn' | translate}}</p>
+  <p *ngIf="hasUnitExctendedTdwLimitCap() &&
+    (isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded() || isEquipmentDwLimitExceeded())"
+     class="limit-warn">
+    {{'unit.details.stats.popup.limitWarnTdwExtended' | translate}}</p>
 </mat-dialog-content>

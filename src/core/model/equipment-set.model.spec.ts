@@ -303,25 +303,6 @@ describe('EquipmentSet', () => {
     expect(equipments.rh_trait3).toBeTruthy();
   });
 
-  it('#equipInSlot should remove weapon special enhancement while equipping non-enhanceable weapon', () => {
-    // GIVEN
-    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
-    equipments.right_hand.category = 27;
-    equipments.rh_trait1 = new Equipment(JSON.parse(VALID_EQUIPMENT));
-    equipments.rh_trait2 = new Equipment(JSON.parse(VALID_EQUIPMENT));
-    equipments.rh_trait3 = new Equipment(JSON.parse(VALID_EQUIPMENT));
-    const newWeapon: Equipment = new Equipment(JSON.parse(VALID_EQUIPMENT));
-    newWeapon.id = 100000;
-    // WHEN
-    equipments.equipInSlot('right_hand', newWeapon);
-    // THEN
-    expect(equipments.right_hand).toBeTruthy();
-    expect(equipments.right_hand.id).toEqual(100000);
-    expect(equipments.rh_trait1).toBeFalsy();
-    expect(equipments.rh_trait2).toBeFalsy();
-    expect(equipments.rh_trait3).toBeFalsy();
-  });
-
   it('#equipInSlot should remove items of category if extra equipment item is removed', () => {
     // GIVEN
     const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
@@ -347,5 +328,43 @@ describe('EquipmentSet', () => {
     // THEN
     expect(equipments.right_hand).toBeTruthy();
     expect(equipments.materia1).toEqual(newMateria);
+  });
+
+  it('#isEquipped should return true if equipment contains the item', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    // WHEN
+    const isEquipped = equipments.isEquipped(1873);
+    // THEN
+    expect(isEquipped).toBeTruthy();
+  });
+
+  it('#isEquipped should return false if equipment does not contains the item', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    // WHEN
+    const isEquipped = equipments.isEquipped(18733);
+    // THEN
+    expect(isEquipped).toBeFalsy();
+  });
+
+  it('#transferLockedStatusToAlternative should lock the alternative item if equipped', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    // WHEN
+    equipments.transferLockedStatusToAlternative(1873, 2222);
+    // THEN
+    expect(equipments.right_hand.locked).toBeTruthy();
+    expect(equipments.right_hand.locked_alternative).toEqual(2222);
+  });
+
+  it('#transferLockedStatusToAlternative should do nothing if the alternative item if not equipped', () => {
+    // GIVEN
+    const equipments: EquipmentSet = new EquipmentSet(JSON.parse(VALID_TWO_HANDED_EQUIPMENT_SET));
+    // WHEN
+    equipments.transferLockedStatusToAlternative(18733, 2222);
+    // THEN
+    expect(equipments.right_hand.locked).toBeFalsy();
+    expect(equipments.right_hand.locked_alternative).toBeFalsy();
   });
 });

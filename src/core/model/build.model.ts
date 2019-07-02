@@ -87,6 +87,11 @@ export class Build {
           if (build.id === 162 || build.id === 163 || build.id === 164) { // viktor marchenko LB
             skill.calculation_stat = 'def';
           }
+          if (build.id === 405) { // Kimono Ayaka LB
+            skill.calculation_stat = 'spr';
+            skill.category = 6;
+            skill.damages_type = 'magical';
+          }
         }
 
         const s = new Skill(skill);
@@ -143,5 +148,13 @@ export class Build {
 
   public equipInSlot(slot: string, equipment: Equipment) {
     this.equipments.equipInSlot(slot, equipment);
+  }
+
+  public isMultiSkill(skill: Skill): boolean {
+    if (skill.isStartPhase) {
+      return this.startPhaseSkills.filter((s: Skill) => s.turnCount === skill.turnCount).length > 1;
+    } else {
+      return this.skills.filter((s: Skill) => s.turnCount === skill.turnCount).length > 1;
+    }
   }
 }

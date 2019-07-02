@@ -50,7 +50,7 @@ describe('UnitStat', () => {
     // GIVEN
     const unitStat: UnitStat = new UnitStat(100, 0, 0, 0, 0);
     // WHEN
-    unitStat.computeTotal(false, false, false);
+    unitStat.computeTotal(false, false, false, false);
     // THEN
     expect(unitStat.total).toEqual(100);
   });
@@ -69,7 +69,7 @@ describe('UnitStat', () => {
     unitStat.dw_effective = 0;
     unitStat.value_from_esper = 50;
     // WHEN
-    unitStat.computeTotal(true, true, false);
+    unitStat.computeTotal(true, true, false, false);
     // THEN
     expect(unitStat.base).toEqual(100);
     expect(unitStat.base_equipment).toEqual(200);
@@ -87,7 +87,7 @@ describe('UnitStat', () => {
     unitStat.passive_equipment = 150;
     unitStat.conditional_passive = 150;
     // WHEN
-    unitStat.computeTotal(true, true, false);
+    unitStat.computeTotal(true, true, false, false);
     // THEN
     expect(unitStat.base).toEqual(100);
     expect(unitStat.value_from_passive).toEqual(300); // 150% + 150% conditional
@@ -104,7 +104,7 @@ describe('UnitStat', () => {
     unitStat.dh_effective = 100;
     unitStat.tdh_effective = 100;
     // WHEN
-    unitStat.computeTotal(true, true, false);
+    unitStat.computeTotal(true, true, false, false);
     // THEN
     expect(unitStat.base).toEqual(100);
     expect(unitStat.value_from_dh).toEqual(200); // 100% DH + 100% TDH
@@ -118,12 +118,27 @@ describe('UnitStat', () => {
     unitStat.base_equipment = 100;
     unitStat.dw_equipment = 80;
     // WHEN
-    unitStat.computeTotal(false, false, true);
+    unitStat.computeTotal(false, false, true, false);
     // THEN
     expect(unitStat.base).toEqual(100);
     expect(unitStat.base_equipment).toEqual(100);
     expect(unitStat.value_from_dw).toEqual(80); // 80% DW
     expect(unitStat.value_from_dw_equipment).toEqual(20); // only 20% taken
     expect(unitStat.total).toEqual(300);
+  });
+
+  it('#computeTotal should limit the stat dw increase to 200% with cap increase', () => {
+    // GIVEN
+    const unitStat: UnitStat = new UnitStat(100, 0, 0, 0, 180);
+    unitStat.base_equipment = 100;
+    unitStat.dw_equipment = 80;
+    // WHEN
+    unitStat.computeTotal(false, false, true, true);
+    // THEN
+    expect(unitStat.base).toEqual(100);
+    expect(unitStat.base_equipment).toEqual(100);
+    expect(unitStat.value_from_dw).toEqual(180); // 180% DW
+    expect(unitStat.value_from_dw_equipment).toEqual(20); // only 20% taken
+    expect(unitStat.total).toEqual(400);
   });
 });

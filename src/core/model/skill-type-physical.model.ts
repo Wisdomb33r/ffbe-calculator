@@ -68,7 +68,7 @@ export class SkillTypePhysical implements SkillType {
     if (skill.nb >= 2) {
       return skill.nb;
     }
-    const isMultiSkill = unit.selectedBuild.skills.filter((s: Skill) => s.turnCount === skill.turnCount).length > 1;
+    const isMultiSkill = unit.selectedBuild.isMultiSkill(skill);
     return unit.selectedBuild.equipments.isDualWielding() && !skill.isLimitBreak && !isMultiSkill ? 2 : 1;
   }
 }

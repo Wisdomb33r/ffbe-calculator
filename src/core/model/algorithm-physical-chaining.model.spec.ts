@@ -25,12 +25,14 @@ describe('AlgorithmChaining', () => {
     unit.stats.atk.total = 1000;
     unit.selectedBuild.equipments.right_hand.variance_min = 100;
     unit.selectedBuild.equipments.right_hand.variance_max = 160;
+    unit.selectedBuild.skills[1].nb = 3;
+    unit.selectedBuild.skills[1].isBreakingChain = true;
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(32.429);
+    expect(result.result).toBeCloseTo(36.376);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn.atk).toEqual(1000);
@@ -51,12 +53,12 @@ describe('AlgorithmChaining', () => {
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [50, 150, 300, 375, 150]);
 
     const turn2 = result['turnDamages'][1];
-    expect(turn2['power']).toBeCloseTo(2000);
-    expect(turn2['physicalDamages']).toEqual(40000000);
-    expect(turn2['physicalKillerDamages']).toBeCloseTo(40000000);
-    expect(turn2['physicalElementalDamages']).toBeCloseTo(40000000);
-    expect(turn2['hitsPower'].length).toEqual(4);
-    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [100, 300, 600, 1000]);
+    expect(turn2['power']).toBeCloseTo(6000);
+    expect(turn2['physicalDamages']).toEqual(120000000);
+    expect(turn2['physicalKillerDamages']).toBeCloseTo(120000000);
+    expect(turn2['physicalElementalDamages']).toBeCloseTo(120000000);
+    expect(turn2['hitsPower'].length).toEqual(12);
+    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [100, 300, 600, 1000, 100, 300, 600, 1000, 100, 300, 600, 1000]);
   });
 
   it('#calculate should set the result object values for a dual-wielded chain', () => {

@@ -90,6 +90,10 @@ export class DamageTypePhysical extends DamageType {
   }
 
   protected calculateDwAbilityDamages(unit: Unit, result: ResultTurnDamages): number {
+    const isMultiSkill = unit.selectedBuild.isMultiSkill(result.skill);
+    if (isMultiSkill) {
+      result.rightHandStat = result.leftHandStat;
+    }
     return (result['buffed_' + this.calculationStat] - result.leftHandStat)
       * (result['buffed_' + this.calculationStat] - result.rightHandStat);
   }

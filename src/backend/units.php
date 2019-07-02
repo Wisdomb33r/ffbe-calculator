@@ -11,8 +11,8 @@ function dieWithError($statusCode, $errorMessages) {
   die ();
 }
 
-if (isset ( $_SERVER ['HTTP_ORIGIN'] ) && ($_SERVER ['HTTP_ORIGIN'] == "http://www.ffbeequip.com" || $_SERVER ['HTTP_ORIGIN'] == "http://www.ffbeEquip.com" || $_SERVER ['HTTP_ORIGIN'] == "https://www.ffbeequip.com" || $_SERVER ['HTTP_ORIGIN'] == "https://www.ffbeEquip.com")) {
-  header ( "Access-Control-Allow-Origin: $_SERVER ['HTTP_ORIGIN']" );
+if (isset ( $_SERVER ['HTTP_ORIGIN'] ) && ($_SERVER ['HTTP_ORIGIN'] == "http://www.ffbeequip.com" || $_SERVER ['HTTP_ORIGIN'] == "http://www.ffbeEquip.com" || $_SERVER ['HTTP_ORIGIN'] == "https://www.ffbeequip.com" || $_SERVER ['HTTP_ORIGIN'] == "https://www.ffbeEquip.com" || $_SERVER ['HTTP_ORIGIN'] == "http://localhost:4200")) {
+  header ( 'Access-Control-Allow-Origin: ' . $_SERVER ['HTTP_ORIGIN'] );
 }
 
 if ($_SERVER ['REQUEST_METHOD'] == 'GET') {

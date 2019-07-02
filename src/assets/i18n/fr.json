@@ -122,7 +122,8 @@
           "esper": "Chimère",
           "esperPercent": "Stats de la chimère",
           "total": "Total",
-          "limitWarn": "La caractéristique dépasse la limite autorisée par le jeu (400% passifs, 300% deux mains, 100% deux armes). Une partie du bonus est donc perdue."
+          "limitWarn": "La caractéristique dépasse la limite autorisée par le jeu (400% passifs, 300% deux mains, 100% deux armes). Une partie du bonus est donc perdue.",
+          "limitWarnTdwExtended": "La caractéristique dépasse la limite autorisée par le jeu (400% passifs, 300% deux mains, 200% deux armes). Une partie du bonus est donc perdue."
         }
       }
     }
@@ -140,7 +141,8 @@
       "filter": "Filtrer les objets",
       "empty": "vide",
       "excludeStmr": "Exclure les STMR",
-      "changeBlocked": "Cet objet est obligatoire pour ce build à cause d'un effet que le calculateur ne peut actuellement pas activer ou désactiver dynamiquement."
+      "changeBlocked": "Cet objet est obligatoire pour ce build à cause d'un effet que le calculateur ne peut pas activer ou désactiver dynamiquement.",
+      "changeBlockedWithAlternatives": "Cet objet active un effet que le calculateur ne peut pas activer ou désactiver dynamiquement. Pour le retirer ou le changer, vous devez d'abord équiper l'objet suivant qui active le même effet :"
     }
   },
   "skills": {

@@ -27,6 +27,10 @@ export class DatabaseClientService {
     return this.http.get<Array<Unit>>(UNIT_PATH + '?language=' + this.translatorService.currentLang + '&time=' + Date.now());
   }
 
+  public getItemById$(itemId: number): Observable<Equipment> {
+    return this.http.get<Equipment>(EQUIPMENT_PATH + '?id=' + itemId + '&language=' + this.translatorService.currentLang);
+  }
+
   public getEquipmentsForUnitAndSlot$(slot: string, unitId: number, extraEquipmentTypes: Array<number>): Observable<Array<Equipment>> {
     return this.http.get<Array<Equipment>>(
       EQUIPMENT_PATH + '?category=' + slot + '&unit=' + unitId + '&language=' + this.translatorService.currentLang

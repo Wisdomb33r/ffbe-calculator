@@ -43,6 +43,7 @@ class Equipment {
   public $variance_max;
   public $unique;
   public $locked;
+  public $locked_alternative;
   public $stmr;
   public $physical_killers;
   public $magical_killers;
@@ -109,6 +110,15 @@ class Equipment {
     $brex_build_passives = brex_build_passif::findByRelation1N ( array ('objet' => $brex_equipement->id) );
     if (count ( $brex_build_passives )) {
       $this->conditional_passives = array ();
+      foreach ( $brex_build_passives as $passive ) {
+        $this->conditional_passives [] = new ConditionalPassive ( $passive, $language );
+      }
+    }
+    $brex_build_passives = brex_build_passif::finderParStmrRelation ( $brex_equipement->id );
+    if (count ( $brex_build_passives )) {
+      if (! $this->conditional_passives) {
+        $this->conditional_passives = array ();
+      }
       foreach ( $brex_build_passives as $passive ) {
         $this->conditional_passives [] = new ConditionalPassive ( $passive, $language );
       }
@@ -295,6 +305,7 @@ class UnitStats {
   public $esper_percent;
   public $lb_multiplier;
   public $dual_wield;
+  public $tdwCapIncrease;
   function __construct($brex_unit_stats) {
     $this->hp = $brex_unit_stats->pv + $brex_unit_stats->pv_pots;
     $this->hp_passive = $brex_unit_stats->pv_passif_amelio > 0 ? $brex_unit_stats->pv_passif_amelio : $brex_unit_stats->pv_passif;
@@ -331,6 +342,7 @@ class UnitStats {
     $this->esper_percent = $brex_unit_stats->esper_percent;
     $this->lb_multiplier = $brex_unit_stats->lb_boost;
     $this->dual_wield = $brex_unit_stats->dual_wield == '1' ? true : false;
+    $this->tdwCapIncrease = $brex_unit_stats->boosted_dw == '1' ? true : false;
   }
 }
 class Build {
@@ -464,7 +476,7 @@ class Skill {
       $this->icon = $brex_skill->competence->icone->getImageimgPath ();
       $this->hits = $brex_skill->competence->hits;
       $this->frames = $brex_skill->competence->frames;
-      $this->damages = $brex_skill->competence->damages;
+      $this->damages = $brex_skill->damages ? $brex_skill->damages : $brex_skill->competence->damages;
       if ($brex_skill->is_enhanced == 1) {
         $values = array ();
         $values ['perso'] = $brex_unit->perso->id;
@@ -540,6 +552,7 @@ class EquipmentSet {
         $slot = $equipment->slot->nom;
         $this->$slot = new Equipment ( $equipment->objet, $language );
         $this->$slot->locked = $equipment->non_removeable ? true : false;
+        $this->$slot->locked_alternative = $equipment->alternative;
       }
     }
   }

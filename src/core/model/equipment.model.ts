@@ -45,6 +45,7 @@ export class Equipment {
   public variance_max: number;
   public unique: boolean;
   public locked: boolean;
+  public locked_alternative: number;
   public stmr: boolean;
   public extra_equip: number;
   public physical_killers: KillerPassives;
@@ -101,6 +102,7 @@ export class Equipment {
     this.variance_max = equipment.variance_max;
     this.unique = equipment.unique;
     this.locked = equipment.locked;
+    this.locked_alternative = equipment.locked_alternative;
     this.stmr = equipment.stmr;
     this.extra_equip = equipment.extra_equip;
     if (equipment.physical_killers) {
@@ -156,6 +158,6 @@ export class Equipment {
   }
 
   public isWeaponTraitPossible(): boolean {
-    return this.id < 3263 && WEAPONS_CATEGORIES.find(categ => categ === this.category) > 0;
+    return WEAPONS_CATEGORIES.find(categ => categ === this.category) > 0;
   }
 }
