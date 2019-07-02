@@ -32,7 +32,7 @@ describe('AlgorithmChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(36.376);
+    expect(result.result).toBeCloseTo(75.3102);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn.atk).toEqual(1000);
