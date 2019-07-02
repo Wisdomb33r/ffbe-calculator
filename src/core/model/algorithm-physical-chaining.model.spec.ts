@@ -30,15 +30,16 @@ describe('AlgorithmChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(36.376);
+    expect(result.result).toBeCloseTo(32.429);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn['atk']).toEqual(1000);
-      expect(turn['buffed_atk']).toEqual(1000);
-      expect(turn['isDualWielding']).toBeFalsy();
-      expect(turn['combosIncrement']).toBeCloseTo(0.25);
-      expect(turn['killerPassive']).toBeCloseTo(0);
+      expect(turn.atk).toEqual(1000);
+      expect(turn.buffed_atk).toEqual(1000);
+      expect(turn.isDualWielding).toBeFalsy();
+      expect(turn.combosIncrement).toBeCloseTo(0.25);
+      expect(turn.killerPassive).toBeCloseTo(0);
       expect(turn.levelCorrection).toBeCloseTo(2);
+      expect(turn.enemyWeaponVariance).toBeCloseTo(0.8915);
     });
 
     const turn1 = result['turnDamages'][0];
@@ -73,7 +74,7 @@ describe('AlgorithmChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(206.06);
+    expect(result.result).toBeCloseTo(192.1337);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn.atk).toEqual(1000);
@@ -84,6 +85,7 @@ describe('AlgorithmChaining', () => {
       expect(turn.combosIncrement).toBeCloseTo(0.3);
       expect(turn.killerPassive).toBeCloseTo(0);
       expect(turn.levelCorrection).toBeCloseTo(2);
+      expect(turn.enemyWeaponVariance).toBeCloseTo(0.9324);
     });
 
     const turn1 = result['turnDamages'][0];

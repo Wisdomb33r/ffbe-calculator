@@ -266,7 +266,7 @@
   <p *ngIf="result.averageElementalResistance">= {{result.physicalElementalDamages | integer}}</p>
 
   <h3>{{'calculation.display.variances' | translate}}</h3>
-  <p>{{result.physicalElementalDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}% /
-    {{algorithm.opponentDef}}</p>
+  <p>{{result.physicalElementalDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}%
+    * {{result.enemyWeaponVariance * 100 | number:'1.2-2'}}% / {{algorithm.opponentDef}}</p>
   <p>= <strong>{{result.physicalResult | integer}}</strong></p>
 </mat-dialog-content>
