@@ -234,7 +234,7 @@
       <td>{{'calculation.display.weaponVariance' | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result.averageWeaponVariance}}%</td>
+      <td>{{result.averageWeaponVariance}}% / {{result.enemyWeaponVariance * 100 | number:'1.2-2'}}%</td>
     </tr>
   </table>
   <mat-error *ngIf="opponentDefValueError">{{'calculation.offensive.opponentDefValueError' | translate}}</mat-error>
@@ -266,7 +266,7 @@
   <p *ngIf="result.averageElementalResistance">= {{result.physicalElementalDamages | integer}}</p>
 
   <h3>{{'calculation.display.variances' | translate}}</h3>
-  <p>{{result.physicalElementalDamages | integer}} * {{result.averageWeaponVariance}}% * {{result.finalVariance}}%
-    * {{result.enemyWeaponVariance * 100 | number:'1.2-2'}}% / {{algorithm.opponentDef}}</p>
+  <p>{{result.physicalElementalDamages | integer}} * {{result.averageWeaponVariance}}%
+    * {{result.enemyWeaponVariance * 100 | number:'1.2-2'}}% * {{result.finalVariance}}% / {{algorithm.opponentDef}}</p>
   <p>= <strong>{{result.physicalResult | integer}}</strong></p>
 </mat-dialog-content>
