@@ -33,6 +33,7 @@ export class ResultTurnDamages extends Result {
   public isDualWielding: boolean;
   public isTurnCounting: boolean;
   public averageWeaponVariance: number;
+  public enemyWeaponVariance: number;
   public finalVariance: number;
   public killerPassive: number;
   public killerActive: number;
