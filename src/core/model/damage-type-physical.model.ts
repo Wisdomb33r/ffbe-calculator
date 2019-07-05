@@ -46,13 +46,25 @@ export class DamageTypePhysical extends DamageType {
 
   public calculateFinalResult(unit: Unit, def: number, spr: number, result: ResultTurnDamages) {
     this.calculateDamageVariance(unit, result);
-    result.physicalResult = result.physicalElementalDamages / def * result.averageWeaponVariance / 100 * result.finalVariance / 100;
+    result.physicalResult = result.physicalElementalDamages / def * result.averageWeaponVariance / 100 * result.finalVariance / 100
+      * result.enemyWeaponVariance;
     result.result = result.physicalResult;
   }
 
   protected calculateDamageVariance(unit: Unit, result: ResultTurnDamages) {
     const right_hand: Equipment = unit.selectedBuild.equipments.right_hand;
+    const left_hand: Equipment = unit.selectedBuild.equipments.right_hand;
     result.averageWeaponVariance = right_hand && right_hand.isTwoHanded() ? (right_hand.variance_min + right_hand.variance_max) / 2 : 100;
+    if (result.isDualWielding) {
+      const mainHandStat = right_hand && right_hand[this.calculationStat] ? right_hand[this.calculationStat] : 0;
+      const offHandStat = left_hand && left_hand[this.calculationStat] ? left_hand[this.calculationStat] : 0;
+      result.enemyWeaponVariance = Math.log((mainHandStat + offHandStat) / 2 + 5 + 25) / Math.log(185);
+    } else if (right_hand) {
+      const mainHandStat = right_hand && right_hand[this.calculationStat] ? right_hand[this.calculationStat] : 0;
+      result.enemyWeaponVariance = Math.log(mainHandStat + 5) / Math.log(185);
+    } else {
+      result.enemyWeaponVariance = 1;
+    }
     result.finalVariance = 92.5;
   }
 

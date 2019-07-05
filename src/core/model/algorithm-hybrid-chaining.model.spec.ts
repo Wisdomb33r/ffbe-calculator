@@ -64,7 +64,7 @@ describe('AlgorithmChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(85.8446);
+    expect(result.result).toBeCloseTo(83.6878);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn['atk']).toEqual(800);
@@ -75,6 +75,7 @@ describe('AlgorithmChaining', () => {
       expect(turn['combosIncrement']).toBeCloseTo(0.1);
       expect(turn['killerPassive']).toBeCloseTo(250);
       expect(turn.levelCorrection).toBeCloseTo(2);
+      expect(turn.enemyWeaponVariance).toBeCloseTo(0.9324);
     });
 
     const turn1 = result['turnDamages'][0];
@@ -85,7 +86,7 @@ describe('AlgorithmChaining', () => {
     expect(turn1['magicalKillerDamages']).toBeCloseTo(40560000);
     expect(turn1['physicalElementalDamages']).toBeCloseTo(24000000);
     expect(turn1['magicalElementalDamages']).toBeCloseTo(40560000);
-    expect(turn1['physicalResult']).toBeCloseTo(22.2);
+    expect(turn1['physicalResult']).toBeCloseTo(20.6996);
     expect(turn1['magicalResult']).toBeCloseTo(37.518);
     expect(turn1['hitsPower'].length).toEqual(10);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [25, 60, 105, 120, 45, 50, 110, 180, 195, 70]);
@@ -98,7 +99,7 @@ describe('AlgorithmChaining', () => {
     expect(turn2['magicalKillerDamages']).toBeCloseTo(76050000);
     expect(turn2['physicalElementalDamages']).toBeCloseTo(45000000);
     expect(turn2['magicalElementalDamages']).toBeCloseTo(76050000);
-    expect(turn2['physicalResult']).toBeCloseTo(41.625);
+    expect(turn2['physicalResult']).toBeCloseTo(38.8117);
     expect(turn2['magicalResult']).toBeCloseTo(70.346);
     expect(turn2['hitsPower'].length).toEqual(8);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [50, 120, 210, 320, 90, 200, 330, 480]);
@@ -121,7 +122,7 @@ describe('AlgorithmChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(47.956);
+    expect(result.result).toBeCloseTo(45.9257);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn['atk']).toEqual(800);
@@ -132,6 +133,7 @@ describe('AlgorithmChaining', () => {
       expect(turn['combosIncrement']).toBeCloseTo(0.45);
       expect(turn['killerPassive']).toBeCloseTo(0);
       expect(turn.levelCorrection).toBeCloseTo(2);
+      expect(turn.enemyWeaponVariance).toBeCloseTo(0.8915);
     });
 
     const turn1 = result['turnDamages'][0];
@@ -142,7 +144,7 @@ describe('AlgorithmChaining', () => {
     expect(turn1['magicalKillerDamages']).toBeCloseTo(14150000);
     expect(turn1['physicalElementalDamages']).toBeCloseTo(13584000);
     expect(turn1['magicalElementalDamages']).toBeCloseTo(21225000);
-    expect(turn1['physicalResult']).toBeCloseTo(12.565);
+    expect(turn1['physicalResult']).toBeCloseTo(11.2019);
     expect(turn1['magicalResult']).toBeCloseTo(19.633);
     expect(turn1['hitsPower'].length).toEqual(5);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [25, 95, 210, 277.5, 100]);
@@ -155,7 +157,7 @@ describe('AlgorithmChaining', () => {
     expect(turn2['magicalKillerDamages']).toBeCloseTo(28000000);
     expect(turn2['physicalElementalDamages']).toBeCloseTo(26880000);
     expect(turn2['magicalElementalDamages']).toBeCloseTo(42000000);
-    expect(turn2['physicalResult']).toBeCloseTo(24.864);
+    expect(turn2['physicalResult']).toBeCloseTo(22.1663);
     expect(turn2['magicalResult']).toBeCloseTo(38.85);
     expect(turn2['hitsPower'].length).toEqual(4);
     CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [50, 190, 420, 740]);
