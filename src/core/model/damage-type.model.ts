@@ -10,10 +10,23 @@ export abstract class DamageType {
     result[this.calculationStat] = unit.stats[this.calculationStat].total;
     result['buffed_' + this.calculationStat] = unit.stats[this.calculationStat].total;
     result.self_buff = skill[this.calculationStat + '_buff'] ? skill[this.calculationStat + '_buff'] : 0;
-    const buff = Math.max(result.self_buff, isSupportBuffing && supportBuff ? supportBuff : 0);
+    const specialSelfBuff = this.getSpecialSelfBuff(unit, skill, this.calculationStat);
+    if (specialSelfBuff && specialSelfBuff > result.self_buff) {
+      result.self_buff = specialSelfBuff;
+    }
+    const buff = Math.max(result.self_buff, specialSelfBuff, isSupportBuffing && supportBuff ? supportBuff : 0);
     if (buff) {
       result['buffed_' + this.calculationStat] += unit.stats[this.calculationStat].base * buff / 100;
     }
+  }
+
+  private getSpecialSelfBuff(unit: Unit, skill: Skill, stat: string): number {
+    // Randy LB buff activated by TA
+    if (unit.id === 1152 && !skill.isLimitBreak && stat === 'atk'
+      && (unit.selectedBuild.equipments.isEquipped(1019) || unit.selectedBuild.equipments.isEquipped(3423))) {
+      return 300;
+    }
+    return 0;
   }
 
   abstract calculateDamages(unit: Unit, result: ResultTurnDamages);
