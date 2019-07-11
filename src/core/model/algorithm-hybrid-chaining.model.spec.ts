@@ -115,8 +115,8 @@ describe('AlgorithmChaining', () => {
     algorithm.isKillerActive = false;
     algorithm.isSparkChain = true;
     algorithm.isSupportBuffing = false;
-    unit.selectedBuild.selectedEquipmentSet.right_hand.elements = [1];
-    unit.selectedBuild.selectedEquipmentSet.left_hand = undefined;
+    unit.selectedEquipmentSet.right_hand.elements = [1];
+    unit.selectedEquipmentSet.left_hand = undefined;
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN

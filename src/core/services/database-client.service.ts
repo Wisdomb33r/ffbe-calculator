@@ -57,53 +57,53 @@ export class DatabaseClientService {
     if (isResultToBePushed) {
       observables.push(this.pushBuildResult$(unit.selectedBuild.id, unit.selectedBuild.result.result));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.right_hand) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 1, unit.selectedBuild.selectedEquipmentSet.right_hand.id));
+    if (unit.selectedEquipmentSet.right_hand) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 1, unit.selectedEquipmentSet.right_hand.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.left_hand) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 2, unit.selectedBuild.selectedEquipmentSet.left_hand.id));
+    if (unit.selectedEquipmentSet.left_hand) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 2, unit.selectedEquipmentSet.left_hand.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.head) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 3, unit.selectedBuild.selectedEquipmentSet.head.id));
+    if (unit.selectedEquipmentSet.head) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 3, unit.selectedEquipmentSet.head.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.body) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 4, unit.selectedBuild.selectedEquipmentSet.body.id));
+    if (unit.selectedEquipmentSet.body) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 4, unit.selectedEquipmentSet.body.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.accessory1) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 5, unit.selectedBuild.selectedEquipmentSet.accessory1.id));
+    if (unit.selectedEquipmentSet.accessory1) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 5, unit.selectedEquipmentSet.accessory1.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.accessory2) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 6, unit.selectedBuild.selectedEquipmentSet.accessory2.id));
+    if (unit.selectedEquipmentSet.accessory2) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 6, unit.selectedEquipmentSet.accessory2.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.materia1) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 7, unit.selectedBuild.selectedEquipmentSet.materia1.id));
+    if (unit.selectedEquipmentSet.materia1) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 7, unit.selectedEquipmentSet.materia1.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.materia2) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 8, unit.selectedBuild.selectedEquipmentSet.materia2.id));
+    if (unit.selectedEquipmentSet.materia2) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 8, unit.selectedEquipmentSet.materia2.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.materia3) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 9, unit.selectedBuild.selectedEquipmentSet.materia3.id));
+    if (unit.selectedEquipmentSet.materia3) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 9, unit.selectedEquipmentSet.materia3.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.materia4) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 10, unit.selectedBuild.selectedEquipmentSet.materia4.id));
+    if (unit.selectedEquipmentSet.materia4) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 10, unit.selectedEquipmentSet.materia4.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.rh_trait1) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 11, unit.selectedBuild.selectedEquipmentSet.rh_trait1.id));
+    if (unit.selectedEquipmentSet.rh_trait1) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 11, unit.selectedEquipmentSet.rh_trait1.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.rh_trait2) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 12, unit.selectedBuild.selectedEquipmentSet.rh_trait2.id));
+    if (unit.selectedEquipmentSet.rh_trait2) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 12, unit.selectedEquipmentSet.rh_trait2.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.rh_trait3) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 13, unit.selectedBuild.selectedEquipmentSet.rh_trait3.id));
+    if (unit.selectedEquipmentSet.rh_trait3) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 13, unit.selectedEquipmentSet.rh_trait3.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.lh_trait1) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 14, unit.selectedBuild.selectedEquipmentSet.lh_trait1.id));
+    if (unit.selectedEquipmentSet.lh_trait1) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 14, unit.selectedEquipmentSet.lh_trait1.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.lh_trait2) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 15, unit.selectedBuild.selectedEquipmentSet.lh_trait2.id));
+    if (unit.selectedEquipmentSet.lh_trait2) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 15, unit.selectedEquipmentSet.lh_trait2.id));
     }
-    if (unit.selectedBuild.selectedEquipmentSet.lh_trait3) {
-      observables.push(this.pushItem$(unit.selectedBuild.id, 16, unit.selectedBuild.selectedEquipmentSet.lh_trait3.id));
+    if (unit.selectedEquipmentSet.lh_trait3) {
+      observables.push(this.pushItem$(unit.selectedBuild.id, 16, unit.selectedEquipmentSet.lh_trait3.id));
     }
     return forkJoin(observables);
   }

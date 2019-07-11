@@ -23,8 +23,8 @@ describe('AlgorithmChaining', () => {
     algorithm.isSparkChain = true;
     algorithm.isKillerActive = false;
     unit.stats.atk.total = 1000;
-    unit.selectedBuild.selectedEquipmentSet.right_hand.variance_min = 100;
-    unit.selectedBuild.selectedEquipmentSet.right_hand.variance_max = 160;
+    unit.selectedEquipmentSet.right_hand.variance_min = 100;
+    unit.selectedEquipmentSet.right_hand.variance_max = 160;
     unit.selectedBuild.skills[1].nb = 3;
     unit.selectedBuild.skills[1].isBreakingChain = true;
     // WHEN
@@ -68,8 +68,8 @@ describe('AlgorithmChaining', () => {
     unit.selectDefaultBuild();
     unit.stats.atk.total = 1000;
     unit.stats.atk.dw_equipment = 50;
-    unit.selectedBuild.selectedEquipmentSet.left_hand = new Equipment(JSON.parse(EQUIPMENT_TEST_DATA));
-    unit.selectedBuild.selectedEquipmentSet.left_hand.elements = [1]; // fire element on left hand weapon for increment calculation
+    unit.selectedEquipmentSet.left_hand = new Equipment(JSON.parse(EQUIPMENT_TEST_DATA));
+    unit.selectedEquipmentSet.left_hand.elements = [1]; // fire element on left hand weapon for increment calculation
     unit.selectedBuild.skills[0].resists_break = [-100, 0, 0, 0, 0, 0, 0, 0]; // skill under 100% fire break
     // WHEN
     const result = algorithm.calculate(unit);

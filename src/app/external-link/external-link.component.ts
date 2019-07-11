@@ -152,7 +152,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
             this.unitsService.selectedUnit.selectBuild(this.build);
           }
           this.restoreAlgorithmConfiguration();
-          this.unitsService.selectedUnit.selectedBuild.selectedEquipmentSet.removeAllNonLocked();
+          this.unitsService.selectedUnit.removeAllNonLockedItems();
 
           const observables = [];
           observables.push(of(unit));
@@ -249,10 +249,10 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
       switchMap(any => {
         const observables = [];
         observables.push(of(this.unitsService.selectedUnit));
-        if (this.unitsService.getEquipments().right_hand && (this.rh_trait1 || this.rh_trait2 || this.rh_trait3)) {
+        if (this.unitsService.selectedUnit.selectedEquipmentSet.right_hand && (this.rh_trait1 || this.rh_trait2 || this.rh_trait3)) {
           observables.push(this.unitsService.getAllowedEquipmentsForSlot$('rh_trait1'));
         }
-        if (this.unitsService.getEquipments().left_hand && (this.lh_trait1 || this.lh_trait2 || this.lh_trait3)) {
+        if (this.unitsService.selectedUnit.selectedEquipmentSet.left_hand && (this.lh_trait1 || this.lh_trait2 || this.lh_trait3)) {
           observables.push(this.unitsService.getAllowedEquipmentsForSlot$('lh_trait1'));
         }
         return forkJoin(observables);
@@ -260,7 +260,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
       tap(observablesResults => {
         this.currentStep = 6;
         let index = 1;
-        if (this.unitsService.getEquipments().right_hand && (this.rh_trait1 || this.rh_trait2 || this.rh_trait3)) {
+        if (this.unitsService.selectedUnit.selectedEquipmentSet.right_hand && (this.rh_trait1 || this.rh_trait2 || this.rh_trait3)) {
           if (this.rh_trait1) {
             this.testAndEquip('rh_trait1', this.rh_trait1, observablesResults, index);
           }
@@ -272,7 +272,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           }
           index++;
         }
-        if (this.unitsService.getEquipments().left_hand && (this.lh_trait1 || this.lh_trait2 || this.lh_trait3)) {
+        if (this.unitsService.selectedUnit.selectedEquipmentSet.left_hand && (this.lh_trait1 || this.lh_trait2 || this.lh_trait3)) {
           if (this.lh_trait1) {
             this.testAndEquip('lh_trait1', this.lh_trait1, observablesResults, index);
           }
@@ -305,7 +305,8 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
       } else {
         equipment = equipments.find((e: Equipment) => e.id === equipment_id);
       }
-      if (equipment && (!this.unitsService.getEquipments()[slot] || !this.unitsService.getEquipments()[slot].locked)) {
+      if (equipment && (!this.unitsService.selectedUnit.selectedEquipmentSet[slot]
+        || !this.unitsService.selectedUnit.selectedEquipmentSet[slot].locked)) {
         this.unitsService.equipInSlot(slot, equipment);
       }
     }

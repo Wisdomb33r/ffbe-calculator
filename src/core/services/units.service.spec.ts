@@ -58,7 +58,7 @@ describe('UnitsService', () => {
       // WHEN
       service.equipInSlot('body', new Equipment(JSON.parse('{"id":-1}')));
       // THEN
-      expect(service.getEquipments().body).toBeNull();
+      expect(service.selectedUnit.selectedEquipmentSet.body).toBeNull();
     }));
 
   it('#equipInSlot should remove left hand if two-handed right hand is equipped',
@@ -66,11 +66,11 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id": 1199, "dual_wield": true}'));
+      service.selectedUnit.selectedEquipmentSet.left_hand = new Equipment(JSON.parse('{"id": 1199, "dual_wield": true}'));
       // WHEN
       service.equipInSlot('right_hand', new Equipment(JSON.parse('{"id":66,"variance_min":100,"variance_max":150}')));
       // THEN
-      expect(service.getEquipments().left_hand).toBeNull();
+      expect(service.selectedUnit.selectedEquipmentSet.left_hand).toBeNull();
     }));
 
   it('#equipInSlot should remove left hand weapon if no DW item left',
@@ -78,11 +78,11 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id":10,"category":1}'));
+      service.selectedUnit.selectedEquipmentSet.left_hand = new Equipment(JSON.parse('{"id":10,"category":1}'));
       // WHEN
       service.equipInSlot('body', new Equipment(JSON.parse('{"id":999}')));
       // THEN
-      expect(service.getEquipments().left_hand).toBeNull();
+      expect(service.selectedUnit.selectedEquipmentSet.left_hand).toBeNull();
     }));
 
   it('#equipInSlot should not remove left hand shield if no DW item left',
@@ -90,12 +90,12 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id":10,"category":9}')); // shield
+      service.selectedUnit.selectedEquipmentSet.left_hand = new Equipment(JSON.parse('{"id":10,"category":9}')); // shield
       // WHEN
       service.equipInSlot('body', new Equipment(JSON.parse('{"id":999}')));
       // THEN
-      expect(service.getEquipments().left_hand).toBeTruthy();
-      expect(service.getEquipments().left_hand.id).toEqual(10);
+      expect(service.selectedUnit.selectedEquipmentSet.left_hand).toBeTruthy();
+      expect(service.selectedUnit.selectedEquipmentSet.left_hand.id).toEqual(10);
     }));
 
   it('#equipInSlot should not remove left hand weapon if DW item left',
@@ -103,12 +103,12 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.getEquipments().left_hand = new Equipment(JSON.parse('{"id":10,"category":1}'));
+      service.selectedUnit.selectedEquipmentSet.left_hand = new Equipment(JSON.parse('{"id":10,"category":1}'));
       // WHEN
       service.equipInSlot('accessory1', new Equipment(JSON.parse('{"id":935, "dual_wield": true}')));
       // THEN
-      expect(service.getEquipments().left_hand).toBeTruthy();
-      expect(service.getEquipments().left_hand.id).toEqual(10);
+      expect(service.selectedUnit.selectedEquipmentSet.left_hand).toBeTruthy();
+      expect(service.selectedUnit.selectedEquipmentSet.left_hand.id).toEqual(10);
     }));
 
   it('#getAllowedEquipmentsForSlot$ should not filter equipments and return an observable',
@@ -178,7 +178,7 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.selectedUnit.selectedBuild.selectedEquipmentSet.left_hand = new Equipment(JSON.parse('{"id": 77, "unique": true}'));
+      service.selectedUnit.selectedEquipmentSet.left_hand = new Equipment(JSON.parse('{"id": 77, "unique": true}'));
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 77, "unique": true}')), // unique and equipped
@@ -204,8 +204,8 @@ describe('UnitsService', () => {
       service.selectedUnit.id = 590; // has native DW
       service.selectedUnit.stats.dual_wield = true;
       service.selectedUnit.selectDefaultBuild();
-      service.selectedUnit.selectedBuild.selectedEquipmentSet.right_hand.variance_min = 100;
-      service.selectedUnit.selectedBuild.selectedEquipmentSet.right_hand.variance_max = 150;
+      service.selectedUnit.selectedEquipmentSet.right_hand.variance_min = 100;
+      service.selectedUnit.selectedEquipmentSet.right_hand.variance_max = 150;
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
@@ -255,8 +255,8 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.selectedUnit.selectedBuild.selectedEquipmentSet.accessory1.id = 935;
-      service.selectedUnit.selectedBuild.selectedEquipmentSet.accessory1.dual_wield = true;
+      service.selectedUnit.selectedEquipmentSet.accessory1.id = 935;
+      service.selectedUnit.selectedEquipmentSet.accessory1.dual_wield = true;
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
