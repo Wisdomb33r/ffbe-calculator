@@ -53,7 +53,7 @@ export class SkillTypePhysical implements SkillType {
   }
 
   public getElements(skill: Skill, unit: Unit): Array<number> {
-    const elements = unit.selectedBuild.equipments.getWeaponsElements();
+    const elements = unit.selectedBuild.selectedEquipmentSet.getWeaponsElements();
     if (Array.isArray(skill.elements) && skill.elements.length > 0) {
       skill.elements.forEach(element => {
         if (elements.indexOf(element) === -1) {
@@ -69,6 +69,6 @@ export class SkillTypePhysical implements SkillType {
       return skill.nb;
     }
     const isMultiSkill = unit.selectedBuild.isMultiSkill(skill);
-    return unit.selectedBuild.equipments.isDualWielding() && !skill.isLimitBreak && !isMultiSkill ? 2 : 1;
+    return unit.selectedBuild.selectedEquipmentSet.isDualWielding() && !skill.isLimitBreak && !isMultiSkill ? 2 : 1;
   }
 }

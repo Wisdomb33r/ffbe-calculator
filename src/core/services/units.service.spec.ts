@@ -178,7 +178,7 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.selectedUnit.selectedBuild.equipments.left_hand = new Equipment(JSON.parse('{"id": 77, "unique": true}'));
+      service.selectedUnit.selectedBuild.selectedEquipmentSet.left_hand = new Equipment(JSON.parse('{"id": 77, "unique": true}'));
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 77, "unique": true}')), // unique and equipped
@@ -204,8 +204,8 @@ describe('UnitsService', () => {
       service.selectedUnit.id = 590; // has native DW
       service.selectedUnit.stats.dual_wield = true;
       service.selectedUnit.selectDefaultBuild();
-      service.selectedUnit.selectedBuild.equipments.right_hand.variance_min = 100;
-      service.selectedUnit.selectedBuild.equipments.right_hand.variance_max = 150;
+      service.selectedUnit.selectedBuild.selectedEquipmentSet.right_hand.variance_min = 100;
+      service.selectedUnit.selectedBuild.selectedEquipmentSet.right_hand.variance_max = 150;
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
@@ -255,8 +255,8 @@ describe('UnitsService', () => {
       // GIVEN
       service.selectedUnit = createMinimalUnit();
       service.selectedUnit.selectDefaultBuild();
-      service.selectedUnit.selectedBuild.equipments.accessory1.id = 935;
-      service.selectedUnit.selectedBuild.equipments.accessory1.dual_wield = true;
+      service.selectedUnit.selectedBuild.selectedEquipmentSet.accessory1.id = 935;
+      service.selectedUnit.selectedBuild.selectedEquipmentSet.accessory1.dual_wield = true;
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
         new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed

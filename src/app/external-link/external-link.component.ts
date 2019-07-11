@@ -152,7 +152,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
             this.unitsService.selectedUnit.selectBuild(this.build);
           }
           this.restoreAlgorithmConfiguration();
-          this.unitsService.selectedUnit.selectedBuild.equipments.removeAllNonLocked();
+          this.unitsService.selectedUnit.selectedBuild.selectedEquipmentSet.removeAllNonLocked();
 
           const observables = [];
           observables.push(of(unit));

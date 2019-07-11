@@ -153,7 +153,7 @@ describe('ExternalLinkComponent', () => {
     unitServiceMock.getAllowedEquipmentsForSlot$.and.returnValue(of([right_hand, head, body, accessory1, accessory2, materia1,
       materia2, materia3, materia4, left_hand, rh_trait1, rh_trait2, rh_trait3, lh_trait1, lh_trait2, lh_trait3]));
     const unit = new Unit(unitFake);
-    unitServiceMock.getEquipments.and.returnValue(unit.builds[0].equipments);
+    unitServiceMock.getEquipments.and.returnValue(unit.builds[0].selectedEquipmentSet);
 
     // WHEN
     fixture.detectChanges();
@@ -262,7 +262,7 @@ describe('ExternalLinkComponent', () => {
     const databaseClientMock = TestBed.get(DatabaseClientService);
     const unitServiceMock = TestBed.get(UnitsService);
     const routerMock = TestBed.get(Router);
-    unitServiceMock.getEquipments.and.returnValue(unit.builds[0].equipments);
+    unitServiceMock.getEquipments.and.returnValue(unit.builds[0].selectedEquipmentSet);
 
     // WHEN
     fixture.detectChanges();

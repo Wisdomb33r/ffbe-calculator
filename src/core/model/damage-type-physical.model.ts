@@ -16,7 +16,7 @@ export class DamageTypePhysical extends DamageType {
   }
 
   public calculateDamages(unit: Unit, result: ResultTurnDamages) {
-    const rawDamages = unit.selectedBuild.equipments.isDualWielding()
+    const rawDamages = unit.selectedBuild.selectedEquipmentSet.isDualWielding()
       ? this.calculateDwDamages(unit, result) : this.calculateDhDamages(unit, result);
     result.physicalDamages = rawDamages * result.power / 100 * result.levelCorrection;
     result.physicalStat = this.calculationStat;
@@ -52,8 +52,8 @@ export class DamageTypePhysical extends DamageType {
   }
 
   protected calculateDamageVariance(unit: Unit, result: ResultTurnDamages) {
-    const right_hand: Equipment = unit.selectedBuild.equipments.right_hand;
-    const left_hand: Equipment = unit.selectedBuild.equipments.right_hand;
+    const right_hand: Equipment = unit.selectedBuild.selectedEquipmentSet.right_hand;
+    const left_hand: Equipment = unit.selectedBuild.selectedEquipmentSet.right_hand;
     result.averageWeaponVariance = right_hand && right_hand.isTwoHanded() ? (right_hand.variance_min + right_hand.variance_max) / 2 : 100;
     if (result.isDualWielding) {
       const mainHandStat = right_hand && right_hand[this.calculationStat] ? right_hand[this.calculationStat] : 0;
@@ -70,8 +70,8 @@ export class DamageTypePhysical extends DamageType {
 
   protected calculateDwDamages(unit: Unit, result: ResultTurnDamages): number {
     result.isDualWielding = true;
-    result.leftHandStat = unit.selectedBuild.equipments.left_hand[this.calculationStat];
-    result.rightHandStat = unit.selectedBuild.equipments.right_hand[this.calculationStat];
+    result.leftHandStat = unit.selectedBuild.selectedEquipmentSet.left_hand[this.calculationStat];
+    result.rightHandStat = unit.selectedBuild.selectedEquipmentSet.right_hand[this.calculationStat];
     if (result.skill.isLimitBreak) {
       return this.calculateDwLbDamages(unit, result);
     } else {

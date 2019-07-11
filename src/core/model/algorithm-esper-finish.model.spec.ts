@@ -29,7 +29,7 @@ describe('AlgorithmFinish for esper invocation', () => {
     unit.selectDefaultBuild();
     unit.selectedBuild.esper = LEVIATHAN_EVOKE_BOOST;
     unit.stats.evo.total = 80;
-    unit.selectedBuild.equipments.right_hand.conditional_passives = [new ConditionalPassive(JSON.parse('{"esper":14,"esper_damage":100}'))];
+    unit.selectedBuild.selectedEquipmentSet.right_hand.conditional_passives = [new ConditionalPassive(JSON.parse('{"esper":14,"esper_damage":100}'))];
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN

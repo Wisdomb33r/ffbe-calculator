@@ -234,7 +234,7 @@ export class UnitsService {
       if (slot === 'right_hand' || slot === 'left_hand') {
         if (
           (this.getEquipments().right_hand && item.id === this.getEquipments().right_hand.id)
-          || (this.selectedUnit.selectedBuild.equipments.left_hand && item.id === this.selectedUnit.selectedBuild.equipments.left_hand.id)
+          || (this.selectedUnit.selectedBuild.selectedEquipmentSet.left_hand && item.id === this.selectedUnit.selectedBuild.selectedEquipmentSet.left_hand.id)
         ) {
           return false;
         }
@@ -314,7 +314,7 @@ export class UnitsService {
   }
 
   public getEquipments(): EquipmentSet {
-    return this.selectedUnit.selectedBuild.equipments;
+    return this.selectedUnit.selectedBuild.selectedEquipmentSet;
   }
 
   public getEsper(): Esper {

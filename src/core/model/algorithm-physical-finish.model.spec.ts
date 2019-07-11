@@ -4,7 +4,7 @@ import {ResultOffensive} from './result-offensive.model';
 import {ResultTurnDamages} from './result-turn-damages.model';
 import {AlgorithmFinish} from './algorithm-finish.model';
 import {Skill} from './skill.model';
-import {IFRIT_EVOKE_BOOST, IFRIT_KILLERS} from '../calculator-constants';
+import {IFRIT_EVOKE_BOOST} from '../calculator-constants';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
 const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100}';
@@ -27,8 +27,8 @@ describe('AlgorithmFinish', () => {
     algorithm.isSparkChain = true;
     algorithm.isKillerActive = false;
     unit.stats.atk.total = 1000;
-    unit.selectedBuild.equipments.right_hand.variance_min = 100;
-    unit.selectedBuild.equipments.right_hand.variance_max = 160;
+    unit.selectedBuild.selectedEquipmentSet.right_hand.variance_min = 100;
+    unit.selectedBuild.selectedEquipmentSet.right_hand.variance_max = 160;
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN

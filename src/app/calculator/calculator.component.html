@@ -1,7 +1,7 @@
 <div class="left">
   <app-unit-details [unit]="unitsService.selectedUnit" *ngIf="unitsService.selectedUnit"
                     (esperChanged)="computeAfterEquipmentChanged()"></app-unit-details>
-  <app-equipments-display [equipments]="unitsService.selectedUnit.selectedBuild.equipments"
+  <app-equipments-display [equipments]="unitsService.selectedUnit.selectedBuild.selectedEquipmentSet"
                           *ngIf="unitsService.selectedUnit"
                           (equipmentChanged)="computeAfterEquipmentChanged()"></app-equipments-display>
   <mat-card *ngIf="!unitsService.selectedUnit">
