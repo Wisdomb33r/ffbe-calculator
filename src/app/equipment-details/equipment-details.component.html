@@ -93,7 +93,9 @@
 
 <p *ngFor="let passive of getConditionalPassivesToDisplay()" class="passive" [class.inactive]="!passive.active">
   <span *ngIf="passive.hp">{{passive.hp}}% {{'hp' | translate}}
-    <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png"></span>
+    <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
+  </span>
   <span *ngIf="passive.hp_dh" [class.inactive]="!isDhActive()">
     {{passive.hp_dh}}% {{'hp' | translate}} {{'dh' | translate}}
   </span>
@@ -105,6 +107,7 @@
   </span>
   <span *ngIf="passive.mp">{{passive.mp}}% {{'mp' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
   </span>
   <span *ngIf="passive.mp_dh" [class.inactive]="!isDhActive()">
     {{passive.mp_dh}}% {{'mp' | translate}} {{'dh' | translate}}
@@ -117,6 +120,7 @@
   </span>
   <span *ngIf="passive.atk">{{passive.atk}}% {{'atk' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
   </span>
   <span *ngIf="passive.atk_dh" [class.inactive]="!isDhActive()">
     {{passive.atk_dh}}% {{'atk' | translate}} {{'dh' | translate}}
@@ -129,6 +133,7 @@
   </span>
   <span *ngIf="passive.mag">{{passive.mag}}% {{'mag' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
   </span>
   <span *ngIf="passive.mag_dh" [class.inactive]="!isDhActive()">
     {{passive.mag_dh}}% {{'mag' | translate}} {{'dh' | translate}}
@@ -141,6 +146,7 @@
   </span>
   <span *ngIf="passive.def">{{passive.def}}% {{'def' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
   </span>
   <span *ngIf="passive.def_dh" [class.inactive]="!isDhActive()">
     {{passive.def_dh}}% {{'def' | translate}} {{'dh' | translate}}
@@ -153,6 +159,7 @@
   </span>
   <span *ngIf="passive.spr">{{passive.spr}}% {{'spr' | translate}}
     <img *ngIf="passive.category" src="assets/equipments/{{passive.category}}.png">
+    <img *ngIf="passive.element" src="assets/resists/resist_{{passive.element}}.png">
   </span>
   <span *ngIf="passive.spr_dh" [class.inactive]="!isDhActive()">
     {{passive.spr_dh}}% {{'spr' | translate}} {{'dh' | translate}}

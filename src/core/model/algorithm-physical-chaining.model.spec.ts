@@ -23,8 +23,8 @@ describe('AlgorithmChaining', () => {
     algorithm.isSparkChain = true;
     algorithm.isKillerActive = false;
     unit.stats.atk.total = 1000;
-    unit.selectedBuild.equipments.right_hand.variance_min = 100;
-    unit.selectedBuild.equipments.right_hand.variance_max = 160;
+    unit.selectedEquipmentSet.right_hand.variance_min = 100;
+    unit.selectedEquipmentSet.right_hand.variance_max = 160;
     unit.selectedBuild.skills[1].nb = 3;
     unit.selectedBuild.skills[1].isBreakingChain = true;
     // WHEN
@@ -32,15 +32,16 @@ describe('AlgorithmChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(84.476);
+    expect(result.result).toBeCloseTo(75.3102);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn['atk']).toEqual(1000);
-      expect(turn['buffed_atk']).toEqual(1000);
-      expect(turn['isDualWielding']).toBeFalsy();
-      expect(turn['combosIncrement']).toBeCloseTo(0.25);
-      expect(turn['killerPassive']).toBeCloseTo(0);
+      expect(turn.atk).toEqual(1000);
+      expect(turn.buffed_atk).toEqual(1000);
+      expect(turn.isDualWielding).toBeFalsy();
+      expect(turn.combosIncrement).toBeCloseTo(0.25);
+      expect(turn.killerPassive).toBeCloseTo(0);
       expect(turn.levelCorrection).toBeCloseTo(2);
+      expect(turn.enemyWeaponVariance).toBeCloseTo(0.8915);
     });
 
     const turn1 = result['turnDamages'][0];
@@ -67,15 +68,15 @@ describe('AlgorithmChaining', () => {
     unit.selectDefaultBuild();
     unit.stats.atk.total = 1000;
     unit.stats.atk.dw_equipment = 50;
-    unit.selectedBuild.equipments.left_hand = new Equipment(JSON.parse(EQUIPMENT_TEST_DATA));
-    unit.selectedBuild.equipments.left_hand.elements = [1]; // fire element on left hand weapon for increment calculation
+    unit.selectedEquipmentSet.left_hand = new Equipment(JSON.parse(EQUIPMENT_TEST_DATA));
+    unit.selectedEquipmentSet.left_hand.elements = [1]; // fire element on left hand weapon for increment calculation
     unit.selectedBuild.skills[0].resists_break = [-100, 0, 0, 0, 0, 0, 0, 0]; // skill under 100% fire break
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(206.06);
+    expect(result.result).toBeCloseTo(192.1337);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn.atk).toEqual(1000);
@@ -86,6 +87,7 @@ describe('AlgorithmChaining', () => {
       expect(turn.combosIncrement).toBeCloseTo(0.3);
       expect(turn.killerPassive).toBeCloseTo(0);
       expect(turn.levelCorrection).toBeCloseTo(2);
+      expect(turn.enemyWeaponVariance).toBeCloseTo(0.9324);
     });
 
     const turn1 = result['turnDamages'][0];

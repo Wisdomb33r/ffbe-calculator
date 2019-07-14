@@ -3,6 +3,7 @@ import {Build} from './build.model';
 import {ConditionalPassive} from './conditional-passive.model';
 import {isNullOrUndefined} from 'util';
 import {Equipment} from './equipment.model';
+import {EquipmentSet} from './equipment-set.model';
 
 export class Unit {
   // from backend
@@ -48,26 +49,26 @@ export class Unit {
 
   public isWithNativeDw() {
     return this.stats.dual_wield
-      || (this.id === 8044 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1202) // Fryevia
-      || (this.id === 8044 && this.selectedBuild.equipments.accessory1 && this.selectedBuild.equipments.accessory1.id === 2799) // Fryevia
-      || (this.id === 8044 && this.selectedBuild.equipments.accessory2 && this.selectedBuild.equipments.accessory2.id === 2799) // Fryevia
+      || (this.id === 8044 && this.selectedEquipmentSet.right_hand && this.selectedEquipmentSet.right_hand.id === 1202) // Fryevia
+      || (this.id === 8044 && this.selectedEquipmentSet.accessory1 && this.selectedEquipmentSet.accessory1.id === 2799) // Fryevia
+      || (this.id === 8044 && this.selectedEquipmentSet.accessory2 && this.selectedEquipmentSet.accessory2.id === 2799) // Fryevia
 
-      || (this.id === 8053 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 1305) // Reberta
-      || (this.id === 8053 && this.selectedBuild.equipments.materia1 && this.selectedBuild.equipments.materia1.id === 2597) // Reberta
-      || (this.id === 8053 && this.selectedBuild.equipments.materia2 && this.selectedBuild.equipments.materia2.id === 2597) // Reberta
-      || (this.id === 8053 && this.selectedBuild.equipments.materia3 && this.selectedBuild.equipments.materia3.id === 2597) // Reberta
-      || (this.id === 8053 && this.selectedBuild.equipments.materia4 && this.selectedBuild.equipments.materia4.id === 2597) // Reberta
+      || (this.id === 8053 && this.selectedEquipmentSet.right_hand && this.selectedEquipmentSet.right_hand.id === 1305) // Reberta
+      || (this.id === 8053 && this.selectedEquipmentSet.materia1 && this.selectedEquipmentSet.materia1.id === 2597) // Reberta
+      || (this.id === 8053 && this.selectedEquipmentSet.materia2 && this.selectedEquipmentSet.materia2.id === 2597) // Reberta
+      || (this.id === 8053 && this.selectedEquipmentSet.materia3 && this.selectedEquipmentSet.materia3.id === 2597) // Reberta
+      || (this.id === 8053 && this.selectedEquipmentSet.materia4 && this.selectedEquipmentSet.materia4.id === 2597) // Reberta
 
-      || (this.id === 1275 && this.selectedBuild.equipments.right_hand && this.selectedBuild.equipments.right_hand.id === 3216) // Beowulf
-      || (this.id === 1275 && this.selectedBuild.equipments.materia1 && this.selectedBuild.equipments.materia1.id === 3215) // Beowulf
-      || (this.id === 1275 && this.selectedBuild.equipments.materia2 && this.selectedBuild.equipments.materia2.id === 3215) // Beowulf
-      || (this.id === 1275 && this.selectedBuild.equipments.materia3 && this.selectedBuild.equipments.materia3.id === 3215) // Beowulf
-      || (this.id === 1275 && this.selectedBuild.equipments.materia4 && this.selectedBuild.equipments.materia4.id === 3215) // Beowulf
+      || (this.id === 1275 && this.selectedEquipmentSet.right_hand && this.selectedEquipmentSet.right_hand.id === 3216) // Beowulf
+      || (this.id === 1275 && this.selectedEquipmentSet.materia1 && this.selectedEquipmentSet.materia1.id === 3215) // Beowulf
+      || (this.id === 1275 && this.selectedEquipmentSet.materia2 && this.selectedEquipmentSet.materia2.id === 3215) // Beowulf
+      || (this.id === 1275 && this.selectedEquipmentSet.materia3 && this.selectedEquipmentSet.materia3.id === 3215) // Beowulf
+      || (this.id === 1275 && this.selectedEquipmentSet.materia4 && this.selectedEquipmentSet.materia4.id === 3215) // Beowulf
       ;
   }
 
   public isWithPartialDwForCategory(category: number): boolean {
-    return this.isPartialDwNativeForCategory(category) || this.selectedBuild.equipments.isPartialDwEquippedForCategory(category);
+    return this.isPartialDwNativeForCategory(category) || this.selectedEquipmentSet.isPartialDwEquippedForCategory(category);
   }
 
   private isPartialDwNativeForCategory(category: number): boolean {
@@ -120,12 +121,12 @@ export class Unit {
   }
 
   public getLbMultiplier() {
-    return this.selectedBuild.equipments.sumEquipmentLbBoost(this.id)
+    return this.selectedEquipmentSet.sumEquipmentLbBoost(this.id)
       + (this.stats.lb_multiplier ? this.stats.lb_multiplier - 1 : 0);
   }
 
   public getLbPowerIncrease() {
-    return this.selectedBuild.equipments.sumEquipmentLbMod(this.id);
+    return this.selectedEquipmentSet.sumEquipmentLbMod(this.id);
   }
 
   public getEsperDamageModifier() {
@@ -140,75 +141,83 @@ export class Unit {
     this.selectedBuild.equipInSlot(slot, equipment);
   }
 
+  public removeAllNonLockedItems() {
+    this.selectedEquipmentSet.removeAllNonLocked();
+  }
+
   public computeRealStats() {
     this.stats.defineEquipmentsStats(
-      this.selectedBuild.equipments.sumEquipmentStat('hp'),
-      this.selectedBuild.equipments.sumEquipmentStat('mp'),
-      this.selectedBuild.equipments.sumEquipmentStat('atk'),
-      this.selectedBuild.equipments.sumEquipmentStat('mag'),
-      this.selectedBuild.equipments.sumEquipmentStat('def'),
-      this.selectedBuild.equipments.sumEquipmentStat('spr'),
-      this.selectedBuild.equipments.sumEquipmentStat('evo')
+      this.selectedEquipmentSet.sumEquipmentStat('hp'),
+      this.selectedEquipmentSet.sumEquipmentStat('mp'),
+      this.selectedEquipmentSet.sumEquipmentStat('atk'),
+      this.selectedEquipmentSet.sumEquipmentStat('mag'),
+      this.selectedEquipmentSet.sumEquipmentStat('def'),
+      this.selectedEquipmentSet.sumEquipmentStat('spr'),
+      this.selectedEquipmentSet.sumEquipmentStat('evo')
     );
-    const equipmentActiveConditionalPassives = this.selectedBuild.equipments.getAllActiveConditionalPassives(this.id);
+    const equipmentActiveConditionalPassives = this.selectedEquipmentSet.getAllActiveConditionalPassives(this.id);
     this.stats.defineEquipmentPassives(
-      this.selectedBuild.equipments.sumEquipmentStatPercent('hp'),
-      this.selectedBuild.equipments.sumEquipmentStatPercent('mp'),
-      this.selectedBuild.equipments.sumEquipmentStatPercent('atk'),
-      this.selectedBuild.equipments.sumEquipmentStatPercent('mag'),
-      this.selectedBuild.equipments.sumEquipmentStatPercent('def'),
-      this.selectedBuild.equipments.sumEquipmentStatPercent('spr'),
-      this.selectedBuild.equipments.sumEquipmentStat('jump'),
+      this.selectedEquipmentSet.sumEquipmentStatPercent('hp'),
+      this.selectedEquipmentSet.sumEquipmentStatPercent('mp'),
+      this.selectedEquipmentSet.sumEquipmentStatPercent('atk'),
+      this.selectedEquipmentSet.sumEquipmentStatPercent('mag'),
+      this.selectedEquipmentSet.sumEquipmentStatPercent('def'),
+      this.selectedEquipmentSet.sumEquipmentStatPercent('spr'),
+      this.selectedEquipmentSet.sumEquipmentStat('jump'),
       equipmentActiveConditionalPassives
     );
     this.stats.defineEquipmentDwBonuses(
-      this.selectedBuild.equipments.sumEquipmentStat('hp_dw'),
-      this.selectedBuild.equipments.sumEquipmentStat('mp_dw'),
-      this.selectedBuild.equipments.sumEquipmentStat('atk_dw'),
-      this.selectedBuild.equipments.sumEquipmentStat('mag_dw'),
-      this.selectedBuild.equipments.sumEquipmentStat('def_dw'),
-      this.selectedBuild.equipments.sumEquipmentStat('spr_dw'),
+      this.selectedEquipmentSet.sumEquipmentStat('hp_dw'),
+      this.selectedEquipmentSet.sumEquipmentStat('mp_dw'),
+      this.selectedEquipmentSet.sumEquipmentStat('atk_dw'),
+      this.selectedEquipmentSet.sumEquipmentStat('mag_dw'),
+      this.selectedEquipmentSet.sumEquipmentStat('def_dw'),
+      this.selectedEquipmentSet.sumEquipmentStat('spr_dw'),
       equipmentActiveConditionalPassives
     );
     this.stats.defineEquipmentDhBonuses(
-      this.selectedBuild.equipments.sumEquipmentStat('hp_dh'),
-      this.selectedBuild.equipments.sumEquipmentStat('mp_dh'),
-      this.selectedBuild.equipments.sumEquipmentStat('atk_dh'),
-      this.selectedBuild.equipments.sumEquipmentStat('mag_dh'),
-      this.selectedBuild.equipments.sumEquipmentStat('def_dh'),
-      this.selectedBuild.equipments.sumEquipmentStat('spr_dh'),
+      this.selectedEquipmentSet.sumEquipmentStat('hp_dh'),
+      this.selectedEquipmentSet.sumEquipmentStat('mp_dh'),
+      this.selectedEquipmentSet.sumEquipmentStat('atk_dh'),
+      this.selectedEquipmentSet.sumEquipmentStat('mag_dh'),
+      this.selectedEquipmentSet.sumEquipmentStat('def_dh'),
+      this.selectedEquipmentSet.sumEquipmentStat('spr_dh'),
       equipmentActiveConditionalPassives
     );
     this.stats.defineEquipmentTdhBonuses(
-      this.selectedBuild.equipments.sumEquipmentStat('hp_tdh'),
-      this.selectedBuild.equipments.sumEquipmentStat('mp_tdh'),
-      this.selectedBuild.equipments.sumEquipmentStat('atk_tdh'),
-      this.selectedBuild.equipments.sumEquipmentStat('mag_tdh'),
-      this.selectedBuild.equipments.sumEquipmentStat('def_tdh'),
-      this.selectedBuild.equipments.sumEquipmentStat('spr_tdh'),
+      this.selectedEquipmentSet.sumEquipmentStat('hp_tdh'),
+      this.selectedEquipmentSet.sumEquipmentStat('mp_tdh'),
+      this.selectedEquipmentSet.sumEquipmentStat('atk_tdh'),
+      this.selectedEquipmentSet.sumEquipmentStat('mag_tdh'),
+      this.selectedEquipmentSet.sumEquipmentStat('def_tdh'),
+      this.selectedEquipmentSet.sumEquipmentStat('spr_tdh'),
       equipmentActiveConditionalPassives
     );
     this.stats.defineEquipmentEsperPercent(
-      this.selectedBuild.equipments.sumEquipmentStat('esper_percent'),
+      this.selectedEquipmentSet.sumEquipmentStat('esper_percent'),
       equipmentActiveConditionalPassives
     );
     this.stats.defineEsperStats(this.selectedBuild.esper);
 
     const activeCondPassives = this.filterUnitActiveConditionalPassives();
     this.stats.defineConditionalPassives(activeCondPassives);
-    this.stats.computeTotals(this.selectedBuild.equipments.isDoubleHandActive(),
-      this.selectedBuild.equipments.isTrueDoubleHandActive(), this.selectedBuild.equipments.isDualWielding());
+    this.stats.computeTotals(this.selectedEquipmentSet.isDoubleHandActive(),
+      this.selectedEquipmentSet.isTrueDoubleHandActive(), this.selectedEquipmentSet.isDualWielding());
   }
 
   private filterUnitActiveConditionalPassives(): Array<ConditionalPassive> {
     const activeConditionalPassives: Array<ConditionalPassive> = [];
     this.conditional_passives.forEach(condPassive => {
       condPassive.active = false;
-      if (this.selectedBuild.equipments.checkConditionalPassiveActive(condPassive, this.id)) {
+      if (this.selectedEquipmentSet.checkConditionalPassiveActive(condPassive, this.id)) {
         condPassive.active = true;
         activeConditionalPassives.push(condPassive);
       }
     });
     return activeConditionalPassives;
+  }
+
+  public get selectedEquipmentSet(): EquipmentSet {
+    return this.selectedBuild.selectedEquipmentSet;
   }
 }

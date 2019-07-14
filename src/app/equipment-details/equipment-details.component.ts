@@ -34,15 +34,15 @@ export class EquipmentDetailsComponent {
   }
 
   public isDhActive(): boolean {
-    return this.unitsService.getEquipments().isDoubleHandActive();
+    return this.unitsService.selectedUnit.selectedEquipmentSet.isDoubleHandActive();
   }
 
   public isTdhActive(): boolean {
-    return this.unitsService.getEquipments().isTrueDoubleHandActive();
+    return this.unitsService.selectedUnit.selectedEquipmentSet.isTrueDoubleHandActive();
   }
 
   public isDualWielding(): boolean {
-    return this.unitsService.getEquipments().isDualWielding();
+    return this.unitsService.selectedUnit.selectedEquipmentSet.isDualWielding();
   }
 
   public isItemCategoryDisplayed(): boolean {

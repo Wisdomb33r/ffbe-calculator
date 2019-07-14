@@ -9,6 +9,10 @@ function dieWithError($statusCode, $errorMessages) {
   die ();
 }
 
+if (isset ( $_SERVER ['HTTP_ORIGIN'] ) && $_SERVER ['HTTP_ORIGIN'] == "http://localhost:4200") {
+  header ( 'Access-Control-Allow-Origin: ' . $_SERVER ['HTTP_ORIGIN'] );
+}
+
 if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
   $language = 'en';
   if (isset ( $_GET ['language'] ) && $_GET ['language'] == 'fr') {
