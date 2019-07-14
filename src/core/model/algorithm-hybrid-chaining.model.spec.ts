@@ -43,7 +43,7 @@ const BUILD_TEST_DATA =
     "algorithmId":3,
     "physical_killers": ${PHYSICAL_KILLERS},
     "magical_killers":${MAGICAL_KILLERS},
-    "equipments":${EQUIPMENTS_TEST_DATA },
+    "equipments":${EQUIPMENTS_TEST_DATA},
     "skills":${SKILLS_TEST_DATA}
   }`;
 const UNIT_TEST_DATA = '{"id":9999,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
@@ -115,8 +115,8 @@ describe('AlgorithmChaining', () => {
     algorithm.isKillerActive = false;
     algorithm.isSparkChain = true;
     algorithm.isSupportBuffing = false;
-    unit.selectedBuild.equipments.right_hand.elements = [1];
-    unit.selectedBuild.equipments.left_hand = undefined;
+    unit.selectedEquipmentSet.right_hand.elements = [1];
+    unit.selectedEquipmentSet.left_hand = undefined;
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN

@@ -23,7 +23,7 @@ export abstract class DamageType {
   private getSpecialSelfBuff(unit: Unit, skill: Skill, stat: string): number {
     // Randy LB buff activated by TA
     if (unit.id === 1152 && !skill.isLimitBreak && stat === 'atk'
-      && (unit.selectedBuild.equipments.isEquipped(1019) || unit.selectedBuild.equipments.isEquipped(3423))) {
+      && (unit.selectedEquipmentSet.isEquipped(1019) || unit.selectedEquipmentSet.isEquipped(3423))) {
       return 300;
     }
     return 0;

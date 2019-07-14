@@ -41,9 +41,9 @@ export class UnitDetailsComponent implements OnChanges {
         unitStats: this.unit.stats,
         stat: stat,
         esper: this.unit.selectedBuild.esper,
-        doublehanding: this.unit.selectedBuild.equipments.isDoubleHandActive()
-          || this.unit.selectedBuild.equipments.isTrueDoubleHandActive(),
-        dualwielding: this.unit.selectedBuild.equipments.isDualWielding(),
+        doublehanding: this.unit.selectedEquipmentSet.isDoubleHandActive()
+          || this.unit.selectedEquipmentSet.isTrueDoubleHandActive(),
+        dualwielding: this.unit.selectedEquipmentSet.isDualWielding(),
       }
     });
   }

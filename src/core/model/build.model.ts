@@ -25,7 +25,7 @@ export class Build {
   public isStartPhaseReady: boolean;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
-  public equipments: EquipmentSet;
+  private equipments: EquipmentSet;
   public skills: Array<Skill> = [];
   public startPhaseSkills: Array<Skill> = [];
 
@@ -113,21 +113,21 @@ export class Build {
   }
 
   public getPhysicalKillers(unitId: number) {
-    return (this.physical_killers ? this.physical_killers.getKillerSum() : 0) + this.equipments.getPhysicalKillers(unitId);
+    return (this.physical_killers ? this.physical_killers.getKillerSum() : 0) + this.selectedEquipmentSet.getPhysicalKillers(unitId);
   }
 
   public getPhysicalKiller(opponentKillerType: string, unitId: number) {
     return (this.physical_killers && this.physical_killers[opponentKillerType] ? this.physical_killers[opponentKillerType] : 0)
-      + this.equipments.getPhysicalKiller(opponentKillerType, unitId);
+      + this.selectedEquipmentSet.getPhysicalKiller(opponentKillerType, unitId);
   }
 
   public getMagicalKillers(unitId: number) {
-    return (this.magical_killers ? this.magical_killers.getKillerSum() : 0) + this.equipments.getMagicalKillers(unitId);
+    return (this.magical_killers ? this.magical_killers.getKillerSum() : 0) + this.selectedEquipmentSet.getMagicalKillers(unitId);
   }
 
   public getMagicalKiller(opponentKillerType: string, unitId: number) {
     return (this.magical_killers && this.magical_killers[opponentKillerType] ? this.magical_killers[opponentKillerType] : 0)
-      + this.equipments.getMagicalKiller(opponentKillerType, unitId);
+      + this.selectedEquipmentSet.getMagicalKiller(opponentKillerType, unitId);
   }
 
   public getSkillIdentifiers(): Array<number> {
@@ -139,15 +139,15 @@ export class Build {
   }
 
   public getEsperDamageModifier(): number {
-    return this.esper.damage_modifier + this.equipments.getEsperDamageModifier(this.esper.id);
+    return this.esper.damage_modifier + this.selectedEquipmentSet.getEsperDamageModifier(this.esper.id);
   }
 
   public emptySlot(slot: string) {
-    this.equipments.emptySlot(slot);
+    this.selectedEquipmentSet.emptySlot(slot);
   }
 
   public equipInSlot(slot: string, equipment: Equipment) {
-    this.equipments.equipInSlot(slot, equipment);
+    this.selectedEquipmentSet.equipInSlot(slot, equipment);
   }
 
   public isMultiSkill(skill: Skill): boolean {
@@ -156,5 +156,9 @@ export class Build {
     } else {
       return this.skills.filter((s: Skill) => s.turnCount === skill.turnCount).length > 1;
     }
+  }
+
+  public get selectedEquipmentSet(): EquipmentSet {
+    return this.equipments;
   }
 }
