@@ -3,7 +3,7 @@ import {UnitsService} from '../../core/services/units.service';
 import {Unit} from '../../core/model/unit.model';
 import {from} from 'rxjs';
 import {ObjectUtils} from '../../core/object-utils';
-import {delay, map, switchMap, tap} from 'rxjs/operators';
+import {concatMap, map, tap} from 'rxjs/operators';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {Build} from '../../core/model/build.model';
 
@@ -44,7 +44,7 @@ export class UnitsRankingsComponent implements OnInit {
     }
 
     from(this.rankedUnits.filter((unit: Unit) => ObjectUtils.isNullOrUndefined(unit.rankingResult))).pipe(
-      switchMap((unit: Unit) => {
+      concatMap((unit: Unit) => {
         return this.databaseClient.getUnitById$(unit.id);
       }),
 
@@ -71,8 +71,6 @@ export class UnitsRankingsComponent implements OnInit {
       tap((unit: Unit) => {
         this.rankedUnits.sort((rankedUnit1: Unit, rankedUnit2: Unit) => rankedUnit2.rankingResult - rankedUnit1.rankingResult);
       }),
-
-      delay(2000),
     ).subscribe();
   }
 
