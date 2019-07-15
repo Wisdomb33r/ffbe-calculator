@@ -55,7 +55,8 @@ export class UnitsRankingsComponent implements OnInit {
       tap((unit: Unit) => {
         const rankedUnit = this.rankedUnits.find((u: Unit) => u.id === unit.id);
         rankedUnit.rankingResult = unit.builds
-          .filter((build: Build) => build.algorithmId === this.selectedAlgorithmId)
+          .filter((build: Build) => build.algorithmId === this.selectedAlgorithmId
+            || (build.algorithmId === 7 && this.selectedAlgorithmId === 5))
           .map((build: Build) => {
             unit.selectBuild(build.id);
             if (!this.isWithKillers) {

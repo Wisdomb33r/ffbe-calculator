@@ -85,12 +85,20 @@ img.details-opener {
 
 .unit-details-mcc mat-select .mat-select-value,
 .unit-details-mcc span.mat-form-field-label-wrapper label.mat-form-field-label,
-.unit-details-mcc .mat-select-arrow {
+.unit-details-mcc .mat-select-arrow,
+.unit-rankings-mcc mat-select .mat-select-value,
+.unit-rankings-mcc span.mat-form-field-label-wrapper label.mat-form-field-label,
+.unit-rankings-mcc .mat-select-arrow {
   color: white;
 }
 
-.unit-details-mcc div.mat-form-field-wrapper div.mat-form-field-underline {
+.unit-details-mcc div.mat-form-field-wrapper div.mat-form-field-underline,
+.unit-rankings-mcc div.mat-form-field-wrapper div.mat-form-field-underline {
   background-color: white;
+}
+
+.unit-rankings-mcc label.mat-checkbox-layout {
+  white-space: normal;
 }
 
 .push-build div.mat-checkbox-frame {

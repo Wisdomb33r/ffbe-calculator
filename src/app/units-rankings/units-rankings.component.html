@@ -1,6 +1,6 @@
 <mat-card class="rankings-configuration">
   <mat-card-title>{{'rankings.configurationTitle' | translate}}</mat-card-title>
-  <mat-card-content>
+  <mat-card-content class="unit-rankings-mcc">
     <p>{{'rankings.summary' | translate}}</p>
     <mat-form-field>
       <mat-select [(ngModel)]="selectedAlgorithmId" placeholder="{{'rankings.algorithmSelection' | translate}}">
@@ -15,7 +15,9 @@
     </mat-form-field>
 
     <div>
-      <mat-checkbox [(ngModel)]="isWithKillers" (change)="switchKillers()"></mat-checkbox>
+      <mat-checkbox [(ngModel)]="isWithKillers" (change)="switchKillers()">
+        {{'rankings.switchKillerCheckbox' | translate}}
+      </mat-checkbox>
     </div>
 
     <div>
@@ -41,5 +43,6 @@
         <td>{{rankedUnit.name}}</td>
       </tr>
     </table>
+    <p><em>{{'rankings.rankingsScaleNotes' | translate}}</em></p>
   </mat-card-content>
 </mat-card>
