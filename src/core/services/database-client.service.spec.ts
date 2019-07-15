@@ -76,13 +76,13 @@ describe('DatabaseClientService', () => {
       const unit: Unit = createMinimalUnit();
       unit.selectDefaultBuild();
       unit.selectedBuild.id = 888;
-      unit.selectedBuild.equipments.left_hand = {id: 10} as Equipment;
-      unit.selectedBuild.equipments.rh_trait1 = {id: 11} as Equipment;
-      unit.selectedBuild.equipments.rh_trait2 = {id: 12} as Equipment;
-      unit.selectedBuild.equipments.rh_trait3 = {id: 13} as Equipment;
-      unit.selectedBuild.equipments.lh_trait1 = {id: 14} as Equipment;
-      unit.selectedBuild.equipments.lh_trait2 = {id: 15} as Equipment;
-      unit.selectedBuild.equipments.lh_trait3 = {id: 16} as Equipment;
+      unit.selectedEquipmentSet.left_hand = {id: 10} as Equipment;
+      unit.selectedEquipmentSet.rh_trait1 = {id: 11} as Equipment;
+      unit.selectedEquipmentSet.rh_trait2 = {id: 12} as Equipment;
+      unit.selectedEquipmentSet.rh_trait3 = {id: 13} as Equipment;
+      unit.selectedEquipmentSet.lh_trait1 = {id: 14} as Equipment;
+      unit.selectedEquipmentSet.lh_trait2 = {id: 15} as Equipment;
+      unit.selectedEquipmentSet.lh_trait3 = {id: 16} as Equipment;
       // WHEN
       service.pushBuild$(unit, false);
       // THEN

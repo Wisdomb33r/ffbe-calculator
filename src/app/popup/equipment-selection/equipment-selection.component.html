@@ -16,7 +16,7 @@
     <div class="equipment" *ngIf="!unitsService.stmrExclusion || !equipment.stmr"
          [style.display]="equipment.filtered ? 'none' : ''">
       <div>
-        <img [src]="equipment.icon" (click)="selectEquipment(equipment)">
+        <img class="clickable" [src]="equipment.icon" (click)="selectEquipment(equipment)">
       </div>
       <app-equipment-details [equipment]="equipment" [displayWeaponTraits]="false"></app-equipment-details>
     </div>
@@ -25,5 +25,18 @@
 
 
 <mat-dialog-content *ngIf="locked">
-  <div class="equipment"><p class="blocked">{{'equipment.selection.changeBlocked' | translate}}</p></div>
+  <div class="equipment" *ngIf="!equipments || equipments.length === 0">
+    <p class="blocked">{{'equipment.selection.changeBlocked' | translate}}</p>
+  </div>
+  <div class="equipment" *ngIf="equipments && equipments.length">
+    <p class="blocked">{{'equipment.selection.changeBlockedWithAlternatives' | translate}}</p>
+  </div>
+  <ng-container *ngFor="let equipment of equipments">
+    <div class="equipment">
+      <div>
+        <img [src]="equipment.icon">
+      </div>
+      <app-equipment-details [equipment]="equipment" [displayWeaponTraits]="false"></app-equipment-details>
+    </div>
+  </ng-container>
 </mat-dialog-content>

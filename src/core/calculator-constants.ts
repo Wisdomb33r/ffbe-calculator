@@ -71,7 +71,6 @@ export const BODY_CATEGORIES: Array<number> = [
   35,
 ];
 export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
-  2317, // daggers
   2318, // swords, lswords, katanas, spears, claws
   2950, // swords, lswords, katanas, spears, claws
   2683, // staves
@@ -79,6 +78,7 @@ export const SPECIAL_WEAPON_ENHANCEMENTS: Array<number> = [
   2319, // rods
   3080, // rods
   2620, // bows
+  3446, // bows
   2694, // hammers
   3155, // hammers
   2791, // harps
@@ -107,6 +107,8 @@ export const EQUIPMENT_EXCLUSIONS: Array<EquipmentExclusion> = [
   new EquipmentExclusion(3080, [2319]), // skill / magic seal 4
   new EquipmentExclusion(2683, [3081]), // skill / soul seal 3
   new EquipmentExclusion(3081, [2683]), // skill / soul seal 4
+  new EquipmentExclusion(2620, [3446]), // power / magic seal 6
+  new EquipmentExclusion(3446, [2620]), // power / magic seal 7
   new EquipmentExclusion(2320, [2952]), // ATK 30%
   new EquipmentExclusion(2952, [2320]), // ATK 40%
   new EquipmentExclusion(2621, [2953]), // HP +30%

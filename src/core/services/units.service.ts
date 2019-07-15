@@ -7,7 +7,6 @@ import {map} from 'rxjs/operators';
 import {CalculatorUtils} from '../calculator-utils';
 import {Algorithm} from '../model/algorithm.model';
 import {Result} from '../model/result.model';
-import {EquipmentSet} from '../model/equipment-set.model';
 import {isNullOrUndefined} from 'util';
 import {Build} from '../model/build.model';
 import {Esper} from '../model/esper.model';
@@ -82,9 +81,10 @@ export class UnitsService {
       this.selectedUnit.emptySlot(slot);
     } else {
       this.selectedUnit.equipInSlot(slot, equipment);
-      if (this.getEquipments().left_hand && !this.checkDwForSecondWeapon(this.getEquipments().left_hand, 'left_hand')) {
-        this.selectedUnit.emptySlot('left_hand');
-      }
+    }
+    if (this.selectedUnit.selectedEquipmentSet.left_hand
+      && !this.checkDwForSecondWeapon(this.selectedUnit.selectedEquipmentSet.left_hand, 'left_hand')) {
+      this.selectedUnit.emptySlot('left_hand');
     }
   }
 
@@ -92,9 +92,9 @@ export class UnitsService {
     if (slot.startsWith('rh_trait') || slot.startsWith('lh_trait')) {
       let category = 0;
       if (slot.startsWith('rh_trait')) {
-        category = this.getEquipments().right_hand.category;
+        category = this.selectedUnit.selectedEquipmentSet.right_hand.category;
       } else {
-        category = this.getEquipments().left_hand.category;
+        category = this.selectedUnit.selectedEquipmentSet.left_hand.category;
       }
 
       return this.databaseClient.getEquipmentsForWeaponCategory$(category)
@@ -106,12 +106,13 @@ export class UnitsService {
           )
         );
     }
-    return this.databaseClient.getEquipmentsForUnitAndSlot$(slot, this.selectedUnit.id, this.getEquipments().getExtraEquipmentTypes())
+    return this.databaseClient
+      .getEquipmentsForUnitAndSlot$(slot, this.selectedUnit.id, this.selectedUnit.selectedEquipmentSet.getExtraEquipmentTypes())
       .pipe(
         map((items: Array<Equipment>) => items
           .map((item: Equipment) => new Equipment(item))
           .filter((item: Equipment) => this.isAllowed(item, slot))
-          .map((item: Equipment) => this.getEquipments().activateEquipmentConditionalPassives(item, this.selectedUnit.id))
+          .map((item: Equipment) => this.selectedUnit.selectedEquipmentSet.activateEquipmentConditionalPassives(item, this.selectedUnit.id))
           .sort((a: Equipment, b: Equipment) => -this.compareEquipmentsForAlgorithm(a, b))
         )
       );
@@ -193,11 +194,11 @@ export class UnitsService {
       .filter(passive => passive.active)
       .map(passive => passive[stat + '_dw']).reduce((val1, val2) => val1 + val2, 0);
     const from_passive = this.selectedUnit.stats[stat].base * (equipment[stat + '_percent'] + conditional_percent) / 100;
-    const from_dh = this.getEquipments().isDoubleHandActive() ?
+    const from_dh = this.selectedUnit.selectedEquipmentSet.isDoubleHandActive() ?
       this.selectedUnit.stats[stat].base_equipment * (equipment[stat + '_dh'] + conditional_dh) / 100 : 0;
-    const from_tdh = this.getEquipments().isTrueDoubleHandActive() ?
+    const from_tdh = this.selectedUnit.selectedEquipmentSet.isTrueDoubleHandActive() ?
       this.selectedUnit.stats[stat].base_equipment * (equipment[stat + '_tdh'] + conditional_tdh) / 100 : 0;
-    const from_dw = this.getEquipments().isDualWielding() ?
+    const from_dw = this.selectedUnit.selectedEquipmentSet.isDualWielding() ?
       this.selectedUnit.stats[stat].base_equipment * (equipment[stat + '_dw'] + conditional_dw) / 100 : 0;
     return equipment[stat] + from_passive + from_dh + from_tdh + from_dw;
   }
@@ -218,16 +219,16 @@ export class UnitsService {
   private checkWeaponTraitUniqueness(item: Equipment, slot: string): boolean {
     if (item.unique) {
       if (slot.startsWith('rh_trait') && (
-        (this.getEquipments().rh_trait1 && item.id === this.getEquipments().rh_trait1.id)
-        || (this.getEquipments().rh_trait2 && item.id === this.getEquipments().rh_trait2.id)
-        || (this.getEquipments().rh_trait3 && item.id === this.getEquipments().rh_trait3.id)
+        (this.selectedUnit.selectedEquipmentSet.rh_trait1 && item.id === this.selectedUnit.selectedEquipmentSet.rh_trait1.id)
+        || (this.selectedUnit.selectedEquipmentSet.rh_trait2 && item.id === this.selectedUnit.selectedEquipmentSet.rh_trait2.id)
+        || (this.selectedUnit.selectedEquipmentSet.rh_trait3 && item.id === this.selectedUnit.selectedEquipmentSet.rh_trait3.id)
       )) {
         return false;
       }
       if (slot.startsWith('lh_trait') && (
-        (this.getEquipments().lh_trait1 && item.id === this.getEquipments().lh_trait1.id)
-        || (this.getEquipments().lh_trait2 && item.id === this.getEquipments().lh_trait2.id)
-        || (this.getEquipments().lh_trait3 && item.id === this.getEquipments().lh_trait3.id)
+        (this.selectedUnit.selectedEquipmentSet.lh_trait1 && item.id === this.selectedUnit.selectedEquipmentSet.lh_trait1.id)
+        || (this.selectedUnit.selectedEquipmentSet.lh_trait2 && item.id === this.selectedUnit.selectedEquipmentSet.lh_trait2.id)
+        || (this.selectedUnit.selectedEquipmentSet.lh_trait3 && item.id === this.selectedUnit.selectedEquipmentSet.lh_trait3.id)
       )) {
         return false;
       }
@@ -238,23 +239,23 @@ export class UnitsService {
   private checkUniqueness(item: Equipment, slot: string): boolean {
     if (item.unique) {
       if (slot.startsWith('materia') && (
-        (this.getEquipments().materia1 && item.id === this.getEquipments().materia1.id)
-        || (this.getEquipments().materia2 && item.id === this.getEquipments().materia2.id)
-        || (this.getEquipments().materia3 && item.id === this.getEquipments().materia3.id)
-        || (this.getEquipments().materia4 && item.id === this.getEquipments().materia4.id))
+        (this.selectedUnit.selectedEquipmentSet.materia1 && item.id === this.selectedUnit.selectedEquipmentSet.materia1.id)
+        || (this.selectedUnit.selectedEquipmentSet.materia2 && item.id === this.selectedUnit.selectedEquipmentSet.materia2.id)
+        || (this.selectedUnit.selectedEquipmentSet.materia3 && item.id === this.selectedUnit.selectedEquipmentSet.materia3.id)
+        || (this.selectedUnit.selectedEquipmentSet.materia4 && item.id === this.selectedUnit.selectedEquipmentSet.materia4.id))
       ) {
         return false;
       }
       if (slot.startsWith('accessory') && (
-        (this.getEquipments().accessory1 && item.id === this.getEquipments().accessory1.id)
-        || (this.getEquipments().accessory2 && item.id === this.getEquipments().accessory2.id))
+        (this.selectedUnit.selectedEquipmentSet.accessory1 && item.id === this.selectedUnit.selectedEquipmentSet.accessory1.id)
+        || (this.selectedUnit.selectedEquipmentSet.accessory2 && item.id === this.selectedUnit.selectedEquipmentSet.accessory2.id))
       ) {
         return false;
       }
       if (slot === 'right_hand' || slot === 'left_hand') {
         if (
-          (this.getEquipments().right_hand && item.id === this.getEquipments().right_hand.id)
-          || (this.selectedUnit.selectedBuild.equipments.left_hand && item.id === this.selectedUnit.selectedBuild.equipments.left_hand.id)
+          (this.selectedUnit.selectedEquipmentSet.right_hand && item.id === this.selectedUnit.selectedEquipmentSet.right_hand.id)
+          || (this.selectedUnit.selectedEquipmentSet.left_hand && item.id === this.selectedUnit.selectedEquipmentSet.left_hand.id)
         ) {
           return false;
         }
@@ -298,7 +299,8 @@ export class UnitsService {
         slotsToCheck = ['materia1', 'materia2', 'materia3'];
       }
       if (slotsToCheck.some(
-        (s: string) => this.getEquipments()[s] && exclusion.exclude.find(excludedBy => excludedBy === this.getEquipments()[s].id) > 0)) {
+        (s: string) => this.selectedUnit.selectedEquipmentSet[s]
+          && exclusion.exclude.find(excludedBy => excludedBy === this.selectedUnit.selectedEquipmentSet[s].id) > 0)) {
         return false;
       }
     }
@@ -306,16 +308,17 @@ export class UnitsService {
   }
 
   private checkTwoHandedMainHandForOffhand(slot: string) {
-    return slot !== 'left_hand' || !this.getEquipments().right_hand || !this.getEquipments().right_hand.isTwoHanded();
+    return slot !== 'left_hand' || !this.selectedUnit.selectedEquipmentSet.right_hand
+      || !this.selectedUnit.selectedEquipmentSet.right_hand.isTwoHanded();
   }
 
   private checkDwForSecondWeapon(item: Equipment, slot: string): boolean {
     return slot !== 'left_hand' || item.isShield()
-      || (this.getEquipments().isDwEquipped() && !item.isTwoHanded())
+      || (this.selectedUnit.selectedEquipmentSet.isDwEquipped() && !item.isTwoHanded())
       || (this.selectedUnit.isWithNativeDw() && !item.isTwoHanded())
       || item.dual_wield
       || (this.selectedUnit.isWithPartialDwForCategory(item.category)
-        && this.selectedUnit.isWithPartialDwForCategory(this.getEquipments().right_hand.category)
+        && this.selectedUnit.isWithPartialDwForCategory(this.selectedUnit.selectedEquipmentSet.right_hand.category)
         && !item.isTwoHanded())
       ;
   }
@@ -331,10 +334,6 @@ export class UnitsService {
 
   public getResult(): Result {
     return this.selectedUnit.selectedBuild.result;
-  }
-
-  public getEquipments(): EquipmentSet {
-    return this.selectedUnit.selectedBuild.equipments;
   }
 
   public getEsper(): Esper {

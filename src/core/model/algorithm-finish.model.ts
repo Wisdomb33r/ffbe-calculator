@@ -51,7 +51,7 @@ export class AlgorithmFinish extends AlgorithmOffensive {
       }
       const lbPower = unit.getLbPowerIncrease();
       const jumpMultiplier = 100 + (skill.isJump ? unit.stats.jump + unit.stats.equipment_jump : 0);
-      let skillTotalPower = skill.power + unit.selectedBuild.equipments.sumSkillModIncrease(skill.id);
+      let skillTotalPower = skill.power + unit.selectedEquipmentSet.sumSkillModIncrease(skill.id);
       if (skill.isLimitBreak && lbPower > 0) {
         skillTotalPower += lbPower;
       }

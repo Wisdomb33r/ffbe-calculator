@@ -141,7 +141,8 @@
       "filter": "Filtrer les objets",
       "empty": "vide",
       "excludeStmr": "Exclure les STMR",
-      "changeBlocked": "Cet objet est obligatoire pour ce build à cause d'un effet que le calculateur ne peut actuellement pas activer ou désactiver dynamiquement."
+      "changeBlocked": "Cet objet est obligatoire pour ce build à cause d'un effet que le calculateur ne peut pas activer ou désactiver dynamiquement.",
+      "changeBlockedWithAlternatives": "Cet objet active un effet que le calculateur ne peut pas activer ou désactiver dynamiquement. Pour le retirer ou le changer, vous devez d'abord équiper l'objet suivant qui active le même effet :"
     }
   },
   "skills": {

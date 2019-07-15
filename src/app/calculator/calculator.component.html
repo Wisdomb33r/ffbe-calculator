@@ -1,7 +1,7 @@
 <div class="left">
   <app-unit-details [unit]="unitsService.selectedUnit" *ngIf="unitsService.selectedUnit"
                     (esperChanged)="computeAfterEquipmentChanged()"></app-unit-details>
-  <app-equipments-display [equipments]="unitsService.selectedUnit.selectedBuild.equipments"
+  <app-equipments-display [equipments]="unitsService.selectedUnit.selectedEquipmentSet"
                           *ngIf="unitsService.selectedUnit"
                           (equipmentChanged)="computeAfterEquipmentChanged()"></app-equipments-display>
   <mat-card *ngIf="!unitsService.selectedUnit">
@@ -23,22 +23,22 @@
   </app-skills-display>
   <app-calculation-display *ngIf="unitsService.selectedUnit"></app-calculation-display>
   <app-permanent-url *ngIf="unitsService.selectedUnit" [unit]="unitsService.selectedUnit"
-                     [right_hand]="unitsService.getEquipments().right_hand"
-                     [rh_trait1]="unitsService.getEquipments().rh_trait1"
-                     [rh_trait2]="unitsService.getEquipments().rh_trait2"
-                     [rh_trait3]="unitsService.getEquipments().rh_trait3"
-                     [left_hand]="unitsService.getEquipments().left_hand"
-                     [lh_trait1]="unitsService.getEquipments().lh_trait1"
-                     [lh_trait2]="unitsService.getEquipments().lh_trait2"
-                     [lh_trait3]="unitsService.getEquipments().lh_trait3"
-                     [head]="unitsService.getEquipments().head"
-                     [body]="unitsService.getEquipments().body"
-                     [accessory1]="unitsService.getEquipments().accessory1"
-                     [accessory2]="unitsService.getEquipments().accessory2"
-                     [materia1]="unitsService.getEquipments().materia1"
-                     [materia2]="unitsService.getEquipments().materia2"
-                     [materia3]="unitsService.getEquipments().materia3"
-                     [materia4]="unitsService.getEquipments().materia4"
+                     [right_hand]="unitsService.selectedUnit.selectedEquipmentSet.right_hand"
+                     [rh_trait1]="unitsService.selectedUnit.selectedEquipmentSet.rh_trait1"
+                     [rh_trait2]="unitsService.selectedUnit.selectedEquipmentSet.rh_trait2"
+                     [rh_trait3]="unitsService.selectedUnit.selectedEquipmentSet.rh_trait3"
+                     [left_hand]="unitsService.selectedUnit.selectedEquipmentSet.left_hand"
+                     [lh_trait1]="unitsService.selectedUnit.selectedEquipmentSet.lh_trait1"
+                     [lh_trait2]="unitsService.selectedUnit.selectedEquipmentSet.lh_trait2"
+                     [lh_trait3]="unitsService.selectedUnit.selectedEquipmentSet.lh_trait3"
+                     [head]="unitsService.selectedUnit.selectedEquipmentSet.head"
+                     [body]="unitsService.selectedUnit.selectedEquipmentSet.body"
+                     [accessory1]="unitsService.selectedUnit.selectedEquipmentSet.accessory1"
+                     [accessory2]="unitsService.selectedUnit.selectedEquipmentSet.accessory2"
+                     [materia1]="unitsService.selectedUnit.selectedEquipmentSet.materia1"
+                     [materia2]="unitsService.selectedUnit.selectedEquipmentSet.materia2"
+                     [materia3]="unitsService.selectedUnit.selectedEquipmentSet.materia3"
+                     [materia4]="unitsService.selectedUnit.selectedEquipmentSet.materia4"
                      [esper]="unitsService.getEsper()">
   </app-permanent-url>
   <app-push-build *ngIf="unitsService.selectedUnit && pushBuildDisplayed"></app-push-build>
