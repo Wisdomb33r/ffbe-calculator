@@ -65,6 +65,7 @@ describe('UnitsRankingsComponent', () => {
   beforeEach(() => {
     const unitServiceMock = {
       getUnitListByAlgorithm: jasmine.createSpy('getUnitListByAlgorithm').and.returnValue([new Unit(unitFake1), new Unit(unitFake2)]),
+      resetUnitsRankingResults: jasmine.createSpy('resetUnitsRankingResults'),
     };
     const databaseClientMock = {
       getUnitById$: jasmine.createSpy('getUnitById$')
@@ -99,6 +100,8 @@ describe('UnitsRankingsComponent', () => {
     // GIVEN
     const unitServiceMock = TestBed.get(UnitsService);
     component.selectedAlgorithmId = 4;
+    spyOn(localStorage, 'getItem');
+    spyOn(localStorage, 'setItem');
 
     // WHEN
     component.changeAlgorithm();
@@ -121,12 +124,12 @@ describe('UnitsRankingsComponent', () => {
     expect(rankingsResultsTitle.textContent).toEqual('rankings.rankingsTitle');
 
     const rankingsResultsTableRow1: DebugElement = rankingsResults.query(By.css('tr:nth-child(2)'));
-    expect(rankingsResultsTableRow1.query(By.css('td:nth-child(1)')).nativeElement.textContent).toEqual('1');
+    expect(rankingsResultsTableRow1.query(By.css('td:nth-child(1)')).nativeElement.textContent).toEqual('##');
     expect(rankingsResultsTableRow1.query(By.css('td:nth-child(2)')).nativeElement.textContent).toEqual('');
     expect(rankingsResultsTableRow1.query(By.css('td:nth-child(3)')).nativeElement.textContent).toEqual('Unit1');
 
     const rankingsResultsTableRow2: DebugElement = rankingsResults.query(By.css('tr:nth-child(3)'));
-    expect(rankingsResultsTableRow2.query(By.css('td:nth-child(1)')).nativeElement.textContent).toEqual('2');
+    expect(rankingsResultsTableRow2.query(By.css('td:nth-child(1)')).nativeElement.textContent).toEqual('##');
     expect(rankingsResultsTableRow2.query(By.css('td:nth-child(2)')).nativeElement.textContent).toEqual('');
     expect(rankingsResultsTableRow2.query(By.css('td:nth-child(3)')).nativeElement.textContent).toEqual('Unit2');
   });
@@ -138,6 +141,8 @@ describe('UnitsRankingsComponent', () => {
     const translateService: TranslateService = TestBed.get(TranslateService);
     component.selectedAlgorithmId = 4;
     translateService.use('fr');
+    spyOn(localStorage, 'getItem');
+    spyOn(localStorage, 'setItem');
 
     // WHEN
     component.changeAlgorithm();
@@ -178,6 +183,8 @@ describe('UnitsRankingsComponent', () => {
     const translateService: TranslateService = TestBed.get(TranslateService);
     component.selectedAlgorithmId = 4;
     translateService.use('fr');
+    spyOn(localStorage, 'getItem');
+    spyOn(localStorage, 'setItem');
 
     // WHEN
     component.changeAlgorithm();
