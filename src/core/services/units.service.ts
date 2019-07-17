@@ -76,6 +76,10 @@ export class UnitsService {
     return [];
   }
 
+  public resetUnitsRankingResults() {
+    this.units.forEach((unit: Unit) => unit.rankingResult = undefined);
+  }
+
   public equipInSlot(slot: string, equipment: Equipment) {
     if (equipment.id === -1) {
       this.selectedUnit.emptySlot(slot);

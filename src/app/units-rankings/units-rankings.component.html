@@ -37,7 +37,7 @@
         <th>{{'rankings.unitHeader' | translate}}</th>
       </tr>
       <tr *ngFor="let rankedUnit of rankedUnits;let i = index">
-        <td>{{i + 1}}</td>
+        <td>{{rankedUnit.rankingResult ? i + 1 : '##'}}</td>
         <td *ngIf="rankedUnit.rankingResult">{{rankedUnit.rankingResult | integer}}</td>
         <td *ngIf="!rankedUnit.rankingResult"></td>
         <td>{{rankedUnit.name}}</td>
