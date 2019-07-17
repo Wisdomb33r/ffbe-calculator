@@ -18,10 +18,15 @@ a:hover {
 mat-toolbar.mat-toolbar {
   margin-bottom: 5px;
   background-color: #EEEEEE;
+  padding: 0 5px;
 }
 
 mat-toolbar.mat-toolbar button {
   margin-left: 10px;
+}
+
+mat-toolbar.mat-toolbar button:last-child {
+  margin-left: 0;
 }
 
 mat-toolbar.mat-toolbar button:first-child {
