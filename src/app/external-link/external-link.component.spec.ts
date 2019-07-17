@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {ExternalLinkComponent} from './external-link.component';
-import {MatCardModule} from '@angular/material';
+import {MatCardModule, MatFormFieldModule} from '@angular/material';
 import {of} from 'rxjs';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {UnitsService} from '../../core/services/units.service';
@@ -63,6 +63,7 @@ describe('ExternalLinkComponent', () => {
       ],
       imports: [
         MatCardModule,
+        MatFormFieldModule,
         TranslateModule.forRoot(),
       ],
       providers: [
@@ -226,6 +227,7 @@ describe('ExternalLinkComponent', () => {
       ],
       imports: [
         MatCardModule,
+        MatFormFieldModule,
         TranslateModule.forRoot(),
       ],
       providers: [
