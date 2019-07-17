@@ -59,19 +59,19 @@ export class UnitsService {
   public getUnitListByAlgorithm(algorithm: number) {
     switch (algorithm) {
       case 1:
-        return this.physicalChainers;
+        return this.physicalChainers.slice();
       case 2:
-        return this.magicalChainers;
+        return this.magicalChainers.slice();
       case 3:
-        return this.hybridChainers;
+        return this.hybridChainers.slice();
       case 4:
-        return this.physicalFinishers;
+        return this.physicalFinishers.slice();
       case 5:
-        return this.magicalFinishers;
+        return this.magicalFinishers.slice();
       case 6:
-        return this.hybridFinishers;
+        return this.hybridFinishers.slice();
       case 8:
-        return this.defenders;
+        return this.defenders.slice();
     }
     return [];
   }
