@@ -85,7 +85,8 @@
     },
     "externalLink": {
       "title": "Loading build",
-      "summary": "Loading steps to build calculation : "
+      "summary": "Loading steps to build calculation : ",
+      "loadError": "Build reload failed : at least one parameter of the URL could not be properly restored to the build."
     }
   },
   "unit": {
