@@ -58,6 +58,10 @@ export class AppMenusComponent implements OnInit {
     }
   }
 
+  public navigateToRankings() {
+    this.router.navigate(['/rankings']);
+  }
+
   public switchLanguage(lang: string) {
     this.translate.use(lang);
 

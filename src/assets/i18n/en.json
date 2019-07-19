@@ -30,6 +30,7 @@
   "magical": "magical",
   "menu": {
     "units": "Units",
+    "rankings": "Rankings",
     "languages": "Languages",
     "language": {
       "english": "English",
@@ -250,5 +251,23 @@
       "title": "Permanent URL",
       "copy": "Copy"
     }
+  },
+  "rankings": {
+    "configurationTitle": "Calculations configuration",
+    "summary": "The following options let you adapt how the ranking calculation is performed to match your preferences as much as possible.",
+    "algorithmSelection": "Ranked units type selection",
+    "physicalChainers": "Physical chainers",
+    "magicalChainers": "Magical chainers",
+    "hybridChainers": "Hybrid chainers",
+    "physicalFinishers": "Physical finishers",
+    "magicalFinishers": "Magical finishers",
+    "hybridFinishers": "Hybrid finishers",
+    "switchKillerCheckbox": "Include killers (5% damage for each 50% killer)",
+    "calculateMissingBuilds": "Calculate",
+    "rankingsTitle": "Ranking",
+    "rankingHeader": "Rank",
+    "damageHeader": "Damages",
+    "unitHeader": "Unit",
+    "rankingsScaleNotes": "Note : Damages are expressed in millions per turn on a 1 DEF/SPR ennemy. Please keep in mind that new equipment items are brought IG every week, some builds are likely to be outdated and not strictly speaking BiS, especially for older units."
   }
 }

@@ -30,6 +30,7 @@
   "magical": "magique",
   "menu": {
     "units": "Unités",
+    "rankings": "Classements",
     "languages": "Langues",
     "language": {
       "english": "English",
@@ -250,5 +251,23 @@
       "title": "URL permanente",
       "copy": "Copier"
     }
+  },
+  "rankings": {
+    "configurationTitle": "Configuration des calculs",
+    "summary": "Les paramètres qui suivent vous permettent de configurer au mieux selon vos préférences la façon de réaliser les calculs.",
+    "algorithmSelection": "Choix du type d'unités classées",
+    "physicalChainers": "Chaîneurs physiques",
+    "magicalChainers": "Chaîneurs magiques",
+    "hybridChainers": "Chaîneurs hybrides",
+    "physicalFinishers": "Finishers physiques",
+    "magicalFinishers": "Finishers magiques",
+    "hybridFinishers": "Finishers hybrides",
+    "switchKillerCheckbox": "Inclure les tueurs dans le calcul (5% de dégâts pour 50% de tueurs)",
+    "calculateMissingBuilds": "Calculer",
+    "rankingsTitle": "Classement",
+    "rankingHeader": "Rang",
+    "damageHeader": "Dégâts",
+    "unitHeader": "Unité",
+    "rankingsScaleNotes": "Note : Les dégâts sont exprimés en millions de dégâts sur un ennemi à 1 de DEF/PSY. Gardez en tête que de nouvelles pièces d'équipement sont ajoutées chaque semaine en jeu et qu'il est probable que certains builds ne soient pas strictement BiS, surtout pour les plus vieilles unités."
   }
 }

@@ -18,6 +18,7 @@ export class Unit {
 
   // transcient
   public selectedBuild: Build;
+  public rankingResult: number;
 
   constructor(unit: Unit) {
     this.id = unit.id;
