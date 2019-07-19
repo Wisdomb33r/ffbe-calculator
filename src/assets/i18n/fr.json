@@ -85,7 +85,8 @@
     },
     "externalLink": {
       "title": "Chargement du build",
-      "summary": "Étapes du chargement du build en cours : "
+      "summary": "Étapes du chargement du build en cours : ",
+      "loadError": "Erreur de chargement du build : au moins un paramètre de l'URL n'a pas pu être rechargé correctement."
     }
   },
   "unit": {

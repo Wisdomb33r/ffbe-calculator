@@ -20,6 +20,11 @@ import {Skill} from '../../core/model/skill.model';
 export class ExternalLinkComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
+  private loadError = false;
+  private itemToLock: number;
+  private itemToLockAlternative: number;
+
+  // unit, build and equipment parameters
   private unit: number;
   private build: number;
   private right_hand: number;
@@ -152,6 +157,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
             this.unitsService.selectedUnit.selectBuild(this.build);
           }
           this.restoreAlgorithmConfiguration();
+          this.unlockLockedItemsIfAlternativeToBeLoaded();
           this.unitsService.selectedUnit.removeAllNonLockedItems();
 
           const observables = [];
@@ -285,8 +291,34 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         }
       }),
     ).subscribe(any => {
-      this.unitsService.selectedUnit.computeAll();
-      this.router.navigate(['/']);
+      const selectedEquipment = this.unitsService.selectedUnit.selectedEquipmentSet;
+      if ((this.build && this.unitsService.selectedUnit.selectedBuild.id !== this.build)
+        || (this.right_hand && (!selectedEquipment.right_hand || selectedEquipment.right_hand.id !== this.right_hand))
+        || (this.left_hand && (!selectedEquipment.left_hand || selectedEquipment.left_hand.id !== this.left_hand))
+        || (this.head && (!selectedEquipment.head || selectedEquipment.head.id !== this.head))
+        || (this.body && (!selectedEquipment.body || selectedEquipment.body.id !== this.body))
+        || (this.accessory1 && (!selectedEquipment.accessory1 || selectedEquipment.accessory1.id !== this.accessory1))
+        || (this.accessory2 && (!selectedEquipment.accessory2 || selectedEquipment.accessory2.id !== this.accessory2))
+        || (this.materia1 && (!selectedEquipment.materia1 || selectedEquipment.materia1.id !== this.materia1))
+        || (this.materia2 && (!selectedEquipment.materia2 || selectedEquipment.materia2.id !== this.materia2))
+        || (this.materia3 && (!selectedEquipment.materia3 || selectedEquipment.materia3.id !== this.materia3))
+        || (this.materia4 && (!selectedEquipment.materia4 || selectedEquipment.materia4.id !== this.materia4))
+        || (this.rh_trait1 && (!selectedEquipment.rh_trait1 || selectedEquipment.rh_trait1.id !== this.rh_trait1))
+        || (this.rh_trait2 && (!selectedEquipment.rh_trait2 || selectedEquipment.rh_trait2.id !== this.rh_trait2))
+        || (this.rh_trait3 && (!selectedEquipment.rh_trait3 || selectedEquipment.rh_trait3.id !== this.rh_trait3))
+        || (this.lh_trait1 && (!selectedEquipment.lh_trait1 || selectedEquipment.lh_trait1.id !== this.lh_trait1))
+        || (this.lh_trait2 && (!selectedEquipment.lh_trait2 || selectedEquipment.lh_trait2.id !== this.lh_trait2))
+        || (this.lh_trait3 && (!selectedEquipment.lh_trait3 || selectedEquipment.lh_trait3.id !== this.lh_trait3))
+      ) {
+        this.loadError = true;
+      } else {
+        if (this.itemToLock && this.itemToLockAlternative) {
+          this.unitsService.selectedUnit.selectedEquipmentSet
+            .transferLockedStatusToAlternative(this.itemToLock, this.itemToLockAlternative);
+        }
+        this.unitsService.selectedUnit.computeAll();
+        this.router.navigate(['/']);
+      }
     }, error => this.router.navigate(['/']));
   }
 
@@ -310,6 +342,29 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         this.unitsService.equipInSlot(slot, equipment);
       }
     }
+  }
+
+  private unlockLockedItemsIfAlternativeToBeLoaded() {
+    const lockedItems = this.unitsService.selectedUnit.getLockedItems();
+    if (lockedItems && lockedItems.length) {
+      lockedItems.forEach((item: Equipment) => {
+        if (item.locked_alternative && this.isItemToBeLoaded(item.locked_alternative)) {
+          this.itemToLock = item.locked_alternative;
+          this.itemToLockAlternative = item.id;
+          item.locked = false;
+          item.locked_alternative = undefined;
+        }
+      });
+    }
+  }
+
+  private isItemToBeLoaded(alternative: number) {
+    if (this.right_hand === alternative || this.left_hand === alternative || this.head === alternative || this.body === alternative
+      || this.materia1 === alternative || this.materia2 === alternative || this.materia3 === alternative || this.materia4 === alternative
+      || this.accessory1 === alternative || this.accessory2 === alternative) {
+      return true;
+    }
+    return false;
   }
 
   private restoreAlgorithmConfiguration() {

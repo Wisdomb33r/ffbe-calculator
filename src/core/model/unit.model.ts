@@ -141,6 +141,10 @@ export class Unit {
     this.selectedBuild.equipInSlot(slot, equipment);
   }
 
+  public getLockedItems(): Array<Equipment> {
+    return this.selectedEquipmentSet.getLockedItems();
+  }
+
   public removeAllNonLockedItems() {
     this.selectedEquipmentSet.removeAllNonLocked();
   }
