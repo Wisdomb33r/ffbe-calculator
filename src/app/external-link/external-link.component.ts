@@ -20,7 +20,7 @@ import {Skill} from '../../core/model/skill.model';
 export class ExternalLinkComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
-  private loadError = false;
+  public loadError = false;
   private itemToLock: number;
   private itemToLockAlternative: number;
 
