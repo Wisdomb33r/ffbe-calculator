@@ -12,6 +12,7 @@ import {
   MatCheckboxModule,
   MatDialogModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
   MatMenuModule,
   MatSelectModule,
@@ -51,6 +52,7 @@ import {CalculationEvokerDamagesComponent} from './popup/calculation-evoker-dama
 import {PushBuildComponent} from './push-build/push-build.component';
 import {UnitTraitsComponent} from './unit-traits/unit-traits.component';
 import {CalculationOffensiveTotalsComponent} from './calculation-offensive-totals/calculation-offensive-totals.component';
+import {UnitsRankingsComponent} from './units-rankings/units-rankings.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {ScrollingModule as ExperimentalScrollingModule} from '@angular/cdk-experimental/scrolling';
 
@@ -62,6 +64,7 @@ const appRoutes: Routes = [
   {path: 'about/report', component: AboutReportComponent},
   {path: 'about/calculator', component: AboutCalculatorComponent},
   {path: 'link/unit/:id', component: ExternalLinkComponent},
+  {path: 'rankings', component: UnitsRankingsComponent},
   {path: '', pathMatch: 'full', component: CalculatorComponent},
   {path: '**', redirectTo: '/'}
 ];
@@ -99,6 +102,7 @@ const appRoutes: Routes = [
     EsperSelectionComponent,
     PushBuildComponent,
     UnitTraitsComponent,
+    UnitsRankingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,15 +119,16 @@ const appRoutes: Routes = [
         deps: [HttpClient]
       }
     }),
-    MatCardModule,
-    MatSelectModule,
-    MatMenuModule,
-    MatDialogModule,
     MatButtonModule,
-    MatToolbarModule,
+    MatCardModule,
     MatCheckboxModule,
-    MatInputModule,
+    MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatToolbarModule,
     ScrollingModule,
     ExperimentalScrollingModule,
     ClipboardModule,

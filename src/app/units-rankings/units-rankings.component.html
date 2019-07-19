@@ -1,0 +1,48 @@
+<mat-card class="rankings-configuration">
+  <mat-card-title>{{'rankings.configurationTitle' | translate}}</mat-card-title>
+  <mat-card-content class="unit-rankings-mcc">
+    <p>{{'rankings.summary' | translate}}</p>
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedAlgorithmId" placeholder="{{'rankings.algorithmSelection' | translate}}">
+        <mat-option></mat-option>
+        <mat-option [value]="1" (click)="changeAlgorithm()">{{'rankings.physicalChainers' | translate}}</mat-option>
+        <mat-option [value]="2" (click)="changeAlgorithm()">{{'rankings.magicalChainers' | translate}}</mat-option>
+        <mat-option [value]="3" (click)="changeAlgorithm()">{{'rankings.hybridChainers' | translate}}</mat-option>
+        <mat-option [value]="4" (click)="changeAlgorithm()">{{'rankings.physicalFinishers' | translate}}</mat-option>
+        <mat-option [value]="5" (click)="changeAlgorithm()">{{'rankings.magicalFinishers' | translate}}</mat-option>
+        <mat-option [value]="6" (click)="changeAlgorithm()">{{'rankings.hybridFinishers' | translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div>
+      <mat-checkbox [(ngModel)]="isWithKillers" (change)="switchKillers()">
+        {{'rankings.switchKillerCheckbox' | translate}}
+      </mat-checkbox>
+    </div>
+
+    <div>
+      <button mat-raised-button color="accent"
+              (click)="calculateMissingBuilds()">{{'rankings.calculateMissingBuilds' | translate}}</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="rankedUnits && rankedUnits.length" class="rankings-results">
+  <mat-card-title>{{'rankings.rankingsTitle' | translate}}</mat-card-title>
+  <mat-card-content>
+    <table>
+      <tr>
+        <th>{{'rankings.rankingHeader' | translate}}</th>
+        <th>{{'rankings.damageHeader' | translate}}</th>
+        <th>{{'rankings.unitHeader' | translate}}</th>
+      </tr>
+      <tr *ngFor="let rankedUnit of rankedUnits;let i = index">
+        <td>{{rankedUnit.rankingResult ? i + 1 : '##'}}</td>
+        <td *ngIf="rankedUnit.rankingResult">{{rankedUnit.rankingResult | integer}}</td>
+        <td *ngIf="!rankedUnit.rankingResult"></td>
+        <td>{{rankedUnit.name}}</td>
+      </tr>
+    </table>
+    <p><em>{{'rankings.rankingsScaleNotes' | translate}}</em></p>
+  </mat-card-content>
+</mat-card>

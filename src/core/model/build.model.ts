@@ -142,6 +142,10 @@ export class Build {
     return this.esper.damage_modifier + this.selectedEquipmentSet.getEsperDamageModifier(this.esper.id);
   }
 
+  public getLockedItems(): Array<Equipment> {
+    return this.selectedEquipmentSet.getLockedItems();
+  }
+
   public emptySlot(slot: string) {
     this.selectedEquipmentSet.emptySlot(slot);
   }

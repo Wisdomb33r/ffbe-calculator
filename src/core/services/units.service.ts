@@ -56,6 +56,30 @@ export class UnitsService {
       u.builds.filter((b: Build) => b.algorithmId === 8).length > 0);
   }
 
+  public getUnitListByAlgorithm(algorithm: number) {
+    switch (algorithm) {
+      case 1:
+        return this.physicalChainers.slice();
+      case 2:
+        return this.magicalChainers.slice();
+      case 3:
+        return this.hybridChainers.slice();
+      case 4:
+        return this.physicalFinishers.slice();
+      case 5:
+        return this.magicalFinishers.slice();
+      case 6:
+        return this.hybridFinishers.slice();
+      case 8:
+        return this.defenders.slice();
+    }
+    return [];
+  }
+
+  public resetUnitsRankingResults() {
+    this.units.forEach((unit: Unit) => unit.rankingResult = undefined);
+  }
+
   public equipInSlot(slot: string, equipment: Equipment) {
     if (equipment.id === -1) {
       this.selectedUnit.emptySlot(slot);

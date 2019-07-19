@@ -18,6 +18,7 @@ export class Unit {
 
   // transcient
   public selectedBuild: Build;
+  public rankingResult: number;
 
   constructor(unit: Unit) {
     this.id = unit.id;
@@ -139,6 +140,10 @@ export class Unit {
 
   public equipInSlot(slot: string, equipment: Equipment) {
     this.selectedBuild.equipInSlot(slot, equipment);
+  }
+
+  public getLockedItems(): Array<Equipment> {
+    return this.selectedEquipmentSet.getLockedItems();
   }
 
   public removeAllNonLockedItems() {

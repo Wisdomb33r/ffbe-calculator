@@ -510,6 +510,41 @@ export class EquipmentSet {
     return !isNullOrUndefined(this.getEquippedItemById(itemId));
   }
 
+  public getLockedItems(): Array<Equipment> {
+    const lockedItems: Array<Equipment> = [];
+    if (this.right_hand && this.right_hand.locked) {
+      lockedItems.push(this.right_hand);
+    }
+    if (this.left_hand && this.left_hand.locked) {
+      lockedItems.push(this.left_hand);
+    }
+    if (this.head && this.head.locked) {
+      lockedItems.push(this.head);
+    }
+    if (this.body && this.body.locked) {
+      lockedItems.push(this.body);
+    }
+    if (this.accessory1 && this.accessory1.locked) {
+      lockedItems.push(this.accessory1);
+    }
+    if (this.accessory2 && this.accessory2.locked) {
+      lockedItems.push(this.accessory2);
+    }
+    if (this.materia1 && this.materia1.locked) {
+      lockedItems.push(this.materia1);
+    }
+    if (this.materia2 && this.materia2.locked) {
+      lockedItems.push(this.materia2);
+    }
+    if (this.materia3 && this.materia3.locked) {
+      lockedItems.push(this.materia3);
+    }
+    if (this.materia4 && this.materia4.locked) {
+      lockedItems.push(this.materia4);
+    }
+    return lockedItems;
+  }
+
   public transferLockedStatusToAlternative(alternative: number, newAlternative: number) {
     const equippedItem: Equipment = this.getEquippedItemById(alternative);
     if (equippedItem) {
