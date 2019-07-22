@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {ExternalLinkComponent} from './external-link.component';
 import {MatCardModule, MatFormFieldModule} from '@angular/material';
@@ -125,7 +125,7 @@ describe('ExternalLinkComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should load a unit according to route parameters', () => {
+  it('should load a unit according to route parameters', async(() => {
     // GIVEN
     const databaseClientMock = TestBed.get(DatabaseClientService);
     const unitService = TestBed.get(UnitsService);
@@ -152,10 +152,11 @@ describe('ExternalLinkComponent', () => {
     const unit = new Unit(unitFake);
 
     // WHEN
-    fixture.detectChanges();
+    fixture.detectChanges(); // trigger ngOnInit
 
     // THEN
     fixture.whenStable().then(() => {
+      fixture.detectChanges(); // refresh DOM
       expect(component).toBeTruthy();
       expect(databaseClientMock.getUnitById$).toHaveBeenCalledTimes(1);
       expect(databaseClientMock.getUnitById$).toHaveBeenCalledWith(999);
@@ -208,7 +209,7 @@ describe('ExternalLinkComponent', () => {
       const paragraphElement: HTMLElement = fixture.debugElement.query(By.css('p')).nativeElement;
       expect(paragraphElement.textContent).toEqual('calculator.externalLink.summary 6/6');
     });
-  });
+  }));
 });
 
 describe('ExternalLinkComponent', () => {
@@ -250,7 +251,7 @@ describe('ExternalLinkComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should load a unit even with minimal equipment parameters', () => {
+  it('should load a unit even with minimal equipment parameters', async(() => {
     // GIVEN
     const unit = new Unit(unitFake);
     const databaseClientMock = TestBed.get(DatabaseClientService);
@@ -260,10 +261,11 @@ describe('ExternalLinkComponent', () => {
     spyOn(unitService, 'equipInSlot');
 
     // WHEN
-    fixture.detectChanges();
+    fixture.detectChanges(); // trigger ngOnInit
 
     // THEN
     fixture.whenStable().then(() => {
+      fixture.detectChanges(); // refresh DOM
       expect(component).toBeTruthy();
       expect(databaseClientMock.getUnitById$).toHaveBeenCalledTimes(1);
       expect(databaseClientMock.getUnitById$).toHaveBeenCalledWith(999);
@@ -276,5 +278,5 @@ describe('ExternalLinkComponent', () => {
       const paragraphElement: HTMLElement = fixture.debugElement.query(By.css('p')).nativeElement;
       expect(paragraphElement.textContent).toEqual('calculator.externalLink.summary 6/6');
     });
-  });
+  }));
 });
