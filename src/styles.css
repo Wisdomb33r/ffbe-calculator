@@ -106,7 +106,8 @@ img.details-opener {
   white-space: normal;
 }
 
-.push-build div.mat-checkbox-frame {
+.push-build div.mat-checkbox-frame,
+.unit-rankings-mcc div.mat-checkbox-frame {
   background-color: white;
 }
 
