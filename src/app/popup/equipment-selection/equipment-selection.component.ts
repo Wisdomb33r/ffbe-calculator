@@ -15,7 +15,7 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
   public equipments: Array<Equipment> = [];
   public removeable: boolean;
   public locked: boolean;
-  @ViewChild('itemfilter') itemfilter: ElementRef;
+  @ViewChild('itemfilter', { static: false }) itemfilter: ElementRef;
   private filterChangedSubscription: Subscription;
 
   constructor(public unitsService: UnitsService,
