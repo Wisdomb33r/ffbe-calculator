@@ -42,7 +42,9 @@
   <h3>{{'calculation.display.calculationParameters' | translate}}</h3>
   <table>
     <tr>
-      <td>{{'mag' | translate}} / {{'spr' | translate}}</td>
+      <td>{{'mag' | translate}} / {{'spr' | translate}}
+        ({{result.statsRatio | integer}}% / {{100 - result.statsRatio | integer}}%)
+      </td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
       <td>{{result.mag | integer}} / {{result.spr | integer}}</td>
@@ -163,7 +165,7 @@
       </td>
       <td>
         <div *ngFor="let element of result.elements" class="resist-label">
-          {{result.resistances[element-1] | integer}}%
+          {{result.resistances[element - 1] | integer}}%
         </div>
       </td>
     </tr>
@@ -178,7 +180,8 @@
 
   <h3>{{'calculation.offensive.baseDamages' | translate}}</h3>
   <p>
-    ({{result.buffed_mag | integer}}² + {{result.buffed_spr | integer}}²)/2 * (1 + {{result.evo}}/100) *
+    ({{result.buffed_mag | integer}}² * {{result.statsRatio | integer}}%
+    + {{result.buffed_spr | integer}}² * {{100 - result.statsRatio | integer}}%) * (1 + {{result.evo}}/100) *
     {{result.power | integer}}% * {{result.levelCorrection | number:'1.1-1'}}
   </p>
   <p>= {{result.magicalDamages | integer}}</p>

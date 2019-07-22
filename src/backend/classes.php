@@ -513,6 +513,7 @@ class Skill {
       }
       if ($brex_skill->competence->esper) {
         $this->damages_type = 'evoker';
+        $this->stats_ratio = $brex_skill->competence->stats_ratio;
       }
       if ($brex_skill->competence->elements) {
         $elements = explode ( ',', $brex_skill->competence->elements );

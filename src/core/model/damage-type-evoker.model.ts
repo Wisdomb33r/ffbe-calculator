@@ -12,10 +12,13 @@ export class DamageTypeEvoker extends DamageTypeMagical {
     super.calculateBuffs(unit, skill, isSupportBuffing, supportBuff, result);
     result.evo = unit.stats.evo.total;
     result.damageAlgorithm = 'evoker';
+    result.statsRatio = skill.stats_ratio >= 0 && skill.stats_ratio <= 100 ? skill.stats_ratio : 50;
   }
 
   calculateDamages(unit: Unit, result: ResultTurnDamages) {
-    result.magicalDamages = (result['buffed_mag'] * result['buffed_mag'] + result['buffed_spr'] * result['buffed_spr']) / 2
-      * (1 + result.evo / 100) * result.power / 100 * result.levelCorrection;
+    result.magicalDamages = (
+      result.buffed_mag * result.buffed_mag * result.statsRatio / 100
+      + result.buffed_spr * result.buffed_spr * (100 - result.statsRatio) / 100
+    ) * (1 + result.evo / 100) * result.power / 100 * result.levelCorrection;
   }
 }

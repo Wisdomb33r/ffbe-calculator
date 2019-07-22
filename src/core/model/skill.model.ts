@@ -21,6 +21,7 @@ export class Skill {
   public damages: string;
   public damages_type: string;
   public calculation_stat: string;
+  public stats_ratio: number;
   public isBreakingChain: boolean;
   public isTurnCounting: boolean;
   public turnCount: number;
@@ -55,6 +56,7 @@ export class Skill {
     this.damages = skill.damages;
     this.damages_type = skill.damages_type;
     this.calculation_stat = skill.calculation_stat;
+    this.stats_ratio = skill.stats_ratio;
     this.isBreakingChain = skill.isBreakingChain;
     this.isTurnCounting = skill.isTurnCounting;
     this.turnCount = skill.turnCount;
