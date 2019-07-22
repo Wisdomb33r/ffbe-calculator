@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {CalculationPhysicalDamagesComponent} from '../popup/calculation-physical-damages/calculation-physical-damages.component';
 import {ResultOffensive} from '../../core/model/result-offensive.model';
 import {CalculationMagicalDamagesComponent} from '../popup/calculation-magical-damages/calculation-magical-damages.component';

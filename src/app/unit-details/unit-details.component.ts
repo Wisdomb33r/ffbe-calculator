@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {Unit} from '../../core/model/unit.model';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {UnitDetailsStatSumComponent} from '../unit-details-stat-sum/unit-details-stat-sum.component';
 import {TranslateService} from '@ngx-translate/core';
 import {EsperSelectionComponent} from '../popup/esper-selection/esper-selection.component';

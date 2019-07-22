@@ -1,6 +1,9 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {MatCardModule, MatCheckboxModule, MatOptionModule, MatSelectModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {UnitsService} from '../../core/services/units.service';
 import {UnitsRankingsComponent} from './units-rankings.component';

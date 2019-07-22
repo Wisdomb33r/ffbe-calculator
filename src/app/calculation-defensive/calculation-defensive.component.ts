@@ -4,7 +4,7 @@ import {ResultDefensive} from '../../core/model/result-defensive.model';
 import {CalculationPhysicalEhpComponent} from '../popup/calculation-physical-ehp/calculation-physical-ehp.component';
 import {CalculationMagicalEhpComponent} from '../popup/calculation-magical-ehp/calculation-magical-ehp.component';
 import {CalculationEhpComponent} from '../popup/calculation-ehp/calculation-ehp.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-calculation-defensive',

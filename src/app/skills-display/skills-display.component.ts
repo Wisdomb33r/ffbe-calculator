@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {UnitsService} from '../../core/services/units.service';
 import {TranslateService} from '@ngx-translate/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {Skill} from '../../core/model/skill.model';
 import {SkillDisplayComponent} from '../popup/skill-display/skill-display.component';
 

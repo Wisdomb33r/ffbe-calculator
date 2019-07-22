@@ -6,18 +6,16 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatMenuModule,
-  MatSelectModule,
-  MatToolbarModule,
-} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {AppComponent} from './app.component';
 import {UnitDetailsComponent} from './unit-details/unit-details.component';
 import {CalculatorComponent} from './calculator/calculator.component';

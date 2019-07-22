@@ -1,7 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {TranslateModule} from '@ngx-translate/core';
 import {ExternalLinkComponent} from './external-link.component';
-import {MatCardModule, MatFormFieldModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {of} from 'rxjs';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {UnitsService} from '../../core/services/units.service';
