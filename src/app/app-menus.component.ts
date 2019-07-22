@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Unit} from '../core/model/unit.model';
 import {UnitsService} from '../core/services/units.service';
 import {DatabaseClientService} from '../core/services/database-client.service';
@@ -15,7 +15,7 @@ import {DOCUMENT} from '@angular/common';
   templateUrl: './app-menus.component.html',
   styleUrls: ['./app-menus.component.css']
 })
-export class AppMenusComponent implements OnInit {
+export class AppMenusComponent {
   constructor(public unitsService: UnitsService,
               private dialog: MatDialog,
               private databaseClient: DatabaseClientService,
@@ -24,10 +24,6 @@ export class AppMenusComponent implements OnInit {
               private meta: Meta,
               private title: Title,
               @Inject(DOCUMENT) private document) {
-  }
-
-  ngOnInit() {
-    this.unitsService.loadUnits();
   }
 
   public openUnitSelectionPane() {
@@ -58,6 +54,14 @@ export class AppMenusComponent implements OnInit {
     }
   }
 
+  public goToUnitSelection() {
+    if (this.unitsService.isLoaded()) {
+      this.openUnitSelectionPane();
+    } else {
+      this.unitsService.loadUnits$().subscribe(units => this.openUnitSelectionPane());
+    }
+  }
+
   public navigateToRankings() {
     this.router.navigate(['/rankings']);
   }
@@ -71,5 +75,6 @@ export class AppMenusComponent implements OnInit {
     this.translate.get('calculator.app.title').subscribe(translated => this.title.setTitle(translated));
     this.translate.get('calculator.app.description').subscribe(translated => this.meta.addTag({name: 'description', content: translated}));
     this.translate.get('calculator.app.keywords').subscribe(translated => this.meta.addTag({name: 'keywords', content: translated}));
+    this.unitsService.loadUnits$().subscribe();
   }
 }

@@ -3,7 +3,7 @@ import {DatabaseClientService} from './database-client.service';
 import {Unit} from '../model/unit.model';
 import {Observable} from 'rxjs';
 import {Equipment} from '../model/equipment.model';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {CalculatorUtils} from '../calculator-utils';
 import {Algorithm} from '../model/algorithm.model';
 import {Result} from '../model/result.model';
@@ -31,12 +31,17 @@ export class UnitsService {
   constructor(private databaseClient: DatabaseClientService) {
   }
 
-  public loadUnits() {
-    this.databaseClient.getUnits$()
-      .subscribe(units => {
+  public loadUnits$(): Observable<Array<Unit>> {
+    return this.databaseClient.getUnits$().pipe(
+      tap(units => {
         this.units = units;
         this.filterByRank(7);
-      });
+      })
+    );
+  }
+
+  public isLoaded(): boolean {
+    return this.units && this.units.length > 0;
   }
 
   public filterByRank(rankFilter: number) {

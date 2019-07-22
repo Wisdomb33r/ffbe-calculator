@@ -7,7 +7,7 @@ import {Equipment} from '../../core/model/equipment.model';
 import {ESPER_BUILDS, MONSTER_TYPES} from '../../core/calculator-constants';
 import {Esper} from '../../core/model/esper.model';
 import {forkJoin, of, Subscription, throwError} from 'rxjs';
-import {switchMap, tap} from 'rxjs/operators';
+import {delay, switchMap, tap} from 'rxjs/operators';
 import {AlgorithmOffensive} from '../../core/model/algorithm-offensive.model';
 import {AlgorithmFinish} from '../../core/model/algorithm-finish.model';
 import {Skill} from '../../core/model/skill.model';
@@ -137,7 +137,10 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           }
         }
 
-        return this.databaseClient.getUnitById$(this.unit);
+        return of(null).pipe(
+          delay(500),
+          switchMap(v => this.databaseClient.getUnitById$(this.unit)),
+        );
       }),
       switchMap((unit: Unit) => {
         this.currentStep = 2;
