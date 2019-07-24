@@ -22,6 +22,9 @@ export class UnitsRankingsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.unitsService.isLoaded()) {
+      this.unitsService.loadUnits$().subscribe();
+    }
   }
 
   public changeAlgorithm() {
