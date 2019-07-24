@@ -69,6 +69,7 @@ describe('UnitsRankingsComponent', () => {
     const unitServiceMock = {
       getUnitListByAlgorithm: jasmine.createSpy('getUnitListByAlgorithm').and.returnValue([new Unit(unitFake1), new Unit(unitFake2)]),
       resetUnitsRankingResults: jasmine.createSpy('resetUnitsRankingResults'),
+      isLoaded: jasmine.createSpy('isLoaded').and.returnValue(true),
     };
     const databaseClientMock = {
       getUnitById$: jasmine.createSpy('getUnitById$')
