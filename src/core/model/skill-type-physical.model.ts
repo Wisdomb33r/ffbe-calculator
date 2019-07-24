@@ -61,7 +61,7 @@ export class SkillTypePhysical implements SkillType {
         }
       });
     }
-    return elements ? elements.sort() : elements;
+    return elements ? elements.sort((a, b) => a - b) : elements;
   }
 
   public getNumberOfExecutions(skill: Skill, unit: Unit): number {
