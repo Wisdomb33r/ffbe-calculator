@@ -3,7 +3,11 @@ sudo: required
 dist: trusty
 addons:
   chrome:
-     stable
+    stable
+  sonarcloud:
+    organization: "wisdomb33r"
+    token:
+      secure: ${SONAR_TOKEN}
 
 node_js:
   - "node"
@@ -16,3 +20,4 @@ before_script:
 
 script:
   - npm run test-ci
+  - sonar-scanner
