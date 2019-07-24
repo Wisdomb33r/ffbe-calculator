@@ -22,7 +22,7 @@ img.clickable {
   cursor: pointer;
 }
 
-.equipment app-equipment-details {
+.equipment .equipment-details {
   flex-grow: 1;
 }
 

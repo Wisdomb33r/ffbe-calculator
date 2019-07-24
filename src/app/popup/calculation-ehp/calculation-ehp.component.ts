@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {UnitsService} from '../../../core/services/units.service';
 import {ResultDefensive} from '../../../core/model/result-defensive.model';
 import {AlgorithmDefensive} from '../../../core/model/algorithm-defensive.model';

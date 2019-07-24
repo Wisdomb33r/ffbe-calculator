@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ESPER_BUILDS} from '../../../core/calculator-constants';
 import {Esper} from '../../../core/model/esper.model';
 import {TranslateService} from '@ngx-translate/core';
-import {MatDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 import {EquipmentSelectionComponent} from '../equipment-selection/equipment-selection.component';
 
 @Component({

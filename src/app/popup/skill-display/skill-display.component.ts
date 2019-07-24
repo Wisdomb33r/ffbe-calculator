@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {Skill} from '../../../core/model/skill.model';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Esper} from '../../../core/model/esper.model';
 import {TranslateService} from '@ngx-translate/core';
 

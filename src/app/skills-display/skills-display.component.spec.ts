@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TranslateModule} from '@ngx-translate/core';
-import {MatCardModule, MatDialog} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatDialog} from '@angular/material/dialog';
 import {UnitsService} from '../../core/services/units.service';
 import {By} from '@angular/platform-browser';
 import {SkillsDisplayComponent} from './skills-display.component';

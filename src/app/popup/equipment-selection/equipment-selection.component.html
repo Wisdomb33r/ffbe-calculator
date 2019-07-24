@@ -18,7 +18,8 @@
       <div>
         <img class="clickable" [src]="equipment.icon" (click)="selectEquipment(equipment)">
       </div>
-      <app-equipment-details [equipment]="equipment" [displayWeaponTraits]="false"></app-equipment-details>
+      <app-equipment-details class="equipment-details" [equipment]="equipment" [displayWeaponTraits]="false">
+      </app-equipment-details>
     </div>
   </ng-container>
 </mat-dialog-content>
@@ -36,7 +37,8 @@
       <div>
         <img [src]="equipment.icon">
       </div>
-      <app-equipment-details [equipment]="equipment" [displayWeaponTraits]="false"></app-equipment-details>
+      <app-equipment-details class="equipment-details" [equipment]="equipment" [displayWeaponTraits]="false">
+      </app-equipment-details>
     </div>
   </ng-container>
 </mat-dialog-content>

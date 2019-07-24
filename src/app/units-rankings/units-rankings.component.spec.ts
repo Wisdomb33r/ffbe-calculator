@@ -1,6 +1,9 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import {MatCardModule, MatCheckboxModule, MatOptionModule, MatSelectModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 import {DatabaseClientService} from '../../core/services/database-client.service';
 import {UnitsService} from '../../core/services/units.service';
 import {UnitsRankingsComponent} from './units-rankings.component';
@@ -66,6 +69,7 @@ describe('UnitsRankingsComponent', () => {
     const unitServiceMock = {
       getUnitListByAlgorithm: jasmine.createSpy('getUnitListByAlgorithm').and.returnValue([new Unit(unitFake1), new Unit(unitFake2)]),
       resetUnitsRankingResults: jasmine.createSpy('resetUnitsRankingResults'),
+      isLoaded: jasmine.createSpy('isLoaded').and.returnValue(true),
     };
     const databaseClientMock = {
       getUnitById$: jasmine.createSpy('getUnitById$')

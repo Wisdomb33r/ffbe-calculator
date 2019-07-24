@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, NgZone, OnDestroy, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Equipment} from '../../../core/model/equipment.model';
 import {fromEvent, Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class EquipmentSelectionComponent implements AfterViewInit, OnDestroy {
   public equipments: Array<Equipment> = [];
   public removeable: boolean;
   public locked: boolean;
-  @ViewChild('itemfilter') itemfilter: ElementRef;
+  @ViewChild('itemfilter', {static: false}) itemfilter: ElementRef;
   private filterChangedSubscription: Subscription;
 
   constructor(public unitsService: UnitsService,

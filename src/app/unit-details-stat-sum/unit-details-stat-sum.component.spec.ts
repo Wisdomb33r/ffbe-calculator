@@ -1,5 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {MatDialog, MatDialogModule} from '@angular/material';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {UnitDetailsStatSumComponent} from './unit-details-stat-sum.component';
 import {Component, NgModule} from '@angular/core';
