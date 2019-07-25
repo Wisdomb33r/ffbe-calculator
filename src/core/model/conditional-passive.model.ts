@@ -88,8 +88,8 @@ export class ConditionalPassive {
     if (conditionalPassive.magical_killers) {
       this.magical_killers = KillerPassives.construct(conditionalPassive.magical_killers);
     }
-    this.partial_dw = conditionalPassive.partial_dw ? true : false;
-    this.unique = conditionalPassive.unique ? true : false;
+    this.partial_dw = conditionalPassive.partial_dw;
+    this.unique = conditionalPassive.unique;
     this.lb_power = conditionalPassive.lb_power;
     this.evo = conditionalPassive.evo ? conditionalPassive.evo : 0;
     this.esper_percent = conditionalPassive.esper_percent;
