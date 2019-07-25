@@ -201,7 +201,6 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
           if (this.materia4) {
             this.testAndEquip('materia4', this.materia4, observablesResults, index);
           }
-          index++;
         }
         if (this.esper) {
           const esper: Esper = ESPER_BUILDS.find(e => e.buildId === this.esper);
@@ -238,7 +237,6 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
         }
         if (this.body) {
           this.testAndEquip('body', this.body, observablesResults, index);
-          index++;
         }
       }),
       switchMap(any => {
@@ -372,7 +370,7 @@ export class ExternalLinkComponent implements OnInit, OnDestroy {
 
   private restoreAlgorithmConfiguration() {
     if (this.unitsService.selectedUnit.selectedBuild.algorithm instanceof AlgorithmOffensive) {
-      const algorithm: AlgorithmOffensive = this.unitsService.selectedUnit.selectedBuild.algorithm as AlgorithmOffensive;
+      const algorithm: AlgorithmOffensive = this.unitsService.selectedUnit.selectedBuild.algorithm;
       if (this.killers === 'false') {
         algorithm.isKillerActive = false;
       }

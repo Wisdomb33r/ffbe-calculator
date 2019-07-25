@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{'esper.selection.title' | translate}}</h2>
 <mat-dialog-content>
   <div class="esper" *ngFor="let esper of getEsperList()">
-    <img [src]="esper.icon" (click)="selectEsper(esper)">
+    <img [src]="esper.icon" (click)="selectEsper(esper)" alt="{{getEsperName(esper)}}">
     <div class="esper-info">
       <h3>{{getEsperName(esper)}}</h3>
       <p [innerHTML]="getEsperBuildName(esper)"></p>

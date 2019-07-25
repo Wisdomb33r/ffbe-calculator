@@ -17,10 +17,10 @@
            alt="PayPal – The safer, easier way to pay online!" (click)="formen.submit()">
     <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
   </form>
-  <iframe *ngIf="translateService.currentLang === 'fr'"
+  <iframe *ngIf="translateService.currentLang === 'fr'" title="Facebook Like"
           src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.final-fantasy.ch%2Fffbe%2Fcalculator%2F&amp;layout=button_count&amp;locale=fr_FR&amp;show_faces=false&amp;width=110&amp;action=like&amp;colorscheme=dark"
           style="border: none; overflow: hidden; width: 110px; height: 25px"></iframe>
-  <iframe *ngIf="translateService.currentLang !== 'fr'"
+  <iframe *ngIf="translateService.currentLang !== 'fr'" title="Facebook Like"
           src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.final-fantasy.ch%2Fffbe%2Fcalculator%2F&amp;layout=button_count&amp;locale=en_US&amp;show_faces=false&amp;width=110&amp;action=like&amp;colorscheme=dark"
           style="border: none; overflow: hidden; width: 110px; height: 25px"></iframe>
 </mat-toolbar>

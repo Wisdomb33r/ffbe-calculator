@@ -78,7 +78,7 @@ export class EquipmentsDisplayComponent implements OnInit, OnDestroy {
     this.subscription = this.unitsService.getAllowedEquipmentsForSlot$(slot)
       .subscribe((equipments: Array<Equipment>) => {
           if (equipments.length > 0 || itemPresent) {
-            const dialogRef = this.dialog.open(EquipmentSelectionComponent, {
+            this.dialog.open(EquipmentSelectionComponent, {
               data: {
                 slot: slot,
                 equipments: equipments,

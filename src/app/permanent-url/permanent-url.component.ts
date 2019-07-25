@@ -103,7 +103,7 @@ export class PermanentUrlComponent implements OnInit, DoCheck {
   private getPermanentUrlForAlgorithmConfiguration(): string {
     let url = '';
     if (this.unit.selectedBuild.algorithm instanceof AlgorithmOffensive) {
-      const algorithm: AlgorithmOffensive = this.unit.selectedBuild.algorithm as AlgorithmOffensive;
+      const algorithm: AlgorithmOffensive = this.unit.selectedBuild.algorithm;
       if (!algorithm.isKillerActive) {
         url += ';killers=false';
       }
