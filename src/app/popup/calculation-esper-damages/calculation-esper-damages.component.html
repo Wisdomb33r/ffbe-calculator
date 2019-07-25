@@ -75,7 +75,7 @@
       <td></td>
       <td>
         <div *ngFor="let element of result.elements" class="resist-icon">
-          <img src="assets/resists/resist_{{element}}.png">
+          <img src="assets/resists/resist_{{element}}.png" alt="{{'resist_' + element | translate}}">
         </div>
       </td>
       <td>
@@ -112,7 +112,7 @@
       </td>
       <td>
         <div *ngFor="let element of result.elements" class="resist-icon">
-          <img src="assets/resists/resist_{{element}}.png">
+          <img src="assets/resists/resist_{{element}}.png" alt="{{'resist_' + element | translate}}">
         </div>
       </td>
       <td>
@@ -138,12 +138,12 @@
       <td></td>
       <td>
         <div *ngFor="let element of result.elements" class="resist-icon">
-          <img src="assets/resists/resist_{{element}}.png">
+          <img src="assets/resists/resist_{{element}}.png" alt="{{'resist_' + element | translate}}">
         </div>
       </td>
       <td>
         <div *ngFor="let element of result.elements" class="resist-label">
-          {{result.resistances[element-1] | integer}}%
+          {{result.resistances[element - 1] | integer}}%
         </div>
       </td>
     </tr>

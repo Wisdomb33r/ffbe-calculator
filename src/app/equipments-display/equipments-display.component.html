@@ -3,7 +3,7 @@
   <table class="equipment">
     <tr>
       <td class="equipment-icon">
-        <img *ngIf="equipments.right_hand" [src]="equipments.right_hand.icon"
+        <img *ngIf="equipments.right_hand" [src]="equipments.right_hand.icon" alt="{{equipments.right_hand.name}}"
              (click)="openEquipmentSelectionPane('right_hand')">
         <div *ngIf="!equipments.right_hand" class="empty-slot" (click)="openEquipmentSelectionPane('right_hand')">
           {{'equipment.selection.empty' | translate}}
@@ -20,7 +20,7 @@
         <h2 *ngIf="!equipments.right_hand"></h2>
       </td>
       <td class="equipment-icon">
-        <img *ngIf="equipments.left_hand" [src]="equipments.left_hand.icon"
+        <img *ngIf="equipments.left_hand" [src]="equipments.left_hand.icon" alt="{{equipments.left_hand.name}}"
              (click)="openEquipmentSelectionPane('left_hand')">
         <div *ngIf="!equipments.left_hand" class="empty-slot" (click)="openEquipmentSelectionPane('left_hand')">
           {{'equipment.selection.empty' | translate}}
@@ -39,7 +39,8 @@
     </tr>
     <tr>
       <td class="equipment-icon">
-        <img *ngIf="equipments.head" [src]="equipments.head.icon" (click)="openEquipmentSelectionPane('head')">
+        <img *ngIf="equipments.head" [src]="equipments.head.icon" alt="{{equipments.head.name}}"
+             (click)="openEquipmentSelectionPane('head')">
         <div *ngIf="!equipments.head" class="empty-slot" (click)="openEquipmentSelectionPane('head')">
           {{'equipment.selection.empty' | translate}}
         </div>
@@ -49,7 +50,8 @@
         <h2 *ngIf="!equipments.head"></h2>
       </td>
       <td class="equipment-icon">
-        <img *ngIf="equipments.body" [src]="equipments.body.icon" (click)="openEquipmentSelectionPane('body')">
+        <img *ngIf="equipments.body" [src]="equipments.body.icon" alt="{{equipments.body.name}}"
+             (click)="openEquipmentSelectionPane('body')">
         <div *ngIf="!equipments.body" class="empty-slot" (click)="openEquipmentSelectionPane('body')">
           {{'equipment.selection.empty' | translate}}
         </div>
@@ -61,7 +63,7 @@
     </tr>
     <tr>
       <td class="equipment-icon">
-        <img *ngIf="equipments.accessory1" [src]="equipments.accessory1.icon"
+        <img *ngIf="equipments.accessory1" [src]="equipments.accessory1.icon" alt="{{equipments.accessory1.name}}"
              (click)="openEquipmentSelectionPane('accessory1')">
         <div *ngIf="!equipments.accessory1" class="empty-slot" (click)="openEquipmentSelectionPane('accessory1')">
           {{'equipment.selection.empty' | translate}}
@@ -73,7 +75,7 @@
         <h2 *ngIf="!equipments.accessory1"></h2>
       </td>
       <td class="equipment-icon">
-        <img *ngIf="equipments.accessory2" [src]="equipments.accessory2.icon"
+        <img *ngIf="equipments.accessory2" [src]="equipments.accessory2.icon" alt="{{equipments.accessory2.name}}"
              (click)="openEquipmentSelectionPane('accessory2')">
         <div *ngIf="!equipments.accessory2" class="empty-slot" (click)="openEquipmentSelectionPane('accessory2')">
           {{'equipment.selection.empty' | translate}}
@@ -87,7 +89,7 @@
     </tr>
     <tr>
       <td class="equipment-icon">
-        <img *ngIf="equipments.materia1" [src]="equipments.materia1.icon"
+        <img *ngIf="equipments.materia1" [src]="equipments.materia1.icon" alt="{{equipments.materia1.name}}"
              (click)="openEquipmentSelectionPane('materia1')">
         <div *ngIf="!equipments.materia1" class="empty-slot" (click)="openEquipmentSelectionPane('materia1')">
           {{'equipment.selection.empty' | translate}}
@@ -98,7 +100,7 @@
         <h2 *ngIf="!equipments.materia1"></h2>
       </td>
       <td class="equipment-icon">
-        <img *ngIf="equipments.materia2" [src]="equipments.materia2.icon"
+        <img *ngIf="equipments.materia2" [src]="equipments.materia2.icon" alt="{{equipments.materia2.name}}"
              (click)="openEquipmentSelectionPane('materia2')">
         <div *ngIf="!equipments.materia2" class="empty-slot" (click)="openEquipmentSelectionPane('materia2')">
           {{'equipment.selection.empty' | translate}}
@@ -111,7 +113,7 @@
     </tr>
     <tr>
       <td class="equipment-icon">
-        <img *ngIf="equipments.materia3" [src]="equipments.materia3.icon"
+        <img *ngIf="equipments.materia3" [src]="equipments.materia3.icon" alt="{{equipments.materia3.name}}"
              (click)="openEquipmentSelectionPane('materia3')">
         <div *ngIf="!equipments.materia3" class="empty-slot" (click)="openEquipmentSelectionPane('materia3')">
           {{'equipment.selection.empty' | translate}}
@@ -122,7 +124,7 @@
         <h2 *ngIf="!equipments.materia3"></h2>
       </td>
       <td class="equipment-icon">
-        <img *ngIf="equipments.materia4" [src]="equipments.materia4.icon"
+        <img *ngIf="equipments.materia4" [src]="equipments.materia4.icon" alt="{{equipments.materia4.name}}"
              (click)="openEquipmentSelectionPane('materia4')">
         <div *ngIf="!equipments.materia4" class="empty-slot" (click)="openEquipmentSelectionPane('materia4')">
           {{'equipment.selection.empty' | translate}}

@@ -29,4 +29,9 @@ export class SkillsDisplayComponent {
   public getEsperImage(): string {
     return this.unitsService.selectedUnit.selectedBuild.esper.icon;
   }
+
+  public getEsperName(): string {
+    const lang = (this.translate.currentLang && this.translate.currentLang.startsWith('fr') ? 'fr' : 'en');
+    return this.unitsService.selectedUnit.selectedBuild.esper['name_' + lang];
+  }
 }

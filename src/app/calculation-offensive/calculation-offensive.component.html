@@ -3,17 +3,19 @@
     <th>{{'calculation.display.turn' | translate}} <span *ngIf="!isStartPhase">n+</span>{{getTurnCount(i)}}</th>
     <td *ngIf="turn.physicalResult">{{turn.physicalResult | integer}}</td>
     <td *ngIf="turn.physicalResult && !turn.esperDamageModifier">
-      <img class="inline-icon details-opener" src="assets/icons/grey/question.png" (click)="displayPhysicalDamages(i)">
+      <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
+           (click)="displayPhysicalDamages(i)">
     </td>
     <td *ngIf="turn.magicalResult">{{turn.magicalResult | integer}}</td>
     <td *ngIf="turn.magicalResult && !turn.esperDamageModifier">
-      <img *ngIf="turn.damageAlgorithm === 'evoker'" class="inline-icon details-opener"
+      <img *ngIf="turn.damageAlgorithm === 'evoker'" class="inline-icon details-opener" alt="?"
            src="assets/icons/grey/question.png" (click)="displayEvokerDamages(i)">
-      <img *ngIf="turn.damageAlgorithm !== 'evoker'" class="inline-icon details-opener"
+      <img *ngIf="turn.damageAlgorithm !== 'evoker'" class="inline-icon details-opener" alt="?"
            src="assets/icons/grey/question.png" (click)="displayMagicalDamages(i)">
     </td>
     <td *ngIf="(turn.physicalResult || turn.magicalResult) && turn.esperDamageModifier">
-      <img class="inline-icon details-opener" src="assets/icons/grey/question.png" (click)="displayEsperDamages(i)">
+      <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
+           (click)="displayEsperDamages(i)">
     </td>
   </tr>
 </table>

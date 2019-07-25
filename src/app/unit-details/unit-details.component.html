@@ -1,6 +1,6 @@
 <mat-card *ngIf="unit">
   <mat-card-title class="unit-details-mct">{{'unit.details.number' | translate}} {{unit.id}}
-    <img src="/Ffexvius/images/star.png" *ngFor="let r of ranks">
+    <img src="/Ffexvius/images/star.png" *ngFor="let r of ranks" alt="★">
   </mat-card-title>
   <mat-card-subtitle class="unit-details-mcst">{{unit.name}}</mat-card-subtitle>
   <mat-card-content class="unit-details-mcc">
@@ -14,36 +14,36 @@
       </mat-form-field>
     </div>
     <div class="flexcontainer">
-      <img [src]="unit.icon">
+      <img [src]="unit.icon" alt="{{unit.name}}">
       <table class="unit-details-stats">
         <tr>
           <th>{{'hp' | translate}}</th>
           <td>{{unit.stats.hp.total | integer}}
-            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('hp')"></td>
           <th>{{'mp' | translate}}</th>
           <td>{{unit.stats.mp.total | integer}}
-            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('mp')"></td>
         </tr>
         <tr>
           <th>{{'atk' | translate}}</th>
           <td>{{unit.stats.atk.total | integer}}
-            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('atk')"></td>
           <th>{{'def' | translate}}</th>
           <td>{{unit.stats.def.total | integer}}
-            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('def')"></td>
         </tr>
         <tr>
           <th>{{'mag' | translate}}</th>
           <td>{{unit.stats.mag.total | integer}}
-            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('mag')"></td>
           <th>{{'spr' | translate}}</th>
           <td>{{unit.stats.spr.total | integer}}
-            <img class="inline-icon details-opener" src="assets/icons/grey/question.png"
+            <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('spr')"></td>
         </tr>
       </table>

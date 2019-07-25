@@ -16,7 +16,7 @@
     <div class="equipment" *ngIf="!unitsService.stmrExclusion || !equipment.stmr"
          [style.display]="equipment.filtered ? 'none' : ''">
       <div>
-        <img class="clickable" [src]="equipment.icon" (click)="selectEquipment(equipment)">
+        <img class="clickable" [src]="equipment.icon" alt="{{equipment.name}}" (click)="selectEquipment(equipment)">
       </div>
       <app-equipment-details class="equipment-details" [equipment]="equipment" [displayWeaponTraits]="false">
       </app-equipment-details>
@@ -35,7 +35,7 @@
   <ng-container *ngFor="let equipment of equipments">
     <div class="equipment">
       <div>
-        <img [src]="equipment.icon">
+        <img [src]="equipment.icon" alt="{{equipment.name}}">
       </div>
       <app-equipment-details class="equipment-details" [equipment]="equipment" [displayWeaponTraits]="false">
       </app-equipment-details>
