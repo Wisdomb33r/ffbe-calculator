@@ -2,6 +2,7 @@ import {Unit} from './unit.model';
 import {ResultTurnDamages} from './result-turn-damages.model';
 import {DamageTypeMagical} from './damage-type-magical.model';
 import {Skill} from './skill.model';
+import {ObjectUtils} from '../object-utils';
 
 export class DamageTypeEvoker extends DamageTypeMagical {
 
@@ -12,7 +13,8 @@ export class DamageTypeEvoker extends DamageTypeMagical {
     super.calculateBuffs(unit, skill, isSupportBuffing, supportBuff, result);
     result.evo = unit.stats.evo.total;
     result.damageAlgorithm = 'evoker';
-    result.statsRatio = skill.stats_ratio >= 0 && skill.stats_ratio <= 100 ? skill.stats_ratio : 50;
+    result.statsRatio = ObjectUtils.isDefined(skill.stats_ratio) &&
+    skill.stats_ratio >= 0 && skill.stats_ratio <= 100 ? skill.stats_ratio : 50;
   }
 
   calculateDamages(unit: Unit, result: ResultTurnDamages) {
