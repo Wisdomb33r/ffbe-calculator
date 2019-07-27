@@ -1,4 +1,4 @@
-import {DH_LIMIT_CAP, EVO_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_EXTENDED_LIMIT_CAP, TDW_LIMIT_CAP} from '../calculator-constants';
+import {DH_LIMIT_CAP, EVO_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_LIMIT_CAP} from '../calculator-constants';
 
 export class UnitStat {
   // from backend
@@ -93,9 +93,7 @@ export class UnitStat {
   }
 
   private getEffectiveEquipmentTdw(hasTdwCapIncrease: boolean): number {
-    if (hasTdwCapIncrease && (this.dw_effective + this.dw_equipment) > TDW_EXTENDED_LIMIT_CAP) {
-      return TDW_EXTENDED_LIMIT_CAP - this.dw_effective;
-    } else if (!hasTdwCapIncrease && ((this.dw_effective + this.dw_equipment) > TDW_LIMIT_CAP)) {
+    if ((this.dw_effective + this.dw_equipment) > TDW_LIMIT_CAP) {
       return TDW_LIMIT_CAP - this.dw_effective;
     } else {
       return this.dw_equipment;

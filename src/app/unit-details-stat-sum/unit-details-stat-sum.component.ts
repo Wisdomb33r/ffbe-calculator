@@ -3,7 +3,7 @@ import {UnitStats} from '../../core/model/unit-stats.model';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Esper} from '../../core/model/esper.model';
 import {TranslateService} from '@ngx-translate/core';
-import {DH_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_EXTENDED_LIMIT_CAP, TDW_LIMIT_CAP} from '../../core/calculator-constants';
+import {DH_LIMIT_CAP, PASSIVE_LIMIT_CAP, TDW_LIMIT_CAP} from '../../core/calculator-constants';
 
 @Component({
   templateUrl: './unit-details-stat-sum.component.html',
@@ -131,14 +131,7 @@ export class UnitDetailsStatSumComponent {
   }
 
   public isEquipmentDwLimitExceeded(): boolean {
-    if (this.unitStats.tdwCapIncrease) {
-      return this.getDwPercent() + this.getEquipmentDwPercent() > TDW_EXTENDED_LIMIT_CAP;
-    }
     return this.getDwPercent() + this.getEquipmentDwPercent() > TDW_LIMIT_CAP;
-  }
-
-  public hasUnitExctendedTdwLimitCap(): boolean {
-    return this.unitStats.tdwCapIncrease;
   }
 
   public getEsperName() {

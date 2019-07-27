@@ -89,12 +89,7 @@
       <td></td>
     </tr>
   </table>
-  <p *ngIf="!hasUnitExctendedTdwLimitCap() &&
-    (isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded() || isEquipmentDwLimitExceeded())"
+  <p *ngIf="isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded() || isEquipmentDwLimitExceeded()"
      class="limit-warn">
     {{'unit.details.stats.popup.limitWarn' | translate}}</p>
-  <p *ngIf="hasUnitExctendedTdwLimitCap() &&
-    (isEquipmentPassiveLimitExceeded() || isEquipmentDhLimitExceeded() || isEquipmentDwLimitExceeded())"
-     class="limit-warn">
-    {{'unit.details.stats.popup.limitWarnTdwExtended' | translate}}</p>
 </mat-dialog-content>
