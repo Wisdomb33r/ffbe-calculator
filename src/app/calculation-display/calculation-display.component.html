@@ -1,11 +1,11 @@
-<mat-card *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId === 8">
+<mat-card *ngIf="unitsService.selectedUnit.selectedBuild.isDefensiveBuild()">
   <mat-card-title>{{'calculation.display.title' | translate}}</mat-card-title>
   <mat-card-content>
     <app-calculation-defensive [algorithm]="unitsService.getAlgorithm()" [result]="unitsService.getResult()">
     </app-calculation-defensive>
   </mat-card-content>
 </mat-card>
-<mat-card *ngIf="unitsService.selectedUnit.selectedBuild.algorithmId < 8">
+<mat-card *ngIf="unitsService.selectedUnit.selectedBuild.isOffensiveBuild()">
   <mat-card-title *ngIf="isBuildStartPhaseReadyAndWithStartPhaseSkills()">
     {{'calculation.offensive.startTitle' | translate}}
   </mat-card-title>

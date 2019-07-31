@@ -426,4 +426,37 @@ describe('UnitsService', () => {
         expect(result[3].id).toEqual(13);
       });
     }));
+
+  it('#getAllowedEquipmentsForSlot$ should sort all equipments based on EVO stats for evokers algorithms',
+    inject([UnitsService], (service: UnitsService) => {
+      // GIVEN
+      service.selectedUnit = createMinimalUnit();
+      service.selectedUnit.selectDefaultBuild();
+      service.selectedUnit.stats.mag.base = 100;
+      service.selectedUnit.stats.mag.base_equipment = 200;
+      service.selectedUnit.stats.mag.total = 2000;
+      service.selectedUnit.stats.spr.base = 200;
+      service.selectedUnit.stats.spr.base_equipment = 100;
+      service.selectedUnit.stats.spr.total = 2000;
+      service.selectedUnit.selectedBuild.algorithmId = 9; // evoker
+      spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
+        .and.returnValue(of([
+        new Equipment(JSON.parse('{"id": 10, "mag": 0, "mag_percent": 0, "spr": 0, "spr_percent": 0, "evo": 20}')),
+        new Equipment(JSON.parse('{"id": 11, "mag": 100, "mag_percent": 50, "spr": 0, "spr_percent": 0, "evo": 0}')),
+        new Equipment(JSON.parse('{"id": 12, "mag": 0, "mag_percent": 0, "spr": 0, "spr_percent": 100, "evo": 0}')),
+        new Equipment(JSON.parse('{"id": 13, "mag": 0, "mag_percent": 0, "spr": 0, "spr_percent": 0, "evo": 0, "conditional_passives": [{"category": 1, "evo": 50}]}')),
+      ]));
+      // WHEN
+      const equipments: Observable<Array<Equipment>> = service.getAllowedEquipmentsForSlot$('head');
+      // THEN
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalled();
+      expect(databaseClient.getEquipmentsForUnitAndSlot$).toHaveBeenCalledWith('head', 9999, []);
+      equipments.subscribe(result => {
+        expect(result.length).toEqual(4);
+        expect(result[0].id).toEqual(13);
+        expect(result[1].id).toEqual(10);
+        expect(result[2].id).toEqual(11);
+        expect(result[3].id).toEqual(12);
+      });
+    }));
 });

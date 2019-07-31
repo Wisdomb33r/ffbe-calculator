@@ -63,7 +63,9 @@ export class UnitsRankingsComponent implements OnInit {
         const rankedUnit = this.rankedUnits.find((u: Unit) => u.id === unit.id);
         rankedUnit.rankingResult = unit.builds
           .filter((build: Build) => build.algorithmId === this.selectedAlgorithmId
-            || (build.algorithmId === 7 && this.selectedAlgorithmId === 5))
+            || (build.algorithmId === 7 && this.selectedAlgorithmId === 5) // esper call as magical finisher
+            || (build.algorithmId === 10 && this.selectedAlgorithmId === 5) // evoker finisher as magical finisher
+            || (build.algorithmId === 9 && this.selectedAlgorithmId === 2)) // evoker chaining as magical chaining
           .map((build: Build) => {
             unit.selectBuild(build.id);
             if (!this.isWithKillers) {

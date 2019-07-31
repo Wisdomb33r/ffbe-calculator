@@ -48,13 +48,13 @@ export class UnitsService {
     this.physicalChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
       u.builds.filter((b: Build) => b.algorithmId === 1).length > 0);
     this.magicalChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
-      u.builds.filter((b: Build) => b.algorithmId === 2).length > 0);
+      u.builds.filter((b: Build) => b.algorithmId === 2 || b.algorithmId === 9).length > 0);
     this.hybridChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
       u.builds.filter((b: Build) => b.algorithmId === 3).length > 0);
     this.physicalFinishers = this.units.filter((u: Unit) => u.rank === rankFilter &&
       u.builds.filter((b: Build) => b.algorithmId === 4).length > 0);
     this.magicalFinishers = this.units.filter((u: Unit) => u.rank === rankFilter &&
-      u.builds.filter((b: Build) => b.algorithmId === 5 || b.algorithmId === 7).length > 0);
+      u.builds.filter((b: Build) => b.algorithmId === 5 || b.algorithmId === 7 || b.algorithmId === 10).length > 0);
     this.hybridFinishers = this.units.filter((u: Unit) => u.rank === rankFilter &&
       u.builds.filter((b: Build) => b.algorithmId === 6).length > 0);
     this.defenders = this.units.filter((u: Unit) => u.rank === rankFilter &&
@@ -146,7 +146,8 @@ export class UnitsService {
     if (this.selectedUnit.selectedBuild.algorithmId === 8) {
       return this.compareEquipmentsForDef(a, b);
     }
-    if (this.selectedUnit.selectedBuild.algorithmId === 7) {
+    if (this.selectedUnit.selectedBuild.algorithmId === 7 || this.selectedUnit.selectedBuild.algorithmId === 9
+      || this.selectedUnit.selectedBuild.algorithmId === 10) {
       return this.compareEquipmentsForEvoMag(a, b);
     }
     return 0;
@@ -183,10 +184,17 @@ export class UnitsService {
   }
 
   private compareEquipmentsForEvoMag(a: Equipment, b: Equipment) {
-    const aEvo = a.evo ? a.evo : 0;
-    const bEvo = b.evo ? b.evo : 0;
+    const aEvo = this.estimateEvo(a);
+    const bEvo = this.estimateEvo(b);
     const comparison = CalculatorUtils.compareNumbers(aEvo, bEvo);
     return comparison !== 0 ? comparison : this.compareEquipmentsForHybrid(a, b, 'mag', 'spr');
+  }
+
+  private estimateEvo(equipment: Equipment) {
+    const conditional_evo = equipment.conditional_passives
+      .filter(passive => passive.active)
+      .map(passive => passive.evo).reduce((val1, val2) => val1 + val2, 0);
+    return conditional_evo + (equipment.evo ? equipment.evo : 0);
   }
 
   private estimateStat(equipment: Equipment, stat: string) {
