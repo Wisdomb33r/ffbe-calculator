@@ -92,6 +92,10 @@ export class Build {
             skill.category = 6;
             skill.damages_type = 'magical';
           }
+          if (build.id === 195 || build.id === 196) { // Circe LB
+            skill.category = 6;
+            skill.damages_type = 'magical';
+          }
         }
 
         const s = new Skill(skill);
