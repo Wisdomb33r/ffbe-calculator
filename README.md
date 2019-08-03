@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Wisdomb33r/ffbe-calculator.svg?branch=master)](https://travis-ci.org/Wisdomb33r/ffbe-calculator)
+[![Build Status](https://travis-ci.org/Wisdomb33r/ffbe-calculator.svg?branch=master)](https://travis-ci.org/Wisdomb33r/ffbe-calculator) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Wisdomb33r_ffbe-calculator&metric=coverage)](https://sonarcloud.io/dashboard?id=Wisdomb33r_ffbe-calculator) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Wisdomb33r_ffbe-calculator&metric=bugs)](https://sonarcloud.io/dashboard?id=Wisdomb33r_ffbe-calculator) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Wisdomb33r_ffbe-calculator&metric=code_smells)](https://sonarcloud.io/dashboard?id=Wisdomb33r_ffbe-calculator) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Wisdomb33r_ffbe-calculator&metric=ncloc)](https://sonarcloud.io/dashboard?id=Wisdomb33r_ffbe-calculator)
 
 # FFBE calculator
 
