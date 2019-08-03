@@ -79,10 +79,11 @@ export class Build {
               skill.category = 8;
               skill.damages_type = 'hybrid';
               break;
-          }
-          if (build.id === 197 || build.id === 211) { // Citra LB
-            skill.category = 9;
-            skill.damages_type = 'evoker';
+            case 7:
+            case 9:
+            case 10:
+              skill.category = 9;
+              skill.damages_type = 'evoker';
           }
           if (build.id === 162 || build.id === 163 || build.id === 164) { // viktor marchenko LB
             skill.calculation_stat = 'def';
@@ -168,5 +169,13 @@ export class Build {
 
   public get selectedEquipmentSet(): EquipmentSet {
     return this.equipments;
+  }
+
+  public isOffensiveBuild(): boolean {
+    return this.algorithmId !== 8;
+  }
+
+  public isDefensiveBuild(): boolean {
+    return this.algorithmId === 8;
   }
 }
