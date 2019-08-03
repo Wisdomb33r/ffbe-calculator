@@ -123,28 +123,28 @@ class Equipment {
         $this->conditional_passives [] = new ConditionalPassive ( $passive, $language );
       }
     }
-    if ($brex_equipement->res_feu >= 100) {
+    if ($brex_equipement->res_feu >= 500) {
       $this->elements [] = 1;
     }
-    if ($brex_equipement->res_glace >= 100) {
+    if ($brex_equipement->res_glace >= 500) {
       $this->elements [] = 2;
     }
-    if ($brex_equipement->res_foudre >= 100) {
+    if ($brex_equipement->res_foudre >= 500) {
       $this->elements [] = 3;
     }
-    if ($brex_equipement->res_eau >= 100) {
+    if ($brex_equipement->res_eau >= 500) {
       $this->elements [] = 4;
     }
-    if ($brex_equipement->res_air >= 100) {
+    if ($brex_equipement->res_air >= 500) {
       $this->elements [] = 5;
     }
-    if ($brex_equipement->res_terre >= 100) {
+    if ($brex_equipement->res_terre >= 500) {
       $this->elements [] = 6;
     }
-    if ($brex_equipement->res_lumiere >= 100) {
+    if ($brex_equipement->res_lumiere >= 500) {
       $this->elements [] = 7;
     }
-    if ($brex_equipement->res_tenebres >= 100) {
+    if ($brex_equipement->res_tenebres >= 500) {
       $this->elements [] = 8;
     }
   }
