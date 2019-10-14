@@ -132,7 +132,8 @@
       },
       "popup": {
         "title": "Choix de l'unité",
-        "rankFilter": "Filtrage des unités par rang",
+        "archivedUnitsFilterExplanation": "Afin d'éviter une surcharge, les plus vieilles unités sont archivées",
+        "archivedUnitsFilterTitle": "Filtrer les unités",
         "physicalChainers": "Combos physiques",
         "magicalChainers": "Combos magiques",
         "hybridChainers": "Combos hybrides",
@@ -140,8 +141,8 @@
         "magicalFinishers": "Finishers magiques",
         "hybridFinishers": "Finishers hybrides",
         "tanks": "Tanks",
-        "sixStarsUnits": "Unités 6★",
-        "sevenStarsUnits": "Unités 7★"
+        "latestUnits": "Unités récentes",
+        "archivedUnits": "Unités archivées"
       }
     },
     "details": {

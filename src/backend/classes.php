@@ -379,7 +379,7 @@ class Build {
       $brex_equipments = brex_build_equipment::findByRelation1N ( $equipments_filter );
       $this->equipments = new EquipmentSet ( $brex_build, $brex_equipments, $language );
       $this->isStartPhaseReady = $brex_build->start_phase ? true : false;
-      
+
       if ($brex_build->algorithm->id == 8) {
         $this->mitigation = $brex_build->mitigation;
         $this->physical_mitigation = $brex_build->physical_mitigation;
@@ -389,7 +389,7 @@ class Build {
         $this->physical_resistance = $brex_build->physical_resistance;
         $this->magical_resistance = $brex_build->magical_resistance;
       }
-      
+
       $brex_build_skills = brex_stuff_comp::findByRelation1N ( array ('stuff' => $brex_build->id) );
       $brex_build_skills = array_reverse ( $brex_build_skills );
       if (count ( $brex_build_skills )) {
@@ -567,6 +567,7 @@ class Unit {
   public $stats;
   public $builds;
   public $conditional_passives;
+  public $isArchived;
   function __construct($brex_unit, $brex_unit_stats, $brex_unit_passives, $brex_builds, $language, $minimal = false) {
     $this->id = $brex_unit->numero;
     $this->name = $language == 'fr' ? $brex_unit->perso->nom : $brex_unit->perso->nom_en;
@@ -576,11 +577,15 @@ class Unit {
     if ($brex_unit_stats) {
       $this->stats = new UnitStats ( $brex_unit_stats );
     }
+    $this->isArchived = true;
     if (is_array ( $brex_builds ) && count ( $brex_builds )) {
       $this->builds = array ();
       foreach ( $brex_builds as $brex_build ) {
         if ($brex_build->algorithm != null) {
           $this->builds [] = new Build ( $brex_build, $language, $brex_unit, $minimal );
+          if($brex_build->coeff > 0){
+            $this->isArchived = false;
+          }
         }
       }
     }

@@ -1,5 +1,19 @@
 <h2 mat-dialog-title>{{'unit.selection.popup.title' | translate}}</h2>
 <mat-dialog-content>
+  <div>
+    <p>{{'unit.selection.popup.archivedUnitsFilterExplanation' | translate}}</p>
+    <mat-form-field>
+      <mat-select [(ngModel)]="unitsService.displayArchivedUnits"
+                  placeholder="{{'unit.selection.popup.archivedUnitsFilterTitle' | translate}}">
+        <mat-option [value]="false" (click)="unitsService.filterUnits()">
+          {{'unit.selection.popup.latestUnits' | translate}}
+        </mat-option>
+        <mat-option [value]="true" (click)="unitsService.filterUnits()">
+          {{'unit.selection.popup.archivedUnits' | translate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <h3>{{'unit.selection.popup.physicalChainers' | translate}}</h3>
   <div class="flexcontainer">
     <div class="unit" *ngFor="let unit of unitsService.physicalChainers">

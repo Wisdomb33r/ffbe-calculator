@@ -46,8 +46,153 @@ describe('UnitsService', () => {
     databaseClient = client;
   }));
 
-  it('should be created', inject([UnitsService], (service: UnitsService) => {
-    expect(service).toBeTruthy();
+  it('should filter out archived units', inject([UnitsService], (service: UnitsService) => {
+    // GIVEN
+    const physicalChainer1 = createMinimalUnit();
+    physicalChainer1.id = 1;
+    physicalChainer1.isArchived = false;
+    physicalChainer1.builds[0].algorithmId = 1;
+    const physicalChainer2 = createMinimalUnit();
+    physicalChainer2.id = 2;
+    physicalChainer2.isArchived = true;
+    physicalChainer2.builds[0].algorithmId = 1;
+    const magicalChainer1 = createMinimalUnit();
+    magicalChainer1.id = 3;
+    magicalChainer1.isArchived = true;
+    magicalChainer1.builds[0].algorithmId = 2;
+    const magicalChainer2 = createMinimalUnit();
+    magicalChainer2.id = 4;
+    magicalChainer2.isArchived = false;
+    magicalChainer2.builds[0].algorithmId = 2;
+    const hybridChainer1 = createMinimalUnit();
+    hybridChainer1.id = 5;
+    hybridChainer1.isArchived = false;
+    hybridChainer1.builds[0].algorithmId = 3;
+    const hybridChainer2 = createMinimalUnit();
+    hybridChainer2.id = 6;
+    hybridChainer2.isArchived = true;
+    hybridChainer2.builds[0].algorithmId = 3;
+    const physicalFinisher1 = createMinimalUnit();
+    physicalFinisher1.id = 11;
+    physicalFinisher1.isArchived = false;
+    physicalFinisher1.builds[0].algorithmId = 4;
+    const physicalFinisher2 = createMinimalUnit();
+    physicalFinisher2.id = 12;
+    physicalFinisher2.isArchived = true;
+    physicalFinisher2.builds[0].algorithmId = 4;
+    const magicalFinisher1 = createMinimalUnit();
+    magicalFinisher1.id = 13;
+    magicalFinisher1.isArchived = true;
+    magicalFinisher1.builds[0].algorithmId = 5;
+    const magicalFinisher2 = createMinimalUnit();
+    magicalFinisher2.id = 14;
+    magicalFinisher2.isArchived = false;
+    magicalFinisher2.builds[0].algorithmId = 7;
+    const hybridFinisher1 = createMinimalUnit();
+    hybridFinisher1.id = 15;
+    hybridFinisher1.isArchived = false;
+    hybridFinisher1.builds[0].algorithmId = 6;
+    const hybridFinisher2 = createMinimalUnit();
+    hybridFinisher2.id = 16;
+    hybridFinisher2.isArchived = true;
+    hybridFinisher2.builds[0].algorithmId = 6;
+    service.units = [
+      physicalChainer1, physicalChainer2, physicalFinisher1, physicalFinisher2,
+      magicalChainer1, magicalChainer2, magicalFinisher1, magicalFinisher2,
+      hybridChainer1, hybridChainer2, hybridFinisher1, hybridFinisher2,
+    ];
+
+    // WHEN
+    service.filterUnits();
+
+    // THEN
+    expect(service.physicalChainers.length).toEqual(1);
+    expect(service.physicalChainers[0].id).toEqual(1);
+    expect(service.magicalChainers.length).toEqual(1);
+    expect(service.magicalChainers[0].id).toEqual(4);
+    expect(service.hybridChainers.length).toEqual(1);
+    expect(service.hybridChainers[0].id).toEqual(5);
+    expect(service.physicalFinishers.length).toEqual(1);
+    expect(service.physicalFinishers[0].id).toEqual(11);
+    expect(service.magicalFinishers.length).toEqual(1);
+    expect(service.magicalFinishers[0].id).toEqual(14);
+    expect(service.hybridFinishers.length).toEqual(1);
+    expect(service.hybridFinishers[0].id).toEqual(15);
+  }));
+
+  it('should filter out non-archived units', inject([UnitsService], (service: UnitsService) => {
+    // GIVEN
+    const physicalChainer1 = createMinimalUnit();
+    physicalChainer1.id = 1;
+    physicalChainer1.isArchived = false;
+    physicalChainer1.builds[0].algorithmId = 1;
+    const physicalChainer2 = createMinimalUnit();
+    physicalChainer2.id = 2;
+    physicalChainer2.isArchived = true;
+    physicalChainer2.builds[0].algorithmId = 1;
+    const magicalChainer1 = createMinimalUnit();
+    magicalChainer1.id = 3;
+    magicalChainer1.isArchived = true;
+    magicalChainer1.builds[0].algorithmId = 2;
+    const magicalChainer2 = createMinimalUnit();
+    magicalChainer2.id = 4;
+    magicalChainer2.isArchived = false;
+    magicalChainer2.builds[0].algorithmId = 2;
+    const hybridChainer1 = createMinimalUnit();
+    hybridChainer1.id = 5;
+    hybridChainer1.isArchived = false;
+    hybridChainer1.builds[0].algorithmId = 3;
+    const hybridChainer2 = createMinimalUnit();
+    hybridChainer2.id = 6;
+    hybridChainer2.isArchived = true;
+    hybridChainer2.builds[0].algorithmId = 3;
+    const physicalFinisher1 = createMinimalUnit();
+    physicalFinisher1.id = 11;
+    physicalFinisher1.isArchived = false;
+    physicalFinisher1.builds[0].algorithmId = 4;
+    const physicalFinisher2 = createMinimalUnit();
+    physicalFinisher2.id = 12;
+    physicalFinisher2.isArchived = true;
+    physicalFinisher2.builds[0].algorithmId = 4;
+    const magicalFinisher1 = createMinimalUnit();
+    magicalFinisher1.id = 13;
+    magicalFinisher1.isArchived = true;
+    magicalFinisher1.builds[0].algorithmId = 5;
+    const magicalFinisher2 = createMinimalUnit();
+    magicalFinisher2.id = 14;
+    magicalFinisher2.isArchived = false;
+    magicalFinisher2.builds[0].algorithmId = 7;
+    const hybridFinisher1 = createMinimalUnit();
+    hybridFinisher1.id = 15;
+    hybridFinisher1.isArchived = false;
+    hybridFinisher1.builds[0].algorithmId = 6;
+    const hybridFinisher2 = createMinimalUnit();
+    hybridFinisher2.id = 16;
+    hybridFinisher2.isArchived = true;
+    hybridFinisher2.builds[0].algorithmId = 6;
+    service.units = [
+      physicalChainer1, physicalChainer2, physicalFinisher1, physicalFinisher2,
+      magicalChainer1, magicalChainer2, magicalFinisher1, magicalFinisher2,
+      hybridChainer1, hybridChainer2, hybridFinisher1, hybridFinisher2,
+    ];
+    service.displayArchivedUnits = true;
+
+    // WHEN
+    service.filterUnits();
+
+    // THEN
+    expect(service.physicalChainers.length).toEqual(1);
+    expect(service.physicalChainers[0].id).toEqual(2);
+    expect(service.magicalChainers.length).toEqual(1);
+    expect(service.magicalChainers[0].id).toEqual(3);
+    expect(service.hybridChainers.length).toEqual(1);
+    expect(service.hybridChainers[0].id).toEqual(6);
+    expect(service.physicalFinishers.length).toEqual(1);
+    expect(service.physicalFinishers[0].id).toEqual(12);
+    expect(service.magicalFinishers.length).toEqual(1);
+    expect(service.magicalFinishers[0].id).toEqual(13);
+    expect(service.hybridFinishers.length).toEqual(1);
+    expect(service.hybridFinishers[0].id).toEqual(16);
   }));
 
   it('#equipInSlot should remove equipment from slot',
