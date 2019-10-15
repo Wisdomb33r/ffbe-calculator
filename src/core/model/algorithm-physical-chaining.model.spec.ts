@@ -6,7 +6,7 @@ import {ResultTurnDamages} from './result-turn-damages.model';
 import {AlgorithmChaining} from './algorithm-chaining.model';
 
 const UNIT_STATS_TEST_DATA = '{"hp":3000,"mp":300,"atk":200,"mag":200,"def":100,"spr":100}';
-const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100}';
+const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100,"twoHanded":false}';
 const EQUIPMENTS_TEST_DATA = '{"right_hand":' + EQUIPMENT_TEST_DATA + ',"head":' + EQUIPMENT_TEST_DATA + ',"body":' + EQUIPMENT_TEST_DATA + ',"accessory1":' + EQUIPMENT_TEST_DATA + ',"accessory2":' + EQUIPMENT_TEST_DATA + ',"materia1":' + EQUIPMENT_TEST_DATA + ',"materia2":' + EQUIPMENT_TEST_DATA + ',"materia3":' + EQUIPMENT_TEST_DATA + ',"materia4":' + EQUIPMENT_TEST_DATA + '}';
 const SKILLS_TEST_DATA = '[{"category":6,"power":500,"hits":5,"frames":"10 20 30 40 50","damages":"10 20 30 30 10","damages_type":"physical","isTurnCounting":true},{"category":6,"power":1000,"hits":4,"frames":"10 20 30 40","damages":"10 20 30 40","damages_type":"physical","isTurnCounting":true}]';
 const BUILD_TEST_DATA = '{"algorithmId":1,"equipments":' + EQUIPMENTS_TEST_DATA + ',"skills":' + SKILLS_TEST_DATA + '}';
@@ -69,6 +69,8 @@ describe('AlgorithmChaining', () => {
     unit.selectDefaultBuild();
     unit.stats.atk.total = 1000;
     unit.stats.atk.dw_equipment = 50;
+    unit.selectedEquipmentSet.right_hand.minVariance = 100;
+    unit.selectedEquipmentSet.right_hand.maxVariance = 110; // one-handed weapon with variance
     unit.selectedEquipmentSet.left_hand = new Equipment(JSON.parse(EQUIPMENT_TEST_DATA));
     unit.selectedEquipmentSet.left_hand.elements = [1]; // fire element on left hand weapon for increment calculation
     unit.selectedBuild.skills[0].resists_break = [-100, 0, 0, 0, 0, 0, 0, 0]; // skill under 100% fire break
@@ -77,7 +79,7 @@ describe('AlgorithmChaining', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(192.1337);
+    expect(result.result).toBeCloseTo(201.740);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
       expect(turn.atk).toEqual(1000);
@@ -89,6 +91,7 @@ describe('AlgorithmChaining', () => {
       expect(turn.killerPassive).toBeCloseTo(0);
       expect(turn.levelCorrection).toBeCloseTo(2);
       expect(turn.enemyWeaponVariance).toBeCloseTo(0.9324);
+      expect(turn.averageWeaponVariance).toBeCloseTo(105);
     });
 
     const turn1 = result['turnDamages'][0];

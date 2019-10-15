@@ -59,6 +59,8 @@ describe('AlgorithmChaining', () => {
     unit.selectDefaultBuild();
     unit.stats.atk.total = 800;
     unit.stats.mag.total = 1000;
+    unit.selectedEquipmentSet.left_hand.minVariance = 100;
+    unit.selectedEquipmentSet.left_hand.maxVariance = 110; // one-handed weapon with variance
     // WHEN
     const result = algorithm.calculate(unit);
     // THEN
@@ -76,6 +78,7 @@ describe('AlgorithmChaining', () => {
       expect(turn['killerPassive']).toBeCloseTo(250);
       expect(turn.levelCorrection).toBeCloseTo(2);
       expect(turn.enemyWeaponVariance).toBeCloseTo(0.9324);
+      expect(turn.averageWeaponVariance).toBeCloseTo(100); // one-handed weapon with variance have no effect when equipped in left hand
     });
 
     const turn1 = result['turnDamages'][0];
