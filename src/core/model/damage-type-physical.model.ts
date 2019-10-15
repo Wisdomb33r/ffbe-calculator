@@ -53,7 +53,7 @@ export class DamageTypePhysical extends DamageType {
 
   protected calculateDamageVariance(unit: Unit, result: ResultTurnDamages) {
     const right_hand: Equipment = unit.selectedEquipmentSet.right_hand;
-    const left_hand: Equipment = unit.selectedEquipmentSet.right_hand;
+    const left_hand: Equipment = unit.selectedEquipmentSet.left_hand;
     result.averageWeaponVariance = right_hand && right_hand.isTwoHanded() ? (right_hand.minVariance + right_hand.maxVariance) / 2 : 100;
     if (result.isDualWielding) {
       const mainHandStat = right_hand && right_hand[this.calculationStat] ? right_hand[this.calculationStat] : 0;
