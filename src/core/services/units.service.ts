@@ -62,22 +62,29 @@ export class UnitsService {
       u.builds.filter((b: Build) => b.algorithmId === 8).length > 0);
   }
 
-  public getUnitListByAlgorithm(algorithm: number) {
+  public getUnitListByAlgorithm(algorithm: number, withArchived: boolean) {
     switch (algorithm) {
       case 1:
-        return this.physicalChainers.slice();
+        return this.units.filter((u: Unit) => (!withArchived ? !u.isArchived : true) &&
+          u.builds.filter((b: Build) => b.algorithmId === 1).length > 0);
       case 2:
-        return this.magicalChainers.slice();
+        return this.units.filter((u: Unit) => (!withArchived ? !u.isArchived : true) &&
+          u.builds.filter((b: Build) => b.algorithmId === 2 || b.algorithmId === 9).length > 0);
       case 3:
-        return this.hybridChainers.slice();
+        return this.units.filter((u: Unit) => (!withArchived ? !u.isArchived : true) &&
+          u.builds.filter((b: Build) => b.algorithmId === 3).length > 0);
       case 4:
-        return this.physicalFinishers.slice();
+        return this.units.filter((u: Unit) => (!withArchived ? !u.isArchived : true) &&
+          u.builds.filter((b: Build) => b.algorithmId === 4).length > 0);
       case 5:
-        return this.magicalFinishers.slice();
+        return this.units.filter((u: Unit) => (!withArchived ? !u.isArchived : true) &&
+          u.builds.filter((b: Build) => b.algorithmId === 5 || b.algorithmId === 7 || b.algorithmId === 10).length > 0);
       case 6:
-        return this.hybridFinishers.slice();
+        return this.units.filter((u: Unit) => (!withArchived ? !u.isArchived : true) &&
+          u.builds.filter((b: Build) => b.algorithmId === 6).length > 0);
       case 8:
-        return this.defenders.slice();
+        return this.units.filter((u: Unit) => (!withArchived ? !u.isArchived : true) &&
+          u.builds.filter((b: Build) => b.algorithmId === 8).length > 0);
     }
     return [];
   }

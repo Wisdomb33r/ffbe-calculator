@@ -15,6 +15,8 @@ export class UnitsRankingsComponent implements OnInit {
 
   public selectedAlgorithmId: number;
   public isWithKillers = true;
+  public isStableRotation = true;
+  public isWithArchivedUnits = false;
   public rankedUnits: Array<Unit> = [];
 
   constructor(private unitsService: UnitsService,
@@ -29,12 +31,22 @@ export class UnitsRankingsComponent implements OnInit {
 
   public changeAlgorithm() {
     this.unitsService.resetUnitsRankingResults();
-    this.rankedUnits = this.unitsService.getUnitListByAlgorithm(this.selectedAlgorithmId);
+    this.rankedUnits = this.unitsService.getUnitListByAlgorithm(this.selectedAlgorithmId, this.isWithArchivedUnits);
     this.restoreFromLocalStorage();
     this.sortRankedUnits();
   }
 
+  public switchArchivedUnits() {
+    this.changeAlgorithm(); // nothing different to do
+  }
+
   public switchKillers() {
+    this.unitsService.resetUnitsRankingResults();
+    this.restoreFromLocalStorage();
+    this.sortRankedUnits();
+  }
+
+  public switchStableRotation() {
     this.unitsService.resetUnitsRankingResults();
     this.restoreFromLocalStorage();
     this.sortRankedUnits();
@@ -91,7 +103,7 @@ export class UnitsRankingsComponent implements OnInit {
   }
 
   private constructLocalStorageKey(unitId: number): string {
-    return '' + unitId + '-' + this.selectedAlgorithmId + '-' + (this.isWithKillers ? 'true' : 'false');
+    return `${unitId}-${this.selectedAlgorithmId}-${this.isWithKillers}-${this.isStableRotation}`;
   }
 
   private sortRankedUnits() {
