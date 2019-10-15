@@ -41,8 +41,9 @@ export class Equipment {
   public spr_dw: number;
   public evo: number;
   public jump: number;
-  public variance_min: number;
-  public variance_max: number;
+  private twoHanded: boolean;
+  public minVariance: number;
+  public maxVariance: number;
   public unique: boolean;
   public locked: boolean;
   public locked_alternative: number;
@@ -98,8 +99,9 @@ export class Equipment {
     this.spr_dw = equipment.spr_dw;
     this.evo = equipment.evo;
     this.jump = equipment.jump;
-    this.variance_min = equipment.variance_min;
-    this.variance_max = equipment.variance_max;
+    this.twoHanded = equipment.twoHanded;
+    this.minVariance = equipment.minVariance;
+    this.maxVariance = equipment.maxVariance;
     this.unique = equipment.unique;
     this.locked = equipment.locked;
     this.locked_alternative = equipment.locked_alternative;
@@ -146,7 +148,7 @@ export class Equipment {
   }
 
   public isTwoHanded(): boolean {
-    return this.variance_min > 0 && this.variance_max > 0;
+    return this.twoHanded;
   }
 
   public getPhysicalKiller(opponentKillerType): number {

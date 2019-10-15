@@ -23,8 +23,9 @@ describe('AlgorithmChaining', () => {
     algorithm.isSparkChain = true;
     algorithm.isKillerActive = false;
     unit.stats.atk.total = 1000;
-    unit.selectedEquipmentSet.right_hand.variance_min = 100;
-    unit.selectedEquipmentSet.right_hand.variance_max = 160;
+    unit.selectedEquipmentSet.right_hand['twoHanded'] = true;
+    unit.selectedEquipmentSet.right_hand.minVariance = 100;
+    unit.selectedEquipmentSet.right_hand.maxVariance = 160;
     unit.selectedBuild.skills[1].nb = 3;
     unit.selectedBuild.skills[1].isBreakingChain = true;
     // WHEN

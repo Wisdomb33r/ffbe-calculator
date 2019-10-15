@@ -2,31 +2,26 @@ import {Equipment} from './equipment.model';
 
 describe('Equipment', () => {
 
-  it('should be two handed if damage variance set', () => {
+  it('should be two handed if damage variance and two handed status set', () => {
     // GIVEN
-    const equipment: Equipment = new Equipment(JSON.parse('{"variance_min": 100, "variance_max": 150}'));
+    const equipment: Equipment = new Equipment(JSON.parse('{"twoHanded": true, "minVariance": 100, "maxVariance": 150}'));
     // WHEN
     const isTwoHanded = equipment.isTwoHanded();
     // THEN
     expect(isTwoHanded).toBeTruthy();
+    expect(equipment.minVariance).toEqual(100);
+    expect(equipment.maxVariance).toEqual(150);
   });
 
-  it('should be one handed if damage variance min is not set', () => {
+  it('should be one handed if damage variance set but not two handed status', () => {
     // GIVEN
-    const equipment: Equipment = new Equipment(JSON.parse('{"variance_min": null, "variance_max": 150}'));
+    const equipment: Equipment = new Equipment(JSON.parse('{"twoHanded": false, "minVariance": 100, "maxVariance": 150}'));
     // WHEN
     const isTwoHanded = equipment.isTwoHanded();
     // THEN
     expect(isTwoHanded).toBeFalsy();
-  });
-
-  it('should be two handed if damage variance max is not set', () => {
-    // GIVEN
-    const equipment: Equipment = new Equipment(JSON.parse('{"variance_min": 100, "variance_max": null}'));
-    // WHEN
-    const isTwoHanded = equipment.isTwoHanded();
-    // THEN
-    expect(isTwoHanded).toBeFalsy();
+    expect(equipment.minVariance).toEqual(100);
+    expect(equipment.maxVariance).toEqual(150);
   });
 
   it('should be a weapon if in the weapon categories', () => {
