@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title class="equipment-selection-mct">{{'equipment.selection.title' | translate}}</mat-card-title>
-  <table class="equipment">
+  <table class="equipment" role="presentation">
     <tr>
       <td class="equipment-icon">
         <img *ngIf="equipments.right_hand" [src]="equipments.right_hand.icon" alt="{{equipments.right_hand.name}}"

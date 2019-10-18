@@ -1,10 +1,10 @@
 <table role="presentation">
   <tr *ngIf="unitsService.selectedUnit.selectedBuild.isStartPhaseReady">
-    <th>{{'calculation.offensive.averageDamages10turns' | translate}}</th>
+    <td class="result-header">{{'calculation.offensive.averageDamages10turns' | translate}}</td>
     <td>{{result.tenTurnsResult | integer}}</td>
   </tr>
   <tr>
-    <th>{{'calculation.offensive.averageDamages' | translate}}</th>
+    <td class="result-header">{{'calculation.offensive.averageDamages' | translate}}</td>
     <td>{{result.result | integer}}</td>
   </tr>
 </table>

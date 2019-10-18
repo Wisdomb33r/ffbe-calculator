@@ -1,6 +1,7 @@
 <table role="presentation">
   <tr *ngFor="let turn of getTurnDamagesToDisplay(); let i = index">
-    <th>{{'calculation.display.turn' | translate}} <span *ngIf="!isStartPhase">n+</span>{{getTurnCount(i)}}</th>
+    <td class="turn-header">{{'calculation.display.turn' | translate}} <span
+      *ngIf="!isStartPhase">n+</span>{{getTurnCount(i)}}</td>
     <td *ngIf="turn.physicalResult">{{turn.physicalResult | integer}}</td>
     <td *ngIf="turn.physicalResult && !turn.esperDamageModifier">
       <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
