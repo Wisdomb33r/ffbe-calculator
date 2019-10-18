@@ -87,7 +87,7 @@ describe('UnitDetailsStatSumComponent', () => {
 
     // unit header line
     const unitHeaderLine = table.querySelector('tr:nth-child(1)');
-    expect(unitHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.unit');
+    expect(unitHeaderLine.querySelector('td:nth-child(1) strong').textContent).toEqual('unit.details.stats.popup.unit');
 
     // unit base line
     const unitBaseLine = table.querySelector('tr:nth-child(2)');
@@ -109,7 +109,7 @@ describe('UnitDetailsStatSumComponent', () => {
 
     // equipment header line
     const equipmentHeaderLine = table.querySelector('tr:nth-child(5)');
-    expect(equipmentHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.equipment');
+    expect(equipmentHeaderLine.querySelector('td:nth-child(1) strong').textContent).toEqual('unit.details.stats.popup.equipment');
 
     // equipment passive line
     const equipmentPassiveLine = table.querySelector('tr:nth-child(6)');
@@ -131,7 +131,7 @@ describe('UnitDetailsStatSumComponent', () => {
 
     // esper header line
     const esperHeaderLine = table.querySelector('tr:nth-child(9)');
-    expect(esperHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.esper');
+    expect(esperHeaderLine.querySelector('td:nth-child(1) strong').textContent).toEqual('unit.details.stats.popup.esper');
 
     // esper base line
     const esperBaseLine = table.querySelector('tr:nth-child(10)');
@@ -153,7 +153,7 @@ describe('UnitDetailsStatSumComponent', () => {
 
     // total line
     const totalLine = table.querySelector('tr:nth-child(13)');
-    expect(totalLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.total');
+    expect(totalLine.querySelector('td:nth-child(1) strong').textContent).toEqual('unit.details.stats.popup.total');
     expect(totalLine.querySelector('td:nth-child(2)').textContent).toEqual('3,480');
     expect(totalLine.querySelector('td:nth-child(3)').textContent).toEqual('');
   });
@@ -195,7 +195,7 @@ describe('UnitDetailsStatSumComponent', () => {
 
     // unit header line
     const unitHeaderLine = table.querySelector('tr:nth-child(1)');
-    expect(unitHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.unit');
+    expect(unitHeaderLine.querySelector('td:nth-child(1) strong').textContent).toEqual('unit.details.stats.popup.unit');
 
     // unit base line
     const unitBaseLine = table.querySelector('tr:nth-child(2)');
@@ -223,7 +223,7 @@ describe('UnitDetailsStatSumComponent', () => {
 
     // equipment header line
     const equipmentHeaderLine = table.querySelector('tr:nth-child(6)');
-    expect(equipmentHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.equipment');
+    expect(equipmentHeaderLine.querySelector('td:nth-child(1) strong').textContent).toEqual('unit.details.stats.popup.equipment');
 
     // equipment base line
     const equipmentBaseLine = table.querySelector('tr:nth-child(7)');
@@ -251,7 +251,7 @@ describe('UnitDetailsStatSumComponent', () => {
 
     // esper header line
     const esperHeaderLine = table.querySelector('tr:nth-child(11)');
-    expect(esperHeaderLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.esper');
+    expect(esperHeaderLine.querySelector('td:nth-child(1) strong').textContent).toEqual('unit.details.stats.popup.esper');
 
     // esper base line
     const esperBaseLine = table.querySelector('tr:nth-child(12)');
@@ -273,7 +273,7 @@ describe('UnitDetailsStatSumComponent', () => {
 
     // total line
     const totalLine = table.querySelector('tr:nth-child(15)');
-    expect(totalLine.querySelector('th').textContent).toEqual('unit.details.stats.popup.total');
+    expect(totalLine.querySelector('td:nth-child(1) strong').textContent).toEqual('unit.details.stats.popup.total');
     expect(totalLine.querySelector('td:nth-child(2)').textContent).toEqual('4,795');
     expect(totalLine.querySelector('td:nth-child(3)').textContent).toEqual('');
   });
