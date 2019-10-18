@@ -90,7 +90,7 @@ export class Build {
           if (build.id === 162 || build.id === 163 || build.id === 164) { // viktor marchenko LB
             skill.calculation_stat = 'def';
           }
-          if (build.id === 405) { // Kimono Ayaka LB
+          if (build.id === 405 || build.id === 438 || build.id === 439) { // Kimono Ayaka and Chocobo Fina LB
             skill.calculation_stat = 'spr';
             skill.category = 6;
             skill.damages_type = 'magical';
