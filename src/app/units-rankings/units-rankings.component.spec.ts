@@ -113,7 +113,7 @@ describe('UnitsRankingsComponent', () => {
 
     // THEN
     expect(unitServiceMock.getUnitListByAlgorithm).toHaveBeenCalledTimes(1);
-    expect(unitServiceMock.getUnitListByAlgorithm).toHaveBeenCalledWith(4);
+    expect(unitServiceMock.getUnitListByAlgorithm).toHaveBeenCalledWith(4, false);
     expect(component.rankedUnits.length).toEqual(2);
     expect(component.rankedUnits[0].id).toEqual(1);
     expect(component.rankedUnits[1].id).toEqual(2);
@@ -155,7 +155,7 @@ describe('UnitsRankingsComponent', () => {
 
     // THEN
     expect(unitServiceMock.getUnitListByAlgorithm).toHaveBeenCalledTimes(1);
-    expect(unitServiceMock.getUnitListByAlgorithm).toHaveBeenCalledWith(4);
+    expect(unitServiceMock.getUnitListByAlgorithm).toHaveBeenCalledWith(4, false);
     expect(component.rankedUnits.length).toEqual(2);
 
     fixture.whenStable().then(() => {
@@ -198,7 +198,7 @@ describe('UnitsRankingsComponent', () => {
 
     // THEN
     expect(unitServiceMock.getUnitListByAlgorithm).toHaveBeenCalledTimes(1);
-    expect(unitServiceMock.getUnitListByAlgorithm).toHaveBeenCalledWith(4);
+    expect(unitServiceMock.getUnitListByAlgorithm).toHaveBeenCalledWith(4, false);
     expect(component.rankedUnits.length).toEqual(2);
 
     fixture.whenStable().then(() => {

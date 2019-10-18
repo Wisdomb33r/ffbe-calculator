@@ -21,6 +21,18 @@
     </div>
 
     <div>
+      <mat-checkbox [(ngModel)]="isStableRotation" (change)="switchStableRotation()">
+        {{'rankings.switchStableRotationCheckbox' | translate}}
+      </mat-checkbox>
+    </div>
+
+    <div>
+      <mat-checkbox [(ngModel)]="isWithArchivedUnits" (change)="switchArchivedUnits()">
+        {{'rankings.switchArchivedUnitsCheckbox' | translate}}
+      </mat-checkbox>
+    </div>
+
+    <div>
       <button mat-raised-button color="accent"
               (click)="calculateMissingBuilds()">{{'rankings.calculateMissingBuilds' | translate}}</button>
     </div>
@@ -28,9 +40,9 @@
 </mat-card>
 
 <mat-card *ngIf="rankedUnits && rankedUnits.length" class="rankings-results">
-  <mat-card-title>{{'rankings.rankingsTitle' | translate}}</mat-card-title>
+  <mat-card-title id="rankings">{{'rankings.rankingsTitle' | translate}}</mat-card-title>
   <mat-card-content>
-    <table>
+    <table aria-describedby="rankings">
       <tr>
         <th>{{'rankings.rankingHeader' | translate}}</th>
         <th>{{'rankings.damageHeader' | translate}}</th>

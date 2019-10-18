@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{'calculation.offensive.esperDamagesCalculation' | translate}}</h2>
 <mat-dialog-content>
   <h3>{{'calculation.offensive.skillHitsPower' | translate}}</h3>
-  <table>
+  <table role="presentation">
     <tr *ngIf="isChaining()">
       <td>{{'calculation.offensive.sparkChain' | translate}}</td>
       <td>
@@ -33,7 +33,7 @@
   <p>{{result.power | integer}}%</p>
 
   <h3>{{'calculation.display.calculationParameters' | translate}}</h3>
-  <table>
+  <table role="presentation">
     <tr>
       <td>{{'atk' | translate}}</td>
       <td></td>

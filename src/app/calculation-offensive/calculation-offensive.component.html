@@ -1,4 +1,4 @@
-<table>
+<table role="presentation">
   <tr *ngFor="let turn of getTurnDamagesToDisplay(); let i = index">
     <th>{{'calculation.display.turn' | translate}} <span *ngIf="!isStartPhase">n+</span>{{getTurnCount(i)}}</th>
     <td *ngIf="turn.physicalResult">{{turn.physicalResult | integer}}</td>

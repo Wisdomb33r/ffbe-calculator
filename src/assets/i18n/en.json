@@ -298,6 +298,8 @@
     "magicalFinishers": "Magical finishers",
     "hybridFinishers": "Hybrid finishers",
     "switchKillerCheckbox": "Include killers (5% damage for each 50% killer)",
+    "switchStableRotationCheckbox": "Use stable rotation (10 first turns otherwise)",
+    "switchArchivedUnitsCheckbox": "Include archived units",
     "calculateMissingBuilds": "Calculate",
     "rankingsTitle": "Ranking",
     "rankingHeader": "Rank",
