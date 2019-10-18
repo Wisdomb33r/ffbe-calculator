@@ -3,7 +3,8 @@ table {
   border-collapse: collapse;
 }
 
-th {
+td.turn-header {
+  font-weight: bold;
   text-align: left;
   padding-right: 15px;
 }

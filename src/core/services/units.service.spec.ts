@@ -213,7 +213,7 @@ describe('UnitsService', () => {
       service.selectedUnit.selectDefaultBuild();
       service.selectedUnit.selectedEquipmentSet.left_hand = new Equipment(JSON.parse('{"id": 1199, "dual_wield": true}'));
       // WHEN
-      service.equipInSlot('right_hand', new Equipment(JSON.parse('{"id":66,"variance_min":100,"variance_max":150}')));
+      service.equipInSlot('right_hand', new Equipment(JSON.parse('{"id":66,"twoHanded": true,"minVariance":100,"maxVariance":150}')));
       // THEN
       expect(service.selectedUnit.selectedEquipmentSet.left_hand).toBeNull();
     }));
@@ -349,11 +349,12 @@ describe('UnitsService', () => {
       service.selectedUnit.id = 590; // has native DW
       service.selectedUnit.stats.dual_wield = true;
       service.selectedUnit.selectDefaultBuild();
-      service.selectedUnit.selectedEquipmentSet.right_hand.variance_min = 100;
-      service.selectedUnit.selectedEquipmentSet.right_hand.variance_max = 150;
+      service.selectedUnit.selectedEquipmentSet.right_hand['twoHanded'] = true;
+      service.selectedUnit.selectedEquipmentSet.right_hand.minVariance = 100;
+      service.selectedUnit.selectedEquipmentSet.right_hand.maxVariance = 150;
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
-        new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
+        new Equipment(JSON.parse('{"id": 10, "twoHanded": true, "minVariance": 100, "maxVariance": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 11, "category": 9}')), // shield
         new Equipment(JSON.parse('{"id": 1352, "dual_wield": true}')), // weapon with dw
@@ -377,7 +378,7 @@ describe('UnitsService', () => {
       service.selectedUnit.selectDefaultBuild();
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
-        new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
+        new Equipment(JSON.parse('{"id": 10, "twoHanded": true, "minVariance": 100, "maxVariance": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 12, "category": 9}')), // shield
         new Equipment(JSON.parse('{"id": 1352, "dual_wield": true}')), // weapon with dw
@@ -404,7 +405,7 @@ describe('UnitsService', () => {
       service.selectedUnit.selectedEquipmentSet.accessory1.dual_wield = true;
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
-        new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
+        new Equipment(JSON.parse('{"id": 10, "twoHanded": true, "minVariance": 100, "maxVariance": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 12, "category": 9}')), // shield
         new Equipment(JSON.parse('{"id": 1352, "dual_wield": true}')),
@@ -429,7 +430,7 @@ describe('UnitsService', () => {
       service.selectedUnit.selectDefaultBuild();
       spyOn(databaseClient, 'getEquipmentsForUnitAndSlot$')
         .and.returnValue(of([
-        new Equipment(JSON.parse('{"id": 10, "variance_min": 100, "variance_max": 150}')), // two handed
+        new Equipment(JSON.parse('{"id": 10, "twoHanded": true, "minVariance": 100, "maxVariance": 150}')), // two handed
         new Equipment(JSON.parse('{"id": 11}')), // one handed
         new Equipment(JSON.parse('{"id": 12, "category": 9}')), // shield
         new Equipment(JSON.parse('{"id": 1352, "dual_wield": true}')), // weapon with dw

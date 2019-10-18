@@ -39,8 +39,9 @@ class Equipment {
   public $spr_tdh;
   public $spr_dw;
   public $jump;
-  public $variance_min;
-  public $variance_max;
+  public $twoHanded;
+  public $minVariance;
+  public $maxVariance;
   public $unique;
   public $locked;
   public $locked_alternative;
@@ -92,8 +93,9 @@ class Equipment {
     $this->spr_dw = $brex_equipement->psy_dw;
     $this->evo = $brex_equipement->evop;
     $this->jump = $brex_equipement->jump;
-    $this->variance_min = $brex_equipement->variance_min;
-    $this->variance_max = $brex_equipement->variance_max;
+    $this->twoHanded = $brex_equipement->two_handed == 1 ? true : false;
+    $this->minVariance = $brex_equipement->variance_min;
+    $this->maxVariance = $brex_equipement->variance_max;
     $this->unique = $brex_equipement->uniq == 1 ? true : false;
     $this->stmr = $brex_equipement->stars == 9 ? true : false;
     if ($brex_equipement->tueurs) {

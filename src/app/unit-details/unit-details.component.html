@@ -17,31 +17,31 @@
       <img [src]="unit.icon" alt="{{unit.name}}">
       <table class="unit-details-stats" role="presentation">
         <tr>
-          <th>{{'hp' | translate}}</th>
+          <td class="stats-header">{{'hp' | translate}}</td>
           <td>{{unit.stats.hp.total | integer}}
             <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('hp')"></td>
-          <th>{{'mp' | translate}}</th>
+          <td class="stats-header">{{'mp' | translate}}</td>
           <td>{{unit.stats.mp.total | integer}}
             <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('mp')"></td>
         </tr>
         <tr>
-          <th>{{'atk' | translate}}</th>
+          <td class="stats-header">{{'atk' | translate}}</td>
           <td>{{unit.stats.atk.total | integer}}
             <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('atk')"></td>
-          <th>{{'def' | translate}}</th>
+          <td class="stats-header">{{'def' | translate}}</td>
           <td>{{unit.stats.def.total | integer}}
             <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('def')"></td>
         </tr>
         <tr>
-          <th>{{'mag' | translate}}</th>
+          <td class="stats-header">{{'mag' | translate}}</td>
           <td>{{unit.stats.mag.total | integer}}
             <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('mag')"></td>
-          <th>{{'spr' | translate}}</th>
+          <td class="stats-header">{{'spr' | translate}}</td>
           <td>{{unit.stats.spr.total | integer}}
             <img class="inline-icon details-opener" src="assets/icons/grey/question.png" alt="?"
                  (click)="displayStatDetails('spr')"></td>
@@ -51,7 +51,7 @@
       <div class="esper">
         <img [src]="unit.selectedBuild.esper.icon" [alt]="getEsperName()" (click)="openEsperSelectionPane()">
         <div class="esper-info">
-          <h3>{{getEsperName(unit.selectedBuild.esper)}}</h3>
+          <h3>{{getEsperName()}}</h3>
           <p [innerHTML]="getEsperBuildName(unit.selectedBuild.esper)"></p>
           <p class="ffbe-equip-link">
             <a *ngIf="unit.selectedBuild.esper.build" target="_blank" href="{{unit.selectedBuild.esper.build}}">

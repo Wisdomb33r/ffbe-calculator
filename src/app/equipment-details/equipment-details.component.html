@@ -220,8 +220,8 @@
                                    alt="{{getEsperName(passive.esper)}}"> {{'damages' | translate}}
   </span>
 </p>
-<p *ngIf="equipment.variance_min > 0 && equipment.variance_max > 0">
-  {{equipment.variance_min}}% - {{equipment.variance_max}}%
+<p *ngIf="equipment.minVariance > 0 && equipment.maxVariance > 0">
+  {{equipment.minVariance}}% - {{equipment.maxVariance}}%
 </p>
 
 <div class="weapon-trait" *ngIf="displayWeaponTraits && equipment.isWeaponTraitPossible()"
