@@ -132,7 +132,8 @@
       },
       "popup": {
         "title": "Unit selection",
-        "rankFilter": "Filter units by rank",
+        "archivedUnitsFilterExplanation": "To avoid cluttering this selection, older units are archived in a separate list.",
+        "archivedUnitsFilterTitle": "Units filter",
         "physicalChainers": "Physical chaining",
         "magicalChainers": "Magical chaining",
         "hybridChainers": "Hybrid chaining",
@@ -140,8 +141,8 @@
         "magicalFinishers": "Magical finishers",
         "hybridFinishers": "Hybrid finishers",
         "tanks": "Tanks",
-        "sixStarsUnits": "6★ units",
-        "sevenStarsUnits": "7★ units"
+        "latestUnits": "Latest units",
+        "archivedUnits": "Archived units"
       }
     },
     "details": {
@@ -297,6 +298,8 @@
     "magicalFinishers": "Magical finishers",
     "hybridFinishers": "Hybrid finishers",
     "switchKillerCheckbox": "Include killers (5% damage for each 50% killer)",
+    "switchStableRotationCheckbox": "Use stable rotation (10 first turns otherwise)",
+    "switchArchivedUnitsCheckbox": "Include archived units",
     "calculateMissingBuilds": "Calculate",
     "rankingsTitle": "Ranking",
     "rankingHeader": "Rank",

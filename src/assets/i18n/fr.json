@@ -132,7 +132,8 @@
       },
       "popup": {
         "title": "Choix de l'unité",
-        "rankFilter": "Filtrage des unités par rang",
+        "archivedUnitsFilterExplanation": "Afin d'éviter de surcharger cet écran, les plus vieilles unités sont archivées.",
+        "archivedUnitsFilterTitle": "Filtrer les unités",
         "physicalChainers": "Combos physiques",
         "magicalChainers": "Combos magiques",
         "hybridChainers": "Combos hybrides",
@@ -140,8 +141,8 @@
         "magicalFinishers": "Finishers magiques",
         "hybridFinishers": "Finishers hybrides",
         "tanks": "Tanks",
-        "sixStarsUnits": "Unités 6★",
-        "sevenStarsUnits": "Unités 7★"
+        "latestUnits": "Unités récentes",
+        "archivedUnits": "Unités archivées"
       }
     },
     "details": {
@@ -296,7 +297,9 @@
     "physicalFinishers": "Finishers physiques",
     "magicalFinishers": "Finishers magiques",
     "hybridFinishers": "Finishers hybrides",
-    "switchKillerCheckbox": "Inclure les tueurs dans le calcul (5% de dégâts pour 50% de tueurs)",
+    "switchKillerCheckbox": "Inclure les tueurs (5% de dégâts pour 50% de tueurs)",
+    "switchStableRotationCheckbox": "Cycle d'attaques stable (10 premiers tours sinon)",
+    "switchArchivedUnitsCheckbox": "Inclure les unités archivées",
     "calculateMissingBuilds": "Calculer",
     "rankingsTitle": "Classement",
     "rankingHeader": "Rang",

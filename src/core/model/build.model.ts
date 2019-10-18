@@ -28,6 +28,7 @@ export class Build {
   private equipments: EquipmentSet;
   public skills: Array<Skill> = [];
   public startPhaseSkills: Array<Skill> = [];
+  public isArchived: boolean;
 
   // transcient
   public algorithm: Algorithm;
@@ -54,6 +55,7 @@ export class Build {
       this.magical_killers = KillerPassives.construct(build.magical_killers);
     }
     this.equipments = new EquipmentSet(build.equipments);
+    this.isArchived = build.isArchived;
     let turnCount = 0;
     if (Array.isArray(build.skills)) {
       build.skills.forEach((skill: Skill) => {

@@ -1,6 +1,6 @@
 <h2 mat-dialog-title *ngIf="!skill.isEsper">{{skill.name}}</h2>
 <mat-dialog-content *ngIf="!skill.isEsper">
-  <table>
+  <table role="presentation">
     <tr>
       <td>{{'skills.display.attackType' | translate}}</td>
       <td>{{'skills.display.attackType_' + skill.category | translate}}</td>
@@ -38,7 +38,7 @@
 
 <h2 mat-dialog-title *ngIf="skill.isEsper">{{getEsperName()}}</h2>
 <mat-dialog-content *ngIf="skill.isEsper">
-  <table>
+  <table role="presentation">
     <tr>
       <td>{{'skills.display.attackType' | translate}}</td>
       <td>{{'skills.display.attackType_esper' | translate}}</td>
