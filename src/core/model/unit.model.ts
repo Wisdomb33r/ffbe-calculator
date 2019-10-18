@@ -15,6 +15,7 @@ export class Unit {
   public stats: UnitStats;
   public conditional_passives: Array<ConditionalPassive> = [];
   public builds: Array<Build> = [];
+  public isArchived: boolean;
 
   // transcient
   public selectedBuild: Build;
@@ -31,6 +32,7 @@ export class Unit {
     if (Array.isArray(unit.conditional_passives)) {
       unit.conditional_passives.forEach(conditional_passive => this.conditional_passives.push(new ConditionalPassive(conditional_passive)));
     }
+    this.isArchived = unit.isArchived;
   }
 
   public selectDefaultBuild() {

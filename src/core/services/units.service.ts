@@ -27,6 +27,7 @@ export class UnitsService {
   public defenders: Array<Unit>;
   public selectedUnit: Unit;
   public stmrExclusion = false;
+  public displayArchivedUnits = false;
 
   constructor(private databaseClient: DatabaseClientService) {
   }
@@ -35,7 +36,7 @@ export class UnitsService {
     return this.databaseClient.getUnits$().pipe(
       tap(units => {
         this.units = units;
-        this.filterByRank(7);
+        this.filterUnits();
       })
     );
   }
@@ -44,20 +45,20 @@ export class UnitsService {
     return this.units && this.units.length > 0;
   }
 
-  public filterByRank(rankFilter: number) {
-    this.physicalChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+  public filterUnits() {
+    this.physicalChainers = this.units.filter((u: Unit) => (this.displayArchivedUnits ? u.isArchived : !u.isArchived) &&
       u.builds.filter((b: Build) => b.algorithmId === 1).length > 0);
-    this.magicalChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+    this.magicalChainers = this.units.filter((u: Unit) => (this.displayArchivedUnits ? u.isArchived : !u.isArchived) &&
       u.builds.filter((b: Build) => b.algorithmId === 2 || b.algorithmId === 9).length > 0);
-    this.hybridChainers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+    this.hybridChainers = this.units.filter((u: Unit) => (this.displayArchivedUnits ? u.isArchived : !u.isArchived) &&
       u.builds.filter((b: Build) => b.algorithmId === 3).length > 0);
-    this.physicalFinishers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+    this.physicalFinishers = this.units.filter((u: Unit) => (this.displayArchivedUnits ? u.isArchived : !u.isArchived) &&
       u.builds.filter((b: Build) => b.algorithmId === 4).length > 0);
-    this.magicalFinishers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+    this.magicalFinishers = this.units.filter((u: Unit) => (this.displayArchivedUnits ? u.isArchived : !u.isArchived) &&
       u.builds.filter((b: Build) => b.algorithmId === 5 || b.algorithmId === 7 || b.algorithmId === 10).length > 0);
-    this.hybridFinishers = this.units.filter((u: Unit) => u.rank === rankFilter &&
+    this.hybridFinishers = this.units.filter((u: Unit) => (this.displayArchivedUnits ? u.isArchived : !u.isArchived) &&
       u.builds.filter((b: Build) => b.algorithmId === 6).length > 0);
-    this.defenders = this.units.filter((u: Unit) => u.rank === rankFilter &&
+    this.defenders = this.units.filter((u: Unit) => !this.displayArchivedUnits &&
       u.builds.filter((b: Build) => b.algorithmId === 8).length > 0);
   }
 

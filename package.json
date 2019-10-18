@@ -1,6 +1,6 @@
 {
   "name": "ffbe-calculator",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "license": "GPL-3.0",
   "scripts": {
     "ng": "ng",

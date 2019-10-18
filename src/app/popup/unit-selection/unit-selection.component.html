@@ -1,5 +1,19 @@
 <h2 mat-dialog-title>{{'unit.selection.popup.title' | translate}}</h2>
 <mat-dialog-content>
+  <div>
+    <p>{{'unit.selection.popup.archivedUnitsFilterExplanation' | translate}}</p>
+    <mat-form-field>
+      <mat-select [(ngModel)]="unitsService.displayArchivedUnits"
+                  placeholder="{{'unit.selection.popup.archivedUnitsFilterTitle' | translate}}">
+        <mat-option [value]="false" (click)="unitsService.filterUnits()">
+          {{'unit.selection.popup.latestUnits' | translate}}
+        </mat-option>
+        <mat-option [value]="true" (click)="unitsService.filterUnits()">
+          {{'unit.selection.popup.archivedUnits' | translate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <h3>{{'unit.selection.popup.physicalChainers' | translate}}</h3>
   <div class="flexcontainer">
     <div class="unit" *ngFor="let unit of unitsService.physicalChainers">
@@ -30,14 +44,14 @@
       <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
     </div>
   </div>
-  <h3>{{'unit.selection.popup.hybridFinishers' | translate}}</h3>
-  <div class="flexcontainer">
+  <h3 *ngIf="unitsService.hybridFinishers.length">{{'unit.selection.popup.hybridFinishers' | translate}}</h3>
+  <div class="flexcontainer" *ngIf="unitsService.hybridFinishers.length">
     <div class="unit" *ngFor="let unit of unitsService.hybridFinishers">
       <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
     </div>
   </div>
-  <h3>{{'unit.selection.popup.tanks' | translate}}</h3>
-  <div class="flexcontainer">
+  <h3 *ngIf="unitsService.defenders.length">{{'unit.selection.popup.tanks' | translate}}</h3>
+  <div class="flexcontainer" *ngIf="unitsService.defenders.length">
     <div class="unit" *ngFor="let unit of unitsService.defenders">
       <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
     </div>
