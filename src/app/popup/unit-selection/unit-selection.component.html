@@ -44,14 +44,14 @@
       <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
     </div>
   </div>
-  <h3>{{'unit.selection.popup.hybridFinishers' | translate}}</h3>
-  <div class="flexcontainer">
+  <h3 *ngIf="unitsService.hybridFinishers.length">{{'unit.selection.popup.hybridFinishers' | translate}}</h3>
+  <div class="flexcontainer" *ngIf="unitsService.hybridFinishers.length">
     <div class="unit" *ngFor="let unit of unitsService.hybridFinishers">
       <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
     </div>
   </div>
-  <h3>{{'unit.selection.popup.tanks' | translate}}</h3>
-  <div class="flexcontainer">
+  <h3 *ngIf="unitsService.defenders.length">{{'unit.selection.popup.tanks' | translate}}</h3>
+  <div class="flexcontainer" *ngIf="unitsService.defenders.length">
     <div class="unit" *ngFor="let unit of unitsService.defenders">
       <img class="unit-icon" [src]="unit.icon" (click)="selectUnit(unit)" alt="{{unit.name}}">
     </div>

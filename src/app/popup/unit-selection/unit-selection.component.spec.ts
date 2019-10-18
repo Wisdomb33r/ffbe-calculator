@@ -27,6 +27,10 @@ describe('UnitSelectionComponent', () => {
       physicalChainers: [unitFake1],
       physicalFinishers: [unitFake1],
       magicalChainers: [unitFake2],
+      magicalFinishers: [],
+      hybridChainers: [],
+      hybridFinishers: [],
+      defenders: [],
       filterUnits: jasmine.createSpy('filterUnits'),
     };
 

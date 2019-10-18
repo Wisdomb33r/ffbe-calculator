@@ -144,6 +144,14 @@ if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
     if (($_GET ['category'] == 'right_hand' || $_GET ['category'] == 'left_hand') && $unit->numero == 1507) {
       $objects [] = brex_objet::findByPrimaryId ( 2925 );
     }
+    // Elena exclusive weapon
+    if (($_GET ['category'] == 'right_hand') && $unit->numero == 8258) {
+      $objects [] = brex_objet::findByPrimaryId ( 3539 );
+    }
+    // Riku exclusive weapon
+    if (($_GET ['category'] == 'right_hand' || $_GET ['category'] == 'left_hand') && $unit->numero == 1752) {
+      $objects [] = brex_objet::findByPrimaryId ( 3710 );
+    }
     
     $equipments = array ();
     foreach ( $objects as $object ) {

@@ -132,7 +132,7 @@
       },
       "popup": {
         "title": "Choix de l'unité",
-        "archivedUnitsFilterExplanation": "Afin d'éviter une surcharge, les plus vieilles unités sont archivées",
+        "archivedUnitsFilterExplanation": "Afin d'éviter de surcharger cet écran, les plus vieilles unités sont archivées.",
         "archivedUnitsFilterTitle": "Filtrer les unités",
         "physicalChainers": "Combos physiques",
         "magicalChainers": "Combos magiques",
