@@ -1,4 +1,4 @@
-<table>
+<table role="presentation">
   <tr *ngIf="unitsService.selectedUnit.selectedBuild.isStartPhaseReady">
     <th>{{'calculation.offensive.averageDamages10turns' | translate}}</th>
     <td>{{result.tenTurnsResult | integer}}</td>

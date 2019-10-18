@@ -73,6 +73,10 @@ export class UnitsRankingsComponent implements OnInit {
 
       tap((unit: Unit) => {
         const rankedUnit = this.rankedUnits.find((u: Unit) => u.id === unit.id);
+        let resultVariableName = 'result';
+        if (!this.isStableRotation) {
+          resultVariableName = 'tenTurnsResult';
+        }
         rankedUnit.rankingResult = unit.builds
           .filter((build: Build) => build.algorithmId === this.selectedAlgorithmId
             || (build.algorithmId === 7 && this.selectedAlgorithmId === 5) // esper call as magical finisher
@@ -86,8 +90,8 @@ export class UnitsRankingsComponent implements OnInit {
             unit.computeAll();
             return build;
           })
-          .sort((build1: Build, build2: Build) => build1.result.result - build2.result.result)
-          .pop().result.result;
+          .sort((build1: Build, build2: Build) => build1.result[resultVariableName] - build2.result[resultVariableName])
+          .pop().result[resultVariableName];
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
         localStorage.setItem(this.constructLocalStorageKey(unit.id), JSON.stringify({
