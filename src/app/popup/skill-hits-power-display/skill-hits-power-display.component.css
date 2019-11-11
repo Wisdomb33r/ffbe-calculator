@@ -1,0 +1,38 @@
+h3 {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+
+td {
+  padding-right: 5px;
+  font-size: 12px;
+  vertical-align: top;
+}
+
+td:last-child {
+  padding-right: 0;
+  text-align: right;
+}
+
+.resist-label, .resist-icon {
+  height: 24px;
+  line-height: 24px;
+}
+
+.limit-warn {
+  background-image: url('https://www.final-fantasy.ch/images/warn.png');
+  background-repeat: no-repeat;
+  background-position: center left;
+  padding-left: 20px;
+}
+
+select,
+input {
+  width: 70px;
+  text-align: right;
+}
