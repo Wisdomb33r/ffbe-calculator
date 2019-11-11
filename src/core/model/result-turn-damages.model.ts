@@ -19,7 +19,7 @@ export class ResultTurnDamages extends Result {
   public physicalStat: string;
   public magicalStat: string;
   public statsRatio: number;
-  public self_buff: number;
+  public selfBuff: number;
 
   // skill power
   public combosIncrement: number;
