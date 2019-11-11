@@ -83,6 +83,12 @@
       <td *ngIf="result.elements && result.elements.length > 0"></td>
       <td>{{result.selfBuff | integer}}%</td>
     </tr>
+    <tr *ngIf="result.atkBerserkBuff > 0">
+      <td>{{'calculation.display.berserk' | translate}}</td>
+      <td></td>
+      <td *ngIf="result.elements && result.elements.length > 0"></td>
+      <td>{{result.atkBerserkBuff | integer}}%</td>
+    </tr>
     <tr>
       <td>{{'calculation.display.buffed_' + result.physicalStat | translate}}</td>
       <td></td>

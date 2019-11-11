@@ -27,6 +27,7 @@ export class Skill {
   public turnCount: number;
   public chainCombo: string;
   public atkBuff: number;
+  public atkBerserkBuff: number;
   public magBuff: number;
   public defBuff: number;
   public sprBuff: number;
@@ -62,6 +63,7 @@ export class Skill {
     this.turnCount = skill.turnCount;
     this.chainCombo = this.formatChainCombo(skill.chainCombo);
     this.atkBuff = skill.atkBuff;
+    this.atkBerserkBuff = skill.atkBerserkBuff;
     this.magBuff = skill.magBuff;
     this.defBuff = skill.defBuff;
     this.sprBuff = skill.sprBuff;

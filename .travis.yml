@@ -6,8 +6,7 @@ addons:
     stable
   sonarcloud:
     organization: "wisdomb33r"
-    token:
-      secure: ${SONAR_TOKEN}
+    token: ${SONAR_TOKEN}
 
 node_js:
   - "node"

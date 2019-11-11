@@ -6,6 +6,7 @@ export class ResultTurnDamages extends Result {
 
   // stats
   public atk: number;
+  public atkBerserkBuff: number;
   public leftHandStat: number;
   public rightHandStat: number;
   public buffed_atk: number;

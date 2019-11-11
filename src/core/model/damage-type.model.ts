@@ -10,6 +10,7 @@ export abstract class DamageType {
     result[this.calculationStat] = unit.stats[this.calculationStat].total;
     result['buffed_' + this.calculationStat] = unit.stats[this.calculationStat].total;
     result.selfBuff = skill[this.calculationStat + 'Buff'] ? skill[this.calculationStat + 'Buff'] : 0;
+    result.atkBerserkBuff = this.calculationStat === 'atk' && skill.atkBerserkBuff ? skill.atkBerserkBuff : 0;
     const specialSelfBuff = this.getSpecialSelfBuff(unit, skill, this.calculationStat);
     if (specialSelfBuff && specialSelfBuff > result.selfBuff) {
       result.selfBuff = specialSelfBuff;
@@ -17,6 +18,9 @@ export abstract class DamageType {
     const buff = Math.max(result.selfBuff, specialSelfBuff, isSupportBuffing && supportBuff ? supportBuff : 0);
     if (buff) {
       result['buffed_' + this.calculationStat] += unit.stats[this.calculationStat].base * buff / 100;
+    }
+    if (this.calculationStat === 'atk' && result.atkBerserkBuff) {
+      result.buffed_atk += unit.stats.atk.base * result.atkBerserkBuff / 100;
     }
   }
 

@@ -425,6 +425,7 @@ class Skill {
   public $resists_break;
   public $elements;
   public $atkBuff;
+  public $atkBerserkBuff;
   public $magBuff;
   public $defBuff;
   public $sprBuff;
@@ -447,6 +448,7 @@ class Skill {
     $this->isStartPhase = $brex_skill->start_phase ? true : false;
     $this->chainCombo = $brex_skill->chain_combo;
     $this->atkBuff = $brex_skill->att_buff;
+    $this->atkBerserkBuff = $brex_skill->att_berserk_buff;
     $this->magBuff = $brex_skill->mag_buff;
     $this->defBuff = $brex_skill->def_buff;
     $this->sprBuff = $brex_skill->psy_buff;
