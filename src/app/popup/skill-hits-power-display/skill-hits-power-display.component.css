@@ -19,18 +19,6 @@ td:last-child {
   text-align: right;
 }
 
-.resist-label, .resist-icon {
-  height: 24px;
-  line-height: 24px;
-}
-
-.limit-warn {
-  background-image: url('https://www.final-fantasy.ch/images/warn.png');
-  background-repeat: no-repeat;
-  background-position: center left;
-  padding-left: 20px;
-}
-
 select,
 input {
   width: 70px;
