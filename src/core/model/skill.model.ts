@@ -35,7 +35,8 @@ export class Skill {
   public resists_break: Array<number>;
   public elements: Array<number>;
   public isStartPhase: boolean;
-  public lb_multiplier: number;
+  public lbMultiplier: number;
+  public isDwBlocked: boolean;
 
   // transcient
   public skillType: SkillType;
@@ -75,8 +76,9 @@ export class Skill {
     if (skill.magical_killers) {
       this.magical_killers = KillerPassives.construct(skill.magical_killers);
     }
-    this.lb_multiplier = skill.lb_multiplier;
+    this.lbMultiplier = skill.lbMultiplier;
     this.isStartPhase = skill.isStartPhase;
+    this.isDwBlocked = skill.isDwBlocked;
   }
 
   private formatChainCombo(chainCombo: string) {

@@ -165,16 +165,16 @@ export class EquipmentSet {
 
   public sumEquipmentLbBoost(unitId: number) {
     let result = 1;
-    result += this.right_hand && this.right_hand.lb_multiplier ? this.right_hand.lb_multiplier - 1 : 0;
-    result += this.left_hand && this.left_hand.lb_multiplier ? this.left_hand.lb_multiplier - 1 : 0;
-    result += this.head && this.head.lb_multiplier ? this.head.lb_multiplier - 1 : 0;
-    result += this.body && this.body.lb_multiplier ? this.body.lb_multiplier - 1 : 0;
-    result += this.accessory1 && this.accessory1.lb_multiplier ? this.accessory1.lb_multiplier - 1 : 0;
-    result += this.accessory2 && this.accessory2.lb_multiplier ? this.accessory2.lb_multiplier - 1 : 0;
-    result += this.materia1 && this.materia1.lb_multiplier ? this.materia1.lb_multiplier - 1 : 0;
-    result += this.materia2 && this.materia2.lb_multiplier ? this.materia2.lb_multiplier - 1 : 0;
-    result += this.materia3 && this.materia3.lb_multiplier ? this.materia3.lb_multiplier - 1 : 0;
-    result += this.materia4 && this.materia4.lb_multiplier ? this.materia4.lb_multiplier - 1 : 0;
+    result += this.right_hand && this.right_hand.lbMultiplier ? this.right_hand.lbMultiplier - 1 : 0;
+    result += this.left_hand && this.left_hand.lbMultiplier ? this.left_hand.lbMultiplier - 1 : 0;
+    result += this.head && this.head.lbMultiplier ? this.head.lbMultiplier - 1 : 0;
+    result += this.body && this.body.lbMultiplier ? this.body.lbMultiplier - 1 : 0;
+    result += this.accessory1 && this.accessory1.lbMultiplier ? this.accessory1.lbMultiplier - 1 : 0;
+    result += this.accessory2 && this.accessory2.lbMultiplier ? this.accessory2.lbMultiplier - 1 : 0;
+    result += this.materia1 && this.materia1.lbMultiplier ? this.materia1.lbMultiplier - 1 : 0;
+    result += this.materia2 && this.materia2.lbMultiplier ? this.materia2.lbMultiplier - 1 : 0;
+    result += this.materia3 && this.materia3.lbMultiplier ? this.materia3.lbMultiplier - 1 : 0;
+    result += this.materia4 && this.materia4.lbMultiplier ? this.materia4.lbMultiplier - 1 : 0;
     this.getAllActiveConditionalPassives(unitId)
       .filter((cond: ConditionalPassive) => cond.lb_power > 1 && cond.lb_power < 10)
       .map(cond => cond.lb_power)

@@ -12,7 +12,7 @@ export class UnitStats {
   public evo: UnitStat;
   public jump: number;
   public esper_percent: number;
-  public lb_multiplier: number;
+  public lbMultiplier: number;
   public dual_wield: boolean;
   public tdwCapIncrease: boolean;
 
@@ -30,7 +30,7 @@ export class UnitStats {
     this.evo = new UnitStat(stats.evo, 0, 0, 0, 0);
     this.jump = stats.jump;
     this.esper_percent = stats.esper_percent;
-    this.lb_multiplier = stats.lb_multiplier;
+    this.lbMultiplier = stats.lbMultiplier;
     this.dual_wield = stats.dual_wield;
     this.tdwCapIncrease = stats.tdwCapIncrease;
   }

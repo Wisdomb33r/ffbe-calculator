@@ -51,7 +51,7 @@ export class Equipment {
   public extra_equip: number;
   public physical_killers: KillerPassives;
   public magical_killers: KillerPassives;
-  public lb_multiplier: number;
+  public lbMultiplier: number;
   public sex_restriction: number;
   public esper_percent: number;
   public dual_wield: boolean;
@@ -113,7 +113,7 @@ export class Equipment {
     if (equipment.magical_killers) {
       this.magical_killers = KillerPassives.construct(equipment.magical_killers);
     }
-    this.lb_multiplier = equipment.lb_multiplier;
+    this.lbMultiplier = equipment.lbMultiplier;
     this.sex_restriction = equipment.sex_restriction === 1 || equipment.sex_restriction === 2 ? equipment.sex_restriction : undefined;
     this.esper_percent = equipment.esper_percent;
     this.dual_wield = equipment.dual_wield;
