@@ -49,8 +49,8 @@ export class AlgorithmChaining extends AlgorithmOffensive {
       const maxChainCombo = unit.stats.tdwCapIncrease && unit.selectedEquipmentSet.isDualWielding() ? 6 : 4;
 
       let lbMultiplier = unit.getLbMultiplier();
-      if (skill.lb_multiplier && skill.lb_multiplier > 1) {
-        lbMultiplier += skill.lb_multiplier - 1;
+      if (skill.lbMultiplier && skill.lbMultiplier > 1) {
+        lbMultiplier += skill.lbMultiplier - 1;
       }
       const lbPower = unit.getLbPowerIncrease();
       const jumpMultiplier = 100 + (skill.isJump ? unit.stats.jump + unit.stats.equipment_jump : 0);

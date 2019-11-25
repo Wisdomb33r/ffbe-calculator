@@ -48,7 +48,7 @@ class Equipment {
   public $stmr;
   public $physical_killers;
   public $magical_killers;
-  public $lb_multiplier;
+  public $lbMultiplier;
   public $sex_restriction;
   public $esper_percent;
   public $dual_wield;
@@ -104,7 +104,7 @@ class Equipment {
     if ($brex_equipement->tueurs_m) {
       $this->magical_killers = new KillerPassives ( $brex_equipement->tueurs_m );
     }
-    $this->lb_multiplier = $brex_equipement->lb_boost;
+    $this->lbMultiplier = $brex_equipement->lb_boost;
     $this->sex_restriction = $brex_equipement->sex_restrict;
     $this->esper_percent = $brex_equipement->esper_percent;
     $this->dual_wield = $brex_equipement->dual_wield == '1' ? true : false;
@@ -305,7 +305,7 @@ class UnitStats {
   public $evo;
   public $jump;
   public $esper_percent;
-  public $lb_multiplier;
+  public $lbMultiplier;
   public $dual_wield;
   public $tdwCapIncrease;
   function __construct($brex_unit_stats) {
@@ -342,7 +342,7 @@ class UnitStats {
     $this->evo = $brex_unit_stats->evop_amelio > 0 ? $brex_unit_stats->evop_amelio : $brex_unit_stats->evop;
     $this->jump = $brex_unit_stats->jump;
     $this->esper_percent = $brex_unit_stats->esper_percent;
-    $this->lb_multiplier = $brex_unit_stats->lb_boost;
+    $this->lbMultiplier = $brex_unit_stats->lb_boost;
     $this->dual_wield = $brex_unit_stats->dual_wield == '1' ? true : false;
     $this->tdwCapIncrease = $brex_unit_stats->boosted_dw == '1' ? true : false;
   }
@@ -431,7 +431,8 @@ class Skill {
   public $sprBuff;
   public $physical_killers;
   public $magical_killers;
-  public $lb_multiplier;
+  public $lbMultiplier;
+  public $isDwBlocked;
   function __construct($brex_skill, $language, $brex_unit) {
     $this->isLimitBreak = $brex_skill->is_limite ? true : false;
     $this->isEsper = $brex_skill->is_esper ? true : false;
@@ -458,7 +459,8 @@ class Skill {
     if ($brex_skill->tueurs_m) {
       $this->magical_killers = new KillerPassives ( $brex_skill->tueurs_m );
     }
-    $this->lb_multiplier = $brex_skill->lb_boost;
+    $this->lbMultiplier = $brex_skill->lb_boost;
+    $this->isDwBlocked = $brex_skill->dw_blocked == 1 ? true : false;
     if ($this->isLimitBreak) {
       $this->name = $language === 'fr' ? $brex_unit->limite : $brex_unit->limite_en;
       $this->icon = null;

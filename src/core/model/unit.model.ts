@@ -125,7 +125,7 @@ export class Unit {
 
   public getLbMultiplier() {
     return this.selectedEquipmentSet.sumEquipmentLbBoost(this.id)
-      + (this.stats.lb_multiplier ? this.stats.lb_multiplier - 1 : 0);
+      + (this.stats.lbMultiplier ? this.stats.lbMultiplier - 1 : 0);
   }
 
   public getLbPowerIncrease() {

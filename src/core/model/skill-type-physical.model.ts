@@ -65,6 +65,6 @@ export class SkillTypePhysical implements SkillType {
       return skill.nb;
     }
     const isMultiSkill = unit.selectedBuild.isMultiSkill(skill);
-    return unit.selectedEquipmentSet.isDualWielding() && !skill.isLimitBreak && !isMultiSkill ? 2 : 1;
+    return unit.selectedEquipmentSet.isDualWielding() && !skill.isDwBlocked && !skill.isLimitBreak && !isMultiSkill ? 2 : 1;
   }
 }
