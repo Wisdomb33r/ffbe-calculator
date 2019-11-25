@@ -424,10 +424,11 @@ class Skill {
   public $chainCombo;
   public $resists_break;
   public $elements;
-  public $atk_buff;
-  public $mag_buff;
-  public $def_buff;
-  public $spr_buff;
+  public $atkBuff;
+  public $atkBerserkBuff;
+  public $magBuff;
+  public $defBuff;
+  public $sprBuff;
   public $physical_killers;
   public $magical_killers;
   public $lb_multiplier;
@@ -446,10 +447,11 @@ class Skill {
     $this->isTurnCounting = $brex_skill->not_turn_counting == 1 ? false : true;
     $this->isStartPhase = $brex_skill->start_phase ? true : false;
     $this->chainCombo = $brex_skill->chain_combo;
-    $this->atk_buff = $brex_skill->att_buff;
-    $this->mag_buff = $brex_skill->mag_buff;
-    $this->def_buff = $brex_skill->def_buff;
-    $this->spr_buff = $brex_skill->psy_buff;
+    $this->atkBuff = $brex_skill->att_buff;
+    $this->atkBerserkBuff = $brex_skill->att_berserk_buff;
+    $this->magBuff = $brex_skill->mag_buff;
+    $this->defBuff = $brex_skill->def_buff;
+    $this->sprBuff = $brex_skill->psy_buff;
     if ($brex_skill->tueurs) {
       $this->physical_killers = new KillerPassives ( $brex_skill->tueurs );
     }

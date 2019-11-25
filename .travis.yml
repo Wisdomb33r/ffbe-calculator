@@ -6,11 +6,10 @@ addons:
     stable
   sonarcloud:
     organization: "wisdomb33r"
-    token:
-      secure: ${SONAR_TOKEN}
+    token: ${SONAR_TOKEN}
 
 node_js:
-  - "node"
+  - '12'
 
 before_script:
   - npm -v

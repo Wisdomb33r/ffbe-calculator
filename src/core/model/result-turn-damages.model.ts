@@ -6,6 +6,7 @@ export class ResultTurnDamages extends Result {
 
   // stats
   public atk: number;
+  public atkBerserkBuff: number;
   public leftHandStat: number;
   public rightHandStat: number;
   public buffed_atk: number;
@@ -19,7 +20,7 @@ export class ResultTurnDamages extends Result {
   public physicalStat: string;
   public magicalStat: string;
   public statsRatio: number;
-  public self_buff: number;
+  public selfBuff: number;
 
   // skill power
   public combosIncrement: number;

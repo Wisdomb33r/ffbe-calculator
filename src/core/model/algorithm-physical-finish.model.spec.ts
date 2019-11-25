@@ -11,7 +11,7 @@ const EQUIPMENT_TEST_DATA = '{"id":1,"category":1,"atk":100}';
 const EQUIPMENTS_TEST_DATA = '{"right_hand":' + EQUIPMENT_TEST_DATA + '}';
 const SKILLS_TEST_DATA = '['
   + '{"category":6,"power":500,"hits":2,"frames":"20 200","damages":"50 50","damages_type":"physical","chainCombo":2.5,"isTurnCounting":true},'
-  + '{"category":6,"power":1000,"hits":1,"frames":"50","damages":"100","damages_type":"physical","isTurnCounting":true}'
+  + '{"category":6,"power":1000,"hits":1,"frames":"50","damages":"100","damages_type":"physical","isTurnCounting":true,"atkBerserkBuff":100}'
   + ']';
 const BUILD_TEST_DATA = '{"algorithmId":4,"equipments":' + EQUIPMENTS_TEST_DATA + ',"skills":' + SKILLS_TEST_DATA + '}';
 const UNIT_TEST_DATA = '{"id":9999,"stats":' + UNIT_STATS_TEST_DATA + ',"builds":[' + BUILD_TEST_DATA + ']}';
@@ -35,34 +35,37 @@ describe('AlgorithmFinish', () => {
     // THEN
     expect(result).toBeTruthy();
     expect(result instanceof ResultOffensive).toBeTruthy();
-    expect(result.result).toBeCloseTo(56.2817);
+    expect(result.result).toBeCloseTo(75.1494);
     expect(result['turnDamages'].length).toEqual(2);
     result['turnDamages'].forEach((turn: ResultTurnDamages) => {
-      expect(turn['atk']).toEqual(1000);
-      expect(turn['buffed_atk']).toEqual(1000);
-      expect(turn['isDualWielding']).toBeFalsy();
-      expect(turn['killerPassive']).toBeCloseTo(0);
+      expect(turn.atk).toEqual(1000);
+      expect(turn.isDualWielding).toBeFalsy();
+      expect(turn.killerPassive).toBeCloseTo(0);
       expect(turn.levelCorrection).toBeCloseTo(2);
       expect(turn.enemyWeaponVariance).toBeCloseTo(0.8915);
     });
 
     const turn1 = result['turnDamages'][0];
-    expect(turn1['combosIncrement']).toBeCloseTo(2.5);
-    expect(turn1['power']).toBeCloseTo(1250);
-    expect(turn1['physicalDamages']).toEqual(25000000);
-    expect(turn1['physicalKillerDamages']).toBeCloseTo(25000000);
-    expect(turn1['physicalElementalDamages']).toBeCloseTo(25000000);
-    expect(turn1['hitsPower'].length).toEqual(2);
-    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [625, 625]);
+    expect(turn1.atkBerserkBuff).toEqual(0);
+    expect(turn1.buffed_atk).toEqual(1000);
+    expect(turn1.combosIncrement).toBeCloseTo(2.5);
+    expect(turn1.power).toBeCloseTo(1250);
+    expect(turn1.physicalDamages).toEqual(25000000);
+    expect(turn1.physicalKillerDamages).toBeCloseTo(25000000);
+    expect(turn1.physicalElementalDamages).toBeCloseTo(25000000);
+    expect(turn1.hitsPower.length).toEqual(2);
+    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1.hitsPower, [625, 625]);
 
     const turn2 = result['turnDamages'][1];
-    expect(turn2['combosIncrement']).toBeCloseTo(4);
-    expect(turn2['power']).toBeCloseTo(4000);
-    expect(turn2['physicalDamages']).toEqual(80000000);
-    expect(turn2['physicalKillerDamages']).toBeCloseTo(80000000);
-    expect(turn2['physicalElementalDamages']).toBeCloseTo(80000000);
-    expect(turn2['hitsPower'].length).toEqual(1);
-    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [4000]);
+    expect(turn2.atkBerserkBuff).toEqual(100);
+    expect(turn2.buffed_atk).toEqual(1200);
+    expect(turn2.combosIncrement).toBeCloseTo(4);
+    expect(turn2.power).toBeCloseTo(4000);
+    expect(turn2.physicalDamages).toEqual(115200000);
+    expect(turn2.physicalKillerDamages).toBeCloseTo(115200000);
+    expect(turn2.physicalElementalDamages).toBeCloseTo(115200000);
+    expect(turn2.hitsPower.length).toEqual(1);
+    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2.hitsPower, [4000]);
   });
 
   it('#calculate should set the result object values for a physical esper calculation', () => {
@@ -99,22 +102,22 @@ describe('AlgorithmFinish', () => {
     expect(turn1.hitsPower.length).toEqual(2);
     expect(turn1.levelCorrection).toBeCloseTo(2);
     expect(turn1.enemyWeaponVariance).toBeCloseTo(0.8915);
-    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1['hitsPower'], [625, 625]);
+    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn1.hitsPower, [625, 625]);
 
     const turn2 = result['turnDamages'][1];
-    expect(turn2['atk']).toEqual(7640);
-    expect(turn2['mag']).toEqual(4150);
-    expect(turn2['def']).toEqual(5060);
-    expect(turn2['spr']).toEqual(3880);
-    expect(turn2['evo']).toEqual(50);
-    expect(turn2['combosIncrement']).toBeCloseTo(4);
-    expect(turn2['power']).toBeCloseTo(940);
-    expect(turn2['physicalDamages']).toEqual(188000000);
-    expect(turn2['physicalKillerDamages']).toBeCloseTo(188000000);
-    expect(turn2['physicalElementalDamages']).toBeCloseTo(282000000);
-    expect(turn2['hitsPower'].length).toEqual(1);
+    expect(turn2.atk).toEqual(7640);
+    expect(turn2.mag).toEqual(4150);
+    expect(turn2.def).toEqual(5060);
+    expect(turn2.spr).toEqual(3880);
+    expect(turn2.evo).toEqual(50);
+    expect(turn2.combosIncrement).toBeCloseTo(4);
+    expect(turn2.power).toBeCloseTo(940);
+    expect(turn2.physicalDamages).toEqual(188000000);
+    expect(turn2.physicalKillerDamages).toBeCloseTo(188000000);
+    expect(turn2.physicalElementalDamages).toBeCloseTo(282000000);
+    expect(turn2.hitsPower.length).toEqual(1);
     expect(turn2.levelCorrection).toBeCloseTo(1.6);
     expect(turn2.enemyWeaponVariance).toBeFalsy();
-    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2['hitsPower'], [940]);
+    CalculatorTestutils.expectArrayOfNumberToBeCloseTo(turn2.hitsPower, [940]);
   });
 });
