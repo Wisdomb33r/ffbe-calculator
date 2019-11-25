@@ -9,14 +9,18 @@ export abstract class DamageType {
   public calculateBuffs(unit: Unit, skill: Skill, isSupportBuffing: boolean, supportBuff: number, result: ResultTurnDamages) {
     result[this.calculationStat] = unit.stats[this.calculationStat].total;
     result['buffed_' + this.calculationStat] = unit.stats[this.calculationStat].total;
-    result.self_buff = skill[this.calculationStat + '_buff'] ? skill[this.calculationStat + '_buff'] : 0;
+    result.selfBuff = skill[this.calculationStat + 'Buff'] ? skill[this.calculationStat + 'Buff'] : 0;
+    result.atkBerserkBuff = this.calculationStat === 'atk' && skill.atkBerserkBuff ? skill.atkBerserkBuff : 0;
     const specialSelfBuff = this.getSpecialSelfBuff(unit, skill, this.calculationStat);
-    if (specialSelfBuff && specialSelfBuff > result.self_buff) {
-      result.self_buff = specialSelfBuff;
+    if (specialSelfBuff && specialSelfBuff > result.selfBuff) {
+      result.selfBuff = specialSelfBuff;
     }
-    const buff = Math.max(result.self_buff, specialSelfBuff, isSupportBuffing && supportBuff ? supportBuff : 0);
+    const buff = Math.max(result.selfBuff, specialSelfBuff, isSupportBuffing && supportBuff ? supportBuff : 0);
     if (buff) {
       result['buffed_' + this.calculationStat] += unit.stats[this.calculationStat].base * buff / 100;
+    }
+    if (this.calculationStat === 'atk' && result.atkBerserkBuff) {
+      result.buffed_atk += unit.stats.atk.base * result.atkBerserkBuff / 100;
     }
   }
 

@@ -51,6 +51,7 @@ import {PushBuildComponent} from './push-build/push-build.component';
 import {UnitTraitsComponent} from './unit-traits/unit-traits.component';
 import {CalculationOffensiveTotalsComponent} from './calculation-offensive-totals/calculation-offensive-totals.component';
 import {UnitsRankingsComponent} from './units-rankings/units-rankings.component';
+import {SkillHitsPowerDisplayComponent} from './popup/skill-hits-power-display/skill-hits-power-display.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -80,6 +81,7 @@ const appRoutes: Routes = [
     UnitDetailsStatSumComponent,
     EquipmentsDisplayComponent,
     SkillsDisplayComponent,
+    SkillHitsPowerDisplayComponent,
     CalculationDefensiveComponent,
     CalculationOffensiveComponent,
     CalculationOffensiveTotalsComponent,

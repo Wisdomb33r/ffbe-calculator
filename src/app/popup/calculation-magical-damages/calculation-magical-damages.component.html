@@ -1,43 +1,7 @@
 <h2 mat-dialog-title>{{'calculation.offensive.magicalDamagesCalculation' | translate}}</h2>
 <mat-dialog-content>
-  <h3>{{'calculation.offensive.skillHitsPower' | translate}}</h3>
-  <table role="presentation">
-    <tr *ngIf="isChaining()">
-      <td>{{'calculation.offensive.sparkChain' | translate}}</td>
-      <td>
-        <mat-checkbox [(ngModel)]="algorithm.isSparkChain" (change)="calculateBuild()"></mat-checkbox>
-      </td>
-    </tr>
-    <tr *ngIf="isChaining()">
-      <td>{{'calculation.offensive.comboIncrement' | translate}}</td>
-      <td>{{result.combosIncrement | number:'1.2-2'}}</td>
-    </tr>
-    <tr *ngIf="!isChaining()">
-      <td>{{'calculation.offensive.comboMultiplier' | translate}}</td>
-      <td>
-        <select [(ngModel)]="result.skill.chainCombo" (change)="calculateBuild()">
-          <option value="4.0">4.0</option>
-          <option value="3.5">3.5</option>
-          <option value="3.0">3.0</option>
-          <option value="2.5">2.5</option>
-          <option value="2.0">2.0</option>
-          <option value="1.5">1.5</option>
-          <option value="1.0">1.0</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>{{'calculation.display.hits' | translate}}</td>
-      <td>{{result.hitsPower.length}}</td>
-    </tr>
-    <tr *ngIf="result.lbMultiplier">
-      <td>{{'calculation.display.lbMultiplier' | translate}}</td>
-      <td>{{result.lbMultiplier | number:'1.2-2'}}</td>
-    </tr>
-  </table>
-  <p><span *ngFor="let hitPower of result.hitsPower">{{hitPower | integer}}% </span></p>
-  <h3>{{'calculation.offensive.turnPower' | translate}}</h3>
-  <p>{{result.power | integer}}%</p>
+  <app-skill-hits-power-display [result]="result" [algorithm]="algorithm" (hitsParameterChanged)="calculateBuild()">
+  </app-skill-hits-power-display>
 
   <h3>{{'calculation.display.calculationParameters' | translate}}</h3>
   <table role="presentation">
@@ -77,7 +41,7 @@
       <td>{{'calculation.display.selfBuff' | translate}}</td>
       <td></td>
       <td *ngIf="result.elements && result.elements.length > 0"></td>
-      <td>{{result.self_buff | integer}}%</td>
+      <td>{{result.selfBuff | integer}}%</td>
     </tr>
     <tr>
       <td>{{'calculation.display.buffed_' + result.magicalStat | translate}}</td>

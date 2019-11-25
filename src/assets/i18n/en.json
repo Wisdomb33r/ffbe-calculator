@@ -223,6 +223,7 @@
       "calculationParameters": "Calculation parameters",
       "groupBuff": "Group buff",
       "selfBuff": "Self buff",
+      "berserk": "Berserk",
       "groupBreak": "Group resists break",
       "buffed_atk": "ATK after buff",
       "buffed_mag": "MAG after buff",
