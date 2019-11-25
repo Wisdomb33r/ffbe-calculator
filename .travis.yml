@@ -9,7 +9,7 @@ addons:
     token: ${SONAR_TOKEN}
 
 node_js:
-  - "node"
+  - '12'
 
 before_script:
   - npm -v
