@@ -4,11 +4,11 @@ import {Injectable} from '@angular/core';
 export class ApplicationLoaderService {
   private loading = false;
 
-  public startLoaderAnimation() {console.log('Starting');
+  public startLoaderAnimation() {
     this.loading = true;
   }
 
-  public stopLoaderAnimation() {console.log('Stopping');
+  public stopLoaderAnimation() {
     this.loading = false;
   }
 

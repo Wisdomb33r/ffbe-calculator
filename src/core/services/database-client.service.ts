@@ -23,11 +23,25 @@ export class DatabaseClientService {
   }
 
   public getUnitById$(id: number): Observable<Unit> {
-    return this.http.get<Unit>(UNIT_PATH + '?id=' + id + '&language=' + this.translatorService.currentLang + '&time=' + Date.now());
+    this.loader.startLoaderAnimation();
+    return this.http.get<Unit>(UNIT_PATH + '?id=' + id + '&language=' + this.translatorService.currentLang + '&time=' + Date.now()).pipe(
+      tap(() => this.loader.stopLoaderAnimation()),
+      catchError((error: HttpErrorResponse) => {
+        this.loader.stopLoaderAnimation();
+        return throwError(error);
+      }),
+    );
   }
 
   public getUnits$(): Observable<Array<Unit>> {
-    return this.http.get<Array<Unit>>(UNIT_PATH + '?language=' + this.translatorService.currentLang + '&time=' + Date.now());
+    this.loader.startLoaderAnimation();
+    return this.http.get<Array<Unit>>(UNIT_PATH + '?language=' + this.translatorService.currentLang + '&time=' + Date.now()).pipe(
+      tap(() => this.loader.stopLoaderAnimation()),
+      catchError((error: HttpErrorResponse) => {
+        this.loader.stopLoaderAnimation();
+        return throwError(error);
+      }),
+    );
   }
 
   public getItemById$(itemId: number): Observable<Equipment> {
@@ -49,8 +63,15 @@ export class DatabaseClientService {
   }
 
   public getEquipmentsForWeaponCategory$(category: number): Observable<Array<Equipment>> {
+    this.loader.startLoaderAnimation();
     return this.http.get<Array<Equipment>>(
       EQUIPMENT_PATH + '?weapon=' + category + '&language=' + this.translatorService.currentLang + '&time=' + Date.now()
+    ).pipe(
+      tap(() => this.loader.stopLoaderAnimation()),
+      catchError((error: HttpErrorResponse) => {
+        this.loader.stopLoaderAnimation();
+        return throwError(error);
+      }),
     );
   }
 
