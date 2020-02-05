@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {AppComponent} from './app.component';
 import {UnitDetailsComponent} from './unit-details/unit-details.component';
@@ -126,6 +127,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatMenuModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
     MatToolbarModule,
     ClipboardModule,
   ],

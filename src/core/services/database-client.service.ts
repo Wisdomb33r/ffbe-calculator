@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {forkJoin, Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {forkJoin, Observable, throwError} from 'rxjs';
 import {Unit} from '../model/unit.model';
 import {Equipment} from '../model/equipment.model';
 import {TranslateService} from '@ngx-translate/core';
+import {ApplicationLoaderService} from './application-loader.service';
+import {catchError, tap} from 'rxjs/operators';
 
 const BASE_URL = '/ffbe/calculator/';
 const EQUIPMENT_PATH = BASE_URL + 'equipments.php';
@@ -16,6 +18,7 @@ const ITEM_PUSH_URL = BASE_PUSH_URL + 'item.php';
 export class DatabaseClientService {
 
   constructor(private http: HttpClient,
+              private loader: ApplicationLoaderService,
               private translatorService: TranslateService) {
   }
 
@@ -32,9 +35,16 @@ export class DatabaseClientService {
   }
 
   public getEquipmentsForUnitAndSlot$(slot: string, unitId: number, extraEquipmentTypes: Array<number>): Observable<Array<Equipment>> {
+    this.loader.startLoaderAnimation();
     return this.http.get<Array<Equipment>>(
       EQUIPMENT_PATH + '?category=' + slot + '&unit=' + unitId + '&language=' + this.translatorService.currentLang
       + (extraEquipmentTypes && extraEquipmentTypes.length ? '&addedTypes=' + extraEquipmentTypes.join('-') : '') + '&time=' + Date.now()
+    ).pipe(
+      tap(() => this.loader.stopLoaderAnimation()),
+      catchError((error: HttpErrorResponse) => {
+        this.loader.stopLoaderAnimation();
+        return throwError(error);
+      }),
     );
   }
 

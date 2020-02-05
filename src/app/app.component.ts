@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Meta, Title} from '@angular/platform-browser';
 import {DOCUMENT} from '@angular/common';
+import {ApplicationLoaderService} from '../core/services/application-loader.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent {
   constructor(private translate: TranslateService,
               private meta: Meta,
               private title: Title,
+              public loader: ApplicationLoaderService,
               @Inject(DOCUMENT) private document) {
     translate.setDefaultLang('en');
     translate.use('en');
